@@ -49,6 +49,7 @@ module.exports = {
 			js: [
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js',
+				'public/lib/angular-sanitize/angular-sanitize.js',
 				'public/lib/angular-animate/angular-animate.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
@@ -61,8 +62,10 @@ module.exports = {
 		js: [
 			'public/config.js',
 			'public/application.js',
+			'public/tinymce.js',
 			'public/modules/*/*.js',
 			'public/modules/*/*[!tests]*/*.js'
+                      
 		],
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',

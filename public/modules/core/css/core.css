@@ -18,3 +18,194 @@ body.ng-cloak
 {
 	display: block;
 }
+
+
+
+.dev-notes {
+    color:blue;
+    font-size:10px;
+}
+
+.input-textarea {
+    background-color:lightblue;
+    font-size:16px;
+    width:70%;
+    display:block;
+    padding:2px;
+
+}
+
+.per-row-icons {
+    height:16px;
+}
+
+.per-row-icons-trashimage {
+    height:20px;
+}
+
+
+
+.per-row-id {
+    font-size:4px;
+}
+
+.per-row-count {
+    font-size:50%;
+}
+
+.hkcssColorRed {
+    color:red;
+}
+.hkcssContentedit {
+
+    webkit-user-modify: read-write;
+    word-wrap: break-word;
+    webkit-line-break: after-white-space;
+    webkit-user-select: text;
+    /*color:green;*/
+
+    background-color: blue;
+    white-space: nowrap;
+    /*width:200px;*/
+    overflow: hidden;
+}
+
+.hkcssPosFixed {
+    /*xxcolor: red;*/
+    /*xx#header {*/
+    /*position: fixed;*/
+    z-index:1
+    /*xxmargin-top: 100px;*/
+}
+
+
+#textaread {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 178px;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    width: 400px;
+    font-size: 1.5em;
+}
+
+
+.hkToolbarElement
+{
+    border: 1px solid gray;
+    /*height: 20px;*/
+    /*width: 40px;*/
+    height:12px;
+    /*width:34px;*/
+    /*max-height: 100px;*/
+
+    max-width: 24px;
+}
+
+#idInput0TypeText {
+    display: none;
+}
+
+#idMediumEditor
+{
+    border: 1px solid #78FA89;
+    width: 100%;
+    height: 65px;
+    background-color: #faf8ff;
+    box-shadow: 10px 10px 5px #d3cbd4;
+    overflow: scroll;
+    min-height: 65px;
+    max-height: 525px;
+    height:50%;
+    resize: both;
+    display:none
+
+    /*older*/
+    /*border: 1px solid #78FA89;*/
+    /*width: 100%;*/
+    /*height: 100px;*/
+    /*background-color: #faf8ff;*/
+    /*box-shadow: 10px 10px 5px #d3cbd4;*/
+    /*overflow: auto;*/
+    /*min-height: 125px;*/
+    /*max-height: 225px;*/
+    /*height:50%;*/
+    /*resize: none;*/
+}
+
+#idDivForCkeEditorTextarea
+{
+    display:block
+    /*visibility: hidden*/
+}
+
+#idTinyMceTextArea
+{
+    display:none;
+    min-height: 100px;
+    max-height: 1025px;
+    /*visibility: hidden*/
+}
+
+#idDivForTinyMceEditorTextarea
+{
+
+}
+
+/*#idDivForTinyMceEditorTextarea*/
+/*{*/
+/*display:block*/
+/*}*/
+
+#idFilterCount {
+    font-size:16px;
+}
+
+
+#cke_1_top {
+    display: none;
+}
+#cke_1_bottom {
+    display: none;
+}
+
+.hkcssPosTable {
+    font-size: 16px;
+    /*xx#header {*/
+    /*margin-top: 100px;*/
+    /*xxposition: static;*/
+    /*position: relative;*/
+    /*xxtop: 300;*/
+    z-index:0;
+    /*xxleft: 100;*/
+    color: green;
+}
+.odd {
+    /*http://www.w3schools.com/html/html_colors.asp*/
+    background-color:lightgrey;
+    /*color: black;*/
+}
+.even{
+    background-color:white;
+    /*color: darkblue;*/
+}
+
+
+
+#cssClassPerRowContentEditableFinal {
+    font-size:50px;
+}
+
+#idSpanSearchedFor {
+    font-size: 20px;
+    color: green
+}
+
+#idSpanSearchedForSearchText {
+    font-size: 20px;
+    color: blue
+}

@@ -1,5 +1,6 @@
 'use strict';
 
+
 //Menu service used for managing  menus
 angular.module('core').service('Menus', [
 
@@ -81,6 +82,7 @@ angular.module('core').service('Menus', [
 		// Add menu item object
 		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position) {
 			// Validate that the menu exists
+            //UtilExceptionStack.print_call_stack();
 			this.validateMenuExistance(menuId);
 
 			// Push new menu item
