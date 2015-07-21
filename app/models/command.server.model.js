@@ -10,10 +10,22 @@ var mongoose = require('mongoose'),
  * Command Schema
  */
 var CommandSchema = new Schema({
-	name: {
+	commandCode: {
 		type: String,
 		default: '',
-		required: 'Please fill Command name',
+		required: 'Please fill commandCode',
+		trim: true
+	},
+	commandUrl: {
+		type: String,
+		default: '',
+		required: 'Please fill commandUrl',
+		trim: true
+	},
+	commandDescription: {
+		type: String,
+		default: 'optional description',
+		//required: 'Please fill commandDescription',
 		trim: true
 	},
 	created: {
@@ -27,3 +39,5 @@ var CommandSchema = new Schema({
 });
 
 mongoose.model('Command', CommandSchema);
+
+

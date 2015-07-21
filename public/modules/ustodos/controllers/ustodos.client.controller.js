@@ -657,6 +657,7 @@ app.controller('UstodosController',
                         $scope.modelDirty = true;
                         //alert ('set $scope.modelDirty = true');
 
+
                         //console.log ('e.keyIdentifier:' + e.keyIdentifier);
                         //console.log ('e.keyCode:' + e.keyCode);
                         //console.log ('e.metaKey:' + e.metaKey);
@@ -664,8 +665,10 @@ app.controller('UstodosController',
                         //console.log ('e.altKey:' + e.altKey);
                         //alert ('e.ctrlKey:' + e.ctrlKey);
 
+
                         if (e.keyIdentifier === "Enter")
                         {
+
                             if (!$scope.modelCheckboxCtrlEnterToSave || e.ctrlKey)
                             {
                                 $scope.eventHandlerEditorcontentChange (
@@ -2317,11 +2320,11 @@ app.controller('UstodosController',
 
                     priorhtml = html;
 
-                    O.o ( 'callcnt [' + callcounteventHandlerEditorcontentChange +
-                    '] in eventHandlerEditorcontentChange ' +
-                    '] \r\n1 data [' + data + '] ascii [' + data.asciiTable("data (1/3)") + ']' +
-                    '] \r\n2 html [' + html + '] ascii [' + html.asciiTable("html (2/3)") + ']' +
-                    '] \r\n3 text [' + text + '] ascii [' + text.asciiTable("text (3/3)") + ']');
+			//O.o ( 'callcnt [' + callcounteventHandlerEditorcontentChange +
+			//'] in eventHandlerEditorcontentChange ' +
+			//'] \r\n1 data [' + data + '] ascii [' + data.asciiTable("data (1/3)") + ']' +
+			//'] \r\n2 html [' + html + '] ascii [' + html.asciiTable("html (2/3)") + ']' +
+			//'] \r\n3 text [' + text + '] ascii [' + text.asciiTable("text (3/3)") + ']');
                     //alert( 'data  [' + data + ']');
                     //alert( 'html [' + html + ']');
                     //alert( 'text [' + text + ']');

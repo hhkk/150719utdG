@@ -61,11 +61,10 @@ var Db = require('mongodb').Db,
 ////var dbTarget = new Db('ustodo-dev', new Server('localhost', 27017), {safe:false});
 //var dbTarget = new Db('notustodo', new Server('localhost', 27017), {safe:false});
 
-var dbNameSource = 'livetest';
-var collNameSource = 'favsckckck';
-//var writedbname = 'ustodo-dev';
+var dbNameSource = 'ustodo-dev';
+var collNameSource = 'commands';
 var writedbname = 'mean-dev';
-var collNameWrite = 'ustodos';
+var collNameWrite = 'commands';
 // QUERY 20 years of records
 //var queryRegExp = {text : new RegExp('hopper')};  // <=========================
 //var queryRegExp = {text : /hopper/};  // <=========================
@@ -116,18 +115,18 @@ if (true) {
                                                 {
                                                     // build json for single string search
                                                     try {
-                                                        var targetObj = {};
-                                                        if (sourceObj.html === undefined || sourceObj.html === null || sourceObj.html === '')
-                                                            targetObj.html = sourceObj.text;
-                                                        else
-                                                            targetObj.html = sourceObj.html;
-
+														var targetObj = {};
                                                         //targetObj.text = JSON.stringify(targetObj);
-                                                        targetObj.text = sourceObj.text;
+                                                        //targetObj.text = sourceObj.text;
                                                         //targetObj.html = sourceObj.html;
-                                                        targetObj.datelastmod = new Date(sourceObj.date);
-                                                        targetObj.datecreated = new Date(sourceObj.date);
-                                                        //targetObj.jsonx = JSON.stringify(targetObj); // jsonx
+
+														targetObj.commandCode = sourceObj.commandCode;
+														targetObj.commandUrl = sourceObj.commandUrl;
+														targetObj.commandCode = sourceObj.commandCode;
+														targetObj.commandDescription = sourceObj.commandDescription;
+														targetObj.created = sourceObj.created;
+
+														//targetObj.jsonx = JSON.stringify(targetObj); // jsonx
                                                         targetObj.user = new ObjectID('5418f365f5bc55500a906584');
 
 
