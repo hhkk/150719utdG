@@ -25,10 +25,10 @@
 //        =  This message will disappear when the default safe is set on the driver Db           =
 //========================================================================================
 //}
-var UtilClass = require('C:/utd/141213UtdV6/public/util/UtilClass.js');
-//var UtilClass3_isString = require('C:/utd/141213UtdV6/public/modules/ustodo/UtilClass3_isString.js');
-//var UtilClass_is = require('C:/utd/141213UtdV6/public/modules/ustodo/UtilClass_is.js');
-//var UtilDate = require('C:/utd/141213UtdV6/public/util/UtilDate.js');
+var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
+//var UtilClass3_isString = require('C:/utd/150719utdG/public/modules/ustodo/UtilClass3_isString.js');
+//var UtilClass_is = require('C:/utd/150719utdG/public/modules/ustodo/UtilClass_is.js');
+//var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
 
 //    Process finished with exit code 0
 //var Db = require('mongodb').Db,
@@ -551,7 +551,7 @@ if (true) {
 //////      console.log("items.length:" + items.length);
 //////      assert.equal(null, err);
 //////      var o = items[items.length - 1];
-//////      //var UtilClass3_isString = require('C:/utd/141213UtdV6/public/modules/ustodo/UtilClass3_isString.js');
+//////      //var UtilClass3_isString = require('C:/utd/150719utdG/public/modules/ustodo/UtilClass3_isString.js');
 //////      console.log("o:" + o);
 //////      //console.log ("o.toString():" + o.toString());
 //////      //console.log ("typeof o:" + typeof o);
@@ -606,7 +606,7 @@ if (true) {
 ////
 ////
 ////// Remove all the document
-//////var UtilKeyRead = require ('C:/utd/141213UtdV6/public/modules/ustodo/UtilKeyRead.js');
+//////var UtilKeyRead = require ('C:/utd/150719utdG/public/modules/ustodo/UtilKeyRead.js');
 //////response = UtilKeyRead.getInput("enter y or n for remove or not");
 //////if (response.toString() === "y") {
 //////    console.log ("you typed y");

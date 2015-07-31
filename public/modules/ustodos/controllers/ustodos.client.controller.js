@@ -1,10 +1,10 @@
 'use strict';
 
 
-//var UtilClass = require('C:/utd/141213UtdV6/public/util/UtilClass.js');
-//var O = require('C:/utd/141213UtdV6/public/util/O.js');
+//var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
+//var O = require('C:/utd/150719utdG/public/util/O.js');
 //var UtilClass = null;
-//var UtilJsTypeDetect = require('C:/utd/141213UtdV6/public/util/UtilJsTypeDetect.js');
+//var UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
 
 
 var O = O;
@@ -3641,7 +3641,7 @@ app.controller('UstodosController',
 
 
 
-                    //var UtilClass = require('C:/utd/141213UtdV6/public/util/UtilClass.js');
+                    //var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
                     //console.log ('%%%$$%%$$%%%%%%%%%%%%% UtilClassx.getClass(this):'+utd.Class.getClass(this));
                     //console.log ('%%%$$%%$$%%%%%%%%%%%%% UtilClassx.utilGetClass(this):'+UtilClassx.utilGetClass(this));
 

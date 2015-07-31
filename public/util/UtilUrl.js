@@ -12,13 +12,13 @@
  * Time: 3:55 PM
  * To change this template use File | Settings | File Templates.
  */
-//var UtilUrl = require('C:/utd/141213UtdV6/public/util/UtilUrl.js');
-var O = require('C:/utd/141213UtdV6/public/util/O.js');
+//var UtilUrl = require('C:/utd/150719utdG/public/util/UtilUrl.js');
+var O = require('C:/utd/150719utdG/public/util/O.js');
 var http = require('follow-redirects').http;
 //var http = require('http');
 //var https = require('follow-redirects').https;
 var async = require("async");
-var UtilHrefThisText = require('C:/utd/141213UtdV6/public/util/UtilHrefThisText.js');
+var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 //tokenize raw text, get array of http-urls to get titles.  expand to include title
 var callCount_expandUrlsToHrefsReturnPatchedStr =0

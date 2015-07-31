@@ -1,5 +1,5 @@
 // from https://github.com/justinklemm/nodejs-async-tutorial/blob/master/async-each.js
-//var UtilUrl2 = require('C:/utd/141213UtdV6/public/util/UtilUrl2.js');
+//var UtilUrl2 = require('C:/utd/150719utdG/public/util/UtilUrl2.js');
 
 function doSomethingOnceAllAreDone(items, res){
     console.log("Everything is done.");
@@ -44,7 +44,7 @@ async = require("async");
 // 1st parameter in async.each() is the array of items
 //titles = [];
 
-var UtilUrl = require('C:/utd/141213UtdV6/public/util/UtilUrl.js');
+var UtilUrl = require('C:/utd/150719utdG/public/util/UtilUrl.js');
 var getTitleStyleTwo_Dell = function(items, res) {
 
     items.forEach(function(item)

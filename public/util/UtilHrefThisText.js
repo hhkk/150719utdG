@@ -3,7 +3,7 @@
 /**
  * Created by henryms on 2/11/2015.
  */
-// var UtilHrefThisText = require('C:/utd/141213UtdV6/public/util/UtilHrefThisText.js');
+// var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 /**
  *
@@ -12,7 +12,7 @@
  * @returns {boolean}
  */
 
-var O = require('C:/utd/141213UtdV6/public/util/O.js');
+var O = require('C:/utd/150719utdG/public/util/O.js');
 
 var seeIfConnectedToThisClass = function (s) {
     return ('in seeIfConnectedToThisClass:' + s);

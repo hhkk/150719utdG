@@ -1,7 +1,7 @@
 
-//var UtilUrl = require('C:/utd/141213UtdV6/public/util/UtilUrl.js');
-var UtilUrl = require('C:/utd/141213UtdV6/public/util/UtilUrl.js');
-var UtilHtmlHref = require('C:/utd/141213UtdV6/public/util/UtilHtmlHref.js');
+//var UtilUrl = require('C:/utd/150719utdG/public/util/UtilUrl.js');
+var UtilUrl = require('C:/utd/150719utdG/public/util/UtilUrl.js');
+var UtilHtmlHref = require('C:/utd/150719utdG/public/util/UtilHtmlHref.js');
 
 var fixUrlsInTextIncludingTitleFetchFromWeb = function(command)
 {
@@ -32,6 +32,6 @@ var fixUrlsInTextIncludingTitleFetchFromWeb = function(command)
 
 
 
-var UtilString = require('C:/utd/141213UtdV6/public/util/UtilString.js');
+var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 fixUrlsInTextIncludingTitleFetchFromWeb ('xi there hk http://www.apple.com ');
 

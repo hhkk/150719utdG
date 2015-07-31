@@ -13,12 +13,13 @@
  * To change this template use File | Settings | File Templates.
  */
 //var UtilUrl = require('C:/utd/141213UtdV6/public/util/UtilUrl.js');
-var O = require('C:/utd/141213UtdV6/public/util/O.js');
+var O = require('C:/utd/150719utdG/public/util/O.js');
+
 var http = require('follow-redirects').http;
 //var http = require('http');
 //var https = require('follow-redirects').https;
 var async = require("async");
-var UtilHrefThisText = require('C:/utd/141213UtdV6/public/util/UtilHrefThisText.js');
+var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var request = require('request');
 var unirest = require('unirest');
 

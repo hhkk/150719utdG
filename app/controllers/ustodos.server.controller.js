@@ -1,13 +1,13 @@
 'use strict';
 
-var UtilClass = require('C:/utd/141213UtdV6/public/util/UtilClass.js');
-var UtilString = require('C:/utd/141213UtdV6/public/util/UtilString.js');
-var O = require('C:/utd/141213UtdV6/public/util/O.js');
-var UtilUrl4 = require('C:/utd/141213UtdV6/public/util/UtilUrl4.js');
+var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
+var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+var O = require('C:/utd/150719utdG/public/util/O.js');
+var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
-var require_Development = require('C:/utd/141213UtdV6/config/env/development.js');
+var require_Development = require('C:/utd/150719utdG/config/env/development.js');
 
 //var UtilClass = require('.././UtilClass');
 // O.o ('__dirname:' + __dirname);  // __dirname:c:\utd\141213UtdV6\app\controllers
@@ -19,7 +19,7 @@ var require_Development = require('C:/utd/141213UtdV6/config/env/development.js'
 //C:\utd\141213UtdV6\app\controllers\ustodos.server.controller.js
 
 
-//var UtilHrefThisText = require('C:/utd/141213UtdV6/public/util/UtilHrefThisText.js');
+//var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 /**
  * Module dependencies.
@@ -268,7 +268,7 @@ exports.list2 = function(req, res) {
 		//O.o ('resetting * star to blank');
 		query.q = '';
 	}
-	var require_ustodos_controller_helper = require('C:/utd/141213UtdV6/app/controllers/helpers/ustodos.controller.helper.js');
+	var require_ustodos_controller_helper = require('C:/utd/150719utdG/app/controllers/helpers/ustodos.controller.helper.js');
 	//O.o('in ustodos.server.controller.js: list, query.querystring: ' + query.q);
 	require_ustodos_controller_helper.processCommandReadPortion(Ustodo, query.q.trim(), req, errorHandler, res);
 

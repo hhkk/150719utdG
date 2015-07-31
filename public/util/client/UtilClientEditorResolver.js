@@ -2,7 +2,7 @@
  * Created by henryms on 4/4/2015.
  */
 
-//var UtilClientEditorResolver = require('C:/utd/141213UtdV6/public/util/client/UtilClientEditorResolver.js');
+//var UtilClientEditorResolver = require('C:/utd/150719utdG/public/util/client/UtilClientEditorResolver.js');
 //
 //var setTextInShowingEditor = function(e) {
 //    try {

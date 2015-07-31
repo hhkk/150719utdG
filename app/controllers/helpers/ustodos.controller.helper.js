@@ -1,12 +1,12 @@
 'use strict';
 
 
-// var ustodos.controller.helper = require('C:/utd/141213UtdV6/app/controllers/helpers/ustodos.controller.helper.js');
+// var ustodos.controller.helper = require('C:/utd/150719utdG/app/controllers/helpers/ustodos.controller.helper.js');
 //processCommandReadPortion
 
-var UtilHrefThisText = require('C:/utd/141213UtdV6/public/util/UtilHrefThisText.js');
-var O = require('C:/utd/141213UtdV6/public/util/O.js');
-var UtilClass = require('C:/utd/141213UtdV6/public/util/UtilClass.js');
+var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
+var O = require('C:/utd/150719utdG/public/util/O.js');
+var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 
 
 var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
@@ -112,7 +112,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
     var queryTokens = (querystringTrimmed.toLowerCase()).split(/\s+/); //input.split(/(\s*,?\s*)+/)
     var querymongo = parseUserInputStringCreateMongoQuery(querystringTrimmed, req);
 
-    var hklimit = 500; // 50 100 200 500 1000
+    var hklimit = 50; // 50 100 200 500 1000
     var countResult = 0;
     var x = [];
 
