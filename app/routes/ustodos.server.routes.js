@@ -6,11 +6,11 @@ module.exports = function(app) {
 
 	// Ustodos Routes
 	app.route('/ustodos')
-		.get(ustodos.list2)
+		.get(users.requiresLogin, ustodos.list2)
 		.post(users.requiresLogin, ustodos.create);
 
 	app.route('/ustodos/:ustodoId')
-		.get(ustodos.read)
+		.get(users.requiresLogin, ustodos.read)
 		.put(users.requiresLogin, ustodos.hasAuthorization, ustodos.update)
 		.delete(users.requiresLogin, ustodos.hasAuthorization, ustodos.delete2);
 

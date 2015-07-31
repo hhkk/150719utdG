@@ -15,7 +15,7 @@
 // var UtilDate = require('C:/utd/141213UtdV6/public/modules/ustodo/UtilDate.js');
 // var UtilDate = require('C:/utd/141213UtdV6/public/util/UtilDate.js');
 
-var UtilClass = require('C:/utd/141213UtdV6/public/util/UtilClass.js');
+var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 
 //console.log (' herehk =========================-----------------=============------------- ');
 //console.log (' herehk =====:'+ UtilClass.getClass(UtilClass) );

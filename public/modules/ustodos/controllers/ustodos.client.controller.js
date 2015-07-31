@@ -269,11 +269,11 @@ app.controller('UstodosController',
                 //alert ('focusManager.focus');
                 //editor.focusManager.focus( editor.editable() );
 
-                CKEDITOR.instances.idCkeEditorTextarea.on('blur', function() {
-                    //alert('cke blur fired');
-                    //$scope.prop2Cke();
-                    //$scope.propagateTextChanges();
-                });
+                //CKEDITOR.instances.idCkeEditorTextarea.on('blur', function() {
+                //    //alert('cke blur fired');
+                //    //$scope.prop2Cke();
+                //    //$scope.propagateTextChanges();
+                //});
 
                 // section_per_editor set initial editor
                 //alert ('oin here');
@@ -345,85 +345,85 @@ app.controller('UstodosController',
                 //alert ('done testTinyMce');
             };
 
-            // section_init_cke
-            $scope.toggleCkeToolebarRich = 3; // will be turned off on first call
-            $scope.toggleCkeToolebar = function()
-            {
-                if ($scope.editor)
-                    $scope.editor.destroy();
-
-                $scope.toggleCkeToolebarRich = ($scope.toggleCkeToolebarRich % 3) + 1 ;
-                if ($scope.toggleCkeToolebarRich === 1)
-                {
-                    //alert ('set cke min');
-                    $scope.editor = CKEDITOR.replace( 'idCkeEditorTextarea', {
-                        //language: 'fr',
-                        customConfig: '/lib/ckeditor/config.js',
-                        startupFocus: false,
-                        uiColor: '#9AB8F3',
-                        //on: {
-                        //    'instanceReady': function (evt) { evt.editor.execCommand('maximize'); }},
-                        toolbar: []
-                    });
-                }
-                else if ($scope.toggleCkeToolebarRich === 2)
-                {
-                    //alert ('set cke rich');
-                    $scope.editor = CKEDITOR.replace( 'idCkeEditorTextarea', {
-                        //language: 'fr',
-                        customConfig: '/lib/ckeditor/config.js',
-                        startupFocus : false,
-                        uiColor: '#9AB8F3'
-                        ,
-                        toolbar: [
-                            { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-                            [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
-                            //'/',																					// Line break - next group will be placed in new line.
-                            { name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
-                        ]
-                    });
-                }
-                else if ($scope.toggleCkeToolebarRich === 3)
-                {
-                    //alert ('set cke rich');
-                    $scope.editor = CKEDITOR.replace( 'idCkeEditorTextarea', {
-                        //language: 'fr',
-                        customConfig: '/lib/ckeditor/config.js',
-                        startupFocus : false,
-                        uiColor: '#9AB8F3',
-                        toolbar: [
-                            { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
-                            { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-                            { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
-                            { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
-                            '/',
-                            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
-                            { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
-                            { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-                            { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-                            '/',
-                            { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
-                            // http://ckeditor.com/addon/colorbutton
-                            // C:/utd/141213UtdV6/public/lib/ckeditor/plugins/colorbutton
-                            // C:\Users\henryms\Downloads\colorbutton_4.4.7\colorbutton
-                            // see layout.server.view.html <!--<script type="text/javascript" src="/lib/ckeditor/plugins/colorbutton/plugin.js"></script>-->
-                            //C:\utd\141213UtdV6\public\lib\ckeditorNotFull
-                            //http://ckeditor.com/download
-                            { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-                            { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
-                            { name: 'others', items: [ '-' ] },
-                            { name: 'about', items: [ 'About' ] }
-                        ]
-                    });
-                }
-                else
-                {
-                    alert ('logic error2 $scope.toggleCkeToolebarRich :' + $scope.toggleCkeToolebarRich );
-                }
-                //alert ('leaving cke $scope.toggleCkeToolebarRich:' + $scope.toggleCkeToolebarRich);
-                O.o ('$scope.toggleCkeToolebarRich :' + $scope.toggleCkeToolebarRich );
-
-            };
+            //// section_init_cke
+            //$scope.toggleCkeToolebarRich = 3; // will be turned off on first call
+            //$scope.toggleCkeToolebar = function()
+            //{
+            //    if ($scope.editor)
+            //        $scope.editor.destroy();
+            //
+            //    $scope.toggleCkeToolebarRich = ($scope.toggleCkeToolebarRich % 3) + 1 ;
+            //    if ($scope.toggleCkeToolebarRich === 1)
+            //    {
+            //        alert ('set cke min');
+            //        $scope.editor = CKEDITOR.replace( 'idCkeEditorTextarea', {
+            //            //language: 'fr',
+            //            customConfig: '/lib/ckeditor/config.js',
+            //            startupFocus: false,
+            //            uiColor: '#9AB8F3',
+            //            //on: {
+            //            //    'instanceReady': function (evt) { evt.editor.execCommand('maximize'); }},
+            //            toolbar: []
+            //        });
+            //    }
+            //    else if ($scope.toggleCkeToolebarRich === 2)
+            //    {
+            //        alert ('set cke rich');
+            //        $scope.editor = CKEDITOR.replace( 'idCkeEditorTextarea', {
+            //            //language: 'fr',
+            //            customConfig: '/lib/ckeditor/config.js',
+            //            startupFocus : false,
+            //            uiColor: '#9AB8F3'
+            //            ,
+            //            toolbar: [
+            //                { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+            //                [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
+            //                //'/',																					// Line break - next group will be placed in new line.
+            //                { name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
+            //            ]
+            //        });
+            //    }
+            //    else if ($scope.toggleCkeToolebarRich === 3)
+            //    {
+            //        alert ('set cke rich');
+            //        $scope.editor = CKEDITOR.replace( 'idCkeEditorTextarea', {
+            //            //language: 'fr',
+            //            customConfig: '/lib/ckeditor/config.js',
+            //            startupFocus : false,
+            //            uiColor: '#9AB8F3',
+            //            toolbar: [
+            //                { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
+            //                { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+            //                { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+            //                { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+            //                '/',
+            //                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+            //                { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+            //                { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+            //                { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+            //                '/',
+            //                { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+            //                // http://ckeditor.com/addon/colorbutton
+            //                // C:/utd/150719utdG/public/lib/ckeditor/plugins/colorbutton
+            //                // C:\Users\henryms\Downloads\colorbutton_4.4.7\colorbutton
+            //                // see layout.server.view.html <!--<script type="text/javascript" src="/lib/ckeditor/plugins/colorbutton/plugin.js"></script>-->
+            //                //C:\utd\150719utdG \public\lib\ckeditorNotFull
+            //                //http://ckeditor.com/download
+            //                { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+            //                { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+            //                { name: 'others', items: [ '-' ] },
+            //                { name: 'about', items: [ 'About' ] }
+            //            ]
+            //        });
+            //    }
+            //    else
+            //    {
+            //        alert ('logic error2 $scope.toggleCkeToolebarRich :' + $scope.toggleCkeToolebarRich );
+            //    }
+            //    //alert ('leaving cke $scope.toggleCkeToolebarRich:' + $scope.toggleCkeToolebarRich);
+            //    O.o ('$scope.toggleCkeToolebarRich :' + $scope.toggleCkeToolebarRich );
+            //
+            //};
 
 
 
@@ -1171,12 +1171,12 @@ app.controller('UstodosController',
             //CKEDITOR.replace('idCkeEditorTextarea');
             //alert('setting editor');
             // section_editor_init_cke
-            if (!$scope.alreadyInitializedCKeditor)
-            {
-                //alert ('initing CKEDITOR');
-                $scope.toggleCkeToolebar();
-                $scope.alreadyInitializedCKeditor = true;
-            }
+            //if (!$scope.alreadyInitializedCKeditor)
+            //{
+            //    alert ('initing CKEDITOR');
+            //    $scope.toggleCkeToolebar();
+            //    $scope.alreadyInitializedCKeditor = true;
+            //}
 
 
             //$scope.whichInputIsInFocus = function() {
@@ -1212,9 +1212,9 @@ app.controller('UstodosController',
                     return $scope.ns.Input.INPUT_NONE_IS_IN_FOCUS;
             };
 
-            $scope.editor = CKEDITOR.instances.idCkeEditorTextarea;
+            //$scope.editor = CKEDITOR.instances.idCkeEditorTextarea;
 
-            var e = CKEDITOR.instances['idCkeEditorTextarea'];
+            //var e = CKEDITOR.instances['idCkeEditorTextarea'];
             var callcountContentDom = 0;
             //alert( 'hi hk e:' + e );
             //e.on( 'change', function() {
@@ -1426,7 +1426,7 @@ app.controller('UstodosController',
 
 
                 } catch (e) {
-                    alert ('era1:' + e);
+                    console.log ('era1:' + e);
                 }
 
             };
@@ -1612,7 +1612,7 @@ app.controller('UstodosController',
                     $scope.mmmm.element.innerHTML = x;
 
                     // 2 CKE
-                    CKEDITOR.instances.idCkeEditorTextarea.setData(x);
+                    //CKEDITOR.instances.idCkeEditorTextarea.setData(x);
 
                     // 3 mce
 
@@ -1799,6 +1799,7 @@ app.controller('UstodosController',
 
             // section_per_editor 2
             $scope.toggleVisibilityTo0 = function() {
+				alert ('in toggleVisibilityTo0');
                 // couldn't figure out mce blur so use this
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_0_TEXT;
                 $scope.focusOnId(arrIds[0]);
@@ -1813,6 +1814,7 @@ app.controller('UstodosController',
             };
 
             $scope.toggleVisibilityTo1 = function() {
+				alert ('in toggleVisibilityTo1');
                 // couldn't figure out mce blur so use this
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_1_MEDIUM;
                 //alert ('in toggleVisibilityTo1 Medium');
@@ -1829,6 +1831,7 @@ app.controller('UstodosController',
             };
 
             $scope.toggleVisibilityTo2 = function() {
+				alert ('in toggleVisibilityTo2');
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_2_CKE;
                 //alert ('in toggleVisibilityTo2 CKE');
                 if ($scope.whichInputIsInFocus() == $scope.ns.Input.INPUT_3_MCE)
@@ -1845,6 +1848,7 @@ app.controller('UstodosController',
             };
 
             $scope.toggleVisibilityTo3 = function(callerId) {
+				//alert ('in toggleVisibilityTo3');
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_3_MCE;
                 //alert ('in toggleVisibilityTo3 MCE callerId [' + callerId + ']');
                 document.getElementById(arrIds[0]).style.display = 'none';
@@ -2846,7 +2850,7 @@ app.controller('UstodosController',
 
                                 //saveOneUstodo($scope.ustodos[i]);
 
-                                // ends up in C:\utd\141213UtdV6\app\controllers\ustodos.server.controller.js
+                                // ends up in C:\utd\150719utdG \app\controllers\ustodos.server.controller.js
                                 // .exports.update
                             }
                             $scope.areThereChanges = true;
