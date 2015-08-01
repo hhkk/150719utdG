@@ -8,7 +8,7 @@
 
 
 var O = O;
-var CKEDITOR = CKEDITOR;
+//var CKEDITOR = CKEDITOR;
 var tinyMCE = tinyMCE;
 var UtilJsTypeDetect = UtilJsTypeDetect;
 var UtilHrefThisText = UtilHrefThisText;
@@ -64,7 +64,7 @@ var resolveFinalCommandBetweenUrlAndInputBox = function(commandFromInputBox, com
 //
 //;
 //
-////alert( "hello world".startsWith( "hello" ) );
+////alert( 'hello world'.startsWith( 'hello' ) );
 //
 //if ( typeof String.prototype.endsWith != 'function' ) {
 //    String.prototype.endsWith = function( str ) {
@@ -74,7 +74,7 @@ var resolveFinalCommandBetweenUrlAndInputBox = function(commandFromInputBox, com
 //else
 //    alert('endswith defined already');
 //
-//alert( "hello world".endsWith( "world"));
+//alert( 'hello world'.endsWith( 'world'));
 
 
 // Ustodos controller
@@ -108,7 +108,7 @@ var angularModule = null;
 //    // Calling `$compile(html)` returns a function that, when called with
 //    // a context object, links the compiled HTML to the given context (e.g.
 //    // binds scope-based expressions in the view to the passed in scope).
-//    var html = "<div ng-repeat='m in model'>{{m.name}}</div>";
+//    var html = '<div ng-repeat='m in model'>{{m.name}}</div>';
 //    var linkingFunction = $compile(html);
 //    var elem = linkingFunction($scope);
 //
@@ -158,16 +158,16 @@ app.controller('UstodosController',
 
 
         //$scope.snippet =   'xxxxxxxxxxxx';
-        $scope.snippet =
-            '<p style="color:blue">an html\n' +
-            '<em onmouseover="this.textContent=\'PWN3D!\'">click here</em>\n' +
-            'snippet</p>';
-
-        $scope.deliberatelyTrustDangerousSnippet = function(s) {
-            //alert ('in deliberatelyTrustDangerousSnippet [' + ']');
-            //return null;
-            return $sce.trustAsHtml(s);
-        };
+		//$scope.snippet =
+		//    '<p style='color:blue'>an html\n' +
+		//    '<em onmouseover='this.textContent=\'PWN3D!\''>click here</em>\n' +
+		//    'snippet</p>';
+		//
+		//$scope.deliberatelyTrustDangerousSnippet = function(s) {
+		//    //alert ('in deliberatelyTrustDangerousSnippet [' + ']');
+		//    //return null;
+		//    return $sce.trustAsHtml(s);
+		//};
 
         //alert ('reiniting scope');
         try
@@ -177,7 +177,7 @@ app.controller('UstodosController',
 
             $scope.dynamicSearch = false; // bound via ng-model=lockMouseover to idcheckbox_dynamicSearch
             $scope.modelCheckboxUpdateOnWrite = true; // bound via ng-model=lockMouseover to idcheckbox_dynamicSearch
-            $scope.modelCheckboxCtrlEnterToSave = true;
+            $scope.modelCheckboxCtrlEnterToSave = false;
             $scope.reloadWarning = false;
             $scope.q = null; // current query
             //$scope.modelDirty = false;
@@ -201,7 +201,7 @@ app.controller('UstodosController',
                 INPUT_NONE_IS_IN_FOCUS: -1,
                 INPUT_0_TEXT: 0,
                 INPUT_1_MEDIUM: 1,
-                INPUT_2_CKE:  2,
+                //INPUT_2_CKE:  2,
                 INPUT_3_MCE:  3
             };
 
@@ -239,11 +239,11 @@ app.controller('UstodosController',
             //    O.a ('sssa1');
 
 
-            $scope.pickCkEditorBasedOnPlatform = function()
-            {
-                var x = 'Platform: '+ navigator.platform;
-                document.getElementById('demo').innerHTML = x;
-            };
+            //$scope.pickCkEditorBasedOnPlatform = function()
+            //{
+            //    var x = 'Platform: '+ navigator.platform;
+            //    document.getElementById('demo').innerHTML = x;
+            //};
 
             //.----------------. .-----------------..----------------. .----------------. .----------------. .----------------.
             //| .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
@@ -305,7 +305,7 @@ app.controller('UstodosController',
 
 
 
-                //ng-blur="propagateTextChanges()"
+                //ng-blur='propagateTextChanges()'
 
                 //tinyMCE.get('idDivForTinyMceEditorTextarea').on('keyup',function(e){
                 //    alert(this.getContent().replace(/(<[a-zA-Z\/][^<>]*>|\[([^\]]+)\])|(\s+)/ig,''));
@@ -406,7 +406,7 @@ app.controller('UstodosController',
             //                // http://ckeditor.com/addon/colorbutton
             //                // C:/utd/150719utdG/public/lib/ckeditor/plugins/colorbutton
             //                // C:\Users\henryms\Downloads\colorbutton_4.4.7\colorbutton
-            //                // see layout.server.view.html <!--<script type="text/javascript" src="/lib/ckeditor/plugins/colorbutton/plugin.js"></script>-->
+            //                // see layout.server.view.html <!--<script type='text/javascript' src='/lib/ckeditor/plugins/colorbutton/plugin.js'></script>-->
             //                //C:\utd\150719utdG \public\lib\ckeditorNotFull
             //                //http://ckeditor.com/download
             //                { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
@@ -448,10 +448,11 @@ app.controller('UstodosController',
             //
 
 
-            $scope.myCustomOnInit = function () {
-                alert("myCustomOnInit from mce");
-                tinyMCE.get('idTinyMceTextArea').setContent('<span>some1</span> html');
-                tinymce.activeEditor.setContent('<span>some</span> html');
+            $scope.myCustomOnInit = function () // works
+            {
+                //alert('myCustomOnInit from mce');
+                //tinyMCE.get('idTinyMceTextArea').setContent('<span>some1</span> html');
+                //tinymce.activeEditor.setContent('<span>some</span> html');
             };
 
             // 1111111111
@@ -468,16 +469,16 @@ app.controller('UstodosController',
             // 222222222
             // tinymce4 works
             //tinymce.init({
-            //    selector: "textarea",
-            //    theme: "modern",
+            //    selector: 'textarea',
+            //    theme: 'modern',
             //    //plugins: [
-            //    //    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-            //    //    "searchreplace wordcount visualblocks visualchars code fullscreen",
-            //    //    "insertdatetime media nonbreaking save table contextmenu directionality",
-            //    //    "emoticons template paste textcolor colorpicker textpattern"
+            //    //    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            //    //    'searchreplace wordcount visualblocks visualchars code fullscreen',
+            //    //    'insertdatetime media nonbreaking save table contextmenu directionality',
+            //    //    'emoticons template paste textcolor colorpicker textpattern'
             //    //],
-            //    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-            //    toolbar2: "print preview media | forecolor backcolor emoticons",
+            //    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            //    toolbar2: 'print preview media | forecolor backcolor emoticons',
             //    image_advtab: true,
             //    templates: [
             //        {title: 'Test template 1', content: 'Test 1'},
@@ -505,14 +506,14 @@ app.controller('UstodosController',
 
 
             //tinyMCE.init({
-            //    mode : "textareas",
-            //    theme : "modern",
-            //    theme_advanced_buttons1 : "mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink",
-            //    theme_advanced_buttons2 : "",
-            //    theme_advanced_buttons3 : "",
-            //    theme_advanced_toolbar_location : "top",
-            //    theme_advanced_toolbar_align : "left",
-            //    theme_advanced_statusbar_location : "bottom",
+            //    mode : 'textareas',
+            //    theme : 'modern',
+            //    theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
+            //    theme_advanced_buttons2 : '',
+            //    theme_advanced_buttons3 : '',
+            //    theme_advanced_toolbar_location : 'top',
+            //    theme_advanced_toolbar_align : 'left',
+            //    theme_advanced_statusbar_location : 'bottom',
             //    //plugins : 'inlinepopups',
             //    setup : function(ed) {
             //        // Add a custom button
@@ -532,8 +533,8 @@ app.controller('UstodosController',
             // WORKS tested 150715
             // http://www.tinymce.com/tryit/menubutton.php
             // tinymce.init({
-            //    selector: "textarea",
-            //    toolbar: "mybutton",
+            //    selector: 'textarea',
+            //    toolbar: 'mybutton',
             //    setup: function(editor) {
             //        editor.addButton('mybutton', {
             //            type: 'menubutton',
@@ -554,14 +555,14 @@ app.controller('UstodosController',
                 //mode : 'exact',
 
 
-                //mode : "textareas",
-                //theme : "advanced",
-                //theme_advanced_buttons1 : "mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink",
-                //theme_advanced_buttons2 : "",
-                //theme_advanced_buttons3 : "",
-                //theme_advanced_toolbar_location : "top",
-                //theme_advanced_toolbar_align : "left",
-                //theme_advanced_statusbar_location : "bottom",
+                //mode : 'textareas',
+                //theme : 'advanced',
+                //theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
+                //theme_advanced_buttons2 : '',
+                //theme_advanced_buttons3 : '',
+                //theme_advanced_toolbar_location : 'top',
+                //theme_advanced_toolbar_align : 'left',
+                //theme_advanced_statusbar_location : 'bottom',
                 //plugins : 'inlinepopups',
                 //setup : function(ed) {
                 //    // Add a custom button
@@ -589,29 +590,31 @@ app.controller('UstodosController',
 
 
 
-                plugins: "code, pagebreak",
-                mode : "textareas",
-                //  theme : "advanced",
-                //plugins : "pagebreak,styleBAD,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+                plugins: 'code, pagebreak',
+                mode : 'textareas',
+                //  theme : 'advanced',
+                //plugins : 'pagebreak,styleBAD,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template',
 
                 // Theme options
-                //theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-                //theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-                //theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-                //theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
-                //theme_advanced_toolbar_location : "top",
-                //theme_advanced_toolbar_align : "left",
-                //theme_advanced_statusbar_location : "bottom",
+                //theme_advanced_buttons1 : 'save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect',
+                //theme_advanced_buttons2 : 'cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor',
+                //theme_advanced_buttons3 : 'tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen',
+                //theme_advanced_buttons4 : 'insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak',
+                //theme_advanced_toolbar_location : 'top',
+                //theme_advanced_toolbar_align : 'left',
+                //theme_advanced_statusbar_location : 'bottom',
                 //theme_advanced_resizing : true,
 
                 width: '100%',
-                height: "100%",
+                height: '100%',
                 resize: 'both',
                 elements : 'idTinyMceTextArea',
-                //toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | image",
-                //toolbar2: "print preview media | forecolor backcolor emoticons",
-                toolbar: "mybutton",
-                //toolbar: 'true',
+                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | image',
+                toolbar2: 'print preview media | forecolor backcolor emoticons',
+                //toolbar: 'mybutton',
+				oninit : $scope.myCustomOnInit,
+
+				//toolbar: 'true',
                 menubar : 'false',
                 init_instance_callback : function() {
                     if ($scope.q)
@@ -633,17 +636,17 @@ app.controller('UstodosController',
 
 
 
-                    //    toolbar: "mybutton",
+                    //    toolbar: 'mybutton',
                     //    setup: function(editor) {
-                            ed.addButton('mybutton', {
-                                type: 'menubutton',
-                                text: 'My button',
-                                icon: false,
-                                menu: [
-                                    {text: 'Menu item 1', onclick: function() {editor.insertContent('Menu item 1');}},
-                                    {text: 'Menu item 2', onclick: function() {editor.insertContent('Menu item 2');}}
-                                ]
-                            });
+					ed.addButton('mybutton', {
+						type: 'menubutton',
+						text: 'My button',
+						icon: false,
+						menu: [
+							{text: 'Menu item 1', onclick: function() {editor.insertContent('Menu item 1');}},
+							{text: 'Menu item 2', onclick: function() {editor.insertContent('Menu item 2');}}
+						]
+					});
                     //    }
 
 
@@ -666,7 +669,7 @@ app.controller('UstodosController',
                         //alert ('e.ctrlKey:' + e.ctrlKey);
 
 
-                        if (e.keyIdentifier === "Enter")
+                        if (e.keyIdentifier === 'Enter')
                         {
 
                             if (!$scope.modelCheckboxCtrlEnterToSave || e.ctrlKey)
@@ -693,7 +696,7 @@ app.controller('UstodosController',
 
                     //ed.onKeyPress.add(
                     //    function (ed, evt) {
-                    //        alert("Editor-ID: "+ed.id+"\nEvent: "+evt);
+                    //        alert('Editor-ID: '+ed.id+'\nEvent: '+evt);
                     //        //....
                     //    }
                     //);
@@ -762,8 +765,8 @@ app.controller('UstodosController',
             ////                paste_auto_cleanup_on_paste : true,
             ////                paste_preprocess : function(pl, o) {
             ////                    // Content string containing the HTML from the clipboard
-            ////                    alert("hi mom" + o.content);
-            ////                    o.content = "-: CLEANED :-\n" + o.content;
+            ////                    alert('hi mom' + o.content);
+            ////                    o.content = '-: CLEANED :-\n' + o.content;
             ////                },
             //
             //
@@ -792,10 +795,10 @@ app.controller('UstodosController',
             //                            (
             //                                function(ed,e)
             //                                {
-            //                                    //alert ("onClick:" + e.target.nodeName);
+            //                                    //alert ('onClick:' + e.target.nodeName);
             //                                    //if (e.target.nodeName == 'A'&&e.altKey) {
             //                                    if (e.target.nodeName == 'A' && e.altKey) {
-            //                                        window.open(e.target.href,"_blank");
+            //                                        window.open(e.target.href,'_blank');
             //                                    }
             //                                }
             //                            );
@@ -805,14 +808,14 @@ app.controller('UstodosController',
             //                                function(ed,l)
             //                                {
             //
-            //                                    // console.log("in keyup add")
+            //                                    // console.log('in keyup add')
             //
             //                                    var txtUpperText = tinyMCE.get('txtUpper').getContent({format : 'text'}).trim();
             //                                    if (document.title.toLowerCase() != txtUpperText.toLowerCase())
-            //                                        document.title = "* "+txtUpperText;
+            //                                        document.title = '* '+txtUpperText;
             //
             //                                    var txtUpperHtml = tinyMCE.get('txtUpper').getContent({format : 'html'}).trim();
-            //                                    //alert("in ed.onKeyUp.add3 l.keyCode :" + l.keyCode );
+            //                                    //alert('in ed.onKeyUp.add3 l.keyCode :' + l.keyCode );
             //                                    //                                if (txtUpperText.endsWith('...'))
             //                                    //                                {
             //                                    //                                        //alert ('yes match')
@@ -820,8 +823,8 @@ app.controller('UstodosController',
             //                                    //                                    //setCaretToPos(getElementByIdHK('txtUpper'), 10000)
             //                                    //                                    //var rng = tinymce.DOM.createRng();
             //                                    //                                    //tinyMCE.activeEditor.setSelectionRange(tinyMCE.activeEditor, 0, 1);
-            //                                    //                                    var textareahbk = document.getElementById("txtUpper");
-            //                                    //                                    console.log ("moveCaretToEnd now textareahbk:"+ textareahbk );
+            //                                    //                                    var textareahbk = document.getElementById('txtUpper');
+            //                                    //                                    console.log ('moveCaretToEnd now textareahbk:'+ textareahbk );
             //                                    //                                    moveCaretToEnd(textareahbk);
             //                                    //
             //                                    //
@@ -836,39 +839,39 @@ app.controller('UstodosController',
             //                                    // Type here
             //                                    //var txtUpperText = tinyMCE.activeEditor.getContent({format : 'html'}).trim();
             //                                    //var txtUpperText = tinyMCE.activeEditor.getContent({format : 'text'}).trim();
-            //                                    //console.log ('in initmcehbk.1 in MCE Key up event: ' + l.keyCode + ", txtUpperText [" + txtUpperText + "]");
+            //                                    //console.log ('in initmcehbk.1 in MCE Key up event: ' + l.keyCode + ', txtUpperText [' + txtUpperText + ']');
             //
             //                                    if (l.keyCode == 27) // escape
             //                                    {
-            //                                        //oooo ("console > got an escape")
+            //                                        //oooo ('console > got an escape')
             //
             //                                        // escapehk
-            //                                        if ( rowClickedDbId != "") //if already editing a row then first unedit
+            //                                        if ( rowClickedDbId != '') //if already editing a row then first unedit
             //                                        {
-            //                                            oooo ("console > got an escape 1")
-            //                                            //alert ("escapehk")
-            //                                            //alert ("txtUpper:"+ document.getElementById("txtUpper").value);
-            //                                            //alert ("unclick id:" + rowClickedIndex)
-            //                                            //console.log ("calling tableChangeUnclickRowTA")
-            //                                            tableChangeUnclickRowTA("console > got an escape", rowClickedIndexCurrent)
+            //                                            oooo ('console > got an escape 1')
+            //                                            //alert ('escapehk')
+            //                                            //alert ('txtUpper:'+ document.getElementById('txtUpper').value);
+            //                                            //alert ('unclick id:' + rowClickedIndex)
+            //                                            //console.log ('calling tableChangeUnclickRowTA')
+            //                                            tableChangeUnclickRowTA('console > got an escape', rowClickedIndexCurrent)
             //                                            // togglezoom
             //                                            //innerLayout.show('south')
             //                                            //innerLayout.show('east')
             //                                            //innerLayout.show('west')
             //
-            //                                            //        console.log("post unclick rowClickedIndex:" + rowClickedIndex)
-            //                                            //        console.log("post unclick rowClickedDbId:" + rowClickedDbId)
+            //                                            //        console.log('post unclick rowClickedIndex:' + rowClickedIndex)
+            //                                            //        console.log('post unclick rowClickedDbId:' + rowClickedDbId)
             //
             //                                        }
             //                                        else
             //                                        {
-            //                                            oooo ("console > got an escape 2")
+            //                                            oooo ('console > got an escape 2')
             //                                            //document.activeElement.blur()
-            //                                            //oooo("2setting to idTextFieldUtdoptions")
+            //                                            //oooo('2setting to idTextFieldUtdoptions')
             ////                                        $('#idTextFieldUtdoptions').focus();
             ////                                        $('#idTextFieldUtdoptions').blur();
             //
-            //                                            //id="select_se_command"
+            //                                            //id='select_se_command'
             //
             //                                            $('#select_se_command').focus();
             //                                            $('#select_se_command').blur();
@@ -878,12 +881,12 @@ app.controller('UstodosController',
             //                                    {
             //                                        if (true) // make this false to disable enter key from either form of tinymce rich text box
             //                                        {
-            //                                            //alert ("gg:" + convertStringToAsciiCommaSeparatedString(tinyMCE.activeEditor.getContent({format : 'html'}).trim()))
+            //                                            //alert ('gg:' + convertStringToAsciiCommaSeparatedString(tinyMCE.activeEditor.getContent({format : 'html'}).trim()))
             //                                            //tinyMCE.activeEditor.setContent(trimTrailingNbspWithSpace(tinyMCE.activeEditor.getContent({format : 'html'})));
-            //                                            if (txtUpperText == "")
+            //                                            if (txtUpperText == '')
             //                                            {
-            //                                                txtUpperText = "*"
-            //                                                tinyMCE.get('txtUpper').setContent("*");
+            //                                                txtUpperText = '*'
+            //                                                tinyMCE.get('txtUpper').setContent('*');
             //                                            }
             //                                            txtUpperText = tinyMCE.get('txtUpper').getContent({format : 'text'}).trim();
             //                                            txtUpperHtml = tinyMCE.get('txtUpper').getContent({format : 'html'}).trim();
@@ -893,60 +896,60 @@ app.controller('UstodosController',
             //                                            //as compared with var commandHTML = getElementByIdHK('txtUpper').innerHTML.trim()   // encoded ampersand
             //
             //
-            //                                            //alert ("s1 [" + convertStringToAsciiCommaSeparatedString(txtUpperText) + "]");
-            //                                            //alert ("s2 [" + toHex(txtUpperText) + "]");
+            //                                            //alert ('s1 [' + convertStringToAsciiCommaSeparatedString(txtUpperText) + ']');
+            //                                            //alert ('s2 [' + toHex(txtUpperText) + ']');
             //
-            //                                            // alert ("got an enter")
-            //                                            while (txtUpperText.trim().endsWith("<br />"))
+            //                                            // alert ('got an enter')
+            //                                            while (txtUpperText.trim().endsWith('<br />'))
             //                                            {
             //                                                cnt++;if (cnt > 2)
             //                                                break;
             //                                                txtUpperText = txtUpperText.substr(0, txtUpperText.length-6).trim()
             //                                            }
             //
-            //                                            if (txtUpperText.endsWith("&nbsp;"))
+            //                                            if (txtUpperText.endsWith('&nbsp;'))
             //                                            {
-            //                                                alert ("do I ever get here?");
+            //                                                alert ('do I ever get here?');
             //                                            }
             //                                            else
             //                                            {
-            //                                                // alert ("3 Key up event1 in enter key [" + txtUpperText  + "]")
+            //                                                // alert ('3 Key up event1 in enter key [' + txtUpperText  + ']')
             //
             //                                                var cnt = 0
-            //                                                while (txtUpperText.trim().endsWith("<br />"))
+            //                                                while (txtUpperText.trim().endsWith('<br />'))
             //                                                {
             //                                                    cnt++;if (cnt > 2)
             //                                                    break;
-            //                                                    //alert ("3.5 Key up event trimming from:" + txtUpperText)
+            //                                                    //alert ('3.5 Key up event trimming from:' + txtUpperText)
             //                                                    txtUpperText = txtUpperText.substr(0, txtUpperText.length-6).trim()
-            //                                                    //alert ("trimming to:" + txtUpperText)
+            //                                                    //alert ('trimming to:' + txtUpperText)
             //                                                }
-            //                                                //alert ("4 Key up event in enter key pre filter [" + txtUpperText + "]")
-            //                                                while (txtUpperText.trim().endsWith("<br />"))
+            //                                                //alert ('4 Key up event in enter key pre filter [' + txtUpperText + ']')
+            //                                                while (txtUpperText.trim().endsWith('<br />'))
             //                                                {
             //                                                    cnt++;if (cnt > 2)
             //                                                    break;
-            //                                                    //alert ("trimming from:" + txtUpperText)
+            //                                                    //alert ('trimming from:' + txtUpperText)
             //                                                    txtUpperText = txtUpperText.substr(0, txtUpperText.length-6).trim()
-            //                                                    //alert ("trimming to:" + txtUpperText)
+            //                                                    //alert ('trimming to:' + txtUpperText)
             //                                                }
-            //                                                //alert ("5 1.777 Key up event in enter key ready to submit[" + txtUpperText + "] ensdwith ' w' [" + txtUpperText.endsWith(" w") + "]")
-            //                                                //alert ("5 1.777 Key up event in enter key ready to submit [" + txtUpperText + "] getElementByIdHK('idTextFieldUtdoptions').value [" + getElementByIdHK('idTextFieldUtdoptions').value + "]")
-            //                                                //console.log ("calling ajax from mcehandler 1.777")
+            //                                                //alert ('5 1.777 Key up event in enter key ready to submit[' + txtUpperText + '] ensdwith ' w' [' + txtUpperText.endsWith(' w') + ']')
+            //                                                //alert ('5 1.777 Key up event in enter key ready to submit [' + txtUpperText + '] getElementByIdHK('idTextFieldUtdoptions').value [' + getElementByIdHK('idTextFieldUtdoptions').value + ']')
+            //                                                //console.log ('calling ajax from mcehandler 1.777')
             //
-            //                                                // see also in gsp "        function onActionButtonClick_userClickedReset() {"
-            //                                                ajax_FetchJsonTableData("AJAXCALLERID_CALLER_MCEHANDLER", txtUpperHtml.trim(), txtUpperText.trim(), false, getElementByIdHK('idTextFieldUtdoptions').value)
+            //                                                // see also in gsp '        function onActionButtonClick_userClickedReset() {'
+            //                                                ajax_FetchJsonTableData('AJAXCALLERID_CALLER_MCEHANDLER', txtUpperHtml.trim(), txtUpperText.trim(), false, getElementByIdHK('idTextFieldUtdoptions').value)
             //
             //                                            }
-            //                                            //alert ("in tinymce.dom.Event.cancel(e);")
+            //                                            //alert ('in tinymce.dom.Event.cancel(e);')
             //                                            //tinymce.dom.Event.cancel(evt);  hbk130616
             //
             //                                        }
             //                                    }
             //                                    else // ELSE A CHARACTER
             //                                    {
-            //                                        //alert ("in ed.onKeyUp.add");
-            //                                        //alert ("6 Key up event in else remotefunction")
+            //                                        //alert ('in ed.onKeyUp.add');
+            //                                        //alert ('6 Key up event in else remotefunction')
             //                                        //copyupdown(2);
             //                                        //                            ${
             //                                        //                                remoteFunction(action: 'ajax_autocompleteSearchUpper',
@@ -955,15 +958,15 @@ app.controller('UstodosController',
             //                                        //                                    params: '\'autocomp=\' + tinyMCE.activeEditor.getContent({format : \'text\'})',
             //                                        //                            onComplete: 'postautocomplete(\'from_tiny_mce\');')
             //                                        // RESTRICT VIEWED RECORD SET
-            //                                        //alert ("comparing to:" + hksetTermsInTxtupperSpaceDelimited.toString())
-            //                                        //alert ("comparing:" + taclass)
-            //                                        //alert ("to:" + CONST_FIELD_UPPER_CLASS )
+            //                                        //alert ('comparing to:' + hksetTermsInTxtupperSpaceDelimited.toString())
+            //                                        //alert ('comparing:' + taclass)
+            //                                        //alert ('to:' + CONST_FIELD_UPPER_CLASS )
             //
             //                                        if (taclass == CONST_FIELD_UPPER_CLASS )
             //                                        {
             //                                            PageData_state_txtUpperEdited = true;
-            //                                            //alert ("set edted to true");
-            //                                            //alert ("eureka it'txtUpperText true!");
+            //                                            //alert ('set edted to true');
+            //                                            //alert ('eureka it'txtUpperText true!');
             //                                            if (document.getElementById('idCheckboxFilter').checked)
             //                                            {
             //                                                // is there already a timer? clear if if there is
@@ -972,7 +975,7 @@ app.controller('UstodosController',
             ////                                                clearTimeout(stoppedTyping);
             ////                                            // set a new timer to execute 3 seconds from last keypress
             ////                                            stoppedTyping = setTimeout(function(){
-            ////                                                //alert ("you stopped typing seconds are up - filter  !!")
+            ////                                                //alert ('you stopped typing seconds are up - filter  !!')
             //                                                hideRowsNotContainingFullTermSet('character in mce', tinyMCE.get('txtUpper').getContent({format : 'text'}), true, true, true, true, compareModes.contains)
             //                                                //}, 500); // millisecond timer
             //
@@ -989,20 +992,20 @@ app.controller('UstodosController',
             //                            );
             //
             //                            ed.onInit.add(function(editor) {
-            //                                tinymce.dom.Event.add(editor.getBody(), "focus", function(e) {
+            //                                tinymce.dom.Event.add(editor.getBody(), 'focus', function(e) {
             //                                    //oooo('focus1 ' +taclass);
             //                                    if (taclass == CONST_FIELD_UPPER_CLASS )
             //                                    {
             //                                        //oooo('focus12 '+rowClickedIndexCurrent)
-            //                                        if (rowClickedIndexCurrent != "")
-            //                                            tableChangeUnclickRowTA("unclick row hk", rowClickedIndexCurrent)
+            //                                        if (rowClickedIndexCurrent != '')
+            //                                            tableChangeUnclickRowTA('unclick row hk', rowClickedIndexCurrent)
             //                                    }
             //
             //                                });
             //                            });
             //
             //                            ed.onInit.add(function(editor) {
-            //                                tinymce.dom.Event.add(editor.getBody(), "blur", function(e) {
+            //                                tinymce.dom.Event.add(editor.getBody(), 'blur', function(e) {
             //                                    //oooo('blur2 ' +taclass);
             //                                });
             //                            });
@@ -1010,14 +1013,14 @@ app.controller('UstodosController',
             //                            ed.onInit.add (
             //                                function(ed)
             //                                {
-            //                                    //alert ("in mce onInit init . add")
+            //                                    //alert ('in mce onInit init . add')
             //                                    ed.getDoc().body.style.fontSize = inFontSize;
-            //                                    ed.getDoc().body.style.color = "olive";          // tinymce color constrolled here hbk color
-            ////                                ed.getDoc().body.style.padding = "0"; //hbk
-            ////                                ed.getDoc().body.style.margin = "0";  // hbk
+            //                                    ed.getDoc().body.style.color = 'olive';          // tinymce color constrolled here hbk color
+            ////                                ed.getDoc().body.style.padding = '0'; //hbk
+            ////                                ed.getDoc().body.style.margin = '0';  // hbk
             //                                    //tinyMCE.execCommand('mceFocus', false, 'txtUpper');
-            //                                    var rich = (typeof tinyMCE != "undefined") && tinyMCE.activeEditor != null && !tinyMCE.activeEditor.isHidden();
-            //                                    //alert ("rich2:" + rich);
+            //                                    var rich = (typeof tinyMCE != 'undefined') && tinyMCE.activeEditor != null && !tinyMCE.activeEditor.isHidden();
+            //                                    //alert ('rich2:' + rich);
             //                                    //var s = tinyMCE.activeEditor.getContent();
             //                                    //tinyMCE.activeEditor.setContent(s)
             //
@@ -1042,26 +1045,26 @@ app.controller('UstodosController',
             //                            handleErr(err);
             //                        }
             //                    },
-            //                    //onchange_callback : "myCustomOnChangeHandler",
+            //                    //onchange_callback : 'myCustomOnChangeHandler',
             //                    mode : 'specific_textareas', // see http://www.tinymce.com/wiki.php/Configuration:editor_selector
             //                    //mode : 'textareas', // see http://www.tinymce.com/wiki.php/Configuration:editor_selector
             //                    //editor_selector : /(mceEditor|mceRichText)/   not tried - from article
             //                    editor_selector : taclass, // only textareas with this clas
-            //                    //editor_selector : "classRowTextArea", // only textareas with this clas
-            //                    //elements : "fld2Lower", // only textareas with this clas
+            //                    //editor_selector : 'classRowTextArea', // only textareas with this clas
+            //                    //elements : 'fld2Lower', // only textareas with this clas
             //
             //                    //theme : themein, //advanced or simple
-            //                    theme : "simple", //advanced or simple
-            //                    //theme : "advanced", //advanced or simple
+            //                    theme : 'simple', //advanced or simple
+            //                    //theme : 'advanced', //advanced or simple
             //
             //                    // https://groups.google.com/forum/#!msg/jquery-ui-layout/dGIYxZX2JLI/W074IODoGv8J
-            //                    //north__onresize: function () { alert ("resized"); },
-            //                    //south__onresize: alert ("resized") },
-            //                    ////plugins : "autoresize, autolink,lists,spellchecker,pagebreak,style,layer,table," +
-            //                    // "save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media," +
-            //                    // "searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars," +
-            //                    // "nonbreaking,xhtmlxtras,template",
-            //                    //plugins : "autoresize",
+            //                    //north__onresize: function () { alert ('resized'); },
+            //                    //south__onresize: alert ('resized') },
+            //                    ////plugins : 'autoresize, autolink,lists,spellchecker,pagebreak,style,layer,table,' +
+            //                    // 'save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,' +
+            //                    // 'searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,' +
+            //                    // 'nonbreaking,xhtmlxtras,template',
+            //                    //plugins : 'autoresize',
             //
             ////                //plusin 'autoresize',  // hbk130414
             //                    width: '100%',
@@ -1073,11 +1076,11 @@ app.controller('UstodosController',
             //
             //
             //
-            //                    //width: "100%",
-            //                    //theme_advanced_statusbar_location : "bottom",
+            //                    //width: '100%',
+            //                    //theme_advanced_statusbar_location : 'bottom',
             //                    //theme_advanced_resizing : true,
-            //                    //theme_advanced_toolbar_location : "left",
-            //                    //theme_advanced_toolbar_align : "left",
+            //                    //theme_advanced_toolbar_location : 'left',
+            //                    //theme_advanced_toolbar_align : 'left',
             //
             //                    theme : 'simple',
             //                    //plugins : 'autoresize',
@@ -1095,40 +1098,40 @@ app.controller('UstodosController',
             //                    // Theme options
             //                    //theme_advanced_buttons1 : buttons,
             //
-            //                    //theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-            //                    //theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+            //                    //theme_advanced_buttons3 : 'tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen',
+            //                    //theme_advanced_buttons4 : 'insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage',
             //
-            //                    theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-            //                    // NEAR ORIGINAL        theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-            //                    // NEAR ORIGINAL       //theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-            //                    // NEAR ORIGINAL       //theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
-            //                    //init_instance_callback: function (inst) { alert ("in resize"); inst.execCommand('mceAutoResize'); },
-            //                    //init_instance_callback: function (inst) { alert("hi") },
+            //                    theme_advanced_buttons1 : 'save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect',
+            //                    // NEAR ORIGINAL        theme_advanced_buttons2 : 'cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor',
+            //                    // NEAR ORIGINAL       //theme_advanced_buttons3 : 'tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen',
+            //                    // NEAR ORIGINAL       //theme_advanced_buttons4 : 'insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage',
+            //                    //init_instance_callback: function (inst) { alert ('in resize'); inst.execCommand('mceAutoResize'); },
+            //                    //init_instance_callback: function (inst) { alert('hi') },
             //                    // Skin options
-            //                    //skin : "o2k7",
-            //                    //skin_variant : "silver",
+            //                    //skin : 'o2k7',
+            //                    //skin_variant : 'silver',
             //                    toolbar_items_size : 'small',
             //                    // Example content CSS (should be your site CSS)
-            //                    //content_css : "js/tinymce/jscripts/tiny_mce/themes/simple/skins/default/content.css",
+            //                    //content_css : 'js/tinymce/jscripts/tiny_mce/themes/simple/skins/default/content.css',
             //
             //
             //
             //
             //                    // Drop lists for link/image/media/template dialogs
-            //                    template_external_list_url : "js/template_list.js",
-            //                    external_link_list_url : "js/link_list.js",
-            //                    external_image_list_url : "js/image_list.js",
-            //                    media_external_list_url : "js/media_list.js",
+            //                    template_external_list_url : 'js/template_list.js',
+            //                    external_link_list_url : 'js/link_list.js',
+            //                    external_image_list_url : 'js/image_list.js',
+            //                    media_external_list_url : 'js/media_list.js',
             //                    //js/tinymce/examples/lists/link_list
-            //                    //        template_external_list_url : "../js/tinymce/examples/lists/template_list.js",
-            //                    //        external_link_list_url : "../js/tinymce/examples/lists/link_list.js",
-            //                    //        external_image_list_url : "../js/tinymce/examples/lists/image_list.js",
-            //                    //        media_external_list_url : "../js/tinymce/examples/lists/media_list.js",
+            //                    //        template_external_list_url : '../js/tinymce/examples/lists/template_list.js',
+            //                    //        external_link_list_url : '../js/tinymce/examples/lists/link_list.js',
+            //                    //        external_image_list_url : '../js/tinymce/examples/lists/image_list.js',
+            //                    //        media_external_list_url : '../js/tinymce/examples/lists/media_list.js',
             //
             //                    // Replace values for the template plugin
             //                    template_replace_values : {
-            //                        username : "Some User",
-            //                        staffid : "991234"
+            //                        username : 'Some User',
+            //                        staffid : '991234'
             //                    },
             //
             //
@@ -1147,7 +1150,7 @@ app.controller('UstodosController',
             //        }
             //        catch (err)
             //        {
-            //            handleErr("in error in mceinit", err);
+            //            handleErr('in error in mceinit', err);
             //        }
 
 
@@ -1201,9 +1204,9 @@ app.controller('UstodosController',
                 // 1 medium
                 else if ($scope.ns.Input.INPUT_1_MEDIUM === currentlyInFocus)
                     return $scope.ns.Input.INPUT_1_MEDIUM;
-                // 2 cke
-                else if ($scope.ns.Input.INPUT_2_CKE === currentlyInFocus)
-                    return $scope.ns.Input.INPUT_2_CKE;
+                //// 2 cke
+                //else if ($scope.ns.Input.INPUT_2_CKE === currentlyInFocus)
+                //    return $scope.ns.Input.INPUT_2_CKE;
 
                 else if ($scope.ns.Input.INPUT_3_MCE === currentlyInFocus)
                     return $scope.ns.Input.INPUT_3_MCE;
@@ -1385,24 +1388,24 @@ app.controller('UstodosController',
 
                 try {
 
-                    if (id !== 'idDivForCkeEditorTextarea' && id !== 'idDivForTinyMceEditorTextarea')
-                    {
-                        //alert ('in focusOnId 1:'+ id);
-                        var el = document.getElementById(id);
-                        var range = document.createRange();
-                        var sel = window.getSelection();
-                        //range.setStart(el.childNodes[0], 5);
-                        //range.collapse(true);
-                        //sel.removeAllRanges();
-                        //sel.addRange(range);
-                        el.focus();
-                    }
-                    else if (id === 'idDivForCkeEditorTextarea')
-                    {
-                        //alert ('in focusOnId 2:'+ id);
-                        CKEDITOR.instances.idCkeEditorTextarea.focus();
-                    }
-                    else if (id === 'idDivForTinyMceEditorTextarea')
+                    //if (id !== 'idDivForCkeEditorTextarea' && id !== 'idDivForTinyMceEditorTextarea')
+                    //{
+                    //    //alert ('in focusOnId 1:'+ id);
+                    //    var el = document.getElementById(id);
+                    //    var range = document.createRange();
+                    //    var sel = window.getSelection();
+                    //    //range.setStart(el.childNodes[0], 5);
+                    //    //range.collapse(true);
+                    //    //sel.removeAllRanges();
+                    //    //sel.addRange(range);
+                    //    el.focus();
+                    //}
+                    //else if (id === 'idDivForCkeEditorTextarea')
+                    //{
+                    //    //alert ('in focusOnId 2:'+ id);
+                    //    CKEDITOR.instances.idCkeEditorTextarea.focus();
+                    //}
+                    if (id === 'idDivForTinyMceEditorTextarea')
                     {
                         //alert ('in focusOnId 3:'+ id);
                         var el = document.getElementById(id);
@@ -1414,14 +1417,14 @@ app.controller('UstodosController',
                         //sel.addRange(range);
                         el.focus();
                     }
-                    else
-                    {
-                        alert ('in focusOnId else');
-                        //var editor = CKEDITOR.instances.idCkeEditorTextarea;
-                        //editor.focusManager.focus( editor.editable() );
-
-
-                    }
+                    //else
+                    //{
+                    //    //alert ('in focusOnId else');
+                    //    //var editor = CKEDITOR.instances.idCkeEditorTextarea;
+                    //    //editor.focusManager.focus( editor.editable() );
+                    //
+                    //
+                    //}
 
 
 
@@ -1497,7 +1500,7 @@ app.controller('UstodosController',
                 UtilNLB_bgFade.NLBfadeBg('ustodorow'+index,'green', '#FFFFFF','1500');
 
                 //alert ('newHtml:' + newHtml);
-                //<a target="_blank" href="http://ibm.com">http://ibm.com</a>
+                //<a target='_blank' href='http://ibm.com'>http://ibm.com</a>
 
                 var fnCallbackFromUpdate = function (errorResponse) {
                     alert ('ERROR ON SAVE !!! errorResponse:' + errorResponse);
@@ -1552,9 +1555,9 @@ app.controller('UstodosController',
                 alert ('in onkeyup');
 
                 //if ($scope.getTextInShowingEditor().xValue === '')
-                //    $scope.mouseoverlock = "off";
+                //    $scope.mouseoverlock = 'off';
                 //else
-                //    $scope.mouseoverlock = "on";
+                //    $scope.mouseoverlock = 'on';
                 //O.o ('========== set mouseoverlock:' + $scope.mouseoverlock);
 
 
@@ -1644,7 +1647,7 @@ app.controller('UstodosController',
                     //$scope.mmmm.element.innerHTML = $scope.inputbind;
 
                     // 2 CKE
-                    CKEDITOR.instances.idCkeEditorTextarea.setData(xHtml);
+                    //CKEDITOR.instances.idCkeEditorTextarea.setData(xHtml);
 
                     // 3 mce
                     //tinyMCE.getInstanceById('idTinyMceTextArea').setContent(xHtml);
@@ -1656,42 +1659,42 @@ app.controller('UstodosController',
                 }
             };
 
-            $scope.prop2Cke = function () {
-                alert ('in prop2Cke ')
-                try {
-                    //alert ('start case 2')
-                    var xText = CKEDITOR.instances.idCkeEditorTextarea.document.getBody().getText();
-                    var xHtml = CKEDITOR.instances.idCkeEditorTextarea.getData();
-                    //alert('start case 2 x [' + xText + ']')
-                    $scope.currentValueAfterBlurText = xText;
-                    $scope.currentValueAfterBlurHtml = xHtml;
-
-                    // 0 text input
-                    document.getElementById('idInput0TypeText').value = xText;
-
-                    // 1 medium
-                    $scope.mmmm.element.innerHTML = xHtml;
-
-                    // 2 CKE
-                    //CKEDITOR.instances.idCkeEditorTextarea.setData($scope.inputbind)
-
-                    // 3 mce
-                    //alert ('settr mce [' + xHtml + ']');
-                    tinyMCE.getInstanceById('idTinyMceTextArea').setContent(xHtml);
-
-
-                }  catch (e) {
-                    alert ('error in prop2Cke:' + e);
-                }
-            };
+            //$scope.prop2Cke = function () {
+            //    alert ('in prop2Cke ')
+            //    try {
+            //        //alert ('start case 2')
+            //        var xText = CKEDITOR.instances.idCkeEditorTextarea.document.getBody().getText();
+            //        var xHtml = CKEDITOR.instances.idCkeEditorTextarea.getData();
+            //        //alert('start case 2 x [' + xText + ']')
+            //        $scope.currentValueAfterBlurText = xText;
+            //        $scope.currentValueAfterBlurHtml = xHtml;
+            //
+            //        // 0 text input
+            //        document.getElementById('idInput0TypeText').value = xText;
+            //
+            //        // 1 medium
+            //        $scope.mmmm.element.innerHTML = xHtml;
+            //
+            //        // 2 CKE
+            //        //CKEDITOR.instances.idCkeEditorTextarea.setData($scope.inputbind)
+            //
+            //        // 3 mce
+            //        //alert ('settr mce [' + xHtml + ']');
+            //        tinyMCE.getInstanceById('idTinyMceTextArea').setContent(xHtml);
+            //
+            //
+            //    }  catch (e) {
+            //        alert ('error in prop2Cke:' + e);
+            //    }
+            //};
 
             $scope.prop3mce = function () {
                 //alert ('start prop3mce ')
                 try {
                     //alert ('start case 2')
                     //var xText = tinyMCE.getInstanceById('idTinyMceTextArea').getContent({format: 'text'});
-                    var xText = tinymce.activeEditor.getContent({format: 'text'});
-                    var xHtml= tinymce.activeEditor.getContent();
+                    var xText = tinyMCE.activeEditor.getContent({format: 'text'});
+                    var xHtml= tinyMCE.activeEditor.getContent();
                     //alert ('got mce content xText:' + xText)
                     //alert ('got mce content xHtml:' + xHtml)
                     //alert(tinymce.activeEditor.selection.getContent({format: 'text'}));
@@ -1709,9 +1712,9 @@ app.controller('UstodosController',
                     // 2 CKE
                     //var tt = '<u>' + xHtml + '</u>';
                     //alert ('sett data into 2 cke tt [' + tt + ']');
-                    //CKEDITOR.instances.mail_msg.insertText(obj["template"]);
-                    //CKEDITOR.instances.wysiwyg.insertHtml("[quote={$row['author']}]" + stringContent + "[/quote]");
-                    CKEDITOR.instances.idCkeEditorTextarea.setData(xHtml);
+                    //CKEDITOR.instances.mail_msg.insertText(obj['template']);
+                    //CKEDITOR.instances.wysiwyg.insertHtml('[quote={$row['author']}]' + stringContent + '[/quote]');
+                    //CKEDITOR.instances.idCkeEditorTextarea.setData(xHtml);
                     //CKEDITOR.instances.idCkeEditorTextarea.insertHtml(tt);
                     //CKEDITOR.instances.idCkeEditorTextarea.setData(tt);
 
@@ -1803,7 +1806,7 @@ app.controller('UstodosController',
                 // couldn't figure out mce blur so use this
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_0_TEXT;
                 $scope.focusOnId(arrIds[0]);
-                if ($scope.whichInputIsInFocus == $scope.ns.Input.INPUT_3_MCE)
+                if ($scope.whichInputIsInFocus === $scope.ns.Input.INPUT_3_MCE)
                     $scope.prop3mce();
                 document.getElementById(arrIds[1]).style.display = 'none';
                 document.getElementById(arrIds[2]).style.display = 'none';
@@ -1818,7 +1821,7 @@ app.controller('UstodosController',
                 // couldn't figure out mce blur so use this
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_1_MEDIUM;
                 //alert ('in toggleVisibilityTo1 Medium');
-                if ($scope.whichInputIsInFocus == $scope.ns.Input.INPUT_3_MCE)
+                if ($scope.whichInputIsInFocus === $scope.ns.Input.INPUT_3_MCE)
                     $scope.prop3mce();
                 document.getElementById(arrIds[0]).style.display = 'none';
                 document.getElementById(arrIds[2]).style.display = 'none';
@@ -1830,23 +1833,23 @@ app.controller('UstodosController',
                 $scope.currentVisibleCounter = $scope.ns.Input.INPUT_1_MEDIUM;
             };
 
-            $scope.toggleVisibilityTo2 = function() {
-				alert ('in toggleVisibilityTo2');
-                $scope.whichEditorShowing = $scope.ns.Input.INPUT_2_CKE;
-                //alert ('in toggleVisibilityTo2 CKE');
-                if ($scope.whichInputIsInFocus() == $scope.ns.Input.INPUT_3_MCE)
-                {
-                    $scope.prop3mce();
-                }
-                document.getElementById(arrIds[0]).style.display = 'none';
-                document.getElementById(arrIds[1]).style.display = 'none';
-                document.getElementById(arrIds[3]).style.display = 'none';
-                document.getElementById(arrIds[2]).style.display = 'block';
-                $scope.currentVisibleCounter = $scope.ns.Input.INPUT_2_CKE;
-                setTimeout(function(){ $scope.focusOnId(arrIds[2]); }, 300);
-                setTimeout(function(){ $scope.focusOnId(arrIds[2]); }, 600);
-            };
-
+            //$scope.toggleVisibilityTo2 = function() {
+				//alert ('in toggleVisibilityTo2');
+            //    $scope.whichEditorShowing = $scope.ns.Input.INPUT_2_CKE;
+            //    //alert ('in toggleVisibilityTo2 CKE');
+            //    if ($scope.whichInputIsInFocus() == $scope.ns.Input.INPUT_3_MCE)
+            //    {
+            //        $scope.prop3mce();
+            //    }
+            //    document.getElementById(arrIds[0]).style.display = 'none';
+            //    document.getElementById(arrIds[1]).style.display = 'none';
+            //    document.getElementById(arrIds[3]).style.display = 'none';
+            //    document.getElementById(arrIds[2]).style.display = 'block';
+            //    $scope.currentVisibleCounter = $scope.ns.Input.INPUT_2_CKE;
+            //    setTimeout(function(){ $scope.focusOnId(arrIds[2]); }, 300);
+            //    setTimeout(function(){ $scope.focusOnId(arrIds[2]); }, 600);
+            //};
+            //
             $scope.toggleVisibilityTo3 = function(callerId) {
 				//alert ('in toggleVisibilityTo3');
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_3_MCE;
@@ -2053,17 +2056,17 @@ app.controller('UstodosController',
                             else
                                 $scope.mmmm.element.innerHTML = e.innerHTML;
                             break;
-                        case $scope.ns.Input.INPUT_2_CKE:
-                            alert ('in settext 2');
-                            //alert ('+++++++++ in setTextInShowingEditor target INPUT_2_CKE e:' + e);
-                            if (UtilJsTypeDetect.isString(e))
-                            {
-                                //alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
-                                CKEDITOR.instances.idCkeEditorTextarea.setData(e);
-                            }
-                            else
-                                CKEDITOR.instances.idCkeEditorTextarea.setData(e.innerHTML);
-                            break;
+                        //case $scope.ns.Input.INPUT_2_CKE:
+                        //    alert ('in settext 2');
+                        //    //alert ('+++++++++ in setTextInShowingEditor target INPUT_2_CKE e:' + e);
+                        //    if (UtilJsTypeDetect.isString(e))
+                        //    {
+                        //        //alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
+                        //        CKEDITOR.instances.idCkeEditorTextarea.setData(e);
+                        //    }
+                        //    else
+                        //        CKEDITOR.instances.idCkeEditorTextarea.setData(e.innerHTML);
+                        //    break;
                         case $scope.ns.Input.INPUT_3_MCE:
                             //alert ('in settext 3 e [' + e + '] callerID [' + callerID + ']');
                             //alert ('in settext 3');
@@ -2112,10 +2115,10 @@ app.controller('UstodosController',
                             xHtmlStripped = xHtmlStripped.replace('</p>','');
                             xHtmlStripped = xHtmlStripped.trim();
                             break;
-                        case $scope.ns.Input.INPUT_2_CKE:
-                            xHtml = CKEDITOR.instances.idCkeEditorTextarea.getData();
-                            alert ('xHtml from 2 cke [' + xHtml + ']');
-                            break;
+                        //case $scope.ns.Input.INPUT_2_CKE:
+                        //    xHtml = CKEDITOR.instances.idCkeEditorTextarea.getData();
+                        //    alert ('xHtml from 2 cke [' + xHtml + ']');
+                        //    break;
                         case $scope.ns.Input.INPUT_3_MCE:
                             //alert ('in setTextInShowingEditor for input2cke');
                             xHtml = CKEDITOR.instances.idCkeEditorTextarea.getData();
@@ -2326,9 +2329,9 @@ app.controller('UstodosController',
 
 			//O.o ( 'callcnt [' + callcounteventHandlerEditorcontentChange +
 			//'] in eventHandlerEditorcontentChange ' +
-			//'] \r\n1 data [' + data + '] ascii [' + data.asciiTable("data (1/3)") + ']' +
-			//'] \r\n2 html [' + html + '] ascii [' + html.asciiTable("html (2/3)") + ']' +
-			//'] \r\n3 text [' + text + '] ascii [' + text.asciiTable("text (3/3)") + ']');
+			//'] \r\n1 data [' + data + '] ascii [' + data.asciiTable('data (1/3)') + ']' +
+			//'] \r\n2 html [' + html + '] ascii [' + html.asciiTable('html (2/3)') + ']' +
+			//'] \r\n3 text [' + text + '] ascii [' + text.asciiTable('text (3/3)') + ']');
                     //alert( 'data  [' + data + ']');
                     //alert( 'html [' + html + ']');
                     //alert( 'text [' + text + ']');
@@ -2367,27 +2370,22 @@ app.controller('UstodosController',
                     if (text.endsWith(' ') && $scope.dynamicSearch ) {
                         //alert ('not     skipping')
                         $scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
-                            "caller eventHandler space and ends w space", text, html, data);
+                            'caller eventHandler space and ends w space', text, html, data);
                     }
                     else if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
                         $scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
-                            "caller eventHandler ENTER key pressed", text, html, data);
+                            'caller eventHandler ENTER key pressed', text, html, data);
                     }
                     else if (text.endsWith(' w')) {
                         $scope.processCommand($scope.enumCommands.COMMAND_WRITE,
-                            "caller eventHandlerEditorcontentChange write", text, html, data);
-                        alert('calling processCommand');
-                    }
-                    else if (text.endsWith(' w')) {
-                        $scope.processCommand($scope.enumCommands.COMMAND_WRITE,
-                            "caller eventHandlerEditorcontentChange write", text, html, data);
-                        alert('calling processCommand');
+                            'caller eventHandlerEditorcontentChange write', text, html, data);
+                        //alert('calling processCommand');
                     }
                 } catch (e) {
                     UtilErrorEmitter.EmitError('in eventHandlerEditorcontentChange', e);
                     //alert ('sdfsdfsdf:' + e);
                 }
-            }
+            };
 
 
             $scope.keyCount = 0;
@@ -2458,7 +2456,7 @@ app.controller('UstodosController',
 
             $scope.stateOKtoOverwrite = function() {
                 return ($scope.state_inSelectedMode === -1);
-            }
+            };
 
             $scope.eventMouseoverCurrentSearch = function() {
                 if ($scope.stateOKtoOverwrite()) {
@@ -2899,16 +2897,16 @@ app.controller('UstodosController',
                     alert ('$scope.dynamicSearch:' + $scope.dynamicSearch);
 
                 // TEST WORKED?
-                if (false) {
-                    document.getElementsByClassName('cke_top')[0].style.display = 'none';
-                    document.getElementsByClassName('cke_bottom')[0].style.display = 'none';
-                    CKEDITOR.instances.idCkeEditorTextarea.execCommand('maximize');
-                    setTimeout(function(){ CKEDITOR.instances.idCkeEditorTextarea.execCommand('minimize'); }, 2000);
-                }
+                //if (false) {
+                //    document.getElementsByClassName('cke_top')[0].style.display = 'none';
+                //    document.getElementsByClassName('cke_bottom')[0].style.display = 'none';
+                //    CKEDITOR.instances.idCkeEditorTextarea.execCommand('maximize');
+                //    setTimeout(function(){ CKEDITOR.instances.idCkeEditorTextarea.execCommand('minimize'); }, 2000);
+                //}
 
                 if (true) {
-                    var xText = tinymce.activeEditor.getContent({format: 'text'});
-                    var xHtml= tinymce.activeEditor.getContent();
+                    var xText = tinyMCE.activeEditor.getContent({format: 'text'});
+                    var xHtml= tinyMCE.activeEditor.getContent();
                     alert ('xHtml:' + xHtml);
                 }
 
@@ -3214,7 +3212,7 @@ app.controller('UstodosController',
                 //var checkboxes = angular.element.find('input');
                 //var checkboxes = document.querySelector('input')
                 //var checkboxes = angular.find('input');
-                //$( "p" ).find( "span" )
+                //$( 'p' ).find( 'span' )
                 // http://stackoverflow.com/questions/659508/how-can-i-shift-select-multiple-checkboxes-like-gmail
                 // http://www.informit.com/articles/article.aspx?p=2271482&seqNum=10
                 //var checkboxes = jQuery('input');  // WORKS! as long as all.js has jquery line
@@ -3327,7 +3325,7 @@ app.controller('UstodosController',
 
             $scope.deleteDbUstotoOneByIndex = function(arrIntIndexesToDelete_or_oneUsToDo)
             {
-                //O.assert (false, "asdasd");
+                //O.assert (false, 'asdasd');
                 O.assert ((arrIntIndexesToDelete_or_oneUsToDo.length === 1), 'support only delete one right now, not:' + arrIntIndexesToDelete_or_oneUsToDo.length);
 
                 // Still support only one delete at a time!!!!!!!!!!!!!!
@@ -3426,7 +3424,7 @@ app.controller('UstodosController',
                     $scope.searchedForAsLink = 'http://ibm.com/test';
                     //O.o ('============================= in xValue [' + xValue + ']');
                     //O.o ('============================= in html2text [' + UtilHrefThisText.html2text(xValue)+ ']');
-                    // <a target="_blank" href="http://ibm.com">http://ibm.com</a>
+                    // <a target='_blank' href='http://ibm.com'>http://ibm.com</a>
 
                     $scope.callCountSearch++;
                     //o ('in search 0 this.commandFromInputBox:' + this.commandFromInputBox);
@@ -3519,8 +3517,8 @@ app.controller('UstodosController',
                     // section_write
                     if (UtilString.endsWith(commandTrimmed, ' w') || UtilString.endsWith(commandTrimmed, ' W'))
                     {
-                        alert ('in write commandTrimmed [' + commandTrimmed  + ']');
-                        alert ('in write xHtml [' + xHtml + ']');
+                        //alert ('in write commandTrimmed [' + commandTrimmed  + ']');
+                        //alert ('in write xHtml [' + xHtml + ']');
                         //alert ('in write commandTrimmed.asciiTable():' + commandTrimmed.asciiTable());
                         //alert ('in endsWith w');
                         commandTrimmed = commandTrimmed.slice(0, commandTrimmed.length - 1).trim();
@@ -3528,8 +3526,8 @@ app.controller('UstodosController',
                         var xHtmlPre = xHtml;
                         do {
                             xHtml = xHtml.trim();
-                            if (xHtml.endsWith("<p>&nbsp;</p>"))
-                                xHtml = xHtml.replaceLast("<p>&nbsp;</p>","");
+                            if (xHtml.endsWith('<p>&nbsp;</p>'))
+                                xHtml = xHtml.replaceLast('<p>&nbsp;</p>','');
                             alert ('in loop xHtml [' + xHtml + ']');
                             xHtmlPre = xHtml;
                         }  while (xHtmlPre != xHtml);
@@ -3538,12 +3536,12 @@ app.controller('UstodosController',
                         alert ('in write xHtml replaced [' + xHtml + ']');
 
                         //alert ('commandRemoved_toSearchFor_trimmed:' + commandRemoved_toSearchFor_trimmed);
-                        //var target = "";
+                        //var target = '';
                         var x = $filter('linky')(commandTrimmed)
                         //alert ('x:' + x);
 
                         var ustodo = new Ustodos ({
-                            html: xHtml.replaceLast(" w", ""),// hbkk mystery
+                            html: xHtml.replaceLast(' w', ''),// hbkk mystery
                             text: commandTrimmed,// hbkk mystery
                             datelastmod: (''+new Date()),
                             datecreated: (''+new Date()),
@@ -3607,7 +3605,7 @@ app.controller('UstodosController',
                             {q:
                                 commandTrimmed.trim()
                                 //new RegExp(t, 'i')
-                                //{ $regex: new RegExp(commandTrimmed.trim(), "i") }
+                                //{ $regex: new RegExp(commandTrimmed.trim(), 'i') }
                                 //{$regex:commandTrimmed.trim(), $options:'i'}
                                 //{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
                             },
@@ -3621,10 +3619,10 @@ app.controller('UstodosController',
                         // {key:{$regex:value, $options:â€˜iâ€™}}
 
                         //{q:new RegExp(commandTrimmed.trim(), 'i') }, callbackFromQuery);      // this is a GET - see RESOURCE
-                        // {q:{ "$regex" : commandTrimmed.trim(), "$options" : "-i" }}, callbackFromQuery);      // this is a GET - see RESOURCE
+                        // {q:{ '$regex' : commandTrimmed.trim(), '$options' : '-i' }}, callbackFromQuery);      // this is a GET - see RESOURCE
 
                         // http://stackoverflow.com/questions/5499451/case-insensitive-query-on-mongodb
-                        //{ "$regex" : "C#", "$options" : "-i" }
+                        //{ '$regex' : 'C#', '$options' : '-i' }
 
 
                         //alert('setting search commandRemoved_toSearchFor_trimmed [' + commandTrimmed + ']');
@@ -3712,7 +3710,7 @@ app.controller('UstodosController',
                     UtilErrorEmitter.EmitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
                     throw e;
                 }
-                $scope.mouseoverlock = "off";
+                $scope.mouseoverlock = 'off';
 
             };  // $scope.processCommand
 
@@ -3883,14 +3881,14 @@ app.controller('UstodosController',
                 //}
                 //
                 //window.onbeforeunload = function () {
-                //    return "Are you sure?";
+                //    return 'Are you sure?';
                 //}
 
             window.onbeforeunload = function () // reload
             {
                 if ($scope.reloadWarning)
-                    return "Are you sure?";
-            }
+                    return 'Are you sure?';
+            };
 
         } catch (e) {
             alert ('e33:' + e);

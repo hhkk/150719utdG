@@ -315,6 +315,7 @@ exports.list2 = function(req, res) {
 	//O.o ('not endswith w');
 
 
+
 	//// if write   in write
 	//if (UtilString.endsWith(commandTrimmed, ' w'))
 	//{
