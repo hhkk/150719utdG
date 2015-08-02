@@ -22,7 +22,7 @@ var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
     {
 
         try {
-            var re = new RegExp(queryTokens[0], 'i')
+            var re = new RegExp(queryTokens[0], 'i');
             arrRegExpsToOr.push ({text:re});
             //[{text:rea}, {text:reb}]
         } catch (e) {
@@ -91,8 +91,7 @@ var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
     //return querymongo;
     return querymongo ;
 
-}
-
+};
 
 
 

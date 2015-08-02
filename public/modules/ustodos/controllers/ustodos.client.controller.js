@@ -15,6 +15,7 @@ var UtilHrefThisText = UtilHrefThisText;
 var UtilString = UtilString;
 var Medium = Medium;
 var UtilDate = UtilDate;
+var $ = $;
 
 var UtilNLB_bgFade = UtilNLB_bgFade;
 var UtilErrorEmitter = UtilErrorEmitter;
@@ -609,8 +610,12 @@ app.controller('UstodosController',
                 height: '100%',
                 resize: 'both',
                 elements : 'idTinyMceTextArea',
-                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | image',
-                toolbar2: 'print preview media | forecolor backcolor emoticons',
+                //toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
+                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic mybutton',
+                //toolbar2: 'print preview media | forecolor backcolor emoticons',
+                ///toolbar2: 'bold italic',
+                ///these don't work": toolbar2: 'image ',
+                //toolbar2: 'bold italic mybutton',
                 //toolbar: 'mybutton',
 				oninit : $scope.myCustomOnInit,
 
@@ -643,8 +648,8 @@ app.controller('UstodosController',
 						text: 'My button',
 						icon: false,
 						menu: [
-							{text: 'Menu item 1', onclick: function() {editor.insertContent('Menu item 1');}},
-							{text: 'Menu item 2', onclick: function() {editor.insertContent('Menu item 2');}}
+							{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
+							{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
 						]
 					});
                     //    }
@@ -672,7 +677,8 @@ app.controller('UstodosController',
                         if (e.keyIdentifier === 'Enter')
                         {
 
-                            if (!$scope.modelCheckboxCtrlEnterToSave || e.ctrlKey)
+                            if ((!(!$scope.modelCheckboxCtrlEnterToSave && e.ctrlKey)) &&
+								(!$scope.modelCheckboxCtrlEnterToSave || e.ctrlKey))
                             {
                                 $scope.eventHandlerEditorcontentChange (
                                     $scope.enumKeyEvent.ENTER,
@@ -1496,10 +1502,11 @@ app.controller('UstodosController',
 
                 var newHtml = document.getElementById('ustodorow'+index).innerHTML;
                 //alert ('newHtml:' + newHtml);
+                //alert ('in onKeyUp_perrow_text escape id:' + 'ustodorow'+index); // not non-escape
 
-                UtilNLB_bgFade.NLBfadeBg('ustodorow'+index,'green', '#FFFFFF','1500');
+				UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+index,'green', '#FFFFFF','1500');
+				//alert ('newHtml:' + newHtml);
 
-                //alert ('newHtml:' + newHtml);
                 //<a target='_blank' href='http://ibm.com'>http://ibm.com</a>
 
                 var fnCallbackFromUpdate = function (errorResponse) {
@@ -1552,7 +1559,7 @@ app.controller('UstodosController',
                 // currently hits alert only to:
                 // text box and medium
                 // and NOT CK or MCE or perRow editor
-                alert ('in onkeyup');
+                //alert ('in onkeyup');
 
                 //if ($scope.getTextInShowingEditor().xValue === '')
                 //    $scope.mouseoverlock = 'off';
@@ -1802,7 +1809,7 @@ app.controller('UstodosController',
 
             // section_per_editor 2
             $scope.toggleVisibilityTo0 = function() {
-				alert ('in toggleVisibilityTo0');
+				//alert ('in toggleVisibilityTo0');
                 // couldn't figure out mce blur so use this
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_0_TEXT;
                 $scope.focusOnId(arrIds[0]);
@@ -1817,7 +1824,7 @@ app.controller('UstodosController',
             };
 
             $scope.toggleVisibilityTo1 = function() {
-				alert ('in toggleVisibilityTo1');
+				//alert ('in toggleVisibilityTo1');
                 // couldn't figure out mce blur so use this
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_1_MEDIUM;
                 //alert ('in toggleVisibilityTo1 Medium');
@@ -2121,7 +2128,8 @@ app.controller('UstodosController',
                         //    break;
                         case $scope.ns.Input.INPUT_3_MCE:
                             //alert ('in setTextInShowingEditor for input2cke');
-                            xHtml = CKEDITOR.instances.idCkeEditorTextarea.getData();
+							//var xText = tinyMCE.activeEditor.getContent({format: 'text'});
+							xHtml= tinyMCE.activeEditor.getContent();
                             alert ('xHtml from 3 mce [' + xHtml + ']');
                             break;
                         default:
@@ -2890,7 +2898,18 @@ app.controller('UstodosController',
                 //alert ('in keyup $scope.getTextInShowingEditor()'+$scope.getTextInShowingEditor());
                 //CKEDITOR.instances.editor.destroy();
 
-                if (false)
+				if (true)
+				{
+						UtilNLB_bgFade.NLBfadeBg('numberWrapForFade1', 'green', '#FFFFFF', '1500');
+				}
+
+				if (false) {
+					var xText = tinyMCE.activeEditor.getContent({format: 'text'});
+					var xHtml= tinyMCE.activeEditor.getContent();
+					alert ('xHtml:' + xHtml);
+				}
+
+				if (false)
                     document.getElementById('idInputTextFilter').value = ' hi mom';
 
                 if (false)
@@ -2903,12 +2922,6 @@ app.controller('UstodosController',
                 //    CKEDITOR.instances.idCkeEditorTextarea.execCommand('maximize');
                 //    setTimeout(function(){ CKEDITOR.instances.idCkeEditorTextarea.execCommand('minimize'); }, 2000);
                 //}
-
-                if (true) {
-                    var xText = tinyMCE.activeEditor.getContent({format: 'text'});
-                    var xHtml= tinyMCE.activeEditor.getContent();
-                    alert ('xHtml:' + xHtml);
-                }
 
 
                 //CKEDITOR.instances.idCkeEditorTextarea.resize('100%',height);
@@ -3528,16 +3541,16 @@ app.controller('UstodosController',
                             xHtml = xHtml.trim();
                             if (xHtml.endsWith('<p>&nbsp;</p>'))
                                 xHtml = xHtml.replaceLast('<p>&nbsp;</p>','');
-                            alert ('in loop xHtml [' + xHtml + ']');
+                            //alert ('in loop xHtml [' + xHtml + ']');
                             xHtmlPre = xHtml;
-                        }  while (xHtmlPre != xHtml);
+                        }  while (xHtmlPre !== xHtml);
                         xHtml = xHtml.trim();
 
-                        alert ('in write xHtml replaced [' + xHtml + ']');
+                        //alert ('in write xHtml replaced [' + xHtml + ']');
 
                         //alert ('commandRemoved_toSearchFor_trimmed:' + commandRemoved_toSearchFor_trimmed);
                         //var target = '';
-                        var x = $filter('linky')(commandTrimmed)
+                        var x = $filter('linky')(commandTrimmed);
                         //alert ('x:' + x);
 
                         var ustodo = new Ustodos ({
@@ -3558,6 +3571,7 @@ app.controller('UstodosController',
                         //alert('pre save 2');
                         ustodo.$save(function(response) // ustodos.server.controller.js exports.create
                         {
+							//alert ('in save');
                             // section_query // section_read
                             //$location.path('ustodos/' + response._id);
                             // http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=QUERY

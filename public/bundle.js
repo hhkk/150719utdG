@@ -29,6 +29,7 @@ var nlbFade_elemTable = new Array( ); // global array to keep track of faded ele
 var nlbFade_t = new Array( ); // global array to keep track of fading timers
 var NLBfadeBg = function ( elementId, startBgColor, endBgColor, fadeTime )
 {
+	console.log ('in fadehk id [' + elementId + ']');
 	var timeBetweenSteps = Math.round( Math.max( fadeTime / 300, 30 ) );
 	var nlbFade_elemTableId = nlbFade_elemTable.indexOf( elementId );
 	if( nlbFade_elemTableId > -1 )
