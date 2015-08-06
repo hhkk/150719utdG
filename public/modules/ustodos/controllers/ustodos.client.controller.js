@@ -154,13 +154,14 @@ app.controller('UstodosController',
     ['$scope', '$window', '$stateParams', '$location', '$document', '$rootScope', '$sce', '$http','$filter',
     'Authentication', 'Ustodos', 'Commands',
     //function($scope, $window, $stateParams, $location, $document, $rootScope, $sce, $http, Authentication, Ustodos, Commands)
-    function($scope, $window, $stateParams, $location, $document, $rootScope, $sce, $http, $filter, Authentication, Ustodos, Commands)
+    function($scope, $window, $stateParams, $location, $document, $rootScope,
+			 $sce, $http, $filter, Authentication, Ustodos, Commands)
     {
 
 
         //$scope.snippet =   'xxxxxxxxxxxx';
 		//$scope.snippet =
-		//    '<p style='color:blue'>an html\n' +
+
 		//    '<em onmouseover='this.textContent=\'PWN3D!\''>click here</em>\n' +
 		//    'snippet</p>';
 		//
@@ -174,7 +175,12 @@ app.controller('UstodosController',
         try
         {
 
-            //alert('initing scope');
+
+			$scope.$on('$stateChangeSuccess', function () {
+				console.log ("successful state change");
+			});
+
+            //alert('initing scope $stateParams' + $stateParams);
 
             $scope.dynamicSearch = false; // bound via ng-model=lockMouseover to idcheckbox_dynamicSearch
             $scope.modelCheckboxUpdateOnWrite = true; // bound via ng-model=lockMouseover to idcheckbox_dynamicSearch
@@ -283,7 +289,7 @@ app.controller('UstodosController',
 
 
 
-
+				$scope.title2 = "$scope.title2 from ustodo client controller"
 
 
                 var q = $location.$$search.q;
@@ -1696,7 +1702,7 @@ app.controller('UstodosController',
             //};
 
             $scope.prop3mce = function () {
-                //alert ('start prop3mce ')
+                alert ('start prop3mce ')
                 try {
                     //alert ('start case 2')
                     //var xText = tinyMCE.getInstanceById('idTinyMceTextArea').getContent({format: 'text'});
@@ -2753,7 +2759,8 @@ app.controller('UstodosController',
                 window.keyStates.keyStateShiftDown = false;
                 window.keyStates.keyStateCtrlDown = false;
                 window.keyStates.keyStateAltDown = false;
-                document.addEventListener('keydown', function(evt) {
+
+				document.addEventListener('keydown', function(evt) {
                     var e = window.event || evt;
                     var key = e.which || e.keyCode;
                     //O.o ('keydown:' + key );
@@ -3730,7 +3737,7 @@ app.controller('UstodosController',
 
             // Search for one hbkk existing Ustodo by string
             $scope.searchOne = function() {
-                console.log ('7 in ustodos.client.controller SEARCHONE');
+                alert ('7 in ustodos.client.controller SEARCHONE');
                 console.log ('7 hbkk getting ustodo searchOne :' + $stateParams.ustodoId);
                 $scope.ustodo = Ustodos.get({
                     // ORIGINAL A/B SPLIT HBKK

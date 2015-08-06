@@ -4,6 +4,7 @@
 //O.a ('oneOfSeveral config routes');
 angular.module('ustodos').config(['$stateProvider',
 	function($stateProvider) {
+		//alert ('in C:\utd\150719utdG\public\modules\ustodos\config\ustodos.client.routes.js');
         //O.a ('dddx');
 		// Ustodos state routing
 		$stateProvider.

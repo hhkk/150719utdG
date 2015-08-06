@@ -5,5 +5,5 @@ module.exports = function(app) {
 	var core = require('../../app/controllers/core.server.controller');
     //app.route('q=').get(core.index);
     //app.route('/hk').get(core.index);
-	app.route('/').get(core.index);
+	app.route('/').get(core.index);           // this is index in core.server.controller
 };
