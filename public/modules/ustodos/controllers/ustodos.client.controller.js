@@ -120,9 +120,18 @@ var angularModule = null;
 
 //alert ('initing app');
 
-var app = angular.module('ustodos',['ngSanitize', 'ui.router']);      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
+var app = angular.module('ustodos');      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
+//var app = angular.module('ustodos',['ngSanitize', 'ui.router']);      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
 
 
+//http://stackoverflow.com/questions/23045083/how-to-inject-modules-properly-in-angularjs
+//angular.module('ustodos', [])
+	//.factory('ustodos', function($ngSanitize){});
+
+//app.config(['$ngSanitize', function($ngSanitize) {
+//	// Configure existing providers
+//	//$locationProvider.hashPrefix('!');
+//}]);
 
 var callbackCommand = function(callbackResult) {
     O.o  ('in callbackCommand');
@@ -130,7 +139,9 @@ var callbackCommand = function(callbackResult) {
 
 
 //O.a ('oneOfSeveral controller with array - first?');
-app.controller('UstodosController',
+angular.module('ustodos').controller('UstodosController',
+//angular.module('ustodos',['ngSanitize']).controller('UstodosController',
+// angular.module('ustodos',[]).controller('UstodosController',
 
 	//function($scope, $window, $stateParams, $location, $document, $rootScope, $sce, $http, Authentication, Ustodos, Commands)
     ['$scope', '$window', '$stateParams',
@@ -144,6 +155,14 @@ app.controller('UstodosController',
 		 $state,
 		 Authentication, Ustodos, Commands)
     {
+
+		// http://henriquat.re/basics-of-angular/services-dependency-injection/services-and-dependency-injection-in-angularjs.html
+
+		//var myInjector = angular.injector(["ng"]);
+		//var $http = myInjector.get("$http");
+		//var $ngSanitize = myInjector.get("$ngSanitize");
+		//var myInjector = angular.injector(["ng"]);
+		//myInjector.invoke(myInjector.get("$ngSanitize"));
 
 
         //$scope.snippet =   'xxxxxxxxxxxx';
@@ -167,7 +186,7 @@ app.controller('UstodosController',
 				console.log ("successful state change");
 			});
 
-			alert ('init ustodos.client.controller.js state:' + $state.$current);   // current state  .current
+			// works alert ('init ustodos.client.controller.js state:' + $state.$current);   // current state  .current
             //alert('initing scope $stateParams' + $stateParams);
 
             $scope.dynamicSearch = false; // bound via ng-model=lockMouseover to idcheckbox_dynamicSearch
