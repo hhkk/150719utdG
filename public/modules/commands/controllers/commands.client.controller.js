@@ -1,10 +1,22 @@
 'use strict';
 
 // Commands controller
-angular.module('commands').controller('CommandsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Commands',
-    function($scope, $stateParams, $location, Authentication, Commands) {
+angular.module('commands').controller('CommandsController',
+	['$scope', '$window', '$stateParams',
+		'$location', '$document', '$rootScope',
+		'$sce', '$http','$filter',
+		'$state',
+		'Authentication', 'Ustodos', 'Commands',
+		function($scope, $window, $stateParams,
+				 $location, $document, $rootScope,
+				 $sce, $http, $filter,
+				 $state,
+				 Authentication, Ustodos, Commands)
+	{
         $scope.authentication = Authentication;
 
+		//alert ('init commands.client.controller.js' );
+		alert ('init commands.client.controller.js state:' + $state.$current);
         $scope.commandData = [
             ['Domain(LeanDomain)','dm','http://www.leandomainsearch.com/search?q=%s'],
             ['Google>Search','g','https://www.google.com/search?q=%s'],

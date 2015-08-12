@@ -1,5 +1,4 @@
 'use strict';
-
 //Setting up route
 angular.module('microphones').config(['$stateProvider',
 	function($stateProvider) {

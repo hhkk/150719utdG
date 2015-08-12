@@ -166,6 +166,7 @@ var getProperties = function (desc, obj)
     }
 };
 
+
 if (typeof exports !== 'undefined') {
     exports.getClass = getClass;
     exports.getProperties = getProperties;

@@ -12,6 +12,7 @@ UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
 UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 UtilNLB_bgFade = require('C:/utd/150719utdG/public/util/NLB_bgFade.js');
 UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
 
 O = require('C:/utd/150719utdG/public/util/O.js');
 

@@ -15,7 +15,9 @@ var UtilHrefThisText = UtilHrefThisText;
 var UtilString = UtilString;
 var Medium = Medium;
 var UtilDate = UtilDate;
+
 var $ = $;
+var UtilPrintObjects = UtilPrintObjects;
 
 var UtilNLB_bgFade = UtilNLB_bgFade;
 var UtilErrorEmitter = UtilErrorEmitter;
@@ -55,27 +57,6 @@ var resolveFinalCommandBetweenUrlAndInputBox = function(commandFromInputBox, com
     return commandFinal;
 };
 
-
-//if ( typeof String.prototype.startsWith != 'function' ) {
-//    String.prototype.startsWith = function( str ) {
-//        return this.substring( 0, str.length ) === str;
-//    }
-//} else
-//    alert('startswith defined already');
-//
-//;
-//
-////alert( 'hello world'.startsWith( 'hello' ) );
-//
-//if ( typeof String.prototype.endsWith != 'function' ) {
-//    String.prototype.endsWith = function( str ) {
-//        return this.substring( this.length - str.length, this.length ) === str;
-//    }
-//}
-//else
-//    alert('endswith defined already');
-//
-//alert( 'hello world'.endsWith( 'world'));
 
 
 // Ustodos controller
@@ -139,7 +120,7 @@ var angularModule = null;
 
 //alert ('initing app');
 
-var app = angular.module('ustodos',['ngSanitize']);
+var app = angular.module('ustodos',['ngSanitize', 'ui.router']);      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
 
 
 
@@ -151,11 +132,17 @@ var callbackCommand = function(callbackResult) {
 //O.a ('oneOfSeveral controller with array - first?');
 app.controller('UstodosController',
 
-    ['$scope', '$window', '$stateParams', '$location', '$document', '$rootScope', '$sce', '$http','$filter',
-    'Authentication', 'Ustodos', 'Commands',
-    //function($scope, $window, $stateParams, $location, $document, $rootScope, $sce, $http, Authentication, Ustodos, Commands)
-    function($scope, $window, $stateParams, $location, $document, $rootScope,
-			 $sce, $http, $filter, Authentication, Ustodos, Commands)
+	//function($scope, $window, $stateParams, $location, $document, $rootScope, $sce, $http, Authentication, Ustodos, Commands)
+    ['$scope', '$window', '$stateParams',
+		'$location', '$document', '$rootScope',
+		'$sce', '$http','$filter',
+		'$state',
+		'Authentication', 'Ustodos', 'Commands',
+    function($scope, $window, $stateParams,
+		 $location, $document, $rootScope,
+		 $sce, $http, $filter,
+		 $state,
+		 Authentication, Ustodos, Commands)
     {
 
 
@@ -180,6 +167,7 @@ app.controller('UstodosController',
 				console.log ("successful state change");
 			});
 
+			alert ('init ustodos.client.controller.js state:' + $state.$current);   // current state  .current
             //alert('initing scope $stateParams' + $stateParams);
 
             $scope.dynamicSearch = false; // bound via ng-model=lockMouseover to idcheckbox_dynamicSearch
@@ -266,58 +254,63 @@ app.controller('UstodosController',
             // http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=ONLOAD%0A
             // section_onload
 
+
+
             $scope.$watch('$viewContentLoaded', function(){ // like onload YES
-                //alert ('in onload');
-                //var x = document.getElementById('idCkeEditorTextarea').innerHTML;
-                //alert ('in $viewContentLoaded:' + x);
+				try {
 
-                //var editor = CKEDITOR.instances.idCkeEditorTextarea;
+					//alert ('in onload');
+					//var x = document.getElementById('idCkeEditorTextarea').innerHTML;
+					//alert ('in $viewContentLoaded:' + x);
 
-                //alert ('focusManager.focus');
-                //editor.focusManager.focus( editor.editable() );
+					//alert ('pre1 $state.get');
+					//alert ($state.get());
+					// works alert(UtilPrintObjects.printObjJSONstringify('$state.get()', $state.get()));
+					alert(UtilPrintObjects.printObjJSONstringify('$state.get()', $state.get()));
+					//alert (JSON.stringify($state.get()));
+					//alert ('post1 $state.get');
 
-                //CKEDITOR.instances.idCkeEditorTextarea.on('blur', function() {
-                //    //alert('cke blur fired');
-                //    //$scope.prop2Cke();
-                //    //$scope.propagateTextChanges();
-                //});
+					//var editor = CKEDITOR.instances.idCkeEditorTextarea;
 
-                // section_per_editor set initial editor
-                //alert ('oin here');
-                $scope.toggleVisibilityTo3('line 260 onload');
+					//alert ('focusManager.focus');
+					//editor.focusManager.focus( editor.editable() );
 
+					//CKEDITOR.instances.idCkeEditorTextarea.on('blur', function() {
+					//    //alert('cke blur fired');
+					//    //$scope.prop2Cke();
+					//    //$scope.propagateTextChanges();
+					//});
 
-
-
-				$scope.title2 = "$scope.title2 from ustodo client controller"
-
-
-                var q = $location.$$search.q;
-                //$scope.toggleVisibilityTo3('line 3656 main');
-                if (q) {
-                    $scope.q = q;
-                    $scope.processCommand($scope.enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.URL, q, q, q);
-                    //$scope.setTextInShowingEditor(q, 'line 275 main');
-
-                } else {
-                    $scope.processCommand($scope.enumCommands.COMMAND_SEARCH,'CLIENT JS line 2355', '*', '*', '*');
-                }
+					// section_per_editor set initial editor
+					//alert ('oin here');
+					$scope.toggleVisibilityTo3('line 260 onload');
 
 
+					$scope.title2 = "$scope.title2 from ustodo client controller"
 
 
+					var q = $location.$$search.q;
+					//$scope.toggleVisibilityTo3('line 3656 main');
+					if (q) {
+						$scope.q = q;
+						$scope.processCommand($scope.enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.URL, q, q, q);
+						//$scope.setTextInShowingEditor(q, 'line 275 main');
+
+					} else {
+						$scope.processCommand($scope.enumCommands.COMMAND_SEARCH, 'CLIENT JS line 2355', '*', '*', '*');
+					}
+				}
+				catch(err)
+				{
+					UtilErrorEmitter.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
+				}
 
 
+				//ng-blur='propagateTextChanges()'
 
-
-
-
-                //ng-blur='propagateTextChanges()'
-
-                //tinyMCE.get('idDivForTinyMceEditorTextarea').on('keyup',function(e){
-                //    alert(this.getContent().replace(/(<[a-zA-Z\/][^<>]*>|\[([^\]]+)\])|(\s+)/ig,''));
-                //});
-
+				//tinyMCE.get('idDivForTinyMceEditorTextarea').on('keyup',function(e){
+				//    alert(this.getContent().replace(/(<[a-zA-Z\/][^<>]*>|\[([^\]]+)\])|(\s+)/ig,''));
+				//});
             });
 
             //$scope.testTinyMce = function()
@@ -1963,7 +1956,8 @@ app.controller('UstodosController',
             //| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
             //'----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'             $scope.propagateTextChanges = function()
             {
-                try {
+                try
+				{
                     $scope.count++;
                     //O.o('in propagateTextChanges');
                     //O.o('in onKeyUp1:'+$scope.count);
@@ -2100,7 +2094,7 @@ app.controller('UstodosController',
                     }
                 } catch (e) {
                     if (processFailure)
-                        UtilErrorEmitter.EmitError ('era3', e);
+                        UtilErrorEmitter.emitError ('era3', e);
                     throw e;
                 }
             };
@@ -2183,7 +2177,8 @@ app.controller('UstodosController',
             //$scope.modelForSelectId = '-save';
             $scope.selectModel = 'Bing (b)';
 
-            $scope.commands = Commands.query(function() {
+            $scope.commands = Commands.query(function()
+			{
                 //$scope.commands = query.exec (function() {
                 //alert ('done query $scope.commands.length:' + $scope.commands.length);
                 try {
@@ -2396,7 +2391,7 @@ app.controller('UstodosController',
                         //alert('calling processCommand');
                     }
                 } catch (e) {
-                    UtilErrorEmitter.EmitError('in eventHandlerEditorcontentChange', e);
+                    UtilErrorEmitter.emitError('in eventHandlerEditorcontentChange', e);
                     //alert ('sdfsdfsdf:' + e);
                 }
             };
@@ -3728,7 +3723,7 @@ app.controller('UstodosController',
                     //	$scope.error = errorResponse.data.message;
 
                 } catch (e) {
-                    UtilErrorEmitter.EmitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
+                    UtilErrorEmitter.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
                     throw e;
                 }
                 $scope.mouseoverlock = 'off';

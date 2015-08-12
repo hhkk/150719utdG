@@ -448,6 +448,7 @@ var getProperties = function (desc, obj)
     }
 };
 
+
 if (typeof exports !== 'undefined') {
     exports.getClass = getClass;
     exports.getProperties = getProperties;
@@ -765,7 +766,7 @@ if (typeof exports !== 'undefined') {
 // from entry.js UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 
 
-function EmitError (desc, err)
+function emitError (desc, err)
 {
 
     try {
@@ -781,7 +782,7 @@ function EmitError (desc, err)
 
 
 if (typeof exports !== 'undefined') {
-    exports.EmitError = EmitError;
+    exports.emitError = emitError;
 }
 
 
@@ -1015,6 +1016,43 @@ if (typeof exports !== 'undefined') {
 
 
 },{}],10:[function(require,module,exports){
+'use strict';
+// var UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
+// in entry.js
+
+
+function printObjJSONstringify (desc, obj) {
+	return 'desc [' + desc + '] JSON.stringify [' + JSON.stringify(obj, null, 2) + '] '
+}
+
+
+
+
+//function printObjToDepthNotCompletedSeeAlsoGetClass (desc, obj, depth) {
+//	var s = null;
+//	if (!depth)
+//		depth = 0;
+//
+//	try {
+//		if (obj === null)
+//			s = s + '\r\n  printObj a says desc [' + desc + '] obj passed in is null. ';
+//		else if (obj === undefined)
+//			s = s + '\r\n  printObj a says desc [' + desc + '] obj passed in is undefined. ';
+//		else if (Array.isArray(obj))
+//		{
+//			s = s + '\r\n  printObj a says desc [' + desc + '] obj passed in is array. ';
+//		}
+//	}
+//
+//}
+
+
+
+if (typeof exports !== 'undefined') {
+    exports.printObjJSONstringify = printObjJSONstringify;
+}
+
+},{}],11:[function(require,module,exports){
     // var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 
 var endsWith = function (str, suffix) {
@@ -1127,7 +1165,7 @@ if (typeof exports !== 'undefined') {
 
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 //utd = [];   // ustodo utilities
 //utd[Date] = require('C:/utd/150719utdG/public/util/UtilDate.js');
 //utd[Class] = require('C:/utd/150719utdG/public/util/UtilClass.js');
@@ -1142,6 +1180,7 @@ UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
 UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 UtilNLB_bgFade = require('C:/utd/150719utdG/public/util/NLB_bgFade.js');
 UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
 
 O = require('C:/utd/150719utdG/public/util/O.js');
 
@@ -1150,4 +1189,4 @@ O = require('C:/utd/150719utdG/public/util/O.js');
 
 
 
-},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilClass.js":4,"C:/utd/150719utdG/public/util/UtilDate.js":5,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":6,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":7,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":8,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":9,"C:/utd/150719utdG/public/util/UtilString.js":10}]},{},[11]);
+},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilClass.js":4,"C:/utd/150719utdG/public/util/UtilDate.js":5,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":6,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":7,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":8,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":9,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":10,"C:/utd/150719utdG/public/util/UtilString.js":11}]},{},[12]);

@@ -9,6 +9,10 @@ angular.module('commands').config(['$stateProvider',
 			url: '/commands',
 			templateUrl: 'modules/commands/views/list-commands.client.view.html'
 		}).
+		state('listCommands.substate', {
+				url: '/commands2',
+			templateUrl: 'modules/commands/views/list-commands2.client.view.html'
+		}).
 		state('createCommand', {
 			url: '/commands/create',
 			templateUrl: 'modules/commands/views/create-command.client.view.html'

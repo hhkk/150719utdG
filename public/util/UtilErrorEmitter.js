@@ -12,7 +12,7 @@
 // from entry.js UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 
 
-function EmitError (desc, err)
+function emitError (desc, err)
 {
 
     try {
@@ -28,7 +28,7 @@ function EmitError (desc, err)
 
 
 if (typeof exports !== 'undefined') {
-    exports.EmitError = EmitError;
+    exports.emitError = emitError;
 }
 
 

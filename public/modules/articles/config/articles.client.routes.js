@@ -1,5 +1,4 @@
 'use strict';
-
 // Setting up route
 angular.module('articles').config(['$stateProvider',
 	function($stateProvider) {

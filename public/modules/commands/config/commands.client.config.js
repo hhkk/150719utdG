@@ -6,6 +6,7 @@ angular.module('commands').run(['Menus',
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Commands', 'commands', 'dropdown', '/commands(/create)?');
 		Menus.addSubMenuItem('topbar', 'commands', 'List Commands', 'commands');
+		Menus.addSubMenuItem('topbar', 'commands', 'List Commands2', 'commands2');
 		Menus.addSubMenuItem('topbar', 'commands', 'New Command', 'commands/create');
 	}
 ]);

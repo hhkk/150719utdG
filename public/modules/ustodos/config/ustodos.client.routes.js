@@ -2,6 +2,7 @@
 
 //Setting up route
 //O.a ('oneOfSeveral config routes');
+
 angular.module('ustodos').config(['$stateProvider',
 	function($stateProvider) {
 		//alert ('in C:\utd\150719utdG\public\modules\ustodos\config\ustodos.client.routes.js');
@@ -47,7 +48,29 @@ angular.module('ustodos').config(['$stateProvider',
 		state('editUstodo', {
 			url: '/ustodos/:ustodoId/edit',
 			templateUrl: 'modules/ustodos/views/edit-ustodo.client.view.html'
+		}).
+		state('hkhkstateustodos1', {
+			url: '/ustodos/hkhkstateustodos1',
+			template: 'in ustodos state hkhkstateustodos1 ' +
+			' <br> <a ui-sref="hkhkstateustodos2">sref to hkhkstateustodos2</a> <br> ' +
+			' <br> <a ui-sref="hkhkstatecore2">sref to hkhkstatecore2</a> <br> ' +
+			'<a href="#!/ustodos/hkhkstateustodos2">href to #/ustodos/hkhkstateustodos2</a> <br> ' +
+			'<a href="#!/ustodos/hkhkstatecore2">href to #/ustodos/hkhkstatecore2</a> <br> ' ,
+			controller: function ($scope, $state) {
+				alert ('start state '+$state.$current)
+				$scope.stateInfoHKstate='hihk';
+			}
+		}).
+		state('hkhkstateustodos2', {
+			url: '/ustodos/hkhkstateustodos2',
+			template: 'in ustodos state hkhkstateustodos2 <a ui-sref="hkhkstateustodos1">sref to hkhkstateustodos1</a>  <br> ' +
+			'<a href="#!/ustodos/hkhkstateustodos1">href to #/ustodos/hkhkstateustodos1</a>',
+			controller: function ($scope, $state) {
+				alert ('start state '+$state.$current)
+				$scope.stateInfoHKstate='hihk';
+			}
 		})
+
 		;
 	}
 ]);
