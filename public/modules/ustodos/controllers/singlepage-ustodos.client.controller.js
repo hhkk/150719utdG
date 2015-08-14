@@ -139,7 +139,7 @@ var callbackCommand = function(callbackResult) {
 
 
 //O.a ('oneOfSeveral controller with array - first?');
-angular.module('ustodos').controller('UstodosController',
+angular.module('ustodos').controller('SinglepageUstodosController',
 //angular.module('ustodos',['ngSanitize']).controller('UstodosController',
 // angular.module('ustodos',[]).controller('UstodosController',
 
@@ -155,6 +155,22 @@ angular.module('ustodos').controller('UstodosController',
 		 $state,
 		 Authentication, Ustodos, Commands)
     {
+
+
+		//$scope.processThis = function(s)
+		//{
+		//	//alert ('in here');
+		//	return '<span style=\"word-break:break-all\"> xxyz ' + s + '</span>';
+		//	//return '<div style=\"word-break:break-all\"> xxy ' + s + '</div>';
+		//	//return '<div style="word-break:break-all>" xx' + s + '</div>';
+		//}
+
+		$scope.preparePerRowHtml = function(s)
+		{
+			return s;
+		}
+
+
 
 		// http://henriquat.re/basics-of-angular/services-dependency-injection/services-and-dependency-injection-in-angularjs.html
 

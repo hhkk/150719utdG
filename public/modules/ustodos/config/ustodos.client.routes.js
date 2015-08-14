@@ -23,6 +23,28 @@ angular.module('ustodos').config(['$stateProvider',
 
 
 
+
+
+        state('findlistUstodos', {
+            // http://localhost:3000/#!/ustodos/findlist
+            url: '/ustodos/',
+            templateUrl: 'modules/ustodos/views/singlepage-ustodos.client.view.html'
+        }).
+		//state('findlistUstodos2', {
+		//	// http://localhost:3000/#!
+		//	// http://localhost:3000
+		//	url: '/:searchstring_url',
+		//	templateUrl: '	modules/ustodos/views/findlist-ustodos.client.view.html'
+		//}).
+		state('listUstodos', {
+			// http://localhost:3000/#!/ustodos
+			url: '/ustodos',
+			templateUrl: 'modules/ustodos/views/list-ustodos.client.view.html',
+			controller: function ($scope, $state) {
+				alert ('start state '+$state.$current)
+				$scope.stateInfoHKstate='hihk';
+			}
+		}).
 			state('hkhkstateustodos1', {
 				url: '/ustodos/hkhkstateustodos1',
 				template: 'in ustodos state hkhkstateustodos1 <a ui-sref="hkhkstateustodos2">sref to hkhkstateustodos2</a> <br> ' +
@@ -44,25 +66,7 @@ angular.module('ustodos').config(['$stateProvider',
 
 
 
-
-
-        state('findlistUstodos', {
-            // http://localhost:3000/#!/ustodos/findlist
-            url: '/ustodos/findlist',
-            templateUrl: 'modules/ustodos/views/findlist-ustodos.client.view.html'
-        }).
-		//state('findlistUstodos2', {
-		//	// http://localhost:3000/#!
-		//	// http://localhost:3000
-		//	url: '/:searchstring_url',
-		//	templateUrl: '	modules/ustodos/views/findlist-ustodos.client.view.html'
-		//}).
-		state('listUstodos', {
-			// http://localhost:3000/#!/ustodos
-			url: '/ustodos',
-			templateUrl: 'modules/ustodos/views/list-ustodos.client.view.html'
-		}).
-		state('createUstodo', {
+			state('createUstodo', {
 			//http://localhost:3000/#!/ustodos/create
 			url: '/ustodos/create',
 			templateUrl: 'modules/ustodos/views/create-ustodo.client.view.html'

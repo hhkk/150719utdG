@@ -1,3 +1,4 @@
+
 .content {
 	margin-top: 50px;
 }
@@ -174,30 +175,40 @@ body.ng-cloak
 }
 
 .hkcssPosTable {
-    font-size: 16px;
+    font-size: 12px;
     /*xx#header {*/
-    /*margin-top: 100px;*/
+    margin-top: -40px;
     /*xxposition: static;*/
     /*position: relative;*/
     /*xxtop: 300;*/
     z-index:0;
     /*xxleft: 100;*/
     color: green;
+	xxdisplay:none;
+	xxvisibility:hidden
+
 }
 .odd {
     /*http://www.w3schools.com/html/html_colors.asp*/
     background-color:lightgrey;
-    /*color: black;*/
+	overflow-x:hidden;
+
+	/*color: black;*/
 }
 .even{
     background-color:white;
+	overflow-x:hidden;
     /*color: darkblue;*/
 }
 
 
 
-#cssClassPerRowContentEditableFinal {
-    font-size:50px;
+.cssClassPerRowContentEditableFinal {
+	font-size:24px;
+	overflow-x:hidden;
+
+	/*width:100%;*/
+	word-break:break-all
 }
 
 #idSpanSearchedFor {
