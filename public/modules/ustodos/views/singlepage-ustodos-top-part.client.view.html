@@ -1,0 +1,274 @@
+<div id='topDivInFindUstodos' ng-app style="
+		border-width:10px
+		medium
+		thick
+		10px;
+		top:0;
+		background-color:lightblue;
+		display:inline-block;"
+		>
+
+	<!--<section data-ng-controller="UstodosController" ng-keydown="count = count + 4;" ng-init="count=0">-->
+	<!--<input type="text" ng-model="currentVisibleCounter"/>-->
+
+	<!--<button ng-click="yyutdact()">Do</button>-->
+
+	<!--<button ng-init='ngInitTinyMceButton()' ng-click="testTinyMce()">testTinyMce()</button>-->
+	<!--<button xxng-init='xxtoggleReadOnly()' ng-click="toggleReadOnly()">toggleReadOnly CK EDIT()</button>-->
+	<!--<input focus-on="focusMe"/>-->
+	<!--<input class="hkToolbarElement" type='image' style="height:20px;"-->
+	<!--ng-click='toggleVisibilityToNext()'-->
+	<!--src='modules/ustodos/img/UsToDoanimalsblack.jpg'-->
+	<!--title="Next Editor"-->
+	<!--style='height:32px;'-->
+	<!--/>-->
+	<!-- section_toolbar
+    .----------------. .----------------. .----------------. .----------------. .----------------. .----------------. .----------------.
+    | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
+    | |  _________   | | |     ____     | | |     ____     | | |   _____      | | |   ______     | | |      __      | | |  _______     | |
+    | | |  _   _  |  | | |   .'    `.   | | |   .'    `.   | | |  |_   _|     | | |  |_   _ \    | | |     /  \     | | | |_   __ \    | |
+    | | |_/ | | \_|  | | |  /  .--.  \  | | |  /  .--.  \  | | |    | |       | | |    | |_) |   | | |    / /\ \    | | |   | |__) |   | |
+    | |     | |      | | |  | |    | |  | | |  | |    | |  | | |    | |   _   | | |    |  __'.   | | |   / ____ \   | | |   |  __ /    | |
+    | |    _| |_     | | |  \  `--'  /  | | |  \  `--'  /  | | |   _| |__/ |  | | |   _| |__) |  | | | _/ /    \ \_ | | |  _| |  \ \_  | |
+    | |   |_____|    | | |   `.____.'   | | |   `.____.'   | | |  |________|  | | |  |_______/   | | ||____|  |____|| | | |____| |___| | |
+    | |              | | |              | | |              | | |              | | |              | | |              | | |              | |
+    | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
+    '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
+    -->
+	<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
+		   ng-click="clearText()"                src='/img/ClearText.png'
+		   title="Clear Text"
+			/>
+	&nbsp;
+	<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
+		   ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*', '*')"                src='/img/Asterisk.png'
+		   title="Search all"
+			/>
+	&nbsp;
+	<input class="hkToolbarElement" type='image' style="height:8px;"
+		   ng-click='toggleVisibilityTo0()'                src='/img/input0OneLine.png'
+		   title="One Line Editor"
+			/>
+	&nbsp;
+	<input class="hkToolbarElement" type='image' style="height:14px;width:20px;"
+		   ng-click='toggleVisibilityTo1()'                src='/img/input1MultiLine.png'
+		   title="Multi-Line Editor"
+			/>
+	&nbsp;
+	<!--<input class="hkToolbarElement" type='image'  style='height:25px;'-->
+	<!--ng-click='toggleVisibilityTo2()'                src='/img/input2.png'-->
+	<!--title="Rich Editor (CKEditor)"-->
+	<!--/>-->
+
+	<!--<input class="hkToolbarElement" type='image'  style='height:25px;'-->
+	<!--ng-click='toggleCkeToolebar()'                src='/img/input2.png'-->
+	<!--title="Rich Editor (CKEditor) click to add toolbars = no mouseover"-->
+	<!--/>-->
+
+	&nbsp;
+	<input class="hkToolbarElement" type='image'  style='height:25px;'
+		   ng-click='toggleVisibilityTo3()'                src='/img/input2.png'
+		   title="Rich Editor (TinyMCE)"
+			/>
+
+	&nbsp;<input  id='idcheckbox_dynammicSearch' ng-model=dynamicSearch type="checkbox" title="Dynamic Search (as you type)" />LiveFilter
+	&nbsp;<input  id='idcheckbox_modelCheckboxUpdateOnWrite' ng-model=modelCheckboxUpdateOnWrite type="checkbox" title="Update search results display after a write/save" />UpdateOnWrite
+	&nbsp;<input  id='idcheckbox_modelCheckboxCtrlEnterToSave' ng-model=modelCheckboxCtrlEnterToSave type="checkbox" title="if checked, control+enter submits a command while enter is just a line feed (allows multiline record entries)" />CtrlEnterToSave
+	&nbsp;<input  id='idcheckbox_modelmodelCheckboxCtrlEnterToSave' ng-model=reloadWarning type="checkbox" title="reload warnings on" />reloadWarn
+	&nbsp;<span id='idcheckbox_dirty' ng-bind=modelDirty title="Has text been modified" ></span>
+
+	<!--xx&nbsp;<span ng-model=$scope.lockMouseover> </span>yy-->
+
+	<!--<span ng-bind-html='$scope.lockMouseover'></span>-->
+
+	<!--DynamicSearch [<span ng-bind='dynamicSearch'></span>]-->
+	Selected [<span ng-bind="state_inSelectedMode"></span>]
+	WhichEditorShowing[<span ng-bind='whichEditorShowing'></span>]
+	Dirty[<span ng-bind='modelDirty' ></span>]
+
+
+	<br>
+
+	<!--<a ui-sref="HKTestSref2">ui-sref=HKTestSref2</a>-->
+
+		<span xxng-keyup='onKeyUp("line 63", $event, this.ENUM_KEYEVENTCALLER_KEYUPSPAN)'>
+
+		<!--<input class="hkToolbarElement" type='image'-->
+		<!--ng-click='toggleVisibilityToNext()'-->
+		<!--src='modules/ustodos/img/UsToDoanimalsblack.jpg'-->
+		<!--title="toggleVisibilityToNext"-->
+		<!--style='height:32px;'-->
+		<!--/>-->
+		<!-- section_3_inputs
+		 .----------------. .----------------. .----------------. .-----------------..----------------. .----------------. .----------------. .----------------.
+		| .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
+		| |    ______    | | |              | | |     _____    | | | ____  _____  | | |   ______     | | | _____  _____ | | |  _________   | | |    _______   | |
+		| |   / ____ `.  | | |              | | |    |_   _|   | | ||_   \|_   _| | | |  |_   __ \   | | ||_   _||_   _|| | | |  _   _  |  | | |   /  ___  |  | |
+		| |   `'  __) |  | | |              | | |      | |     | | |  |   \ | |   | | |    | |__) |  | | |  | |    | |  | | | |_/ | | \_|  | | |  |  (__ \_|  | |
+		| |   _  |__ '.  | | |              | | |      | |     | | |  | |\ \| |   | | |    |  ___/   | | |  | '    ' |  | | |     | |      | | |   '.___`-.   | |
+		| |  | \____) |  | | |              | | |     _| |_    | | | _| |_\   |_  | | |   _| |_      | | |   \ `--' /   | | |    _| |_     | | |  |`\____) |  | |
+		| |   \______.'  | | |   _______    | | |    |_____|   | | ||_____|\____| | | |  |_____|     | | |    `.__.'    | | |   |_____|    | | |  |_______.'  | |
+		| |              | | |  |_______|   | | |              | | |              | | |              | | |              | | |              | | |              | |
+		| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
+		 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
+		-->
+		<!-- ================ INPUT#0 ======================== maps to $scope.onKeyUp -->
+		<input id="idInput0TypeText"
+			   type="text"
+			   xxng-keyup='this.onKeyUp("line 85", $event, this.ENUM_KEYEVENTCALLER_INPUT0)'
+			   ng-keyup='this.onKeyUp("line 102", $event )'
+			   class="input-textarea"
+			   placeholder="Search / Input / Command"
+			   title='Search (case insensitive, order insensitive) / Save / Command '
+			   ng-blur="eventBlur0InputText()" required>
+		   <!--ng-model="inputbind"-->
+
+		<!--ng-bind='inputbind'-->
+		<!--data-ng-model="commandFromInputBox"-->
+
+		<!--<a href="javascript:NLBfadeBg('div1hk','#FF0000','#FFFFFF','1000');">Fade DIV-->
+
+
+		<!-- ================ INPUT#1 ======================== -->
+		<!--section_per_editor 0-->
+		<span id='idMediumEditor'
+			  ng-init='focusOnId("idInput0TypeText")'
+			  ng-blur="eventBlur1Medium()"
+			  ng-keyup='this.onKeyUp("line 98", $event)'
+			  title='search (case insensitive, order insensitive)'></span >
+
+		<!-- ================ INPUT#2 CKE CURRENT DEFAULT ======================== -->
+		<span id='idDivForCkeEditorTextarea'
+			  ng-keyup='this.onKeyUp("line 102")'
+			  ng-blur="xxpropagateTextChanges()">
+			<textarea id="idCkeEditorTextarea"
+					  ng-blur="this.alerthk()"
+					  ng-keyup='this.onKeyUp("line 135", $event )'
+					  name="idCkeEditorTextarea"
+					  idxx="xxeditor1" rows="10" cols="80">
+
+			</textarea>
+		</span>
+
+		<!-- ================ INPUT#3 ======================== -->
+		<div id='idDivForTinyMceEditorTextarea'>
+			<!--was Search / Input-->
+			<textarea ng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
+		</div>
+
+
+		<select
+				id='selectId'
+				ng-change="this.utdEventSelectedEngine()"
+				ng-model="this.commands[0]"
+				title='select command to apply to the entered text'
+				ng-options="command as command.commandDescription2 for
+				command in commands | orderBy:'commandDescription2'"
+				ng-mouseover="showSelectDropdown()"
+				></select>
+
+		<!-- ========================= SECTION_FILTER ICON AND TEXTBOX ===================== -->
+		<img ng-src="/img/filterIcon2.jpg" class="per-row-icons-trashimage"
+			 alt="{{image.name}}"  title='Restrict within search result'
+			 xxxxng-mouseover="this.filterToLinksOnly ()"
+			 xxng-click="this.filterToLinksOnly ()"
+				>
+		&nbsp;
+		<input id="idInputTextFilter"  type="text" title='Restrict within search result' name="input" ng-model="filterText"  ng-keyup='updateUstodosFiltered(filterText)'
+			   xxng-pattern="example.word" required ng-trim="false">
+
+		<!-- RESEARCH SECTION_FILTER ICON AND TEXTBOX -->
+		<!--Filter: <span ng-bind=('('+this.searchedFor+'+'+this.filterText+')')  ng-mouseover="this.eventMouseoverRow3(this.searchedFor)"-->
+		<!--></span >-->
+
+	<!--<br><a ng-href="http://google.com/search?q={{this.searchedFor}}">http://google.com/search?q={{this.searchedFor}}</a>-->
+	<!--<br><a ng-href="{{this.searchedForAsLink}}">{{this.searchedForAsLink}}</a>-->
+
+	Count <span ng-bind=(this.ustodosFiltered.length)></span >
+	of <span ng-bind=(this.ustodos.length)></span >
+	&nbsp;
+	<!--<button ng-click="this.buttonClickSearchStar()">*</button>-->
+	<!--<button ng-click="this.buttonClickSearchClear()">Clear</button>-->
+
+	<!--<WORKS p ng-repeat="command in commands">{{command}}</p>-->
+
+	<button ng-click="testButton(-2)" title="testButton">TestButton</button>
+
+	<!--<button ng-click="testButton(-2)">TestButton</button>-->
+	<!--<p ng-repeat="operator in operators">{{operator.commandDescription}}</p>-->
+	</span>
+	<br>
+	<br>
+
+	<div   style='
+		xxwidth: 100%;
+		padding: 10px;
+		display: inline-block;
+		border: 1px solid greenyellow;
+		margin: 10px' class='hkcssPosTable'
+			>
+
+		<!--<table style="width: 100%;">-->
+		<!--<tr>-->
+		<!--<td align="left">-->
+		<!--<div style="word-break:break-all;">LongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWord</div>-->
+		<!--</td>-->
+		<!--<td align="right">-->
+		<!--<span style="display: inline;">Foo</span>-->
+		<!--</td>-->
+		<!--</tr>-->
+		<!--</table>-->
+		<br>
+
+			<span id='idSpanSearchedFor'>Current search [
+				<span id='idSpanSearchedForSearchText'
+					  ng-mouseover='this.eventMouseoverCurrentSearch()'
+					  ng-bind='searchedFor'
+						></span>
+			</span>
+
+
+
+		<!-- SECTION_ HEADER ROW SELECT ALL CHECKBOX AND TRASH ICON -->
+		&nbsp;<input ng-click='checkBoxClickedToggleAll()' id='checkBoxAll' type="checkbox"/> All
+
+		&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
+				   alt="{{image.name}}"  title='Delete Selected'
+				   ng-click="operationOnChecked_Delete()"
+			>
+		&nbsp;
+
+		<!-- SECTION_ TEXT FILTER ICON AND DYNAMIC SEARCH BOX -->
+		<br>
+		<br>
+
+
+
+		<!--Snippet: <textarea ng-model="snippet" cols="60" rows="3"></textarea>-->
+		<!--<table>-->
+		<!--<tr id="bind-html-with-sanitize">-->
+		<!--<td>ng-bind-html</td>-->
+		<!--<td>Automatically uses $sanitize</td>-->
+		<!--<td><pre>&lt;div ng-bind-html="snippet"&gt;<br/>&lt;/div&gt;</pre></td>-->
+		<!--<td>aa<div ng-bind-html="snippet"></div>bb</td>-->
+		<!--</tr>-->
+		<!--<tr id="bind-html-with-trust">-->
+		<!--<td>ng-bind-html</td>-->
+		<!--<td>Bypass $sanitize by explicitly trusting the dangerous value</td>-->
+		<!--<td>-->
+		<!--<pre>&lt;div ng-bind-html="deliberatelyTrustDangerousSnippet()"&gt;-->
+		<!--&lt;/div&gt;</pre>-->
+		<!--</td>-->
+		<!--<td>aa<div ng-bind-html="deliberatelyTrustDangerousSnippet()"></div>bb</td>-->
+		<!--</tr>-->
+		<!--<tr id="bind-default">-->
+		<!--<td>ng-bind</td>-->
+		<!--<td>Automatically escapes</td>-->
+		<!--<td><pre>&lt;div ng-bind="snippet"&gt;<br/>&lt;/div&gt;</pre></td>-->
+		<!--<td>aa<div ng-bind='snippet'></div>bb</td>-->
+		<!--</tr>-->
+		<!--</table>-->
+
+
+	</div>
+</div>
