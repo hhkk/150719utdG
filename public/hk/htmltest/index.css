@@ -1,0 +1,90 @@
+/*http://jsfiddle.net/NGLN/qndjW/6/*/
+
+/*xxhtml, xxbody, xx* {*/
+	/*padding: 0;*/
+	/*margin: 0;*/
+/*}*/
+
+#container {
+	width: 900px;
+}
+
+#header {
+	width:900px;
+	height:100px;
+	position:relative;
+	background-color: #03F;
+	border-bottom: 2px solid #000000;
+}
+
+#leftnav{
+	float:left;
+	width:140px;
+	height: 400px;
+	background-color: green;
+	border-left: 1px dashed #694717;
+	xxcolor:red ;
+	xxdisplay: inline-block;
+}
+
+
+#rightnav{
+	float:right;
+	width:140px;
+	height: 400px;
+	background-color: mediumpurple;
+	border-left: 1px dashed #694717;
+}
+#body {
+	margin:auto;
+	width: 600px;
+	padding: 10px 0px 0px 0px;
+}
+#footer {
+	width:900px;
+	height:100px;
+	position:relative;
+	background-color: #03F;
+	border-bottom: 2px solid #000000;
+}
+
+
+/*xhtml, xbody, x* {*/
+	/*padding: 0;*/
+	/*margin: 0;*/
+/*}*/
+/*xp, xh3 {*/
+	/*padding: 1em 0 .5em 0;*/
+/*}*/
+
+/*.wrapper {*/
+		/*min-width: 500px;*/
+	/*max-width: 700px;*/
+	/*margin: 0 auto;*/
+/*}*/
+/*#content {*/
+	/*background: #bbb;*/
+	/*margin-right: 260px;  /!* = sidebar width + some white space *!/*/
+/*}*/
+/*#overlay {*/
+	/*position: fixed;*/
+	/*top: 0;*/
+	/*width: 100%;*/
+	/*height: 100%;*/
+/*}*/
+/*#overlay .wrapper {*/
+	/*height: 100%;*/
+/*}*/
+/*#sidebar {*/
+	/*background: #ddd;*/
+	/*width: 250px;*/
+	/*float: right;*/
+	/*max-height: 100%;*/
+/*}*/
+/*#sidebar:hover {*/
+	/*overflow-y: auto;*/
+/*}*/
+/*#sidebar>* {*/
+	/*max-width: 225px; /!* leave some space for vertical scrollbar *!/*/
+/*}*/
+
