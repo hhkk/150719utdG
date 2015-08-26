@@ -9,7 +9,7 @@
 
 	<!--<div data-ng-include="'/modules/core/views/footer.client.view.html'" class="navbar-fixed-bottom"></div >-->
 
-	<span id='topDivInFindUstodos' ng-app
+	<span id='topDivInFindUstodos'
 		  style="
 		 	border-width:10px medium thick 10px;
 		 	top:56px;
@@ -97,7 +97,6 @@
 		Dirty[<span ng-bind='modelDirty' ></span>]
 
 
-		<br>
 
 		<!--<a ui-sref="HKTestSref2">ui-sref=HKTestSref2</a>-->
 
@@ -273,7 +272,7 @@
 
 
 		</div>
-	</span>
+		<!--hbkkkk--> toggling this from div to correctly span breaks something
 
 
 
@@ -285,139 +284,144 @@
 
 
 
-		<!--hbkkk-->
-
-		<table id='hktable1'
-			   style="
-		width:100%;
-		xxoverflow:auto;
-		height:900px;
-		top:450px;
-		z-index: -2;
-		position:relative">
-			<!--<tr ng-repeat="ustodo in ustodos ">f-->
-			<!--&lt;!&ndash; timeAgo &ndash;&gt;f-->
-			<!--<td><span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>f-->
-			<!--&lt;!&ndash; html &ndash;&gt;f-->
-			<!--<td>f-->
-			<!--<span contenteditable="true"f-->
-			<!--onclick = "this.contentEditable = true;"f-->
-			<!--ng-bind-html="ustodos[$index].html"></span>f-->
-			<!--</td>f-->
-			<!--</tr>f-->
-
-			<!--<button ng-click="alert ('ff')" ng-init="count=0">-->
-			<!--  SECTION_PER_ROW PERROW section_perrow
-			 .----------------. .----------------. .----------------. .----------------. .----------------. .----------------. .----------------.
-			| .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
-			| |   ______     | | |  _________   | | |  _______     | | |              | | |  _______     | | |     ____     | | | _____  _____ | |
-			| |  |_   __ \   | | | |_   ___  |  | | | |_   __ \    | | |              | | | |_   __ \    | | |   .'    `.   | | ||_   _||_   _|| |
-			| |    | |__) |  | | |   | |_  \_|  | | |   | |__) |   | | |              | | |   | |__) |   | | |  /  .--.  \  | | |  | | /\ | |  | |
-			| |    |  ___/   | | |   |  _|  _   | | |   |  __ /    | | |              | | |   |  __ /    | | |  | |    | |  | | |  | |/  \| |  | |
-			| |   _| |_      | | |  _| |___/ |  | | |  _| |  \ \_  | | |              | | |  _| |  \ \_  | | |  \  `--'  /  | | |  |   /\   |  | |
-			| |  |_____|     | | | |_________|  | | | |____| |___| | | |   _______    | | | |____| |___| | | |   `.____.'   | | |  |__/  \__|  | |
-			| |              | | |              | | |              | | |  |_______|   | | |              | | |              | | |              | |
-			| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
-			 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
-			-->
-
-			<!-- SECTION__ NG-REPEAT NG-IF FILTER PER ROW EXPERIMENTAL -->
-			<!--<tr  ng-repeat="ustodo in ustodosFiltered"-->
-			<!--<tr  ng-repeat="ustodo in ustodosFiltered"-->
-			<!--<tr  ng-repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
-			<!--<tr  ng-repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
 
 
+			<!--hbkkk-->
+
+		<div 		style="
+			width:75%;
+			overflow:scroll;
+			height:1000px;
+			top:25px;
+			z-index: -2;
+			position:relative"
+				>
+			<table id='hktable1'>
+				<!--<tr ng-repeat="ustodo in ustodos ">f-->
+				<!--&lt;!&ndash; timeAgo &ndash;&gt;f-->
+				<!--<td><span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>f-->
+				<!--&lt;!&ndash; html &ndash;&gt;f-->
+				<!--<td>f-->
+				<!--<span contenteditable="true"f-->
+				<!--onclick = "this.contentEditable = true;"f-->
+				<!--ng-bind-html="ustodos[$index].html"></span>f-->
+				<!--</td>f-->
+				<!--</tr>f-->
+
+				<!--<button ng-click="alert ('ff')" ng-init="count=0">-->
+				<!--  SECTION_PER_ROW PERROW section_perrow
+				 .----------------. .----------------. .----------------. .----------------. .----------------. .----------------. .----------------.
+				| .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
+				| |   ______     | | |  _________   | | |  _______     | | |              | | |  _______     | | |     ____     | | | _____  _____ | |
+				| |  |_   __ \   | | | |_   ___  |  | | | |_   __ \    | | |              | | | |_   __ \    | | |   .'    `.   | | ||_   _||_   _|| |
+				| |    | |__) |  | | |   | |_  \_|  | | |   | |__) |   | | |              | | |   | |__) |   | | |  /  .--.  \  | | |  | | /\ | |  | |
+				| |    |  ___/   | | |   |  _|  _   | | |   |  __ /    | | |              | | |   |  __ /    | | |  | |    | |  | | |  | |/  \| |  | |
+				| |   _| |_      | | |  _| |___/ |  | | |  _| |  \ \_  | | |              | | |  _| |  \ \_  | | |  \  `--'  /  | | |  |   /\   |  | |
+				| |  |_____|     | | | |_________|  | | | |____| |___| | | |   _______    | | | |____| |___| | | |   `.____.'   | | |  |__/  \__|  | |
+				| |              | | |              | | |              | | |  |_______|   | | |              | | |              | | |              | |
+				| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
+				 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
+				-->
+
+				<!-- SECTION__ NG-REPEAT NG-IF FILTER PER ROW EXPERIMENTAL -->
+				<!--<tr  ng-repeat="ustodo in ustodosFiltered"-->
+				<!--<tr  ng-repeat="ustodo in ustodosFiltered"-->
+				<!--<tr  ng-repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
+				<!--<tr  ng-repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
 
 
 
-			<div id='perRowOnly'>
-				<tr  ng-repeat="ustodo in ustodosFiltered "
 
-					 ng-mouseover="this.eventMouseoverRow2($index)"
-					 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
-					 ng-class-odd="'odd'" ng-class-even="'even'">
 
-					<!-- 1 PER ROW COUNT AND CHECK BOX -->
-					<td>
-						<span id='numberWrapForFade{{$index}}'>
-						{{$index}}
-						</span>
 
-						<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
-						<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox{{ustodo.html}}"' type="checkbox"/>-->
-						<!--&nbsp;<input ng-click='checkBoxClickedSingle(ustodos[$index]._id)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>-->
-						&nbsp;<input ng-click='checkBoxClickedSingle($index)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>
-						<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox"' type="checkbox"/>-->
-					</td>
+				<div id='perRowOnly'>
+					<tr  ng-repeat="ustodo in ustodosFiltered "
 
-					<!-- 2 PER ROW DELETE BUTTON -->
-					<td>
-						<!-- trash garbage icon -->
-						&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
-										 alt="{{image.name}}"  title='Delete immediately'
-										 ng-click="deleteDbUstotoOneByIndex([$index])"
-							>
-						&nbsp
-						<!--ng-show="nowShowing==$index"-->
-						<!--ng-repeat="image in images"-->
-						<!--class="gallery-image fade-animation"-->
-					</td>
+						 ng-mouseover="this.eventMouseoverRow2($index)"
+						 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
+						 ng-class-odd="'odd'" ng-class-even="'even'">
 
-					<!-- 3 PER ROW SAVE BUTTON -->
-					<td>
-						<!--<button ng-click="count = count + 1" ng-init="count=0">-->
-						<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
+						<!-- 1 PER ROW COUNT AND CHECK BOX -->
+						<td>
+							<span id='numberWrapForFade{{$index}}'>
+							{{$index}}
+							</span>
 
-						<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
-
-						<img class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
-							 alt="{{image.name}}"
-							 ng-click="saveUstodoGiven(ustodo, $index)"
-								>
-						&nbsp;
-					</td>
-
-					<!-- PER ROW COUNT -->
-					<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
-
-					<!-- 4 PER ROW TIME AGO -->
-					<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
-					<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
-									ng-click="event_click_timeAgo(ustodo._id)"
-									title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}></span>
-					</td>
-					<!--<td>{{ ustodo.text}}</td>f-->
-
-					<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
-					<span class='hkcssContentedit' >
-						<td style="width:90%;
-							word-wrap: break-word;
-							white-space: nowrap;
-							//overflow: auto;
-							/*visible|hidden|scroll|auto|initial|inherit*/
-							/*-moz-hyphens:auto;*/
-							/*-webkit-hyphens:auto;*/
-							/*-o-hyphens:auto;*/
-							/*hyphens:auto;*/
-							">
-
-							<!--ng-bind-html="ustodosFiltered[$index].html">-->
-							<!--ng-bind-html="processThis(ustodosFiltered[$index].html)"-->
-							<div class="PerRowCtEdit" id="ustodorow{{$index}}" contenteditable="true"
-								 ng-focus='hkngfocustest($index)'
-								 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
-								 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
-									>
-
-							</div>
+							<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
+							<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox{{ustodo.html}}"' type="checkbox"/>-->
+							<!--&nbsp;<input ng-click='checkBoxClickedSingle(ustodos[$index]._id)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>-->
+							&nbsp;<input ng-click='checkBoxClickedSingle($index)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>
+							<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox"' type="checkbox"/>-->
 						</td>
-						<!--/onclick = "this.contentEditable = true;"-->
-					</span>
-				</tr>
-			</div>
-		</table>
 
+						<!-- 2 PER ROW DELETE BUTTON -->
+						<td>
+							<!-- trash garbage icon -->
+							&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
+											 alt="{{image.name}}"  title='Delete immediately'
+											 ng-click="deleteDbUstotoOneByIndex([$index])"
+								>
+							&nbsp
+							<!--ng-show="nowShowing==$index"-->
+							<!--ng-repeat="image in images"-->
+							<!--class="gallery-image fade-animation"-->
+						</td>
+
+						<!-- 3 PER ROW SAVE BUTTON -->
+						<td>
+							<!--<button ng-click="count = count + 1" ng-init="count=0">-->
+							<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
+
+							<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
+
+							<img class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
+								 alt="{{image.name}}"
+								 ng-click="saveUstodoGiven(ustodo, $index)"
+									>
+							&nbsp;
+						</td>
+
+						<!-- PER ROW COUNT -->
+						<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
+
+						<!-- 4 PER ROW TIME AGO -->
+						<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
+						<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
+										ng-click="event_click_timeAgo(ustodo._id)"
+										title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}></span>
+						</td>
+						<!--<td>{{ ustodo.text}}</td>f-->
+
+						<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
+						<span class='hkcssContentedit' >
+							<td style="xxwidth:90%;
+								word-wrap: break-word;
+								white-space: nowrap;
+								//overflow: auto;
+								/*visible|hidden|scroll|auto|initial|inherit*/
+								/*-moz-hyphens:auto;*/
+								/*-webkit-hyphens:auto;*/
+								/*-o-hyphens:auto;*/
+								/*hyphens:auto;*/
+								">
+
+								<!--ng-bind-html="ustodosFiltered[$index].html">-->
+								<!--ng-bind-html="processThis(ustodosFiltered[$index].html)"-->
+								<div class="PerRowCtEdit" id="ustodorow{{$index}}" contenteditable="true"
+									 ng-focus='hkngfocustest($index)'
+									 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
+									 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
+										>
+
+								</div>
+							</td>
+							<!--/onclick = "this.contentEditable = true;"-->
+						</span>
+					</tr>
+				</div>
+			</table>
+
+		</div>
 
 	<!--<span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span>f-->
 	<!--<span id="contentx{{$index}}" contenteditable="true"f-->
@@ -427,6 +431,7 @@
 	<!--onmouseout = "this.contentEditable = false;f-->
 	<!--"f-->
 	<!--ng-bind-html="ustodos[$index].html"></span>f-->
+	</span>
 </section>
 
 
