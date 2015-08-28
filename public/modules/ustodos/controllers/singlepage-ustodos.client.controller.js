@@ -694,9 +694,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                     ed.on('keyup', function(e) {
 
-                        //alert ('in keyup in mce');
+                        alert ('in keyup in mce $scope.modelDirty:' + $scope.modelDirty);
                         $scope.modelDirty = true;
-                        //alert ('set $scope.modelDirty = true');
+                        alert ('set $scope.modelDirty = true');
 
 
                         //console.log ('e.keyIdentifier:' + e.keyIdentifier);
@@ -2935,6 +2935,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //CKEDITOR.instances.editor.destroy();
 
 				if (true)
+				{
+
+					alert ('in here:' + $scope.modelDirty); // hbkk
+					$scope.modelDirty = !$scope.modelDirty ;
+				}
+
+				if (false) // green fade text
 				{
 						UtilNLB_bgFade.NLBfadeBg('numberWrapForFade1', 'green', '#FFFFFF', '1500');
 				}

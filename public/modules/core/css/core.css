@@ -203,8 +203,8 @@ body.ng-cloak
 
 
 
-.PerRowCtEdit {
-	font-size:24px;
+.WholePage {
+	font-size:16px;
 	overflow-x:hidden;
 
 	/*width:100%;*/
@@ -213,7 +213,7 @@ body.ng-cloak
 
 #idSpanSearchedFor {
     font-size: 20px;
-    color: green
+    xxcolor: green
 }
 
 #idSpanSearchedForSearchText {

@@ -2920,6 +2920,13 @@ angular.module('ustodos').controller('UstodosController',
 
 				if (true)
 				{
+
+					alert ('in here');
+					$scope.modelDirty = !$scope.modelDirty ;
+				}
+
+				if (false)
+				{
 						UtilNLB_bgFade.NLBfadeBg('numberWrapForFade1', 'green', '#FFFFFF', '1500');
 				}
 
