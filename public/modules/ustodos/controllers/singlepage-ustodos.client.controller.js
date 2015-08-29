@@ -124,6 +124,25 @@ var app = angular.module('ustodos');      // worked before ui.router was added b
 //var app = angular.module('ustodos',['ngSanitize', 'ui.router']);      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
 
 
+//http://jsfiddle.net/whnSs/
+//app.factory('items', function() {
+//	var items = ['joey'];
+//	var itemsService = {};
+//
+//	itemsService.add = function(item) {
+//		items.push(item);
+//	};
+//	itemsService.list = function() {
+//		return items;
+//	};
+//
+//	return itemsService;
+//});
+
+
+
+
+
 //http://stackoverflow.com/questions/23045083/how-to-inject-modules-properly-in-angularjs
 //angular.module('ustodos', [])
 	//.factory('ustodos', function($ngSanitize){});
@@ -210,7 +229,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.modelCheckboxCtrlEnterToSave = false;
             $scope.reloadWarning = false;
             $scope.q = null; // current query
-            //$scope.modelDirty = false;
+					//$scope.modelDirty = false;
             //alert ('set $scope.modelDirty = false;')
 
             //.----------------. .-----------------..----------------. .----------------.
@@ -694,9 +713,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                     ed.on('keyup', function(e) {
 
-                        alert ('in keyup in mce $scope.modelDirty:' + $scope.modelDirty);
                         $scope.modelDirty = true;
-                        alert ('set $scope.modelDirty = true');
+						$scope.$apply();
 
 
                         //console.log ('e.keyIdentifier:' + e.keyIdentifier);
@@ -1594,7 +1612,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 // and NOT CK or MCE or perRow editor
                 //alert ('in onkeyup');
 
-                //if ($scope.getTextInShowingEditor().xValue === '')
+                //if ($scope.getTextHtmlAndValueInShowingEditor().xValue === '')
                 //    $scope.mouseoverlock = 'off';
                 //else
                 //    $scope.mouseoverlock = 'on';
@@ -2134,7 +2152,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             };
 
             // section_per_editor 5
-            $scope.getTextInShowingEditor = function()
+            $scope.getTextHtmlAndValueInShowingEditor = function()
             {
                 var xText = null;
                 var xHtml = null;
@@ -2162,9 +2180,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         //    break;
                         case $scope.ns.Input.INPUT_3_MCE:
                             //alert ('in setTextInShowingEditor for input2cke');
-							//var xText = tinyMCE.activeEditor.getContent({format: 'text'});
+							xText = tinyMCE.activeEditor.getContent({format: 'text'});
 							xHtml= tinyMCE.activeEditor.getContent();
-                            alert ('xHtml from 3 mce [' + xHtml + ']');
+                            //alert ('xHtml from 3 mce [' + xHtml + ']');
                             break;
                         default:
                             alert ('era - bad input resolution');
@@ -2475,28 +2493,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //};
             //
             // Handler
-            $scope.eventMouseoverRow2 = function(i) {
-                //console.log('A in eventMouseoverRow2 i:' + i);
-                //O.o ('in eventMouseoverRow2:' + i);
-                //O.o (i + '. $scope.ustodosFiltered[i].text:' + $scope.ustodosFiltered[i].text);
-                //O.o (i + '. $scope.ustodosFiltered[i].html:' + $scope.ustodosFiltered[i].html);
-                //alert (' in here');
-                if ($scope.state_inSelectedMode === -1) {
-                    //if ($scope.mouseoverlock !== 'on') {
-                    //$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));
-                    $scope.setTextInShowingEditor($scope.ustodosFiltered[i].html, 'line 2254');
-                    //}
-                }
-
-
-                //console.log ('B in eventMouseoverRow x.innerText:' + x.innerText);
-                //$scope.commandFromInputBox = x.innerText;
-                //$scope.mmmm.element.innerHTML =  x.innerHTML;
-                //tinyMCE.get('idTinyMceTextArea').setContent(x.innerHTML);
-
-                //console.log('C in eventMouseoverRow2 i:' + i);
-            };
-
             $scope.stateOKtoOverwrite = function() {
                 return ($scope.state_inSelectedMode === -1);
             };
@@ -2510,16 +2506,28 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 }
             };
 
-            $scope.eventMouseoverRow2 = function(i) {
-                if ($scope.stateOKtoOverwrite()) {
-                    //if ($scope.mouseoverlock !== 'on') {
-                    //$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));
-                    $scope.setTextInShowingEditor($scope.ustodosFiltered[i].html, 'line 2284');
-                    //}
-                }
-            };
+			$scope.isCurrentEditorEmpty = function()  {
+				return $scope.getTextHtmlAndValueInShowingEditor().xText.trim() === '';
+			}
 
-            $scope.eventMouseoverRow3 = function(s) {
+            $scope.eventMouseoverRow2 = function(i)
+			{
+				//alert ('$scope.getTextHtmlAndValueInShowingEditor() ['+ $scope.getTextHtmlAndValueInShowingEditor().xText + ']');
+				if (
+					// if not selected, if not
+					($scope.state_inSelectedMode === -1 && !$scope.modelDirty ) ||
+						$scope.isCurrentEditorEmpty())
+					{
+					//if ($scope.mouseoverlock !== 'on') {
+					//$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));
+					$scope.setTextInShowingEditor($scope.ustodosFiltered[i].html, 'line 2254');
+					$scope.modelDirty = false;
+					//}
+				}
+			};
+
+
+			$scope.eventMouseoverRow3 = function(s) {
                 //alert ('in eventMouseoverRow3 s:' + s);
                 $scope.setTextInShowingEditor(s, 'line 2291');
             };
@@ -2931,13 +2939,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             $scope.testButton= function(s)
             {
-                //alert ('in keyup $scope.getTextInShowingEditor()'+$scope.getTextInShowingEditor());
+                //alert ('in keyup $scope.getTextHtmlAndValueInShowingEditor()'+$scope.getTextHtmlAndValueInShowingEditor());
                 //CKEDITOR.instances.editor.destroy();
 
 				if (true)
 				{
-
-					alert ('in here:' + $scope.modelDirty); // hbkk
+					//alert ('in here:' + $scope.modelDirty); // hbkk
 					$scope.modelDirty = !$scope.modelDirty ;
 				}
 
@@ -2969,7 +2976,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                 //CKEDITOR.instances.idCkeEditorTextarea.resize('100%',height);
 
-                // WORKS $scope.getTextInShowingEditor();
+                // WORKS $scope.getTextHtmlAndValueInShowingEditor();
                 //var xText = tinyMCE.getInstanceById('idTinyMceTextArea').getContent({format: 'text'});
                 //var xHtml= tinyMCE.getInstanceById('idTinyMceTextArea').getContent();
                 //alert ('got mce content xText:' + xText)

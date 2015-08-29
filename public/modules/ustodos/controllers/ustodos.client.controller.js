@@ -1578,7 +1578,7 @@ angular.module('ustodos').controller('UstodosController',
                 // and NOT CK or MCE or perRow editor
                 //alert ('in onkeyup');
 
-                //if ($scope.getTextInShowingEditor().xValue === '')
+                //if ($scope.getTextHtmlAndValueInShowingEditor().xValue === '')
                 //    $scope.mouseoverlock = 'off';
                 //else
                 //    $scope.mouseoverlock = 'on';
@@ -2118,7 +2118,7 @@ angular.module('ustodos').controller('UstodosController',
             };
 
             // section_per_editor 5
-            $scope.getTextInShowingEditor = function()
+            $scope.getTextHtmlAndValueInShowingEditor = function()
             {
                 var xText = null;
                 var xHtml = null;
@@ -2915,7 +2915,7 @@ angular.module('ustodos').controller('UstodosController',
 
             $scope.testButton= function(s)
             {
-                //alert ('in keyup $scope.getTextInShowingEditor()'+$scope.getTextInShowingEditor());
+                //alert ('in keyup $scope.getTextHtmlAndValueInShowingEditor()'+$scope.getTextHtmlAndValueInShowingEditor());
                 //CKEDITOR.instances.editor.destroy();
 
 				if (true)
@@ -2953,7 +2953,7 @@ angular.module('ustodos').controller('UstodosController',
 
                 //CKEDITOR.instances.idCkeEditorTextarea.resize('100%',height);
 
-                // WORKS $scope.getTextInShowingEditor();
+                // WORKS $scope.getTextHtmlAndValueInShowingEditor();
                 //var xText = tinyMCE.getInstanceById('idTinyMceTextArea').getContent({format: 'text'});
                 //var xHtml= tinyMCE.getInstanceById('idTinyMceTextArea').getContent();
                 //alert ('got mce content xText:' + xText)
