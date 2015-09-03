@@ -129,23 +129,24 @@ var app = angular.module('ustodos');      // worked before ui.router was added b
 //var app = angular.module('myApp', []);
 
 // http://stackoverflow.com/questions/15666048/service-vs-provider-vs-factory    http://jsfiddle.net/pkozlowski_opensource/PxdSP/14/
-alert ('defining SinglePagePublisherService');
+//alert ('defining SinglePagePublisherService');
 app.factory('SinglePagePublisherService', function() {
-	alert ('in SinglePagePublisherService');
+	//alert ('in SinglePagePublisherService');
 	var itemsServiceData = {'key1':'val1'};
 	var itemsServiceFns = {};
 
-	itemsServiceFns.add0 = function(val, key) {
-		itemsServiceData['val'] = key;
+	itemsServiceFns.set0 = function(val, key) {
+		//alert ('in set0 ' + val + ':' + key);
+		itemsServiceData[val] = key;
 	};
 	itemsServiceFns.get0 = function() {
-		alert ('in get0');
+		//alert ('in get0');
 		return itemsServiceData;
 	};
 	return itemsServiceFns;
 });
 
-alert ('done defining SinglePagePublisherService');
+//alert ('done defining SinglePagePublisherService');
 
 
 
@@ -242,9 +243,9 @@ angular.module('ustodos').controller('SinglePageGetCtrl1',
 	function($scope,
 			 SinglePagePublisherService
 	) {
-		alert ('in ctrl1');
+		//alert ('in ctrl1');
 		var x  = SinglePagePublisherService.get0()['key1'];
-		alert ('in ctrl1 x:' + x);
+		//alert ('in ctrl1 x:' + x);
 
 		$scope.get1 = SinglePagePublisherService.get0;
 
@@ -327,20 +328,20 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		'$sce', '$http','$filter',
 		'$state',
 		'Authentication', 'Ustodos', 'Commands',
-		//'SinglePagePublisherService',
+		'SinglePagePublisherService',
       function($scope, $window, $stateParams,
 		 $location, $document, $rootScope,
 		 $sce, $http, $filter,
 		 $state,
 		 Authentication, Ustodos, Commands
-		 //, SinglePagePublisherService
+		 , SinglePagePublisherService
 		)
     {
 
 
-		alert ('in def');
+		//alert ('in def');
 		$scope.modelDirty = true;
-		//SinglePagePublisherService.add2('modelDirty', true);
+		SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
 		//$scope.processThis = function(s)
 		//{
 		//	//alert ('in here');
@@ -880,6 +881,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
                         $scope.modelDirty = true; //hbkkk
+						SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
+
 						//SinglePagePublisherService.add0('modelDirty', true);
 						$scope.$apply();
 
@@ -2689,7 +2692,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));
 					$scope.setTextInShowingEditor($scope.ustodosFiltered[i].html, 'line 2254');
 					$scope.modelDirty = false; // hbkkk
-					//SinglePagePublisherService.add0('modelDirty', false);
+					SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
+
+						//SinglePagePublisherService.add0('modelDirty', false);
 
 						//}
 				}
@@ -3115,6 +3120,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				{
 					//alert ('in here:' + $scope.modelDirty); // hbkk
 					$scope.modelDirty = !$scope.modelDirty ;
+					SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
+
 					//SinglePagePublisherService.add0('modelDirty', $scope.modelDirty);
 
 				}
@@ -3702,6 +3709,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                         $scope.setUstodosFiltered('caller2', $scope.ustodos);
                         $scope.modelDirty = false; // hbkk
+						SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
 						//SinglePagePublisherService.add0('modelDirty', $scope.modelDirty);
 
                         //alert ('set $scope.modelDirty = false2;')
