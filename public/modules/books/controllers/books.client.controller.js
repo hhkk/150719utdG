@@ -1,5 +1,6 @@
 'use strict';
 
+//alert ('in books controller');
 // Books controller
 angular.module('books').controller('BooksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Books',
 	function($scope, $stateParams, $location, Authentication, Books) {
@@ -25,7 +26,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 
 		// Remove existing Book
 		$scope.remove = function(book) {
-			if ( book ) { 
+			if ( book ) {
 				book.$remove();
 
 				for (var i in $scope.books) {
@@ -58,7 +59,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 
 		// Find existing Book
 		$scope.findOne = function() {
-			$scope.book = Books.get({ 
+			$scope.book = Books.get({
 				bookId: $stateParams.bookId
 			});
 		};

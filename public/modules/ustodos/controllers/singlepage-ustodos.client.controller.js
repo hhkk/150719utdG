@@ -7,6 +7,7 @@
 //var UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
 
 
+
 var O = O;
 //var CKEDITOR = CKEDITOR;
 var tinyMCE = tinyMCE;
@@ -123,23 +124,181 @@ var angularModule = null;
 var app = angular.module('ustodos');      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
 //var app = angular.module('ustodos',['ngSanitize', 'ui.router']);      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
 
+////http://jsfiddle.net/whnSs/
+// hbkkk
+//var app = angular.module('myApp', []);
 
-//http://jsfiddle.net/whnSs/
-//app.factory('items', function() {
-//	var items = ['joey'];
-//	var itemsService = {};
+// http://stackoverflow.com/questions/15666048/service-vs-provider-vs-factory    http://jsfiddle.net/pkozlowski_opensource/PxdSP/14/
+alert ('defining SinglePagePublisherService');
+app.factory('SinglePagePublisherService', function() {
+	alert ('in SinglePagePublisherService');
+	var itemsServiceData = {'key1':'val1'};
+	var itemsServiceFns = {};
+
+	itemsServiceFns.add0 = function(val, key) {
+		itemsServiceData['val'] = key;
+	};
+	itemsServiceFns.get0 = function() {
+		alert ('in get0');
+		return itemsServiceData;
+	};
+	return itemsServiceFns;
+});
+
+alert ('done defining SinglePagePublisherService');
+
+
+
+// original http://jsfiddle.net/b32je3u9/
 //
-//	itemsService.add = function(item) {
-//		items.push(item);
-//	};
-//	itemsService.list = function() {
-//		return items;
-//	};
+			//<div ng-controller="Ctrl1">
+			//	<h2>Ctrl1 - List</h2>
+			//	<ul>
+			//	<li ng-repeat="item in list1()">{{item}}</li>
+			//</ul>
+			//</div>
+			//<hr />
+			//<div ng-controller="Ctrl2">
+			//	<h2>Ctrl2 - Add</h2>
+			//	<form ng-submit="add2(newItem); newItem = 'xx';">
+			//	<input type="text" ng-model="newItem">
+			//	<br />
+			//	<input class="btn" type="submit">
+			//	</form>
+			//</div>
+
+			//var app = angular.module('myApp', []);
+            //
+			//app.factory('itemsz', function() {
+			//	var xdata = ['joey'];
+			//	var itemsService = {};
+            //
+			//	itemsService.add = function(item) {
+			//		xdata.push(item);
+			//	};
+			//	itemsService.listw = function() {
+			//		return xdata;
+			//	};
+			//	return itemsService;
+			//});
+            //
+			//function Ctrl1($scope,itemsz) {
+			//	alert ('in ctrl1');
+			//	$scope.list1 = itemsz.listw;
+			//}
+            //
+			//function Ctrl2($scope, itemsz) {
+			//	$scope.add2 = itemsz.add;
+			//}
+            //
+
+
+			//v2
+			//
+	//<div ng-controller="SinglePageGetCtrl1">
+	//	<h2>Ctrl1 - List</h2>
+	//	<ul>
+	//	<li ng-repeat="item in get1()">{{item}}</li>
+	//</ul>
+	//</div>
+	//<hr />
+	//<div ng-controller="SinglePageAddCtrl2">
+	//	<h2>Ctrl2 - Add</h2>
+	//	<form ng-submit="add2(newItem); newItem = 'xx';">
+	//	<input type="text" ng-model="newItem">
+	//	<br />
+	//	<input class="btn" type="submit">
+	//	</form>
+	//</div>
+	//	//
+	//		//
+	//var app = angular.module('myApp', []);
+    //
+	//app.factory('SinglePagePublisherService', function() {
+	//	var itemsServiceData = ['joey'];
+	//	var itemsServiceFns = {};
+    //
+	//	itemsServiceFns.add0 = function(item) {
+	//		itemsServiceData.push(item);
+	//	};
+	//	itemsServiceFns.get0 = function() {
+	//		return itemsServiceData;
+	//	};
+	//	return itemsServiceFns;
+	//});
+    //
+	//function SinglePageGetCtrl1($scope,SinglePagePublisherService) {
+	//	alert ('in ctrl1');
+	//	$scope.get1 = SinglePagePublisherService.get0;
+	//}
+    //
+	//function SinglePageAddCtrl2($scope, SinglePagePublisherService) {
+	//	$scope.add2 = SinglePagePublisherService.add0;
+	//}
+    //
+angular.module('ustodos').controller('SinglePageGetCtrl1',
+	['$scope',
+	'SinglePagePublisherService',
+	function($scope,
+			 SinglePagePublisherService
+	) {
+		alert ('in ctrl1');
+		var x  = SinglePagePublisherService.get0()['key1'];
+		alert ('in ctrl1 x:' + x);
+
+		$scope.get1 = SinglePagePublisherService.get0;
+
+	}]);
+
+
+//function SinglePageGetCtrl1($scope,SinglePagePublisherService) {
+//	alert ('in ctrl1');
+//	$scope.get1 = SinglePagePublisherService.get0;
+//}
+
+// v3 with hashmaps
+
+//<div ng-controller="GetCtrl1">
+//	<h2>Ctrl1 - List</h2>
+//	<ul>
+//	<li ng-repeat="item in get1()">{{item}}</li>
+//</ul>
+//</div>
+//<hr />
 //
-//	return itemsService;
+//<div ng-controller="AddCtrl2">
+//	<h2>Ctrl2 - Add</h2>
+//	<form ng-submit="add2(newPubKey, newPubValue); newPubValue = 'key';newPubValue = 'value';">
+//	<input type="text" ng-model="newPubKey">
+//	<input type="text" ng-model="newPubValue">
+//	<br />
+//	<input class="btn" type="submit">
+//	</form>
+//</div>
+//
+//var app = angular.module('myApp', []);
+//
+//app.factory('SinglePagePublisherService', function() {
+//	var itemsServiceData = {'joey':'pete'};
+//	var itemsServiceFns = {};
+//
+//	itemsServiceFns.add0 = function(newPubKey, newPubValue) {
+//		itemsServiceData[newPubKey] = newPubValue;
+//	};
+//	itemsServiceFns.get0 = function() {
+//		return itemsServiceData;
+//	};
+//	return itemsServiceFns;
 //});
-
-
+//
+//function GetCtrl1($scope,SinglePagePublisherService) {
+//	alert ('in ctrl1');
+//	$scope.get1 = SinglePagePublisherService.get0;
+//}
+//
+//function AddCtrl2($scope, SinglePagePublisherService) {
+//	$scope.add2 = SinglePagePublisherService.add0;
+//}
 
 
 
@@ -168,14 +327,20 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		'$sce', '$http','$filter',
 		'$state',
 		'Authentication', 'Ustodos', 'Commands',
-    function($scope, $window, $stateParams,
+		//'SinglePagePublisherService',
+      function($scope, $window, $stateParams,
 		 $location, $document, $rootScope,
 		 $sce, $http, $filter,
 		 $state,
-		 Authentication, Ustodos, Commands)
+		 Authentication, Ustodos, Commands
+		 //, SinglePagePublisherService
+		)
     {
 
 
+		alert ('in def');
+		$scope.modelDirty = true;
+		//SinglePagePublisherService.add2('modelDirty', true);
 		//$scope.processThis = function(s)
 		//{
 		//	//alert ('in here');
@@ -713,7 +878,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                     ed.on('keyup', function(e) {
 
-                        $scope.modelDirty = true;
+
+                        $scope.modelDirty = true; //hbkkk
+						//SinglePagePublisherService.add0('modelDirty', true);
 						$scope.$apply();
 
 
@@ -2521,8 +2688,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//if ($scope.mouseoverlock !== 'on') {
 					//$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));
 					$scope.setTextInShowingEditor($scope.ustodosFiltered[i].html, 'line 2254');
-					$scope.modelDirty = false;
-					//}
+					$scope.modelDirty = false; // hbkkk
+					//SinglePagePublisherService.add0('modelDirty', false);
+
+						//}
 				}
 			};
 
@@ -2946,6 +3115,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				{
 					//alert ('in here:' + $scope.modelDirty); // hbkk
 					$scope.modelDirty = !$scope.modelDirty ;
+					//SinglePagePublisherService.add0('modelDirty', $scope.modelDirty);
+
 				}
 
 				if (false) // green fade text
@@ -3530,7 +3701,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         //alert ('in callbackFromQuery post get callback');
 
                         $scope.setUstodosFiltered('caller2', $scope.ustodos);
-                        $scope.modelDirty = false;
+                        $scope.modelDirty = false; // hbkk
+						//SinglePagePublisherService.add0('modelDirty', $scope.modelDirty);
+
                         //alert ('set $scope.modelDirty = false2;')
                         $scope.setTextInShowingEditor($scope.searchedFor, 'line 3329');
 

@@ -1,5 +1,6 @@
 'use strict';
 
+//alert ('in Microphones controller');
 // Microphones controller
 angular.module('microphones').controller('MicrophonesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Microphones',
 	function($scope, $stateParams, $location, Authentication, Microphones) {

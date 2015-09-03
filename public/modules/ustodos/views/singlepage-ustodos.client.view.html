@@ -1,8 +1,17 @@
 <div ng-address-bar></div><br>
 
+
+
 <section class="WholePage"
 		 data-ng-controller="SinglepageUstodosController"
 		 ng-init="keyCount=0;ngInitTopLevel()">
+
+
+
+
+
+
+
 
 
 	<!--<div data-ng-include="'/modules/ustodos/views/singlepage-ustodos-top-part.client.view.html'"></div>-->
@@ -217,6 +226,27 @@
 			<!--<WORKS p ng-repeat="command in commands">{{command}}</p>-->
 
 			<button ng-click="testButton(-2)" title="testButton">TestButton</button>
+
+
+
+
+			<!--<div ng-controller="Ctrl1">-->
+				<!--<h2>Ctrl1 - List</h2>-->
+				<!--<ul>-->
+					<!--<li ng-repeat="item in list1()">{{item}}</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+			<!--<hr />-->
+			<!--<div ng-controller="Ctrl2">-->
+				<!--<h2>Ctrl2 - Add</h2>-->
+				<!--<form ng-submit="add(newItem); newItem = '';">-->
+					<!--<input type="text" ng-model="newItem">-->
+					<!--<br />-->
+					<!--<input class="btn" type="submit">-->
+				<!--</form>-->
+			<!--</div>-->
+
+
 
 
 			<!--<br><a ng-href="http://google.com/search?q={{this.searchedFor}}">http://google.com/search?q={{this.searchedFor}}</a>-->
@@ -435,6 +465,18 @@
 	<!--"f-->
 	<!--ng-bind-html="ustodos[$index].html"></span>f-->
 	</span>
+	Dirty[<span ng-bind='modelDirty' ></span>]
+	<!--<section class="navbar-fixed-bottom" style="background-color:pink"-->
+			 <!--data-ng-controller="FooterController"-->
+			 <!--ng-init="keyCount=0;ngInitTopLevel()">-->
+		<!--&lt;!&ndash;Dirty[<span ng-bind="singlePageStatesFactory['modelDirty']" ></span>]&ndash;&gt;-->
+		<!--Dirty[<span ng-bind='modelDirty' ></span>]-->
+
+		<!--footerhk-->
+	<!--</section>-->
+	<!--<div data-ng-include="'/modules/core/views/footer.client.view.html'" class="navbar-fixed-bottom"></div >-->
+
+
 </section>
 
 
