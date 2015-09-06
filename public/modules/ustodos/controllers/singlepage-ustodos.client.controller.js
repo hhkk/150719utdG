@@ -132,10 +132,10 @@ var app = angular.module('ustodos');      // worked before ui.router was added b
 //alert ('defining SinglePagePublisherService');
 app.factory('SinglePagePublisherService', function() {
 	//alert ('in SinglePagePublisherService');
-	var itemsServiceData = {'key1':'val1'};
+	var itemsServiceData = {};
 	var itemsServiceFns = {};
 
-	itemsServiceFns.set0 = function(val, key) {
+ 	itemsServiceFns.set0 = function(val, key) {
 		//
 		// alert ('in set0 ' + val + ':' + key);
 		itemsServiceData[val] = key;
@@ -244,10 +244,6 @@ angular.module('ustodos').controller('SinglePageGetCtrl1',
 	function($scope,
 			 SinglePagePublisherService
 	) {
-		//alert ('in ctrl1');
-		var x  = SinglePagePublisherService.get0()['key1'];
-		//alert ('in ctrl1 x:' + x);
-
 		$scope.get1 = SinglePagePublisherService.get0;
 
 	}]);
@@ -444,7 +440,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
 
-            $scope.whichEditorShowing = $scope.ns.Input.INPUT_NONE_IS_IN_FOCUS;
+			SinglePagePublisherService.set0('whichEditorShowing', $scope.ns.Input.INPUT_NONE_IS_IN_FOCUS)
 
             //angularModule.controller('UstodosController', ['$scope', '$stateParams', '$locationProvider', '$rootScope', '$sce',
             //    'Authentication', 'Ustodos',
@@ -1768,8 +1764,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                 }
                 //O.o ('========== $scope.state_inSelectedMode set to -1');
-                $scope.state_inSelectedMode = -1;
-                document.getElementById('ustodorow'+index).blur();
+				SinglePagePublisherService.set0('state_inSelectedMode', -1)
+
+				document.getElementById('ustodorow'+index).blur();
 
                 if (!found) {
                     alert ('not found!');
@@ -2033,7 +2030,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.toggleVisibilityTo0 = function() {
 				//alert ('in toggleVisibilityTo0');
                 // couldn't figure out mce blur so use this
-                $scope.whichEditorShowing = $scope.ns.Input.INPUT_0_TEXT;
+				SinglePagePublisherService.set0('whichEditorShowing', $scope.ns.Input.INPUT_0_TEXT)
                 $scope.focusOnId(arrIds[0]);
                 if ($scope.whichInputIsInFocus === $scope.ns.Input.INPUT_3_MCE)
                     $scope.prop3mce();
@@ -2048,7 +2045,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.toggleVisibilityTo1 = function() {
 				//alert ('in toggleVisibilityTo1');
                 // couldn't figure out mce blur so use this
-                $scope.whichEditorShowing = $scope.ns.Input.INPUT_1_MEDIUM;
+				SinglePagePublisherService.set0('whichEditorShowing', $scope.ns.Input.INPUT_1_MEDIUM)
                 //alert ('in toggleVisibilityTo1 Medium');
                 if ($scope.whichInputIsInFocus === $scope.ns.Input.INPUT_3_MCE)
                     $scope.prop3mce();
@@ -2081,7 +2078,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //
             $scope.toggleVisibilityTo3 = function(callerId) {
 				//alert ('in toggleVisibilityTo3');
-                $scope.whichEditorShowing = $scope.ns.Input.INPUT_3_MCE;
+				SinglePagePublisherService.set0('whichEditorShowing', $scope.ns.Input.INPUT_3_MCE)
                 //alert ('in toggleVisibilityTo3 MCE callerId [' + callerId + ']');
                 document.getElementById(arrIds[0]).style.display = 'none';
                 document.getElementById(arrIds[1]).style.display = 'none';
@@ -2665,7 +2662,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //
             // Handler
             $scope.stateOKtoOverwrite = function() {
-                return ($scope.state_inSelectedMode === -1);
+                return (SinglePagePublisherService.get0('state_inSelectedMode') === -1);
             };
 
             $scope.eventMouseoverCurrentSearch = function() {
@@ -2686,7 +2683,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//alert ('$scope.getTextHtmlAndValueInShowingEditor() ['+ $scope.getTextHtmlAndValueInShowingEditor().xText + ']');
 				if (
 					// if not selected, if not
-					($scope.state_inSelectedMode === -1 && !$scope.modelDirty ) ||
+					(SinglePagePublisherService.get0('state_inSelectedMode') === -1 && !$scope.modelDirty ) ||
 						$scope.isCurrentEditorEmpty())
 					{
 					//if ($scope.mouseoverlock !== 'on') {
@@ -3438,13 +3435,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             }; // checkboxclickedToggleAll
 
             //O.o ('========== $scope.state_inSelectedMode set to -1');
-            $scope.state_inSelectedMode = -1;
+			SinglePagePublisherService.set0('state_inSelectedMode', -1)
+
 
             $scope.checkBoxClickedSingle = function(j)
             {
                 //O.o ('========== $scope.state_inSelectedMode set to j:' + j);
-                $scope.state_inSelectedMode = j;
-                //alert ('in checkBoxClickedSingle j:' + j)  ;
+				SinglePagePublisherService.set0('state_inSelectedMode', i)
+
+				//alert ('in checkBoxClickedSingle j:' + j)  ;
                 //var elem = angular.element(document.querySelector('#hktablespan'));
 
                 //find('.classname'), assumes you already have the starting elem to search from
@@ -3643,8 +3642,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
                 O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
 
-                $scope.state_inSelectedMode = -1;
-                //$scope.setTextInShowingEditor(xValue);
+				SinglePagePublisherService.set0('state_inSelectedMode', -1)
+
+				//$scope.setTextInShowingEditor(xValue);
 
                 //alert (' =========================== in processcommand callerId [' +
                 //callerId + '] xValue' + '[' + xValue + ']' );
@@ -4081,7 +4081,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             $scope.hkngfocustest = function(index) {
                 //O.o('================ from hkngfocustest:' + index);
-                $scope.state_inSelectedMode = index;
+				SinglePagePublisherService.set0('state_inSelectedMode', index)
+
             };
 
 

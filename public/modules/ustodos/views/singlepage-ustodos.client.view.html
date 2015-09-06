@@ -99,9 +99,6 @@
 		<!--<span ng-bind-html='$scope.lockMouseover'></span>-->
 
 		<!--DynamicSearch [<span ng-bind='dynamicSearch'></span>]-->
-		Selected [<span ng-bind="state_inSelectedMode"></span>]
-		WhichEditorShowing[<span ng-bind='whichEditorShowing'></span>]
-		Dirty[<span ng-bind='modelDirty' ></span>]
 
 		<!--<a ui-sref="HKTestSref2">ui-sref=HKTestSref2</a>-->
 
@@ -210,7 +207,7 @@
 
 			<!-- ========================= SECTION_FILTER ICON AND TEXTBOX ===================== -->
 			<img ng-src="/img/filterIcon2.jpg" class="per-row-icons-trashimage"
-				 alt="{{image.name}}"  title='Restrict within search result'
+				 alt="{{image.name}}"  title='Filter within search results below'
 				 xxxxng-mouseover="this.filterToLinksOnly ()"
 				 xxng-click="this.filterToLinksOnly ()"
 					>
@@ -465,7 +462,6 @@
 	<!--"f-->
 	<!--ng-bind-html="ustodos[$index].html"></span>f-->
 	</span>
-	Dirty[<span ng-bind='modelDirty' ></span>]
 	<!--<section class="navbar-fixed-bottom" style="background-color:pink"-->
 			 <!--data-ng-controller="FooterController"-->
 			 <!--ng-init="keyCount=0;ngInitTopLevel()">-->

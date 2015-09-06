@@ -2,8 +2,12 @@
 		 data-ng-controller="SinglePageGetCtrl1"
 		 ng-init="keyCount=0;ngInitTopLevel()">
 	<!--Dirty[<span ng-bind="singlePageStatesFactory['modelDirty']" ></span>]-->
-	Key1 [<span ng-bind="get1()['key1']" ></span>]
 	modelDirty[<span ng-bind="get1()['modelDirty']" ></span>]
+	whichEditorShowing[<span ng-bind="get1()['whichEditorShowing']" ></span>]
+	Selected [<span ng-bind="get1()['state_inSelectedMode']"></span>]
+	&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_modelmodelCheckboxCtrlEnterToSave' ng-model=reloadWarning />reloadWarn
+
+
 	<!--ccccccccccccccccccccccGetCtrlDirty[<span ng-bind="$scope.get1('modelDirty')" ></span>]-->
 
 	footerhk
