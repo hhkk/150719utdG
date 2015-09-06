@@ -136,7 +136,8 @@ app.factory('SinglePagePublisherService', function() {
 	var itemsServiceFns = {};
 
 	itemsServiceFns.set0 = function(val, key) {
-		//alert ('in set0 ' + val + ':' + key);
+		//
+		// alert ('in set0 ' + val + ':' + key);
 		itemsServiceData[val] = key;
 	};
 	itemsServiceFns.get0 = function() {
