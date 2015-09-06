@@ -6,13 +6,13 @@
 //    function($scope, $stateParams, $location, $document, $rootScope, $sce, Authentication, Ustodos) {
 
 
-angular.module('core').controller('HeaderController', ['$scope', '$window', '$location', 'Authentication', 'Menus',
-	function($scope, $window, $location, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', '$window', '$location', 'Authentication', 'Menus','SppSvc',
+	function($scope, $window, $location, Authentication, Menus, SppSvc) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
 
-        //alert ('defining sayhi');
+        //alert ('defining HeaderController');
 
         $scope.eventClickedTheAnimals = function() {
             //alert ('in eventClickedTheAnimals');

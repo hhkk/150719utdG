@@ -90,10 +90,19 @@
 			   title="Rich Editor (TinyMCE)"
 				/>
 
+		<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
+		<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
+
+
 		&nbsp;<input type="checkbox" title="Dynamic Search (as you type)" id='idcheckbox_dynammicSearch' ng-model=dynamicSearch  />LiveFilter
 		&nbsp;<input type="checkbox" title="Update search results display after a write/save" id='idcheckbox_modelCheckboxUpdateOnWrite' ng-model=modelCheckboxUpdateOnWrite  />UpdateOnWrite
 		&nbsp;<input type="checkbox" title="if checked, control+enter submits a command while enter is just a line feed (allows multiline record entries)" id='idcheckbox_modelCheckboxCtrlEnterToSave' ng-model=modelCheckboxCtrlEnterToSave  />CtrlEnterToSave
-		&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_modelmodelCheckboxCtrlEnterToSave' ng-model=reloadWarning />reloadWarn
+		&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_reloadWarning' ng-model=reloadWarning />reloadWarn
+
+		<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">
+		<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">
+
+
 
 		<!--xx&nbsp;<span ng-model=$scope.lockMouseover> </span>yy-->
 		<!--<span ng-bind-html='$scope.lockMouseover'></span>-->

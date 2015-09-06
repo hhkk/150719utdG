@@ -1,11 +1,19 @@
 <section class="footer" style="background-color:pink"
-		 data-ng-controller="SinglePageGetCtrl1"
+		 data-ng-controller="FooterController"
 		 ng-init="keyCount=0;ngInitTopLevel()">
 	<!--Dirty[<span ng-bind="singlePageStatesFactory['modelDirty']" ></span>]-->
-	modelDirty[<span ng-bind="get1()['modelDirty']" ></span>]
-	whichEditorShowing[<span ng-bind="get1()['whichEditorShowing']" ></span>]
-	Selected [<span ng-bind="get1()['state_inSelectedMode']"></span>]
-	&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_modelmodelCheckboxCtrlEnterToSave' ng-model=reloadWarning />reloadWarn
+	<!--<span src='/img/input2.png' data-ng-show="SppSvc.getModelDirty()">-->
+		<!--Editing-->
+	<!--</span>-->
+
+	<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">
+	<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">
+
+
+
+	whichEditorShowing[<span ng-bind="SppSvc.getWhichEditorShowing()" ></span>]
+	Selected [<span ng-bind="SppSvc.getSelectedItem()"></span>]
+	&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_reloadWarning' ng-model=reloadWarning />reloadWarn
 
 
 	<!--ccccccccccccccccccccccGetCtrlDirty[<span ng-bind="$scope.get1('modelDirty')" ></span>]-->
@@ -15,7 +23,6 @@
 
 <!--<section class="footer" style="background-color:pink"-->
 	 <!--data-ng-controller='FooterControllerx'-->
-		<!-->-->
 
 
 <!--</section>-->

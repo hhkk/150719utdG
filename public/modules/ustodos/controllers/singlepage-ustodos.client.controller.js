@@ -1,6 +1,5 @@
 'use strict';
 
-
 //var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 //var O = require('C:/utd/150719utdG/public/util/O.js');
 //var UtilClass = null;
@@ -57,7 +56,6 @@ var resolveFinalCommandBetweenUrlAndInputBox = function(commandFromInputBox, com
     console.log ('commandFinal:'+commandFinal);
     return commandFinal;
 };
-
 
 
 // Ustodos controller
@@ -129,185 +127,83 @@ var app = angular.module('ustodos');      // worked before ui.router was added b
 //var app = angular.module('myApp', []);
 
 // http://stackoverflow.com/questions/15666048/service-vs-provider-vs-factory    http://jsfiddle.net/pkozlowski_opensource/PxdSP/14/
-//alert ('defining SinglePagePublisherService');
-app.factory('SinglePagePublisherService', function() {
-	//alert ('in SinglePagePublisherService');
-	var itemsServiceData = {};
+//alert ('defining SppSvc');
+// http://stackoverflow.com/questions/21919962/angular-share-data-between-controllers
+
+//alert ('defining SppSvc');
+
+app.factory('SppSvc', function() {
+	//alert ('in SppSvc');
+	var sppData = {};
 	var itemsServiceFns = {};
 
- 	itemsServiceFns.set0 = function(val, key) {
-		//
-		// alert ('in set0 ' + val + ':' + key);
-		itemsServiceData[val] = key;
+ 	//itemsServiceFns.setSppData = function(sppData1) {
+	//	//
+	//	// alert ('in set0 ' + val + ':' + key);
+	//	sppData2 = sppData1;
+	//};
+ 	//itemsServiceFns.set0 = function(val, key) {
+	//	//
+	//	// alert ('in set0 ' + val + ':' + key);
+	//	data[val] = key;
+    //
+	//};
+	//itemsServiceFns.get0 = function() {
+	//	//alert ('in get0');
+	//	return data;
+	//};
+
+ 	itemsServiceFns.setModelDirty = function(val) {
+		sppData['modelDirty'] = val;
 	};
-	itemsServiceFns.get0 = function() {
-		//alert ('in get0');
-		return itemsServiceData;
+ 	itemsServiceFns.getModelDirty = function() {
+		return sppData['modelDirty'];
 	};
+
+ 	itemsServiceFns.setWhichEditorShowing = function(val) {
+		sppData['whichEditorShowing'] = val;
+	};
+ 	itemsServiceFns.getWhichEditorShowing = function() {
+		return sppData['whichEditorShowing'];
+	};
+
+ 	itemsServiceFns.setSelectedItem = function(val) {
+		sppData['selectedItem'] = val;
+	};
+ 	itemsServiceFns.getSelectedItem = function() {
+		return sppData['selectedItem'];
+	};
+
 	return itemsServiceFns;
 });
 
-//alert ('done defining SinglePagePublisherService');
+//alert ('done defining SppSvc');
 
 
 
-// original http://jsfiddle.net/b32je3u9/
+//angular.module('ustodos').controller('HeaderController',
+//	['$scope',
+//	'SppSvc',
+//	function($scope,
+//			 SppSvc
+//	) {
+//		$scope.SppSvc = SppSvc;
+//		//$scope.gblx = gblx;
 //
-			//<div ng-controller="Ctrl1">
-			//	<h2>Ctrl1 - List</h2>
-			//	<ul>
-			//	<li ng-repeat="item in list1()">{{item}}</li>
-			//</ul>
-			//</div>
-			//<hr />
-			//<div ng-controller="Ctrl2">
-			//	<h2>Ctrl2 - Add</h2>
-			//	<form ng-submit="add2(newItem); newItem = 'xx';">
-			//	<input type="text" ng-model="newItem">
-			//	<br />
-			//	<input class="btn" type="submit">
-			//	</form>
-			//</div>
+//	}]);
 
-			//var app = angular.module('myApp', []);
-            //
-			//app.factory('itemsz', function() {
-			//	var xdata = ['joey'];
-			//	var itemsService = {};
-            //
-			//	itemsService.add = function(item) {
-			//		xdata.push(item);
-			//	};
-			//	itemsService.listw = function() {
-			//		return xdata;
-			//	};
-			//	return itemsService;
-			//});
-            //
-			//function Ctrl1($scope,itemsz) {
-			//	alert ('in ctrl1');
-			//	$scope.list1 = itemsz.listw;
-			//}
-            //
-			//function Ctrl2($scope, itemsz) {
-			//	$scope.add2 = itemsz.add;
-			//}
-            //
-
-
-			//v2
-			//
-	//<div ng-controller="SinglePageGetCtrl1">
-	//	<h2>Ctrl1 - List</h2>
-	//	<ul>
-	//	<li ng-repeat="item in get1()">{{item}}</li>
-	//</ul>
-	//</div>
-	//<hr />
-	//<div ng-controller="SinglePageAddCtrl2">
-	//	<h2>Ctrl2 - Add</h2>
-	//	<form ng-submit="add2(newItem); newItem = 'xx';">
-	//	<input type="text" ng-model="newItem">
-	//	<br />
-	//	<input class="btn" type="submit">
-	//	</form>
-	//</div>
-	//	//
-	//		//
-	//var app = angular.module('myApp', []);
-    //
-	//app.factory('SinglePagePublisherService', function() {
-	//	var itemsServiceData = ['joey'];
-	//	var itemsServiceFns = {};
-    //
-	//	itemsServiceFns.add0 = function(item) {
-	//		itemsServiceData.push(item);
-	//	};
-	//	itemsServiceFns.get0 = function() {
-	//		return itemsServiceData;
-	//	};
-	//	return itemsServiceFns;
-	//});
-    //
-	//function SinglePageGetCtrl1($scope,SinglePagePublisherService) {
-	//	alert ('in ctrl1');
-	//	$scope.get1 = SinglePagePublisherService.get0;
-	//}
-    //
-	//function SinglePageAddCtrl2($scope, SinglePagePublisherService) {
-	//	$scope.add2 = SinglePagePublisherService.add0;
-	//}
-    //
-angular.module('ustodos').controller('SinglePageGetCtrl1',
+angular.module('ustodos').controller('FooterController',
 	['$scope',
-	'SinglePagePublisherService',
+	'SppSvc',
 	function($scope,
-			 SinglePagePublisherService
+			 SppSvc
 	) {
-		$scope.get1 = SinglePagePublisherService.get0;
+		//alert ('defining FooterController');
+		$scope.SppSvc = SppSvc;
+		//$scope.gblx = gblx;
 
 	}]);
 
-
-//function SinglePageGetCtrl1($scope,SinglePagePublisherService) {
-//	alert ('in ctrl1');
-//	$scope.get1 = SinglePagePublisherService.get0;
-//}
-
-// v3 with hashmaps
-
-//<div ng-controller="GetCtrl1">
-//	<h2>Ctrl1 - List</h2>
-//	<ul>
-//	<li ng-repeat="item in get1()">{{item}}</li>
-//</ul>
-//</div>
-//<hr />
-//
-//<div ng-controller="AddCtrl2">
-//	<h2>Ctrl2 - Add</h2>
-//	<form ng-submit="add2(newPubKey, newPubValue); newPubValue = 'key';newPubValue = 'value';">
-//	<input type="text" ng-model="newPubKey">
-//	<input type="text" ng-model="newPubValue">
-//	<br />
-//	<input class="btn" type="submit">
-//	</form>
-//</div>
-//
-//var app = angular.module('myApp', []);
-//
-//app.factory('SinglePagePublisherService', function() {
-//	var itemsServiceData = {'joey':'pete'};
-//	var itemsServiceFns = {};
-//
-//	itemsServiceFns.add0 = function(newPubKey, newPubValue) {
-//		itemsServiceData[newPubKey] = newPubValue;
-//	};
-//	itemsServiceFns.get0 = function() {
-//		return itemsServiceData;
-//	};
-//	return itemsServiceFns;
-//});
-//
-//function GetCtrl1($scope,SinglePagePublisherService) {
-//	alert ('in ctrl1');
-//	$scope.get1 = SinglePagePublisherService.get0;
-//}
-//
-//function AddCtrl2($scope, SinglePagePublisherService) {
-//	$scope.add2 = SinglePagePublisherService.add0;
-//}
-
-
-
-//http://stackoverflow.com/questions/23045083/how-to-inject-modules-properly-in-angularjs
-//angular.module('ustodos', [])
-	//.factory('ustodos', function($ngSanitize){});
-
-//app.config(['$ngSanitize', function($ngSanitize) {
-//	// Configure existing providers
-//	//$locationProvider.hashPrefix('!');
-//}]);
 
 var callbackCommand = function(callbackResult) {
     O.o  ('in callbackCommand');
@@ -325,20 +221,20 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		'$sce', '$http','$filter',
 		'$state',
 		'Authentication', 'Ustodos', 'Commands',
-		'SinglePagePublisherService',
+		'SppSvc',
       function($scope, $window, $stateParams,
 		 $location, $document, $rootScope,
 		 $sce, $http, $filter,
 		 $state,
 		 Authentication, Ustodos, Commands
-		 , SinglePagePublisherService
+		 , SppSvc
 		)
     {
 
-
+		$scope.SppSvc = SppSvc;
 		//alert ('in def');
-		$scope.modelDirty = true;
-		SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
+		SppSvc.setModelDirty (true);
+
 		//$scope.processThis = function(s)
 		//{
 		//	//alert ('in here');
@@ -392,8 +288,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.modelCheckboxCtrlEnterToSave = false;
             $scope.reloadWarning = false;
             $scope.q = null; // current query
-					//$scope.modelDirty = false;
-            //alert ('set $scope.modelDirty = false;')
+            //alert ('set gblx.modelDirty  = false;')
 
             //.----------------. .-----------------..----------------. .----------------.
             //| .--------------. | .--------------. | .--------------. | .--------------. |
@@ -440,7 +335,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
 
-			SinglePagePublisherService.set0('whichEditorShowing', $scope.ns.Input.INPUT_NONE_IS_IN_FOCUS)
+			SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_NONE_IS_IN_FOCUS);
 
             //angularModule.controller('UstodosController', ['$scope', '$stateParams', '$locationProvider', '$rootScope', '$sce',
             //    'Authentication', 'Ustodos',
@@ -877,10 +772,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     ed.on('keyup', function(e) {
 
 
-                        $scope.modelDirty = true; //hbkkk
-						SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
+						SppSvc.setModelDirty (true);
 
-						//SinglePagePublisherService.add0('modelDirty', true);
 						$scope.$apply();
 
 
@@ -1763,8 +1656,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     }
 
                 }
-                //O.o ('========== $scope.state_inSelectedMode set to -1');
-				SinglePagePublisherService.set0('state_inSelectedMode', -1)
+                //O.o ('========== $scope.state_delectedItem set to -1');
+				SppSvc.setSelectedItem(-1);
 
 				document.getElementById('ustodorow'+index).blur();
 
@@ -2030,7 +1923,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.toggleVisibilityTo0 = function() {
 				//alert ('in toggleVisibilityTo0');
                 // couldn't figure out mce blur so use this
-				SinglePagePublisherService.set0('whichEditorShowing', $scope.ns.Input.INPUT_0_TEXT)
+				SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_0_TEXT);
                 $scope.focusOnId(arrIds[0]);
                 if ($scope.whichInputIsInFocus === $scope.ns.Input.INPUT_3_MCE)
                     $scope.prop3mce();
@@ -2045,7 +1938,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.toggleVisibilityTo1 = function() {
 				//alert ('in toggleVisibilityTo1');
                 // couldn't figure out mce blur so use this
-				SinglePagePublisherService.set0('whichEditorShowing', $scope.ns.Input.INPUT_1_MEDIUM)
+				SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_1_MEDIUM);
                 //alert ('in toggleVisibilityTo1 Medium');
                 if ($scope.whichInputIsInFocus === $scope.ns.Input.INPUT_3_MCE)
                     $scope.prop3mce();
@@ -2078,7 +1971,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //
             $scope.toggleVisibilityTo3 = function(callerId) {
 				//alert ('in toggleVisibilityTo3');
-				SinglePagePublisherService.set0('whichEditorShowing', $scope.ns.Input.INPUT_3_MCE)
+				SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_3_MCE);
                 //alert ('in toggleVisibilityTo3 MCE callerId [' + callerId + ']');
                 document.getElementById(arrIds[0]).style.display = 'none';
                 document.getElementById(arrIds[1]).style.display = 'none';
@@ -2662,7 +2555,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //
             // Handler
             $scope.stateOKtoOverwrite = function() {
-                return (SinglePagePublisherService.get0('state_inSelectedMode') === -1);
+                return (SppSvc.getSelectedItem() === -1);
             };
 
             $scope.eventMouseoverCurrentSearch = function() {
@@ -2683,18 +2576,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//alert ('$scope.getTextHtmlAndValueInShowingEditor() ['+ $scope.getTextHtmlAndValueInShowingEditor().xText + ']');
 				if (
 					// if not selected, if not
-					(SinglePagePublisherService.get0('state_inSelectedMode') === -1 && !$scope.modelDirty ) ||
+					(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty()
+				) ||
 						$scope.isCurrentEditorEmpty())
 					{
 					//if ($scope.mouseoverlock !== 'on') {
 					//$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));
 					$scope.setTextInShowingEditor($scope.ustodosFiltered[i].html, 'line 2254');
-					$scope.modelDirty = false; // hbkkk
-					SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
 
-						//SinglePagePublisherService.add0('modelDirty', false);
-
-						//}
+					SppSvc.setModelDirty (false);
 				}
 			};
 
@@ -3116,12 +3006,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				if (true)
 				{
-					//alert ('in here:' + $scope.modelDirty); // hbkk
-					$scope.modelDirty = !$scope.modelDirty ;
-					SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
-
-					//SinglePagePublisherService.add0('modelDirty', $scope.modelDirty);
-
+					SppSvc.setModelDirty (!SppSvc.getModelDirty());
 				}
 
 				if (false) // green fade text
@@ -3434,14 +3319,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             }; // checkboxclickedToggleAll
 
-            //O.o ('========== $scope.state_inSelectedMode set to -1');
-			SinglePagePublisherService.set0('state_inSelectedMode', -1)
-
+			SppSvc.setSelectedItem(-1);
 
             $scope.checkBoxClickedSingle = function(j)
             {
-                //O.o ('========== $scope.state_inSelectedMode set to j:' + j);
-				SinglePagePublisherService.set0('state_inSelectedMode', i)
+                //O.o ('========== $scope.state_delectedItem set to j:' + j);
+				SppSvc.setSelectedItem(i);
 
 				//alert ('in checkBoxClickedSingle j:' + j)  ;
                 //var elem = angular.element(document.querySelector('#hktablespan'));
@@ -3642,7 +3525,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
                 O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
 
-				SinglePagePublisherService.set0('state_inSelectedMode', -1)
+				SppSvc.setSelectedItem(-1);
 
 				//$scope.setTextInShowingEditor(xValue);
 
@@ -3709,11 +3592,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         //alert ('in callbackFromQuery post get callback');
 
                         $scope.setUstodosFiltered('caller2', $scope.ustodos);
-                        $scope.modelDirty = false; // hbkk
-						SinglePagePublisherService.set0('modelDirty', $scope.modelDirty);
-						//SinglePagePublisherService.add0('modelDirty', $scope.modelDirty);
-
-                        //alert ('set $scope.modelDirty = false2;')
+						SppSvc.setModelDirty(false);
+                        //alert ('set gblx.modelDirty  = false2;')
                         $scope.setTextInShowingEditor($scope.searchedFor, 'line 3329');
 
 
@@ -4081,7 +3961,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             $scope.hkngfocustest = function(index) {
                 //O.o('================ from hkngfocustest:' + index);
-				SinglePagePublisherService.set0('state_inSelectedMode', index)
+				SppSvc.setSelectedItem(index);
 
             };
 
@@ -4133,8 +4013,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             window.onbeforeunload = function () // reload
             {
-                if ($scope.reloadWarning)
-                    return 'Are you sure?';
+                //if ($scope.reloadWarning)
+                //    return 'Are you sure?';
+                if (SppSvc.getModelDirty())
+                    return 'Exit?  A record changed.  Exiting will lose it.';
             };
 
         } catch (e) {
