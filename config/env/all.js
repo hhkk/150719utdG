@@ -62,14 +62,15 @@ module.exports = {
 		js: [
 			'public/config.js',
 			'public/application.js',
-			'public/tinymce.js',
 			'public/modules/*/*.js',
 			'public/modules/*/*[!tests]*/*.js',
-            'public/lib/jquery/dist/jquery.js', // hbkkk
+            //'public/lib/jquery/dist/jquery.js', // hbkkk
+
             // putting stuff here in all.js gets it loaded on the client even w/o html load of js
             // or you can put it in layout view alone
             // will not be run on server from here
-            'public/tinymce.js'
+            //'public/tinymce.js'
+            //'public/lib/tinymce4/tinymce.min.js'
 		],
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',

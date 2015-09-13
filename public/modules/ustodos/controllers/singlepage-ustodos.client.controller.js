@@ -28,7 +28,7 @@ var UtilErrorEmitter = UtilErrorEmitter;
 //    O.o ('got callback from unirequest get');
 //}
 //var unirequest = unirest.get('/ustodos');
-//unirequest.timeout(5000);
+	//unirequest.timeout(5000);
 //unirequest.end(fn);
 
 
@@ -234,6 +234,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		$scope.SppSvc = SppSvc;
 		//alert ('in def');
 		SppSvc.setModelDirty (true);
+
+		addEventListener('load', load, false);
+		function load(){
+			alert('in load');
+
+			var el = document.getElementById("foo");
+			alert(el);
+		}
+
 
 		//$scope.processThis = function(s)
 		//{
@@ -3001,10 +3010,33 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             $scope.testButton= function(s)
             {
+
+
                 //alert ('in keyup $scope.getTextHtmlAndValueInShowingEditor()'+$scope.getTextHtmlAndValueInShowingEditor());
                 //CKEDITOR.instances.editor.destroy();
 
+				//alert ('in testbutton');
 				if (true)
+				{
+					document.getElementById('imageIdRedPEncil').style.visibility='visible';
+//alert('pre:' + angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src);
+					//angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src = '/img/ClearText.png';
+					//alert('post:' + angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src);
+
+					//alert('pre:' + document.getElementById( 'imageIdRedPEncilbnw' ).src);
+					//alert('post:' + document.getElementById( 'imageIdRedPEncilbnw' ).src);
+
+					//angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).width = '15';
+//					alert ('onload - set width to:'+angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).width);
+					//alert ('onload - set width to:'+document.getElementById('imageIdRedPEncilbnw').width);
+					//alert ('onload - set style.width to:'+document.getElementById('imageIdRedPEncilbnw').style.width);
+					//document.getElementById('imageIdRedPEncilbnw').width = 300;
+					//document.getElementById('imageIdRedPEncil').style.visibility='visible';
+					//document.getElementById( 'imageIdRedPEncilbnw' ).src = '/img/ClearText.png';
+					//document.getElementById( 'imageIdRedPEncil' ).src = '/img/ClearText.png';
+
+				}
+				if (false)
 				{
 					SppSvc.setModelDirty (!SppSvc.getModelDirty());
 				}
@@ -3521,9 +3553,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml, xValue)
             {
                 //alert ('in processCommand caller [' + enumProcessCommandCaller + ']')
-                O.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
-                O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
-                O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
+                //O.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
+                //O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
+                //O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
 
 				SppSvc.setSelectedItem(-1);
 
@@ -4201,14 +4233,35 @@ angular.module('ustodos')
         };
     });
 
-//window.onload = function()
-//{
-//alert ('onload ');
+window.onload = function()
+{
+	//var x = document.getElementById('imageIdRedPEncilbnw');
+	try {
+		//alert('in window.onload ');
+
+		//var x = angular.element('imageIdRedPEncilbnw');
+
+		//angular.element( document.querySelector( '#imageIdRedPEncil' ) ).src = '/img/ClearText.png';
+		//angular.element( document.querySelector( '#imageIdRedPEncilbnwxxx' ) ).width = '15';
+		//alert ('xxsonload - set width to:'+angular.element( document.querySelector( '#imageIdRedPEncilbnwxxx' ) ).width);
+		//alert ('yyyonload - set width to:'+angular.element( document.querySelector( '#imageIdRedPEncilbnwxxx' ) ).style.width );
+		//angular.element( document.querySelector( '#imageIdRedPEncilbnwxxx' ) ).style.color = 'visible';
+		//document.getElementById('imageIdRedPEncilbnw').width = 300;
+		//document.getElementById('imageIdRedPEncil').style.visibility='visible';
+		//document.getElementById('imageIdRedPEncil').style.visibility='visible';
+		//angular.element( document.querySelector( '#imageIdRedPEncil' ) ).style.visibility='visible';
+
+	}
+	catch(err)
+	{
+		alert ('in error catcher');
+		UtilErrorEmitter.emitError('in onload error', err);
+	}
+
 //CKEDITOR.replace( 'editor1' );
 //CKEDITOR.instances.editor1.on('blur', function() {
 //    alert('onblur fired');
-//});
-//};
+};
 
 //alert ('done onload');
 

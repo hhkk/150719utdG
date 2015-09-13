@@ -99,8 +99,13 @@
 		&nbsp;<input type="checkbox" title="if checked, control+enter submits a command while enter is just a line feed (allows multiline record entries)" id='idcheckbox_modelCheckboxCtrlEnterToSave' ng-model=modelCheckboxCtrlEnterToSave  />CtrlEnterToSave
 		&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_reloadWarning' ng-model=reloadWarning />reloadWarn
 
-		<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">
-		<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">
+		<img id='imageIdRedPEncilbnw' src='/img/EditPencilBnW.png' xxstyle="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">
+		<img id='imageIdRedPEncil'    src='/img/EditPencilRed.png' style="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">
+
+	<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
+	<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
+		<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
+		<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
 
 
 
@@ -481,7 +486,29 @@
 	<!--</section>-->
 	<!--<div data-ng-include="'/modules/core/views/footer.client.view.html'" class="navbar-fixed-bottom"></div >-->
 
+	<script>
 
+		$(document).ready(function() {
+			//alert('in (document).ready');
+
+			//document.getElementById('imageIdRedPEncilbnw').width= 1000;
+			//alert ("asdasda:"+document.getElementById('imageIdRedPEncil').style.visibility);
+			//document.getElementById('imageIdRedPEncil').style.visibility='visible';
+
+			//alert ('ttttttt in ready ['+ document.getElementById('imageIdRedPEncilbnw').width +']');
+			//document.getElementById('imageIdRedPEncilbnw').width = 200;
+//			document.getElementById('imageIdRedPEncil').style.visibility='visible';
+
+			setTimeout(function(){
+				//alert ('you stopped typing seconds are up - filter  !!');
+				document.getElementById('imageIdRedPEncil').style.visibility='visible';
+			}
+			,500); // millisecond timer
+
+
+
+		});
+	</script>
 </section>
 
 
