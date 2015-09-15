@@ -21,6 +21,7 @@ var UtilPrintObjects = UtilPrintObjects;
 
 var UtilNLB_bgFade = UtilNLB_bgFade;
 var UtilErrorEmitter = UtilErrorEmitter;
+var UtilClassz = UtilClassz;
 
 //var unirest = require('unirest');
 //var fn = function()
@@ -155,6 +156,27 @@ app.factory('SppSvc', function() {
 
  	itemsServiceFns.setModelDirty = function(val) {
 		sppData['modelDirty'] = val;
+		var elemId = 'mceu_57';
+		if (document.getElementById(elemId) !== null)
+		{
+			if (val)
+				document.getElementById(elemId).style.visibility='visible';
+			else
+				document.getElementById(elemId).style.visibility='hidden';
+
+		}
+		//if (document.getElementById('mceu_57-body').style.visibility==='hidden')
+		//	document.getElementById('mceu_57-body').style.visibility='visible';
+		//else
+		//	document.getElementById('mceu_57-body').style.visibility='hidden';
+		//
+		//
+		//{
+		//	if (document.getElementById(elemId).style.visibility==='visible')
+		//	//else
+		//	//	document.getElementById(elemId).style.visibility='hidden';
+		//}
+
 	};
  	itemsServiceFns.getModelDirty = function() {
 		return sppData['modelDirty'];
@@ -237,7 +259,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 		addEventListener('load', load, false);
 		function load(){
-			alert('in load');
+			alert('in angular addEventListener load');
 
 			var el = document.getElementById("foo");
 			alert(el);
@@ -730,7 +752,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 resize: 'both',
                 elements : 'idTinyMceTextArea',
                 //toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
-                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic mybutton',
+                toolbar1: 'mybuttonimage | mybuttonmenu | example | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic ',
                 //toolbar2: 'print preview media | forecolor backcolor emoticons',
                 ///toolbar2: 'bold italic',
                 ///these don't work": toolbar2: 'image ',
@@ -757,20 +779,76 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     //    ed.save();  // or whatever you want to do to save the editor content
                     //});
 
+					ed.on('init', function(e) {
+						//alert('init event' + e);
+						var elemId = 'mceu_57';
+						if (document.getElementById(elemId) !== null)
+						{
+							//alert ('1123123');
+						//	if (document.getElementById('mceu_57').style.visibility==='hidden')
+						//		document.getElementById('mceu_57').style.visibility='visible';
+						//	else
+						//		document.getElementById('mceu_57').style.visibility='hidden';
+							//if (document.getElementById(elemId).style.visibility==='visible')
+							//{
+								document.getElementById(elemId).style.visibility='hidden';
+								//alert ('1123123b');
+
+							//}
+							//else
+							//	document.getElementById(elemId).style.visibility='hidden';
+						}
 
 
+
+					});
+
+					//ed.onLoadContent.add(function(ed, o) {
+					//	// Output the element name
+					//	alert ('sdfsf');
+					//	//console.debug(o.element.nodeName);
+					//});
 
                     //    toolbar: 'mybutton',
                     //    setup: function(editor) {
-					ed.addButton('mybutton', {
-						type: 'menubutton',
-						text: 'My button',
+					ed.addButton('mybuttonimage', {
+						//type: 'menubutton',
+						//text: 'My button',
+						//id: 'mcebuttonid2',
+						//image: '/img/EditPencilBnW.png',
+						image: '/img/SaveIconBlue.png',
 						icon: false,
+						onclick: function() {ed.insertContent('Menu item 0')},
+						//menu: [
+						//	{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
+						//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
+						//]
+					});
+
+					ed.addButton('mybuttonmenu', {
+						type: 'menubutton',
+						//id: 'mcebuttonid1',
+						text: 'My button',
+						//id: 'mcebuttonid',
+						//image: '/img/EditPencilBnW.png',
+						icon: false,
+						//onclick: function() {ed.insertContent('Menu item 0')},
 						menu: [
 							{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
 							{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
 						]
+					}					);
+
+
+					ed.addButton('example', {
+						text: 'My title',
+						//image: '/img/EditPencilBnW.png',
+						onclick: function() {
+							ed.insertContent('Hello world!!');
+						}
 					});
+					//alert ('inasd');
+
                     //    }
 
 
@@ -866,6 +944,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //        console.log('blur event', e);
                 //    });
                 //}
+
             }); // tinymce init
 
 
@@ -3016,7 +3095,74 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //CKEDITOR.instances.editor.destroy();
 
 				//alert ('in testbutton');
-				if (true)
+
+				if (true )
+				{
+					//document.getElementById('mceu_34').style.visibility='hidden';
+					if (document.getElementById('mceu_57-body').style.visibility==='hidden')
+						document.getElementById('mceu_57-body').style.visibility='visible';
+					else
+						document.getElementById('mceu_57-body').style.visibility='hidden';
+
+					//if (document.getElementById('mceu_58-body').style.visibility==='hidden')
+					//	document.getElementById('mceu_58-body').style.visibility='visible';
+					//else
+					//	document.getElementById('mceu_58-body').style.visibility='hidden';
+
+					//if (document.getElementById('mceu_34').style.display==='none')
+					//	document.getElementById('mceu_34').style.display='inline'
+					//else
+					//	document.getElementById('mceu_34').style.display='none'
+                    //
+
+
+
+					//var ed = tinymce.activeEditor;
+					//ed.addButton('mybutton2', {
+					//	//type: 'menubutton',
+					//	//text: 'My button',
+					//	//id: 'mcebuttonid2',
+					//	image: '/img/EditPencil.png',
+					//	icon: false,
+					//	onclick: function() {ed.insertContent('Menu item 0')},
+					//	//menu: [
+					//	//	{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
+					//	//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
+					//	//]
+					//});
+                    //
+					//tinymce.execCommand("mceRepaint");
+					//alert ('done repaint');
+				}
+
+
+				if (false) {
+					var documentx = document.getElementById('mcebuttonid2').firstElementChild.firstElementChild;
+					alert ("UtilClassz.getClass(documentx):" + UtilClassz.getClass(documentx))
+					//var documentx = document.getElementById('mcebuttonid2').children.children;
+					//<div id="mcebuttonid2" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mcebuttonid2"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i></button></div>
+					//	<button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i></button>
+					//    <i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i>				}
+					//alert ("documentx" + documentx)
+					alert ("documentx.style:" + documentx.style);
+					alert ("documentx.style.height:" + documentx.style.height);
+					alert ("documentx.style.length:" + documentx.style.length);
+					alert ("documentx.style.item(0):" + documentx.style.item(0));
+					alert ("documentx.style.item(4):" + documentx.style.item(4));
+					alert ("documentx.style.getParentRule:" + documentx.style.getParentRule());
+					alert ("documentx.style.getLength():" + documentx.style.getLength());
+					alert ("documentx.style.getCssText():" + documentx.style.getCssText());
+					alert ("UtilClassz.getClass(documentx.style):" + UtilClassz.getClass(documentx.style))
+					//getProperties is not a function alert ("UtilClassz.getClass(documentx.style.getProperties()):" + documentx.style.getProperties())
+					alert ("UtilClassz.getClass(documentx.style.getOwnPropertyNames()):" + documentx.style.getOwnPropertyNames())
+					alert ("documentx.className:" + documentx.className)
+					alert ("documentx.style:" + documentx.style);
+					//alert ("documentx.style.background-image" + documentx.style.background-image);
+					alert ("documentx.style.cssText:" + documentx.style.cssText);
+					alert ("documentx.style.getPropertyValue(background-image):" + documentx.style.getPropertyValue('background-image'));
+					//alert ("documentx.style.getPropertyCSSValue(background-image)" + documentx.style.getPropertyCSSValue('background-image'));
+				}
+				if (false)
 				{
 					document.getElementById('imageIdRedPEncil').style.visibility='visible';
 //alert('pre:' + angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src);
@@ -4237,7 +4383,7 @@ window.onload = function()
 {
 	//var x = document.getElementById('imageIdRedPEncilbnw');
 	try {
-		//alert('in window.onload ');
+		//alert('in window.onload');
 
 		//var x = angular.element('imageIdRedPEncilbnw');
 

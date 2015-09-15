@@ -41,14 +41,13 @@ function getClassSub (desc, obj)
 
 
             var properties = [];
-            s = s + ('\r\n e typeof properties [' + typeof properties + ']');
 
             var i = 0;
             for (var key in obj) {
                 i++;
                 var hasOwnPropIndicator = obj.hasOwnProperty(key);
                 var obj_key = 'obj_key is really null';
-                s = s + '\r\nPROPHK get type of prop key keyname [' + key + '] : typeof obj[key]:'+ typeof obj[key];
+                s = s + '\r\nPROPHK['+i+'] get type of prop key keyname [' + key + '] : typeof obj[key]:'+ typeof obj[key];
                 if (obj[key] !== null && obj[key] !== undefined && typeof obj[key] !== 'object')
                     obj_key = obj[key].toString();
                 if (typeof obj[key] === 'object')
