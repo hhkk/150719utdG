@@ -593,6 +593,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.myCustomOnInit = function () // works
             {
                 //alert('myCustomOnInit from mce');
+				//this.getDoc().body.style.fontSize = '13px';
                 //tinyMCE.get('idTinyMceTextArea').setContent('<span>some1</span> html');
                 //tinymce.activeEditor.setContent('<span>some</span> html');
             };
@@ -780,6 +781,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     //});
 
 					ed.on('init', function(e) {
+						this.getDoc().body.style.fontSize = '20px';
 						//alert('init event' + e);
 						var elemId = 'mceu_57';
 						if (document.getElementById(elemId) !== null)
@@ -816,7 +818,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//text: 'My button',
 						//id: 'mcebuttonid2',
 						//image: '/img/EditPencilBnW.png',
-						image: '/img/SaveIconBlue.png',
+						image: '/img/SaveIconBlue	.png',
 						icon: false,
 						onclick: function() {ed.insertContent('Menu item 0')},
 						//menu: [
@@ -824,6 +826,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
 						//]
 					});
+
+
 
 					ed.addButton('mybuttonmenu', {
 						type: 'menubutton',

@@ -468,7 +468,7 @@ angular.module('ustodos').controller('UstodosController',
 
             $scope.myCustomOnInit = function () // works
             {
-                //alert('myCustomOnInit from mce');
+                alert('myCustomOnInit from mce2');
                 //tinyMCE.get('idTinyMceTextArea').setContent('<span>some1</span> html');
                 //tinymce.activeEditor.setContent('<span>some</span> html');
             };
