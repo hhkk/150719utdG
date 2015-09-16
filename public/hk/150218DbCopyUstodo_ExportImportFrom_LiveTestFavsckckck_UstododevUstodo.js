@@ -64,7 +64,8 @@ var Db = require('mongodb').Db,
 var dbNameSource = 'livetest';
 var collNameSource = 'favsckckck';
 //var writedbname = 'ustodo-dev';
-var writedbname = 'mean-dev';
+// var writedbname = 'mean-dev';
+var writedbname = 'ustodo-dev';
 var collNameWrite = 'ustodos';
 // QUERY 20 years of records
 //var queryRegExp = {text : new RegExp('hopper')};  // <=========================

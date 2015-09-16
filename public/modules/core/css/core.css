@@ -190,7 +190,8 @@ body.ng-cloak
 }
 .odd {
     /*http://www.w3schools.com/html/html_colors.asp*/
-    background-color:lightgrey;
+    /*background-color:#d0e0f5;*/
+    background-color:#e5f0f5;
 	overflow-x:hidden;
 
 	/*color: black;*/
