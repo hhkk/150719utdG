@@ -18,7 +18,11 @@ String.prototype.reverse = function () {
 };
 
 String.prototype.replaceLast = function (what, replacement) {
-    return this.reverse().replace(new RegExp(what.reverse()), replacement.reverse()).reverse();
+	return this.reverse().replace(new RegExp(what.reverse()), replacement.reverse()).reverse();
+};
+
+String.prototype.everythingAfterLast = function (allAfterLastOfThis) {
+	return i = this.substring(this.lastIndexOf(allAfterLastOfThis)+1);
 };
 
     /**

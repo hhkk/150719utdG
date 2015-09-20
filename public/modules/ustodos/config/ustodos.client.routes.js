@@ -3,6 +3,7 @@
 //Setting up route
 //O.a ('oneOfSeveral config routes');
 
+//alert('defining in ustodos.client.routes.js');
 angular.module('ustodos').config(['$stateProvider',
 	function($stateProvider) {
 		//alert ('in C:\utd\150719utdG\public\modules\ustodos\config\ustodos.client.routes.js');
@@ -29,6 +30,7 @@ angular.module('ustodos').config(['$stateProvider',
             // http://localhost:3000/#!/ustodos/findlist
             url: '/ustodos/',
             templateUrl: 'modules/ustodos/views/singlepage-ustodos.client.view.html'
+				//	templateUrl: '	modules/ustodos/views/findlist-ustodos.client.view.html'
         }).
 		//state('findlistUstodos2', {
 		//	// http://localhost:3000/#!

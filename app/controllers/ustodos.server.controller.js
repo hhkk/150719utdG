@@ -38,7 +38,7 @@ var callcountSaved = 0;
 // section_create_new not section_write
 exports.create = function(req, res)
 {
-	//O.o('33333333333333333333 in ustodos.server.controller.js: create');
+	O.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
 	var ustodo = new Ustodo(req.body);
 	ustodo.user = req.user;
 
@@ -174,6 +174,8 @@ exports.delete2 = function(req, res) {
 exports.ustodobulkdel = function(req, res) {
 	try
 	{
+		//O.o ('in 1 exports.ustodobulkdel ');
+		console.log ('in exports.ustodobulkdel');
 		//O.o('_______________________ in exports.ustodobulkdel  req.body.form:'+req.body.form);
 		//O.o('_______________________ in exports.ustodobulkdel  req.body.form.arrIdsToDelete:'+req.body.form.arrOidsToDelete);
 
@@ -202,11 +204,9 @@ exports.ustodobulkdel = function(req, res) {
 		 )*
 		 */
 
+		O.o("require_Development.db.uri:" + require_Development.db.uri.everythingAfterLast("/"));
 
-
-
-
-		var dbWrite = new Db(require_Development.dbname_ustodo, new Server('localhost', 27017), {safe: false});
+		var dbWrite = new Db(require_Development.db.uri.everythingAfterLast("/"), new Server('localhost', 27017), {safe: false});
 		dbWrite.open(function (err, dbWrite)
 		{
 			dbWrite.collection('ustodos', function (err, collRemove_ustodos)

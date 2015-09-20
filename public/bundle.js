@@ -152,6 +152,7 @@ var alertHistory = [];
 var callcount_o = 0;
 
 var passesFilters = function(s) {
+
     var filters = [];
     //  var filters = ['Two'];
     var passes = false;
@@ -170,6 +171,7 @@ var passesFilters = function(s) {
 
 var o = function (s)
 {
+	console.log ('in o.o');
     if (passesFilters(s))
     {
         var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s
@@ -1072,7 +1074,11 @@ String.prototype.reverse = function () {
 };
 
 String.prototype.replaceLast = function (what, replacement) {
-    return this.reverse().replace(new RegExp(what.reverse()), replacement.reverse()).reverse();
+	return this.reverse().replace(new RegExp(what.reverse()), replacement.reverse()).reverse();
+};
+
+String.prototype.everythingAfterLast = function (allAfterLastOfThis) {
+	return i = this.substring(this.lastIndexOf(allAfterLastOfThis)+1);
 };
 
     /**

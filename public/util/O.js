@@ -18,6 +18,7 @@ var alertHistory = [];
 var callcount_o = 0;
 
 var passesFilters = function(s) {
+
     var filters = [];
     //  var filters = ['Two'];
     var passes = false;
@@ -36,6 +37,7 @@ var passesFilters = function(s) {
 
 var o = function (s)
 {
+	console.log ('in o.o');
     if (passesFilters(s))
     {
         var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s

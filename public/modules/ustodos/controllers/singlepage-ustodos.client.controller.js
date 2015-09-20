@@ -257,12 +257,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		//alert ('in def');
 		SppSvc.setModelDirty (true);
 
-		addEventListener('load', load, false);
+		//works first time load only
+		// addEventListener('load', load, false);
 		function load(){
-			alert('in angular addEventListener load');
+			//alert('in angular addEventListener load');
 
-			var el = document.getElementById("foo");
-			alert(el);
+			//var el = document.getElementById("foo");
+			//alert(el);
 		}
 
 
@@ -3401,6 +3402,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 alert ('4 in ustodos.client.controller FIND');
                 //getProperties('props Ustodos:', Ustodos);
 
+				alert (' in scope.find');
                 //$scope.ustodos = Ustodos. query(); //original
                 //returns a single not array, causing a fail $scope.ustodos = Ustodos. query({ustodoId: '54929d5d1d3df384165f4fa2'});
                 // seems to work but returns all? $scope.ustodos = Ustodos. query({name: 'ggggg'});
@@ -3505,7 +3507,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             $scope.checkBoxClickedSingle = function(j)
             {
-                //O.o ('========== $scope.state_delectedItem set to j:' + j);
+                //alert ('========== $scope.state_delectedItem set to j:' + j);
 				SppSvc.setSelectedItem(i);
 
 				//alert ('in checkBoxClickedSingle j:' + j)  ;
@@ -3555,6 +3557,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             $scope.operationOnChecked_Delete = function()       // Delete Selected
             {
+				//alert('in operationOnChecked_Delete');
                 var x = $('.chkbox');
                 // check if all are checked so it's just a toggle
                 var arrOidsToDelete = [];
@@ -3563,7 +3566,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     if (document.getElementById('idcheckbox'+i).checked)
                     {
                         arrOidsToDelete.push($scope.ustodos[i]._id);
-                    }
+						//alert('in operationOnChecked_Delete');
+
+					}
                 }
                 //alert ('delete all:' + arrOidsToDelete);
 
@@ -3596,19 +3601,23 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
                     // 3333 works great in that it makes it to the method, and req data is not in the URL but in the
+                    //$http.post('/exports.ustodobulkdel ', {form:{key:'hkvalue', arrOidsToDelete:arrOidsToDelete}}).
                     $http.post('/ustodobulkdel', {form:{key:'hkvalue', arrOidsToDelete:arrOidsToDelete}}).
                         success(function(data) {
+							alert('success on return from exports.ustodobulkdel ');
                             //O.o ('data:' + data.toString());
-                            $scope.find();
+                            $scope.find(); // to $scope.find = function() {in
 
                         }). error(function(data, status, headers, config) {
                             // called asynchronously if an error occurs
                             // or server returns response with an error status.
-                            O.o ('data:' + data);
-                            O.o ('status:' + status);
-                            O.o ('headers:' + headers);
-                            O.o ('config:' + config);
+							alert('error on return from exports.ustodobulkdel ');
+                            O.o ('dataxx:' + data);
+                            O.o ('statusxx:' + status);
+                            O.o ('headersxx:' + headers);
+                            O.o ('configxx:' + config);
                         });
+					alert('posted to exports.ustodobulkdel ');
 
                     //$http.delete('/ustodobulkdel', {
                     //    params: { user_id: user.id }

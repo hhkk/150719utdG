@@ -16,7 +16,7 @@ client.open('GET', 'http://netflix.com');
 client.responseType = 'json';
 client.addEventListener('load', function() {
     var data = client.response;
-    console.log('data:' + data);
+    console.log('dataxx:' + data);
     if (data.meta.status !== 200) {
         return;
     }

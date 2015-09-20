@@ -6,4 +6,5 @@ module.exports = function(app) {
     //app.route('q=').get(core.index);
     //app.route('/hk').get(core.index);
 	app.route('/').get(core.index);           // this is index in core.server.controller
+	//app.route('/').get(core.index);           // this is index in core.server.controller
 };

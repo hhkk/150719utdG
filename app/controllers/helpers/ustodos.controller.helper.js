@@ -152,7 +152,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
                     ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text);
                         x.push(ustodos[k]);
                 } else {
-                    O.o ('&&&&&&&&&&&&&&&&&&& in result loop NOT a keeper' );
+                    //O.o ('&&&&&&&&&&&&&&&&&&& in result loop NOT a keeper' );
 
                 }
             }

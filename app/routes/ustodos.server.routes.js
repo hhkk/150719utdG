@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(users.requiresLogin, ustodos.list2)
 		.post(users.requiresLogin, ustodos.create);
 
+	app.route('/ustodobulkdel')
+		.post(users.requiresLogin, ustodos.ustodobulkdel);
+
 	app.route('/ustodos/:ustodoId')
 		.get(users.requiresLogin, ustodos.read)
 		.put(users.requiresLogin, ustodos.hasAuthorization, ustodos.update)

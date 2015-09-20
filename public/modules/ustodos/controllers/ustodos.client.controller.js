@@ -3296,6 +3296,7 @@ angular.module('ustodos').controller('UstodosController',
                 {
                     if (document.getElementById('idcheckbox'+i).checked)
                     {
+						alert('adding to delete list');
                         arrOidsToDelete.push($scope.ustodos[i]._id);
                     }
                 }
