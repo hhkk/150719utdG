@@ -3393,7 +3393,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
                 // corresponds to exports.list2 in ustodos.server.controller.js
                 // see also app.route('/ustodos').get in ustodos.server.routes.js
-                alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller); // hbkk 1509
+                //alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller); // hbkk 1509
                 return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
             } ;
 
@@ -3511,14 +3511,14 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         document.getElementById('idcheckbox'+k).checked = true;
                     }
                 }
-				$scope.updateCheckboxCheckedTotalCount()
+				$scope.synchNumberCheckboxesChecked()
 
             }; // checkboxclickedToggleAll
 
 			SppSvc.setSelectedItem(-1);
 
-			$scope.updateCheckboxCheckedTotalCount = function() {
-				//alert ('in updateCheckboxCheckedTotalCount ');
+			$scope.synchNumberCheckboxesChecked = function() {
+				//alert ('in synchNumberCheckboxesChecked ');
 				var indexx = 0;
 				$scope.numberCheckboxesChecked = 0;
 				var $chkboxes = $('.chkbox');
@@ -3577,7 +3577,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                 //alert('setting lastchecked');
                 $scope.lastChecked = thisCheckBox;
-				$scope.updateCheckboxCheckedTotalCount();
+				$scope.synchNumberCheckboxesChecked();
 
             }; // checkBoxClickedSingle
 
@@ -3662,7 +3662,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 } catch (e) {
                     O.e ('errrra:' + e);
                 }
-				$scope.updateCheckboxCheckedTotalCount()
+				$scope.synchNumberCheckboxesChecked()
             };
 
 
