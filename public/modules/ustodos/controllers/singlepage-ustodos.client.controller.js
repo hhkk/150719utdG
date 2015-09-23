@@ -124,7 +124,6 @@ var app = angular.module('ustodos');      // worked before ui.router was added b
 //var app = angular.module('ustodos',['ngSanitize', 'ui.router']);      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
 
 ////http://jsfiddle.net/whnSs/
-// hbkkk
 //var app = angular.module('myApp', []);
 
 // http://stackoverflow.com/questions/15666048/service-vs-provider-vs-factory    http://jsfiddle.net/pkozlowski_opensource/PxdSP/14/
@@ -320,6 +319,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.modelCheckboxCtrlEnterToSave = false;
             $scope.reloadWarning = false;
             $scope.q = null; // current query
+			$scope.numberCheckboxesChecked = 0;
             //alert ('set gblx.modelDirty  = false;')
 
             //.----------------. .-----------------..----------------. .----------------.
@@ -2526,7 +2526,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             {
                 try {
 
-                    document.getElementById('idInputTextFilter').value = text;
+                    //document.getElementById('idInputTextFilter').value = text;
 
                     callcounteventHandlerEditorcontentChange++;
                     if (enumKeyEvent === $scope.enumKeyEvent.ENTER)
@@ -3335,7 +3335,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //    //getProperties('props this:', this);
             //    //getProperties('props Ustodos:', Ustodos);
             //    var ustodo = new Ustodos ({
-            //        html: this.html// hbkk mystery
+            //        html: this.html//  mystery
             //    });
             //    //getProperties('props ustodo:', ustodo);
             //
@@ -3393,23 +3393,36 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
                 // corresponds to exports.list2 in ustodos.server.controller.js
                 // see also app.route('/ustodos').get in ustodos.server.routes.js
-                //alert ('caller:' + caller);
-                return Ustodos.query(jsonquery, callback);
+                alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller); // hbkk 1509
+                return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
             } ;
 
             // Find a list of Ustodos
             $scope.find = function() {
-                alert ('4 in ustodos.client.controller FIND');
+                //alert ('4 in ustodos.client.controller FIND');
                 //getProperties('props Ustodos:', Ustodos);
 
-				alert (' in scope.find');
+				//alert (' in scope.find');
                 //$scope.ustodos = Ustodos. query(); //original
                 //returns a single not array, causing a fail $scope.ustodos = Ustodos. query({ustodoId: '54929d5d1d3df384165f4fa2'});
                 // seems to work but returns all? $scope.ustodos = Ustodos. query({name: 'ggggg'});
                 //$scope.ustodos = Ustodos. query({name: 'ggggg'}); // Works!
 
                 // corresponds to exports.list2 in ustodos.server.controller.js
-                $scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackhkhk_find);
+                //$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackhkhk_find);
+				// http://docs.mongodb.org/manual/reference/operator/query/and/
+				// http://docs.mongodb.org/manual/reference/operator/query/not/
+				alert ('in this funny query hbkx pre len:' + $scope.ustodos.length);
+				//see also
+				//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
+				//	{q: commandTrimmed.trim()
+
+				//$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {$and: [{text: 'xx'}, {$not:{deleted: true}}]}, callbackhkhk_find);
+				//$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {$and: [{text: 'x'}, {$not:{text: 'y'}}]}, callbackhkhk_find);
+				$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackhkhk_find);
+
+
+				alert ('in this funny query hbkx pos len:' + $scope.ustodos.length);
 
 
                 //alert ('____ $scope.ustodos.length:' + $scope.ustodos.length);
@@ -3434,7 +3447,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.findOne = function() {
                 console.log ('5 in ustodos.client.controller FINDONE');
                 $scope.ustodo = Ustodos.get({
-                    // ORIGINAL A/B SPLIT HBKK
+                    // ORIGINAL A/B SPLIT
                     ustodoId: $stateParams.ustodoId    // original
                     //ustodoId: '54929d5d1d3df384165f4fa2'  // worked!!
                     //name: /road/
@@ -3490,7 +3503,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     {
                         document.getElementById('idcheckbox'+j).checked = !checkboxFirstState;
                     }
-                    return;
                 }
                 else // not all same, set all to T
                 {
@@ -3498,17 +3510,31 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     {
                         document.getElementById('idcheckbox'+k).checked = true;
                     }
-                    return;
                 }
+				$scope.updateCheckboxCheckedTotalCount()
 
             }; // checkboxclickedToggleAll
 
 			SppSvc.setSelectedItem(-1);
 
-            $scope.checkBoxClickedSingle = function(j)
+			$scope.updateCheckboxCheckedTotalCount = function() {
+				//alert ('in updateCheckboxCheckedTotalCount ');
+				var indexx = 0;
+				$scope.numberCheckboxesChecked = 0;
+				var $chkboxes = $('.chkbox');
+
+				for (indexx = 0; indexx < $chkboxes.length; ++indexx) {
+					//alert("indexx:" + indexx);
+					if ($chkboxes[indexx].checked)
+						$scope.numberCheckboxesChecked++;
+				}
+			}
+
+
+			$scope.checkBoxClickedSingle = function(j)
             {
                 //alert ('========== $scope.state_delectedItem set to j:' + j);
-				SppSvc.setSelectedItem(i);
+				SppSvc.setSelectedItem(j);
 
 				//alert ('in checkBoxClickedSingle j:' + j)  ;
                 //var elem = angular.element(document.querySelector('#hktablespan'));
@@ -3534,6 +3560,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 var $chkboxes = $('.chkbox');
 
                 //if(!$scope.lastChecked) {
+
                 //O.o ('set $scope.lastChecked to:' + $scope.lastChecked.id);
                 //}
 
@@ -3550,6 +3577,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                 //alert('setting lastchecked');
                 $scope.lastChecked = thisCheckBox;
+				$scope.updateCheckboxCheckedTotalCount();
 
             }; // checkBoxClickedSingle
 
@@ -3604,7 +3632,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     //$http.post('/exports.ustodobulkdel ', {form:{key:'hkvalue', arrOidsToDelete:arrOidsToDelete}}).
                     $http.post('/ustodobulkdel', {form:{key:'hkvalue', arrOidsToDelete:arrOidsToDelete}}).
                         success(function(data) {
-							alert('success on return from exports.ustodobulkdel ');
+							//alert('success on return from exports.ustodobulkdel ');
                             //O.o ('data:' + data.toString());
                             $scope.find(); // to $scope.find = function() {in
 
@@ -3617,7 +3645,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                             O.o ('headersxx:' + headers);
                             O.o ('configxx:' + config);
                         });
-					alert('posted to exports.ustodobulkdel ');
+					//alert('posted to exports.ustodobulkdel ');
 
                     //$http.delete('/ustodobulkdel', {
                     //    params: { user_id: user.id }
@@ -3634,6 +3662,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 } catch (e) {
                     O.e ('errrra:' + e);
                 }
+				$scope.updateCheckboxCheckedTotalCount()
             };
 
 
@@ -3677,8 +3706,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             //alert ('setting setUstodosFiltered');
             $scope.setUstodosFiltered = function(caller, ustodosUnfiltered) {
-                // hbk 1505
-                //alert('in setUstodosFiltered caller [' + caller + '] dirtying $scope.ustodosFiltered ustodosUnfiltered.length' + ustodosUnfiltered.length);
+                // hbkk 1505
+                //alert('in setUstodosFiltered caller [' + caller + '] dirtying $scope.ustodosFiltered ustodosUnfiltered.length' + ustodosUnfiltered.length); // hbkk 1509
                 $scope.ustodosFiltered = ustodosUnfiltered;
                 document.ustodosFilterCacheDirty = true;
             };
@@ -3782,7 +3811,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     var callbackFromQuery = function() {
                         //alert ('in callbackFromQuery post get callback');
 
-                        $scope.setUstodosFiltered('caller2', $scope.ustodos);
+							$scope.setUstodosFiltered('caller2', $scope.ustodos);
 						SppSvc.setModelDirty(false);
                         //alert ('set gblx.modelDirty  = false2;')
                         $scope.setTextInShowingEditor($scope.searchedFor, 'line 3329');
@@ -3857,8 +3886,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         //alert ('x:' + x);
 
                         var ustodo = new Ustodos ({
-                            html: xHtml.replaceLast(' w', ''),// hbkk mystery
-                            text: commandTrimmed,// hbkk mystery
+                            html: xHtml.replaceLast(' w', ''),//  mystery
+                            text: commandTrimmed,//  mystery
                             datelastmod: (''+new Date()),
                             datecreated: (''+new Date()),
                             joey: 'and pete'
@@ -3918,14 +3947,39 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         var t = commandTrimmed.trim();
                         $scope.searchedFor = t;
                         //alert ('in not a write commandTrimmed.trim [' + commandTrimmed.trim() + ']');
+						// hbkk 150923
                         $scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
-                            {q:
-                                commandTrimmed.trim()
-                                //new RegExp(t, 'i')
-                                //{ $regex: new RegExp(commandTrimmed.trim(), 'i') }
-                                //{$regex:commandTrimmed.trim(), $options:'i'}
-                                //{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
-                            },
+							{q:commandTrimmed.trim()}
+
+							//{$and:
+							//	[
+							//		{q:commandTrimmed.trim()},
+							//		{deleted:{$ne:true}}  // hbkk 1509
+							//	]
+							//}
+
+							// exports.processCommandReadPortion
+							// hbkk 1509 ustodos.server.routes.js may be related to this
+								//app.route('/ustodos')
+								//	.get(users.requiresLogin, ustodos.list2)
+							// hbkk 1509 ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
+
+
+							//new RegExp(t, 'i')
+							//{ $regex: new RegExp(commandTrimmed.trim(), 'i') }
+							//{$regex:commandTrimmed.trim(), $options:'i'}
+							//{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
+
+                            ,
+                            //{q:
+                            //    commandTrimmed.trim()
+								////{$not:{deleted:true}}
+                            //    //new RegExp(t, 'i')
+                            //    //{ $regex: new RegExp(commandTrimmed.trim(), 'i') }
+                            //    //{$regex:commandTrimmed.trim(), $options:'i'}
+                            //    //{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
+                            //
+                            //},
                             callbackFromQuery);      // this is a GET - see RESOURCE
 
                         //$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
@@ -4008,8 +4062,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                     //getProperties('props this:', this);
                     //var ustodo = new Ustodos ({
-                    //	name: this.name,  // hbkk mystery
-                    //	commandFromInputBox: this.commandFromInputBox // hbkk mystery
+                    //	name: this.name,  //  mystery
+                    //	commandFromInputBox: this.commandFromInputBox //  mystery
                     //});
                     //getProperties('props ustodo:', ustodo);
 
@@ -4031,12 +4085,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             };  // $scope.processCommand
 
-            // Search for one hbkk existing Ustodo by string
+            // Search for one  existing Ustodo by string
             $scope.searchOne = function() {
                 alert ('7 in ustodos.client.controller SEARCHONE');
-                console.log ('7 hbkk getting ustodo searchOne :' + $stateParams.ustodoId);
+                console.log ('7  getting ustodo searchOne :' + $stateParams.ustodoId);
                 $scope.ustodo = Ustodos.get({
-                    // ORIGINAL A/B SPLIT HBKK
+                    // ORIGINAL A/B SPLIT
                     ustodoSearchString: $stateParams.ustodoId
                     //ustodoId: '54929d5d1d3df384165f4fa2'  // worked!!
                     //name: /road/
@@ -4086,7 +4140,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.updateUstodosFiltered = function (s)
             {
 
-                O.o ('========================= in updateUstodosFiltered');
+                //alert ('========================= in ttttttttttt updateUstodosFiltered');
                 if (document.ustodosFilterCacheDirty === false)
                 {
                     //alert('setting cache dirty');

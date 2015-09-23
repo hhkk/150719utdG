@@ -13,7 +13,7 @@ var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
 {
     var queryTokens = (querystringTrimmed.toLowerCase()).split(/\s+/); //input.split(/(\s*,?\s*)+/)
 
-    //O.o ('########## queryTokens.length:' + queryTokens.length);
+    O.o ('################################### HBKK 1509  queryTokens.length:' + queryTokens.length);
 
     var querymongo = null;
 
@@ -23,6 +23,7 @@ var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
 
         try {
             var re = new RegExp(queryTokens[0], 'i');
+			O.o ('################################### HBKK 1509  re [' + i + '] ' + re);
             arrRegExpsToOr.push ({text:re});
             //[{text:rea}, {text:reb}]
         } catch (e) {
@@ -33,7 +34,7 @@ var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
     }
 
     //querymongo = {$or: arrRegExpsToOr};
-    querymongo = {$and:[{$or: arrRegExpsToOr},{$or: arrRegExpsToOr}]};
+    querymongo = {$and:[{$or: arrRegExpsToOr},{$or: arrRegExpsToOr}, {deleted:{$ne:true}}]}; // hbkk this is the default loader at page init time
 
     //var rex = new RegExp(queryTokens[0], "i");
     //querymongo = {text:rex};

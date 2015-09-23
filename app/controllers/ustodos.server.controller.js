@@ -92,7 +92,7 @@ exports.read = function(req, res) {
 };
 
 /**
- * Update a Ustodo        hbkk
+ * Update a Ustodo
  */
 // section_update_existing section_save_Existing
 exports.update = function(req, res)
@@ -184,25 +184,6 @@ exports.ustodobulkdel = function(req, res) {
 
 
 		// http://docs.mongodb.org/manual/reference/method/db.collection.remove/
-		/**
-		 The db.collection.remove() method can have one of two syntaxes. The remove() method can take a query document and an optional justOne boolean:
-
-		 db.collection.remove(
-		 <query>,
-		 <justOne>
-		 )
-		 Or the method can take a query document and an optional remove options document:
-
-		 New in version 2.6.
-
-		 db.collection.remove(
-		 <query>,
-		 {
-           justOne: <boolean>,
-           writeConcern: <document>
-         }
-		 )*
-		 */
 
 		O.o("require_Development.db.uri:" + require_Development.db.uri.everythingAfterLast("/"));
 
@@ -220,7 +201,21 @@ exports.ustodobulkdel = function(req, res) {
 						arrOidsToDelete.push (new ObjectID(arrIdsToDelete[j]));
 						//O.o ('deleting id:' + arrIdsToDelete[j]);
 					}
-					collRemove_ustodos.remove({_id: {$in:arrOidsToDelete}} );
+
+					collRemove_ustodos.update(
+						{_id: {$in:arrOidsToDelete}},
+						{ $set: { deleted: true}     }
+					);
+
+					// hbkk
+
+					//db.books.update(
+					//	{ item: "EFG222" },
+					//	{ $set: { reorder: false, tags: [ "literature", "translated" ] } },
+					//	{ upsert: true, multi: true }
+					//)
+
+					//	collRemove_ustodos.remove({_id: {$in:arrOidsToDelete}} );
 
 					O.o('removed to dbWrite.collRemove_ustodos:' + dbWrite.databaseName+'.'+collRemove_ustodos.collectionName);
 					O.o('removed this many:' + arrOidsToDelete.length);
@@ -231,7 +226,7 @@ exports.ustodobulkdel = function(req, res) {
 
 
 				if (true)
-				{
+					{
 					collRemove_ustodos.ensureIndex({ lastmoddate: -1 } );
 					console.log('collRemove_ustodos.ensureIndex({ lastmoddate: ok');
 				}
@@ -248,14 +243,96 @@ exports.ustodobulkdel = function(req, res) {
 	}
 };
 
+// WORKS as multi delete - commented in favor of update to set deletes boolean
+//exports.ustodobulkdel = function(req, res) {
+//	try
+//	{
+//		//O.o ('in 1 exports.ustodobulkdel ');
+//		console.log ('in exports.ustodobulkdel');
+//		//O.o('_______________________ in exports.ustodobulkdel  req.body.form:'+req.body.form);
+//		//O.o('_______________________ in exports.ustodobulkdel  req.body.form.arrIdsToDelete:'+req.body.form.arrOidsToDelete);
+//
+//		var arrIdsToDelete = req.body.form.arrOidsToDelete;
+//		//O.o('_______________________ in exports.ustodobulkdel arrIdsToDelete:'+arrIdsToDelete);
+//
+//
+//		// http://docs.mongodb.org/manual/reference/method/db.collection.remove/
+//		/**
+//		 The db.collection.remove() method can have one of two syntaxes. The remove() method can take a query document and an optional justOne boolean:
+//
+//		 db.collection.remove(
+//		 <query>,
+//		 <justOne>
+//		 )
+//		 Or the method can take a query document and an optional remove options document:
+//
+//		 New in version 2.6.
+//
+//		 db.collection.remove(
+//		 <query>,
+//		 {
+//           justOne: <boolean>,
+//           writeConcern: <document>
+//         }
+//		 )*
+//		 */
+//
+//		O.o("require_Development.db.uri:" + require_Development.db.uri.everythingAfterLast("/"));
+//
+//		var dbWrite = new Db(require_Development.db.uri.everythingAfterLast("/"), new Server('localhost', 27017), {safe: false});
+//		dbWrite.open(function (err, dbWrite)
+//		{
+//			dbWrite.collection('ustodos', function (err, collRemove_ustodos)
+//			{
+//				try
+//				{
+//					// works collRemove_ustodos.remove({_id:new ObjectID(arrIdsToDelete[0])});
+//					var arrOidsToDelete = [];
+//					for (var j = 0; j < arrIdsToDelete.length; j++ )
+//					{
+//						arrOidsToDelete.push (new ObjectID(arrIdsToDelete[j]));
+//						//O.o ('deleting id:' + arrIdsToDelete[j]);
+//					}
+//					collRemove_ustodos.remove({_id: {$in:arrOidsToDelete}} );
+//
+//					O.o('removed to dbWrite.collRemove_ustodos:' + dbWrite.databaseName+'.'+collRemove_ustodos.collectionName);
+//					O.o('removed this many:' + arrOidsToDelete.length);
+//				} catch (err) {
+//					//console.log(UtilClass.UtilClass('err', err));
+//					O.e('err:' + err);
+//				}
+//
+//
+//				if (true)
+//				{
+//					collRemove_ustodos.ensureIndex({ lastmoddate: -1 } );
+//					console.log('collRemove_ustodos.ensureIndex({ lastmoddate: ok');
+//				}
+//
+//				O.o ('done with remote');
+//				var x = {result:'success'};
+//				res.json(x);
+//			});
+//		});
+//
+//	} catch (e) {
+//		O.e('fail in bulk delete:' + e);
+//		res.status(403).send('Failure in bulk delete.  e:'+e);
+//	}
+//};
+//
 
 /**
  * List of Ustodos
+ * singlepage-ustodos.client.controller.js
+ * used by $scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
+                return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
+
  */
-exports.list2 = function(req, res) {
+exports.list2 = function(req, res) { // hbkk 1509
 
 	//O.o(' *************** Top of exports.list ');
-	//O.o ('utilclass.getclass of s:' + UtilClass.getClass('hbkk res:', res))
+	//O.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))
 
 	var query = req.query;
 	//O.o('in ustodos.server.controller.js: list query.querystring [' + query.q + ']');
@@ -382,7 +459,7 @@ exports.ustodoByID = function(req, res, next, id) {
 	O.o('in ustodoByID id:'+id);
 	//var s = Ustodo.findById(id);
 
-	// ORIGINAL A/B SPLIT HBKK
+	// ORIGINAL A/B SPLIT
 	// A
 	Ustodo.findById(id).populate('user', 'displayName').exec(function(err, ustodo) {
 		// B
