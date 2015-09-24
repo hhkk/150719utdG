@@ -197,14 +197,23 @@
 		</span>
 
 		<span style="xxbackground-color: cornflowerblue ">
-			<span id='idSpanSearchedFor'>Current search [<span id='idSpanSearchedForSearchText'
-					  ng-mouseover='this.eventMouseoverCurrentSearch()'
-					  ng-bind='searchedFor'
-						></span>]
+			<span class='classSpanSearchedFor' title='Current search.  Mouse over copies this to the input area (if not in edit mode).'
+				  ng-mouseover='this.eventMouseoverCurrentSearch()'>
+				Search
+				<span class='classSpanSearchedForSearchText' ng-mouseover='this.eventMouseoverCurrentSearch()'>
+					[<span ng-bind='searchedFor'></span>]
+				</span>
 			</span>
 
-			Count <span ng-bind=(this.ustodosFiltered.length)></span >
-			of <span ng-bind=(this.ustodos.length)></span >
+			<span class='classSpanSearchedFor'>
+				Count
+				<span class='classSpanSearchedForSearchText' >
+ 					<span ng-bind=(this.ustodosFiltered.length)></span >
+					<span class='classSpanSearchedFor'>of</span>
+					<span ng-bind=(this.ustodos.length)></span >
+				</span>
+			</span>
+
 			&nbsp;
 
 			<!-- ======================== SELECT DROPDOWN ONE OF 20 ACTIONS -->
@@ -422,13 +431,13 @@
 						</td>
 
 						<!-- 3 PER ROW SAVE BUTTON -->
-						<td style="width:3%">
+						<td style="width:3%" >
 							<!--<button ng-click="count = count + 1" ng-init="count=0">-->
 							<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
 
 							<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
 
-							<img class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
+							<img id="savimg{{$index}}" class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
 								 alt="{{image.name}}"
 								 ng-click="saveUstodoGiven(ustodo, $index)"
 									>

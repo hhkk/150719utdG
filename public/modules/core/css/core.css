@@ -213,12 +213,12 @@ body.ng-cloak
 	word-break:break-all
 }
 
-#idSpanSearchedFor {
-    font-size: 20px;
+.classSpanSearchedFor {
+    font-size: 12px;
     xxcolor: green
 }
 
-#idSpanSearchedForSearchText {
+.classSpanSearchedForSearchText {
     font-size: 20px;
     color: blue
 }

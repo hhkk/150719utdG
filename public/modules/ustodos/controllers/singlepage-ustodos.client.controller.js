@@ -864,40 +864,50 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     ed.on('keyup', function(e) {
 
 
-						SppSvc.setModelDirty (true);
+						if (ed.getContent({format : 'text'}).trim() === '*' ||
+							ed.getContent({format : 'text'}).trim() === '')
+						{
+							SppSvc.setModelDirty (false);
+						} else {
+							SppSvc.setModelDirty (true);
+						}
+
 
 						$scope.$apply();
 
+						//console.log ('e.keyIdentifier:' + e.keyIdentifier);
+						//console.log ('e.keyCode:' + e.keyCode);
+						//console.log ('e.metaKey:' + e.metaKey);
+						//console.log ('e.shiftKey:' + e.shiftKey);
+						//console.log ('e.altKey:' + e.altKey);
+						//alert ('e.ctrlKey:' + e.ctrlKey);
 
-                        //console.log ('e.keyIdentifier:' + e.keyIdentifier);
-                        //console.log ('e.keyCode:' + e.keyCode);
-                        //console.log ('e.metaKey:' + e.metaKey);
-                        //console.log ('e.shiftKey:' + e.shiftKey);
-                        //console.log ('e.altKey:' + e.altKey);
-                        //alert ('e.ctrlKey:' + e.ctrlKey);
 
+						if (e.keyIdentifier === 'Enter')
+						{
+							if (ed.getContent({format : 'text'}).trim() === '') {
+								$scope.setTextInShowingEditor('*', 'line 889');
+							}
 
-                        if (e.keyIdentifier === 'Enter')
-                        {
-
-                            if ((!(!$scope.modelCheckboxCtrlEnterToSave && e.ctrlKey)) &&
+							if ((!(!$scope.modelCheckboxCtrlEnterToSave && e.ctrlKey)) &&
 								(!$scope.modelCheckboxCtrlEnterToSave || e.ctrlKey))
-                            {
-                                $scope.eventHandlerEditorcontentChange (
-                                    $scope.enumKeyEvent.ENTER,
-                                    ed.getContent({format : 'data'}),
-                                    ed.getContent({format : 'html'}),
-                                    ed.getContent({format : 'text'})
-                                );
-                            }
-                        } else if (e.keyCode === 32) {
-                            $scope.eventHandlerEditorcontentChange (
-                                $scope.enumKeyEvent.SPACE,
-                                ed.getContent({format : 'data'}),
-                                ed.getContent({format : 'html'}),
-                                ed.getContent({format : 'text'})
-                            );
-                        }
+							{
+								$scope.eventHandlerEditorcontentChange (
+									$scope.enumKeyEvent.ENTER,
+									ed.getContent({format : 'data'}),
+									ed.getContent({format : 'html'}),
+									ed.getContent({format : 'text'})
+								);
+							}
+						} else if (e.keyCode === 32) {
+							$scope.eventHandlerEditorcontentChange (
+								$scope.enumKeyEvent.SPACE,
+								ed.getContent({format : 'data'}),
+								ed.getContent({format : 'html'}),
+								ed.getContent({format : 'text'})
+							);
+						}
+
                         //console.log ('xx:' + tinyMCE.get('idDivForTinyMceEditorTextarea').getContent({format : 'text'}).trim());
 
                         //check_submit();
@@ -1700,11 +1710,20 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             $scope.onKeyUp_perrow_text = function (keyEvent, index, _id) // https://docs.angularjs.org/api/ng/directive/ngKeyup
             {
-                if (keyEvent.keyCode !== 27 ) // escape key
-                    return;
+				var newHtml = document.getElementById('ustodorow'+index).innerHTML;
+				var newText = document.getElementById('ustodorow'+index).innerText;
+
+                if (keyEvent.keyCode !== 27 ) // if not escape key
+				{
+					// change local image to requiring a save
+					var savImgHtml = document.getElementById('savimg'+index);
+					//alert ('savImgHtml.src:' + savImgHtml.src);
+					savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
+
+					return;
+				}
 
 
-                var newHtml = document.getElementById('ustodorow'+index).innerHTML;
                 //alert ('newHtml:' + newHtml);
                 //alert ('in onKeyUp_perrow_text escape id:' + 'ustodorow'+index); // not non-escape
 
@@ -1730,7 +1749,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         found = true;
                         //alert ('found match at index:' + i + ' with original text :' + $scope.ustodos[i]);
 
-                        $scope.ustodos[i].html = newHtml;
+
+						var savImgHtml = document.getElementById('savimg'+index);
+						//alert ('savImgHtml.src:' + savImgHtml.src);
+						savImgHtml.src = savImgHtml.src.replaceAll('SaveIconBlue.png', 'saveIcon.jpg');
+
+
+						$scope.ustodos[i].html = newHtml;
 
                         // maps to exports.update
                         //$scope.ustodos[i].$update(function () {
@@ -1745,9 +1770,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                             alert('error on save errorResponse.data.message [' + errorResponse.data.message + ']');
                         });
                         //alert ('done update submit [' + $scope.ustodos[i].html + ']');
-
                     }
-
                 }
                 //O.o ('========== $scope.state_delectedItem set to -1');
 				SppSvc.setSelectedItem(-1);
@@ -1755,7 +1778,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				document.getElementById('ustodorow'+index).blur();
 
                 if (!found) {
-                    alert ('not found!');
+                    alert ('ustodo not found - reload page');
                 }
             };
 
