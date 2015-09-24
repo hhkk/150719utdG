@@ -1,5 +1,8 @@
 'use strict';
 
+
+// this file runs only in server mode ;
+
 module.exports = {
 	app: {
 		title: 'MEAN.JS',

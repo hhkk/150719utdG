@@ -590,8 +590,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //});
             //
 
+			alert ('pre setIdleTimeout');
+			setIdleTimeout(4000);
+			alert ('post setIdleTimeout');
 
-            $scope.myCustomOnInit = function () // works
+
+			$scope.myCustomOnInit = function () // works
             {
                 //alert('myCustomOnInit from mce');
 				//this.getDoc().body.style.fontSize = '13px';

@@ -1,5 +1,9 @@
 'use strict';
 
+
+// this file runs only in server mode ;
+console.log ('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ in development.js');
+
 module.exports = {
 	db: {
 		uri: 'mongodb://localhost/ustodo-dev',
