@@ -99,8 +99,9 @@
 		&nbsp;<input type="checkbox" title="if checked, control+enter submits a command while enter is just a line feed (allows multiline record entries)" id='idcheckbox_modelCheckboxCtrlEnterToSave' ng-model=modelCheckboxCtrlEnterToSave  />CtrlEnterToSave
 		&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_reloadWarning' ng-model=reloadWarning />reloadWarn
 
-		<img id='imageIdRedPEncilbnw' src='/img/EditPencilBnW.png' xxstyle="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">
-		<img id='imageIdRedPEncil'    src='/img/EditPencilRed.png' style="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">
+		<!--archetype prototype - conditional tag display by variable true false binding-->
+		<!--<img id='imageIdRedPEncilbnw' src='/img/EditPencilBnW.png' xxstyle="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
+		<!--<img id='imageIdRedPEncil'    src='/img/EditPencilRed.png' style="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
 
 	<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
 	<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
@@ -139,13 +140,13 @@
 			-->
 			<!-- ================ INPUT#0 ======================== maps to $scope.onKeyUp -->
 			<input id="idInput0TypeText"
-				   type="text"
-				   xxng-keyup='this.onKeyUp("line 85", $event, this.ENUM_KEYEVENTCALLER_INPUT0)'
-				   ng-keyup='this.onKeyUp("line 102", $event )'
-				   class="input-textarea"
-				   placeholder="Search / Input / Command"
-				   title='Search (case insensitive, order insensitive) / Save / Command '
-				   ng-blur="eventBlur0InputText()" required>
+			   type="text"
+			   xxng-keyup='this.onKeyUp("line 85", $event, this.ENUM_KEYEVENTCALLER_INPUT0)'
+			   ng-keyup='this.onKeyUp("line 102", $event )'
+			   class="input-textarea"
+			   placeholder="Search / Input / Command"
+			   title='Search (case insensitive, order insensitive) / Save / Command '
+			   ng-blur="eventBlur0InputText()" required>
 			   <!--ng-model="inputbind"-->
 
 			<!--ng-bind='inputbind'-->
@@ -197,6 +198,18 @@
 		</span>
 
 		<span style="xxbackground-color: cornflowerblue ">
+			<span>
+				&nbsp;<input unchecked ng-click='checkBoxClickedToggleAll()' title='Check or uncheck all' id='checkBoxAll' type="checkbox"/>
+
+				&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
+						   alt="{{image.name}}"  title='Delete Selected'
+						   ng-click="operationOnChecked_Delete()"
+				>
+
+				<span style="display: inline-block width:500px" ng-bind='numberCheckboxesChecked'></span>
+
+			&nbsp;
+			</span>
 			<span class='classSpanSearchedFor' title='Current search.  Mouse over copies this to the input area (if not in edit mode).'
 				  ng-mouseover='this.eventMouseoverCurrentSearch()'>
 				Search
@@ -206,7 +219,14 @@
 			</span>
 
 			<span class='classSpanSearchedFor'>
-				Count
+				Filter
+			</span>
+
+			<input id="idInputTextFilter"  type="text" title='Restrict/filter within search result' name="input" ng-model="filterText"  ng-keyup='updateUstodosFiltered(filterText)'
+				   xxng-pattern="example.word" required ng-trim="false" >
+
+			<span class='classSpanSearchedFor'>
+				Showing
 				<span class='classSpanSearchedForSearchText' >
  					<span ng-bind=(this.ustodosFiltered.length)></span >
 					<span class='classSpanSearchedFor'>of</span>
@@ -297,20 +317,6 @@
 
 
 				<!-- SECTION_ HEADER ROW SELECT ALL CHECKBOX AND TRASH ICON -->
-				<span>
-					&nbsp;<input ng-click='checkBoxClickedToggleAll()' title='Check or uncheck all' id='checkBoxAll' type="checkbox"/> All
-
-					&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
-							   alt="{{image.name}}"  title='Delete Selected'
-							   ng-click="operationOnChecked_Delete()"
-					>
-
-					<span style="width:150px" ng-bind='numberCheckboxesChecked'></span>
-
-				&nbsp;
-				</span>
-				<input id="idInputTextFilter"  type="text" title='Restrict within search result' name="input" ng-model="filterText"  ng-keyup='updateUstodosFiltered(filterText)'
-					   xxng-pattern="example.word" required ng-trim="false">
 
 				<!-- SECTION_ TEXT FILTER ICON AND DYNAMIC SEARCH BOX -->
 
@@ -407,7 +413,7 @@
 						<!-- 1 PER ROW COUNT AND CHECK BOX -->
 						<td style="width:3%">
 							<span id='numberWrapForFade{{$index}}'>
-							{{$index}}
+							{{$index+1}}
 							</span>
 
 							<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
@@ -463,8 +469,11 @@
 
 
 						<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
-						<td style="xxwidth:50%;
+						<td
+							id="idConentEditableRow{{$index}}"
+							style="xxwidth:50%;
 							word-wrap: break-word;
+							zzbackground-color: yellow;
 							white-space: nowrap;
 							overflow: auto;
 							/*visible|hidden|scroll|auto|initial|inherit*/
@@ -513,6 +522,7 @@
 
 	<script>
 
+
 		$(document).ready(function() {
 			//alert('in view file (document).ready');
 			var elemId = 'mceu_57';
@@ -541,11 +551,11 @@
 			//document.getElementById('imageIdRedPEncilbnw').width = 200;
 //			document.getElementById('imageIdRedPEncil').style.visibility='visible';
 
-			setTimeout(function(){
-				//alert ('you stopped typing seconds are up - filter  !!');
-				document.getElementById('imageIdRedPEncil').style.visibility='visible';
-			}
-			,500); // millisecond timer
+//			setTimeout(function(){
+//				//alert ('you stopped typing seconds are up - filter  !!');
+//				document.getElementById('imageIdRedPEncil').style.visibility='visible';
+//			}
+//			,500); // millisecond timer
 
 
 

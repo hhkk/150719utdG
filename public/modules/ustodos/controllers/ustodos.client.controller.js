@@ -2918,7 +2918,14 @@ angular.module('ustodos').controller('UstodosController',
                 //alert ('in keyup $scope.getTextHtmlAndValueInShowingEditor()'+$scope.getTextHtmlAndValueInShowingEditor());
                 //CKEDITOR.instances.editor.destroy();
 
+
+
 				if (true)
+				{
+					alert ('document.getElementById(checkBoxAll).value = :' + document.getElementById('checkBoxAll').checked);
+				}
+
+				if (false)
 				{
 
 					alert ('in here');

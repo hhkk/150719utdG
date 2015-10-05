@@ -230,3 +230,12 @@ body.ng-cloak
 	width: 100%;
 	white-space: nowrap;
 }
+
+
+.mce-last {
+	display: none;
+}
+
+.mce-path-item  {
+	display: none;
+}

@@ -51,8 +51,8 @@ function _makeIdle()
 		_idleTimer = setTimeout(_makeIdle, _idleTimestamp - t + 50);
 		return;
 	}
-	//console.log('** IDLE **');
-	alert('** IDLE **');
+	console.log('** IDLE **');
+	//alert('** IDLE **');
 	_idleNow = true;
 
 	try {

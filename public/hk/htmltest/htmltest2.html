@@ -1,0 +1,33 @@
+
+<!--http://98.229.125.119:3000/hk/htmltest/htmltest2.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script type="text/javascript">
+		function FindNext () {
+			var str = document.getElementById ("findInput").value;
+			if (str == "") {
+				alert ("Please enter some text to search!");
+				return;
+			}
+
+			if (window.find) {        // Firefox, Google Chrome, Safari
+				var found = window.find (str);
+				if (!found) {
+					alert ("The following text was not found:\n" + str);
+				}
+			}
+			else {
+				alert ("Your browser does not support this example!");
+			}
+		}
+	</script>
+</head>
+<body>
+<div>LaLa, Lala, laLa , lala, 1<B>la</B>lala2, tralala, some other text</div>
+<br />
+<input type="text" id="findInput" value="lala" size="20" />
+<button onclick="FindNext ();">Find Next</button>
+</body>
+</html>

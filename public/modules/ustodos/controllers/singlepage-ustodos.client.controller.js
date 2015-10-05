@@ -132,6 +132,7 @@ var app = angular.module('ustodos');      // worked before ui.router was added b
 
 //alert ('defining SppSvc');
 
+// archetype prototype service for access to data across controllers
 app.factory('SppSvc', function() {
 	//alert ('in SppSvc');
 	var sppData = {};
@@ -590,9 +591,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //});
             //
 
-			alert ('pre setIdleTimeout');
-			setIdleTimeout(4000);
-			alert ('post setIdleTimeout');
+			//alert ('pre setIdleTimeout');
+			// setIdleTimeout(500000); // hbkk 150924 works
+			//alert ('post setIdleTimeout');
 
 
 			$scope.myCustomOnInit = function () // works
@@ -699,7 +700,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
             // USED until at least 150715
-            tinyMCE.init({
+            tinyMCE.init
+			(
+				{
                 //mode : 'exact',
 
 
@@ -738,7 +741,22 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
 
-                plugins: 'code, pagebreak',
+                plugins: 'code, pagebreak, paste',
+
+				theme_advanced_buttons3_add : "pastetext,pasteword,selectall",
+				paste_auto_cleanup_on_paste : true,
+				paste_preprocess : function(pl, o) {
+					// Content string containing the HTML from the clipboard
+					//alert(o.content);
+					o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' );
+					//o.content = "-: CLEANED PRE :-\n" + o.content;
+				},
+				paste_postprocess : function(pl, o) {
+					// Content DOM node containing the DOM structure of the clipboard
+					//alert(o.node.innerHTML);
+					o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
+				},
+
                 mode : 'textareas',
                 //  theme : 'advanced',
                 //plugins : 'pagebreak,styleBAD,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template',
@@ -752,7 +770,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //theme_advanced_toolbar_align : 'left',
                 //theme_advanced_statusbar_location : 'bottom',
                 //theme_advanced_resizing : true,
-
+				theme_advanced_statusbar_location : "", // hbkk
                 width: '100%',
                 height: '100%',
                 resize: 'both',
@@ -805,9 +823,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//else
 							//	document.getElementById(elemId).style.visibility='hidden';
 						}
-
-
-
 					});
 
 					//ed.onLoadContent.add(function(ed, o) {
@@ -823,7 +838,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//text: 'My button',
 						//id: 'mcebuttonid2',
 						//image: '/img/EditPencilBnW.png',
-						image: '/img/SaveIconBlue	.png',
+						image: '/img/SaveIconBlue.png',
 						icon: false,
 						onclick: function() {ed.insertContent('Menu item 0')},
 						//menu: [
@@ -831,8 +846,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
 						//]
 					});
-
-
 
 					ed.addButton('mybuttonmenu', {
 						type: 'menubutton',
@@ -860,14 +873,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                     //    }
 
-
-
-
-
-
-                    ed.on('keyup', function(e) {
-
-
+                    ed.on('keyup', function(e)
+					{
 						if (ed.getContent({format : 'text'}).trim() === '*' ||
 							ed.getContent({format : 'text'}).trim() === '')
 						{
@@ -875,7 +882,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						} else {
 							SppSvc.setModelDirty (true);
 						}
-
 
 						$scope.$apply();
 
@@ -933,8 +939,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     //        alert('blur!!!');
                     //    });
                     //});
-                } // setup
-                //setup: function(editor) {
+                }, // setup
+				theme_advanced_path : false,
+
+					//setup: function(editor) {
                 //    editor.on('blur', function(e) {
                 //        console.log('blur event', e);
                 //    });
@@ -3127,8 +3135,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //CKEDITOR.instances.editor.destroy();
 
 				//alert ('in testbutton');
+				if (true)
+				{
+					//alert ('document.getElementById(checkBoxAll).value = :' + document.getElementById('checkBoxAll').checked);
+					document.getElementById('checkBoxAll').checked = false;
 
-				if (true )
+				}
+
+
+				if (false)
 				{
 					//document.getElementById('mceu_34').style.visibility='hidden';
 					if (document.getElementById('mceu_57-body').style.visibility==='hidden')
@@ -3420,13 +3435,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
                 // corresponds to exports.list2 in ustodos.server.controller.js
                 // see also app.route('/ustodos').get in ustodos.server.routes.js
-                //alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller); // hbkk 1509
+                //alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller);
                 return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
             } ;
 
             // Find a list of Ustodos
             $scope.find = function() {
-                //alert ('4 in ustodos.client.controller FIND');
+                alert ('4 in ustodos.client.controller FIND');
                 //getProperties('props Ustodos:', Ustodos);
 
 				//alert (' in scope.find');
@@ -3538,7 +3553,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         document.getElementById('idcheckbox'+k).checked = true;
                     }
                 }
-				$scope.synchNumberCheckboxesChecked()
+				$scope.synchNumberCheckboxesChecked();
 
             }; // checkboxclickedToggleAll
 
@@ -3546,15 +3561,31 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 			$scope.synchNumberCheckboxesChecked = function() {
 				//alert ('in synchNumberCheckboxesChecked ');
-				var indexx = 0;
-				$scope.numberCheckboxesChecked = 0;
-				var $chkboxes = $('.chkbox');
+				try
+				{ // hbkk
+					var indexx = 0;
+					// archetype prototype howto - iterate over all of a class
+					$scope.numberCheckboxesChecked = 0;
+					var $chkboxes = $('.chkbox');
+					for (indexx = 0; indexx < $chkboxes.length; ++indexx)
+					{
+						//alert("indexx:" + indexx);
+						if ($chkboxes[indexx].checked)
+						{
+							document.getElementById('idConentEditableRow'+indexx).style['background-color'] = '#FFFF99';
+							$scope.numberCheckboxesChecked++;
+						} else {
+							document.getElementById('idConentEditableRow'+indexx).style['background-color'] = null;
+						}
 
-				for (indexx = 0; indexx < $chkboxes.length; ++indexx) {
-					//alert("indexx:" + indexx);
-					if ($chkboxes[indexx].checked)
-						$scope.numberCheckboxesChecked++;
+					}
 				}
+				catch(err)
+				{
+					alert ('error here');
+					UtilErrorEmitter.emitError('error in synchNumberCheckboxesChecked()', err);
+				}
+
 			}
 
 
@@ -3595,11 +3626,14 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 {
                     //alert ('yes window.keyStates.keyStateShiftDown');
                     var start = $chkboxes.index(thisCheckBox);
-                    var end = $chkboxes.index($scope.lastChecked);
-                    //alert('using lastchecked start [' + start + '] end [' + end + '] ');
-                    $chkboxes.slice(Math.min(start,end), Math.max(start,end)+ 1).prop('checked', $scope.lastChecked.checked);
-                    //alert('used lastchecked successfully');
-                    //O.o ('set $scope.lastChecked to:' + $scope.lastChecked.id);
+					if ($scope.lastChecked)
+					{
+						var end = $chkboxes.index($scope.lastChecked);
+						//alert('using lastchecked start [' + start + '] end [' + end + '] ');
+						$chkboxes.slice(Math.min(start,end), Math.max(start,end)+ 1).prop('checked', $scope.lastChecked.checked);
+						//alert('used lastchecked successfully');
+						//O.o ('set $scope.lastChecked to:' + $scope.lastChecked.id);
+					}
                 }
 
                 //alert('setting lastchecked');
@@ -3622,9 +3656,14 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     {
                         arrOidsToDelete.push($scope.ustodos[i]._id);
 						//alert('in operationOnChecked_Delete');
-
 					}
                 }
+
+				if (arrOidsToDelete.length === 0)
+				{
+					alert('No items selected to delete.')
+					return;
+				}
                 //alert ('delete all:' + arrOidsToDelete);
 
                 // now make web service call
@@ -3658,12 +3697,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     // 3333 works great in that it makes it to the method, and req data is not in the URL but in the
                     //$http.post('/exports.ustodobulkdel ', {form:{key:'hkvalue', arrOidsToDelete:arrOidsToDelete}}).
                     $http.post('/ustodobulkdel', {form:{key:'hkvalue', arrOidsToDelete:arrOidsToDelete}}).
-                        success(function(data) {
+                        success(function(data)
+						{
 							//alert('success on return from exports.ustodobulkdel ');
                             //O.o ('data:' + data.toString());
                             $scope.find(); // to $scope.find = function() {in
+							$scope.synchNumberCheckboxesChecked();
 
-                        }). error(function(data, status, headers, config) {
+
+						}). error(function(data, status, headers, config) {
                             // called asynchronously if an error occurs
                             // or server returns response with an error status.
 							alert('error on return from exports.ustodobulkdel ');
@@ -3733,8 +3775,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             //alert ('setting setUstodosFiltered');
             $scope.setUstodosFiltered = function(caller, ustodosUnfiltered) {
-                // hbkk 1505
-                //alert('in setUstodosFiltered caller [' + caller + '] dirtying $scope.ustodosFiltered ustodosUnfiltered.length' + ustodosUnfiltered.length); // hbkk 1509
+                //alert('in setUstodosFiltered caller [' + caller + '] dirtying $scope.ustodosFiltered ustodosUnfiltered.length' + ustodosUnfiltered.length);
                 $scope.ustodosFiltered = ustodosUnfiltered;
                 document.ustodosFilterCacheDirty = true;
             };
@@ -3768,9 +3809,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml, xValue)
             {
                 //alert ('in processCommand caller [' + enumProcessCommandCaller + ']')
-                //O.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
-                //O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
-                //O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
+                O.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
+                O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
+                O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
 
 				SppSvc.setSelectedItem(-1);
 
@@ -3964,7 +4005,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                         //commandTrimmed = commandRemoved_toSearchFor_trimmed;
                     }
-                    // else // not a write
+
+
+					// POST WRIT IF IT WAS A WRITE
                     {
                         //alert ('not a write - search for [' + commandTrimmed.trim() + ']');
                         //O.o ('=============== in section QUERY2')
@@ -3974,7 +4017,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         var t = commandTrimmed.trim();
                         $scope.searchedFor = t;
                         //alert ('in not a write commandTrimmed.trim [' + commandTrimmed.trim() + ']');
-						// hbkk 150923
+
                         $scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
 							{q:commandTrimmed.trim()}
 
@@ -3986,10 +4029,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//}
 
 							// exports.processCommandReadPortion
-							// hbkk 1509 ustodos.server.routes.js may be related to this
+							// ustodos.server.routes.js may be related to this
 								//app.route('/ustodos')
 								//	.get(users.requiresLogin, ustodos.list2)
-							// hbkk 1509 ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
+							// ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
 
 
 							//new RegExp(t, 'i')
@@ -4031,6 +4074,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     // section_location_set_url
                     //alert ('in herehk pre $location.search');
                     $location.search('q', commandTrimmed);       // yoo bar foo bar baz not $location.path
+					$scope.filterText = commandTrimmed;
 
                     //alert ('commandRemoved_toSearchFor_trimmed:'+ commandRemoved_toSearchFor_trimmed);
 
@@ -4086,6 +4130,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     //setTimeout(function(){console.log ('in ustodos.client.controller SEARCH2 $scope.ustodos.length:' + $scope.ustodos.length);}, 1000);
                     //setTimeout(function(){alert ('in ustodos.client.controller SEARCH2 $scope.ustodos.length:' + $scope.ustodos.length);}, 1000);
                     //$scope.$apply();
+
 
                     //getProperties('props this:', this);
                     //var ustodo = new Ustodos ({
