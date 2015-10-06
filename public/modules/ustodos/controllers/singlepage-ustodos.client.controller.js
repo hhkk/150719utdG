@@ -25,7 +25,7 @@ var UtilClassz = UtilClassz;
 
 var UtilHtmlCleaner = UtilHtmlCleaner; // this is a file name
 
-alert ('in here 2');
+//alert ('in here 2');
 //var myapplication = exports.myapplication;
 
 //var unirest = require('unirest');
@@ -756,16 +756,16 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner cleanhtml
 					//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
 					//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
-					alert('prehk');
-					o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
-					alert('posthk');
+					alert('prehk [' + o.content + ']');
+					o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(o.content, '<span><div><table><td><tr><tbody><ul><li><p><br><pre><a><h1><h2><h3><h4><h5><span><b><strong><u><i><p>' ); // htmlcleaner
+					//alert('posthk');
 
 					//o.content = "-: CLEANED PRE :-\n" + o.content;
 				},
 				paste_postprocess : function(pl, o) {
 					// Content DOM node containing the DOM structure of the clipboard
-					//alert(o.node.innerHTML);
-					o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
+					//alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
+					//o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
 				},
 
                 mode : 'textareas',

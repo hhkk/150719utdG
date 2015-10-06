@@ -21,9 +21,16 @@ var O = require('C:/utd/150719utdG/public/util/O.js');
 
 	//alert ('defining tinymceHtmlCleaner');
 
+var privateSpace = new function() {
+	this.cleanHtmlPrePrivate = function(str, allowed_tags) {
+		alert(' in private function')
+	}
+}
+
+
 var utilHtmlCleaner = new function() {
 	this.cleanHtmlPre = function(str, allowed_tags) {
-		alert ('in tinymcePasteCleanFilter.cleanHtml [' + str+ ']');
+		//alert ('in tinymcePasteCleanFilter.cleanHtml [' + str+ ']');
 
 		var key = '', allowed = false;
 		var matches = [];    var allowed_array = [];
@@ -72,7 +79,7 @@ var utilHtmlCleaner = new function() {
 				str = replacer(html, "", str); // Custom replace. No regexing
 			}
 		}
-		//return "by cleanHtmlPre: " + str;
+		//return "bracketed << by cleanHtmlPre <<" + str + ">>";
 		return str;
 	}
 }
