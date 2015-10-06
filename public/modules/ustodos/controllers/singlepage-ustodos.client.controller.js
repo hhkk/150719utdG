@@ -23,6 +23,11 @@ var UtilNLB_bgFade = UtilNLB_bgFade;
 var UtilErrorEmitter = UtilErrorEmitter;
 var UtilClassz = UtilClassz;
 
+var UtilHtmlCleaner = UtilHtmlCleaner; // this is a file name
+
+alert ('in here 2');
+//var myapplication = exports.myapplication;
+
 //var unirest = require('unirest');
 //var fn = function()
 //{
@@ -748,7 +753,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				paste_preprocess : function(pl, o) {
 					// Content string containing the HTML from the clipboard
 					//alert(o.content);
-					o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' );
+					//o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner cleanhtml
+					//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
+					//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
+					alert('prehk');
+					o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
+					alert('posthk');
+
 					//o.content = "-: CLEANED PRE :-\n" + o.content;
 				},
 				paste_postprocess : function(pl, o) {
