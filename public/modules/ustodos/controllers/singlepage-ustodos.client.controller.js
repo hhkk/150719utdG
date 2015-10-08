@@ -609,382 +609,395 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //tinymce.activeEditor.setContent('<span>some</span> html');
             };
 
-            // 1111111111
-            //tinyMCE.init({
-            //    selector:'textarea',
-            //    //setup : function(ed) {
-            //    //    ed.onKeyDown.add(function(ed, e) {
-            //    //        console.debug('Key down event: ' + e.keyCode);
-            //    //    });
-            //    oninit : '$scope.myCustomOnInit()'
-            //    })
-            //;
+			$scope.localTinyMceInit = function ()
+			{
+				alert ('in localTinyMceInit');
+				// 1111111111
+				//tinyMCE.init({
+				//    selector:'textarea',
+				//    //setup : function(ed) {
+				//    //    ed.onKeyDown.add(function(ed, e) {
+				//    //        console.debug('Key down event: ' + e.keyCode);
+				//    //    });
+				//    oninit : '$scope.myCustomOnInit()'
+				//    })
+				//;
 
-            // 222222222
-            // tinymce4 works
-            //tinymce.init({
-            //    selector: 'textarea',
-            //    theme: 'modern',
-            //    //plugins: [
-            //    //    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            //    //    'searchreplace wordcount visualblocks visualchars code fullscreen',
-            //    //    'insertdatetime media nonbreaking save table contextmenu directionality',
-            //    //    'emoticons template paste textcolor colorpicker textpattern'
-            //    //],
-            //    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-            //    toolbar2: 'print preview media | forecolor backcolor emoticons',
-            //    image_advtab: true,
-            //    templates: [
-            //        {title: 'Test template 1', content: 'Test 1'},
-            //        {title: 'Test template 2', content: 'Test 2'}
-            //    ],
-            //    setup : function(ed) {
-            //        ed.onDeactivate.add(function(ed) {
-            //            alert ('in special function');
-            //            ed.save();  // or whatever you want to do to save the editor content
-            //            ed.remove(); // removes tinymce instance
-            //        });
-            //
-            //        ed.onKeyUp.add(function(ed,l) {
-            //            alert ('in onkeyup');
-            //            ed.save();  // or whatever you want to do to save the editor content
-            //        });
-            //    }
-            //
-            //});
+				// 222222222
+				// tinymce4 works
+				//tinymce.init({
+				//    selector: 'textarea',
+				//    theme: 'modern',
+				//    //plugins: [
+				//    //    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+				//    //    'searchreplace wordcount visualblocks visualchars code fullscreen',
+				//    //    'insertdatetime media nonbreaking save table contextmenu directionality',
+				//    //    'emoticons template paste textcolor colorpicker textpattern'
+				//    //],
+				//    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+				//    toolbar2: 'print preview media | forecolor backcolor emoticons',
+				//    image_advtab: true,
+				//    templates: [
+				//        {title: 'Test template 1', content: 'Test 1'},
+				//        {title: 'Test template 2', content: 'Test 2'}
+				//    ],
+				//    setup : function(ed) {
+				//        ed.onDeactivate.add(function(ed) {
+				//            alert ('in special function');
+				//            ed.save();  // or whatever you want to do to save the editor content
+				//            ed.remove(); // removes tinymce instance
+				//        });
+				//
+				//        ed.onKeyUp.add(function(ed,l) {
+				//            alert ('in onkeyup');
+				//            ed.save();  // or whatever you want to do to save the editor content
+				//        });
+				//    }
+				//
+				//});
 
-            //// 333333333333
-            ////tinymce3 works
-            //alert ('in tinymce init');
-            //// section_editor_init_mce
-
-
-            //tinyMCE.init({
-            //    mode : 'textareas',
-            //    theme : 'modern',
-            //    theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
-            //    theme_advanced_buttons2 : '',
-            //    theme_advanced_buttons3 : '',
-            //    theme_advanced_toolbar_location : 'top',
-            //    theme_advanced_toolbar_align : 'left',
-            //    theme_advanced_statusbar_location : 'bottom',
-            //    //plugins : 'inlinepopups',
-            //    setup : function(ed) {
-            //        // Add a custom button
-            //        ed.addButton('mybutton', {
-            //            title : 'My button',
-            //            image : '/example_data/example.gif',
-            //            onclick : function() {
-            //                // Add you own code to execute something on click
-            //                ed.focus();
-            //                ed.selection.setContent('Hello world!');
-            //            }
-            //        });
-            //    }
-            //});
+				//// 333333333333
+				////tinymce3 works
+				//alert ('in tinymce init');
+				//// section_editor_init_mce
 
 
-            // WORKS tested 150715
-            // http://www.tinymce.com/tryit/menubutton.php
-            // tinymce.init({
-            //    selector: 'textarea',
-            //    toolbar: 'mybutton',
-            //    setup: function(editor) {
-            //        editor.addButton('mybutton', {
-            //            type: 'menubutton',
-            //            text: 'My button',
-            //            icon: false,
-            //            menu: [
-            //                {text: 'Menu item 1', onclick: function() {editor.insertContent('Menu item 1');}},
-            //                {text: 'Menu item 2', onclick: function() {editor.insertContent('Menu item 2');}}
-            //            ]
-            //        });
-            //    }
-            //});
+				//tinyMCE.init({
+				//    mode : 'textareas',
+				//    theme : 'modern',
+				//    theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
+				//    theme_advanced_buttons2 : '',
+				//    theme_advanced_buttons3 : '',
+				//    theme_advanced_toolbar_location : 'top',
+				//    theme_advanced_toolbar_align : 'left',
+				//    theme_advanced_statusbar_location : 'bottom',
+				//    //plugins : 'inlinepopups',
+				//    setup : function(ed) {
+				//        // Add a custom button
+				//        ed.addButton('mybutton', {
+				//            title : 'My button',
+				//            image : '/example_data/example.gif',
+				//            onclick : function() {
+				//                // Add you own code to execute something on click
+				//                ed.focus();
+				//                ed.selection.setContent('Hello world!');
+				//            }
+				//        });
+				//    }
+				//});
+
+
+				// WORKS tested 150715
+				// http://www.tinymce.com/tryit/menubutton.php
+				// tinymce.init({
+				//    selector: 'textarea',
+				//    toolbar: 'mybutton',
+				//    setup: function(editor) {
+				//        editor.addButton('mybutton', {
+				//            type: 'menubutton',
+				//            text: 'My button',
+				//            icon: false,
+				//            menu: [
+				//                {text: 'Menu item 1', onclick: function() {editor.insertContent('Menu item 1');}},
+				//                {text: 'Menu item 2', onclick: function() {editor.insertContent('Menu item 2');}}
+				//            ]
+				//        });
+				//    }
+				//});
 
 
 
-            // USED until at least 150715
-            tinyMCE.init
-			(
+				// USED until at least 150715
+
+				var toAdd = {};
+				if (true)
 				{
-                //mode : 'exact',
+					toAdd['plugins'] = 'code, pagebreak, paste';
+
+					// added paste 10/2015 - just having this paste affects wat is pasted
+					//plugins: 'code, pagebreak', // added paste 10/2015
+
+					// begin added with paste
+					toAdd['theme_advanced_buttons3_add'] = 'pastetext,pasteword,selectall';
+					toAdd['paste_auto_cleanup_on_paste'] = false;
+					toAdd['paste_preprocess'] = function(pl, o) {
+						// Content string containing the HTML from the clipboard
+						//alert(o.content);
+						//o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner cleanhtml
+						//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
+						//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
+						//alert('prehk [' + o.content + ']');
+						//alert('posthk');
+						//o.content = "-: CLEANED PRE :-\n" + o.content;
+						o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(o.content, '<span><div><table><td><tr><tbody><ul><li><p><br><pre><a><h1><h2><h3><h4><h5><span><b><strong><u><i><p>' ); // htmlcleaner
+					};
+					toAdd['paste_postprocess'] = function(pl, o) {
+						// Content DOM node containing the DOM structure of the clipboard
+						alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
+						o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
+					};
+					// end added with paste
+
+				}
+
+				var tinyMceparams =
+				{
+					//mode : 'exact',
 
 
-                //mode : 'textareas',
-                //theme : 'advanced',
-                //theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
-                //theme_advanced_buttons2 : '',
-                //theme_advanced_buttons3 : '',
-                //theme_advanced_toolbar_location : 'top',
-                //theme_advanced_toolbar_align : 'left',
-                //theme_advanced_statusbar_location : 'bottom',
-                //plugins : 'inlinepopups',
-                //setup : function(ed) {
-                //    // Add a custom button
-                //    ed.addButton('mybutton', {
-                //        title : 'My button',
-                //        image : '/example_data/example.gif',
-                //        onclick : function() {
-                //            // Add you own code to execute something on click
-                //            ed.focus();
-                //            ed.selection.setContent('Hello world!');
-                //        }
-                //    });
-                //}
-                //
-                //
+					//mode : 'textareas',
+					//theme : 'advanced',
+					//theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
+					//theme_advanced_buttons2 : '',
+					//theme_advanced_buttons3 : '',
+					//theme_advanced_toolbar_location : 'top',
+					//theme_advanced_toolbar_align : 'left',
+					//theme_advanced_statusbar_location : 'bottom',
+					//plugins : 'inlinepopups',
+					//setup : function(ed) {
+					//    // Add a custom button
+					//    ed.addButton('mybutton', {
+					//        title : 'My button',
+					//        image : '/example_data/example.gif',
+					//        onclick : function() {
+					//            // Add you own code to execute something on click
+					//            ed.focus();
+					//            ed.selection.setContent('Hello world!');
+					//        }
+					//    });
+					//}
+					//
+					//
 
 
+					mode : 'textareas',
+					//  theme : 'advanced',
+					//plugins : 'pagebreak,styleBAD,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template',
 
+					// Theme options
+					//theme_advanced_buttons1 : 'save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect',
+					//theme_advanced_buttons2 : 'cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor',
+					//theme_advanced_buttons3 : 'tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen',
+					//theme_advanced_buttons4 : 'insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak',
+					//theme_advanced_toolbar_location : 'top',
+					//theme_advanced_toolbar_align : 'left',
+					//theme_advanced_statusbar_location : 'bottom',
+					//theme_advanced_resizing : true,
+					theme_advanced_statusbar_location : "", // hbkk
+					width: '100%',
+					height: '100%',
+					resize: 'both',
+					elements : 'idTinyMceTextArea',
+					//toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
+					toolbar1: 'mybuttonimage | mybuttonmenu | example | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic ',
+					//toolbar2: 'print preview media | forecolor backcolor emoticons',
+					///toolbar2: 'bold italic',
+					///these don't work": toolbar2: 'image ',
+					//toolbar2: 'bold italic mybutton',
+					//toolbar: 'mybutton',
+					oninit : $scope.myCustomOnInit,
 
+					//toolbar: 'true',
+					menubar : 'false',
+					init_instance_callback : function() {
+						if ($scope.q)
+							tinyMCE.activeEditor.setContent($scope.q);
+					},
 
+					setup : function(ed) {
+						//ed.onDeactivate.add(function(ed) {
+						//    alert ('in special function');
+						//    ed.save();  // or whatever you want to do to save the editor content
+						//    ed.remove(); // removes tinymce instance
+						//});
 
+						//ed.onKeyUp.add(function(ed,l) {
+						//    alert ('in onkeyup');
+						//    ed.save();  // or whatever you want to do to save the editor content
+						//});
 
-
-
-
-
-
-                plugins: 'code, pagebreak, paste',
-
-				theme_advanced_buttons3_add : "pastetext,pasteword,selectall",
-				paste_auto_cleanup_on_paste : true,
-				paste_preprocess : function(pl, o) {
-					// Content string containing the HTML from the clipboard
-					//alert(o.content);
-					//o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner cleanhtml
-					//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
-					//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
-					alert('prehk [' + o.content + ']');
-					o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(o.content, '<span><div><table><td><tr><tbody><ul><li><p><br><pre><a><h1><h2><h3><h4><h5><span><b><strong><u><i><p>' ); // htmlcleaner
-					//alert('posthk');
-
-					//o.content = "-: CLEANED PRE :-\n" + o.content;
-				},
-				paste_postprocess : function(pl, o) {
-					// Content DOM node containing the DOM structure of the clipboard
-					//alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
-					//o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
-				},
-
-                mode : 'textareas',
-                //  theme : 'advanced',
-                //plugins : 'pagebreak,styleBAD,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template',
-
-                // Theme options
-                //theme_advanced_buttons1 : 'save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect',
-                //theme_advanced_buttons2 : 'cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor',
-                //theme_advanced_buttons3 : 'tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen',
-                //theme_advanced_buttons4 : 'insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak',
-                //theme_advanced_toolbar_location : 'top',
-                //theme_advanced_toolbar_align : 'left',
-                //theme_advanced_statusbar_location : 'bottom',
-                //theme_advanced_resizing : true,
-				theme_advanced_statusbar_location : "", // hbkk
-                width: '100%',
-                height: '100%',
-                resize: 'both',
-                elements : 'idTinyMceTextArea',
-                //toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
-                toolbar1: 'mybuttonimage | mybuttonmenu | example | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic ',
-                //toolbar2: 'print preview media | forecolor backcolor emoticons',
-                ///toolbar2: 'bold italic',
-                ///these don't work": toolbar2: 'image ',
-                //toolbar2: 'bold italic mybutton',
-                //toolbar: 'mybutton',
-				oninit : $scope.myCustomOnInit,
-
-				//toolbar: 'true',
-                menubar : 'false',
-                init_instance_callback : function() {
-                    if ($scope.q)
-                        tinyMCE.activeEditor.setContent($scope.q);
-                },
-
-                setup : function(ed) {
-                    //ed.onDeactivate.add(function(ed) {
-                    //    alert ('in special function');
-                    //    ed.save();  // or whatever you want to do to save the editor content
-                    //    ed.remove(); // removes tinymce instance
-                    //});
-
-                    //ed.onKeyUp.add(function(ed,l) {
-                    //    alert ('in onkeyup');
-                    //    ed.save();  // or whatever you want to do to save the editor content
-                    //});
-
-					ed.on('init', function(e) {
-						this.getDoc().body.style.fontSize = '20px';
-						//alert('init event' + e);
-						var elemId = 'mceu_57';
-						if (document.getElementById(elemId) !== null)
-						{
-							//alert ('1123123');
-						//	if (document.getElementById('mceu_57').style.visibility==='hidden')
-						//		document.getElementById('mceu_57').style.visibility='visible';
-						//	else
-						//		document.getElementById('mceu_57').style.visibility='hidden';
-							//if (document.getElementById(elemId).style.visibility==='visible')
-							//{
+						ed.on('init', function(e) {
+							this.getDoc().body.style.fontSize = '20px';
+							//alert('init event' + e);
+							var elemId = 'mceu_57';
+							if (document.getElementById(elemId) !== null)
+							{
+								//alert ('1123123');
+								//	if (document.getElementById('mceu_57').style.visibility==='hidden')
+								//		document.getElementById('mceu_57').style.visibility='visible';
+								//	else
+								//		document.getElementById('mceu_57').style.visibility='hidden';
+								//if (document.getElementById(elemId).style.visibility==='visible')
+								//{
 								document.getElementById(elemId).style.visibility='hidden';
 								//alert ('1123123b');
 
-							//}
-							//else
-							//	document.getElementById(elemId).style.visibility='hidden';
-						}
-					});
+								//}
+								//else
+								//	document.getElementById(elemId).style.visibility='hidden';
+							}
+						});
 
-					//ed.onLoadContent.add(function(ed, o) {
-					//	// Output the element name
-					//	alert ('sdfsf');
-					//	//console.debug(o.element.nodeName);
-					//});
+						//ed.onLoadContent.add(function(ed, o) {
+						//	// Output the element name
+						//	alert ('sdfsf');
+						//	//console.debug(o.element.nodeName);
+						//});
 
-                    //    toolbar: 'mybutton',
-                    //    setup: function(editor) {
-					ed.addButton('mybuttonimage', {
-						//type: 'menubutton',
-						//text: 'My button',
-						//id: 'mcebuttonid2',
-						//image: '/img/EditPencilBnW.png',
-						image: '/img/SaveIconBlue.png',
-						icon: false,
-						onclick: function() {ed.insertContent('Menu item 0')},
-						//menu: [
-						//	{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
-						//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
-						//]
-					});
+						//    toolbar: 'mybutton',
+						//    setup: function(editor) {
+						ed.addButton('mybuttonimage', {
+							//type: 'menubutton',
+							//text: 'My button',
+							//id: 'mcebuttonid2',
+							//image: '/img/EditPencilBnW.png',
+							image: '/img/SaveIconBlue.png',
+							icon: false,
+							onclick: function() {ed.insertContent('Menu item 0')},
+							//menu: [
+							//	{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
+							//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
+							//]
+						});
 
-					ed.addButton('mybuttonmenu', {
-						type: 'menubutton',
-						//id: 'mcebuttonid1',
-						text: 'My button',
-						//id: 'mcebuttonid',
-						//image: '/img/EditPencilBnW.png',
-						icon: false,
-						//onclick: function() {ed.insertContent('Menu item 0')},
-						menu: [
-							{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
-							{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
-						]
-					}					);
+						ed.addButton('mybuttonmenu', {
+							type: 'menubutton',
+							//id: 'mcebuttonid1',
+							text: 'My button',
+							//id: 'mcebuttonid',
+							//image: '/img/EditPencilBnW.png',
+							icon: false,
+							//onclick: function() {ed.insertContent('Menu item 0')},
+							menu: [
+								{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
+								{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
+							]
+						}					);
 
 
-					ed.addButton('example', {
-						text: 'My title',
-						//image: '/img/EditPencilBnW.png',
-						onclick: function() {
-							ed.insertContent('Hello world!!');
-						}
-					});
-					//alert ('inasd');
+						ed.addButton('example', {
+							text: 'My title',
+							//image: '/img/EditPencilBnW.png',
+							onclick: function() {
+								ed.insertContent('Hello world!!');
+							}
+						});
+						//alert ('inasd');
 
-                    //    }
+						//    }
 
-                    ed.on('keyup', function(e)
-					{
-						if (ed.getContent({format : 'text'}).trim() === '*' ||
-							ed.getContent({format : 'text'}).trim() === '')
+						ed.on('keyup', function(e)
 						{
-							SppSvc.setModelDirty (false);
-						} else {
-							SppSvc.setModelDirty (true);
-						}
-
-						$scope.$apply();
-
-						//console.log ('e.keyIdentifier:' + e.keyIdentifier);
-						//console.log ('e.keyCode:' + e.keyCode);
-						//console.log ('e.metaKey:' + e.metaKey);
-						//console.log ('e.shiftKey:' + e.shiftKey);
-						//console.log ('e.altKey:' + e.altKey);
-						//alert ('e.ctrlKey:' + e.ctrlKey);
-
-
-						if (e.keyIdentifier === 'Enter')
-						{
-							if (ed.getContent({format : 'text'}).trim() === '') {
-								$scope.setTextInShowingEditor('*', 'line 889');
+							if (ed.getContent({format : 'text'}).trim() === '*' ||
+								ed.getContent({format : 'text'}).trim() === '')
+							{
+								SppSvc.setModelDirty (false);
+							} else {
+								SppSvc.setModelDirty (true);
 							}
 
-							if ((!(!$scope.modelCheckboxCtrlEnterToSave && e.ctrlKey)) &&
-								(!$scope.modelCheckboxCtrlEnterToSave || e.ctrlKey))
+							$scope.$apply();
+
+							//console.log ('e.keyIdentifier:' + e.keyIdentifier);
+							//console.log ('e.keyCode:' + e.keyCode);
+							//console.log ('e.metaKey:' + e.metaKey);
+							//console.log ('e.shiftKey:' + e.shiftKey);
+							//console.log ('e.altKey:' + e.altKey);
+							//alert ('e.ctrlKey:' + e.ctrlKey);
+
+
+							if (e.keyIdentifier === 'Enter')
 							{
+								if (ed.getContent({format : 'text'}).trim() === '') {
+									$scope.setTextInShowingEditor('*', 'line 889');
+								}
+
+								if ((!(!$scope.modelCheckboxCtrlEnterToSave && e.ctrlKey)) &&
+									(!$scope.modelCheckboxCtrlEnterToSave || e.ctrlKey))
+								{
+									$scope.eventHandlerEditorcontentChange (
+										$scope.enumKeyEvent.ENTER,
+										ed.getContent({format : 'data'}),
+										ed.getContent({format : 'html'}),
+										ed.getContent({format : 'text'})
+									);
+								}
+							} else if (e.keyCode === 32) {
 								$scope.eventHandlerEditorcontentChange (
-									$scope.enumKeyEvent.ENTER,
+									$scope.enumKeyEvent.SPACE,
 									ed.getContent({format : 'data'}),
 									ed.getContent({format : 'html'}),
 									ed.getContent({format : 'text'})
 								);
 							}
-						} else if (e.keyCode === 32) {
-							$scope.eventHandlerEditorcontentChange (
-								$scope.enumKeyEvent.SPACE,
-								ed.getContent({format : 'data'}),
-								ed.getContent({format : 'html'}),
-								ed.getContent({format : 'text'})
-							);
-						}
 
-                        //console.log ('xx:' + tinyMCE.get('idDivForTinyMceEditorTextarea').getContent({format : 'text'}).trim());
+							//console.log ('xx:' + tinyMCE.get('idDivForTinyMceEditorTextarea').getContent({format : 'text'}).trim());
 
-                        //check_submit();
-                    });
+							//check_submit();
+						});
 
-                    //ed.onKeyPress.add(
-                    //    function (ed, evt) {
-                    //        alert('Editor-ID: '+ed.id+'\nEvent: '+evt);
-                    //        //....
-                    //    }
-                    //);
-                    //
-                    ////ed.onInit.add(function(ed, evt) {
-                    //
-                    //    var dom = ed.dom;
-                    //    var doc = ed.getDoc();
-                    //
-                    //    tinymce.dom.Event.add(doc, 'blur', function(e) {
-                    //        alert('blur!!!');
-                    //    });
-                    //});
-                }, // setup
-				theme_advanced_path : false,
+						//ed.onKeyPress.add(
+						//    function (ed, evt) {
+						//        alert('Editor-ID: '+ed.id+'\nEvent: '+evt);
+						//        //....
+						//    }
+						//);
+						//
+						////ed.onInit.add(function(ed, evt) {
+						//
+						//    var dom = ed.dom;
+						//    var doc = ed.getDoc();
+						//
+						//    tinymce.dom.Event.add(doc, 'blur', function(e) {
+						//        alert('blur!!!');
+						//    });
+						//});
+					}, // setup
+					theme_advanced_path : false,
 
 					//setup: function(editor) {
-                //    editor.on('blur', function(e) {
-                //        console.log('blur event', e);
-                //    });
-                //}
-                //setup : function(ed) {
-                //    ed.on('blur', function(e) {
-                //        alert('blur');
-                //    });
-                //}
-                //,
-                //setup : function(ed) {
-                //    ed.onInit.add(function(ed, evt) {
-                //
-                //        var dom = ed.dom;
-                //        var doc = ed.getDoc();
-                //
-                //        tinymce.dom.Event.add(doc, 'blur', function(e) {
-                //            // Do something when the editor window is blured.
-                //            alert('blur!!!');
-                //        });
-                //    });
-                //},
+					//    editor.on('blur', function(e) {
+					//        console.log('blur event', e);
+					//    });
+					//}
+					//setup : function(ed) {
+					//    ed.on('blur', function(e) {
+					//        alert('blur');
+					//    });
+					//}
+					//,
+					//setup : function(ed) {
+					//    ed.onInit.add(function(ed, evt) {
+					//
+					//        var dom = ed.dom;
+					//        var doc = ed.getDoc();
+					//
+					//        tinymce.dom.Event.add(doc, 'blur', function(e) {
+					//            // Do something when the editor window is blured.
+					//            alert('blur!!!');
+					//        });
+					//    });
+					//},
 
-                //setup: function(editor) {
-                //    editor.on('blur', function(e) {
-                //        console.log('blur event', e);
-                //    });
-                //}
+					//setup: function(editor) {
+					//    editor.on('blur', function(e) {
+					//        console.log('blur event', e);
+					//    });
+					//}
 
-            }); // tinymce init
+				};
 
+				for (var propertyName in toAdd) {
+					//alert (propertyName + ':' + toAdd[propertyName]);
+					tinyMceparams[propertyName] = toAdd[propertyName];
+				}
+
+				tinyMCE.init (tinyMceparams); // tinymce init
+
+			}
+
+
+			$scope.localTinyMceInit();
 
 
             //.----------------. .----------------. .----------------. .----------------. .----------------. .----------------. .----------------.
