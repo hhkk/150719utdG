@@ -265,9 +265,10 @@
 
 			<!--<WORKS p ng-repeat="command in commands">{{command}}</p>-->
 
+			<!--<div id='div' contenteditable='true' onpaste='handlepaste(this, event)'>Paste</div>-->
+			<!--hbkk 1510 -->
+			<div id='div' contenteditable='true' onpaste='UtilHtmlCleaner.handlepaste (this, event)'>Paste</div>
 			<button ng-click="testButton(-2)" title="testButton">TestButton</button>
-
-
 
 
 			<!--<div ng-controller="Ctrl1">-->
@@ -406,6 +407,7 @@
 				<div id='perRowOnly'>
 					<tr  ng-repeat="ustodo in ustodosFiltered "
 
+						 id="topLevelTableRow{{$index}}"
 						 ng-mouseover="this.eventMouseoverRow2($index)"
 						 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
 						 ng-class-odd="'odd'" ng-class-even="'even'">
@@ -486,9 +488,14 @@
 
 								<!--ng-bind-html="ustodosFiltered[$index].html">-->
 								<!--ng-bind-html="processThis(ustodosFiltered[$index].html)"-->
+								<!--hbkk 1510-->
+
+
 								<div class="WholePage" id="ustodorow{{$index}}" contenteditable="true"
+									 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
 									 ng-focus='hkngfocustest($index)'
 									 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
+
 									 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
 										>
 

@@ -24,6 +24,8 @@ var UtilErrorEmitter = UtilErrorEmitter;
 var UtilClassz = UtilClassz;
 
 var UtilHtmlCleaner = UtilHtmlCleaner; // this is a file name
+//alert('defining UtilHtmlCleaner2_pasteProcessForContentEditable ');
+//var UtilHtmlCleaner2_pasteProcessForContentEditable = UtilHtmlCleaner2_pasteProcessForContentEditable; // this is a file name
 
 //alert ('in here 2');
 //var myapplication = exports.myapplication;
@@ -119,6 +121,16 @@ var angularModule = null;
 // works angularModule.controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'Authentication', 'Ustodos',
 //    function($scope, $stateParams, $location, $rootScope, Authentication, Ustodos) {
 // angularModule.controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'ngSanitize', 'Authentication', 'Ustodos',
+
+
+
+var pasteHtmlContentEditableCleaner = function () {
+	//alert('in scope.pasteHtmlContentEditableCleaner():' + window.clipboardData.getData('Text'));
+	alert('in scope.pasteHtmlContentEditableCleaner():' + x);
+	var foo = 'xx:' + window.clipboardData.getData('Text');
+	window.clipboardData.setData('Text', foo);
+};
+
 
 
 
@@ -470,6 +482,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //    //alert ('done testTinyMce');
             //}
 
+
             $scope.ngInitTopLevel= function()
             {
                 //alert ('in ngInitTopLevel');
@@ -587,7 +600,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //| |              | | |              | | |              | | | |              | | |              | | |              | | |              | |
             //| '--------------' | '--------------' | '--------------' | | '--------------' | '--------------' | '--------------' | '--------------' |
             //'----------------' '----------------' '----------------'   '----------------' '----------------' '----------------' '----------------'
-            // section_mceinit
+            // section_mceinit  section_tinymce
             // http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=MCE%20INIT%0A
             // n other project see UtilTinyMCE.js
             //tinyMCE.init({
@@ -609,9 +622,14 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //tinymce.activeEditor.setContent('<span>some</span> html');
             };
 
-			$scope.localTinyMceInit = function ()
+			$scope.localTinyMceInit = function (includeHtmlCleaner) // hbkk 1510
 			{
-				alert ('in localTinyMceInit');
+				if (!includeHtmlCleaner)
+				{
+					includeHtmlCleaner = true;
+				}
+
+
 				// 1111111111
 				//tinyMCE.init({
 				//    selector:'textarea',
@@ -710,7 +728,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				// USED until at least 150715
 
 				var toAdd = {};
-				if (true)
+				if (false)  // hbkk 1510
 				{
 					toAdd['plugins'] = 'code, pagebreak, paste';
 
@@ -729,16 +747,18 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//alert('prehk [' + o.content + ']');
 						//alert('posthk');
 						//o.content = "-: CLEANED PRE :-\n" + o.content;
-						o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(o.content, '<span><div><table><td><tr><tbody><ul><li><p><br><pre><a><h1><h2><h3><h4><h5><span><b><strong><u><i><p>' ); // htmlcleaner
+						// works hbkk 1510
+						//o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlStandard(o.content); // htmlcleaner
 					};
 					toAdd['paste_postprocess'] = function(pl, o) {
 						// Content DOM node containing the DOM structure of the clipboard
-						alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
-						o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
+						//alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
+						//o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
 					};
 					// end added with paste
 
 				}
+
 
 				var tinyMceparams =
 				{
@@ -783,7 +803,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//theme_advanced_toolbar_align : 'left',
 					//theme_advanced_statusbar_location : 'bottom',
 					//theme_advanced_resizing : true,
-					theme_advanced_statusbar_location : "", // hbkk
+					theme_advanced_statusbar_location : "", //
 					width: '100%',
 					height: '100%',
 					resize: 'both',
@@ -3159,13 +3179,43 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //CKEDITOR.instances.editor.destroy();
 
 				//alert ('in testbutton');
-				if (true)
+				//if (true)    // hbkk 1510
+				//{
+				//	var x = document.getElementById('topLevelTableRow1');
+                //
+				//	//x.
+                //
+				//	if (confirm('Do you want to convert this to text?'))
+				//	{
+				//		var foo = window.clipboardData.getData('Text');
+				//		window.clipboardData.setData('Text', foo);
+				//	} else
+				//	{
+				//		// Do nothing!
+				//	}
+                //
+                //
+				//}
+
+				if (true)    // hbkk 1510 works to set text as mce window
 				{
-					//alert ('document.getElementById(checkBoxAll).value = :' + document.getElementById('checkBoxAll').checked);
-					document.getElementById('checkBoxAll').checked = false;
+					var x = document.getElementById('topLevelTableRow1');
+					//alert ('x:' + x);
+					//alert ('x.firstElementChild.innerHTML:' + x.firstElementChild.innerHTML);
+					//alert ('x.firstChild.innerHTML:' + x.firstChild.innerHTML);
+					x.innerHTML= '<textarea id="hktestTinyMceTextArea"></textarea>';
+
+						//<textarea ng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
+
+					$scope.localTinyMceInit();
 
 				}
 
+				if (false)
+				{
+					//alert ('document.getElementById(checkBoxAll).value = :' + document.getElementById('checkBoxAll').checked);
+					document.getElementById('checkBoxAll').checked = false;
+				}
 
 				if (false)
 				{
@@ -3283,7 +3333,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //    setTimeout(function(){ CKEDITOR.instances.idCkeEditorTextarea.execCommand('minimize'); }, 2000);
                 //}
 
-
                 //CKEDITOR.instances.idCkeEditorTextarea.resize('100%',height);
 
                 // WORKS $scope.getTextHtmlAndValueInShowingEditor();
@@ -3312,9 +3361,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //var selectedCommandUrl = $scope.commands[idxSelected].commandUrl;
                 //isDirtySetFlag_updateScopeStateFlag_SaveDiffsOption(true);
 
-
                 //$location.search('hk', 'sdfsdf');
-
 
             };
 
@@ -3586,7 +3633,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 			$scope.synchNumberCheckboxesChecked = function() {
 				//alert ('in synchNumberCheckboxesChecked ');
 				try
-				{ // hbkk
+				{ //
 					var indexx = 0;
 					// archetype prototype howto - iterate over all of a class
 					$scope.numberCheckboxesChecked = 0;

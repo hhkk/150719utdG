@@ -1079,10 +1079,129 @@ var utilHtmlCleaner = new function() {
 		//return "bracketed << by cleanHtmlPre <<" + str + ">>";
 		return str;
 	}
+
+	this.cleanHtmlStandard = function(html) {
+		var pre = html;
+		var post = pre;
+		if (confirm('Do you want the HTML cleaned?'))
+		{
+			var post = this.cleanHtmlPre(html,
+				// allowed tags list
+				//''
+				'<a>' +
+				'<b>' +
+				'<br>' +
+				'<code>' +
+				'<div>' +
+				'<h1>' +
+				'<h2>' +
+				'<h3>' +
+				'<h4>' +
+				'<h5>' +
+				'<i>' +
+				'<li>' +
+				'<p>' +
+				'<pre>' +
+				'<span>' +
+				'<strong>' +
+				'<table>' +
+				'<tbody>' +
+				'<td>' +
+				'<tr>' +
+				'<u>' +
+				'<ul>'
+			);
+		}
+		if (pre !== post)
+			alert('changed [' + pre + '] to ['+ post + ']');
+		else
+			alert('no change from pre to post [' + pre + ']');
+
+		return post;
+	}
 }
+
+
+
+// http://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser
+var handlepaste = function (elem, e)
+{
+	//alert('in scope.pasteHtmlContentEditableCleaner():' + window.clipboardData.getData('Text'));
+	var savedcontent = elem.innerHTML;
+	if (e && e.clipboardData && e.clipboardData.getData)
+	{// Webkit - get data from clipboard, put into editdiv, cleanup, then cancel event
+		if (/text\/html/.test(e.clipboardData.types))
+		{
+			elem.innerHTML = e.clipboardData.getData('text/html');
+			alert ('in handlepaste 1 elem.innerHTML [' + elem.innerHTML + ']');
+		}
+		else if (/text\/plain/.test(e.clipboardData.types))
+		{
+			elem.innerHTML = e.clipboardData.getData('text/plain');
+			alert ('in handlepaste 2 elem.innerHTML [' + elem.innerHTML + ']');
+		}
+		else
+		{
+			elem.innerHTML = "";
+		}
+		waitforpastedata(elem, savedcontent);
+		if (e.preventDefault)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		}
+		return false;
+	}
+	else
+	{// Everything else - empty editdiv and allow browser to paste content into it, then cleanup
+		elem.innerHTML = "";
+		waitforpastedata(elem, savedcontent);
+		return true;
+	}
+}
+
+function waitforpastedata (elem, savedcontent) {
+	//alert ('in waitforpastedata ');
+	if (elem.childNodes && elem.childNodes.length > 0) {
+		processpaste(elem, savedcontent);
+	}
+	else {
+		var that = {
+			e: elem,
+			s: savedcontent
+		}
+		that.callself = function () {
+			waitforpastedata(that.e, that.s)
+		}
+		setTimeout(that.callself,20);
+	}
+}
+
+
+function processpaste (elem, savedcontent) {
+	//alert ('in processpaste ');
+	var pasteddata = elem.innerHTML;
+	//^^Alternatively loop through dom (elem.childNodes or elem.getElementsByTagName) here
+
+	//elem.innerHTML = 'dd:' + savedcontent;
+	elem.innerHTML = 'dd:' + pasteddata;
+
+	// Do whatever with gathered data;
+	//alert('xx:' + pasteddata);
+}
+
+
+
+
+
+
+
+
+
 
 if (typeof exports !== 'undefined') {
     exports.utilHtmlCleaner = utilHtmlCleaner;
+    exports.handlepaste = handlepaste;
 	// UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(strm ...)
 }
 
