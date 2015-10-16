@@ -727,18 +727,18 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				// USED until at least 150715
 
-				var toAdd = {};
-				if (false)  // hbkk 1510
+				var addToMceInitPaste = {};
+				if (confirm('Include MCE HTML paste filter?'))  // hbkk 1510
 				{
-					toAdd['plugins'] = 'code, pagebreak, paste';
+					addToMceInitPaste['plugins'] = 'code, pagebreak, paste';
 
 					// added paste 10/2015 - just having this paste affects wat is pasted
 					//plugins: 'code, pagebreak', // added paste 10/2015
 
 					// begin added with paste
-					toAdd['theme_advanced_buttons3_add'] = 'pastetext,pasteword,selectall';
-					toAdd['paste_auto_cleanup_on_paste'] = false;
-					toAdd['paste_preprocess'] = function(pl, o) {
+					addToMceInitPaste['theme_advanced_buttons3_add'] = 'pastetext,pasteword,selectall';
+					addToMceInitPaste['paste_auto_cleanup_on_paste'] = false;
+					addToMceInitPaste['paste_preprocess'] = function(pl, o) {
 						// Content string containing the HTML from the clipboard
 						//alert(o.content);
 						//o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner cleanhtml
@@ -750,7 +750,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						// works hbkk 1510
 						//o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlStandard(o.content); // htmlcleaner
 					};
-					toAdd['paste_postprocess'] = function(pl, o) {
+					addToMceInitPaste['paste_postprocess'] = function(pl, o) {
 						// Content DOM node containing the DOM structure of the clipboard
 						//alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
 						//o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
@@ -763,8 +763,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				var tinyMceparams =
 				{
 					//mode : 'exact',
-
-
 					//mode : 'textareas',
 					//theme : 'advanced',
 					//theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
@@ -819,12 +817,14 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 					//toolbar: 'true',
 					menubar : 'false',
-					init_instance_callback : function() {
+					init_instance_callback : function()
+					{
 						if ($scope.q)
 							tinyMCE.activeEditor.setContent($scope.q);
 					},
 
-					setup : function(ed) {
+					setup : function(ed)
+					{
 						//ed.onDeactivate.add(function(ed) {
 						//    alert ('in special function');
 						//    ed.save();  // or whatever you want to do to save the editor content
@@ -836,7 +836,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//    ed.save();  // or whatever you want to do to save the editor content
 						//});
 
-						ed.on('init', function(e) {
+						ed.on('init', function(e)
+						{
 							this.getDoc().body.style.fontSize = '20px';
 							//alert('init event' + e);
 							var elemId = 'mceu_57';
@@ -1007,14 +1008,14 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				};
 
-				for (var propertyName in toAdd) {
-					//alert (propertyName + ':' + toAdd[propertyName]);
-					tinyMceparams[propertyName] = toAdd[propertyName];
+				for (var propertyName in addToMceInitPaste) {
+					//alert (propertyName + ':' + addToMceInitPaste[propertyName]);
+					tinyMceparams[propertyName] = addToMceInitPaste[propertyName];
 				}
 
 				tinyMCE.init (tinyMceparams); // tinymce init
 
-			}
+			};
 
 
 			$scope.localTinyMceInit();
@@ -1660,7 +1661,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
             $scope.focusOnId = function (id) {
-                //alert ('in focusOnId :' + id);
+                alert ('in focusOnId :' + id);
 
                 try {
 
@@ -2092,8 +2093,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //};
 
             // section_per_editor 2
+			alert('11111');
             $scope.toggleVisibilityTo0 = function() {
-				//alert ('in toggleVisibilityTo0');
+				alert ('in toggleVisibilityTo0');
                 // couldn't figure out mce blur so use this
 				SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_0_TEXT);
                 $scope.focusOnId(arrIds[0]);
@@ -2108,7 +2110,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             };
 
             $scope.toggleVisibilityTo1 = function() {
-				//alert ('in toggleVisibilityTo1');
+				alert ('in toggleVisibilityTo1');
                 // couldn't figure out mce blur so use this
 				SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_1_MEDIUM);
                 //alert ('in toggleVisibilityTo1 Medium');
@@ -2142,7 +2144,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //};
             //
             $scope.toggleVisibilityTo3 = function(callerId) {
-				//alert ('in toggleVisibilityTo3');
+				alert ('in toggleVisibilityTo3');
 				SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_3_MCE);
                 //alert ('in toggleVisibilityTo3 MCE callerId [' + callerId + ']');
                 document.getElementById(arrIds[0]).style.display = 'none';
