@@ -9,16 +9,16 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		$urlRouterProvider.otherwise('/');
 
 		// Home state routing
-		$stateProvider.
-			state('home', {
-				url: '/',
-				//templateUrl: 'modules/core/views/home.client.view.html'
-				//templateUrl: 'modules/ustodos/views/view-ustodo.client.view.html'
-				//template: 'in core state home',
-				templateUrl: 'modules/ustodos/views/singlepage-ustodos.client.view.html',
-				controller: function ($scope) {
-					//alert ('start state '+$state.$current)
-					$scope.stateInfoHKstate='hihk';
+			$stateProvider.
+				state('home', {
+					url: '/',
+					//templateUrl: 'modules/core/views/home.client.view.html'
+					//templateUrl: 'modules/ustodos/views/view-ustodo.client.view.html'
+					//template: 'in core state home',
+					templateUrl: 'modules/ustodos/views/singlepage-ustodos.client.view.html',
+					controller: function ($scope) {
+						//alert ('start state '+$state.$current)
+						$scope.stateInfoHKstate='hihk';
 				}
 				//templateUrl: 'modules/core/views/home.client.view.html'
 			}).
