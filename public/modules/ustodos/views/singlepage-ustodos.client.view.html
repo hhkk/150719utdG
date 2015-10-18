@@ -98,6 +98,7 @@
 		&nbsp;<input type="checkbox" title="Update search results display after a write/save" id='idcheckbox_modelCheckboxUpdateOnWrite' ng-model=modelCheckboxUpdateOnWrite  />UpdateOnWrite
 		&nbsp;<input type="checkbox" title="if checked, control+enter submits a command while enter is just a line feed (allows multiline record entries)" id='idcheckbox_modelCheckboxCtrlEnterToSave' ng-model=modelCheckboxCtrlEnterToSave  />CtrlEnterToSave
 		&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_reloadWarning' ng-model=reloadWarning />reloadWarn
+		&nbsp;<input type="checkbox" ng-Change="eventNgChange_idcheckbox_includeMceHtmlPasteFilter()" title="On means clean HTML on rich text paste"  id='idcheckbox_includeMceHtmlPasteFilter' ng-model=includeMceHtmlPasteFilter />MCE Paste Filter
 
 		<!--archetype prototype - conditional tag display by variable true false binding-->
 		<!--<img id='imageIdRedPEncilbnw' src='/img/EditPencilBnW.png' xxstyle="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
@@ -138,45 +139,6 @@
 			| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
 			 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
 			-->
-			<!-- ================ INPUT#0 ======================== maps to $scope.onKeyUp -->
-			<input id="idInput0TypeText"
-			   type="text"
-			   xxng-keyup='this.onKeyUp("line 85", $event, this.ENUM_KEYEVENTCALLER_INPUT0)'
-			   ng-keyup='this.onKeyUp("line 102", $event )'
-			   class="input-textarea"
-			   placeholder="Search / Input / Command"
-			   title='Search (case insensitive, order insensitive) / Save / Command '
-			   ng-blur="eventBlur0InputText()" required>
-			   <!--ng-model="inputbind"-->
-
-			<!--ng-bind='inputbind'-->
-			<!--data-ng-model="commandFromInputBox"-->
-
-			<!--<a href="javascript:NLBfadeBg('div1hk','#FF0000','#FFFFFF','1000');">Fade DIV-->
-
-
-			<!-- ================ INPUT#1 ======================== -->
-			<!--section_per_editor 0-->
-			<span id='idMediumEditor'
-				  xxng-init='focusOnId("idInput0TypeText")'
-				  ng-blur="eventBlur1Medium()"
-				  ng-keyup='this.onKeyUp("line 98", $event)'
-				  title='search (case insensitive, order insensitive)'>
-
-			</span >
-
-			<!-- ================ INPUT#2 CKE CURRENT DEFAULT ======================== -->
-			<span id='idDivForCkeEditorTextarea'
-				  ng-keyup='this.onKeyUp("line 102")'
-				  ng-blur="xxpropagateTextChanges()">
-				<textarea id="idCkeEditorTextarea"
-						  ng-blur="this.alerthk()"
-						  ng-keyup='this.onKeyUp("line 135", $event )'
-						  name="idCkeEditorTextarea"
-						  idxx="xxeditor1" rows="10" cols="80">
-				</textarea>
-			</span>
-
 			<!-- ================ INPUT#3 ======================== -->
 			<div id='idDivForTinyMceEditorTextarea'>
 				<!--was Search / Input-->
