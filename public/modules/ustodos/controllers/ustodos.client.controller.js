@@ -183,7 +183,7 @@ angular.module('ustodos').controller('UstodosController',
 
 
 			$scope.$on('$stateChangeSuccess', function () {
-				console.log ("successful state change");
+				console.log ('successful state change');
 			});
 
 			// works alert ('init ustodos.client.controller.js state:' + $state.$current);   // current state  .current
@@ -304,7 +304,7 @@ angular.module('ustodos').controller('UstodosController',
 					$scope.toggleVisibilityTo3('line 260 onload');
 
 
-					$scope.title2 = "$scope.title2 from ustodo client controller"
+					$scope.title2 = '$scope.title2 from ustodo client controller';
 
 
 					var q = $location.$$search.q;
@@ -1713,7 +1713,7 @@ angular.module('ustodos').controller('UstodosController',
             //};
 
             $scope.prop3mce = function () {
-                alert ('start prop3mce ')
+                alert ('start prop3mce ');
                 try {
                     //alert ('start case 2')
                     //var xText = tinyMCE.getInstanceById('idTinyMceTextArea').getContent({format: 'text'});
@@ -2341,14 +2341,14 @@ angular.module('ustodos').controller('UstodosController',
                     document.getElementById('idInputTextFilter').value = text;
 
                     callcounteventHandlerEditorcontentChange++;
-                    if (enumKeyEvent === $scope.enumKeyEvent.ENTER)
-                    {
+                    //if (enumKeyEvent === $scope.enumKeyEvent.ENTER)
+                    //{
                         //alert ('enter pressed');
-                    }
-                    else if (enumKeyEvent === $scope.enumKeyEvent.SPACE)
-                    {
-                        O.o ('space pressed');
-                    }
+                    //}
+                    //else if (enumKeyEvent === $scope.enumKeyEvent.SPACE)
+                    //{
+//                        O.o ('space pressed');
+//                    }
                     //if (html === priorhtml)
                     //    alert('same html');
 
@@ -3456,8 +3456,8 @@ angular.module('ustodos').controller('UstodosController',
                 //callerId + '] xValue' + '[' + xValue + ']' );
                 try {
 
-                    if (enumProcessCommandCaller !== $scope.enumProcessCommandCaller.EDITOR)
-                    {
+                    //if (enumProcessCommandCaller !== $scope.enumProcessCommandCaller.EDITOR)
+                    //{
                         //alert ('showing');
                         //try {
                         //    $scope.setTextInShowingEditor(xText, 'line 3262 process command', false);
@@ -3465,7 +3465,7 @@ angular.module('ustodos').controller('UstodosController',
                         //
                         //}
 
-                    }
+                    //}
                     //alert ('$scope.searchedFor[' + $scope.searchedFor + ']');
 
                     //$scope.searchedForAsLink = '<a ng-href=\'jpro.com\'> search</a>';
@@ -3848,9 +3848,10 @@ angular.module('ustodos').controller('UstodosController',
                     if (!s || strOneOfManyIterThru.indexOf(s) >= 0) {
                         $scope.ustodosFiltered.push($scope.ustodos[i]);
                         //O.o ('MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru +  '] index [' + i + ']');
-                    } else {
-                        //O.o ('NO MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru + '] index [' + i + ']');
                     }
+					//else {
+                        //O.o ('NO MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru + '] index [' + i + ']');
+                    //}
                     //if (i % 2 == 0)
                 }
                 O.o ('---------------updateUstodosFiltered done from len [' + $scope.ustodos.length + '] len [' + $scope.ustodosFiltered.length + '] ');

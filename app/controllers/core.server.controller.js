@@ -11,7 +11,7 @@ exports.index = function(req, res) {
 	//} catch (e) {
 	//	console.log (err.stack);
 	//}
-	res.render('index', // app\views\index.server.view.html (express.js added “server.view.html")
+	res.render('index', // app\views\index.server.view.html (express.js added 'server.view.html')
 	{
 		user: req.user || null,
 		request: req

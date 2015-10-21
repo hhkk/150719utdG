@@ -152,10 +152,10 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
                     // convert to HREFs
                     ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text);
                         x.push(ustodos[k]);
-                } else {
-                    //O.o ('&&&&&&&&&&&&&&&&&&& in result loop NOT a keeper' );
-
                 }
+				//else {
+                    //O.o ('&&&&&&&&&&&&&&&&&&& in result loop NOT a keeper' );
+                //}
             }
             //console.log('pushed:'+ustodos[k]._doc.datelastmod + "." + +ustodos[k]._doc.datelastmod);
             O.o ('for query x [' + req.query.q + '] countResultx [' + countResult + '] req._passport.session.user id [' + req._passport.session.user + ']');

@@ -1,5 +1,7 @@
 'use strict';
 
+console.log ('======================top of gruntfile.js');
+
 var fs = require('fs');
 
 module.exports = function(grunt) {
@@ -192,3 +194,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
 };
+
+console.log ('======================bottom of gruntfile.js');

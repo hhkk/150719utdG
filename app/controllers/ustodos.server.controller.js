@@ -185,9 +185,9 @@ exports.ustodobulkdel = function(req, res) {
 
 		// http://docs.mongodb.org/manual/reference/method/db.collection.remove/
 
-		O.o("require_Development.db.uri:" + require_Development.db.uri.everythingAfterLast("/"));
+		O.o('require_Development.db.uri:' + require_Development.db.uri.everythingAfterLast('/'));
 
-		var dbWrite = new Db(require_Development.db.uri.everythingAfterLast("/"), new Server('localhost', 27017), {safe: false});
+		var dbWrite = new Db(require_Development.db.uri.everythingAfterLast('/'), new Server('localhost', 27017), {safe: false});
 		dbWrite.open(function (err, dbWrite)
 		{
 			dbWrite.collection('ustodos', function (err, collRemove_ustodos)

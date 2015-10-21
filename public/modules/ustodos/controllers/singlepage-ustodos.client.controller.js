@@ -129,7 +129,7 @@ var angularModule = null;
 
 var pasteHtmlContentEditableCleaner = function () {
 	//alert('in scope.pasteHtmlContentEditableCleaner():' + window.clipboardData.getData('Text'));
-	alert('in scope.pasteHtmlContentEditableCleaner():' + x);
+	alert('in scope.pasteHtmlContentEditableCleaner():');
 	var foo = 'xx:' + window.clipboardData.getData('Text');
 	window.clipboardData.setData('Text', foo);
 };
@@ -175,7 +175,7 @@ app.factory('SppSvc', function() {
 	//};
 
  	itemsServiceFns.setModelDirty = function(val) {
-		sppData['modelDirty'] = val;
+		sppData.modelDirty = val;
 		var elemId = 'mceu_57';
 		if (document.getElementById(elemId) !== null)
 		{
@@ -199,21 +199,21 @@ app.factory('SppSvc', function() {
 
 	};
  	itemsServiceFns.getModelDirty = function() {
-		return sppData['modelDirty'];
+		return sppData.modelDirty;
 	};
 
  	itemsServiceFns.setWhichEditorShowing = function(val) {
-		sppData['whichEditorShowing'] = val;
+		sppData.whichEditorShowing = val;
 	};
  	itemsServiceFns.getWhichEditorShowing = function() {
-		return sppData['whichEditorShowing'];
+		return sppData.whichEditorShowing;
 	};
 
  	itemsServiceFns.setSelectedItem = function(val) {
-		sppData['selectedItem'] = val;
+		sppData.selectedItem = val;
 	};
  	itemsServiceFns.getSelectedItem = function() {
-		return sppData['selectedItem'];
+		return sppData.selectedItem;
 	};
 
 	return itemsServiceFns;
@@ -268,8 +268,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		 $location, $document, $rootScope,
 		 $sce, $http, $filter,
 		 $state,
-		 Authentication, Ustodos, Commands
-		 , SppSvc
+		 Authentication, Ustodos, Commands, SppSvc
 		)
     {
 
@@ -300,7 +299,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		$scope.preparePerRowHtml = function(s)
 		{
 			return s;
-		}
+		};
 
 
 
@@ -331,7 +330,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
 			$scope.$on('$stateChangeSuccess', function () {
-				console.log ("successful state change");
+				console.log ('successful state change');
 			});
 
 			// works alert ('init ustodos.client.controller.js state:' + $state.$current);   // current state  .current
@@ -454,7 +453,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					$scope.currentVisibleCounter = $scope.ns.Input.INPUT_3_MCE;
 					setTimeout(function(){ $scope.focusOnId(arrIds[3]); }, 600);
 
-					$scope.title2 = "$scope.title2 from ustodo client controller"
+					$scope.title2 = '$scope.title2 from ustodo client controller';
 
 
 					var q = $location.$$search.q;
@@ -737,15 +736,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				if ($scope.includeMceHtmlPasteFilter)  // hbkk 1510
 				{
 					//alert("yes $scope.includeMceHtmlPasteFilter:" + $scope.includeMceHtmlPasteFilter);
-					addToMceInitPasteFilter['plugins'] = 'code, pagebreak, paste';
+					addToMceInitPasteFilter.plugins = 'code, pagebreak, paste';
 
 					// added paste 10/2015 - just having this paste affects wat is pasted
 					//plugins: 'code, pagebreak', // added paste 10/2015
 
 					// begin added with paste
-					addToMceInitPasteFilter['theme_advanced_buttons3_add'] = 'pastetext,pasteword,selectall';
-					addToMceInitPasteFilter['paste_auto_cleanup_on_paste'] = false;
-					addToMceInitPasteFilter['paste_preprocess'] = function(pl, o) {
+					addToMceInitPasteFilter.theme_advanced_buttons3_add = 'pastetext,pasteword,selectall';
+					addToMceInitPasteFilter.paste_auto_cleanup_on_paste = false;
+					addToMceInitPasteFilter.paste_preprocess = function(pl, o) {
 						// Content string containing the HTML from the clipboard
 						//alert(o.content);
 						//o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner cleanhtml
@@ -757,7 +756,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						// works hbkk 1510
 						//o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlStandard(o.content); // htmlcleaner
 					};
-					addToMceInitPasteFilter['paste_postprocess'] = function(pl, o) {
+					addToMceInitPasteFilter.paste_postprocess = function(pl, o) {
 						// Content DOM node containing the DOM structure of the clipboard
 						//alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
 						//o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
@@ -808,7 +807,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//theme_advanced_toolbar_align : 'left',
 					//theme_advanced_statusbar_location : 'bottom',
 					//theme_advanced_resizing : true,
-					theme_advanced_statusbar_location : "", //
+					theme_advanced_statusbar_location : '', //
 					width: '100%',
 					height: '100%',
 					resize: 'both',
@@ -881,7 +880,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//image: '/img/EditPencilBnW.png',
 							image: '/img/SaveIconBlue.png',
 							icon: false,
-							onclick: function() {ed.insertContent('Menu item 0')},
+							onclick: function() {ed.insertContent('Menu item 0');},
 							//menu: [
 							//	{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
 							//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
@@ -1876,7 +1875,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
             $scope.prop3mce = function () {
-                alert ('start prop3mce ')
+                alert ('start prop3mce ');
                 try {
                     //alert ('start case 2')
                     //var xText = tinyMCE.getInstanceById('idTinyMceTextArea').getContent({format: 'text'});
@@ -2186,7 +2185,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 			{
 				$scope.localTinyMceInit();
 				alert('Completed init of TinyMCE');
-			}
+			};
 
             // eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
             $scope.eventHandlerEditorcontentChange = function(enumKeyEvent, data, html, text)
@@ -2198,7 +2197,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     callcounteventHandlerEditorcontentChange++;
                     if (enumKeyEvent === $scope.enumKeyEvent.ENTER)
                     {
-                        //alert ('enter pressed');
+                        alert ('enter pressed');
                     }
                     else if (enumKeyEvent === $scope.enumKeyEvent.SPACE)
                     {
@@ -2329,7 +2328,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 			$scope.isCurrentEditorEmpty = function()  {
 				return $scope.getTextHtmlAndValueInShowingEditor().xText.trim() === '';
-			}
+			};
 
             $scope.eventMouseoverRow2 = function(i)
 			{
@@ -2846,29 +2845,29 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				if (false) {
 					var documentx = document.getElementById('mcebuttonid2').firstElementChild.firstElementChild;
-					alert ("UtilClassz.getClass(documentx):" + UtilClassz.getClass(documentx))
+					alert ('UtilClassz.getClass(documentx):' + UtilClassz.getClass(documentx));
 					//var documentx = document.getElementById('mcebuttonid2').children.children;
 					//<div id="mcebuttonid2" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mcebuttonid2"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i></button></div>
 					//	<button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i></button>
 					//    <i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i>				}
 					//alert ("documentx" + documentx)
-					alert ("documentx.style:" + documentx.style);
-					alert ("documentx.style.height:" + documentx.style.height);
-					alert ("documentx.style.length:" + documentx.style.length);
-					alert ("documentx.style.item(0):" + documentx.style.item(0));
-					alert ("documentx.style.item(4):" + documentx.style.item(4));
-					alert ("documentx.style.getParentRule:" + documentx.style.getParentRule());
-					alert ("documentx.style.getLength():" + documentx.style.getLength());
-					alert ("documentx.style.getCssText():" + documentx.style.getCssText());
-					alert ("UtilClassz.getClass(documentx.style):" + UtilClassz.getClass(documentx.style))
-					//getProperties is not a function alert ("UtilClassz.getClass(documentx.style.getProperties()):" + documentx.style.getProperties())
-					alert ("UtilClassz.getClass(documentx.style.getOwnPropertyNames()):" + documentx.style.getOwnPropertyNames())
-					alert ("documentx.className:" + documentx.className)
-					alert ("documentx.style:" + documentx.style);
-					//alert ("documentx.style.background-image" + documentx.style.background-image);
-					alert ("documentx.style.cssText:" + documentx.style.cssText);
-					alert ("documentx.style.getPropertyValue(background-image):" + documentx.style.getPropertyValue('background-image'));
-					//alert ("documentx.style.getPropertyCSSValue(background-image)" + documentx.style.getPropertyCSSValue('background-image'));
+					alert ('documentx.style:' + documentx.style);
+					alert ('documentx.style.height:' + documentx.style.height);
+					alert ('documentx.style.length:' + documentx.style.length);
+					alert ('documentx.style.item(0):' + documentx.style.item(0));
+					alert ('documentx.style.item(4):' + documentx.style.item(4));
+					alert ('documentx.style.getParentRule:' + documentx.style.getParentRule());
+					alert ('documentx.style.getLength():' + documentx.style.getLength());
+					alert ('documentx.style.getCssText():' + documentx.style.getCssText());
+					alert ('UtilClassz.getClass(documentx.style):' + UtilClassz.getClass(documentx.style));
+					//getProperties is not a function alert ('UtilClassz.getClass(documentx.style.getProperties()):' + documentx.style.getProperties())
+					alert ('UtilClassz.getClass(documentx.style.getOwnPropertyNames()):' + documentx.style.getOwnPropertyNames());
+					alert ('documentx.className:' + documentx.className);
+					alert ('documentx.style:' + documentx.style);
+					//alert ('documentx.style.background-image' + documentx.style.background-image);
+					alert ('documentx.style.cssText:' + documentx.style.cssText);
+					alert ('documentx.style.getPropertyValue(background-image):' + documentx.style.getPropertyValue('background-image'));
+					//alert ('documentx.style.getPropertyCSSValue(background-image)' + documentx.style.getPropertyCSSValue('background-image'));
 				}
 				if (false)
 				{
@@ -3244,7 +3243,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					UtilErrorEmitter.emitError('error in synchNumberCheckboxesChecked()', err);
 				}
 
-			}
+			};
 
 
 			$scope.checkBoxClickedSingle = function(j)
@@ -3319,7 +3318,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				if (arrOidsToDelete.length === 0)
 				{
-					alert('No items selected to delete.')
+					alert('No items selected to delete.');
 					return;
 				}
                 //alert ('delete all:' + arrOidsToDelete);
@@ -3389,7 +3388,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 } catch (e) {
                     O.e ('errrra:' + e);
                 }
-				$scope.synchNumberCheckboxesChecked()
+				$scope.synchNumberCheckboxesChecked();
             };
 
 
@@ -3479,8 +3478,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //callerId + '] xValue' + '[' + xValue + ']' );
                 try {
 
-                    if (enumProcessCommandCaller !== $scope.enumProcessCommandCaller.EDITOR)
-                    {
+                    //if (enumProcessCommandCaller !== $scope.enumProcessCommandCaller.EDITOR)
+                    //{
                         //alert ('showing');
                         //try {
                         //    $scope.setTextInShowingEditor(xText, 'line 3262 process command', false);
@@ -3488,7 +3487,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         //
                         //}
 
-                    }
+                    //}
                     //alert ('$scope.searchedFor[' + $scope.searchedFor + ']');
 
                     //$scope.searchedForAsLink = '<a ng-href=\'jpro.com\'> search</a>';
@@ -3677,7 +3676,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         //alert ('in not a write commandTrimmed.trim [' + commandTrimmed.trim() + ']');
 
                         $scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
-							{q:commandTrimmed.trim()}
+							{q:commandTrimmed.trim()},
 
 							//{$and:
 							//	[
@@ -3692,13 +3691,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 								//	.get(users.requiresLogin, ustodos.list2)
 							// ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
 
-
 							//new RegExp(t, 'i')
 							//{ $regex: new RegExp(commandTrimmed.trim(), 'i') }
 							//{$regex:commandTrimmed.trim(), $options:'i'}
 							//{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
-
-                            ,
                             //{q:
                             //    commandTrimmed.trim()
 								////{$not:{deleted:true}}
@@ -3900,9 +3896,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     if (!s || strOneOfManyIterThru.indexOf(s) >= 0) {
                         $scope.ustodosFiltered.push($scope.ustodos[i]);
                         //O.o ('MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru +  '] index [' + i + ']');
-                    } else {
-                        //O.o ('NO MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru + '] index [' + i + ']');
                     }
+					//else {
+                        //O.o ('NO MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru + '] index [' + i + ']');
+                    //}
                     //if (i % 2 == 0)
                 }
                 O.o ('---------------updateUstodosFiltered done from len [' + $scope.ustodos.length + '] len [' + $scope.ustodosFiltered.length + '] ');
@@ -4087,7 +4084,7 @@ angular.module('ustodos')
 window.onload = function()
 {
 	//var x = document.getElementById('imageIdRedPEncilbnw');
-	try {
+	//try {
 		//alert('in window.onload');
 
 		//var x = angular.element('imageIdRedPEncilbnw');
@@ -4102,12 +4099,12 @@ window.onload = function()
 		//document.getElementById('imageIdRedPEncil').style.visibility='visible';
 		//angular.element( document.querySelector( '#imageIdRedPEncil' ) ).style.visibility='visible';
 
-	}
-	catch(err)
-	{
-		alert ('in error catcher');
-		UtilErrorEmitter.emitError('in onload error', err);
-	}
+	//}
+	//catch(err)
+	//{
+//		alert ('in error catcher');
+		//UtilErrorEmitter.emitError('in onload error', err);
+	//}
 
 //CKEDITOR.replace( 'editor1' );
 //CKEDITOR.instances.editor1.on('blur', function() {

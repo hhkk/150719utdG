@@ -6,7 +6,7 @@
 angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
 		// Redirect to home view when route not found
-		<!--hbklrb4-->
+		//<!--hbklrb4-->
 		$urlRouterProvider.otherwise('/');
 
 		// Home state routing
@@ -31,7 +31,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 				'<a href="/#!/ustodos/hkhkstateustodos1">href to #!/ustodos/hkhkstateustodos1</a> <br> ' +
 				'<a href="/#!/ustodos/hkhkstateustodos1">href to #!/ustodos/hkhkstateustodos1</a> <br> ',
 				controller: function ($scope, $state) {
-					alert ('start state '+$state.$current)
+					alert ('start state '+$state.$current);
 					$scope.stateInfoHKstate='hihk';
 				}
 			}).
@@ -41,13 +41,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 				template: 'in core state hkhkstatecore2 <a ui-sref="hkhkstatecore1">sref to hkhkstatecore1</a>  <br> ' +
 				'<a href="/#!/core/hkhkstatecore1">href to #/core/hkhkstatecore1</a>',
 				controller: function ($scope, $state) {
-					alert ('start state '+$state.$current)
+					alert ('start state '+$state.$current);
 					$scope.stateInfoHKstate='hihk';
 				}
-			})
-
-
-		;
+			});
 
 
 

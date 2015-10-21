@@ -1,4 +1,7 @@
 'use strict';
+
+console.log ('======================top of server.js');
+
 /**
  * Module dependencies.
  */
@@ -37,6 +40,7 @@ app.listen(config.port);
 // Expose app
 exports = module.exports = app;
 
+console.log ('======================middle of server.js');
 // Logging initialization
 console.log('--');
 console.log(chalk.green(config.app.title + ' application started'));

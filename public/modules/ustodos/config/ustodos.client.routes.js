@@ -43,7 +43,7 @@ angular.module('ustodos').config(['$stateProvider',
 			url: '/ustodos',
 			templateUrl: 'modules/ustodos/views/list-ustodos.client.view.html',
 			controller: function ($scope, $state) {
-				alert ('start state '+$state.$current)
+				alert ('start state '+$state.$current);
 				$scope.stateInfoHKstate='hihk';
 			}
 		}).
@@ -52,7 +52,7 @@ angular.module('ustodos').config(['$stateProvider',
 				template: 'in ustodos state hkhkstateustodos1 <a ui-sref="hkhkstateustodos2">sref to hkhkstateustodos2</a> <br> ' +
 				'<a href="#!/ustodos/hkhkstateustodos2">href to #/ustodos/hkhkstateustodos2</a>',
 				controller: function ($scope, $state) {
-					alert ('start state '+$state.$current)
+					alert ('start state '+$state.$current);
 					$scope.stateInfoHKstate='hihk';
 				}
 			}).
