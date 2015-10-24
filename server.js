@@ -1,6 +1,7 @@
 'use strict';
 
 console.log ('======================top of server.js');
+//	grunt.log ('hi mom');
 
 /**
  * Module dependencies.
@@ -51,3 +52,6 @@ if (process.env.NODE_ENV === 'secure') {
 	console.log(chalk.green('HTTPs:\t\t\t\ton'));
 }
 console.log('--');
+
+
+console.log ('======================end of server.js');

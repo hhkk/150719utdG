@@ -1783,6 +1783,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 var found = false;
                 //find the element in memory matching the id passed from the UI on the click
                 // might have this passed in OK - check it and maybe can remove this loop
+				var fnx = function(errorResponse) {
+					alert('error on save errorResponse.data.message [' + errorResponse.data.message + ']');
+				};
                 for (var i = 0; i < $scope.ustodos.length; i++)
                 {
                     if ($scope.ustodos[i]._id === _id)
@@ -1807,9 +1810,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         $scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
                             //alert('success save newHtml [' + newHtml + ']');
 
-                        }, function(errorResponse) {
-                            alert('error on save errorResponse.data.message [' + errorResponse.data.message + ']');
-                        });
+                        }, fnx);
                         //alert ('done update submit [' + $scope.ustodos[i].html + ']');
                     }
                 }
