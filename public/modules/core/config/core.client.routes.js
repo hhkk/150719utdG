@@ -10,6 +10,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		$urlRouterProvider.otherwise('/');
 
 		// Home state routing
+
 			$stateProvider.
 				state('home', {
 					url: '/',

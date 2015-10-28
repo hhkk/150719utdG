@@ -341,7 +341,7 @@ angular.module('ustodos').controller('UstodosController',
 
             $scope.ngInitTopLevel= function()
             {
-                //alert ('in ngInitTopLevel');
+                alert ('in ngInitTopLevel');
             };
 
             $scope.testNLBfadeBg = function() {

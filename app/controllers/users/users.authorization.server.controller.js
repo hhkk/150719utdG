@@ -1,5 +1,7 @@
 'use strict';
 
+var O = require('C:/utd/150719utdG/public/util/O.js');
+
 /**
  * Module dependencies.
  */
@@ -23,10 +25,21 @@ exports.userByID = function(req, res, next, id) {
  * Require login routing middleware
  */
 exports.requiresLogin = function(req, res, next) {
+
 	if (!req.isAuthenticated()) {
-		return res.status(401).send({
+		O.o ('user is not logged in' );
+		return res.status(401	).send({
 			message: 'User is not logged in'
 		});
+	}
+	else{
+		O.o ('user is logged in req.user._doc.create:' + req.user._doc.created );
+		O.o ('user is logged in req.user._doc.email:' + req.user._doc.email );
+		O.o ('user is logged in req.user._doc.firstName:' + req.user._doc.firstName );
+		O.o ('user is logged in req.user._doc.lastName:' + req.user._doc.lastName );
+		O.o ('user is logged in req.user._doc.displayName:' + req.user._doc.displayName );
+		O.o ('user is logged in req.user._doc.username:' + req.user._doc.username );
+		O.o ('user is logged in req.user._doc.email:' + req.user._doc.email );
 	}
 
 	next();

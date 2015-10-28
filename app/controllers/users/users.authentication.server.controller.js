@@ -51,7 +51,7 @@ exports.signup = function(req, res) {
  */
 exports.signin = function(req, res, next) {
 
-	console.log ('================================== hbkk signin');
+	console.log ('================================== hbkk signin hbklrb?');
 
 	passport.authenticate('local', function(err, user, info) {
 		if (err || !user) {
@@ -88,13 +88,16 @@ exports.oauthCallback = function(strategy) {
 	return function(req, res, next) {
 		passport.authenticate(strategy, function(err, user, redirectURL) {
 			if (err || !user) {
+				console.log ('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk  signin redirect1');
 				return res.redirect('/#!/signin');
 			}
 			req.login(user, function(err) {
 				if (err) {
+					console.log ('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk  signin redirect2');
 					return res.redirect('/#!/signin');
 				}
 
+				console.log ('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk  signin redirect3');
 				return res.redirect(redirectURL || '/');
 			});
 		})(req, res, next);

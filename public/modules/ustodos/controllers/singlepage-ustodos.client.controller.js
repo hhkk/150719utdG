@@ -30,6 +30,9 @@ var UtilHtmlCleaner = UtilHtmlCleaner; // this is a file name
 //alert('defining UtilHtmlCleaner2_pasteProcessForContentEditable ');
 //var UtilHtmlCleaner2_pasteProcessForContentEditable = UtilHtmlCleaner2_pasteProcessForContentEditable; // this is a file name
 
+var mceId = 'idTinyMceTextArea';
+
+
 //alert ('in here 2');
 //var myapplication = exports.myapplication;
 
@@ -252,6 +255,8 @@ var callbackCommand = function(callbackResult) {
 };
 
 
+
+
 //O.a ('oneOfSeveral controller with array - first?');
 angular.module('ustodos').controller('SinglepageUstodosController',
 //angular.module('ustodos',['ngSanitize']).controller('UstodosController',
@@ -272,14 +277,16 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		)
     {
 
-
+		//alert('scope define');
 
 		$scope.SppSvc = SppSvc;
 		//alert ('in def');
 		SppSvc.setModelDirty (true);
 
 		//works first time load only
-		// addEventListener('load', load, false);
+		//addEventListener('load', load, false);
+		//alert ('added listener');
+		// oct 2015 seems not to be called at all even with add listener in place
 		function load(){
 			//alert('in angular addEventListener load');
 
@@ -426,9 +433,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.$watch('$viewContentLoaded', function(){ // like onload YES
 				try {
 
-					//alert ('in onload');
+					//alert ('in $scope.$watch  onload'); // hbklrb11
+					//$scope.localTinyMceInit(); // hbklrb11
+
 					//var x = document.getElementById('idCkeEditorTextarea').innerHTML;
 					//alert ('in $viewContentLoaded:' + x);
+
 
 					//alert ('pre1 $state.get');
 					//alert ($state.get());
@@ -449,9 +459,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 					// section_per_editor set initial editor
 					SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_3_MCE);
-					document.getElementById(arrIds[3]).style.display = 'block';
+					//document.getElementById('idDivForTinyMceEditorTextarea').style.display = 'block'; // hbklrbb
+					//alert('xx:' + 'idTinyMceTextArea');
+					//alert('xx:' + document.getElementById('idTinyMceTextArea'));
+					document.getElementById('idTinyMceTextArea').style.display = 'block';
+					//document.getElementById('idTinyMceTextArea').style.display = 'block';
 					$scope.currentVisibleCounter = $scope.ns.Input.INPUT_3_MCE;
-					setTimeout(function(){ $scope.focusOnId(arrIds[3]); }, 600);
+					//setTimeout(function(){ $scope.focusOnId(mceId); }, 600); // hbklrb10
 
 					$scope.title2 = '$scope.title2 from ustodo client controller';
 
@@ -487,11 +501,18 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //    //alert ('done testTinyMce');
             //}
 
-
             $scope.ngInitTopLevel= function()
             {
+				//if ($scope.howManyTimesInited == 1)
                 //alert ('in ngInitTopLevel');
-            };
+					setTimeout(function(){ $scope.localTinyMceInit(); }, 300); // hbklrbb
+				//else
+					//$scope.localTinyMceInit(); // hbklrbb
+
+				//$scope.localTinyMceInit(); // hbklrb11
+
+
+			};
 
             $scope.testNLBfadeBg = function() {
                 alert('in testNLBfadeBg')      ;
@@ -627,8 +648,80 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //tinymce.activeEditor.setContent('<span>some</span> html');
             };
 
+
+
+			$scope.focusOnId = function (id) // hbklrbb
+			{
+				//alert ('in focusOnId :' + id);
+
+				try {
+
+					//if (id !== 'idDivForCkeEditorTextarea' && id !== 'idDivForTinyMceEditorTextarea')
+					//{
+					//    //alert ('in focusOnId 1:'+ id);
+					//    var el = document.getElementById(id);
+					//    var range = document.createRange();
+					//    var sel = window.getSelection();
+					//    //range.setStart(el.childNodes[0], 5);
+					//    //range.collapse(true);
+					//    //sel.removeAllRanges();
+					//    //sel.addRange(range);
+					//    el.focus();
+					//}
+					//else if (id === 'idDivForCkeEditorTextarea')
+					//{
+					//    //alert ('in focusOnId 2:'+ id);
+					//    CKEDITOR.instances.idCkeEditorTextarea.focus();
+					//}
+					if (id === 'idDivForTinyMceEditorTextarea')
+					{
+						alert (' should not be here: in focusOnId 3:'+ id);
+						var el = document.getElementById(id);
+						var range = document.createRange();
+						var sel = window.getSelection();
+						//range.setStart(el.childNodes[0], 5);
+						//range.collapse(true);
+						//sel.removeAllRanges();
+						//sel.addRange(range);
+						el.focus();
+					}
+					else if (id === 'idTinyMceTextArea')
+					{
+						//alert ('in focusOnId 4:'+ id);
+						var el = document.getElementById(id);
+						var range = document.createRange();
+						var sel = window.getSelection();
+						//range.setStart(el.childNodes[0], 5);
+						//range.collapse(true);
+						//sel.removeAllRanges();
+						//sel.addRange(range);
+						el.focus();
+					}
+					else
+					{
+						//alert ('in focusOnId else');
+						//    //var editor = CKEDITOR.instances.idCkeEditorTextarea;
+						//    //editor.focusManager.focus( editor.editable() );
+						//
+						//
+					}
+
+
+
+				} catch (e) {
+					console.log ('era1:' + e);
+					alert ('era1:' + e);
+				}
+
+			};
+
+
+
 			$scope.localTinyMceInit = function (includeHtmlCleaner) // hbkk 1510
 			{
+
+				//alert ('in localTinyMceInit [' + mceId + ']'); // in tiny // hbklrb11
+
 				if (!includeHtmlCleaner)
 				{
 					includeHtmlCleaner = true;
@@ -766,6 +859,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				}
 
 
+				// hbklrbb
+
+
 				var tinyMceparams =
 				{
 					//mode : 'exact',
@@ -794,7 +890,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//
 
 
-					mode : 'textareas',
+					//mode : 'textareas',
+					//mode : 'exact',
+					mode : 'specific_textareas',
+					elements : mceId, // hbklrbb
 					//  theme : 'advanced',
 					//plugins : 'pagebreak,styleBAD,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template',
 
@@ -811,7 +910,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					width: '100%',
 					height: '100%',
 					resize: 'both',
-					elements : 'idTinyMceTextArea',
 					//toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
 					toolbar1: 'mybuttonimage | mybuttonmenu | example | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic ',
 					//toolbar2: 'print preview media | forecolor backcolor emoticons',
@@ -1021,10 +1119,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				tinyMCE.init (tinyMceparams); // tinymce init
 
+				$scope.focusOnId(mceId);
+
 			};
 
+			//setTimeout(function(){ $scope.localTinyMceInit() }, 200); // hbklrbb
+	//		setTimeout(function(){ $scope.focusOnId(mceId); }, ); // hbklrbb
+			//$scope.focusOnId(mceId);
 
-			$scope.localTinyMceInit();
+			// $scope.localTinyMceInit(); // hbklrb9
 
 
             //.----------------. .----------------. .----------------. .----------------. .----------------. .----------------. .----------------.
@@ -1471,22 +1574,22 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             // section_per_editor -1
             $scope.whichInputIsInFocus = function() {
-                var currentlyInFocus = $scope.currentVisibleCounter % arrIds.length;
-                // 0 input text box
-                if ($scope.ns.Input.INPUT_0_TEXT === currentlyInFocus)
-                    return $scope.ns.Input.INPUT_0_TEXT;
-                // 1 medium
-                else if ($scope.ns.Input.INPUT_1_MEDIUM === currentlyInFocus)
-                    return $scope.ns.Input.INPUT_1_MEDIUM;
-                //// 2 cke
-                //else if ($scope.ns.Input.INPUT_2_CKE === currentlyInFocus)
-                //    return $scope.ns.Input.INPUT_2_CKE;
-
-                else if ($scope.ns.Input.INPUT_3_MCE === currentlyInFocus)
+                //var currentlyInFocus = $scope.currentVisibleCounter % arrIds.length;
+                //// 0 input text box
+                //if ($scope.ns.Input.INPUT_0_TEXT === currentlyInFocus)
+                //    return $scope.ns.Input.INPUT_0_TEXT;
+                //// 1 medium
+                //else if ($scope.ns.Input.INPUT_1_MEDIUM === currentlyInFocus)
+                //    return $scope.ns.Input.INPUT_1_MEDIUM;
+                ////// 2 cke
+                ////else if ($scope.ns.Input.INPUT_2_CKE === currentlyInFocus)
+                ////    return $scope.ns.Input.INPUT_2_CKE;
+                //
+                //else if ($scope.ns.Input.INPUT_3_MCE === currentlyInFocus)
                     return $scope.ns.Input.INPUT_3_MCE;
-
-                else
-                    return $scope.ns.Input.INPUT_NONE_IS_IN_FOCUS;
+                //
+                //else
+                //    return $scope.ns.Input.INPUT_NONE_IS_IN_FOCUS;
             };
 
             //$scope.editor = CKEDITOR.instances.idCkeEditorTextarea;
@@ -1655,58 +1758,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             //$scope.testTinyMce();
             //tinyMCE.get('idTinyMceTextArea').setContent('<span>some2</span> html');
-
-
-            $scope.focusOnId = function (id) {
-                //alert ('in focusOnId :' + id);
-
-                try {
-
-                    //if (id !== 'idDivForCkeEditorTextarea' && id !== 'idDivForTinyMceEditorTextarea')
-                    //{
-                    //    //alert ('in focusOnId 1:'+ id);
-                    //    var el = document.getElementById(id);
-                    //    var range = document.createRange();
-                    //    var sel = window.getSelection();
-                    //    //range.setStart(el.childNodes[0], 5);
-                    //    //range.collapse(true);
-                    //    //sel.removeAllRanges();
-                    //    //sel.addRange(range);
-                    //    el.focus();
-                    //}
-                    //else if (id === 'idDivForCkeEditorTextarea')
-                    //{
-                    //    //alert ('in focusOnId 2:'+ id);
-                    //    CKEDITOR.instances.idCkeEditorTextarea.focus();
-                    //}
-                    if (id === 'idDivForTinyMceEditorTextarea')
-                    {
-                        //alert ('in focusOnId 3:'+ id);
-                        var el = document.getElementById(id);
-                        var range = document.createRange();
-                        var sel = window.getSelection();
-                        //range.setStart(el.childNodes[0], 5);
-                        //range.collapse(true);
-                        //sel.removeAllRanges();
-                        //sel.addRange(range);
-                        el.focus();
-                    }
-                    //else
-                    //{
-                    //    //alert ('in focusOnId else');
-                    //    //var editor = CKEDITOR.instances.idCkeEditorTextarea;
-                    //    //editor.focusManager.focus( editor.editable() );
-                    //
-                    //
-                    //}
-
-
-
-                } catch (e) {
-                    console.log ('era1:' + e);
-                }
-
-            };
 
 
 
@@ -1917,8 +1968,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
 
-            var arrIds = ['idInput0TypeText', 'idMediumEditor', 'idDivForCkeEditorTextarea', 'idDivForTinyMceEditorTextarea', ];
-            //var arrIds = ['idInput0TypeText', 'idMediumEditor', 'idDivForCkeEditorTextarea', 'idDivForTinyMceEditorTextarea'];
+            //var arrIds = ['idInput0TypeText', 'idMediumEditor', 'idDivForCkeEditorTextarea', 'idDivForTinyMceEditorTextarea', ];
+            //var arrIds = ['idInput0TypeText', 'idMediumEditor', 'idDivForCkeEditorTextarea', 'idTinyMceTextArea', ];      // hbklrbb
             $scope.currentVisibleCounter = $scope.ns.Input.INPUT_0_TEXT; // arrIds.length-1;
 
             $scope.showFocus= function() {
@@ -1947,10 +1998,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             //$scope.toggleVisibilityTo3 = function(callerId) {
 				//alert ('in toggleVisibilityTo3 MCE callerId [' + callerId + ']');
 				//SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_3_MCE);
-            //    document.getElementById(arrIds[3]).style.display = 'block';
+            //    document.getElementById('idTinyMceTextArea').style.display = 'block';
             //    $scope.currentVisibleCounter = $scope.ns.Input.INPUT_3_MCE;
-            //    setTimeout(function(){ $scope.focusOnId(arrIds[3]); }, 300);
-            //    setTimeout(function(){ $scope.focusOnId(arrIds[3]); }, 600);
+            //    setTimeout(function(){ $scope.focusOnId('idTinyMceTextArea'); }, 300);
+            //    setTimeout(function(){ $scope.focusOnId('idTinyMceTextArea'); }, 600);
             //};
 
 
@@ -1987,26 +2038,29 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             {
                 //alert ('in setTextInShowingEditor e [' + e + '] callerID [' + callerID + ']');
                 try {
-                    switch($scope.whichInputIsInFocus())
-                    {
-                        case $scope.ns.Input.INPUT_3_MCE:
+                    //switch($scope.whichInputIsInFocus())
+                    //{
+                    //    case $scope.ns.Input.INPUT_3_MCE:
                             //alert ('in settext 3 e [' + e + '] callerID [' + callerID + ']');
                             //alert ('in settext 3');
                             //alert ('+++++++++ in setTextInShowingEditor target INPUT_3_MCE e:' + e);
-                            if (UtilJsTypeDetect.isString(e)) {
-                                //tinyMCE.get('idTinyMceTextArea').setContent(e);
-                                tinyMCE.activeEditor.setContent(e);
-                            }
-                            //alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
-                            else {
-                                //tinyMCE.get('idTinyMceTextArea').setContent(e.innerHTML);
-                                tinyMCE.activeEditor.setContent(e.innerHTML);
-                            }
-                            break;
-
-                        default:
-                            alert ('era - bad input resolution');
-                    }
+							if (tinyMCE.activeEditor !== null)
+							{
+								if (UtilJsTypeDetect.isString(e)) {
+									//tinyMCE.get('idTinyMceTextArea').setContent(e);
+									tinyMCE.activeEditor.setContent(e);
+								}
+								//alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
+								else {
+									//tinyMCE.get('idTinyMceTextArea').setContent(e.innerHTML);
+									tinyMCE.activeEditor.setContent(e.innerHTML);
+								}
+							}
+                    //        break;
+                    //
+                    //    default:
+                    //        alert ('era - bad input resolution');
+                    //}
                 } catch (e) {
                     if (processFailure)
                         UtilErrorEmitter.emitError ('era3', e);
@@ -2022,17 +2076,17 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 var xValue = null;
                 var xHtmlStripped = null;
                 try {
-                    switch($scope.whichInputIsInFocus())
-                    {
-                        case $scope.ns.Input.INPUT_3_MCE:
+                    //switch($scope.whichInputIsInFocus())
+                    //{
+                    //    case $scope.ns.Input.INPUT_3_MCE:
                             //alert ('in setTextInShowingEditor for input2cke');
 							xText = tinyMCE.activeEditor.getContent({format: 'text'});
 							xHtml= tinyMCE.activeEditor.getContent();
                             //alert ('xHtml from 3 mce [' + xHtml + ']');
-                            break;
-                        default:
-                            alert ('era - bad input resolution');
-                    } // switch
+                    //        break;
+                    //    default:
+                    //        alert ('era - bad input resolution');
+                    //} // switch
 
                 } catch (e) {
                     alert ('era2:' + e);
@@ -4066,6 +4120,7 @@ angular.module('ustodos')
     ////    //$routeProvider.otherwise({redirectTo: '/home', controller: HomeCtrl});
     ////})
     .directive('onFinishRender', function ($timeout) {
+		// oct 2015 seems not called
         O.a('sss2');
         alert ('done onload');
         return {
@@ -4086,9 +4141,13 @@ window.onload = function()
 {
 	//var x = document.getElementById('imageIdRedPEncilbnw');
 	//try {
-		//alert('in window.onload');
+	//	alert('in window.onload');
+	//setTimeout(function(){ $scope.localTinyMceInit() }, 2000); // hbklrb11
+	//setTimeout(function(){ $scope.focusOnId(mceId); }, 3000); // hbklrbb
 
-		//var x = angular.element('imageIdRedPEncilbnw');
+
+
+	//var x = angular.element('imageIdRedPEncilbnw');
 
 		//angular.element( document.querySelector( '#imageIdRedPEncil' ) ).src = '/img/ClearText.png';
 		//angular.element( document.querySelector( '#imageIdRedPEncilbnwxxx' ) ).width = '15';

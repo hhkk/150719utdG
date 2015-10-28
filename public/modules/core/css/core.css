@@ -144,13 +144,13 @@ body.ng-cloak
     /*visibility: hidden*/
 }
 
-#idTinyMceTextArea
-{
-    display:none;
-    min-height: 100px;
-    max-height: 1025px;
-    /*visibility: hidden*/
-}
+/*#idTinyMceTextArea*/
+/*{*/
+    /*display:none;*/
+    /*min-height: 100px;*/
+    /*max-height: 1025px;*/
+    /*/!*visibility: hidden*!/*/
+/*}*/
 
 #idDivForTinyMceEditorTextarea
 {
