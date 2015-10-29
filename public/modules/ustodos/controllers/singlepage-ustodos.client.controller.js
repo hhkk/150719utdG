@@ -447,7 +447,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//alert ('post1 $state.get');
 
 					//var editor = CKEDITOR.instances.idCkeEditorTextarea;
-
 					//alert ('focusManager.focus');
 					//editor.focusManager.focus( editor.editable() );
 
@@ -505,11 +504,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             {
 				//if ($scope.howManyTimesInited == 1)
                 //alert ('in ngInitTopLevel');
-					setTimeout(function(){ $scope.localTinyMceInit(); }, 300); // hbklrbb
+					//setTimeout(function(){ $scope.localTinyMceInit(); }, 300); // hbklrbb12
 				//else
 					//$scope.localTinyMceInit(); // hbklrbb
 
 				//$scope.localTinyMceInit(); // hbklrb11
+				$scope.localTinyMceInit();  //hbkeak
+				//tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
+
+
 
 
 			};
@@ -687,7 +690,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					}
 					else if (id === 'idTinyMceTextArea')
 					{
-						//alert ('in focusOnId 4:'+ id);
+						alert ('in focusOnId 4:'+ id);
 						var el = document.getElementById(id);
 						var range = document.createRange();
 						var sel = window.getSelection();
@@ -1117,11 +1120,17 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					tinyMceparams[propertyName] = addToMceInitPasteFilter[propertyName];
 				}
 
+				// hbkeak http://stackoverflow.com/questions/4651676/how-do-i-remove-tinymce-and-then-re-add-it
+				tinyMCE.remove(); // tinymce init
 				tinyMCE.init (tinyMceparams); // tinymce init
+				tinyMCE.execCommand('mceFocus',false,'idTinyMceTextArea');
+				setTimeout(function(){ tinymce.execCommand('mceFocus',false,'idTinyMceTextArea') }, 100); // hbklrbb12
 
-				$scope.focusOnId(mceId);
 
-			};
+				//setTimeout(function(){ $scope.focusOnId(mceId) }, 2000); // hbklrbb
+
+
+			}; // localtinymceinit
 
 			//setTimeout(function(){ $scope.localTinyMceInit() }, 200); // hbklrbb
 	//		setTimeout(function(){ $scope.focusOnId(mceId); }, ); // hbklrbb
@@ -1819,12 +1828,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //alert ('newHtml:' + newHtml);
                 //alert ('in onKeyUp_perrow_text escape id:' + 'ustodorow'+index); // not non-escape
 
-				UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+index,'green', '#FFFFFF','1500');
 				//alert ('newHtml:' + newHtml);
 
                 //<a target='_blank' href='http://ibm.com'>http://ibm.com</a>
 
                 var fnCallbackFromUpdate = function (errorResponse) {
+					UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+index,'red', '#FFFFFF','1500');
                     alert ('ERROR ON SAVE !!! errorResponse:' + errorResponse);
                     //
                     //$scope.error = errorResponse.data.message;
@@ -1834,8 +1843,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 var found = false;
                 //find the element in memory matching the id passed from the UI on the click
                 // might have this passed in OK - check it and maybe can remove this loop
-				var fnx = function(errorResponse) {
-					alert('error on save errorResponse.data.message [' + errorResponse.data.message + ']');
+				var updateCallBackIfErrorIndex = -1;
+				var updateCallBackIfError = function(errorResponse) {
+					UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+updateCallBackIfErrorIndex,'red', 'pink','500');
+					alert('error2 on save errorResponse.data.message [' + errorResponse.data.message + ']');
 				};
                 for (var i = 0; i < $scope.ustodos.length; i++)
                 {
@@ -1850,7 +1861,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						savImgHtml.src = savImgHtml.src.replaceAll('SaveIconBlue.png', 'saveIcon.jpg');
 
 
-						$scope.ustodos[i].html = newHtml;
+						//alert('compare [' + $scope.ustodos[i].html + '] to [' + newHtml + ']')
+						//if ($scope.ustodos[i].html !== newHtml) {
+						//	alert('changed1');
+						//} else {
+						//	alert('no changed1');
+						//}
 
                         // maps to exports.update
                         //$scope.ustodos[i].$update(function () {
@@ -1858,11 +1874,23 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                         //}, fnCallbackFromUpdate);
 
                         // section_update per row on update with escape key
-                        $scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
-                            //alert('success save newHtml [' + newHtml + ']');
+						if ($scope.ustodos[i].html !== newHtml)
+						{
+							updateCallBackIfErrorIndex = index;
+							$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
+								UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+index,'green', '#FFFFFF','1500');
+								$scope.ustodos[i].html = newHtml;
 
-                        }, fnx);
-                        //alert ('done update submit [' + $scope.ustodos[i].html + ']');
+								//alert('saved');
+
+							}, updateCallBackIfError);
+							//alert ('done update submit [' + $scope.ustodos[i].html + ']');
+
+						}
+						//else
+						//{
+						//	//alert('no change');
+						//}
                     }
                 }
                 //O.o ('========== $scope.state_delectedItem set to -1');
@@ -2252,7 +2280,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     callcounteventHandlerEditorcontentChange++;
                     if (enumKeyEvent === $scope.enumKeyEvent.ENTER)
                     {
-                        alert ('enter pressed');
+                        //alert ('enter pressed');
                     }
                     else if (enumKeyEvent === $scope.enumKeyEvent.SPACE)
                     {
@@ -2849,7 +2877,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 						//<textarea ng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
 
-					$scope.localTinyMceInit();
+					//$scope.localTinyMceInit();
+					// hbkeak tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
+					setTimeout(function(){ tinymce.execCommand('mceFocus',false,'idTinyMceTextArea') }, 100); // hbklrbb12
+					//setTimeout(function(){ alert('done') }, 100); // hbklrbb12
 				}
 
 				if (false)
