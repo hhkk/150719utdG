@@ -1125,6 +1125,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 						ed.on('keyup', function(e)
 						{
+							//alert('in keyup');
 							if (ed.getContent({format : 'text'}).trim() === '*' ||
 								ed.getContent({format : 'text'}).trim() === '')
 							{
@@ -1142,6 +1143,47 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//console.log ('e.altKey:' + e.altKey);
 							//alert ('e.ctrlKey:' + e.ctrlKey);
 
+
+							var text = ed.getContent({format : 'text'}).trim();
+							var i = text.length;
+							var allDots = true && text.length !== 0;
+							while (i-- && allDots) {
+								if (text[i] !== '.') {
+									allDots = false;
+									break;
+								}
+							}
+
+							if (allDots)
+							{
+
+								if (text.length % 4 == 1)
+								{
+									document.getElementById('hkheader').style.display = 'block';
+									document.getElementById('hkidtoolbars').style.display = 'none';
+								}
+								else if (text.length % 4 == 2)
+								{
+									document.getElementById('hkheader').style.display = 'none';
+									document.getElementById('hkidtoolbars').style.display = 'block';
+								}
+								else if (text.length % 4 == 3)
+								{
+									document.getElementById('hkheader').style.display = 'block';
+									document.getElementById('hkidtoolbars').style.display = 'block';
+								}
+								else if (text.length % 4 == 0)
+								{
+									document.getElementById('hkheader').style.display = 'none';
+									document.getElementById('hkidtoolbars').style.display = 'none';
+								}
+
+
+								//	document.getElementById('hkheader').style.visibility = 'visible';
+								//else
+								//	document.getElementById('hkheader').style.visibility = 'hidden';
+
+							}
 
 							if (e.keyIdentifier === 'Enter')
 							{
@@ -2015,7 +2057,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//{
 						//	//alert('no change');
 						//}
+						break;
                     }
+
                 }
                 //O.o ('========== $scope.state_delectedItem set to -1');
 				SppSvc.setSelectedItem(-1);
@@ -2094,10 +2138,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     $scope.currentValueAfterBlurHtml = xHtml;
 
                     // 0 text input
-                    document.getElementById('idInput0TypeText').value = xText;
+                    //document.getElementById('idInput0TypeText').value = xText;
 
                     // 1 medium
-                    $scope.mmmm.element.innerHTML = xHtml;
+                    //$scope.mmmm.element.innerHTML = xHtml;
 
                     // 2 CKE
                     //var tt = '<u>' + xHtml + '</u>';
@@ -2200,14 +2244,14 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						if (UtilJsTypeDetect.isString(e)) {
 							//tinyMCE.get('idTinyMceTextArea').setContent(e);
 							//alert('setttt');
-							alert ('in setTextInShowingEditor as string e [' + e + '] callerID [' + callerID + ']');
+							//alert ('in setTextInShowingEditor as string e [' + e + '] callerID [' + callerID + ']');
 							tinyMCE.activeEditor.setContent(e);
 						}
 						//alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
 						else {
 							//tinyMCE.get('idTinyMceTextArea').setContent(e.innerHTML);
 							//alert('settttt');
-							alert ('in setTextInShowingEditor NOT as string e [' + e + '] callerID [' + callerID + ']');
+							//alert ('in setTextInShowingEditor NOT as string e [' + e + '] callerID [' + callerID + ']');
 							tinyMCE.activeEditor.setContent(e.innerHTML);
 						}
 					}
@@ -2400,6 +2444,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             // eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
             $scope.eventHandlerEditorcontentChange = function(enumKeyEvent, data, html, text)
             {
+				//alert( 'in eventHandlerEditorcontentChange');
                 try {
 
                     //document.getElementById('idInputTextFilter').value = text;
@@ -2459,11 +2504,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                     //if (text.endsWith(' ') && $scope.dynamicSearch ) {
                     if (text.endsWith(' ') && $scope.dynamicSearch ) {
-                        //alert ('not     skipping')
+                        alert ('not     skipping')
                         $scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
                             'caller eventHandler space and ends w space', text, html, data);
                     }
                     else if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
+						//alert ('not     skipping 2')
                         $scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
                             'caller eventHandler ENTER key pressed', text, html, data);
                     }
@@ -3871,7 +3917,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                             // hbk 1505
                             //$location.search('q', commandRemoved_toSearchFor_trimmed);       // yoo bar foo bar baz
-                            UtilNLB_bgFade.NLBfadeBg('idInput0TypeText','green', '#FFFFFF','1500');
+                            //UtilNLB_bgFade.NLBfadeBg('idInput0TypeText','green', '#FFFFFF','1500');
 
 
                         }, function(errorResponse) {
