@@ -42,83 +42,6 @@
 		<!--title="Next Editor"-->
 		<!--style='height:32px;'-->
 		<!--/>-->
-		<!-- section_toolbar
-		.----------------. .----------------. .----------------. .----------------. .----------------. .----------------. .----------------.
-		| .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
-		| |  _________   | | |     ____     | | |     ____     | | |   _____      | | |   ______     | | |      __      | | |  _______     | |
-		| | |  _   _  |  | | |   .'    `.   | | |   .'    `.   | | |  |_   _|     | | |  |_   _ \    | | |     /  \     | | | |_   __ \    | |
-		| | |_/ | | \_|  | | |  /  .--.  \  | | |  /  .--.  \  | | |    | |       | | |    | |_) |   | | |    / /\ \    | | |   | |__) |   | |
-		| |     | |      | | |  | |    | |  | | |  | |    | |  | | |    | |   _   | | |    |  __'.   | | |   / ____ \   | | |   |  __ /    | |
-		| |    _| |_     | | |  \  `--'  /  | | |  \  `--'  /  | | |   _| |__/ |  | | |   _| |__) |  | | | _/ /    \ \_ | | |  _| |  \ \_  | |
-		| |   |_____|    | | |   `.____.'   | | |   `.____.'   | | |  |________|  | | |  |_______/   | | ||____|  |____|| | | |____| |___| | |
-		| |              | | |              | | |              | | |              | | |              | | |              | | |              | |
-		| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
-		'----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
-		-->
-		<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
-			   ng-click="clearText()"                src='/img/ClearText.png'
-			   title="Clear Text"
-				/>
-		&nbsp;
-		<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
-			   ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*', '*')"                src='/img/Asterisk.png'
-			   title="Search all"
-				/>
-		&nbsp;
-		<input class="hkToolbarElement" type='image' style="height:8px;"
-			   ng-click='toggleVisibilityTo0()'                src='/img/input0OneLine.png'
-			   title="One Line Editor"
-				/>
-		&nbsp;
-		<input class="hkToolbarElement" type='image' style="height:14px;width:20px;"
-			   ng-click='toggleVisibilityTo1()'                src='/img/input1MultiLine.png'
-			   title="Multi-Line Editor"
-				/>
-		&nbsp;
-		<!--<input class="hkToolbarElement" type='image'  style='height:25px;'-->
-		<!--ng-click='toggleVisibilityTo2()'                src='/img/input2.png'-->
-		<!--title="Rich Editor (CKEditor)"-->
-		<!--/>-->
-
-		<!--<input class="hkToolbarElement" type='image'  style='height:25px;'-->
-		<!--ng-click='toggleCkeToolebar()'                src='/img/input2.png'-->
-		<!--title="Rich Editor (CKEditor) click to add toolbars = no mouseover"-->
-		<!--/>-->
-
-		&nbsp;
-		<input class="hkToolbarElement" type='image'  style='height:25px;'
-			   ng-click='toggleVisibilityTo3()'                src='/img/input2.png'
-			   title="Rich Editor (TinyMCE)"
-				/>
-
-		<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
-		<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
-
-
-		&nbsp;<input type="checkbox" title="Dynamic Search (as you type)" id='idcheckbox_dynammicSearch' ng-model=dynamicSearch  />LiveFilter
-		&nbsp;<input type="checkbox" title="Update search results display after a write/save" id='idcheckbox_modelCheckboxUpdateOnWrite' ng-model=modelCheckboxUpdateOnWrite  />UpdateOnWrite
-		&nbsp;<input type="checkbox" title="if checked, control+enter submits a command while enter is just a line feed (allows multiline record entries)" id='idcheckbox_modelCheckboxCtrlEnterToSave' ng-model=modelCheckboxCtrlEnterToSave  />CtrlEnterToSave
-		&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_reloadWarning' ng-model=reloadWarning />reloadWarn
-		&nbsp;<input type="checkbox" ng-Change="eventNgChange_idcheckbox_includeMceHtmlPasteFilter()" title="On means clean HTML on rich text paste"  id='idcheckbox_includeMceHtmlPasteFilter' ng-model=includeMceHtmlPasteFilter />MCE Paste Filter
-
-		<!--archetype prototype - conditional tag display by variable true false binding-->
-		<!--<img id='imageIdRedPEncilbnw' src='/img/EditPencilBnW.png' xxstyle="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
-		<!--<img id='imageIdRedPEncil'    src='/img/EditPencilRed.png' style="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
-
-	<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
-	<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
-		<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
-		<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
-
-
-
-		<!--xx&nbsp;<span ng-model=$scope.lockMouseover> </span>yy-->
-		<!--<span ng-bind-html='$scope.lockMouseover'></span>-->
-
-		<!--DynamicSearch [<span ng-bind='dynamicSearch'></span>]-->
-
-		<!--<a ui-sref="HKTestSref2">ui-sref=HKTestSref2</a>-->
-
 		<span ng-keyup='onKeyUp("line 63", $event, this.ENUM_KEYEVENTCALLER_KEYUPSPAN)'>
 
 			<!--<input class="hkToolbarElement" type='image'-->
@@ -141,12 +64,10 @@
 			 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
 			-->
 			<!-- ================ INPUT#3 ======================== -->
-			hbklrba
 			<!--<div id='idDivForTinyMceEditorTextarea'>-->
 				<!--was Search / Input-->
 				<textarea xxng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
 			<!--</div>-->
-			hbklrbb
 
 
 			<!-- section_ABOVE_TABLE_CHECKALL_ETC
@@ -163,78 +84,160 @@
 			 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
 			 -->
 		</span>
+		<span style="display: none">
+			<!-- section_toolbar
+			.----------------. .----------------. .----------------. .----------------. .----------------. .----------------. .----------------.
+			| .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
+			| |  _________   | | |     ____     | | |     ____     | | |   _____      | | |   ______     | | |      __      | | |  _______     | |
+			| | |  _   _  |  | | |   .'    `.   | | |   .'    `.   | | |  |_   _|     | | |  |_   _ \    | | |     /  \     | | | |_   __ \    | |
+			| | |_/ | | \_|  | | |  /  .--.  \  | | |  /  .--.  \  | | |    | |       | | |    | |_) |   | | |    / /\ \    | | |   | |__) |   | |
+			| |     | |      | | |  | |    | |  | | |  | |    | |  | | |    | |   _   | | |    |  __'.   | | |   / ____ \   | | |   |  __ /    | |
+			| |    _| |_     | | |  \  `--'  /  | | |  \  `--'  /  | | |   _| |__/ |  | | |   _| |__) |  | | | _/ /    \ \_ | | |  _| |  \ \_  | |
+			| |   |_____|    | | |   `.____.'   | | |   `.____.'   | | |  |________|  | | |  |_______/   | | ||____|  |____|| | | |____| |___| | |
+			| |              | | |              | | |              | | |              | | |              | | |              | | |              | |
+			| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
+			'----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
+			-->
 
-		<span style="xxbackground-color: cornflowerblue ">
-			<span>
-				&nbsp;<input unchecked ng-click='checkBoxClickedToggleAll()' title='Check or uncheck all' id='checkBoxAll' type="checkbox"/>
+			<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
+				   ng-click="clearText()"                src='/img/ClearText.png'
+				   title="Clear Text"
+					/>
+			&nbsp;
+			<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
+				   ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*', '*')"                src='/img/Asterisk.png'
+				   title="Search all"
+					/>
+			&nbsp;
+			<input class="hkToolbarElement" type='image' style="height:8px;"
+				   ng-click='toggleVisibilityTo0()'                src='/img/input0OneLine.png'
+				   title="One Line Editor"
+					/>
+			&nbsp;
+			<input class="hkToolbarElement" type='image' style="height:14px;width:20px;"
+				   ng-click='toggleVisibilityTo1()'                src='/img/input1MultiLine.png'
+				   title="Multi-Line Editor"
+					/>
+			&nbsp;
+			<!--<input class="hkToolbarElement" type='image'  style='height:25px;'-->
+			<!--ng-click='toggleVisibilityTo2()'                src='/img/input2.png'-->
+			<!--title="Rich Editor (CKEditor)"-->
+			<!--/>-->
 
-				&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
-						   alt="{{image.name}}"  title='Delete Selected'
-						   ng-click="operationOnChecked_Delete()"
-				>
-
-				<span style="display: inline-block width:500px" ng-bind='numberCheckboxesChecked'></span>
+			<!--<input class="hkToolbarElement" type='image'  style='height:25px;'-->
+			<!--ng-click='toggleCkeToolebar()'                src='/img/input2.png'-->
+			<!--title="Rich Editor (CKEditor) click to add toolbars = no mouseover"-->
+			<!--/>-->
 
 			&nbsp;
-			</span>
-			<span class='classSpanSearchedFor' title='Current search.  Mouse over copies this to the input area (if not in edit mode).'
-				  ng-mouseover='this.eventMouseoverCurrentSearch()'>
-				Search
-				<span class='classSpanSearchedForSearchText' ng-mouseover='this.eventMouseoverCurrentSearch()'>
-					[<span ng-bind='searchedFor'></span>]
-				</span>
-			</span>
+			<input class="hkToolbarElement" type='image'  style='height:25px;'
+				   ng-click='toggleVisibilityTo3()'                src='/img/input2.png'
+				   title="Rich Editor (TinyMCE)"
+					/>
 
-			<span class='classSpanSearchedFor'>
-				Filter
-			</span>
+			<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
+			<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
 
-			<input id="idInputTextFilter"  type="text" title='Restrict/filter within search result' name="input" ng-model="filterText"  ng-keyup='updateUstodosFiltered(filterText)'
-				   xxng-pattern="example.word" required ng-trim="false" >
 
-			<span class='classSpanSearchedFor'>
-				Showing
-				<span class='classSpanSearchedForSearchText' >
- 					<span ng-bind=(this.ustodosFiltered.length)></span >
-					<span class='classSpanSearchedFor'>of</span>
-					<span ng-bind=(this.ustodos.length)></span >
-				</span>
-			</span>
+			&nbsp;<input type="checkbox" title="Dynamic Search (as you type)" id='idcheckbox_dynammicSearch' ng-model=dynamicSearch  />LiveFilter
+			&nbsp;<input type="checkbox" title="Update search results display after a write/save" id='idcheckbox_modelCheckboxUpdateOnWrite' ng-model=modelCheckboxUpdateOnWrite  />UpdateOnWrite
+			&nbsp;<input type="checkbox" title="if checked, control+enter submits a command while enter is just a line feed (allows multiline record entries)" id='idcheckbox_modelCheckboxCtrlEnterToSave' ng-model=modelCheckboxCtrlEnterToSave  />CtrlEnterToSave
+			&nbsp;<input type="checkbox" title="reload warnings on"  id='idcheckbox_reloadWarning' ng-model=reloadWarning />reloadWarn
+			&nbsp;<input type="checkbox" ng-Change="eventNgChange_idcheckbox_includeMceHtmlPasteFilter()" title="On means clean HTML on rich text paste"  id='idcheckbox_includeMceHtmlPasteFilter' ng-model=includeMceHtmlPasteFilter />MCE Paste Filter
 
-			&nbsp;
+			<!--archetype prototype - conditional tag display by variable true false binding-->
+			<!--<img id='imageIdRedPEncilbnw' src='/img/EditPencilBnW.png' xxstyle="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
+			<!--<img id='imageIdRedPEncil'    src='/img/EditPencilRed.png' style="visibility:hidden" alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
 
-			<!-- ======================== SELECT DROPDOWN ONE OF 20 ACTIONS -->
-			<select
-					id='selectId'
-					ng-change="this.utdEventSelectedEngine()"
-					ng-model="this.commands[0]"
-					title='select command to apply to the entered text'
-					ng-options="command as command.commandDescription2 for
-				command in commands | orderBy:'commandDescription2'"
-					ng-mouseover="showSelectDropdown()"
+			<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
+			<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
+			<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
+			<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
+
+
+
+			<!--xx&nbsp;<span ng-model=$scope.lockMouseover> </span>yy-->
+			<!--<span ng-bind-html='$scope.lockMouseover'></span>-->
+
+			<!--DynamicSearch [<span ng-bind='dynamicSearch'></span>]-->
+
+			<!--<a ui-sref="HKTestSref2">ui-sref=HKTestSref2</a>-->
+
+			<br>
+			<span style="xxbackground-color: cornflowerblue ">
+				<span>
+					&nbsp;<input unchecked ng-click='checkBoxClickedToggleAll()' title='Check or uncheck all' id='checkBoxAll' type="checkbox"/>
+
+					&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
+							   alt="{{image.name}}"  title='Delete Selected'
+							   ng-click="operationOnChecked_Delete()"
 					>
-			</select>
 
-			<!-- ========================= SECTION_FILTER ICON AND TEXTBOX ===================== -->
-			<img ng-src="/img/filterIcon2.jpg" class="per-row-icons-trashimage"
-				 alt="{{image.name}}"  title='Filter within search results below'
-				 xxxxng-mouseover="this.filterToLinksOnly ()"
-				 xxng-click="this.filterToLinksOnly ()"
-					>
-			&nbsp;
+					<span style="display: inline-block width:500px" ng-bind='numberCheckboxesChecked'></span>
 
-			<!-- RESEARCH SECTION_FILTER ICON AND TEXTBOX -->
-			<!--Filter: <span ng-bind=('('+this.searchedFor+'+'+this.filterText+')')  ng-mouseover="this.eventMouseoverRow3(this.searchedFor)"-->
+				&nbsp;
+				</span>
+				<span class='classSpanSearchedFor' title='Current search.  Mouse over copies this to the input area (if not in edit mode).'
+					  ng-mouseover='this.eventMouseoverCurrentSearch()'>
+					Search
+					<span class='classSpanSearchedForSearchText' ng-mouseover='this.eventMouseoverCurrentSearch()'>
+						[<span ng-bind='searchedFor'></span>]
+					</span>
+				</span>
+
+				<span class='classSpanSearchedFor'>
+					Filter
+				</span>
+
+				<input id="idInputTextFilter"  type="text" title='Restrict/filter within search result' name="input" ng-model="filterText"  ng-keyup='updateUstodosFiltered(filterText)'
+					   xxng-pattern="example.word" required ng-trim="false" >
+
+				<span class='classSpanSearchedFor'>
+					Showing
+					<span class='classSpanSearchedForSearchText' >
+						<span ng-bind=(this.ustodosFiltered.length)></span >
+						<span class='classSpanSearchedFor'>of</span>
+						<span ng-bind=(this.ustodos.length)></span >
+					</span>
+				</span>
+
+				&nbsp;
+
+				<!-- ======================== SELECT DROPDOWN ONE OF 20 ACTIONS -->
+				<select
+						id='selectId'
+						ng-change="this.utdEventSelectedEngine()"
+						ng-model="this.commands[0]"
+						title='select command to apply to the entered text'
+						ng-options="command as command.commandDescription2 for
+					command in commands | orderBy:'commandDescription2'"
+						ng-mouseover="showSelectDropdown()"
+						>
+				</select>
+
+				<!-- ========================= SECTION_FILTER ICON AND TEXTBOX ===================== -->
+				<img ng-src="/img/filterIcon2.jpg" class="per-row-icons-trashimage"
+					 alt="{{image.name}}"  title='Filter within search results below'
+					 xxxxng-mouseover="this.filterToLinksOnly ()"
+					 xxng-click="this.filterToLinksOnly ()"
+						>
+				&nbsp;
+
+				<!-- RESEARCH SECTION_FILTER ICON AND TEXTBOX -->
+				<!--Filter: <span ng-bind=('('+this.searchedFor+'+'+this.filterText+')')  ng-mouseover="this.eventMouseoverRow3(this.searchedFor)"-->
 
 
-			<!--<button ng-click="this.buttonClickSearchStar()">*</button>-->
-			<!--<button ng-click="this.buttonClickSearchClear()">Clear</button>-->
+				<!--<button ng-click="this.buttonClickSearchStar()">*</button>-->
+				<!--<button ng-click="this.buttonClickSearchClear()">Clear</button>-->
 
-			<!--<WORKS p ng-repeat="command in commands">{{command}}</p>-->
+				<!--<WORKS p ng-repeat="command in commands">{{command}}</p>-->
 
-			<!--<div id='div' contenteditable='true' onpaste='handlepaste(this, event)'>Paste</div>-->
-			<!--hbkk 1510 -->
-			<div id='div' contenteditable='true' onpaste='UtilHtmlCleaner.handlepaste (this, event)'>Paste</div>
+				<!--<div id='div' contenteditable='true' onpaste='handlepaste(this, event)'>Paste</div>-->
+				<!--hbkk 1510 -->
+				<div id='div' contenteditable='true' onpaste='UtilHtmlCleaner.handlepaste (this, event)'>Paste</div>
+			</span>
+
+
 			<button ng-click="testButton(-2)" title="testButton">TestButton</button>
 
 
@@ -253,6 +256,7 @@
 					<!--<input class="btn" type="submit">-->
 				<!--</form>-->
 			<!--</div>-->
+		</span>
 
 
 
@@ -316,7 +320,6 @@
 
 
 			</div>
-		</span>
 
 		<div 	style="
 			width:75%;

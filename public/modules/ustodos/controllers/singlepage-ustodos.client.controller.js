@@ -269,13 +269,19 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		'$state',
 		'Authentication', 'Ustodos', 'Commands',
 		'SppSvc',
-      function($scope, $window, $stateParams,
+    function($scope, $window, $stateParams,
 		 $location, $document, $rootScope,
 		 $sce, $http, $filter,
 		 $state,
 		 Authentication, Ustodos, Commands, SppSvc
 		)
-    {
+	{
+		var windowhk = angular.element($window);
+		windowhk.bind('resize', function () {
+			//console.log ('resize');
+			//alert(windowhk.width() + 'x' + windowhk.height());
+		});
+
 
 		//alert('scope define');
 
@@ -502,6 +508,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
             $scope.ngInitTopLevel= function()
             {
+				//alert ('in nginit');
 				//if ($scope.howManyTimesInited == 1)
                 //alert ('in ngInitTopLevel');
 					//setTimeout(function(){ $scope.localTinyMceInit(); }, 300); // hbklrbb12
@@ -509,12 +516,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//$scope.localTinyMceInit(); // hbklrbb
 
 				//$scope.localTinyMceInit(); // hbklrb11
-				$scope.localTinyMceInit();  //hbkeak
+				$scope.localTinyMceInit();  // hbkeak
 				//tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
-
-
-
-
 			};
 
             $scope.testNLBfadeBg = function() {
@@ -828,38 +831,146 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				// USED until at least 150715
 
-				var addToMceInitPasteFilter = {};
-				if ($scope.includeMceHtmlPasteFilter)  // hbkk 1510
+				var tinyMceparams_pasteFilter = {};
 				{
-					//alert("yes $scope.includeMceHtmlPasteFilter:" + $scope.includeMceHtmlPasteFilter);
-					addToMceInitPasteFilter.plugins = 'code, pagebreak, paste';
+					if ($scope.includeMceHtmlPasteFilter)  // hbkk 1510
+					{
+						//alert("yes $scope.includeMceHtmlPasteFilter:" + $scope.includeMceHtmlPasteFilter);
+						tinyMceparams_pasteFilter.plugins = 'code, pagebreak, paste';
 
-					// added paste 10/2015 - just having this paste affects wat is pasted
-					//plugins: 'code, pagebreak', // added paste 10/2015
+						// added paste 10/2015 - just having this paste affects wat is pasted
+						//plugins: 'code, pagebreak', // added paste 10/2015
 
-					// begin added with paste
-					addToMceInitPasteFilter.theme_advanced_buttons3_add = 'pastetext,pasteword,selectall';
-					addToMceInitPasteFilter.paste_auto_cleanup_on_paste = false;
-					addToMceInitPasteFilter.paste_preprocess = function(pl, o) {
-						// Content string containing the HTML from the clipboard
-						//alert(o.content);
-						//o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner cleanhtml
-						//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
-						//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
-						//alert('prehk [' + o.content + ']');
-						//alert('posthk');
-						//o.content = "-: CLEANED PRE :-\n" + o.content;
-						// works hbkk 1510
-						//o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlStandard(o.content); // htmlcleaner
-					};
-					addToMceInitPasteFilter.paste_postprocess = function(pl, o) {
-						// Content DOM node containing the DOM structure of the clipboard
-						//alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
-						//o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
-					};
-					// end added with paste
+						// begin added with paste
+						tinyMceparams_pasteFilter.theme_advanced_buttons3_add = 'pastetext,pasteword,selectall';
+						tinyMceparams_pasteFilter.paste_auto_cleanup_on_paste = false;
+						tinyMceparams_pasteFilter.paste_preprocess = function(pl, o) {
+							// Content string containing the HTML from the clipboard
+							//alert(o.content);
+							//o.content = tinymcePasteCleanFilter.cleanHtmlPre(o.content, '<b><strong><u><i><p>' ); // htmlcleaner cleanhtml
+							//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
+							//o.content = ModuleTinymcePasteCleanFilter.tinymcePasteCleanFilter(o.content, '<b><strong><u><i><p>' ); // htmlcleaner
+							//alert('prehk [' + o.content + ']');
+							//alert('posthk');
+							//o.content = "-: CLEANED PRE :-\n" + o.content;
+							// works hbkk 1510
+							//o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlStandard(o.content); // htmlcleaner
+						};
+						tinyMceparams_pasteFilter.paste_postprocess = function(pl, o) {
+							// Content DOM node containing the DOM structure of the clipboard
+							//alert("in event paste_postprocess: o.node.innerHTML" + o.node.innerHTML);
+							//o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED POST :-";
+						};
+						// end added with paste
+
+					}
+				}
+
+				var tinyMceparams_toolbars = {};
+				{
+					if (false)  // hbkk 1510
+					{
+						tinyMceparams_toolbars =
+						{
+							//toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
+							//toolbar2: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
+							toolbar1: 'mybuttonimage | mybuttonmenu | example | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic ',
+							//toolbar: false,
+							//toolbar2: 'print preview media | forecolor backcolor emoticons',
+							///toolbar2: 'bold italic',
+							///these don't work": toolbar2: 'image ',
+							//toolbar2: 'bold italic mybutton',
+							//toolbar: 'mybutton',
+
+							menubar : 'false'
+
+						}
+					}
+					else{
+						{
+							tinyMceparams_toolbars =
+							{
+								//toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
+								//toolbar2: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
+								//toolbar1: 'mybuttonimage | mybuttonmenu | example | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic ',
+								toolbar: false,
+								//toolbar2: 'print preview media | forecolor backcolor emoticons',
+								///toolbar2: 'bold italic',
+								///these don't work": toolbar2: 'image ',
+								//toolbar2: 'bold italic mybutton',
+								//toolbar: 'mybutton',
+
+								menubar : 'false'
+
+							}
+						}
+
+					}
+
 
 				}
+
+
+				var tinyMceparams_theme = {};
+				{
+
+					if (true)
+					{
+						tinyMceparams_theme =
+						{
+							//theme : 'advanced',
+							//theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
+							//theme_advanced_buttons2 : '',
+							//theme_advanced_buttons3 : '',
+							//theme_advanced_toolbar_location : 'top',
+							//theme_advanced_toolbar_align : 'left',
+							//theme_advanced_statusbar_location : 'bottom',
+							//  theme : 'advanced',
+							// Theme options
+							//theme_advanced_buttons1 : 'save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect',
+							//theme_advanced_buttons2 : 'cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor',
+							//theme_advanced_buttons3 : 'tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen',
+							//theme_advanced_buttons4 : 'insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak',
+							//theme_advanced_toolbar_location : 'top',
+							//theme_advanced_toolbar_align : 'left',
+							//theme_advanced_statusbar_location : 'bottom',
+							//theme_advanced_resizing : true,
+							//theme_advanced_statusbar_location : '', //
+							//font_formats: "Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;AkrutiKndPadmini=Akpdmi-n",
+							//theme_advanced_font_sizes: "10px,12px,13px,14px,16px,18px,20px",
+							//font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
+							//content_css : "modules/core/css/core.css"
+						};
+
+					}
+				}
+
+				// http://howbigismybrowser.com/
+				//var tinyMceparams_size = {};
+				//{
+				//	//alert (windowhk.height());
+				//	if (windowhk.height() > 700)
+				//	{
+				//		//alert ('big browser');
+				//		tinyMceparams_size =
+				//		{
+				//			width: '100%',
+				//			height: '50%',
+				//			resize: 'both'
+				//		};
+				//	} else {
+				//		//alert ('little browser');
+				//		tinyMceparams_size =
+				//		{
+				//			width: '100%',
+				//			height: '10'
+				//		};
+				//	}
+				//}
+
+
+
+
 
 
 				// hbklrbb
@@ -867,15 +978,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				var tinyMceparams =
 				{
+					elementpath: false,
+					statusbar: false,
 					//mode : 'exact',
 					//mode : 'textareas',
-					//theme : 'advanced',
-					//theme_advanced_buttons1 : 'mybutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink',
-					//theme_advanced_buttons2 : '',
-					//theme_advanced_buttons3 : '',
-					//theme_advanced_toolbar_location : 'top',
-					//theme_advanced_toolbar_align : 'left',
-					//theme_advanced_statusbar_location : 'bottom',
 					//plugins : 'inlinepopups',
 					//setup : function(ed) {
 					//    // Add a custom button
@@ -897,37 +1003,19 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//mode : 'exact',
 					mode : 'specific_textareas',
 					elements : mceId, // hbklrbb
-					//  theme : 'advanced',
 					//plugins : 'pagebreak,styleBAD,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template',
 
-					// Theme options
-					//theme_advanced_buttons1 : 'save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect',
-					//theme_advanced_buttons2 : 'cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor',
-					//theme_advanced_buttons3 : 'tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen',
-					//theme_advanced_buttons4 : 'insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak',
-					//theme_advanced_toolbar_location : 'top',
-					//theme_advanced_toolbar_align : 'left',
-					//theme_advanced_statusbar_location : 'bottom',
-					//theme_advanced_resizing : true,
-					theme_advanced_statusbar_location : '', //
-					width: '100%',
-					height: '100%',
-					resize: 'both',
-					//toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link',
-					toolbar1: 'mybuttonimage | mybuttonmenu | example | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent link | bold italic ',
-					//toolbar2: 'print preview media | forecolor backcolor emoticons',
-					///toolbar2: 'bold italic',
-					///these don't work": toolbar2: 'image ',
-					//toolbar2: 'bold italic mybutton',
-					//toolbar: 'mybutton',
 					oninit : $scope.myCustomOnInit,
 
-					//toolbar: 'true',
-					menubar : 'false',
 					init_instance_callback : function()
 					{
-						if ($scope.q)
-							tinyMCE.activeEditor.setContent($scope.q);
+						if ($scope.q)   {
+							//if ($scope.q !== '*')
+							//	$scope.setTextInShowingEditor($scope.searchedFor, 'line 3329a1');
+							//else
+							//	$scope.setTextInShowingEditor('', 'line 3329b1');
+							//tinyMCE.activeEditor.setContent($scope.q);
+						}
 					},
 
 					setup : function(ed)
@@ -942,10 +1030,27 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//    alert ('in onkeyup');
 						//    ed.save();  // or whatever you want to do to save the editor content
 						//});
-
+						//ed.onInit.add(function() {
+						//});
 						ed.on('init', function(e)
 						{
+							//alert('in mce init function'); // in tinymce init
+							var id = ed.id;
+							var height = 75;
+							//alert('document.getElementById(id + _ifr):'+ document.getElementById(id + '_ifr'));
+							document.getElementById(id + '_ifr').style.height = height + 'px';
+							//One line with buttons takes roughly 30px, so we add that
+							//document.getElementById(id + '_tbl').style.height = (height + 30) + 'px';
+
+
+							//alert('initing hkon2');
+							//var width = ed.getWin().clientWidth/2;
+							//var height = 10;
+							//ed.theme.resizeTo(width, height);
+
+							//alert('initing hkon');
 							this.getDoc().body.style.fontSize = '20px';
+							this.getDoc().body.style.border = '0px';
 							//alert('init event' + e);
 							var elemId = 'mceu_57';
 							if (document.getElementById(elemId) !== null)
@@ -964,6 +1069,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 								//else
 								//	document.getElementById(elemId).style.visibility='hidden';
 							}
+
+							//tinyMCE.activeEditor.setContent('hi hk1!');
+
+
 						});
 
 						//ed.onLoadContent.add(function(ed, o) {
@@ -1115,10 +1224,25 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				};
 
-				for (var propertyName in addToMceInitPasteFilter) {
-					//alert (propertyName + ':' + addToMceInitPasteFilter[propertyName]);
-					tinyMceparams[propertyName] = addToMceInitPasteFilter[propertyName];
+				for (var propertyName in tinyMceparams_pasteFilter) {
+					//alert (propertyName + ':' + tinyMceparams_pasteFilter[propertyName]);
+					tinyMceparams[propertyName] = tinyMceparams_pasteFilter[propertyName];
 				}
+
+				for (var propertyName in tinyMceparams_toolbars) {
+					//alert (propertyName + ':' + tinyMceparams_pasteFilter[propertyName]);
+					tinyMceparams[propertyName] = tinyMceparams_toolbars[propertyName];
+				}
+
+				for (var propertyName in tinyMceparams_theme) {
+					//alert (propertyName + ':' + tinyMceparams_pasteFilter[propertyName]);
+					tinyMceparams[propertyName] = tinyMceparams_theme[propertyName];
+				}
+
+				//for (var propertyName in tinyMceparams_size) {
+				//	//alert (propertyName + ':' + tinyMceparams_pasteFilter[propertyName]);
+				//	tinyMceparams[propertyName] = tinyMceparams_size[propertyName];
+				//}
 
 				// hbkeak http://stackoverflow.com/questions/4651676/how-do-i-remove-tinymce-and-then-re-add-it
 				tinyMCE.remove(); // tinymce init
@@ -2064,7 +2188,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             // section_per_editor 3
             $scope.setTextInShowingEditor = function(e, callerID, processFailure)
             {
-                //alert ('in setTextInShowingEditor e [' + e + '] callerID [' + callerID + ']');
                 try {
                     //switch($scope.whichInputIsInFocus())
                     //{
@@ -2072,18 +2195,22 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                             //alert ('in settext 3 e [' + e + '] callerID [' + callerID + ']');
                             //alert ('in settext 3');
                             //alert ('+++++++++ in setTextInShowingEditor target INPUT_3_MCE e:' + e);
-							if (tinyMCE.activeEditor !== null)
-							{
-								if (UtilJsTypeDetect.isString(e)) {
-									//tinyMCE.get('idTinyMceTextArea').setContent(e);
-									tinyMCE.activeEditor.setContent(e);
-								}
-								//alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
-								else {
-									//tinyMCE.get('idTinyMceTextArea').setContent(e.innerHTML);
-									tinyMCE.activeEditor.setContent(e.innerHTML);
-								}
-							}
+					if (tinyMCE.activeEditor !== null)
+					{
+						if (UtilJsTypeDetect.isString(e)) {
+							//tinyMCE.get('idTinyMceTextArea').setContent(e);
+							//alert('setttt');
+							alert ('in setTextInShowingEditor as string e [' + e + '] callerID [' + callerID + ']');
+							tinyMCE.activeEditor.setContent(e);
+						}
+						//alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
+						else {
+							//tinyMCE.get('idTinyMceTextArea').setContent(e.innerHTML);
+							//alert('settttt');
+							alert ('in setTextInShowingEditor NOT as string e [' + e + '] callerID [' + callerID + ']');
+							tinyMCE.activeEditor.setContent(e.innerHTML);
+						}
+					}
                     //        break;
                     //
                     //    default:
@@ -2108,8 +2235,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     //{
                     //    case $scope.ns.Input.INPUT_3_MCE:
                             //alert ('in setTextInShowingEditor for input2cke');
-							xText = tinyMCE.activeEditor.getContent({format: 'text'});
-							xHtml= tinyMCE.activeEditor.getContent();
+					xText = tinyMCE.activeEditor.getContent({format: 'text'});
+					xHtml= tinyMCE.activeEditor.getContent();
                             //alert ('xHtml from 3 mce [' + xHtml + ']');
                     //        break;
                     //    default:
@@ -2867,7 +2994,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                 //
 				//}
 
-				if (true)    // hbkk 1510 works to set text as mce window // TEST changing one of the text rows to a textarea
+				if (true)
+				{
+					alert(windowhk.width() + 'x' + windowhk.height());
+				}
+
+				if (false)    // hbkk 1510 works to set text as mce window // TEST changing one of the text rows to a textarea
 				{
 					//var x = document.getElementById('topLevelTableRow1');
 					//alert ('x:' + x);
@@ -3552,9 +3684,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
             $scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml, xValue)
             {
                 //alert ('in processCommand caller [' + enumProcessCommandCaller + ']')
-                O.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
-                O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
-                O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
+                //O.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
+                //O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
+                //O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
 
 				SppSvc.setSelectedItem(-1);
 
@@ -3622,10 +3754,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
                     var callbackFromQuery = function() {
                         //alert ('in callbackFromQuery post get callback');
 
-							$scope.setUstodosFiltered('caller2', $scope.ustodos);
+						$scope.setUstodosFiltered('caller2', $scope.ustodos);
 						SppSvc.setModelDirty(false);
                         //alert ('set gblx.modelDirty  = false2;')
-                        $scope.setTextInShowingEditor($scope.searchedFor, 'line 3329');
+						if ($scope.searchedFor !== '*')
+                        	$scope.setTextInShowingEditor($scope.searchedFor, 'line 3329a2');
+						else
+							$scope.setTextInShowingEditor('', 'line 3329b2');
 
 
                         //alert ('in callback from query')
