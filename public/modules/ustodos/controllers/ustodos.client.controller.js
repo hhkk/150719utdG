@@ -1826,55 +1826,6 @@ angular.module('ustodos').controller('UstodosController',
             //};
 
             // section_per_editor 2
-            $scope.toggleVisibilityTo0 = function() {
-				//alert ('in toggleVisibilityTo0');
-                // couldn't figure out mce blur so use this
-                $scope.whichEditorShowing = $scope.ns.Input.INPUT_0_TEXT;
-                $scope.focusOnId(arrIds[0]);
-                if ($scope.whichInputIsInFocus === $scope.ns.Input.INPUT_3_MCE)
-                    $scope.prop3mce();
-                document.getElementById(arrIds[1]).style.display = 'none';
-                document.getElementById(arrIds[2]).style.display = 'none';
-                document.getElementById(arrIds[3]).style.display = 'none';
-                document.getElementById(arrIds[0]).style.display = 'block';
-                $scope.currentVisibleCounter = $scope.ns.Input.INPUT_0_TEXT;
-
-            };
-
-            $scope.toggleVisibilityTo1 = function() {
-				//alert ('in toggleVisibilityTo1');
-                // couldn't figure out mce blur so use this
-                $scope.whichEditorShowing = $scope.ns.Input.INPUT_1_MEDIUM;
-                //alert ('in toggleVisibilityTo1 Medium');
-                if ($scope.whichInputIsInFocus === $scope.ns.Input.INPUT_3_MCE)
-                    $scope.prop3mce();
-                document.getElementById(arrIds[0]).style.display = 'none';
-                document.getElementById(arrIds[2]).style.display = 'none';
-                document.getElementById(arrIds[3]).style.display = 'none';
-                document.getElementById(arrIds[1]).style.display = 'block';
-                //alert('pre move focus to 1 in toggleVisibilityTo1')
-                $scope.focusOnId(arrIds[1]);
-                //alert('post move focus to 1 in toggleVisibilityTo1')
-                $scope.currentVisibleCounter = $scope.ns.Input.INPUT_1_MEDIUM;
-            };
-
-            //$scope.toggleVisibilityTo2 = function() {
-				//alert ('in toggleVisibilityTo2');
-            //    $scope.whichEditorShowing = $scope.ns.Input.INPUT_2_CKE;
-            //    //alert ('in toggleVisibilityTo2 CKE');
-            //    if ($scope.whichInputIsInFocus() == $scope.ns.Input.INPUT_3_MCE)
-            //    {
-            //        $scope.prop3mce();
-            //    }
-            //    document.getElementById(arrIds[0]).style.display = 'none';
-            //    document.getElementById(arrIds[1]).style.display = 'none';
-            //    document.getElementById(arrIds[3]).style.display = 'none';
-            //    document.getElementById(arrIds[2]).style.display = 'block';
-            //    $scope.currentVisibleCounter = $scope.ns.Input.INPUT_2_CKE;
-            //    setTimeout(function(){ $scope.focusOnId(arrIds[2]); }, 300);
-            //    setTimeout(function(){ $scope.focusOnId(arrIds[2]); }, 600);
-            //};
-            //
             $scope.toggleVisibilityTo3 = function(callerId) {
 				//alert ('in toggleVisibilityTo3');
                 $scope.whichEditorShowing = $scope.ns.Input.INPUT_3_MCE;

@@ -2613,12 +2613,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
                     //if (text.endsWith(' ') && $scope.dynamicSearch ) {
                     if (text.endsWith(' ') && $scope.dynamicSearch ) {
-                        alert ('not     skipping')
+                        //alert ('not skipping')
                         $scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
                             'caller eventHandler space and ends w space', text, html, data);
                     }
                     else if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
-						//alert ('not     skipping 2')
+						//alert ('not skipping 2')
                         $scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
                             'caller eventHandler ENTER key pressed', text, html, data);
                     }

@@ -109,16 +109,6 @@
 				   title="Search all"
 					/>
 			&nbsp;
-			<input class="hkToolbarElement" type='image' style="height:8px;"
-				   ng-click='toggleVisibilityTo0()'                src='/img/input0OneLine.png'
-				   title="One Line Editor"
-					/>
-			&nbsp;
-			<input class="hkToolbarElement" type='image' style="height:14px;width:20px;"
-				   ng-click='toggleVisibilityTo1()'                src='/img/input1MultiLine.png'
-				   title="Multi-Line Editor"
-					/>
-			&nbsp;
 			<!--<input class="hkToolbarElement" type='image'  style='height:25px;'-->
 			<!--ng-click='toggleVisibilityTo2()'                src='/img/input2.png'-->
 			<!--title="Rich Editor (CKEditor)"-->
@@ -128,12 +118,6 @@
 			<!--ng-click='toggleCkeToolebar()'                src='/img/input2.png'-->
 			<!--title="Rich Editor (CKEditor) click to add toolbars = no mouseover"-->
 			<!--/>-->
-
-			&nbsp;
-			<input class="hkToolbarElement" type='image'  style='height:25px;'
-				   ng-click='toggleVisibilityTo3()'                src='/img/input2.png'
-				   title="Rich Editor (TinyMCE)"
-					/>
 
 			<!--<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">-->
 			<!--<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">-->
@@ -175,7 +159,7 @@
 
 					<span style="display: inline-block width:500px" ng-bind='numberCheckboxesChecked'></span>
 
-				&nbsp;
+					&nbsp;
 				</span>
 				<span class='classSpanSearchedFor' title='Current search.  Mouse over copies this to the input area (if not in edit mode).'
 					  ng-mouseover='this.eventMouseoverCurrentSearch()'>
@@ -234,7 +218,7 @@
 
 				<!--<div id='div' contenteditable='true' onpaste='handlepaste(this, event)'>Paste</div>-->
 				<!--hbkk 1510 -->
-				<div id='div' contenteditable='true' onpaste='UtilHtmlCleaner.handlepaste (this, event)'>Paste</div>
+				<span id='div' contenteditable='true' onpaste='UtilHtmlCleaner.handlepaste (this, event)'>PasteIntoContentEditableTest</span>
 			</span>
 
 
@@ -261,77 +245,22 @@
 
 
 
-			<!--<br><a ng-href="http://google.com/search?q={{this.searchedFor}}">http://google.com/search?q={{this.searchedFor}}</a>-->
-			<!--<br><a ng-href="{{this.searchedForAsLink}}">{{this.searchedForAsLink}}</a>-->
+		<!--<br><a ng-href="http://google.com/search?q={{this.searchedFor}}">http://google.com/search?q={{this.searchedFor}}</a>-->
+		<!--<br><a ng-href="{{this.searchedForAsLink}}">{{this.searchedForAsLink}}</a>-->
 
-			<!--<button ng-click="testButton(-2)">TestButton</button>-->
-			<!--<p ng-repeat="operator in operators">{{operator.commandDescription}}</p>-->
+		<!--<button ng-click="testButton(-2)">TestButton</button>-->
+		<!--<p ng-repeat="operator in operators">{{operator.commandDescription}}</p>-->
 
-			<div   style='
-				xxwidth: 100%;
-				padding: 0px;
-				xxdisplay: inline-block;
-				xxborder: 1px solid greenyellow;
-				margin: 0px' class='hkcssPosTable'>
-
-				<!--<table style="width: 100%;">-->
-				<!--<tr>-->
-				<!--<td align="left">-->
-				<!--<div style="word-break:break-all;">LongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWordLongWord</div>-->
-				<!--</td>-->
-				<!--<td align="right">-->
-				<!--<span style="display: inline;">Foo</span>-->
-				<!--</td>-->
-				<!--</tr>-->
-				<!--</table>-->
-
-
-
-
-				<!-- SECTION_ HEADER ROW SELECT ALL CHECKBOX AND TRASH ICON -->
-
-				<!-- SECTION_ TEXT FILTER ICON AND DYNAMIC SEARCH BOX -->
-
-
-				<!--Snippet: <textarea ng-model="snippet" cols="60" rows="3"></textarea>-->
-				<!--<table>-->
-				<!--<tr id="bind-html-with-sanitize">-->
-				<!--<td>ng-bind-html</td>-->
-				<!--<td>Automatically uses $sanitize</td>-->
-				<!--<td><pre>&lt;div ng-bind-html="snippet"&gt;<br/>&lt;/div&gt;</pre></td>-->
-				<!--<td>aa<div ng-bind-html="snippet"></div>bb</td>-->
-				<!--</tr>-->
-				<!--<tr id="bind-html-with-trust">-->
-				<!--<td>ng-bind-html</td>-->
-				<!--<td>Bypass $sanitize by explicitly trusting the dangerous value</td>-->
-				<!--<td>-->
-				<!--<pre>&lt;div ng-bind-html="deliberatelyTrustDangerousSnippet()"&gt;-->
-				<!--&lt;/div&gt;</pre>-->
-				<!--</td>-->
-				<!--<td>aa<div ng-bind-html="deliberatelyTrustDangerousSnippet()"></div>bb</td>-->
-				<!--</tr>-->
-				<!--<tr id="bind-default">-->
-				<!--<td>ng-bind</td>-->
-				<!--<td>Automatically escapes</td>-->
-				<!--<td><pre>&lt;div ng-bind="snippet"&gt;<br/>&lt;/div&gt;</pre></td>-->
-				<!--<td>aa<div ng-bind='snippet'></div>bb</td>-->
-				<!--</tr>-->
-				<!--</table>-->
-
-
-			</div>
-
-		<div
-			style='
-			width:85%;
-			overflow:scroll;
-			height:100%;
-			top:5px;
-			z-index: -2;
-			background-color: steelblue;
-			position:relative
-			'
-				>
+		<div >
+			<!--style='-->
+			<!--width:85%;-->
+			<!--overflow:scroll;-->
+			<!--height:100%;-->
+			<!--top:5px;-->
+			<!--z-index: -2;-->
+			<!--background-color: steelblue;-->
+			<!--position:relative-->
+			<!--'-->
 			<!-- hbkk 1509 hktable -->
 			11111111111111111111111111
 			<table id='maincsstableid'>
@@ -372,112 +301,120 @@
 				<!--<tr  ng-repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
 				<!--<tr  ng-repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
 
+				<!--//height:80em;-->
+				<tbody
+						style='
+    					overflow:scroll;
+						width:50%;
+						height:50%;
+						top:5px;
+						z-index: 0;
+						background-color: steelblue;
+						position:relative;
+    					'
+					>
+					<div id='perRowOnly'>
+						<tr  ng-repeat="ustodo in ustodosFiltered "
 
+							 id="topLevelTableRow{{$index}}"
+							 ng-mouseover="this.eventMouseoverRow2($index)"
+							 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
+							 ng-class-odd="'odd'" ng-class-even="'even'">
 
+							<!-- 1 PER ROW COUNT AND CHECK BOX -->
+							<td style="width:3%">
+								<span id='numberWrapForFade{{$index}}'>
+								{{$index+1}}
+								</span>
 
+								<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
+								<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox{{ustodo.html}}"' type="checkbox"/>-->
+								<!--&nbsp;<input ng-click='checkBoxClickedSingle(ustodos[$index]._id)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>-->
+								&nbsp;<input ng-click='checkBoxClickedSingle($index)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>
+								<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox"' type="checkbox"/>-->
+							</td>
 
-
-				<div id='perRowOnly'>
-					<tr  ng-repeat="ustodo in ustodosFiltered "
-
-						 id="topLevelTableRow{{$index}}"
-						 ng-mouseover="this.eventMouseoverRow2($index)"
-						 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
-						 ng-class-odd="'odd'" ng-class-even="'even'">
-
-						<!-- 1 PER ROW COUNT AND CHECK BOX -->
-						<td style="width:3%">
-							<span id='numberWrapForFade{{$index}}'>
-							{{$index+1}}
-							</span>
-
-							<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
-							<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox{{ustodo.html}}"' type="checkbox"/>-->
-							<!--&nbsp;<input ng-click='checkBoxClickedSingle(ustodos[$index]._id)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>-->
-							&nbsp;<input ng-click='checkBoxClickedSingle($index)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>
-							<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox"' type="checkbox"/>-->
-						</td>
-
-						<!-- 2 PER ROW DELETE BUTTON -->
-						<td style="width:3%">
-							<!-- trash garbage icon -->
-							&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
-											 alt="{{image.name}}"  title='Delete immediately'
-											 ng-click="deleteDbUstotoOneByIndex([$index])"
-								>
-							&nbsp
-							<!--ng-show="nowShowing==$index"-->
-							<!--ng-repeat="image in images"-->
-							<!--class="gallery-image fade-animation"-->
-						</td>
-
-						<!-- 3 PER ROW SAVE BUTTON -->
-						<td style="width:3%" >
-							<!--<button ng-click="count = count + 1" ng-init="count=0">-->
-							<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
-
-							<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
-
-							<img id="savimg{{$index}}" class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
-								 alt="{{image.name}}"
-								 ng-click="saveUstodoGiven(ustodo, $index)"
+							<!-- 2 PER ROW DELETE BUTTON -->
+							<td style="width:3%">
+								<!-- trash garbage icon -->
+								&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
+												 alt="{{image.name}}"  title='Delete immediately'
+												 ng-click="deleteDbUstotoOneByIndex([$index])"
 									>
-							&nbsp;
-						</td>
+								&nbsp
+								<!--ng-show="nowShowing==$index"-->
+								<!--ng-repeat="image in images"-->
+								<!--class="gallery-image fade-animation"-->
+							</td>
 
-						<!-- PER ROW COUNT -->
-						<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
+							<!-- 3 PER ROW SAVE BUTTON -->
+							<td style="width:3%" >
+								<!--<button ng-click="count = count + 1" ng-init="count=0">-->
+								<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
 
-						<!-- 4 PER ROW TIME AGO -->
-						<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
-						<td style="width:3%">
-							&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
-										ng-click="event_click_timeAgo(ustodo._id)"
-										title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}></span>
-						</td>
-						<!--<td>{{ ustodo.text}}</td>f-->
+								<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
 
-
-						<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
-						<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
-						<!--</td>-->
-
-
-						<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
-						<td
-							id="idConentEditableRow{{$index}}"
-							style="xxwidth:50%;
-							word-wrap: break-word;
-							zzbackground-color: yellow;
-							white-space: nowrap;
-							overflow: auto;
-							/*visible|hidden|scroll|auto|initial|inherit*/
-							/*-moz-hyphens:auto;*/
-							/*-webkit-hyphens:auto;*/
-							/*-o-hyphens:auto;*/
-							/*hyphens:auto;*/
-							">
-								<span class='hkcssContentedit' >
-
-								<!--ng-bind-html="ustodosFiltered[$index].html">-->
-								<!--ng-bind-html="processThis(ustodosFiltered[$index].html)"-->
-								<!--hbkk 1510-->
-
-
-								<div class="WholePage" id="ustodorow{{$index}}" contenteditable="true"
-									 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
-									 ng-focus='hkngfocustest($index)'
-									 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
-
-									 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
+								<img id="savimg{{$index}}" class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
+									 alt="{{image.name}}"
+									 ng-click="saveUstodoGiven(ustodo, $index)"
 										>
+								&nbsp;
+							</td>
 
-								</div>
-							<!--/onclick = "this.contentEditable = true;"-->
-							</span>
-						</td>
-					</tr>
-				</div>
+							<!-- PER ROW COUNT -->
+							<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
+
+							<!-- 4 PER ROW TIME AGO -->
+							<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
+							<td style="width:3%">
+								&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
+											ng-click="event_click_timeAgo(ustodo._id)"
+											title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}></span>
+							</td>
+							<!--<td>{{ ustodo.text}}</td>f-->
+
+
+							<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
+							<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
+							<!--</td>-->
+
+
+							<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
+							<td
+								id="idConentEditableRow{{$index}}"
+								style="xxwidth:50%;
+								word-wrap: break-word;
+								zzbackground-color: yellow;
+								white-space: nowrap;
+								overflow: auto;
+								/*visible|hidden|scroll|auto|initial|inherit*/
+								/*-moz-hyphens:auto;*/
+								/*-webkit-hyphens:auto;*/
+								/*-o-hyphens:auto;*/
+								/*hyphens:auto;*/
+								">
+									<span class='hkcssContentedit' >
+
+									<!--ng-bind-html="ustodosFiltered[$index].html">-->
+									<!--ng-bind-html="processThis(ustodosFiltered[$index].html)"-->
+									<!--hbkk 1510-->
+
+
+									<div class="WholePage" id="ustodorow{{$index}}" contenteditable="true"
+										 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
+										 ng-focus='hkngfocustest($index)'
+										 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
+
+										 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
+											>
+
+									</div>
+								<!--/onclick = "this.contentEditable = true;"-->
+								</span>
+							</td>
+						</tr>
+					</div>
+				</tbody>
 			</table>
 			2222222222222222222222222
 		</div>
