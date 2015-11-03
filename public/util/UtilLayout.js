@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
+	alert('in UtilLayout.js');
+
 // from http://www.hardcode.nl/subcategory_1/article_526-singleton-examples-in-javascript.htm
 var singletonUtilLayout_layout_showAll_state = ( function() {
 

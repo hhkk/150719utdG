@@ -283,6 +283,115 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 		});
 
 
+
+
+
+		//function northOnresize ()
+		//{
+		//	//oooo("start north__onresize htNorthOri htMceTargetGiveNorth ");
+		//	//return;
+		//	var htNorthOri = $('#id-ui-layout-north-inner').height();
+		//	var htMceTargetGiveNorth = htNorthOri - 28;
+        //
+		//	//var t = $('#testme2ta').val() + 'px';
+		//	var t = htMceTargetGiveNorth + 'px';
+		//	//alert ("setting to t:") // +t
+		//	$(".mceIframeContainer").attr ('style', 'height: '+t);
+		//	//var t = '300px'
+		//	//alert ("setting to:" + t)
+		//	$('#txtUpper_ifr').css('height', t);
+		//	//oooo ("done north__onresize htNorthOri:" +  htNorthOri + ", htMceTargetGiveNorth:" + htMceTargetGiveNorth);
+		//};
+
+
+
+
+//
+//		var layoutSettings_Inner = {
+//			applyDefaultStyles:				true // basic styling for testing & demo purposes
+//			,	minSize:						20 // TESTING ONLY
+//			,	spacing_closed:					14
+//			,	north__spacing_closed:			8
+//			,	south__spacing_closed:			8
+//			,	north__togglerLength_closed:	-1 // = 100% - so cannot 'slide open'
+//			,	south__togglerLength_closed:	-1
+//			//,	fxName:							"slide" // do not confuse with "slidable" option!
+//			,	fxName:							"none" // do not confuse with "slidable" option!
+//			//,	fxSpeed_open:					000
+//			//,	fxSpeed_close:					000
+//			//,	fxSettings_open:				{ easing: "easeInQuint" }
+//			//,	fxSettings_close:				{ easing: "easeOutQuint" }
+//			//,	north__fxName:					"none"
+//			//,	south__fxName:					"drop"
+//			//,	south__fxSpeed_open:			0
+//			//,	south__fxSpeed_close:			0
+//			//,	initClosed:						true
+//			,	center__minWidth:				200
+//			,	center__minHeight:				200
+//
+//			// inner north  1/4
+//			,	north: {
+//				size:			230 // north default size HBK
+//
+//				//        ,	resizable: 				true
+//				//        ,	slidable:				true
+//
+//				,   maskContents:  true
+//				,   maskObjects:   true
+//
+//			}
+//
+//			// inner west 2/4
+//			,   west:
+//			{
+//				initClosed:				false
+//				,	togglerTip_open:		"Close East Pane"
+//				,	togglerTip_closed:		"Open East Pane"
+//				,	resizerTip_open:		"Resize East Pane"
+//				,	slideTrigger_open:		"mouseover"
+//				// ,spacing_open: 0
+//			}
+//
+//			// inner center 3/4
+//			,   center: {
+//				//size:			230 // north default size HBK
+//
+//				//        ,	resizable: 				true
+//				//        ,	slidable:				true
+//
+//				maskContents:  true
+//				,maskObjects:   true
+//
+//			}
+//
+//			// inner south 4/4
+//			,   south:
+//			{
+//				initClosed:				true
+//			}
+//
+////    ,   north__maskContents:  true
+////    ,   north__maskObjects:   true
+//			,   north__onresize: northOnresize    // zindex stuff from here - not sure what is does - maybe useful with resize issue http://layout.jquery-dev.net/changelog.cfm
+//			//    ,   zIndex:                      null        // the PANE zIndex - resizers and masks will be +1
+//			////  DO NOT CHANGE the zIndex values below unless you clearly understand their relationships
+//			//    ,   zIndexes: {                              // set _default_ z-index values here...
+//			//        pane_normal:             0           // normal z-index for panes
+//			//        ,   content_mask:            1           // applied to overlays used to mask content INSIDE panes during resizing
+//			//        ,   resizer_normal:          2           // normal z-index for resizer-bars
+//			//        ,   pane_sliding:            100         // applied to *BOTH* the pane and its resizer when a pane is 'slid open'
+//			//        ,   pane_animate:            1000        // applied to the pane when being animated - not applied to the resizer
+//			//        ,   resizer_drag:            10000       // applied to the CLONED resizer-bar when being 'dragged'
+//			//}
+//		};
+//
+//		$("body").layout({applyDemoStyles:false});
+//		var innerLayout = $("div.ui-layout-center").layout( layoutSettings_Inner );
+
+
+//test if jquery active		var o = $(window).width();
+		//alert ('o:' + o)
+
 		//alert('scope define');
 
 		$scope.SppSvc = SppSvc;

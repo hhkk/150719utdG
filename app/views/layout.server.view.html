@@ -4,6 +4,12 @@
 <head>
 	<title>{{title}}</title>
 
+	<!--from http://www.informit.com/articles/article.aspx?p=2271482&seqNum=10-->
+	<!--Accessing jQuery or jQuery Lite Directly-->
+	<!--For most AngularJS applications the jQuery lite library built into AngularJS is sufficient. However, if you need the additional functionality of the full version of jQuery, simply load the jQuery library before loading the AngularJS library. For example:-->
+	<!--<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>-->
+	<!--<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>	-->
+
 	<!-- General META -->
 	<meta charset="utf-8">
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
@@ -48,6 +54,7 @@
 
     <script type="text/javascript" src="bundle.js"></script>
 	<script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
+	<!--<script type="text/javascript" src="/lib/jquery-layout/jquery.layout-latest.js"></script>-->
 	<!--<script type="text/javascript" src="/lib/tinymce4obsolete/tinymce.min.js"></script>-->
     <script type="text/javascript" src="/lib/tinymce425/js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript" src="/util/UtilIdle.js"></script>
@@ -73,6 +80,7 @@
 
 <body class="ng-cloak">
 
+<!--<div class="ui-layout-center" >-->
 
 	<span id='hkheader' style="display: none">
 		<header data-ng-include="'/modules/core/views/header.client.view.html'"
@@ -80,6 +88,7 @@
 				class="navbar navbar-fixed-top navbar-inverse">
 		</header>
 	</span>
+
 	<section class="content">
 		<section class="container">
 			<!-- marries in {% block contentXXYYOfSameNameCarefulNottoBeSAMe!!!!HERE IN COMMENT %} from index.server.view.html-->
@@ -87,6 +96,7 @@
 		</section>
 	</section>
 
+<!--</div>-->
 	<!--Embedding The User Object-->
 	<script type="text/javascript">
 		var user = {{ user | json | safe }};
