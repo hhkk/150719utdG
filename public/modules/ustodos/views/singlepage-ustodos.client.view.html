@@ -251,18 +251,12 @@
 		<!--<button ng-click="testButton(-2)">TestButton</button>-->
 		<!--<p ng-repeat="operator in operators">{{operator.commandDescription}}</p>-->
 
-		<div >
-			<!--style='-->
-			<!--width:85%;-->
-			<!--overflow:scroll;-->
-			<!--height:100%;-->
-			<!--top:5px;-->
-			<!--z-index: -2;-->
-			<!--background-color: steelblue;-->
-			<!--position:relative-->
-			<!--'-->
+		<div id='hbkdiv1'
+				style='height:800px;
+				overflow:auto;
+				'
+			>
 			<!-- hbkk 1509 hktable -->
-			11111111111111111111111111
 			<table id='maincsstableid'>
 				<!--<col style="width:2%">-->
 				<!--<col style="width:2%">-->
@@ -316,10 +310,11 @@
 					<div id='perRowOnly'>
 						<tr  ng-repeat="ustodo in ustodosFiltered "
 
-							 id="topLevelTableRow{{$index}}"
-							 ng-mouseover="this.eventMouseoverRow2($index)"
-							 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
-							 ng-class-odd="'odd'" ng-class-even="'even'">
+							 <td
+								 id="topLevelTableRow{{$index}}"
+								 ng-mouseover="this.eventMouseoverRow2($index)"
+								 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
+								 ng-class-odd="'odd'" ng-class-even="'even'">
 
 							<!-- 1 PER ROW COUNT AND CHECK BOX -->
 							<td style="width:3%">
@@ -395,9 +390,9 @@
 								">
 									<span class='hkcssContentedit' >
 
-									<!--ng-bind-html="ustodosFiltered[$index].html">-->
-									<!--ng-bind-html="processThis(ustodosFiltered[$index].html)"-->
-									<!--hbkk 1510-->
+								<!--ng-bind-html="ustodosFiltered[$index].html">-->
+								<!--ng-bind-html="processThis(ustodosFiltered[$index].html)"-->
+								<!--hbkk 1510-->
 
 
 									<div class="WholePage" id="ustodorow{{$index}}" contenteditable="true"
@@ -406,7 +401,7 @@
 										 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
 
 										 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
-											>
+									>
 
 									</div>
 								<!--/onclick = "this.contentEditable = true;"-->
@@ -480,6 +475,8 @@
 		});
 	</script>
 </section>
+
+
 
 
 

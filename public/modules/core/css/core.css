@@ -227,7 +227,9 @@ body.ng-cloak
 /*hbkk 1509 */
 #maincsstableid {
 	table-layout: fixed;
-	width: 100%;
+	color: blue;
+	width: 90%;
+	height: 50%;
 	white-space: nowrap;
 }
 
