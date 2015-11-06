@@ -229,7 +229,7 @@ body.ng-cloak
 	table-layout: fixed;
 	color: blue;
 	width: 90%;
-	height: 50%;
+	/*height: 50%;*/
 	white-space: nowrap;
 }
 

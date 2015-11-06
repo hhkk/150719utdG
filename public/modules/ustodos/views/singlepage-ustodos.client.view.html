@@ -252,7 +252,7 @@
 		<!--<p ng-repeat="operator in operators">{{operator.commandDescription}}</p>-->
 
 		<div id='hbkdiv1'
-				style='height:800px;
+			 style='height:300px;
 				overflow:auto;
 				'
 			>
@@ -299,114 +299,109 @@
 				<tbody
 						style='
     					overflow:scroll;
-						width:50%;
-						height:50%;
-						top:5px;
+						width:100%;
+						height:85%;
+						/*top:5px;*/
 						z-index: 0;
-						background-color: steelblue;
-						position:relative;
+						/*background-color: lightgrey;*/
+						position:fixed;
     					'
 					>
 					<div id='perRowOnly'>
-						<tr  ng-repeat="ustodo in ustodosFiltered "
+						<tr  ng-repeat='ustodo in ustodosFiltered ' ng-class-odd="'odd'" ng-class-even="'even'">
 
-							 <td
-								 id="topLevelTableRow{{$index}}"
-								 ng-mouseover="this.eventMouseoverRow2($index)"
-								 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
-								 ng-class-odd="'odd'" ng-class-even="'even'">
-
-							<!-- 1 PER ROW COUNT AND CHECK BOX -->
-							<td style="width:3%">
-								<span id='numberWrapForFade{{$index}}'>
-								{{$index+1}}
-								</span>
-
-								<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
-								<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox{{ustodo.html}}"' type="checkbox"/>-->
-								<!--&nbsp;<input ng-click='checkBoxClickedSingle(ustodos[$index]._id)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>-->
-								&nbsp;<input ng-click='checkBoxClickedSingle($index)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>
-								<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox"' type="checkbox"/>-->
-							</td>
-
-							<!-- 2 PER ROW DELETE BUTTON -->
-							<td style="width:3%">
-								<!-- trash garbage icon -->
-								&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
-												 alt="{{image.name}}"  title='Delete immediately'
-												 ng-click="deleteDbUstotoOneByIndex([$index])"
+								 <td
+									 id="topLevelTableRow{{$index}}"
+									 ng-mouseover="this.eventMouseoverRow2($index)"
+									 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
 									>
-								&nbsp
-								<!--ng-show="nowShowing==$index"-->
-								<!--ng-repeat="image in images"-->
-								<!--class="gallery-image fade-animation"-->
-							</td>
 
-							<!-- 3 PER ROW SAVE BUTTON -->
-							<td style="width:3%" >
-								<!--<button ng-click="count = count + 1" ng-init="count=0">-->
-								<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
+								<!-- 1 PER ROW COUNT AND CHECK BOX -->
+								<td style="width:3%">
+									<span id='numberWrapForFade{{$index}}'>
+									{{$index+1}}
+									</span>
 
-								<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
+									<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
+									<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox{{ustodo.html}}"' type="checkbox"/>-->
+									<!--&nbsp;<input ng-click='checkBoxClickedSingle(ustodos[$index]._id)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>-->
+									&nbsp;<input ng-click='checkBoxClickedSingle($index)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>
+									<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox"' type="checkbox"/>-->
+								</td>
 
-								<img id="savimg{{$index}}" class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
-									 alt="{{image.name}}"
-									 ng-click="saveUstodoGiven(ustodo, $index)"
+								<!-- 2 PER ROW DELETE BUTTON -->
+								<td style="width:3%">
+									<!-- trash garbage icon -->
+									&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
+													 alt="{{image.name}}"  title='Delete immediately'
+													 ng-click="deleteDbUstotoOneByIndex([$index])"
 										>
-								&nbsp;
-							</td>
+									&nbsp
+									<!--ng-show="nowShowing==$index"-->
+									<!--ng-repeat="image in images"-->
+									<!--class="gallery-image fade-animation"-->
+								</td>
 
-							<!-- PER ROW COUNT -->
-							<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
+								<!-- 3 PER ROW SAVE BUTTON -->
+								<td style="width:3%" >
+									<!--<button ng-click="count = count + 1" ng-init="count=0">-->
+									<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
 
-							<!-- 4 PER ROW TIME AGO -->
-							<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
-							<td style="width:3%">
-								&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
-											ng-click="event_click_timeAgo(ustodo._id)"
-											title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}></span>
-							</td>
-							<!--<td>{{ ustodo.text}}</td>f-->
+									<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
 
+									<img id="savimg{{$index}}" class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
+										 alt="{{image.name}}"
+										 ng-click="saveUstodoGiven(ustodo, $index)"
+											>
+									&nbsp;
+								</td>
 
-							<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
-							<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
-							<!--</td>-->
+								<!-- PER ROW COUNT -->
+								<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
 
-
-							<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
-							<td
-								id="idConentEditableRow{{$index}}"
-								style="xxwidth:50%;
-								word-wrap: break-word;
-								zzbackground-color: yellow;
-								white-space: nowrap;
-								overflow: auto;
-								/*visible|hidden|scroll|auto|initial|inherit*/
-								/*-moz-hyphens:auto;*/
-								/*-webkit-hyphens:auto;*/
-								/*-o-hyphens:auto;*/
-								/*hyphens:auto;*/
-								">
-									<span class='hkcssContentedit' >
-
-								<!--ng-bind-html="ustodosFiltered[$index].html">-->
-								<!--ng-bind-html="processThis(ustodosFiltered[$index].html)"-->
-								<!--hbkk 1510-->
+								<!-- 4 PER ROW TIME AGO -->
+								<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
+								<td style="width:3%">
+									&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
+												ng-click="event_click_timeAgo(ustodo._id)"
+												title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}></span>
+								</td>
+								<!--<td>{{ ustodo.text}}</td>f-->
 
 
-									<div class="WholePage" id="ustodorow{{$index}}" contenteditable="true"
-										 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
-										 ng-focus='hkngfocustest($index)'
-										 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
+								<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
+								<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
+								<!--</td>-->
 
-										 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
+
+								<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
+								<td
+									id="idConentEditableRow{{$index}}"
+									style='xxwidth:50%;
+									word-wrap: break-word;
+									zzbackground-color: yellow;
+									white-space: nowrap;
+									overflow: auto;'
+									/*visible|hidden|scroll|auto|initial|inherit*/
+									/*-moz-hyphens:auto;*/
+									/*-webkit-hyphens:auto;*/
+									/*-o-hyphens:auto;*/
+									/*hyphens:auto;*/
 									>
+									<span class='hkcssContentedit' >
+										<div class="WholePage" id="ustodorow{{$index}}" contenteditable="true"
+											 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
+											 ng-focus='hkngfocustest($index)'
+											 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
+											 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
+										>
 
-									</div>
-								<!--/onclick = "this.contentEditable = true;"-->
-								</span>
-							</td>
+										</div>
+									</span>
+									<!--/onclick = "this.contentEditable = true;"-->
+								</td>
+
+							</span>
 						</tr>
 					</div>
 				</tbody>

@@ -3151,7 +3151,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				if (true)
 				{
-					alert(windowhk.width() + 'x' + windowhk.height());
+					alert('w:' + windowhk.width() + ', x ht:' + windowhk.height());
 				}
 
 				if (false)    // hbkk 1510 works to set text as mce window // TEST changing one of the text rows to a textarea
