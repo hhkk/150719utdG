@@ -423,6 +423,11 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 			return s;
 		};
 
+		$scope.eventBlur3mce = function(s)
+		{
+			alert ('in blur') ;
+		};
+
 
 
 		// http://henriquat.re/basics-of-angular/services-dependency-injection/services-and-dependency-injection-in-angularjs.html
@@ -545,7 +550,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 
 
-            $scope.$watch('$viewContentLoaded', function(){ // like onload YES
+				$scope.$watch('$viewContentLoaded', function(){ // like onload YES
 				try {
 
 					//alert ('in $scope.$watch  onload'); // hbklrb11
@@ -576,7 +581,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//document.getElementById('idDivForTinyMceEditorTextarea').style.display = 'block'; // hbklrbb
 					//alert('xx:' + 'idTinyMceTextArea');
 					//alert('xx:' + document.getElementById('idTinyMceTextArea'));
-					document.getElementById('idTinyMceTextArea').style.display = 'block';
+					//document.getElementById('idTinyMceTextArea').style.display = 'block';
 					//document.getElementById('idTinyMceTextArea').style.display = 'block';
 					$scope.currentVisibleCounter = $scope.ns.Input.INPUT_3_MCE;
 					//setTimeout(function(){ $scope.focusOnId(mceId); }, 600); // hbklrb10
@@ -758,6 +763,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 			$scope.myCustomOnInit = function () // works
             {
                 //alert('myCustomOnInit from mce');
+				//var o = document.getElementById('idTinyMceTextArea');
+				//alert('myCustomOnInit from mce o.ng-blur:' + o['ng-blur']);
+				//alert('myCustomOnInit from mce o.style.display:' + o.style.display);
+
 				//this.getDoc().body.style.fontSize = '13px';
                 //tinyMCE.get('idTinyMceTextArea').setContent('<span>some1</span> html');
                 //tinymce.activeEditor.setContent('<span>some</span> html');
@@ -3150,6 +3159,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//}
 
 				if (true)
+				{
+					var o = document.getElementById('idTinyMceTextArea');
+					//alert('myCustomOnInit from mce o.ng-blur:' + o['ng-blur']);
+					alert('myCustomOnInit from mce o.style.display:' + o.style.display);
+				}
+
+				if (false)
 				{
 					alert('w:' + windowhk.width() + ', x ht:' + windowhk.height());
 				}
