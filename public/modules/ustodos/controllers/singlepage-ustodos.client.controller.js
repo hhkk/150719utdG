@@ -1098,6 +1098,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				{
 					elementpath: false,
 					statusbar: false,
+					content_css : "modules/core/css/core_mce.css",
+
 					//mode : 'exact',
 					//mode : 'textareas',
 					//plugins : 'inlinepopups',
