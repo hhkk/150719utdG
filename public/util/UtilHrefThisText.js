@@ -13,6 +13,8 @@
  */
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+
 
 var seeIfConnectedToThisClass = function (s) {
     return ('in seeIfConnectedToThisClass:' + s);
@@ -99,33 +101,35 @@ var hrefThisText = function(textToBeHrefed)
 };
 
 /**
+ * 1 split string on whitespace
+ * 2 if a token is a url, prefix each isurl with http://
+ * 3
  * create n
- * @param textToBeTokenized
- * @returns {*}
+ * @param textWithUrls
+ * @returns urlsFromTextToGetTitleOf: array of urls {
+					'urlOriginal':'http://' + tokens[i],
+					'urlWithHttpPrefix':'http://' + tokens[i]
  */
-var splitTextToTokensWithHttpUrlState = function(textToBeTokenized)
+var getUrlsFromText = function(textWithUrls)
 {
-    //textToBeTokenized = '=-=-=-=-=-=-=-=-' + textToBeTokenized;
-    var tokens = textToBeTokenized.split(/\s+/);
+    //textWithUrls = '=-=-=-=-=-=-=-=-' + textWithUrls;
+    var tokens = textWithUrls.split(/\s+/);
     //console.log ('y.length:' + y.length);
     var i = 0;
     // section_adds http to .coms .edu etc
-    tokens.forEach(function(token) {
+	var urls = [];
+	tokens.forEach(function(token) {
+		//UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre('asdasd',['a']);
         if (isUrl(token)) {
-            //console.log ('is a url:' + token);
-            var replaceWith = null;
-            if (tokens[i].toLowerCase().indexOf('http') !== 0)
-                tokens[i] = 'http://' + tokens[i]
-            //if (tokens[i].toLowerCase().indexOf('www') === -1)
-            //    tokens[i] = tokens[i].replace(/http:\/\//, "http://www.");
-
-            //tokens[i] = buildHrefFromUrlString(tokens[i]);
-            //O.o ('keeping tokens[i] [' + tokens[i] + ']');
-            //tokens[i] = replaceWith;
-        }
-        i++;
+            O.o ('--------> is a url from text:' + token);
+			// some URLs will have the http:// prefix already, for others add it
+			urls.push ({
+				'urlOriginal': token,
+				'urlWithHttpPrefix': (token.toLowerCase().indexOf('http') === 0 ? '' : 'http://') + token
+			});
+		}
     });
-    return tokens;
+    return urls;
 };
 
 
@@ -168,7 +172,7 @@ var html2text = function (html) {
 
 
 if (typeof exports !== 'undefined') {
-    exports.splitTextToTokensWithHttpUrlState = splitTextToTokensWithHttpUrlState;
+    exports.getUrlsFromText = getUrlsFromText;
     exports.hrefThisText = hrefThisText;
     exports.html2text = html2text;
 }

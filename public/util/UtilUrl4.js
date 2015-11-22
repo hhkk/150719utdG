@@ -28,75 +28,82 @@ var unirest = require('unirest');
 
 //tokenize raw text, get array of http-urls to get titles.  expand to include title
 var callCount_expandUrlsToHrefsReturnPatchedStr =0
-var expandUrlsToHrefsReturnPatchedStr = function (initialTextWithPreHrefs, res)
+var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 {
-    //O.o ('################# in expandUrlsToHrefsReturnPatchedStr get titles [' + initialTextWithPreHrefs + ']');
+    //O.o ('################# in expandUrlsToHrefsReturnPatchedStr get titles [' + ustodoHtml + ']');
     var Item = function(url) {
         this.url = url;
         this.urlori = url;
         this.title = null;
     };
 
-    var items = [];
-
     // ARE THERE ANY URLS
-    // get tokens with urls as "http..." in their own array element
+    // get urls with urls as "http..." in their own array element
     // section_expand_ eg com to include http
-    var tokens = UtilHrefThisText.splitTextToTokensWithHttpUrlState (initialTextWithPreHrefs);
+    var urls = UtilHrefThisText.getUrlsFromText(ustodoText);
+    //urls.forEach(function(token)
+    //{
+    //    if (token.indexOf('http://') == 0) {
+    //        //hashUrlsToTitle[token] = token;
+    //        items.push (new Item(token));
+    //    }
+    //});
+    //
 
-    tokens.forEach(function(token)
-    {
-        if (token.indexOf('http://') == 0) {
-            //hashUrlsToTitle[token] = token;
-            items.push (new Item(token));
-        }
-    });
-
-    if (items.length > 0)
+    if (urls.length > 0)
     {
         var res2 = {};
+		/**
+		 * once I have a title back from web call, knit the title back into both html and text
+		 */
         res2.result = function()
         {
             //O.o ("items have all been converted");
 
             // knit / replace here
-            // now replace tokens with combo [title] + hrefed url
-            items.forEach(function(item)
+            // now replace urls with combo [title] + hrefed url
+			urls.forEach(function(url)
             {
+				//url.urlOriginal = "rr"
+				//url.urlWithHttpPrefix = "http://rr"
+
                 var foundMatch = false;
                 var sbufStringsChecked = '';
 
-                for (var itokens = 0; itokens < tokens.length; itokens++)
+	            for (var iUrls = 0; iUrls < urls.length; iUrls++)
                 {
-                    //O.o ('yes match found for  item.url:' + item.url);
-                    sbufStringsChecked += '\r\nand testing [' + item.urlori + '] against [' + tokens[itokens] + '] ';
+                    //O.o ('yes match found for  url.url:' + url.url);
+                    sbufStringsChecked += '\r\nand testing [' + url.urlori + '] against [' + urls[iUrls] + '] ';
 
-                    if (item.urlori === tokens[itokens] )
+                    if (url.urlOriginal === urls[iUrls] )
                     {
-                        //O.o ('yes match found for  item.url:' + item.url);
+                        //O.o ('yes match found for  url.url:' + url.url);
                         foundMatch = true;
-                        //tokens[itokens] = '[' + item.title + '] ' + UtilHrefThisText.hrefThisText(item.url);
+                        //urls[iUrls] = '[' + url.title + '] ' + UtilHrefThisText.hrefThisText(url.url);
                         // original ustodo saves non href'ed links to the db
-                        tokens[itokens] = '[' + item.title + '] ' + item.url;
+                        urls[iUrls] = '[' + url.title + '] ' + url.url;
                     }
                 }
 
                 //if (!foundMatch) {
-                //    O.o ('no match found for  item.url:' + item.url + ' against these:' + sbufStringsChecked);
-                //    throw  ('no match found for  item.url:' + item.url + ' against these:' + sbufStringsChecked);
+                //    O.o ('no match found for  url.url:' + url.url + ' against these:' + sbufStringsChecked);
+                //    throw  ('no match found for  url.url:' + url.url + ' against these:' + sbufStringsChecked);
                 //}
             });
 
-            res.json(tokens.join(' '));
+			var x = urls.join(' ')
+			O.o ( 'x:' + x);
+            res.json(x);
             //O.o ('reached res.json!!! ================================');
 
         };
 
-        asyncWrapperForTitle_levelOne(items, res2);
-        //replace tokens in string
-    }
-    else{
-        res.json(tokens.join(' '));
+        asyncWrapperForTitle_levelOne(urls, res2);
+        //replace urls in string
+    } else {
+		var x = urls.join(' ')
+		O.o ( 'x:' + x);
+		res.json(x);
     }
     //if (hashUrlsToTitle.size() > 0) {
     //    }
@@ -108,21 +115,24 @@ var expandUrlsToHrefsReturnPatchedStr = function (initialTextWithPreHrefs, res)
 
 // 1
 var asyncWrapperForTitle_levelOne_callCount = 0;
-var asyncWrapperForTitle_levelOne = function(items, res2) {
-    // 1st parameter in async.each() is the array of items
+var asyncWrapperForTitle_levelOne = function(urls, res2) {
+    // 1st parameter in async.each() is the array of urls
     //O.o (asyncWrapperForTitle_levelOne_callCount++ +  '.in asyncWrapperForTitle_levelOne');
     //http://justinklemm.com/node-js-async-tutorial/
     try {
-        async.each(items,
-            // 2nd parameter is the function that each item is passed into
-            function (item, callback) {
+        async.each(urls,
+			//url.urlOriginal = "rr"
+			//url.urlWithHttpPrefix = "http://rr"
+			// 2nd parameter is the function that each item is passed into
+            function (url, callback) {
                 // Call an asynchronous function (often a save() to MongoDB)
                 //O.o ('called 2nd param function')
                 try {
+
                     getUrlContent_levelOne(function () {
                         // Async call is done, alert via callback
                         callback();
-                    }, item);
+                    }, url);
                 } catch (e) {
                     O.o('errerreea:' + e);
                 }
@@ -131,7 +141,7 @@ var asyncWrapperForTitle_levelOne = function(items, res2) {
             // 3rd parameter is the function call when everything is done
             function (err) {
                 // All tasks are done now
-                whenDoneAsync_LevelOne(items, res2);
+                whenDoneAsync_LevelOne(urls, res2);
             }
         );
     } catch (e) {
@@ -141,7 +151,7 @@ var asyncWrapperForTitle_levelOne = function(items, res2) {
 
 
 // 2
-var getUrlContent_levelOne = function(callback, item) {
+var getUrlContent_levelOne = function(callback, url) {
     try
     {
         var calledBack = false;
@@ -151,7 +161,7 @@ var getUrlContent_levelOne = function(callback, item) {
         //    return function () {
         //        // do some logging, cleaning, etc. depending on req
         //        if (!calledBack) {
-        //            O.e('timeout for item.url [' + item.url + ']');
+        //            O.e('timeout for url.url [' + url.url + ']');
         //
         //            try {
         //                req.abort();
@@ -159,13 +169,13 @@ var getUrlContent_levelOne = function(callback, item) {
         //                O.o('req.abort fail [' + e + ']');
         //            }
         //            if (!calledBack) {
-        //                O.o('in timeout calling back for url [' + item.url + ']');
-        //                item.title = 'timed out';
+        //                O.o('in timeout calling back for url [' + url.url + ']');
+        //                url.title = 'timed out';
         //                calledBack = true;
-        //                callback('dummy', item);
+        //                callback('dummy', url);
         //            }
         //            else
-        //                O.o('in timeout not calling back for url [' + item.url + ']');
+        //                O.o('in timeout not calling back for url [' + url.url + ']');
         //        }
         //
         //    };
@@ -178,20 +188,26 @@ var getUrlContent_levelOne = function(callback, item) {
         //var timeout = setTimeout( fn, 4000000 );
         ////clearTimeout(timeout);
 
-        //O.o ('-------- in getUrlContent_levelOne trying url:' + item.url);
+        //O.o ('-------- in getUrlContent_levelOne trying url:' + url.url);
 
 
         var fn = function (response)
         {
 //request('http://ibm.com', function (error, response, html) {
-            if (response.error && response.error.code === 'ETIMEDOUT') {
-                if (!calledBack) {
-                    calledBack = true;
-                    item.title = "<timed out>"
+			if (response.error)
+			{
+				if (response.error && response.error.code === 'ETIMEDOUT') {
+					if (!calledBack) {
+						calledBack = true;
+						url.title = "<timed out>"
+						callback('dummy', url);
+					}
+				}
+				else {
+					url.title = "<error in title retrieval:>" + response.error;
+				}
 
-                    callback('dummy', item);
-                }
-            }
+			}
             else if (response.statusCode == 200) {
                 //console.log('pass 1 html:' + html);
                 var title = null;
@@ -200,44 +216,44 @@ var getUrlContent_levelOne = function(callback, item) {
                 else
                     O.o ('body is null');
                 if (!calledBack) {
-                    //O.o('calling back from getUrlContent_levelOne x1:' + item.url + '->' + title);
+                    //O.o('calling back from getUrlContent_levelOne x1:' + url.url + '->' + title);
                     if (title != null) {
-                        item.title = '1:' + title;
-                        //item.title = title;
+                        url.title = '1:' + title;
+                        //url.title = title;
                         calledBack = true;
-                        callback('dummy', item);
+                        callback('dummy', url);
                     }
                 }
 
                 //O.o ('========================= title:' + title);
             }
 
-            if(item.title === null)
+            if(url.title === null)
             {
                 getUrlContent_levelTwo(function (item) {
                     // Async call is done, alert via callback
                     //O.o ('for url:' + url + ', got title:' + title);
                     //titles.push ('for url:' + url + ', got title:' + title);
-                    //item.title = title;
+                    //url.title = title;
                     if (!calledBack) {
                         calledBack = true;
                         callback('dummy', item);
                     }
-                }, item);
+                }, url);
             } else {
                 if (!calledBack) {
-                    O.o('calling back from getUrlContent_levelOne x2:' + item.url + '->' + title);
-                    //O.o('x2:' + item.url + '->' + title);
+                    O.o('calling back from getUrlContent_levelOne x2:' + url.url + '->' + title);
+                    //O.o('x2:' + url.url + '->' + title);
                     calledBack = true;
-                    callback('dummy', item);
+                    callback('dummy', url);
                 }
             }
         };
 
 
-        //var xxx = request(item.url, fn);
-        //O.o ('requesting item.url [' + item.url + ']');
-        var unirequest = unirest.get(item.url);
+        //var xxx = request(url.url, fn);
+        //O.o ('requesting url.url [' + url.url + ']');
+        var unirequest = unirest.get(url.url);
         unirequest.timeout(5000);
         unirequest.end(fn);
 
@@ -247,28 +263,28 @@ var getUrlContent_levelOne = function(callback, item) {
 
     } catch (e) {
         O.e('x12 errrta:' + e);
-        O.e('x12:' + item.url + '->' + item.title);
+        O.e('x12:' + url.url + '->' + url.title);
         throw e;
-        //callback('fail', item);
+        //callback('fail', url);
     }
 };
 
 
 
-function whenDoneAsync_LevelOne(items, res2){
-    //O.o('Everything is done level one for [' + items.length + '] items.');
-    //var i = 0;
-    var itemsWithoutTitlesAfter_levelOne = [];
-    for (var i = items.length-1 ; i >= 0 ; i--) {
-        //O.o (i + '. xxx ' + item.url + '->' + item.title);
-        if (items[i].title === null){
-            //O.o ('================================');
-            itemsWithoutTitlesAfter_levelOne.push (items[i]);
-            items.splice(i, 1);
+function whenDoneAsync_LevelOne(urls, res2){
+    //O.o('Everything is done level one for [' + urls.length + '] urls.');
+    //var iUrl = 0;
+    //var itemsWithoutTitlesAfter_levelOne = [];
+    for (var iUrl = urls.length-1 ; iUrl >= 0 ; iUrl--) {
+        //O.o (iUrl + '. xxx ' + item.url + '->' + item.title);
+        if (urls[iUrl].title === null){
+            O.o ('================================ title null after level one');
+            //itemsWithoutTitlesAfter_levelOne.push (urls[iUrl]);
+            urls.splice(iUrl, 1);
         }
     }
 
-    res2.result(items); // temp to return just level one results
+    res2.result(urls); // temp to return just level one results
 
 }
 

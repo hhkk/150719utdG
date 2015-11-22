@@ -834,6 +834,8 @@ if (typeof exports !== 'undefined') {
  */
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+
 
 var seeIfConnectedToThisClass = function (s) {
     return ('in seeIfConnectedToThisClass:' + s);
@@ -920,33 +922,39 @@ var hrefThisText = function(textToBeHrefed)
 };
 
 /**
+ * 1 split string on whitespace
+ * 2 if a token is a url, prefix each isurl with http://
+ * 3
  * create n
- * @param textToBeTokenized
- * @returns {*}
+ * @param textWithUrls
+ * @returns urlsFromTextToGetTitleOf: array of urls {
+					'urlOriginal':'http://' + tokens[i],
+					'urlWithHttpPrefix':'http://' + tokens[i]
  */
-var splitTextToTokensWithHttpUrlState = function(textToBeTokenized)
+var getUrlsFromText = function(textWithUrls)
 {
-    //textToBeTokenized = '=-=-=-=-=-=-=-=-' + textToBeTokenized;
-    var tokens = textToBeTokenized.split(/\s+/);
+    //textWithUrls = '=-=-=-=-=-=-=-=-' + textWithUrls;
+    var tokens = textWithUrls.split(/\s+/);
     //console.log ('y.length:' + y.length);
     var i = 0;
     // section_adds http to .coms .edu etc
-    tokens.forEach(function(token) {
+	var urls = [];
+	tokens.forEach(function(token) {
+		//UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre('asdasd',['a']);
         if (isUrl(token)) {
-            //console.log ('is a url:' + token);
-            var replaceWith = null;
-            if (tokens[i].toLowerCase().indexOf('http') !== 0)
-                tokens[i] = 'http://' + tokens[i]
-            //if (tokens[i].toLowerCase().indexOf('www') === -1)
-            //    tokens[i] = tokens[i].replace(/http:\/\//, "http://www.");
-
-            //tokens[i] = buildHrefFromUrlString(tokens[i]);
-            //O.o ('keeping tokens[i] [' + tokens[i] + ']');
-            //tokens[i] = replaceWith;
-        }
+            O.o ('--------> is a url from text:' + token);
+			// some URLs will have the http:// prefix already, for others add it
+            if (token.toLowerCase().indexOf('http') !== 0)
+			{
+				urls[i] = {
+					'urlOriginal': tokens[i],
+					'urlWithHttpPrefix': 'http://' + tokens[i]
+				};
+			}
+		}
         i++;
     });
-    return tokens;
+    return urls;
 };
 
 
@@ -989,7 +997,7 @@ var html2text = function (html) {
 
 
 if (typeof exports !== 'undefined') {
-    exports.splitTextToTokensWithHttpUrlState = splitTextToTokensWithHttpUrlState;
+    exports.getUrlsFromText = getUrlsFromText;
     exports.hrefThisText = hrefThisText;
     exports.html2text = html2text;
 }
@@ -1026,9 +1034,11 @@ var privateSpace = new function() {
 
 
 var utilHtmlCleaner = new function() {
+	// call this as utilHtmlCleaner.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
 	this.cleanHtmlPre = function(str, allowed_tags) {
 		//alert ('in tinymcePasteCleanFilter.cleanHtml [' + str+ ']');
 
+		O.o ('xxxxxxxxxxxxxxxxxxxxx: in utilHtmlCleaner.cleanHtmlPre()');
 		var key = '', allowed = false;
 		var matches = [];    var allowed_array = [];
 		var allowed_tag = '';
@@ -1197,14 +1207,19 @@ function processpaste (elem, savedcontent) {
 
 
 
-
-
 if (typeof exports !== 'undefined') {
     exports.utilHtmlCleaner = utilHtmlCleaner;
     exports.handlepaste = handlepaste;
 	// UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(strm ...)
 }
 
+
+if (false)
+{
+	var prestrip = '<p>ibm.com</p>';
+	var stripped  = utilHtmlCleaner.cleanHtmlPre(prestrip, '');
+	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
+}
 
 
 

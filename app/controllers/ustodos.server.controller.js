@@ -8,6 +8,7 @@ var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
+var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 
 //var UtilClass = require('.././UtilClass');
 // O.o ('__dirname:' + __dirname);  // __dirname:c:\utd\141213UtdV6\app\controllers
@@ -36,45 +37,58 @@ O.o ('&&&&&&&&&&000 init var callcountSaved = 0');
 var callcountSaved = 0;
 
 // section_create_new not section_write
+// section_routes_from_singlepage-ustodos.client.controller.js $scope.processCommand
 exports.create = function(req, res)
 {
 	O.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
+	// ustodo is a model object with getters and setters derived from the
 	var ustodo = new Ustodo(req.body);
-	ustodo.user = req.user;
 
-	ustodo.html = ustodo.html;
+	O.o('11111111111111111  in ustodos.server.controller.js: create : ustodo.text:' + ustodo.text);
+	O.o('11111111111111111  in ustodos.server.controller.js: create : ustodo.html:' + ustodo.html);
+	ustodo.user = req.user;
+	try {
+	 // do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
+		//	if (false)
+		ustodo.html = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(ustodo.html);
+	} catch (err) {
+		//console.log(UtilClass.UtilClass('err', err));
+		O.e('err in expandUrlsToHrefsReturnPatchedStr:' + err);
+	}
 
 	var res2 = {};
 	// section_exports.create
-	O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ in server.controller exports.create');
+	O.o ('xxxxxxxxxxxxxxxxxxxxxxxxxin server.controller exports.create');
 	res2.json = function(s)
 	{
-		//O.o ('--------> saving content as both text and html [' + s + ']');
-		//ustodo.text = 't1.' + s;
-		//ustodo.html = 'h1.' + s;
-		//ustodo.text = s;
-		//ustodo.html = s;
+		O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + s + ']');
 		ustodo.datelastmod = new Date();
 		ustodo.datecreated = new Date();
 
-		O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.text:' + ustodo.html);
+		O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.text:' + ustodo.text);
 		O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.html:' + ustodo.html);
 		O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsonx:' + ustodo.jsonx);
 		//O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsony:' + ustodo.jsony);
 		ustodo.save(function(err) {
 			if (err) {
+				console.log ('xxxxxxxxxxxxxxxxxxxxxxx error on save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
 				O.o('*** write fail err [' +err + ']');
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				console.log ('@@@@@@@@@@@@@@@@@@@@@ completed save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
+				console.log ('xxxxxxxxxxxxxxxxxxxxxxx completed save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
 				res.jsonp(ustodo);
 			}
 		});
 	};
 
-	UtilUrl4.expandUrlsToHrefsReturnPatchedStr(ustodo.html, res2);
+	try {
+		UtilUrl4.expandUrlsToHrefsReturnPatchedStr(ustodo.html, ustodo.text, res2);
+	} catch (err) {
+		//console.log(UtilClass.UtilClass('err', err));
+		O.e('err in expandUrlsToHrefsReturnPatchedStr:' + err);
+	}
 
 
 
@@ -329,7 +343,7 @@ exports.ustodobulkdel = function(req, res) {
                 return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
 
  */
-exports.list2 = function(req, res) { // hbkk 1509
+exports.list2 = function(req, res) { // hbkk 1509  from \app\routes\ustodos.server.routes.js
 
 	//O.o(' *************** Top of exports.list ');
 	//O.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))

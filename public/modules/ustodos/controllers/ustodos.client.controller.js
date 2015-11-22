@@ -3523,16 +3523,6 @@ angular.module('ustodos').controller('UstodosController',
                         //alert ('in endsWith w');
                         commandTrimmed = commandTrimmed.slice(0, commandTrimmed.length - 1).trim();
 
-                        var xHtmlPre = xHtml;
-                        do {
-                            xHtml = xHtml.trim();
-                            if (xHtml.endsWith('<p>&nbsp;</p>'))
-                                xHtml = xHtml.replaceLast('<p>&nbsp;</p>','');
-                            //alert ('in loop xHtml [' + xHtml + ']');
-                            xHtmlPre = xHtml;
-                        }  while (xHtmlPre !== xHtml);
-                        xHtml = xHtml.trim();
-
                         //alert ('in write xHtml replaced [' + xHtml + ']');
 
                         //alert ('commandRemoved_toSearchFor_trimmed:' + commandRemoved_toSearchFor_trimmed);

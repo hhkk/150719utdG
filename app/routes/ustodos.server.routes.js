@@ -6,13 +6,13 @@ module.exports = function(app) {
 
 	// Ustodos Routes
 	app.route('/ustodos')
-		.get(users.requiresLogin, ustodos.list2)
+		.get(users.requiresLogin, ustodos.list2)  // in C:\utd\150719utdG\app\controllers\ustodos.server.controller.js
 		.post(users.requiresLogin, ustodos.create);
 
 	app.route('/ustodobulkdel')
 		.post(users.requiresLogin, ustodos.ustodobulkdel);
 
-	app.route('/ustodos/:ustodoId')
+	app.route('/ustodos/:ustodoId') // from singlepage-ustodos.client.controller.js
 		.get(users.requiresLogin, ustodos.read)
 		.put(users.requiresLogin, ustodos.hasAuthorization, ustodos.update)
 		.delete(users.requiresLogin, ustodos.hasAuthorization, ustodos.delete2);

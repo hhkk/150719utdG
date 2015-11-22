@@ -1,10 +1,11 @@
-<div ng-address-bar></div><br>
+<div ng-address-bar style="top:0px"></div>
 
 <!-- hbklrb5 invoked by core client routes -->
 
 
 <section class="WholePage"
 		 data-ng-controller="SinglepageUstodosController"
+		 style="top:0px"
 		 data-ng-init="ngInitTopLevel()">
 
 
@@ -21,10 +22,8 @@
 
 	<span id='topDivInFindUstodos'
 		  style="
-		 	border-width:10px medium thick 10px;
-		 	top:56px;
+		 	border-width:0px medium thick 10px; top:0px;
 			display:none;
-		 	position: fixed;
 		 	xxbackground-color:lightblue;
 		 	display:inline-block;
 		 ">
@@ -64,10 +63,10 @@
 			 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
 			-->
 			<!-- ================ INPUT#3 ======================== -->
-			<!--<div id='idDivForTinyMceEditorTextarea'>-->
+			<div id='idDivForTinyMceEditorTextarea'>
 				<!--was Search / Input-->
 				<textarea xxng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
-			<!--</div>-->
+			</div>
 
 
 			<!-- section_ABOVE_TABLE_CHECKALL_ETC
@@ -252,7 +251,7 @@
 		<!--<p ng-repeat="operator in operators">{{operator.commandDescription}}</p>-->
 
 		<div id='hbkdiv1'
-			 style='height:300px;
+			 style='xxheight:300px;
 				overflow:auto;
 				'
 			>
@@ -304,7 +303,7 @@
 						/*top:5px;*/
 						z-index: 0;
 						/*background-color: lightgrey;*/
-						position:fixed;
+						position:static;
     					'
 					>
 					<div id='perRowOnly'>

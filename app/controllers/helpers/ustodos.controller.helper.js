@@ -120,7 +120,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
     //Ustodo.find().exec(function(err, ustodos) {
     //var sClass = UtilClass.getClass('Ustodo', Ustodo);
     //O.o ('sClassHK ustodo:' + sClass);
-	O.o ('pre query querymongo [' + querymongo + ']');
+	O.o ('xpre query querymongo [' + querymongo + ']');
     Ustodo.find(querymongo).sort('-datelastmod').limit(hklimit).populate('user', 'displayName').exec(function(err, ustodos) {
         //Ustodo.find(querymongo).populate('user', 'displayName').exec(function(err, ustodos) {
         if (err) {

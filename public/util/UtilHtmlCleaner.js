@@ -29,56 +29,76 @@ var privateSpace = new function() {
 
 
 var utilHtmlCleaner = new function() {
+	// call this as utilHtmlCleaner.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
 	this.cleanHtmlPre = function(str, allowed_tags) {
 		//alert ('in tinymcePasteCleanFilter.cleanHtml [' + str+ ']');
+		O.o ("in cleanHtmlPre ");
+		try {
 
-		var key = '', allowed = false;
-		var matches = [];    var allowed_array = [];
-		var allowed_tag = '';
-		var i = 0;
-		var k = '';
-		var html = '';
-		var replacer = function (search, replace, str) {
-			return str.split(search).join(replace);
-		};
-		// Build allowes tags associative array
-		if (allowed_tags) {
-			allowed_array = allowed_tags.match(/([a-zA-Z0-9]+)/gi);
-		}
-		str += '';
+			// no need to remove trailing or whatever htmlwhitespace
+			//var xHtmlPre;
+			//do {
+			//	xHtmlPre = str;
+			//	var xHtml = xHtmlPre;
+			//	str = str.trim();
+			//	if (xHtml.endsWith('<p>&nbsp;</p>')) {
+			//		str = str.replaceLast('<p>&nbsp;</p>','').trim();
+			//		O.o ('replaced <p>&nbsp;</p> to get str [' + str + ']');
+			//	}
+			//}  while (xHtmlPre !== str);
 
-		// Match tags
-		matches = str.match(/(<\/?[\S][^>]*>)/gi);
-		// Go through all HTML tags
-		for (key in matches) {
-			if (isNaN(key)) {
-				// IE7 Hack
-				continue;
+			var key = '', allowed = false;
+			var matches = [];    var allowed_array = [];
+			var allowed_tag = '';
+			var i = 0;
+			var k = '';
+			var html = '';
+			var replacer = function (search, replace, str) {
+				return str.split(search).join(replace);
+			};
+			// Build allowes tags associative array
+			if (allowed_tags) {
+				allowed_array = allowed_tags.match(/([a-zA-Z0-9]+)/gi);
 			}
+			str += '';
 
-			// Save HTML tag
-			html = matches[key].toString();
-			// Is tag not in allowed list? Remove from str!
-			allowed = false;
+			// Match tags
+			matches = str.match(/(<\/?[\S][^>]*>)/gi);
+			// Go through all HTML tags
+			for (key in matches) {
+				if (isNaN(key)) {
+					// IE7 Hack
+					continue;
+				}
 
-			// Go through all allowed tags
-			for (k in allowed_array) {            // Init
-				allowed_tag = allowed_array[k];
-				i = -1;
+				// Save HTML tag
+				html = matches[key].toString();
+				// Is tag not in allowed list? Remove from str!
+				allowed = false;
 
-				if (i != 0) { i = html.toLowerCase().indexOf('<'+allowed_tag+'>');}
-				if (i != 0) { i = html.toLowerCase().indexOf('<'+allowed_tag+' ');}
-				if (i != 0) { i = html.toLowerCase().indexOf('</'+allowed_tag)   ;}
+				// Go through all allowed tags
+				for (k in allowed_array) {            // Init
+					allowed_tag = allowed_array[k];
+					i = -1;
 
-				// Determine
-				if (i == 0) {                allowed = true;
-					break;
+					if (i != 0) { i = html.toLowerCase().indexOf('<'+allowed_tag+'>');}
+					if (i != 0) { i = html.toLowerCase().indexOf('<'+allowed_tag+' ');}
+					if (i != 0) { i = html.toLowerCase().indexOf('</'+allowed_tag)   ;}
+
+					// Determine
+					if (i == 0) {                allowed = true;
+						break;
+					}
+				}
+				if (!allowed) {
+					str = replacer(html, "", str); // Custom replace. No regexing
 				}
 			}
-			if (!allowed) {
-				str = replacer(html, "", str); // Custom replace. No regexing
-			}
+		} catch (err) {
+			//console.log(UtilClass.UtilClass('err', err));
+			O.o ('ERROR: in utilHtmlCleaner.cleanHtmlPre() UtilHtmlCleaner:' + err);
 		}
+
 		//return "bracketed << by cleanHtmlPre <<" + str + ">>";
 		return str;
 	}
@@ -200,14 +220,19 @@ function processpaste (elem, savedcontent) {
 
 
 
-
-
 if (typeof exports !== 'undefined') {
     exports.utilHtmlCleaner = utilHtmlCleaner;
     exports.handlepaste = handlepaste;
 	// UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(strm ...)
 }
 
+
+if (false)
+{
+	var prestrip = '<p>ibm.com</p>';
+	var stripped  = utilHtmlCleaner.cleanHtmlPre(prestrip, '');
+	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
+}
 
 
 

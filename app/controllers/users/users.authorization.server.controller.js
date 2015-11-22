@@ -33,13 +33,13 @@ exports.requiresLogin = function(req, res, next) {
 		});
 	}
 	else{
-		O.o ('user is logged in req.user._doc.create:' + req.user._doc.created );
-		O.o ('user is logged in req.user._doc.email:' + req.user._doc.email );
-		O.o ('user is logged in req.user._doc.firstName:' + req.user._doc.firstName );
-		O.o ('user is logged in req.user._doc.lastName:' + req.user._doc.lastName );
-		O.o ('user is logged in req.user._doc.displayName:' + req.user._doc.displayName );
+		//O.o ('user is logged in req.user._doc.create:' + req.user._doc.created );
+		//O.o ('user is logged in req.user._doc.email:' + req.user._doc.email );
+		//O.o ('user is logged in req.user._doc.firstName:' + req.user._doc.firstName );
+		//O.o ('user is logged in req.user._doc.lastName:' + req.user._doc.lastName );
+		//O.o ('user is logged in req.user._doc.displayName:' + req.user._doc.displayName );
 		O.o ('user is logged in req.user._doc.username:' + req.user._doc.username );
-		O.o ('user is logged in req.user._doc.email:' + req.user._doc.email );
+		//O.o ('user is logged in req.user._doc.email:' + req.user._doc.email );
 	}
 
 	next();

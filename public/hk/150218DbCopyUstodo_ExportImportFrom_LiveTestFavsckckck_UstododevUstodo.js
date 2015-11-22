@@ -73,6 +73,19 @@ var collNameWrite = 'ustodos';
 var queryRegExp = {};  // <=========================
 var countLimit = -1;
 
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
+console.log ('ddddddddddddddddddddddddddd');
 // 222222222222222222222222222222222222222222222222
 //var collNameSource = 'favsckckck'
 //var collNameTarget = 'ustodoorisx'
@@ -211,10 +224,23 @@ if (true) {
 
 
 
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
+	console.log ('ddddddddddddddddddddddddddd');
 
 
 
-    console.log ('done');
+	console.log ('done');
 
 
 
