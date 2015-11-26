@@ -171,7 +171,7 @@ var passesFilters = function(s) {
 
 var o = function (s)
 {
-	console.log ('in o.o');
+	//console.log ('in o.o');
     if (passesFilters(s))
     {
         var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s
@@ -771,9 +771,9 @@ function emitError (desc, err)
 {
 
     try {
-        alert ('error, see log for stacktrace [' + err.message + ']');
-        console.log ('error in err.message:' + err.message);
-        console.log ('error in err.stack:' + err.stack);
+		console.log ('error in err.message:' + err.message);
+		console.log ('error in err.stack:' + err.stack);
+		alert ('error, see log for stacktrace [' + err.message + ']');
 
     } catch (e) {
         console.log ('error in getClass:e:' + e.message);
@@ -942,17 +942,13 @@ var getUrlsFromText = function(textWithUrls)
 	tokens.forEach(function(token) {
 		//UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre('asdasd',['a']);
         if (isUrl(token)) {
-            O.o ('--------> is a url from text:' + token);
+            //O.o ('--------> is a url from text:' + token);
 			// some URLs will have the http:// prefix already, for others add it
-            if (token.toLowerCase().indexOf('http') !== 0)
-			{
-				urls[i] = {
-					'urlOriginal': tokens[i],
-					'urlWithHttpPrefix': 'http://' + tokens[i]
-				};
-			}
+			urls.push ({
+				'urlOriginal': token,
+				'urlWithHttpPrefix': (token.toLowerCase().indexOf('http') === 0 ? '' : 'http://') + token
+			});
 		}
-        i++;
     });
     return urls;
 };
@@ -1037,55 +1033,73 @@ var utilHtmlCleaner = new function() {
 	// call this as utilHtmlCleaner.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
 	this.cleanHtmlPre = function(str, allowed_tags) {
 		//alert ('in tinymcePasteCleanFilter.cleanHtml [' + str+ ']');
+		O.o ("in cleanHtmlPre ");
+		try {
 
-		O.o ('xxxxxxxxxxxxxxxxxxxxx: in utilHtmlCleaner.cleanHtmlPre()');
-		var key = '', allowed = false;
-		var matches = [];    var allowed_array = [];
-		var allowed_tag = '';
-		var i = 0;
-		var k = '';
-		var html = '';
-		var replacer = function (search, replace, str) {
-			return str.split(search).join(replace);
-		};
-		// Build allowes tags associative array
-		if (allowed_tags) {
-			allowed_array = allowed_tags.match(/([a-zA-Z0-9]+)/gi);
-		}
-		str += '';
+			// no need to remove trailing or whatever htmlwhitespace
+			//var xHtmlPre;
+			//do {
+			//	xHtmlPre = str;
+			//	var xHtml = xHtmlPre;
+			//	str = str.trim();
+			//	if (xHtml.endsWith('<p>&nbsp;</p>')) {
+			//		str = str.replaceLast('<p>&nbsp;</p>','').trim();
+			//		O.o ('replaced <p>&nbsp;</p> to get str [' + str + ']');
+			//	}
+			//}  while (xHtmlPre !== str);
 
-		// Match tags
-		matches = str.match(/(<\/?[\S][^>]*>)/gi);
-		// Go through all HTML tags
-		for (key in matches) {
-			if (isNaN(key)) {
-				// IE7 Hack
-				continue;
+			var key = '', allowed = false;
+			var matches = [];    var allowed_array = [];
+			var allowed_tag = '';
+			var i = 0;
+			var k = '';
+			var html = '';
+			var replacer = function (search, replace, str) {
+				return str.split(search).join(replace);
+			};
+			// Build allowes tags associative array
+			if (allowed_tags) {
+				allowed_array = allowed_tags.match(/([a-zA-Z0-9]+)/gi);
 			}
+			str += '';
 
-			// Save HTML tag
-			html = matches[key].toString();
-			// Is tag not in allowed list? Remove from str!
-			allowed = false;
+			// Match tags
+			matches = str.match(/(<\/?[\S][^>]*>)/gi);
+			// Go through all HTML tags
+			for (key in matches) {
+				if (isNaN(key)) {
+					// IE7 Hack
+					continue;
+				}
 
-			// Go through all allowed tags
-			for (k in allowed_array) {            // Init
-				allowed_tag = allowed_array[k];
-				i = -1;
+				// Save HTML tag
+				html = matches[key].toString();
+				// Is tag not in allowed list? Remove from str!
+				allowed = false;
 
-				if (i != 0) { i = html.toLowerCase().indexOf('<'+allowed_tag+'>');}
-				if (i != 0) { i = html.toLowerCase().indexOf('<'+allowed_tag+' ');}
-				if (i != 0) { i = html.toLowerCase().indexOf('</'+allowed_tag)   ;}
+				// Go through all allowed tags
+				for (k in allowed_array) {            // Init
+					allowed_tag = allowed_array[k];
+					i = -1;
 
-				// Determine
-				if (i == 0) {                allowed = true;
-					break;
+					if (i != 0) { i = html.toLowerCase().indexOf('<'+allowed_tag+'>');}
+					if (i != 0) { i = html.toLowerCase().indexOf('<'+allowed_tag+' ');}
+					if (i != 0) { i = html.toLowerCase().indexOf('</'+allowed_tag)   ;}
+
+					// Determine
+					if (i == 0) {                allowed = true;
+						break;
+					}
+				}
+				if (!allowed) {
+					str = replacer(html, "", str); // Custom replace. No regexing
 				}
 			}
-			if (!allowed) {
-				str = replacer(html, "", str); // Custom replace. No regexing
-			}
+		} catch (err) {
+			//console.log(UtilClass.UtilClass('err', err));
+			O.o ('ERROR: in utilHtmlCleaner.cleanHtmlPre() UtilHtmlCleaner:' + err);
 		}
+
 		//return "bracketed << by cleanHtmlPre <<" + str + ">>";
 		return str;
 	}

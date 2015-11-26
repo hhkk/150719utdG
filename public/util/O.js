@@ -37,7 +37,7 @@ var passesFilters = function(s) {
 
 var o = function (s)
 {
-	console.log ('in o.o');
+	//console.log ('in o.o');
     if (passesFilters(s))
     {
         var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s

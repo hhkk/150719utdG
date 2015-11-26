@@ -121,7 +121,7 @@ var getUrlsFromText = function(textWithUrls)
 	tokens.forEach(function(token) {
 		//UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre('asdasd',['a']);
         if (isUrl(token)) {
-            O.o ('--------> is a url from text:' + token);
+            //O.o ('--------> is a url from text:' + token);
 			// some URLs will have the http:// prefix already, for others add it
 			urls.push ({
 				'urlOriginal': token,

@@ -22,6 +22,28 @@ var async = require("async");
 var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var request = require('request');
 var unirest = require('unirest');
+var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+
+var findTitle_htmlParse = function(html) {
+
+	//O.o ('search for title in [' + html + ']')
+	var titletag = "<title "
+	var iTitle = html.toLowerCase().indexOf(titletag)
+	var iTitleEnd = html.toLowerCase().indexOf("</title>")
+
+	var rem1 = html.slice(iTitle+titletag.length,iTitleEnd).trim();
+	var iEndTitleTag = rem1.indexOf('>');
+	if (iEndTitleTag !== -1) {
+		return html.slice(iTitle+titletag.length+iEndTitleTag+1,iTitleEnd).trim();
+		// parse error or bad html title tag
+	}
+
+	//var title = result.match("<title>(.*?)</title>")[1];
+	if (iTitle === -1 || iTitleEnd === -1 || iEndTitleTag === -1)
+	{
+		return null;
+	}
+}
 
 
 
@@ -30,86 +52,88 @@ var unirest = require('unirest');
 var callCount_expandUrlsToHrefsReturnPatchedStr =0
 var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 {
-    //O.o ('################# in expandUrlsToHrefsReturnPatchedStr get titles [' + ustodoHtml + ']');
-    var Item = function(url) {
-        this.url = url;
-        this.urlori = url;
-        this.title = null;
-    };
+	try {
+		//O.o ('################# in expandUrlsToHrefsReturnPatchedStr get titles [' + ustodoHtml + ']');
+		var Item = function(url) {
+			this.url = url;
+			this.urlori = url;
+			this.title = null;
+		};
 
-    // ARE THERE ANY URLS
-    // get urls with urls as "http..." in their own array element
-    // section_expand_ eg com to include http
-    var urls = UtilHrefThisText.getUrlsFromText(ustodoText);
-    //urls.forEach(function(token)
-    //{
-    //    if (token.indexOf('http://') == 0) {
-    //        //hashUrlsToTitle[token] = token;
-    //        items.push (new Item(token));
-    //    }
-    //});
-    //
+		// ARE THERE ANY URLS
+		// get urls with urls as "http..." in their own array element
+		// section_expand_ eg com to include http
+		var urls = UtilHrefThisText.getUrlsFromText(ustodoText);
+		//urls.forEach(function(token)
+		//{
+		//    if (token.indexOf('http://') == 0) {
+		//        //hashUrlsToTitle[token] = token;
+		//        items.push (new Item(token));
+		//    }
+		//});
+		//
 
-    if (urls.length > 0)
-    {
-        var res2 = {};
-		/**
-		 * once I have a title back from web call, knit the title back into both html and text
-		 */
-        res2.result = function()
-        {
-            //O.o ("items have all been converted");
+		if (urls.length > 0)
+		{
+			var res2 = {};
+			/**
+			 * once I have a title back from web call, knit the title back into both html and text
+			 */
+			res2.result = function()
+			{
+				//O.o ("items have all been converted");
 
-            // knit / replace here
-            // now replace urls with combo [title] + hrefed url
-			urls.forEach(function(url)
-            {
-				//url.urlOriginal = "rr"
-				//url.urlWithHttpPrefix = "http://rr"
+				// knit / replace here
+				// now replace urls with combo [title] + hrefed url
+				urls.forEach(function(url)
+				{
+					//url.urlOriginal = "rr"
+					//url.urlWithHttpPrefix = "http://rr"
 
-                var foundMatch = false;
-                var sbufStringsChecked = '';
+					var foundMatch = false;
+					var sbufStringsChecked = '';
 
-	            for (var iUrls = 0; iUrls < urls.length; iUrls++)
-                {
-                    //O.o ('yes match found for  url.url:' + url.url);
-                    sbufStringsChecked += '\r\nand testing [' + url.urlori + '] against [' + urls[iUrls] + '] ';
+					for (var iUrls = 0; iUrls < urls.length; iUrls++)
+					{
+						//O.o ('yes match found for  url.url:' + url.url);
+						sbufStringsChecked += '\r\nand testing [' + url.urlori + '] against [' + urls[iUrls] + '] ';
 
-                    if (url.urlOriginal === urls[iUrls] )
-                    {
-                        //O.o ('yes match found for  url.url:' + url.url);
-                        foundMatch = true;
-                        //urls[iUrls] = '[' + url.title + '] ' + UtilHrefThisText.hrefThisText(url.url);
-                        // original ustodo saves non href'ed links to the db
-                        urls[iUrls] = '[' + url.title + '] ' + url.url;
-                    }
-                }
+						if (url.urlOriginal === urls[iUrls] )
+						{
+							//O.o ('yes match found for  url.url:' + url.url);
+							foundMatch = true;
+							//urls[iUrls] = '[' + url.title + '] ' + UtilHrefThisText.hrefThisText(url.url);
+							// original ustodo saves non href'ed links to the db
+							urls[iUrls] = '[' + url.title + '] ' + url.url;
+						}
+					}
 
-                //if (!foundMatch) {
-                //    O.o ('no match found for  url.url:' + url.url + ' against these:' + sbufStringsChecked);
-                //    throw  ('no match found for  url.url:' + url.url + ' against these:' + sbufStringsChecked);
-                //}
-            });
+					//if (!foundMatch) {
+					//    O.o ('no match found for  url.url:' + url.url + ' against these:' + sbufStringsChecked);
+					//    throw  ('no match found for  url.url:' + url.url + ' against these:' + sbufStringsChecked);
+					//}
+				});
 
+				var x = urls.join(' ')
+				O.o ( 'x:' + x);
+				res.json(x);
+				//O.o ('reached res.json!!! ================================');
+
+			};
+
+			asyncWrapperForTitle_levelOne(urls, res2);
+			//replace urls in string
+		} else {
 			var x = urls.join(' ')
 			O.o ( 'x:' + x);
-            res.json(x);
-            //O.o ('reached res.json!!! ================================');
-
-        };
-
-        asyncWrapperForTitle_levelOne(urls, res2);
-        //replace urls in string
-    } else {
-		var x = urls.join(' ')
-		O.o ( 'x:' + x);
-		res.json(x);
-    }
-    //if (hashUrlsToTitle.size() > 0) {
-    //    }
-
-
-
+			res.json(x);
+		}
+		//if (hashUrlsToTitle.size() > 0) {
+		//    }
+	} catch (err) {
+		UtilErrorEmitter.emitError ('from outside: error in expandUrlsToHrefsReturnPatchedStr', err);
+		throw err;
+	}
 }
 
 
@@ -124,7 +148,7 @@ var asyncWrapperForTitle_levelOne = function(urls, res2) {
 			//url.urlOriginal = "rr"
 			//url.urlWithHttpPrefix = "http://rr"
 			// 2nd parameter is the function that each item is passed into
-            function (url, callback) {
+		function (url, callback) {
                 // Call an asynchronous function (often a save() to MongoDB)
                 //O.o ('called 2nd param function')
                 try {
@@ -141,6 +165,8 @@ var asyncWrapperForTitle_levelOne = function(urls, res2) {
             // 3rd parameter is the function call when everything is done
             function (err) {
                 // All tasks are done now
+
+
                 whenDoneAsync_LevelOne(urls, res2);
             }
         );
@@ -151,7 +177,8 @@ var asyncWrapperForTitle_levelOne = function(urls, res2) {
 
 
 // 2
-var getUrlContent_levelOne = function(callback, url) {
+var getUrlContent_levelOne = function(callback, url)
+{
     try
     {
         var calledBack = false;
@@ -196,6 +223,8 @@ var getUrlContent_levelOne = function(callback, url) {
 //request('http://ibm.com', function (error, response, html) {
 			if (response.error)
 			{
+				O.o ('000000000000000 ERROR in getUrlContent_levelOne url:' + url.urlWithHttpPrefix + ':' +
+					+ response.error);
 				if (response.error && response.error.code === 'ETIMEDOUT') {
 					if (!calledBack) {
 						calledBack = true;
@@ -204,21 +233,34 @@ var getUrlContent_levelOne = function(callback, url) {
 					}
 				}
 				else {
-					url.title = "<error in title retrieval:>" + response.error;
+					url.asyncWrapperForTitle_levelOneResult = "<error in title retrieval:>" + response.error;;
 				}
+				// don't want to put error so caller will fall back to method 2, since title presence is the indicator
+				//else {
+				//	url.title = "<error in title retrieval:>" + response.error;
+				//}
 
 			}
-            else if (response.statusCode == 200) {
+            else if (response.statusCode == 200)
+			{
+				O.o ('000000000000000 SUCCESS in getUrlContent_levelOne url:' + url.urlWithHttpPrefix + ':' +
+					+ response.error);
                 //console.log('pass 1 html:' + html);
                 var title = null;
-                if (response.body != null)
-                    title = findTitle_htmlParse(response.body);
-                else
-                    O.o ('body is null');
+                if (response.body != null) {
+					title = findTitle_htmlParse(response.body);
+					O.o ('Level 1 SUCCESS response.body got title from level one:' + url.urlWithHttpPrefix + '->' + title);
+				}
+                else {
+					O.o ('body is null');
+				}
+
                 if (!calledBack) {
                     //O.o('calling back from getUrlContent_levelOne x1:' + url.url + '->' + title);
                     if (title != null) {
                         url.title = '1:' + title;
+						//O.o ('000000000000000 SUCCESS1.2 in getUrlContent_levelOne url:' + url.urlWithHttpPrefix + ' -> [' +
+							//+ url.title + ']');
                         //url.title = title;
                         calledBack = true;
                         callback('dummy', url);
@@ -228,7 +270,7 @@ var getUrlContent_levelOne = function(callback, url) {
                 //O.o ('========================= title:' + title);
             }
 
-            if(url.title === null)
+            if(!url.title)
             {
                 getUrlContent_levelTwo(function (item) {
                     // Async call is done, alert via callback
@@ -253,7 +295,17 @@ var getUrlContent_levelOne = function(callback, url) {
 
         //var xxx = request(url.url, fn);
         //O.o ('requesting url.url [' + url.url + ']');
-        var unirequest = unirest.get(url.url);
+        var unirequest = unirest.get(url.urlWithHttpPrefix);
+
+		// http://unirest.io/nodejs.html
+		//unirest.post('http://mockbin.com/request')
+		//	.header('Accept', 'application/json')
+		//	.send({ "parameter": 23, "foo": "bar" })
+		//	.end(function (response) {
+		//		console.log(response.body);
+		//	});
+
+
         unirequest.timeout(5000);
         unirequest.end(fn);
 
@@ -263,11 +315,11 @@ var getUrlContent_levelOne = function(callback, url) {
 
     } catch (e) {
         O.e('x12 errrta:' + e);
-        O.e('x12:' + url.url + '->' + url.title);
+        O.e('x12:' + url.urlWithHttpPrefix+ '->' + url.title);
         throw e;
         //callback('fail', url);
     }
-};
+}; // getUrlContent_levelOne
 
 
 
@@ -286,12 +338,12 @@ function whenDoneAsync_LevelOne(urls, res2){
 
     res2.result(urls); // temp to return just level one results
 
-}
+} // whenDoneAsync_LevelOne
 
 // 4
 // 5
-var getUrlContent_levelTwo = function(callback, item) {
-    //O.o ('000000000000000 in getUrlContent_levelTwo url:' + item.url);
+var getUrlContent_levelTwo = function(callback, url) {
+    O.o ('000000000000000 in getUrlContent_levelTwo url:' + url.url);
     try {
         // XMLHttpRequest populate responseXML
         //xhr.open("POST", "http://www.service.org/myService.svc/Method", true);
@@ -326,36 +378,37 @@ var getUrlContent_levelTwo = function(callback, item) {
                 var html = xmlhttp.responseText;
                 var title = findTitle_htmlParse(html);
 
-                item.title = '2a:' + title;
-                //item.title = title;
+                url.title = '2a:' + title;
+				O.o ('url.title from level2:' + url.title);
+                //url.title = title;
 
                 if (typeof callback === "function")
-                    callback('DUMMY', item);
+                    callback('DUMMY', url);
 
                 //var parser = new DOMParser();
                 //var xmlDoc = parser.parseFromString(xmlhttp.responseText, "application/xml");
             } else if (xmlhttp.readyState == 4 && xmlhttp.status == 503) {
                 if (typeof callback === "function") {
-                    item.title = '<503 unavailable>';
-                    callback('dummy', item);
+                    url.title = '<503 unavailable>';
+                    callback('dummy', url);
                 }
             } else if (xmlhttp.readyState == 4 && xmlhttp.status == 404) {
                 if (typeof callback === "function") {
-                    item.title = '<404 not found>';
-                    callback('dummy', item);
+                    url.title = '<404 not found>';
+                    callback('dummy', url);
                 }
 
             } else {
                 //O.o ('!!!!!!!!!!!!!!!!!!!!!failed on level 2');
                 //callback("other error");
-                //item.title = 'not 404 of 503 error - something else';
-                //callback('dummy', item);
+                //url.title = 'not 404 of 503 error - something else';
+                //callback('dummy', url);
             }
         }
         //O.o ('url:' + url);
-        xmlhttp.open("get", item.url, true); // true = async
+        xmlhttp.open("get", url.urlWithHttpPrefix, true); // true = async
 
-        //xmlhttp.overrideMimeType("text/plain; charset=x-user-defined");
+		//xmlhttp.overrideMimeType("text/plain; charset=x-user-defined");
 
         //xmlhttp.open("POST", url, false);
         //xmlhttp.timeout = timeout;
@@ -366,10 +419,10 @@ var getUrlContent_levelTwo = function(callback, item) {
         //return ('xmlHttp.responseText:'+xmlhttp.responseText);
     } catch (e) {
         O.e('x13 errrta:' + e);
-        O.e('x14:' + item.url + '->' + item.title);
+        O.e('x14:' + url.url + '->' + url.title);
         throw e;
     }
-}
+} // getUrlContent_levelTwo
 
 
 var test = function() {
@@ -399,29 +452,20 @@ var test = function() {
 }
 
 
-
-var findTitle_htmlParse = function(html) {
-    //O.o ('search for title in [' + html + ']')
-    var titletag = "<title>"
-    var iTitle = html.toLowerCase().indexOf(titletag)
-    var iTitleEnd = html.toLowerCase().indexOf("</title>")
-    var title = null;
-    if (iTitle === -1 || iTitleEnd === -1)
-    {
-        return null;
-    }
-    else
-    {
-        //O.o ('html.slice(iTitle+7,iTitleEnd-1).trim() ['+html.slice(iTitle+7,iTitleEnd-1).trim() + ']');
-        return html.slice(iTitle+7,iTitleEnd).trim();
-    }
+if (typeof exports !== 'undefined') {
+	exports.expandUrlsToHrefsReturnPatchedStr = expandUrlsToHrefsReturnPatchedStr;
+	exports.findTitle_htmlParse = findTitle_htmlParse;
 }
+
+
+
+
 
 
 
 var test = false;
 if (test) {
-    //var x = '1111 ibm.com 2222  apple.com 333333';
+    var x = '1111 ibm.com 2222  apple.com 333333';
     //var x = '1111 ibm.com 2222  dell.com 333333 ddfgdfgdfgdfgdfgf.com 4444 ';
     //var x = '1111 jpro.co 2222';
     //var x = '1111 ibm.com 2222  dell.com 333333 ddfgdfgdfgdfgdfgf.com 4444 u2d.co 555 ustodo.com 666 jpro.co 777';
@@ -432,23 +476,77 @@ if (test) {
     //var x = '1 jpro.co 2 ';
     //var x = '1111 http://www.dell.com 2222  '; // ok by itself at 40 seconds
     //var x = '1111 dell.com 2222  '; // ok by itself at 40 seconds
-    var x = '1 ibm.com 2 dell.com 3 ddfgdfgdfgdfgdfgf.com 4 apple.com 4 google.com 5 yahoo.com 6 www.tester.com 7 get.com 8 time.com 9 www.jpro.co 10 www.jpro.co 10 www.jpro.co 10 www.jpro.co 10 www.jpro.co 10 www.jpro.co 10 www.jpro.co 10 www.jpro.co 10 www.jpro.co 10 ';
+    var x = [];
+	x.push ('apple.com ');
+	//x.push ('ibm.com ');
+	//x.push ('dell.com ');
+	//x.push ('apple.com ');
+	//x.push ('sdsfsdfsdfsdfsdf.com ');
+	//x.push ('google.com ');
+	//x.push ('yahoo.com');
+	//x.push ('tester.com ');
+	//x.push ('get.com ');
+	//x.push ('time.com ');
+	//x.push ('jpro.com ');
+
+
+	var res = {};
+	res.json = function(s) {
+		O.o ('FINAL OUT RES JSON in res.json [' + JSON.stringify(s) + ']');
+	}
+	async.series([
+			function(callback){
+				O.o ('11111111111111111111111111111111111111111111111111111111111111111111111');
+				var x = 'apple.com';
+				expandUrlsToHrefsReturnPatchedStr(x, x, res);
+				callback(null, 'a')
+			},
+			//function(callback){
+			//	O.o ('2222222222222222222222222222222222222222222222222');
+			//	var x = 'time.com';
+			//	expandUrlsToHrefsReturnPatchedStr(x, x, res);
+			//	callback(null, 'a')
+			//}
+		],
+		// optional callback
+		function(err, results){
+			// results is ['a', 'b', 'c', 'd']
+			// final callback code
+		}
+	)
+
+
+
+
+
+
+	//var x = '1 ibm.com 2 dell.com 3 ddfgdfgdfgdfgdfgf.com 4 apple.com 4 google.com 5 yahoo.com 6 www.tester.com 7 get.com 8 time.com 9 www.jpro.co ';
     //var x = '1111 tester.com 2222  '; // ok by itself at 40 seconds
 
-    var res = {};
 
+	var returned = false;
     res.json = function(s) {
         O.o ('FINAL OUT RES JSON in res.json [' + JSON.stringify(s) + ']');
     }
 
 
-    try {
-        expandUrlsToHrefsReturnPatchedStr(x, res);
-    } catch (e) {
-        O.e ('errrtta:' + e);
-    } finally {
-        //O.o ('finally done');
-    }
+    //try {
+		//for (var urlstring in x) {
+		//	//O.o ('urlstring:' + x[urlstring]);
+    //
+		//	O.o ('');
+		//	expandUrlsToHrefsReturnPatchedStr(x[urlstring], x[urlstring], res);
+		//	while (!returned) {
+		//		setTimeout(function(){alert('in ustodos')}, 2000);
+		//	}
+    //
+		//}
+    //} catch (e) {
+    //    O.e ('errrtta:' + e);
+    //} finally {
+    //
+    //    //O.o ('finally done');
+    //}
 
     //var regexp = new RegExp();
     //var y = x.split(/\s+/);
@@ -464,7 +562,34 @@ if (test) {
     //});
 }
 
-if (typeof exports !== 'undefined') {
-    exports.expandUrlsToHrefsReturnPatchedStr = expandUrlsToHrefsReturnPatchedStr;
+
+if (false)
+{
+
+
+	var test_findTitle_htmlParse = function(html) {
+
+		//O.o ('search for title in [' + html + ']')
+		var titletag = "<title "
+		var iTitle = html.toLowerCase().indexOf(titletag)
+		var iTitleEnd = html.toLowerCase().indexOf("</title>")
+
+		var rem1 = html.slice(iTitle+titletag.length,iTitleEnd).trim();
+		var iEndTitleTag = rem1.indexOf('>');
+		if (iEndTitleTag !== -1) {
+			return html.slice(iTitle+titletag.length+iEndTitleTag+1,iTitleEnd).trim();
+			// parse error or bad html title tag
+		}
+
+		//var title = result.match("<title>(.*?)</title>")[1];
+		if (iTitle === -1 || iTitleEnd === -1 || iEndTitleTag === -1)
+		{
+			return null;
+		}
+	}
+
+	O.o ('[' + test_findTitle_htmlParse('<title sdfsdf>applehk</title>') + ']');
+
 }
+
 

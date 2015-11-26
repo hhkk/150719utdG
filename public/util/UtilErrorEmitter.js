@@ -16,9 +16,9 @@ function emitError (desc, err)
 {
 
     try {
-        alert ('error, see log for stacktrace [' + err.message + ']');
-        console.log ('error in err.message:' + err.message);
-        console.log ('error in err.stack:' + err.stack);
+		console.log ('error in err.message:' + err.message);
+		console.log ('error in err.stack:' + err.stack);
+		alert ('error, see log for stacktrace [' + err.message + ']');
 
     } catch (e) {
         console.log ('error in getClass:e:' + e.message);
