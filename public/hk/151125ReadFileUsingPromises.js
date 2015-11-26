@@ -78,13 +78,28 @@ if (true) // 3
 		return Q.nfcall(request, url, options);
 	}
 
+	var a = ['http://yahoo.com',
+		'http://ibm.com'];
+	//var a = ['http://yahoo.com',
+	//	'http://ibm.com'];
+
+	var x = [];
+	//var x = [ggg('http://yahoo.com'),
+	//	ggg('http://ibm.com')];
+	for (d in a) {
+		//console.log (a[d]);
+		x.push(
+				ggg(a[d]));
+	}
+	//var x = [ggg('http://yahoo.com'),
+	//	ggg('http://ibm.com')];
+
 	function getResults(pathToFile) {
 		return Q.nfcall(FS.readFile, pathToFile, "utf-8")
 			.then(function(repo) {
 				//var options = { headers: {'User-Agent': 'MyAgent'} }; // github requires user agent string
 				//return 'hi mom';
-				return [ggg('http://yahoo.com'),
-					ggg('http://ibm.com')];
+				return x;
 			})
 			.spread(function(collaboratorsRes, commitsRes) {
 				return [collaboratorsRes[1], commitsRes[1]];  // return the response body
@@ -99,9 +114,11 @@ if (true) // 3
 	// actual call
 	getResults('repos.txt').then(function(responses_arrayOfHTMLs) {
 		// do something with the responses
+		var i = 0;
 		for (html in responses_arrayOfHTMLs)
 		{
-			console.log ('do something with the responses' + responses_arrayOfHTMLs[html]);
+			console.log (i + ' do something with the responses' + responses_arrayOfHTMLs[html].slice(1,500));
+			i++;
 
 		}
 	});
