@@ -27,7 +27,7 @@ var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.j
 var findTitle_htmlParse = function(html) {
 
 	//O.o ('search for title in [' + html + ']')
-	var titletag = "<title "
+	var titletag = "<title"
 	var iTitle = html.toLowerCase().indexOf(titletag)
 	var iTitleEnd = html.toLowerCase().indexOf("</title>")
 

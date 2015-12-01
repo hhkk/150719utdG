@@ -4,6 +4,11 @@
  */
 // var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
+var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
+
+//var filters = ['htmlxxy', 'titlexx'];
+//var filters = ['htmlxx', 'title'];
+var filters = [];
 
 
 //alert ('redefine alerthistory');
@@ -19,7 +24,6 @@ var callcount_o = 0;
 
 var passesFilters = function(s) {
 
-    var filters = [];
     //  var filters = ['Two'];
     var passes = false;
     if (filters.length > 0) {
