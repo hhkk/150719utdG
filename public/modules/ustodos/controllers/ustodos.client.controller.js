@@ -3027,7 +3027,7 @@ angular.module('ustodos').controller('UstodosController',
             //    //getProperties('props this:', this);
             //    //getProperties('props Ustodos:', Ustodos);
             //    var ustodo = new Ustodos ({
-            //        html: this.html// hbkk mystery
+            //        html: this.html//
             //    });
             //    //getProperties('props ustodo:', ustodo);
             //
@@ -3125,7 +3125,7 @@ angular.module('ustodos').controller('UstodosController',
             $scope.findOne = function() {
                 console.log ('5 in ustodos.client.controller FINDONE');
                 $scope.ustodo = Ustodos.get({
-                    // ORIGINAL A/B SPLIT HBKK
+                    // ORIGINAL A/B SPLIT
                     ustodoId: $stateParams.ustodoId    // original
                     //ustodoId: '54929d5d1d3df384165f4fa2'  // worked!!
                     //name: /road/
@@ -3531,8 +3531,8 @@ angular.module('ustodos').controller('UstodosController',
                         //alert ('x:' + x);
 
                         var ustodo = new Ustodos ({
-                            html: xHtml.replaceLast(' w', ''),// hbkk mystery
-                            text: commandTrimmed,// hbkk mystery
+                            html: xHtml.replaceLast(' w', ''),// mystery
+                            text: commandTrimmed,// mystery
                             datelastmod: (''+new Date()),
                             datecreated: (''+new Date()),
                             joey: 'and pete'
@@ -3546,7 +3546,8 @@ angular.module('ustodos').controller('UstodosController',
                         //O.o ('4 $$$$$$$$$$$$$$$$$$ save callerId 4 [' + callerId + '] ustodo.jsonx [' + ustodo.jsonx + ']');
                         //O.o ('5 $$$$$$$$$$$$$$$$$$ save callerId 5 [' + callerId + '] commandRemoved_toSearchFor_trimmed [' + commandRemoved_toSearchFor_trimmed + ']');
                         //alert('pre save 2');
-                        ustodo.$save(function(response) // ustodos.server.controller.js exports.create
+
+                        ustodo.$save(function(response) // calls to: ustodos.server.controller.js exports.create
                         {
 							//alert ('in save');
                             // section_query // section_read
@@ -3682,8 +3683,8 @@ angular.module('ustodos').controller('UstodosController',
 
                     //getProperties('props this:', this);
                     //var ustodo = new Ustodos ({
-                    //	name: this.name,  // hbkk mystery
-                    //	commandFromInputBox: this.commandFromInputBox // hbkk mystery
+                    //	name: this.name,  // mystery
+                    //	commandFromInputBox: this.commandFromInputBox // mystery
                     //});
                     //getProperties('props ustodo:', ustodo);
 
@@ -3705,12 +3706,12 @@ angular.module('ustodos').controller('UstodosController',
 
             };  // $scope.processCommand
 
-            // Search for one hbkk existing Ustodo by string
+            // Search for one existing Ustodo by string
             $scope.searchOne = function() {
                 alert ('7 in ustodos.client.controller SEARCHONE');
-                console.log ('7 hbkk getting ustodo searchOne :' + $stateParams.ustodoId);
+                console.log ('7 getting ustodo searchOne :' + $stateParams.ustodoId);
                 $scope.ustodo = Ustodos.get({
-                    // ORIGINAL A/B SPLIT HBKK
+                    // ORIGINAL A/B SPLIT
                     ustodoSearchString: $stateParams.ustodoId
                     //ustodoId: '54929d5d1d3df384165f4fa2'  // worked!!
                     //name: /road/
