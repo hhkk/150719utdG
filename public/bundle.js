@@ -138,10 +138,11 @@ if (typeof exports !== 'undefined') {
  */
 // var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
+var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
 
-var filters = ['htmlxxy', 'titlexx'];
+//var filters = ['htmlxxy', 'titlexx'];
 //var filters = ['htmlxx', 'title'];
-//var filters = [];
+var filters = [];
 
 
 //alert ('redefine alerthistory');
@@ -774,13 +775,13 @@ function emitError (desc, err)
 {
 
     try {
-		console.log ('error in err.message:' + err.message);
-		console.log ('error in err.stack:' + err.stack);
-		alert ('error, see log for stacktrace [' + err.message + ']');
+		console.log ('error [' + desc + '] in err.message:' + err.message);
+		console.log ('error [' + desc + '] in err.stack:' + err.stack);
+		//alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
 
     } catch (e) {
-        console.log ('error in getClass:e:' + e.message);
-        console.log ('error in getClass:estack:' + e.stack);
+        console.log ('error [' + desc + '] in getClass:e:' + e.message);
+        console.log ('error [' + desc + '] in getClass:estack:' + e.stack);
     }
 }  //
 
@@ -934,6 +935,21 @@ var hrefThisText = function(textToBeHrefed)
 					'urlOriginal':'http://' + tokens[i],
 					'urlWithHttpPrefix':'http://' + tokens[i]
  */
+
+function UrlUtd(addressOriMightHaveHttpNeededForSearchReplace, addressWithHttp, title) {
+	this.addressOriMightHaveHttpNeededForSearchReplace = addressOriMightHaveHttpNeededForSearchReplace;
+	this.addressWithHttp = addressWithHttp;
+	if (title)
+		this.title = title;
+	else
+		this.title = 'uninitialized';
+}
+
+var url = new UrlUtd ('ibm.com', 'http://ibm.com');
+console.log (url.addressOriMightHaveHttpNeededForSearchReplace);
+console.log (url.addressWithHttp);
+
+//called by line 76 in \UtilUrl4bUsesKrawlerToSupportServerController.js  var urls = UtilHrefThisText.getUrlsFromText(ustodoText);
 var getUrlsFromText = function(textWithUrls)
 {
     //textWithUrls = '=-=-=-=-=-=-=-=-' + textWithUrls;
@@ -947,10 +963,17 @@ var getUrlsFromText = function(textWithUrls)
         if (isUrl(token)) {
             //O.o ('--------> is a url from text:' + token);
 			// some URLs will have the http:// prefix already, for others add it
-			urls.push ({
-				'urlOriginal': token,
-				'urlWithHttpPrefix': (token.toLowerCase().indexOf('http') === 0 ? '' : 'http://') + token
-			});
+			// hbkk
+			urls.push (
+					new UrlUtd(token, (token.toLowerCase().indexOf('http') === 0 ? '' : 'http://') + token));
+
+				//{
+				//	// todo need a real object here
+				//	// https://docs.google.com/document/d/1VXnlrDsBBCmCHNxUHgD6A4qtksaX3Mq7QcgpaqOyMts/edit
+				//	'urlOriginal': token,
+				//	'urlWithHttpPrefix': (token.toLowerCase().indexOf('http') === 0 ? '' : 'http://') + token
+				//}
+
 		}
     });
     return urls;

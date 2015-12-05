@@ -3,12 +3,15 @@
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 var O = require('C:/utd/150719utdG/public/util/O.js');
-var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
+//var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
+var UtilUrl4bUsesKrawlerToSupportServerController =
+	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 
 //var UtilClass = require('.././UtilClass');
 // O.o ('__dirname:' + __dirname);  // __dirname:c:\utd\141213UtdV6\app\controllers
@@ -37,7 +40,14 @@ O.o ('&&&&&&&&&&000 init var callcountSaved = 0');
 var callcountSaved = 0;
 
 // section_create_new not section_write
-// section_routes_from_singlepage-ustodos.client.controller.js $scope.processCommand
+// called by: // section_routes_from_
+/**
+ * hbkk
+ * @param req
+ * @param res - into the response we push a json data structure of an ustodo which is a model
+ */
+// called from >>>singlepage-ustodos.client.controller.js>>> line 3484 (was 2203)
+// search for "$scope.processCommand($scope.enumCommands.COMMAND_WRITE"
 exports.create = function(req, res)
 {
 	O.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
@@ -49,7 +59,7 @@ exports.create = function(req, res)
 	ustodo.user = req.user;
 	try {
 	 // do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
-		//	if (false)
+			//	if (false)
 		ustodo.html = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(ustodo.html);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
@@ -73,7 +83,7 @@ exports.create = function(req, res)
 			if (err) {
 				console.log ('xxxxxxxxxxxxxxxxxxxxxxx error on save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
 				O.o('*** write fail err [' +err + ']');
-				return res.status(400).send({
+				return res.status(400).send({ // pairs with singlepage-ustodos.client.controller.js line 3512 function(errorResponse) {
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
@@ -84,10 +94,12 @@ exports.create = function(req, res)
 	};
 
 	try {
-		UtilUrl4.expandUrlsToHrefsReturnPatchedStr(ustodo.html, ustodo.text, res2);
+		//UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(ustodo.html, ustodo.text, res2);
+		// hbkk
+		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(ustodo.html, ustodo.text, res2);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
-		O.e('err in expandUrlsToHrefsReturnPatchedStr:' + err);
+		UtilErrorEmitter.emitError('err in expandUrlsToHrefsReturnPatchedStr:' + err);
 	}
 
 
@@ -221,8 +233,6 @@ exports.ustodobulkdel = function(req, res) {
 						{ $set: { deleted: true}     }
 					);
 
-					// hbkk
-
 					//db.books.update(
 					//	{ item: "EFG222" },
 					//	{ $set: { reorder: false, tags: [ "literature", "translated" ] } },
@@ -343,7 +353,7 @@ exports.ustodobulkdel = function(req, res) {
                 return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
 
  */
-exports.list2 = function(req, res) { // hbkk 1509  from \app\routes\ustodos.server.routes.js
+exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
 
 	//O.o(' *************** Top of exports.list ');
 	//O.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))

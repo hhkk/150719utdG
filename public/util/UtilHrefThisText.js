@@ -14,6 +14,7 @@
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+// var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 
 var seeIfConnectedToThisClass = function (s) {
@@ -110,6 +111,21 @@ var hrefThisText = function(textToBeHrefed)
 					'urlOriginal':'http://' + tokens[i],
 					'urlWithHttpPrefix':'http://' + tokens[i]
  */
+
+function UrlUtd(addressOriMightHaveHttpNeededForSearchReplace, addressWithHttp, title) {
+	this.addressOriMightHaveHttpNeededForSearchReplace = addressOriMightHaveHttpNeededForSearchReplace;
+	this.addressWithHttp = addressWithHttp;
+	if (title)
+		this.title = title;
+	else
+		this.title = 'uninitialized';
+}
+
+var url = new UrlUtd ('ibm.com', 'http://ibm.com');
+console.log (url.addressOriMightHaveHttpNeededForSearchReplace);
+console.log (url.addressWithHttp);
+
+//called by line 76 in \UtilUrl4bUsesKrawlerToSupportServerController.js  var urls = UtilHrefThisText.getUrlsFromText(ustodoText);
 var getUrlsFromText = function(textWithUrls)
 {
     //textWithUrls = '=-=-=-=-=-=-=-=-' + textWithUrls;
@@ -123,10 +139,17 @@ var getUrlsFromText = function(textWithUrls)
         if (isUrl(token)) {
             //O.o ('--------> is a url from text:' + token);
 			// some URLs will have the http:// prefix already, for others add it
-			urls.push ({
-				'urlOriginal': token,
-				'urlWithHttpPrefix': (token.toLowerCase().indexOf('http') === 0 ? '' : 'http://') + token
-			});
+			// hbkk
+			urls.push (
+					new UrlUtd(token, (token.toLowerCase().indexOf('http') === 0 ? '' : 'http://') + token));
+
+				//{
+				//	// todo need a real object here
+				//	// https://docs.google.com/document/d/1VXnlrDsBBCmCHNxUHgD6A4qtksaX3Mq7QcgpaqOyMts/edit
+				//	'urlOriginal': token,
+				//	'urlWithHttpPrefix': (token.toLowerCase().indexOf('http') === 0 ? '' : 'http://') + token
+				//}
+
 		}
     });
     return urls;

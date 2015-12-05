@@ -4,25 +4,12 @@
 //var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
 var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var Krawler = require('krawler');
+// var UtilUrl5Krawler = require('C:/utd/150719utdG/public/util/UtilUrl5Krawler.js');
 
-	var Krawler = require('krawler')
 
-	var urls = [
-//		'http://ondraplsek.cz'
-//		'http://localhost:6762/',
-//		'http://localhost:6768/',
-//		'http://time.com/',
-//		'http://apple.com/',
-//		'http://twitter.com/',
-//		'http://tweeter.com/',
-//		'http://rock.com/',
-		'http://tester.com/',
-//		'http://hp.com/',
-//		'http://ibm.com/',
-//		'http://yahoo.com/',
-
-	];
-
+var krawl = function(urlUtds, callback)
+{
 	//2. ologx:really done hk
 	//3. ologx:really done hk xxx: [http://localhost:6768/] -> [hbk6768]
 	//4. ologx:really done hk xxx: [http://time.com/] -> [TIME - Current & Breaking News | National & World Updates]
@@ -39,19 +26,24 @@ var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.j
 
 	var krawler = new Krawler;
 
+	var sArrUtlStringsWhttp = [];
+	for (var iUrlUtd in urlUtds) {
+		sArrUtlStringsWhttp.push (urlUtds[iUrlUtd].addressWithHttp);
+	}
+
 	var resultshk = {};
 
 	krawler
-		.queue(urls)
-		.on('data', function($, url, response) {
+		.queue(sArrUtlStringsWhttp)
+		.on('data', function($, urlString, response) {
 			try {
 				// $ - cheerio instance
 				// url of the current webpage
 				// response object from mikeal/request
-				O.o ('response.body:' + response.body.toString());
+				//O.o ('response.body:' + response.body.toString());
 				var titleCheerio = $("title").text();
 				//var title = UtilUrl4.findTitle_htmlParse(response.body.toString());
-				resultshk[url] = titleCheerio;
+				resultshk[urlString] = titleCheerio;
 				//O.o ('title [' + titleCheerio + ']');
 
 			} catch (err) {
@@ -60,7 +52,7 @@ var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.j
 		})
 		.on('error', function(err, url) {
 			O.o ('err:' + err);
-			resultshk[url] = err.toString();
+			resultshk[urlString] = err.toString();
 			// there has been an 'error' on 'url'
 		})
 		.on('end', function() {
@@ -70,8 +62,44 @@ var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.j
 				O.o ('really done hk xxx: [' + i + '] -> [' + resultshk[i] + ']');
 			}
 			O.o ('really done hk results:' + resultshk);
+			callback(resultshk);
 			// all URLs has been fetched
 		});
 
-	O.o ('end hk');
+
+
 }
+
+
+
+if (typeof exports !== 'undefined') {
+	exports.krawl = krawl;
+}
+
+
+if (false)
+{
+	var urlUtds = [
+	];
+
+	urlUtds.push
+		'http://ondraplsek.cz',
+		'http://localhost:6762/',
+		'http://localhost:6768/',
+		'http://time.com/',
+		'http://apple.com/',
+		'http://twitter.com/',
+		'http://tweeter.com/',
+		'http://rock.com/',
+		'http://tester.com/',
+		'http://hp.com/',
+		'http://ibm.com/',
+		'http://yahoo.com/',
+
+
+
+		krawl(urlUtds, function(s){
+		O.o ('I did it Mom!');
+	});
+}
+

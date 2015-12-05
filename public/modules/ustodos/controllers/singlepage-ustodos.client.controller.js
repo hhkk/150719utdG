@@ -3442,7 +3442,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=WRITE
 
 						// section_write
-						if (utdUserCommand.isWriteCommand)
+						if (utdUserCommand.isWriteCommand) // e.g., $scope.enumCommands.COMMAND_WRITE
 						{
 							//alert ('in write xTextCommandRemoved [' + xTextCommandRemoved  + ']');
 							//alert ('in write xHtml [' + xHtml + ']');
@@ -3480,7 +3480,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//O.o ('4 $$$$$$$$$$$$$$$$$$ save callerId 4 [' + callerId + '] ustodo.jsonx [' + ustodo.jsonx + ']');
 							//O.o ('5 $$$$$$$$$$$$$$$$$$ save callerId 5 [' + callerId + '] commandRemoved_toSearchFor_trimmed [' + commandRemoved_toSearchFor_trimmed + ']');
 							//alert('pre ustodo save ');
-							ustodo.$save(function(response) // ustodos.server.controller.js exports.create
+							// hbkk
+							ustodo.$save(
+								function(response) // line 50 of 'ustodos.server.controller.js' exports.create
 							{
 								//alert ('successful save');
 								// section_query // section_read
@@ -3506,7 +3508,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 								//$location.search('q', commandRemoved_toSearchFor_trimmed);       // yoo bar foo bar baz
 								//UtilNLB_bgFade.NLBfadeBg('idInput0TypeText','green', '#FFFFFF','1500');
 
-
+								// pairs with ustodos.server.controller.js line 85 return res.status(400)
+								// return res.status(400).send
+								// hbkk error reply
 							}, function(errorResponse) {
 								alert('failed to save record:' + errorResponse.data.message);
 								$scope.error = errorResponse.data.message;
