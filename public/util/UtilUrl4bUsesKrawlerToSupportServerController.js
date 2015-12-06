@@ -136,7 +136,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 				}
 
 				var joinedTokens = arrStr_tokensToJoinNowTitled.join(' ');
-				O.o ('reached res.json!!! ================================ [' + joinedTokens + ']');
+				O.o ('reached res.json with urls!!! ================================ [' + joinedTokens + ']');
 				res.json(joinedTokens);
 			} // callbackFromKrawl
 
@@ -180,6 +180,10 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 
 			UtilUrl5Krawler.krawl(urlUtdsFromText, callbackFromKrawl);
 
+		}
+		else {
+			O.o ('reached res.json withOUT urls!!! ================================ [' + ustodoText + ']');
+			res.json(ustodoText);
 		};
 
 		// hbkk

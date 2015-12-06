@@ -3410,13 +3410,15 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//alert (' =========================== in processcommand callerId [' +
 					//callerId + '] xValue' + '[' + xValue + ']' );
 					try {
-						$scope.searchedForAsLink = 'http://ibm.com/test';
+						//$scope.searchedForAsLink = 'http://ibm.com/test';
 						//O.o ('============================= in xValue [' + xValue + ']');
 						//O.o ('============================= in html2text [' + UtilHrefThisText.html2text(xValue)+ ']');
 						// <a target='_blank' href='http://ibm.com'>http://ibm.com</a>
 
 						$scope.callCountSearch++;
 
+
+						// what is xTextCommandRemovedTrimmedr
 						var callbackFromQuery = function(xTextCommandRemovedTrimmed) {
 							//alert ('in callbackFromQuery post get callback');
 							$scope.setUstodosFiltered('caller2', $scope.ustodos);
@@ -3444,7 +3446,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						// section_write
 						if (utdUserCommand.isWriteCommand) // e.g., $scope.enumCommands.COMMAND_WRITE
 						{
-							//alert ('in write xTextCommandRemoved [' + xTextCommandRemoved  + ']');
+							alert ('in write utdUserCommand.xTextCommandRemoved [' + utdUserCommand.xTextCommandRemoved + ']');
 							//alert ('in write xHtml [' + xHtml + ']');
 							//alert ('in write xTextCommandRemoved.asciiTable():' + xTextCommandRemoved.asciiTable());
 							//alert ('in endsWith w');
@@ -3481,10 +3483,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//O.o ('5 $$$$$$$$$$$$$$$$$$ save callerId 5 [' + callerId + '] commandRemoved_toSearchFor_trimmed [' + commandRemoved_toSearchFor_trimmed + ']');
 							//alert('pre ustodo save ');
 							// hbkk
-							ustodo.$save(
+							ustodo.$save (
 								function(response) // line 50 of 'ustodos.server.controller.js' exports.create
 							{
-								//alert ('successful save');
+								alert ('successful save');
 								// section_query // section_read
 								//$location.path('ustodos/' + response._id);
 								// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=QUERY
@@ -3519,68 +3521,70 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//'] for commandRemoved_toSearchFor_trimmed:' + commandRemoved_toSearchFor_trimmed);
 
 							//xTextCommandRemoved = commandRemoved_toSearchFor_trimmed;
-						}
+						} // if was write
+
+						//alert ('post write - search for ');
 
 
 						// POST WRIT IF IT WAS A WRITE
-						{
-							//alert ('not a write - search for [' + xTextCommandRemoved.trim() + ']');
-							//O.o ('=============== in section QUERY2')
-							//var t = new RegExp(xTextCommandRemoved.trim(), 'i');
+						//O.o ('=============== in section QUERY2')
+						//var t = new RegExp(xTextCommandRemoved.trim(), 'i');
 
-							$scope.searchedFor = utdUserCommand.xTextCommandRemoved;
+						//alert ('post write - search for 2');
+						$scope.searchedFor = utdUserCommand.xTextCommandRemoved;
+						//alert ('post write - search for $scope.searchedFor [' + $scope.searchedFor + ']');
 
-							//alert ('in not a write xTextCommandRemoved.trim [' + xTextCommandRemoved.trim() + ']');
+						//alert ('in not a write xTextCommandRemoved.trim [' + xTextCommandRemoved.trim() + ']');
 
-							$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
-								{q:utdUserCommand.xTextCommandRemoved}, // same as x
+						$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
+							{q:utdUserCommand.xTextCommandRemoved}, // same as x
 
-								//{$and:
-								//	[
-								//		{q:xTextCommandRemoved.trim()},
-								//		{deleted:{$ne:true}}
-								//	]
-								//}
+							//{$and:
+							//	[
+							//		{q:xTextCommandRemoved.trim()},
+							//		{deleted:{$ne:true}}
+							//	]
+							//}
 
-								// exports.processCommandReadPortion
-								// ustodos.server.routes.js may be related to this
-								//app.route('/ustodos')
-								//	.get(users.requiresLogin, ustodos.list2)
-								// ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
+							// exports.processCommandReadPortion
+							// ustodos.server.routes.js may be related to this
+							//app.route('/ustodos')
+							//	.get(users.requiresLogin, ustodos.list2)
+							// ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
 
-								//new RegExp(t, 'i')
-								//{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
-								//{$regex:xTextCommandRemoved.trim(), $options:'i'}
-								//{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
-								//{q:
-								//    xTextCommandRemoved.trim()
-								////{$not:{deleted:true}}
-								//    //new RegExp(t, 'i')
-								//    //{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
-								//    //{$regex:xTextCommandRemoved.trim(), $options:'i'}
-								//    //{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
-								//
-								//},
-								callbackFromQuery);      // this is a GET - see RESOURCE
+							//new RegExp(t, 'i')
+							//{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
+							//{$regex:xTextCommandRemoved.trim(), $options:'i'}
+							//{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
+							//{q:
+							//    xTextCommandRemoved.trim()
+							////{$not:{deleted:true}}
+							//    //new RegExp(t, 'i')
+							//    //{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
+							//    //{$regex:xTextCommandRemoved.trim(), $options:'i'}
+							//    //{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
+							//
+							//},
+							callbackFromQuery);      // this is a GET - see RESOURCE
 
-							//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
+						//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
 //                           {q:xTextCommandRemoved.trim()});      // this is a GET - see RESOURCE
-							//{q:{$regex:xTextCommandRemoved.trim()}});      // this is a GET - see RESOURCE
-							//{q:{$regex:xTextCommandRemoved.trim(), $options:'i'}});      // this is a GET - see RESOURCE
-							//{q:xTextCommandRemoved.trim() }, callbackFromQuery);      // this is a GET - see RESOURCE
-							// {key:{$regex:value, $options:â€˜iâ€™}}
+						//{q:{$regex:xTextCommandRemoved.trim()}});      // this is a GET - see RESOURCE
+						//{q:{$regex:xTextCommandRemoved.trim(), $options:'i'}});      // this is a GET - see RESOURCE
+						//{q:xTextCommandRemoved.trim() }, callbackFromQuery);      // this is a GET - see RESOURCE
+						// {key:{$regex:value, $options:â€˜iâ€™}}
 
-							//{q:new RegExp(xTextCommandRemoved.trim(), 'i') }, callbackFromQuery);      // this is a GET - see RESOURCE
-							// {q:{ '$regex' : xTextCommandRemoved.trim(), '$options' : '-i' }}, callbackFromQuery);      // this is a GET - see RESOURCE
+						//{q:new RegExp(xTextCommandRemoved.trim(), 'i') }, callbackFromQuery);      // this is a GET - see RESOURCE
+						// {q:{ '$regex' : xTextCommandRemoved.trim(), '$options' : '-i' }}, callbackFromQuery);      // this is a GET - see RESOURCE
 
-							// http://stackoverflow.com/questions/5499451/case-insensitive-query-on-mongodb
-							//{ '$regex' : 'C#', '$options' : '-i' }
+						// http://stackoverflow.com/questions/5499451/case-insensitive-query-on-mongodb
+						//{ '$regex' : 'C#', '$options' : '-i' }
 
 
-							//alert('setting search commandRemoved_toSearchFor_trimmed [' + xTextCommandRemoved + ']');
-							//$location.path('#/user/' + client.tagid);
+						//alert('setting search commandRemoved_toSearchFor_trimmed [' + xTextCommandRemoved + ']');
+						//$location.path('#/user/' + client.tagid);
 
-						} // if write else
+
 
 						// section_location_set_url
 						//alert ('in herehk pre $location.search');
@@ -3661,6 +3665,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//	$scope.error = errorResponse.data.message;
 
 					} catch (e) {
+						alert ('got error calling UtilErrorEmitter.emitError')
 						UtilErrorEmitter.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
 						throw e;
 					}
