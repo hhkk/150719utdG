@@ -17,6 +17,21 @@ var O = require('C:/utd/150719utdG/public/util/O.js');
 // var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 
+function UrlUtd(addressOriMightHaveHttpNeededForSearchReplace, addressWithHttp, title) {
+	this.addressOriMightHaveHttpNeededForSearchReplace = addressOriMightHaveHttpNeededForSearchReplace;
+	this.addressWithHttp = addressWithHttp;
+	if (title)
+		this.title = title;
+	else
+		this.title = 'uninitialized';
+}
+
+
+
+
+
+
+
 var seeIfConnectedToThisClass = function (s) {
     return ('in seeIfConnectedToThisClass:' + s);
 };
@@ -112,18 +127,9 @@ var hrefThisText = function(textToBeHrefed)
 					'urlWithHttpPrefix':'http://' + tokens[i]
  */
 
-function UrlUtd(addressOriMightHaveHttpNeededForSearchReplace, addressWithHttp, title) {
-	this.addressOriMightHaveHttpNeededForSearchReplace = addressOriMightHaveHttpNeededForSearchReplace;
-	this.addressWithHttp = addressWithHttp;
-	if (title)
-		this.title = title;
-	else
-		this.title = 'uninitialized';
-}
-
-var url = new UrlUtd ('ibm.com', 'http://ibm.com');
-console.log (url.addressOriMightHaveHttpNeededForSearchReplace);
-console.log (url.addressWithHttp);
+//var url = new UrlUtd ('ibm.com', 'http://ibm.com');
+//console.log (url.addressOriMightHaveHttpNeededForSearchReplace);
+//console.log (url.addressWithHttp);
 
 //called by line 76 in \UtilUrl4bUsesKrawlerToSupportServerController.js  var urls = UtilHrefThisText.getUrlsFromText(ustodoText);
 var getUrlsFromText = function(textWithUrls)
@@ -198,4 +204,5 @@ if (typeof exports !== 'undefined') {
     exports.getUrlsFromText = getUrlsFromText;
     exports.hrefThisText = hrefThisText;
     exports.html2text = html2text;
+    exports.isUrl = isUrl;
 }

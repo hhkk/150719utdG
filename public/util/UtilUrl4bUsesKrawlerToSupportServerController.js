@@ -15,6 +15,7 @@
 //var UtilUrl = require('C:/utd/141213UtdV6/public/util/UtilUrl.js');
 var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilUrl5Krawler = require('C:/utd/150719utdG/public/util/UtilUrl5Krawler.js');
+var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 var http = require('follow-redirects').http;
 //var http = require('http');
@@ -75,84 +76,139 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 		// ARE THERE ANY URLS
 		// get urls with urls as "http..." in their own array element
 		// section_expand_ eg com to include http
-		var urlUtds = UtilHrefThisText.getUrlsFromText(ustodoText);
+		var urlUtdsFromText = UtilHrefThisText.getUrlsFromText(ustodoText);
 
-		urlUtds.forEach(function(urlUtd)
-		{
-			console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressOriMightHaveHttpNeededForSearchReplace);
-			console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressWithHttp);
-		    //if (token.indexOf('http://') == 0) {
-		    //    //hashUrlsToTitle[token] = token;
-		    //    items.push (new Item(token));
-		    //}
-		});
+		//urlUtdsFromText.forEach(function(urlUtd)
+		//{
+		//	console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressOriMightHaveHttpNeededForSearchReplace);
+		//	console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressWithHttp);
+		//    //if (token.indexOf('http://') == 0) {
+		//    //    //hashUrlsToTitle[token] = token;
+		//    //    items.push (new Item(token));
+		//    //}
+		//});
 
-
-		if (urlUtds.length > 0)
+		if (urlUtdsFromText.length > 0)
 		{
 			//var res2 = {};
 			/**
 			 * once I have a title back from web call, knit the title back into both html and text
 			 */
-
-			var callback = function(resultshk)
+			// get title into each element of urlUtds
+			var callbackFromKrawl = function(urlUtdsEnrichedByKrawl)
 			{
-				O.o ("in callback from ");
-
-				// knit / replace here
-				// now replace urls with combo [title] + http'd url
-				urlUtds.forEach(function(urlUtd)
-				{
-					//urlUtd.urlOriginal = "rr"
-					//urlUtd.urlWithHttpPrefix = "http://rr"
-
-					var foundMatch = false;
-					var sbufStringsChecked = '';
-
-					for (var iUrls = 0; iUrls < urlUtds.length; iUrls++)
-					{
-						//O.o ('yes match found for  urlUtd.url:' + urlUtd.url);
-						sbufStringsChecked += '\r\nand testing [' + urlUtd.urlori + '] against [' + urlUtds[iUrls] + '] ';
-
-						if (urlUtd.addressOriMightHaveHttpNeededForSearchReplace === urls[iUrls] )
-						{
-							//O.o ('yes match found for  urlUtd.urlUtd:' + urlUtd.urlUtd);
-							foundMatch = true;
-							//urls[iUrls] = '[' + urlUtd.title + '] ' + UtilHrefThisText.hrefThisText(urlUtd.urlUtd);
-							// original ustodo saves non href'ed links to the db
-							urls[iUrls] = '[' + urlUtd.title + '] ' + urlUtd.title;
-						}
-					}
-
-					//if (!foundMatch) {
-					//    O.o ('no match found for  urlUtd.urlUtd:' + urlUtd.urlUtd + ' against these:' + sbufStringsChecked);
-					//    throw  ('no match found for  urlUtd.urlUtd:' + urlUtd.urlUtd + ' against these:' + sbufStringsChecked);
-					//}
+				// create index of urlUtdsEnrichedByKrawl by originals for performance so not O n**2 searching thru urlUtd array
+				var urlUtdsEnrichedByKrawl_byOriginal = {};
+				urlUtdsEnrichedByKrawl.forEach(function(urlUtdEnrichedByKrawl) {
+					urlUtdsEnrichedByKrawl_byOriginal[urlUtdEnrichedByKrawl.addressOriMightHaveHttpNeededForSearchReplace] = urlUtdEnrichedByKrawl;
 				});
 
-				var x = urls.join(' ')
-				O.o ( 'x:' + x);
-				res.json(x);
-				//O.o ('reached res.json!!! ================================');
+				//O.o ("in callback from ");
+				//O.o ("ustodoText:" + ustodoText);
+				//O.o ("items have all been converted ustodoHtml:" + ustodoHtml);
 
-			};
+				//O.o ("items have all been converted");
+				// section_knit_replace_text into text here
+				// now replace tokens with combo [title] + hrefed url
+				//textWithUrls = '=-=-=-=-=-=-=-=-' + textWithUrls;
+				var arrStr_tokensOriginal = ustodoText.split(/\s+/);
+				var arrStr_tokensToJoinNowTitled = [];
+				//console.log ('y.length:' + y.length);
+				try {
+					for (var itokens = 0; itokens < arrStr_tokensOriginal.length; itokens++)
+					{
+						var token = arrStr_tokensOriginal[itokens];
+						arrStr_tokensToJoinNowTitled[itokens] = token; // optimistic
+						if (
+							UtilHrefThisText.isUrl(token)) {
+							try {
+								arrStr_tokensToJoinNowTitled[itokens]  = '[' +
+									urlUtdsEnrichedByKrawl_byOriginal[token].title + '] ' +
+									token;
+							}   catch (err) {
+								throw 'error no urlUtd match found in krawl results for url token [' + token + ']';
+							}
+						}
+					}
+				} catch (err) {
+					UtilErrorEmitter.emitError ('xxfrom outside: error in expandUrlsToHrefsReturnPatchedStr', err);
+					throw err;
+				}
 
-			// hbkk
-			// var UtilUrl5Krawler = require('C:/utd/150719utdG/public/util/UtilUrl5Krawler.js');
-			UtilUrl5Krawler.krawl(urlUtds, callback)
+				var joinedTokens = arrStr_tokensToJoinNowTitled.join(' ');
+				O.o ('reached res.json!!! ================================ [' + joinedTokens + ']');
+				res.json(joinedTokens);
+			} // callbackFromKrawl
+
+
+
+			//
+			//
+			//
+			//
+			//
+			//
+			//// now replace urls with combo [title] + http'd url
+			//urlUtdsFromTextNowWithTitle_SideEffectedByKrawl.forEach(function(urlUtd)
+			//{
+			//	//urlUtd.urlOriginal = "rr"
+			//	//urlUtd.urlWithHttpPrefix = "http://rr"
+			//
+			//	var foundMatch = false;
+			//	var sbufStringsChecked = '';
+			//
+			//	for (var iUrls = 0; iUrls < urlUtdsFromTextNowWithTitle_SideEffectedByKrawl.length; iUrls++)
+			//	{
+			//		//O.o ('yes match found for  urlUtd.url:' + urlUtd.url);
+			//		//sbufStringsChecked += '\r\nand testing [' + urlUtd.urlori + '] against [' + urlUtds[iUrls] + '] ';
+			//
+			//		if (urlUtd.addressOriMightHaveHttpNeededForSearchReplace === urls[iUrls] )
+			//		{
+			//			//O.o ('yes match found for  urlUtd.urlUtd:' + urlUtd.urlUtd);
+			//			foundMatch = true;
+			//			//urls[iUrls] = '[' + urlUtd.title + '] ' + UtilHrefThisText.hrefThisText(urlUtd.urlUtd);
+			//			// original ustodo saves non href'ed links to the db
+			//			urls[iUrls] = '[' + urlUtd.title + '] ' + urlUtd.title;
+			//		}
+			//	}
+			//
+			//	if (!foundMatch) {
+			//	    O.o ('no match found for  urlUtd.urlUtd:' + urlUtd.urlUtd + ' against these:' + sbufStringsChecked);
+			//	    throw  ('no match found for  urlUtd.urlUtd:' + urlUtd.urlUtd + ' against these:' + sbufStringsChecked);
+			//	}
+			//});
+
+			UtilUrl5Krawler.krawl(urlUtdsFromText, callbackFromKrawl);
+
+		};
+
+		// hbkk
+		// var UtilUrl5Krawler = require('C:/utd/150719utdG/public/util/UtilUrl5Krawler.js');
 
 			//replace urls in string
-		} else {
-			var x = urls.join(' ')
-			O.o ( 'x:' + x);
-			res.json(x);
-		}
 		//if (hashUrlsToTitle.size() > 0) {
 		//    }
 	} catch (err) {
 		UtilErrorEmitter.emitError ('from outside: error in expandUrlsToHrefsReturnPatchedStr', err);
 		throw err;
 	}
+
+
+
+
+
+
+//} else {
+//	var x = urls.join(' ')
+//	O.o ( 'x:' + x);
+//	res.json(x);
+//}
+
+
+
+
+
+
 }
 
 

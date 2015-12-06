@@ -8,7 +8,7 @@ var Krawler = require('krawler');
 // var UtilUrl5Krawler = require('C:/utd/150719utdG/public/util/UtilUrl5Krawler.js');
 
 
-var krawl = function(urlUtds, callback)
+var krawl = function(urlUtds, callbackFromKrawl)
 {
 	//2. ologx:really done hk
 	//3. ologx:really done hk xxx: [http://localhost:6768/] -> [hbk6768]
@@ -23,51 +23,77 @@ var krawl = function(urlUtds, callback)
 	//12. ologx:really done hk xxx: [http://twitter.com/] -> [Twitter]
 	//13. ologx:really done hk xxx: [http://localhost:6762/] -> [Error: connect ECONNREFUSED 127.0.0.1:6762]
 
+	try {
+		var krawler = new Krawler;
 
-	var krawler = new Krawler;
+		// set up URLs to fetch title on
+		var sArrUrlStringsWhttp = [];
+		for (var iUrlUtd in urlUtds) {
+			sArrUrlStringsWhttp.push (urlUtds[iUrlUtd].addressWithHttp);
+		}
 
-	var sArrUtlStringsWhttp = [];
-	for (var iUrlUtd in urlUtds) {
-		sArrUtlStringsWhttp.push (urlUtds[iUrlUtd].addressWithHttp);
+		var mapUrlStringWhttp_Title = {};
+
+		krawler
+			.queue(sArrUrlStringsWhttp)
+			.on('data', function($, urlStringWhttp, response) {
+				try {
+					// $ - cheerio instance
+					// url of the current webpage
+					// response object from mikeal/request
+					//O.o ('response.body:' + response.body.toString());
+					var titleCheerio = $("title").text();
+					//var title = UtilUrl4.findTitle_htmlParse(response.body.toString());
+					mapUrlStringWhttp_Title[urlStringWhttp] = titleCheerio;
+					//O.o ('title [' + titleCheerio + ']');
+
+				} catch (err) {
+					UtilErrorEmitter.emitError('err in ondata', err);
+				}
+			})
+			.on('error', function(err, url) {
+				O.o ('err:' + err);
+				mapUrlStringWhttp_Title[urlString] = err.toString();
+				// there has been an 'error' on 'url'
+			})
+			.on('end', function() {
+				O.o ('really done hk');
+				// since Krawl returns a map from url to title, and we have arr of utdUrls...
+				// grab titles from krawl results and put into utdUrls
+				for (var urlStringWhttpMapsToTitle_nameIndex in mapUrlStringWhttp_Title)
+				{
+					var foundMatch = false;
+					for (var iUrlUtd in urlUtds)
+					{
+						if (urlStringWhttpMapsToTitle_nameIndex === urlUtds[iUrlUtd].addressWithHttp)
+						{
+							urlUtds[iUrlUtd].title = mapUrlStringWhttp_Title[urlStringWhttpMapsToTitle_nameIndex];
+							foundMatch = true;
+							O.o ('title get success : [' + urlStringWhttpMapsToTitle_nameIndex + '] -> [' + mapUrlStringWhttp_Title[urlStringWhttpMapsToTitle_nameIndex] + ']');
+						}
+					}
+					if (!foundMatch) {
+						throw  'failed to find a matching UrlUtd for urlMapsToTitle [' + urlStringWhttpMapsToTitle_nameIndex + ']';
+					}
+
+				}
+
+				// now verify that every urlUtd has a title
+				for (var iUrlUtd in urlUtds)
+				{
+					if (!urlUtds[iUrlUtd].title)   {
+						throw  'failed to populate title in urlUtds[iUrlUtd].addressWithHttp [' + urlUtds[iUrlUtd].addressWithHttp + ']';
+					}
+				}
+
+
+				O.o ('really done hk results:' + mapUrlStringWhttp_Title);
+				callbackFromKrawl(urlUtds);
+				// all URLs has been fetched
+			});
+	} catch (err) {
+		UtilErrorEmitter.emitError('error i krawler', err);
 	}
-
-	var resultshk = {};
-
-	krawler
-		.queue(sArrUtlStringsWhttp)
-		.on('data', function($, urlString, response) {
-			try {
-				// $ - cheerio instance
-				// url of the current webpage
-				// response object from mikeal/request
-				//O.o ('response.body:' + response.body.toString());
-				var titleCheerio = $("title").text();
-				//var title = UtilUrl4.findTitle_htmlParse(response.body.toString());
-				resultshk[urlString] = titleCheerio;
-				//O.o ('title [' + titleCheerio + ']');
-
-			} catch (err) {
-				UtilErrorEmitter.emitError('err in ondata', err);
-			}
-		})
-		.on('error', function(err, url) {
-			O.o ('err:' + err);
-			resultshk[urlString] = err.toString();
-			// there has been an 'error' on 'url'
-		})
-		.on('end', function() {
-			O.o ('really done hk');
-			for (var i in resultshk)
-			{
-				O.o ('really done hk xxx: [' + i + '] -> [' + resultshk[i] + ']');
-			}
-			O.o ('really done hk results:' + resultshk);
-			callback(resultshk);
-			// all URLs has been fetched
-		});
-
-
-
 }
 
 

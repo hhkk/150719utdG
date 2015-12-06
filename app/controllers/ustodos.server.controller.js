@@ -69,28 +69,37 @@ exports.create = function(req, res)
 	var res2 = {};
 	// section_exports.create
 	O.o ('xxxxxxxxxxxxxxxxxxxxxxxxxin server.controller exports.create');
-	res2.json = function(s)
+	res2.json = function(utdText)
 	{
-		O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + s + ']');
-		ustodo.datelastmod = new Date();
-		ustodo.datecreated = new Date();
+		try {
+			ustodo.text = utdText;
+			ustodo.html = utdText;
+			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + utdText + ']');
+			ustodo.datelastmod = new Date();
+			ustodo.datecreated = new Date();
 
-		O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.text:' + ustodo.text);
-		O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.html:' + ustodo.html);
-		O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsonx:' + ustodo.jsonx);
-		//O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsony:' + ustodo.jsony);
-		ustodo.save(function(err) {
-			if (err) {
-				console.log ('xxxxxxxxxxxxxxxxxxxxxxx error on save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
-				O.o('*** write fail err [' +err + ']');
-				return res.status(400).send({ // pairs with singlepage-ustodos.client.controller.js line 3512 function(errorResponse) {
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else {
-				console.log ('xxxxxxxxxxxxxxxxxxxxxxx completed save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
-				res.jsonp(ustodo);
-			}
-		});
+			O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.text:' + ustodo.text);
+			O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.html:' + ustodo.html);
+			O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsonx:' + ustodo.jsonx);
+			//O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsony:' + ustodo.jsony);
+			ustodo.save(function(err) {
+				if (err) {
+					console.log ('xxxxxxxxxxxxxxxxxxxxxxx error on save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
+					O.o('*** write fail err [' +err + ']');
+					return res.status(400).send({ // pairs with singlepage-ustodos.client.controller.js line 3512 function(errorResponse) {
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					console.log ('xxxxxxxxxxxxxxxxxxxxxxx completed save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
+					res.jsonp(ustodo);
+				}
+			});
+
+		} catch (err) {
+		//console.log(UtilClass.UtilClass('err', err));
+			UtilErrorEmitter.emitError('err in res2.json:' + err);
+		}
+
 	};
 
 	try {
