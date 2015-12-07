@@ -3446,7 +3446,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						// section_write
 						if (utdUserCommand.isWriteCommand) // e.g., $scope.enumCommands.COMMAND_WRITE
 						{
-							alert ('in write utdUserCommand.xTextCommandRemoved [' + utdUserCommand.xTextCommandRemoved + ']');
+							//alert ('in write utdUserCommand.xTextCommandRemoved [' + utdUserCommand.xTextCommandRemoved + ']');
 							//alert ('in write xHtml [' + xHtml + ']');
 							//alert ('in write xTextCommandRemoved.asciiTable():' + xTextCommandRemoved.asciiTable());
 							//alert ('in endsWith w');
@@ -3522,7 +3522,20 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 							//xTextCommandRemoved = commandRemoved_toSearchFor_trimmed;
 						} // if was write
+						else {
 
+							//alert ('post write - search for 2');
+							$scope.searchedFor = utdUserCommand.xTextCommandRemoved;
+							//alert ('post write - search for $scope.searchedFor [' + $scope.searchedFor + ']');
+
+							//alert ('in not a write xTextCommandRemoved.trim [' + xTextCommandRemoved.trim() + ']');
+
+							$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
+								{q:utdUserCommand.xTextCommandRemoved}, // same as x
+								callbackFromQuery);      // this is a GET - see RESOURCE
+							$location.search('q', utdUserCommand.xTextCommandRemoved);       // yoo bar foo bar baz not $location.path
+							$scope.filterText = utdUserCommand.xTextCommandRemoved;
+						}
 						//alert ('post write - search for ');
 
 
@@ -3530,14 +3543,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//O.o ('=============== in section QUERY2')
 						//var t = new RegExp(xTextCommandRemoved.trim(), 'i');
 
-						//alert ('post write - search for 2');
-						$scope.searchedFor = utdUserCommand.xTextCommandRemoved;
-						//alert ('post write - search for $scope.searchedFor [' + $scope.searchedFor + ']');
-
-						//alert ('in not a write xTextCommandRemoved.trim [' + xTextCommandRemoved.trim() + ']');
-
-						$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
-							{q:utdUserCommand.xTextCommandRemoved}, // same as x
 
 							//{$and:
 							//	[
@@ -3565,7 +3570,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//    //{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
 							//
 							//},
-							callbackFromQuery);      // this is a GET - see RESOURCE
 
 						//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
 //                           {q:xTextCommandRemoved.trim()});      // this is a GET - see RESOURCE
@@ -3588,8 +3592,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 						// section_location_set_url
 						//alert ('in herehk pre $location.search');
-						$location.search('q', utdUserCommand.xTextCommandRemoved);       // yoo bar foo bar baz not $location.path
-						$scope.filterText = utdUserCommand.xTextCommandRemoved;
 
 						//alert ('commandRemoved_toSearchFor_trimmed:'+ commandRemoved_toSearchFor_trimmed);
 
