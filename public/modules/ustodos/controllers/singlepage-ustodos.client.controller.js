@@ -636,7 +636,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				$scope.testNLBfadeBg = function() {
 					alert('in testNLBfadeBg')      ;
-					UtilNLB_bgFade.NLBfadeBg('div1hk','green', '#FFFFFF','1500');
+					//UtilNLB_bgFade.NLBfadeBg('div1hk','green', '#FFFFFF','1500');
+					UtilNLB_bgFade.NLBfadeBg('ustodorow0','green', '#FFFFFF','1500');
 				};
 
 
@@ -1621,7 +1622,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//tinyMCE.get('idTinyMceTextArea').setContent('<span>some2</span> html');
 
 
-
 				// section_per_editor 0
 				$scope.inputbind ='search or inputx';
 
@@ -1659,38 +1659,23 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//$scope.onKeyDown = function ($event) {
 				//    $scope.onKeyDownResult = getKeyboardEventResult($event, 'Key down');
 				//};
-
-
 				$scope.onKeyUp_perrow_text = function (keyEvent, index, _id) // https://docs.angularjs.org/api/ng/directive/ngKeyup
 				{
 					var newHtml = document.getElementById('ustodorow'+index).innerHTML;
 					var newText = document.getElementById('ustodorow'+index).innerText;
 
+					// if not escape then return
 					if (keyEvent.keyCode !== 27 ) // if not escape key
 					{
 						// change local image to requiring a save
 						var savImgHtml = document.getElementById('savimg'+index);
 						//alert ('savImgHtml.src:' + savImgHtml.src);
 						savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
-
 						return;
 					}
 
-
 					//alert ('newHtml:' + newHtml);
 					//alert ('in onKeyUp_perrow_text escape id:' + 'ustodorow'+index); // not non-escape
-
-					//alert ('newHtml:' + newHtml);
-
-					//<a target='_blank' href='http://ibm.com'>http://ibm.com</a>
-
-					var fnCallbackFromUpdate = function (errorResponse) {
-						UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+index,'red', '#FFFFFF','1500');
-						alert ('ERROR ON SAVE !!! errorResponse:' + errorResponse);
-						//
-						//$scope.error = errorResponse.data.message;
-						//alert ('ERROR ON SAVE !!! ' + $scope.ustodos[i].html);
-					};
 
 					var found = false;
 					//find the element in memory matching the id passed from the UI on the click
@@ -1698,7 +1683,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					var updateCallBackIfErrorIndex = -1;
 					var updateCallBackIfError = function(errorResponse) {
 						UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+updateCallBackIfErrorIndex,'red', 'pink','500');
-						alert('error2 on save errorResponse.data.message [' + errorResponse.data.message + ']');
+						alert('error on save errorResponse.data.message [' + errorResponse.data.message + ']');
 					};
 					for (var i = 0; i < $scope.ustodos.length; i++)
 					{
@@ -1707,42 +1692,23 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							found = true;
 							//alert ('found match at index:' + i + ' with original text :' + $scope.ustodos[i]);
 
-
 							var savImgHtml = document.getElementById('savimg'+index);
 							//alert ('savImgHtml.src:' + savImgHtml.src);
 							savImgHtml.src = savImgHtml.src.replaceAll('SaveIconBlue.png', 'saveIcon.jpg');
 
-
 							//alert('compare [' + $scope.ustodos[i].html + '] to [' + newHtml + ']')
-							//if ($scope.ustodos[i].html !== newHtml) {
-							//	alert('changed1');
-							//} else {
-							//	alert('no changed1');
-							//}
-
-							// maps to exports.update
-							//$scope.ustodos[i].$update(function () {
-							//    alert ('---------------------------- SAVED utd OK !!! ');
-							//}, fnCallbackFromUpdate);
-
 							// section_update per row on update with escape key
 							if ($scope.ustodos[i].html !== newHtml)
 							{
+								$scope.ustodos[i].html = newHtml;
+								$scope.ustodos[i].text = newText;
 								updateCallBackIfErrorIndex = index;
 								$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
 									UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+index,'green', '#FFFFFF','1500');
-									$scope.ustodos[i].html = newHtml;
-
-									//alert('saved');
-
+									//$scope.ustodos[i].html = newHtml;
+									alert('Record saved');
 								}, updateCallBackIfError);
-								//alert ('done update submit [' + $scope.ustodos[i].html + ']');
-
 							}
-							//else
-							//{
-							//	//alert('no change');
-							//}
 							break;
 						}
 
@@ -2703,6 +2669,11 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				$scope.testButton= function(s)
 				{
 
+					if (true) {
+						alert ('pre fade');
+						$scope.testNLBfadeBg();
+						alert ('post fade');
+					}
 
 					//alert ('in keyup $scope.getTextHtmlAndValueInShowingEditor()'+$scope.getTextHtmlAndValueInShowingEditor());
 					//CKEDITOR.instances.editor.destroy();
@@ -2726,7 +2697,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//
 					//}
 
-					if (true)
+					if (false)
 					{
 						var o = document.getElementById('idTinyMceTextArea');
 						//alert('myCustomOnInit from mce o.ng-blur:' + o['ng-blur']);
@@ -2999,11 +2970,11 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					});
 				};
 
-				var callbackhkhk_find = function()
-				{
-					//alert ('in callbackhkhk_find');
-					$scope.setUstodosFiltered('caller1_find', $scope.ustodos);
-				};
+				//var callbackhkhk_find = function()
+				//{
+				//	//alert ('in callbackhkhk_find');
+				//	$scope.setUstodosFiltered('caller1_find', $scope.ustodos);
+				//};
 				//
 				$scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
 					// corresponds to exports.list2 in ustodos.server.controller.js
@@ -3034,8 +3005,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 					//$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {$and: [{text: 'xx'}, {$not:{deleted: true}}]}, callbackhkhk_find);
 					//$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {$and: [{text: 'x'}, {$not:{text: 'y'}}]}, callbackhkhk_find);
-					$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackhkhk_find);
-
+					$scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackFromQuery);
 
 					alert ('in this funny query hbkx pos len:' + $scope.ustodos.length);
 
@@ -3387,6 +3357,47 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					console.log('UtdUserCommand instantiated this.xText [' + this.xText + '] this.xHtml [' + this.xHtml + ']');
 				};
 
+				var ustodosQueryCommon_wrapper = function(xTextCommandRemoved, callbackFromQuery)
+				{
+					$scope.searchedFor = xTextCommandRemoved;
+					//alert ('post write - search for $scope.searchedFor [' + $scope.searchedFor + ']');
+
+					//alert ('in ustodosQueryCommon_wrapper xTextCommandRemoved [' + xTextCommandRemoved + ']');
+
+					$scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
+						{q:xTextCommandRemoved}, // same as x
+						callbackFromQuery);      // this is a GET - see RESOURCE
+
+					$location.search('q', xTextCommandRemoved);       // yoo bar foo bar baz not $location.path
+					$scope.filterText = xTextCommandRemoved;
+					//$scope.searchedFor = utdUserCommand.xTextCommandRemoved;
+					////alert ('post write - search for $scope.searchedFor [' + $scope.searchedFor + ']');
+                    //
+					////alert ('in not a write xTextCommandRemoved.trim [' + xTextCommandRemoved.trim() + ']');
+                    //
+					//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
+					//	{q:utdUserCommand.xTextCommandRemoved}, // same as x
+					//	callbackFromQuery);      // this is a GET - see RESOURCE
+					//$location.search('q', utdUserCommand.xTextCommandRemoved);       // yoo bar foo bar baz not $location.path
+					//$scope.filterText = utdUserCommand.xTextCommandRemoved;
+
+				}
+
+
+				var callbackFromQuery = function(arrayUstodosResources) {
+					//alert ('in callbackFromQuery post get callback');
+					$scope.ustodos = arrayUstodosResources;
+					$scope.setUstodosFiltered('caller2', $scope.ustodos);
+					SppSvc.setModelDirty(false);
+					if ($scope.ustodos.length > 0)
+						$scope.setTextInShowingEditor($scope.ustodos[0].html, 'line 3329a2');
+					else
+						$scope.setTextInShowingEditor('', 'line 3329a2');
+						//alert ('in callbackFromQuery post get callback2');
+				};  ///callbackfromquery
+
+
+
 				/**
 				 * this call is the first point after any specific input editor
 				 * @param scopeEnumCommand
@@ -3417,15 +3428,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 						$scope.callCountSearch++;
 
-
 						// what is xTextCommandRemovedTrimmedr
-						var callbackFromQuery = function(xTextCommandRemovedTrimmed) {
-							//alert ('in callbackFromQuery post get callback');
-							$scope.setUstodosFiltered('caller2', $scope.ustodos);
-							SppSvc.setModelDirty(false);
-							$scope.setTextInShowingEditor(utdUserCommand.xTextCommandRemoved, 'line 3329a2');
-							//alert ('in callbackFromQuery post get callback2');
-						};  ///callbackfromquery
 
 						// TODO ADD A WRITE HERE
 						//$scope.ustodos = Ustodos.WRITE????  ({q: xTextCommandRemoved}, fn);      // this is a GET - see RESOURCE
@@ -3485,8 +3488,11 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							// hbkk
 							ustodo.$save (
 								function(response) // line 50 of 'ustodos.server.controller.js' exports.create
-							{
-								alert ('successful save');
+								{
+								//alert ('successful save');
+								ustodosQueryCommon_wrapper('*', callbackFromQuery);
+
+
 								// section_query // section_read
 								//$location.path('ustodos/' + response._id);
 								// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=QUERY
@@ -3509,7 +3515,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 								// hbk 1505
 								//$location.search('q', commandRemoved_toSearchFor_trimmed);       // yoo bar foo bar baz
 								//UtilNLB_bgFade.NLBfadeBg('idInput0TypeText','green', '#FFFFFF','1500');
-
 								// pairs with ustodos.server.controller.js line 85 return res.status(400)
 								// return res.status(400).send
 								// hbkk error reply
@@ -3522,19 +3527,11 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 							//xTextCommandRemoved = commandRemoved_toSearchFor_trimmed;
 						} // if was write
-						else {
+						else
+						{
 
 							//alert ('post write - search for 2');
-							$scope.searchedFor = utdUserCommand.xTextCommandRemoved;
-							//alert ('post write - search for $scope.searchedFor [' + $scope.searchedFor + ']');
-
-							//alert ('in not a write xTextCommandRemoved.trim [' + xTextCommandRemoved.trim() + ']');
-
-							$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
-								{q:utdUserCommand.xTextCommandRemoved}, // same as x
-								callbackFromQuery);      // this is a GET - see RESOURCE
-							$location.search('q', utdUserCommand.xTextCommandRemoved);       // yoo bar foo bar baz not $location.path
-							$scope.filterText = utdUserCommand.xTextCommandRemoved;
+							ustodosQueryCommon_wrapper(utdUserCommand.xTextCommandRemoved, callbackFromQuery);
 						}
 						//alert ('post write - search for ');
 
@@ -3544,35 +3541,35 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//var t = new RegExp(xTextCommandRemoved.trim(), 'i');
 
 
-							//{$and:
-							//	[
-							//		{q:xTextCommandRemoved.trim()},
-							//		{deleted:{$ne:true}}
-							//	]
-							//}
+						//{$and:
+						//	[
+						//		{q:xTextCommandRemoved.trim()},
+						//		{deleted:{$ne:true}}
+						//	]
+						//}
 
-							// exports.processCommandReadPortion
-							// ustodos.server.routes.js may be related to this
-							//app.route('/ustodos')
-							//	.get(users.requiresLogin, ustodos.list2)
-							// ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
+						// exports.processCommandReadPortion
+						// ustodos.server.routes.js may be related to this
+						//app.route('/ustodos')
+						//	.get(users.requiresLogin, ustodos.list2)
+						// ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
 
-							//new RegExp(t, 'i')
-							//{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
-							//{$regex:xTextCommandRemoved.trim(), $options:'i'}
-							//{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
-							//{q:
-							//    xTextCommandRemoved.trim()
-							////{$not:{deleted:true}}
-							//    //new RegExp(t, 'i')
-							//    //{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
-							//    //{$regex:xTextCommandRemoved.trim(), $options:'i'}
-							//    //{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
-							//
-							//},
+						//new RegExp(t, 'i')
+						//{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
+						//{$regex:xTextCommandRemoved.trim(), $options:'i'}
+						//{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
+						//{q:
+						//    xTextCommandRemoved.trim()
+						////{$not:{deleted:true}}
+						//    //new RegExp(t, 'i')
+						//    //{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
+						//    //{$regex:xTextCommandRemoved.trim(), $options:'i'}
+						//    //{ $regex: /thort/, $options: 'i' } // { $regex: /acme.*corp/, $options: 'i' }
+						//
+						//},
 
 						//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
-//                           {q:xTextCommandRemoved.trim()});      // this is a GET - see RESOURCE
+						//  {q:xTextCommandRemoved.trim()});      // this is a GET - see RESOURCE
 						//{q:{$regex:xTextCommandRemoved.trim()}});      // this is a GET - see RESOURCE
 						//{q:{$regex:xTextCommandRemoved.trim(), $options:'i'}});      // this is a GET - see RESOURCE
 						//{q:xTextCommandRemoved.trim() }, callbackFromQuery);      // this is a GET - see RESOURCE
@@ -3698,24 +3695,14 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//            document.getElementById('selectId').dispatchEvent(event);
 				//        };
 				//
-				// This isn't magic.
-				//http://jsfiddle.net/fz2sY/39/
-				$scope.runThis = function () {
-				};
-
-
-
-
 
 				$scope.filterDoesThisRowHtmlMatch = function(s, filterText) {
 					alert ('in here hk');
 					var s2 = '';
 					var arrTokens = s.split(/\s/);
-					for (var i = 0; i < arrTokens.length; i++)
-					{
+					for (var i = 0; i < arrTokens.length; i++) {
 						//O.o ('testing for filterText [' + filterText + '] :' + arrTokens[i]);
-						if (arrTokens[i].indexOf(filterText) > 0)
-						{
+						if (arrTokens[i].indexOf(filterText) > 0) {
 							//O.o ('found:');
 							s2 = s2 + ' ' + arrTokens[i];
 						}
@@ -3727,12 +3714,13 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				$scope.onTrueOffFalse = false;
 				// commented 150513
+
+				// called by UI when idInputTextFilter changes
 				$scope.updateUstodosFiltered = function (s)
 				{
 
 					//alert ('========================= in ttttttttttt updateUstodosFiltered');
-					if (document.ustodosFilterCacheDirty === false)
-					{
+					if (document.ustodosFilterCacheDirty === false) {
 						//alert('setting cache dirty');
 						document.ustodosFilterCacheDirty = true;
 					}
@@ -3743,10 +3731,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					if (s && s.hasUpperCase()) {
 						O.o ('USE CASE SENS');
 						useCaseSensitiveRestrict = true;
-					}    else {
+					} else {
 						O.o ('DO NOT USE CASE SENS');
 					}
-
 
 					for (var i = 0; i < $scope.ustodos.length; i++)
 					{
@@ -3953,11 +3940,7 @@ window.onload = function()
 	//	alert('in window.onload');
 	//setTimeout(function(){ $scope.localTinyMceInit() }, 2000); // hbklrb11
 	//setTimeout(function(){ $scope.focusOnId(mceId); }, 3000); // hbklrbb
-
-
-
 	//var x = angular.element('imageIdRedPEncilbnw');
-
 	//angular.element( document.querySelector( '#imageIdRedPEncil' ) ).src = '/img/ClearText.png';
 	//angular.element( document.querySelector( '#imageIdRedPEncilbnwxxx' ) ).width = '15';
 	//alert ('xxsonload - set width to:'+angular.element( document.querySelector( '#imageIdRedPEncilbnwxxx' ) ).width);

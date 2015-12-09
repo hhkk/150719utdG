@@ -85,7 +85,7 @@ exports.create = function(req, res)
 			ustodo.save(function(err) {
 				if (err) {
 					console.log ('xxxxxxxxxxxxxxxxxxxxxxx error on save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
-					O.o('*** write fail err [' +err + ']');
+					O.o('!!!!!!!!!!!!!!!!ERROR *** write fail err [' +err + ']');
 					return res.status(400).send({ // pairs with singlepage-ustodos.client.controller.js line 3512 function(errorResponse) {
 						message: errorHandler.getErrorMessage(err)
 					});
@@ -154,7 +154,7 @@ exports.update = function(req, res)
 
 	ustodo.save(function (err, ustodosaved, numberAffected) {
 		if (err) {
-			O.o('era!!!!!!!!!');
+			O.o('!!!!!!!!!!!!!!!!ERROR in ustodos.server.controller.js exports.update .save*** save fail err [' +err + ']');
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -192,6 +192,7 @@ exports.delete2 = function(req, res) {
 
 	ustodo.remove(function (err) {
 		if (err) {
+			O.o('!!!!!!!!!!!!!!!!ERROR in ustodos.server.controller.js exports.delete2  .remove*** save fail err [' +err + ']');
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -488,7 +489,8 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 };
 
 /**   * Ustodo middleware  */
-exports.ustodoByID = function(req, res, next, id) {
+exports.ustodoByID = function(req, res, next, id)
+{
 	O.o('in ustodoByID id:'+id);
 	//var s = Ustodo.findById(id);
 
@@ -501,12 +503,15 @@ exports.ustodoByID = function(req, res, next, id) {
 		if (! ustodo) return next(new Error('Failed to load Ustodo ' + id));
 		req.ustodo = ustodo ;
 		next();
-	}); };
+	});
+};
 
 /**  * Ustodo authorization middleware  */
 exports.hasAuthorization = function(req, res, next) {
 	O.o('in ustodos.server.controller.js: hasAuthorization');
+	O.o('Checking auth for req.user.username [' + req.user.username + ']');
 	if (req.ustodo.user.id !== req.user.id) {
+		O.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).');
 		return res.status(403).send('User is not authorized');
 	}
 	next();
