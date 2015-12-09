@@ -13,6 +13,12 @@ var require_Development = require('C:/utd/150719utdG/config/env/development.js')
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 
+//var _ = require('lodash'),
+var	mongoose = require('mongoose'),
+	User = mongoose.model('User');
+
+
+
 //var UtilClass = require('.././UtilClass');
 // O.o ('__dirname:' + __dirname);  // __dirname:c:\utd\141213UtdV6\app\controllers
 // C:\utd\141213UtdV6\app\controllers\ustodos.server.controller.js
@@ -509,8 +515,17 @@ exports.ustodoByID = function(req, res, next, id)
 /**  * Ustodo authorization middleware  */
 exports.hasAuthorization = function(req, res, next) {
 	O.o('in ustodos.server.controller.js: hasAuthorization');
-	O.o('Checking auth for req.user.username [' + req.user.username + ']');
+	O.o('@@@@@@@@@@@@@@@@@ Checking auth for req.user.username [' + req.user.username + ']');
+	O.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.id [' + req.ustodo.user.id + ']');
+
+	User.findById(req.user.id, function (err, user) {
+		//done(err, user);
+		O.o ('hbksdfsdfs:' + user);
+		O.o ('hbksdfsdfs user.username:' + user.username);
+	});
+
 	if (req.ustodo.user.id !== req.user.id) {
+
 		O.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).');
 		return res.status(403).send('User is not authorized');
 	}
