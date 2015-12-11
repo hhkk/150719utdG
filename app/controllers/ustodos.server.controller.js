@@ -16,9 +16,9 @@ var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.j
 
 
 //var _ = require('lodash'),
-var xyhbk2 = 'C:/utd/150719utdG/app/models/user.server.model.js';
-var	mongoose = require('mongoose'),
-	User = mongoose.model('User');
+//var xyhbk2 = 'C:/utd/150719utdG/app/models/user.server.model.js';
+//var	mongoose = require('mongoose'),
+	//User = mongoose.model('User');
 
 
 
@@ -179,15 +179,15 @@ exports.update = function(req, res)
 
 			O.o ('^^^^^^^ method 1  req.user._doc.username [' + req.user._doc.username + ']');
 
-			User.findById(req.user.id, function (err, user) {
-				//done(err, user);
-				if (!err) {
-					O.o ('hbksdfsdfs:' + user);
-					O.o ('hbksdfsdfs user.username:' + user.username);
-				} else {
-					UtilErrorEmitter.emitError("fail getting user name", err);
-				}
-			});
+			//User.findById(req.user.id, function (err, user) {
+			//	//done(err, user);
+			//	if (!err) {
+			//		O.o ('hbksdfsdfs:' + user);
+			//		O.o ('hbksdfsdfs user.username:' + user.username);
+			//	} else {
+			//		UtilErrorEmitter.emitError("fail getting user name", err);
+			//	}
+			//});
 
 
 			res.jsonp(ustodo);

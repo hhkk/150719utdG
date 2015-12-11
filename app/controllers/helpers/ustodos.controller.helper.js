@@ -12,9 +12,9 @@ var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.j
 //var User = require ('C:/utd/150719utdG/app/models/user.server.model.js');
 //var User = mongoose.model('User');
 
-var xyhbk = 'C:/utd/150719utdG/app/models/user.server.model.js';
-var	mongoose = require('mongoose'),
-	User = mongoose.model('User');
+//var xyhbk = 'C:/utd/150719utdG/app/models/user.server.model.js';
+//var	mongoose = require('mongoose'),
+	//User = mongoose.model('User');
 
 
 
@@ -164,20 +164,20 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
                         x.push(ustodos[k]);
 
 					//O.o (ustodos[k]._id);
-					try {
-						User.findById(ustodos[k]._id, function (err, user) {
-							//done(err, user);
-							if (!err) {
-								O.o ('hbksdfsdfs:' + user);
-								O.o ('hbksdfsdfs user.username:' + user.username);
-							} else {
-								UtilErrorEmitter.emitError("fail getting user name", err);
-							}
-						});
-
-					} catch (err ) {
-						UtilErrorEmitter.emitError('error in user access', err);
-					}
+					//try {
+					//	User.findById(ustodos[k]._id, function (err, user) {
+					//		//done(err, user);
+					//		if (!err) {
+					//			O.o ('hbksdfsdfs:' + user);
+					//			O.o ('hbksdfsdfs user.username:' + user.username);
+					//		} else {
+					//			UtilErrorEmitter.emitError("fail getting user name", err);
+					//		}
+					//	});
+                    //
+					//} catch (err ) {
+					//	UtilErrorEmitter.emitError('error in user access', err);
+					//}
 
 
 
