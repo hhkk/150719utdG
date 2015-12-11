@@ -16,13 +16,13 @@ function emitError (desc, err)
 {
 
     try {
-		console.log ('error [' + desc + '] in err.message:' + err.message);
-		console.log ('error [' + desc + '] in err.stack:' + err.stack);
+		console.error ('ERROR [' + desc + '] in err.message:' + err.message);
+		console.error ('ERROR [' + desc + '] in err.stack:' + err.stack);
 		//alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
 
     } catch (e) {
-        console.log ('error [' + desc + '] in getClass:e:' + e.message);
-        console.log ('error [' + desc + '] in getClass:estack:' + e.stack);
+        console.error ('ERROR [' + desc + '] in getClass:e:' + e.message);
+        console.error ('ERROR [' + desc + '] in getClass:estack:' + e.stack);
     }
 }  //
 

@@ -775,13 +775,13 @@ function emitError (desc, err)
 {
 
     try {
-		console.log ('error [' + desc + '] in err.message:' + err.message);
-		console.log ('error [' + desc + '] in err.stack:' + err.stack);
+		console.err ('ERROR [' + desc + '] in err.message:' + err.message);
+		console.err ('ERROR [' + desc + '] in err.stack:' + err.stack);
 		//alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
 
     } catch (e) {
-        console.log ('error [' + desc + '] in getClass:e:' + e.message);
-        console.log ('error [' + desc + '] in getClass:estack:' + e.stack);
+        console.err ('ERROR [' + desc + '] in getClass:e:' + e.message);
+        console.err ('ERROR [' + desc + '] in getClass:estack:' + e.stack);
     }
 }  //
 

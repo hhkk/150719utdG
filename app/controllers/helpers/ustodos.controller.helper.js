@@ -7,6 +7,16 @@
 var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
+var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+//var	mongoose = require('mongoose');
+//var User = require ('C:/utd/150719utdG/app/models/user.server.model.js');
+//var User = mongoose.model('User');
+
+var xyhbk = 'C:/utd/150719utdG/app/models/user.server.model.js';
+var	mongoose = require('mongoose'),
+	User = mongoose.model('User');
+
+
 
 
 var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
@@ -152,6 +162,25 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
                     // convert to HREFs
                     ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text);
                         x.push(ustodos[k]);
+
+					//O.o (ustodos[k]._id);
+					try {
+						User.findById(ustodos[k]._id, function (err, user) {
+							//done(err, user);
+							if (!err) {
+								O.o ('hbksdfsdfs:' + user);
+								O.o ('hbksdfsdfs user.username:' + user.username);
+							} else {
+								UtilErrorEmitter.emitError("fail getting user name", err);
+							}
+						});
+
+					} catch (err ) {
+						UtilErrorEmitter.emitError('error in user access', err);
+					}
+
+
+
                 }
 				//else {
                     //O.o ('&&&&&&&&&&&&&&&&&&& in result loop NOT a keeper' );

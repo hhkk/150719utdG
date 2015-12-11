@@ -13,7 +13,10 @@ var require_Development = require('C:/utd/150719utdG/config/env/development.js')
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 
+
+
 //var _ = require('lodash'),
+var xyhbk2 = 'C:/utd/150719utdG/app/models/user.server.model.js';
 var	mongoose = require('mongoose'),
 	User = mongoose.model('User');
 
@@ -56,12 +59,12 @@ var callcountSaved = 0;
 // search for "$scope.processCommand($scope.enumCommands.COMMAND_WRITE"
 exports.create = function(req, res)
 {
+	O.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
 	O.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
 	// ustodo is a model object with getters and setters derived from the
 	var ustodo = new Ustodo(req.body);
 
-	O.o('11111111111111111  in ustodos.server.controller.js: create : ustodo.text:' + ustodo.text);
-	O.o('11111111111111111  in ustodos.server.controller.js: create : ustodo.html:' + ustodo.html);
+	O.o('12121212 in ustodos.server.controller.js: create :  req.user._doc.username [' + req.user._doc.username + ']  ustodo.html [' + ustodo.html + ']  ustodo.text [' + ustodo.text + ']');
 	ustodo.user = req.user;
 	try {
 	 // do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
@@ -128,6 +131,7 @@ exports.create = function(req, res)
  * Show the current Ustodo
  */
 exports.read = function(req, res) {
+	O.o(' *************** Top of [exports.read] in [ustodos.server.controller.js]');
 	//O.o ('in ustodos.server.controller.js: read');
 	res.jsonp(req.ustodo);
 };
@@ -138,6 +142,7 @@ exports.read = function(req, res) {
 // section_update_existing section_save_Existing
 exports.update = function(req, res)
 {
+	O.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
 	var ustodo = req.ustodo ;
 
 	ustodo = _.extend(ustodo , req.body);
@@ -154,6 +159,8 @@ exports.update = function(req, res)
 	ustodo.datelastmod = new Date();
 	ustodo.jsonx = JSON.stringify(ustodo); // string
 
+
+
 	O.o ('xx################# saving 1 ustodo.text:' + ustodo.text);
 	O.o ('xx################# saving 2 ustodo.html:' + ustodo.html);
 	O.o ('xx################# saving 3 ustodo.jsonx:' + ustodo.jsonx);
@@ -165,9 +172,24 @@ exports.update = function(req, res)
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			O.o('success1!!!!!!!!! ustodosaved.html [' + ustodosaved.html + ']');
-			O.o('success2!!!!!!!!! numberAffected [' + numberAffected + ']');
-			O.o('success3!!!!!!!!! req.body._id [' + req.body._id + ']');
+			O.o('ustodo saved, html [' + ustodosaved.html +
+				'] numberAffected [' + numberAffected +
+				'] req.body._id [' + req.body._id + ']'
+			);
+
+			O.o ('^^^^^^^ method 1  req.user._doc.username [' + req.user._doc.username + ']');
+
+			User.findById(req.user.id, function (err, user) {
+				//done(err, user);
+				if (!err) {
+					O.o ('hbksdfsdfs:' + user);
+					O.o ('hbksdfsdfs user.username:' + user.username);
+				} else {
+					UtilErrorEmitter.emitError("fail getting user name", err);
+				}
+			});
+
+
 			res.jsonp(ustodo);
 		}
 	});
@@ -190,6 +212,7 @@ exports.update = function(req, res)
  * Delete an Ustodo
  */
 exports.delete2 = function(req, res) {
+	O.o(' *************** Top of [exports.delete2] in [ustodos.server.controller.js]');
 	O.o('_______________________ in ustodos.server.controller.js exports.delete ');
 
 	var ustodo = req.ustodo;
@@ -214,6 +237,7 @@ exports.delete2 = function(req, res) {
 
 
 exports.ustodobulkdel = function(req, res) {
+	O.o(' *************** Top of [exports.ustodobulkdel] in [ustodos.server.controller.js]');
 	try
 	{
 		//O.o ('in 1 exports.ustodobulkdel ');
@@ -370,8 +394,8 @@ exports.ustodobulkdel = function(req, res) {
 
  */
 exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
+	O.o(' *************** Top of [exports.list2] in [ustodos.server.controller.js]');
 
-	//O.o(' *************** Top of exports.list ');
 	//O.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))
 
 	var query = req.query;
@@ -497,6 +521,7 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 /**   * Ustodo middleware  */
 exports.ustodoByID = function(req, res, next, id)
 {
+	O.o(' *************** Top of [exports.ustodoByID] in [ustodos.server.controller.js]');
 	O.o('in ustodoByID id:'+id);
 	//var s = Ustodo.findById(id);
 
@@ -514,15 +539,22 @@ exports.ustodoByID = function(req, res, next, id)
 
 /**  * Ustodo authorization middleware  */
 exports.hasAuthorization = function(req, res, next) {
-	O.o('in ustodos.server.controller.js: hasAuthorization');
+	O.o(' *************** Top of [exports.hasAuthorization] in [ustodos.server.controller.js]');
 	O.o('@@@@@@@@@@@@@@@@@ Checking auth for req.user.username [' + req.user.username + ']');
 	O.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.id [' + req.ustodo.user.id + ']');
+	O.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.username [' + req.ustodo.user.username + ']');
 
-	User.findById(req.user.id, function (err, user) {
-		//done(err, user);
-		O.o ('hbksdfsdfs:' + user);
-		O.o ('hbksdfsdfs user.username:' + user.username);
-	});
+	// also works
+	//User.findById(req.user.id, function (err, user) {
+	//	//done(err, user);
+	//	if (!err) {
+	//		O.o ('CHECKED AUTH OK:  ' +
+	//			'user [' + user +
+	//			']  user.username [' + user.username + ']' );
+	//	} else {
+	//		UtilErrorEmitter.emitError("CHECKED AUTH ", err);
+	//	}
+	//});
 
 	if (req.ustodo.user.id !== req.user.id) {
 
