@@ -8,14 +8,26 @@ var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.j
 var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+//var UserController = require('C:/utd/150719utdG/app/controllers/users/users.authorization.server.controller.js');
+
 //var	mongoose = require('mongoose');
 //var User = require ('C:/utd/150719utdG/app/models/user.server.model.js');
 //var User = mongoose.model('User');
 
 //var xyhbk = 'C:/utd/150719utdG/app/models/user.server.model.js';
-//var	mongoose = require('mongoose'),
-	//User = mongoose.model('User');
+//var	mongoose = require('mongo	ose'),
 
+/**
+ * Module dependencies.
+ */
+//var Db = require('mongodb').Db;
+//var Server = require('mongodb').Server;
+//var ObjectID = require('mongodb').ObjectID;
+//
+//var mongoose = require('mongoose'),
+//	errorHandler = require('./../errors.server.controller'),
+//	User = mongoose.model('User'),
+//	_ = require('lodash');
 
 
 
@@ -37,7 +49,7 @@ var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
             arrRegExpsToOr.push ({text:re});
             //[{text:rea}, {text:reb}]
         } catch (e) {
-
+			O.e ('error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ', e)
         }
         if (arrRegExpsToOr.length > 4) // keep only n for the mongo query, the rest we will constrain for
             break;
@@ -106,10 +118,7 @@ var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
 
 
 
-
-
-
-exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, errorHandler, res) {
+exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, errorHandler, res, User) {
 
     O.o (' in processCommandReadPortion ');
 
@@ -163,7 +172,35 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
                     ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text);
                         x.push(ustodos[k]);
 
-					//O.o (ustodos[k]._id);
+					O.o (ustodos[k]._id);
+
+
+
+
+
+
+
+					try {
+						User.findById(req.user._doc._id, function (err, user) {
+							//done(err, user);
+							if (!err) {
+								O.o ('hbksdfsdfs2:' + user);
+								O.o ('hbksdfsdfs2 user.username:' + user.username);
+							} else {
+								UtilErrorEmitter.emitError("fail getting user name2", err);
+							}
+						});
+
+					} catch (err ) {
+						UtilErrorEmitter.emitError('error in user access2', err);
+					}
+
+
+
+
+
+
+
 					//try {
 					//	User.findById(ustodos[k]._id, function (err, user) {
 					//		//done(err, user);
@@ -179,8 +216,27 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 					//	UtilErrorEmitter.emitError('error in user access', err);
 					//}
 
-
-
+					//try {
+                    //
+					//	var req = {};
+					//	var res = {};
+					//	UserController.userByID(
+					//		req,
+					//		res,
+					//		function (err, user) {
+					//			//done(err, user);
+					//			if (!err) {
+					//				O.o ('hbksdfsdfs1:' + user);
+					//				O.o ('hbksdfsdfs1 user.username:' + user.username);
+					//			} else {
+					//				UtilErrorEmitter.emitError("fail getting user name", err);
+					//			}
+					//		},
+					//		ustodos[k]._id
+					//	);
+					//} catch (err ) {
+					//	UtilErrorEmitter.emitError('error in user access2', err);
+					//}
                 }
 				//else {
                     //O.o ('&&&&&&&&&&&&&&&&&&& in result loop NOT a keeper' );

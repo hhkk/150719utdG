@@ -180,6 +180,7 @@ exports.update = function(req, res)
 			O.o ('^^^^^^^ method 1  req.user._doc.username [' + req.user._doc.username + ']');
 
 			try {
+
 				User.findById(req.user._doc._id, function (err, user) {
 					//done(err, user);
 					if (!err) {
@@ -416,7 +417,7 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	}
 	var require_ustodos_controller_helper = require('C:/utd/150719utdG/app/controllers/helpers/ustodos.controller.helper.js');
 	//O.o('in ustodos.server.controller.js: list, query.querystring: ' + query.q);
-	require_ustodos_controller_helper.processCommandReadPortion(Ustodo, query.q.trim(), req, errorHandler, res);
+	require_ustodos_controller_helper.processCommandReadPortion(Ustodo, query.q.trim(), req, errorHandler, res, User);
 
 	//O.o ('query.querystring post trim [' + query.querystring+ ']');
 	//54b143dde898903429ce32b1
