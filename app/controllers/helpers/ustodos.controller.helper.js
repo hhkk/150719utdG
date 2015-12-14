@@ -9,7 +9,7 @@ var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 //var UserController = require('C:/utd/150719utdG/app/controllers/users/users.authorization.server.controller.js');
-
+var async = require('async');
 //var	mongoose = require('mongoose');
 //var User = require ('C:/utd/150719utdG/app/models/user.server.model.js');
 //var User = mongoose.model('User');
@@ -133,123 +133,180 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 
     var hklimit = 50; // 50 100 200 500 1000
     var countResult = 0;
-    var x = [];
+    var arrUstodoPassedAllFilters = [];
 
     //O.o('step: querymongo:' + querymongo) ;
     //Ustodo.find().exec(function(err, ustodos) {
     //var sClass = UtilClass.getClass('Ustodo', Ustodo);
     //O.o ('sClassHK ustodo:' + sClass);
 	O.o ('xpre query querymongo [' + querymongo + ']');
-    Ustodo.find(querymongo).sort('-datelastmod').limit(hklimit).populate('user', 'displayName').exec(function(err, ustodos) {
-        //Ustodo.find(querymongo).populate('user', 'displayName').exec(function(err, ustodos) {
-        if (err) {
-            console.log ('!!!!!!!! err.toString():' + err.toString());
-            return res.status(400).send({
-                  message: errorHandler.getErrorMessage(err)
+    Ustodo.find(querymongo).sort('-datelastmod').limit(hklimit).populate('user', 'displayName').exec (
+		function(err, ustodos)
+		{
+			//Ustodo.find(querymongo).populate('user', 'displayName').exec(function(err, ustodos) {
+			if (err)
+			{
+				console.log ('!!!!!!!! err.toString():' + err.toString());
+				return res.status(400).send({
+					  message: errorHandler.getErrorMessage(err)
 
-            });
-        } else {
-            //if (query.querystring === '')
-            //var x = ustodos.slice[0,20]
-            // console.log ('&&&&&&&&&&&&&&&&&&& pre result loop');
-            for (var k = 0; k < (ustodos.length) && x.length < hklimit; k++)
-            {
-                //console.log ('&&&&&&&&&&&&&&&&&&& in result loop');
-                countResult = countResult + 1;
-                //ustodos[k].text = 'svr2,' + ustodos[k].text;
-                var tt = UtilHrefThisText.hrefThisText(ustodos[k].text);
-                var keeper = true;
-                for (var i = 0; i < queryTokens.length; i++) {
-                    //console.log ('&&&&&&&&&&&&&&&&&&& in result loop tt [' + tt + '] queryTokens[i] [' + queryTokens[i] + ']');
-                    if (tt.toLowerCase().indexOf(queryTokens[i]) < 0) {
-                        keeper = false;
-                        break;
-                    }
-                }
-                if (keeper) {
-                    //O.o ('&&&&&&&&&&&&&&&&&&& in result loop a keeper' );
-                    // convert to HREFs
-                    ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text);
-                        x.push(ustodos[k]);
-
-					O.o (ustodos[k]._id);
+				});
+			}
+			else // no error on query
+			{
+				//if (query.querystring === '')
+				//var arrUstodoPassedAllFilters = ustodos.slice[0,20]
+				// console.log ('&&&&&&&&&&&&&&&&&&& pre result loop');
 
 
+				// for each recard from the DB
+				for (var k = 0; k < (ustodos.length) && arrUstodoPassedAllFilters.length < hklimit; k++)
+				{
+					//console.log ('&&&&&&&&&&&&&&&&&&& in result loop');
+					countResult = countResult + 1;
+					//ustodos[k].text = 'svr2,' + ustodos[k].text;
+					var tt = UtilHrefThisText.hrefThisText(ustodos[k].text);
+					var keeper = true;
+
+					// apply second filter - first was the pull by mongo - now check that list against user inputs not in the query
+					for (var i = 0; i < queryTokens.length; i++) {
+						//console.log ('&&&&&&&&&&&&&&&&&&& in result loop tt [' + tt + '] queryTokens[i] [' + queryTokens[i] + ']');
+						if (tt.toLowerCase().indexOf(queryTokens[i]) < 0) {
+							keeper = false;
+							break;
+						}
+					}
+
+					if (keeper) {
+						//O.o ('&&&&&&&&&&&&&&&&&&& in result loop a keeper' );
+						// convert to HREFs
+						ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text);
+
+						arrUstodoPassedAllFilters.push(ustodos[k]);
+						//O.o (ustodos[k]._id);
 
 
 
 
+						//try {
+						//	User.findById(ustodos[k]._id, function (err, user) {
+						//		//done(err, user);
+						//		if (!err) {
+						//			O.o ('hbksdfsdfs:' + user);
+						//			O.o ('hbksdfsdfs user.username:' + user.username);
+						//		} else {
+						//			UtilErrorEmitter.emitError("fail getting user name", err);
+						//		}
+						//	});
+						//
+						//} catch (err ) {
+						//	UtilErrorEmitter.emitError('error in user access', err);
+						//}
 
+						//try {
+						//
+						//	var req = {};
+						//	var res = {};
+						//	UserController.userByID(
+						//		req,
+						//		res,
+						//		function (err, user) {
+						//			//done(err, user);
+						//			if (!err) {
+						//				O.o ('hbksdfsdfs1:' + user);
+						//				O.o ('hbksdfsdfs1 user.username:' + user.username);
+						//			} else {
+						//				UtilErrorEmitter.emitError("fail getting user name", err);
+						//			}
+						//		},
+						//		ustodos[k]._id
+						//	);
+						//} catch (err ) {
+						//	UtilErrorEmitter.emitError('error in user access2', err);
+						//}
+					}
+					//else {
+						//O.o ('&&&&&&&&&&&&&&&&&&& in result loop NOT a keeper' );
+					//}
+				} // for loop done- now have array of ustodos to pass back to browser client
+
+
+				// just need to fill in names (not user ids)
+				var getUserName = function(ustodo, callback) {
+					O.o ('made it to callbackFromGetUserNames');
+					// Call an asynchronous function (often a save() to MongoDB)
 					try {
-						User.findById(req.user._doc._id, function (err, user) {
+
+						//O.o ('called 2nd param function:' + ustodo._doc._id)
+						User.findById(ustodo.user._id, function (err, user) {
 							//done(err, user);
 							if (!err) {
-								O.o ('hbksdfsdfs2:' + user);
-								O.o ('hbksdfsdfs2 user.username:' + user.username);
+								//O.o ('hbksdfsdfs:' + user);
+								//O.o ('user._id:' + user._id);
+								O.o ('user._doc._id:' + user._doc._id);
+								ustodo.username = user.username;
+								callback();
+								//if (user !== null)
+								//O.o ('hbksdfsdfs user.username:' + user.username);
 							} else {
-								UtilErrorEmitter.emitError("fail getting user name2", err);
+								O.o('erraffffffffff');
+								UtilErrorEmitter.emitError("fail getting user name", err);
+								callback();
 							}
 						});
 
 					} catch (err ) {
-						UtilErrorEmitter.emitError('error in user access2', err);
+						O.o('erraffffffffff');
+						UtilErrorEmitter.emitError('error in user access', err);
+						callback();
 					}
+				};
+
+				//var arrUstodoPassedAllFilters2 = [];
+				//arrUstodoPassedAllFilters2.push (arrUstodoPassedAllFilters[0]);
+
+				if (true)
+				{
+					try
+					{
+						async.each(arrUstodoPassedAllFilters,
+							// 2nd parameter is the function that each item is passed into
+							function(ustodo, callback){
+								// Call a
+								// n asynchronous function (often a save() to MongoDB)
+								console.log ('called 2nd param function')
+								getUserName(ustodo,
+									// Async call is done, alert via callback
+									callback
+								);
+							},
+							// 3rd parameter is the function call when everything is done
+							function(err){
+								// All tasks are done now
+								// all is done
+								if (!err)     {
+									res.jsonp(arrUstodoPassedAllFilters);
+									console.log("Everything is done.");
+								}
+								else{
+									res.send("ERRORHK!!!!!!!!!!!");
+									//res.jsonp(arrUstodoPassedAllFilters);
+								}
+							}
+						);
+					} catch (e) {
+						O.e ('era in asyncWrapperForTitle_levelOne async', e);
+					}
+				} else {
+					res.jsonp(arrUstodoPassedAllFilters);
+				}
+				//console.log('pushed:'+ustodos[k]._doc.datelastmod + "." + +ustodos[k]._doc.datelastmod);
 
 
-
-
-
-
-
-					//try {
-					//	User.findById(ustodos[k]._id, function (err, user) {
-					//		//done(err, user);
-					//		if (!err) {
-					//			O.o ('hbksdfsdfs:' + user);
-					//			O.o ('hbksdfsdfs user.username:' + user.username);
-					//		} else {
-					//			UtilErrorEmitter.emitError("fail getting user name", err);
-					//		}
-					//	});
-                    //
-					//} catch (err ) {
-					//	UtilErrorEmitter.emitError('error in user access', err);
-					//}
-
-					//try {
-                    //
-					//	var req = {};
-					//	var res = {};
-					//	UserController.userByID(
-					//		req,
-					//		res,
-					//		function (err, user) {
-					//			//done(err, user);
-					//			if (!err) {
-					//				O.o ('hbksdfsdfs1:' + user);
-					//				O.o ('hbksdfsdfs1 user.username:' + user.username);
-					//			} else {
-					//				UtilErrorEmitter.emitError("fail getting user name", err);
-					//			}
-					//		},
-					//		ustodos[k]._id
-					//	);
-					//} catch (err ) {
-					//	UtilErrorEmitter.emitError('error in user access2', err);
-					//}
-                }
-				//else {
-                    //O.o ('&&&&&&&&&&&&&&&&&&& in result loop NOT a keeper' );
-                //}
-            }
-            //console.log('pushed:'+ustodos[k]._doc.datelastmod + "." + +ustodos[k]._doc.datelastmod);
-            O.o ('for query x [' + req.query.q + '] countResultx [' + countResult + '] req._passport.session.user id [' + req._passport.session.user + ']');
-            res.jsonp(x);
-
-            //res.jsonp(ustodos);
-            //else
-            //res.jsonp(ustodos.slice[0,20]);
-        }
+				//res.jsonp(ustodos);
+				//else
+				//res.jsonp(ustodos.slice[0,20]);
+			}
     });
 
 };

@@ -3396,8 +3396,6 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//alert ('in callbackFromQuery post get callback2');
 				};  ///callbackfromquery
 
-
-
 				/**
 				 * this call is the first point after any specific input editor
 				 * @param scopeEnumCommand
@@ -3420,7 +3418,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 					//alert (' =========================== in processcommand callerId [' +
 					//callerId + '] xValue' + '[' + xValue + ']' );
-					try {
+					try
+					{
 						//$scope.searchedForAsLink = 'http://ibm.com/test';
 						//O.o ('============================= in xValue [' + xValue + ']');
 						//O.o ('============================= in html2text [' + UtilHrefThisText.html2text(xValue)+ ']');
@@ -3486,48 +3485,51 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							//O.o ('5 $$$$$$$$$$$$$$$$$$ save callerId 5 [' + callerId + '] commandRemoved_toSearchFor_trimmed [' + commandRemoved_toSearchFor_trimmed + ']');
 							//alert('pre ustodo save ');
 							// hbkk
-							ustodo.$save (
-								function(response) // line 50 of 'ustodos.server.controller.js' exports.create
+							ustodo.$save
+							(
+								function(response) // line 60 of 'ustodos.server.controller.js' exports.create
 								{
-								//alert ('successful save');
-								ustodosQueryCommon_wrapper('*', callbackFromQuery);
+									//alert ('successful save');
+									ustodosQueryCommon_wrapper('*', callbackFromQuery);
 
 
-								// section_query // section_read
-								//$location.path('ustodos/' + response._id);
-								// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=QUERY
-								//.----------------. .----------------. .----------------. .----------------. .----------------.
-								//| .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
-								//| |    ___       | | | _____  _____ | | |  _________   | | |  _______     | | |  ____  ____  | |
-								//| |  .'   '.     | | ||_   _||_   _|| | | |_   ___  |  | | | |_   __ \    | | | |_  _||_  _| | |
-								//| | /  .-.  \    | | |  | |    | |  | | |   | |_  \_|  | | |   | |__) |   | | |   \ \  / /   | |
-								//| | | |   | |    | | |  | '    ' |  | | |   |  _|  _   | | |   |  __ /    | | |    \ \/ /    | |
-								//| | \  `-'  \_   | | |   \ `--' /   | | |  _| |___/ |  | | |  _| |  \ \_  | | |    _|  |_    | |
-								//| |  `.___.\__|  | | |    `.__.'    | | | |_________|  | | | |____| |___| | | |   |______|   | |
-								//| |              | | |              | | |              | | |              | | |              | |
-								//| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
-								//'----------------' '----------------' '----------------' '----------------' '----------------'
+									// section_query // section_read
+									//$location.path('ustodos/' + response._id);
+									// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=QUERY
+									//.----------------. .----------------. .----------------. .----------------. .----------------.
+									//| .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
+									//| |    ___       | | | _____  _____ | | |  _________   | | |  _______     | | |  ____  ____  | |
+									//| |  .'   '.     | | ||_   _||_   _|| | | |_   ___  |  | | | |_   __ \    | | | |_  _||_  _| | |
+									//| | /  .-.  \    | | |  | |    | |  | | |   | |_  \_|  | | |   | |__) |   | | |   \ \  / /   | |
+									//| | | |   | |    | | |  | '    ' |  | | |   |  _|  _   | | |   |  __ /    | | |    \ \/ /    | |
+									//| | \  `-'  \_   | | |   \ `--' /   | | |  _| |___/ |  | | |  _| |  \ \_  | | |    _|  |_    | |
+									//| |  `.___.\__|  | | |    `.__.'    | | | |_________|  | | | |____| |___| | | |   |______|   | |
+									//| |              | | |              | | |              | | |              | | |              | |
+									//| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
+									//'----------------' '----------------' '----------------' '----------------' '----------------'
 
-								//alert ('in write query [' + commandRemoved_toSearchFor_trimmed + ']');
-								//O.o ('=============== in section QUERY1');
-								//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_Write', {q: '*'}, callbackFromQuery);
+									//alert ('in write query [' + commandRemoved_toSearchFor_trimmed + ']');
+									//O.o ('=============== in section QUERY1');
+									//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_Write', {q: '*'}, callbackFromQuery);
 
-								// hbk 1505
-								//$location.search('q', commandRemoved_toSearchFor_trimmed);       // yoo bar foo bar baz
-								//UtilNLB_bgFade.NLBfadeBg('idInput0TypeText','green', '#FFFFFF','1500');
-								// pairs with ustodos.server.controller.js line 85 return res.status(400)
-								// return res.status(400).send
-								// hbkk error reply
-							}, function(errorResponse) {
-								alert('failed to save record:' + errorResponse.data.message);
-								$scope.error = errorResponse.data.message;
-							});
-							//alert  ('will search after write wasAwrite [' + wasAwrite +
+									// hbk 1505
+									//$location.search('q', commandRemoved_toSearchFor_trimmed);       // yoo bar foo bar baz
+									//UtilNLB_bgFade.NLBfadeBg('idInput0TypeText','green', '#FFFFFF','1500');
+									// pairs with ustodos.server.controller.js line 85 return res.status(400)
+									// return res.status(400).send
+									// hbkk error reply
+								},
+								function(errorResponse) {
+									alert('failed to save record:' + errorResponse.data.message);
+									$scope.error = errorResponse.data.message;
+								}
+							);
+								//alert  ('will search after write wasAwrite [' + wasAwrite +
 							//'] for commandRemoved_toSearchFor_trimmed:' + commandRemoved_toSearchFor_trimmed);
 
 							//xTextCommandRemoved = commandRemoved_toSearchFor_trimmed;
 						} // if was write
-						else
+						else //not write command
 						{
 
 							//alert ('post write - search for 2');

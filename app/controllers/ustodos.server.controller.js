@@ -55,7 +55,7 @@ var callcountSaved = 0;
  * @param req
  * @param res - into the response we push a json data structure of an ustodo which is a model
  */
-// called from >>>singlepage-ustodos.client.controller.js>>> line 3484 (was 2203)
+// called from >>>singlepage-ustodos.client.controller.js>>> line 3490 (was 2203)
 // search for "$scope.processCommand($scope.enumCommands.COMMAND_WRITE"
 exports.create = function(req, res)
 {
@@ -195,7 +195,7 @@ exports.update = function(req, res)
 				UtilErrorEmitter.emitError('error in user access', err);
 			}
 
-
+            //
 			res.jsonp(ustodo);
 		}
 	});
@@ -394,10 +394,12 @@ exports.ustodobulkdel = function(req, res) {
 
 /**
  * List of Ustodos
+ *
+ * used by
  * singlepage-ustodos.client.controller.js
- * used by $scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
-                return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
-
+ * $scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
+ * line 2983
+ * return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
  */
 exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
 	O.o(' *************** Top of [exports.list2] in [ustodos.server.controller.js]');
@@ -519,8 +521,7 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//else{
 	//    O.o ('not endswith w');
 	//    require_ustodos_controller_helper.processCommandReadPortion(Ustodo, commandTrimmed, req, errorHandler, res);
-//    }
-
+	//    }
 
 };
 
