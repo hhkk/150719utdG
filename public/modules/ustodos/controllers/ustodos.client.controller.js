@@ -3083,7 +3083,7 @@ angular.module('ustodos').controller('UstodosController',
             };
 
             $scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
-                // corresponds to exports.list2 in ustodos.server.controller.js
+                // 1 corresponds to exports.list2 in ustodos.server.controller.js
                 // see also app.route('/ustodos').get in ustodos.server.routes.js
                 //alert ('caller:' + caller);
                 return Ustodos.query(jsonquery, callback);
@@ -3099,7 +3099,7 @@ angular.module('ustodos').controller('UstodosController',
                 // seems to work but returns all? $scope.ustodos = Ustodos. query({name: 'ggggg'});
                 //$scope.ustodos = Ustodos. query({name: 'ggggg'}); // Works!
 
-                // corresponds to exports.list2 in ustodos.server.controller.js
+                // 2 corresponds to exports.list2 in ustodos.server.controller.js
                 $scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackhkhk_find);
 
 

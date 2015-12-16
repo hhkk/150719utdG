@@ -312,7 +312,7 @@
 									 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
 							 >
 
-								<tr  ng-repeat='ustodo in ustodosFiltered ' ng-class-odd="'odd'" ng-class-even="'even'"
+								<tr  ng-repeat='ustodo in ustodosFiltered' ng-class-odd="'odd'" ng-class-even="'even'"
 									 ng-mouseover="this.eventMouseoverRow2($index)"
 								>
 
@@ -375,15 +375,20 @@
 
 
 									<!-- 4.5 USER NAME-->
-									<td style="width:3%">
-										&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.displayName"
-											  ></span>
+									<td style="font-size:12px; width:3%;overflow: hidden">
+										&nbsp;a<span xxclass="per-row-count" data-ng-bind="ustodo.user.username"
+											  ></span>b
+									</td>
+									<!-- 4.5 USER NAME-->
+									<td style="font-size:12px; width:3%;overflow: hidden">
+										&nbsp;c<span xxclass="per-row-count" data-ng-bind="ustodo.user.displayName"
+											  ></span>d
 									</td>
 									<!--<td>{{ ustodo.text}}</td>f-->
 
 
 									<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
-									<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
+										<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
 									<!--</td>-->
 
 

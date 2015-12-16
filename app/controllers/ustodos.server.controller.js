@@ -1,4 +1,5 @@
 'use strict';
+'use strict';
 
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
@@ -178,22 +179,6 @@ exports.update = function(req, res)
 			);
 
 			O.o ('^^^^^^^ method 1  req.user._doc.username [' + req.user._doc.username + ']');
-
-			try {
-
-				User.findById(req.user._doc._id, function (err, user) {
-					//done(err, user);
-					if (!err) {
-						O.o ('hbksdfsdfs:' + user);
-						O.o ('hbksdfsdfs user.username:' + user.username);
-					} else {
-						UtilErrorEmitter.emitError("fail getting user name", err);
-					}
-				});
-
-			} catch (err ) {
-				UtilErrorEmitter.emitError('error in user access', err);
-			}
 
             //
 			res.jsonp(ustodo);
@@ -403,7 +388,6 @@ exports.ustodobulkdel = function(req, res) {
  */
 exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
 	O.o(' *************** Top of [exports.list2] in [ustodos.server.controller.js]');
-
 	//O.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))
 
 	var query = req.query;
@@ -534,11 +518,13 @@ exports.ustodoByID = function(req, res, next, id)
 
 	// ORIGINAL A/B SPLIT
 	// A
-	Ustodo.findById(id).populate('user', 'displayName').exec(function(err, ustodo) {
+	Ustodo.findById(id).populate('user', 'username').exec(function(err, ustodo) {
 		// B
 		// Ustodo.findOne({name:/ia/}).populate('user', 'displayName').exec(function(err, ustodo) {
-		if (err) return next(err);
-		if (! ustodo) return next(new Error('Failed to load Ustodo ' + id));
+		if (err)
+			return next(err);
+		if (! ustodo)
+			return next(new Error('Failed to load Ustodo ' + id));
 		req.ustodo = ustodo ;
 		next();
 	});
@@ -565,7 +551,7 @@ exports.hasAuthorization = function(req, res, next) {
 
 	if (req.ustodo.user.id !== req.user.id) {
 
-		O.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).');
+		O.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).  req.ustodo.user.id  [' + req.ustodo.user.id  + ']  req.user.id [' + req.user.id + ']');
 		return res.status(403).send('User is not authorized');
 	}
 	next();

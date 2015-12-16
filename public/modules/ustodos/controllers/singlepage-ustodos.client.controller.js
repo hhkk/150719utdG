@@ -2977,7 +2977,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//};
 				//
 				$scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
-					// corresponds to exports.list2 in ustodos.server.controller.js
+					// 1 corresponds to exports.list2 in ustodos.server.controller.js
 					// see also app.route('/ustodos').get in ustodos.server.routes.js
 					//alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller);
 					return Ustodos.query(jsonquery, callback); // Ustodosis a "resource"  // maps to a get? in ustodos.server.routes.js? is that a RESOURCE behavior?
@@ -2994,11 +2994,11 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					// seems to work but returns all? $scope.ustodos = Ustodos. query({name: 'ggggg'});
 					//$scope.ustodos = Ustodos. query({name: 'ggggg'}); // Works!
 
-					// corresponds to exports.list2 in ustodos.server.controller.js
+					// 2 corresponds to exports.list2 in ustodos.server.controller.js
 					//$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackhkhk_find);
 					// http://docs.mongodb.org/manual/reference/operator/query/and/
 					// http://docs.mongodb.org/manual/reference/operator/query/not/
-					alert ('in this funny query hbkx pre len:' + $scope.ustodos.length);
+					alert ('1 in this funny query hbkx pre len:' + $scope.ustodos.length);
 					//see also
 					//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
 					//	{q: xTextCommandRemoved.trim()
@@ -3007,7 +3007,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {$and: [{text: 'x'}, {$not:{text: 'y'}}]}, callbackhkhk_find);
 					$scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackFromQuery);
 
-					alert ('in this funny query hbkx pos len:' + $scope.ustodos.length);
+					alert ('2 in this funny query hbkx pos len:' + $scope.ustodos.length);
 
 
 					//alert ('____ $scope.ustodos.length:' + $scope.ustodos.length);
@@ -3313,7 +3313,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				};
 
 				//alert ('setting setUstodosFiltered');
-				$scope.setUstodosFiltered = function(caller, ustodosUnfiltered) {
+				$scope.setUstodosFiltered = function(caller, ustodosUnfiltered)
+				{
 					//alert('in setUstodosFiltered caller [' + caller + '] dirtying $scope.ustodosFiltered ustodosUnfiltered.length' + ustodosUnfiltered.length);
 					$scope.ustodosFiltered = ustodosUnfiltered;
 					document.ustodosFilterCacheDirty = true;

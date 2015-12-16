@@ -159,9 +159,11 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 				// console.log ('&&&&&&&&&&&&&&&&&&& pre result loop');
 
 
+				var mapUserIdToUserNameStr = {};
 				// for each recard from the DB
 				for (var k = 0; k < (ustodos.length) && arrUstodoPassedAllFilters.length < hklimit; k++)
 				{
+					mapUserIdToUserNameStr[ustodos[k].user._id] = null;
 					//console.log ('&&&&&&&&&&&&&&&&&&& in result loop');
 					countResult = countResult + 1;
 					//ustodos[k].text = 'svr2,' + ustodos[k].text;
@@ -231,21 +233,32 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 				} // for loop done- now have array of ustodos to pass back to browser client
 
 
+
+				// get the map as an array of its keys just for the asynch each purpose
+				var arrUserIds = [];
+				for (var userId in mapUserIdToUserNameStr) {
+					if (mapUserIdToUserNameStr.hasOwnProperty(userId)) {
+						arrUserIds.push (userId);
+					}
+				}
+
 				// just need to fill in names (not user ids)
-				var getUserName = function(ustodo, callback) {
+				var getUserNameFromId = function(userId, callback) {
 					O.o ('made it to callbackFromGetUserNames');
 					// Call an asynchronous function (often a save() to MongoDB)
-					try {
+					try
+					{
 
 						//O.o ('called 2nd param function:' + ustodo._doc._id)
-						User.findById(ustodo.user._id, function (err, user) {
+						User.findById(userId, function (err, user) {
 							//done(err, user);
 							if (!err) {
+
 								//O.o ('hbksdfsdfs:' + user);
 								//O.o ('user._id:' + user._id);
 								O.o ('user._doc._id:' + user._doc._id);
-								ustodo.username = user.username;
-								callback();
+								//ustodo.username = user.username;
+								callback(user._doc.username);
 								//if (user !== null)
 								//O.o ('hbksdfsdfs user.username:' + user.username);
 							} else {
@@ -267,17 +280,22 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 
 				if (true)
 				{
+
 					try
 					{
-						async.each(arrUstodoPassedAllFilters,
+						var mapUserIdToUserNameStr2 = {};
+						async.each(arrUserIds,
 							// 2nd parameter is the function that each item is passed into
-							function(ustodo, callback){
+							function(userId, callback){
 								// Call a
 								// n asynchronous function (often a save() to MongoDB)
-								console.log ('called 2nd param function')
-								getUserName(ustodo,
-									// Async call is done, alert via callback
-									callback
+								//console.log ('called 2nd param function')
+								getUserNameFromId(
+									userId,
+									function(userName) {
+										mapUserIdToUserNameStr2[userId] = 'xx' + userName;
+										callback();
+									}
 								);
 							},
 							// 3rd parameter is the function call when everything is done
@@ -285,6 +303,10 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 								// All tasks are done now
 								// all is done
 								if (!err)     {
+									for (var iUsToDo in arrUstodoPassedAllFilters) {
+										//arrUstodoPassedAllFilters[iUsToDo].username = mapUserIdToUserNameStr2[userId];
+										arrUstodoPassedAllFilters[iUsToDo].user.username = mapUserIdToUserNameStr2[userId];
+									}
 									res.jsonp(arrUstodoPassedAllFilters);
 									console.log("Everything is done.");
 								}
