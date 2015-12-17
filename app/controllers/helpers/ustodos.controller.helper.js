@@ -140,7 +140,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
     //var sClass = UtilClass.getClass('Ustodo', Ustodo);
     //O.o ('sClassHK ustodo:' + sClass);
 	O.o ('xpre query querymongo [' + querymongo + ']');
-    Ustodo.find(querymongo).sort('-datelastmod').limit(hklimit).populate('user', 'displayName').exec (
+    Ustodo.find(querymongo).sort('-datelastmod').limit(hklimit).populate('user', 'username displayName _id').exec (
 		function(err, ustodos)
 		{
 			//Ustodo.find(querymongo).populate('user', 'displayName').exec(function(err, ustodos) {
@@ -234,92 +234,93 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 
 
 
-				// get the map as an array of its keys just for the asynch each purpose
-				var arrUserIds = [];
-				for (var userId in mapUserIdToUserNameStr) {
-					if (mapUserIdToUserNameStr.hasOwnProperty(userId)) {
-						arrUserIds.push (userId);
-					}
-				}
+				//// get the map as an array of its keys just for the asynch each purpose
+				//var arr = [];
+				//for (var u in map) {
+				//	if (map.hasOwnProperty(userId)) {
+				//		arrUserIds.push (userId);
+				//	}
+				//}
 
-				// just need to fill in names (not user ids)
-				var getUserNameFromId = function(userId, callback) {
-					O.o ('made it to callbackFromGetUserNames');
-					// Call an asynchronous function (often a save() to MongoDB)
-					try
-					{
-
-						//O.o ('called 2nd param function:' + ustodo._doc._id)
-						User.findById(userId, function (err, user) {
-							//done(err, user);
-							if (!err) {
-
-								//O.o ('hbksdfsdfs:' + user);
-								//O.o ('user._id:' + user._id);
-								O.o ('user._doc._id:' + user._doc._id);
-								//ustodo.username = user.username;
-								callback(user._doc.username);
-								//if (user !== null)
-								//O.o ('hbksdfsdfs user.username:' + user.username);
-							} else {
-								O.o('erraffffffffff');
-								UtilErrorEmitter.emitError("fail getting user name", err);
-								callback();
-							}
-						});
-
-					} catch (err ) {
-						O.o('erraffffffffff');
-						UtilErrorEmitter.emitError('error in user access', err);
-						callback();
-					}
-				};
+				//// just need to fill in names (not user ids)
+				//var getUserNameFromId = function(userId, callback) {
+				//	O.o ('made it to callbackFromGetUserNames');
+				//	// Call an asynchronous function (often a save() to MongoDB)
+				//	try
+				//	{
+                //
+				//		//O.o ('called 2nd param function:' + ustodo._doc._id)
+				//		User.findById(userId, function (err, user) {
+				//			//done(err, user);
+				//			if (!err) {
+                //
+				//				//O.o ('hbksdfsdfs:' + user);
+				//				//O.o ('user._id:' + user._id);
+				//				O.o ('user._doc._id:' + user._doc._id);
+				//				//ustodo.username = user.username;
+				//				callback(user._doc.username);
+				//				//if (user !== null)
+				//				//O.o ('hbksdfsdfs user.username:' + user.username);
+				//			} else {
+				//				O.o('erraffffffffff');
+				//				UtilErrorEmitter.emitError("fail getting user name", err);
+				//				callback();
+				//			}
+				//		});
+                //
+				//	} catch (err ) {
+				//		O.o('erraffffffffff');
+				//		UtilErrorEmitter.emitError('error in user access', err);
+				//		callback();
+				//	}
+				//};
 
 				//var arrUstodoPassedAllFilters2 = [];
 				//arrUstodoPassedAllFilters2.push (arrUstodoPassedAllFilters[0]);
 
-				if (false)
-				{
-
-					try
-					{
-						var mapUserIdToUserNameStr2 = {};
-						async.each(arrUserIds,
-							// 2nd parameter is the function that each item is passed into
-							function(userId, callback){
-								// Call a
-								// n asynchronous function (often a save() to MongoDB)
-								//console.log ('called 2nd param function')
-								getUserNameFromId(
-									userId,
-									function(userName) {
-										mapUserIdToUserNameStr2[userId] = 'xx' + userName;
-										callback();
-									}
-								);
-							},
-							// 3rd parameter is the function call when everything is done
-							function(err){
-								// All tasks are done now
-								// all is done
-								if (!err)     {
-									for (var iUsToDo in arrUstodoPassedAllFilters) {
-										//arrUstodoPassedAllFilters[iUsToDo].username = mapUserIdToUserNameStr2[userId];
-										arrUstodoPassedAllFilters[iUsToDo].user.username = 'un:' + mapUserIdToUserNameStr2[userId];
-									}
-									res.jsonp(arrUstodoPassedAllFilters);
-									console.log("Everything is done.");
-								}
-								else{
-									res.send("ERRORHK!!!!!!!!!!!");
-									//res.jsonp(arrUstodoPassedAllFilters);
-								}
-							}
-						);
-					} catch (e) {
-						O.e ('era in asyncWrapperForTitle_levelOne async', e);
-					}
-				} else {
+				//if (false)
+				//{
+                //
+				//	try
+				//	{
+				//		var mapUserIdToUserNameStr2 = {};
+				//		async.each(arrUserIds,
+				//			// 2nd parameter is the function that each item is passed into
+				//			function(userId, callback){
+				//				// Call a
+				//				// n asynchronous function (often a save() to MongoDB)
+				//				//console.log ('called 2nd param function')
+				//				getUserNameFromId(
+				//					userId,
+				//					function(userName) {
+				//						mapUserIdToUserNameStr2[userId] = 'xx' + userName;
+				//						callback();
+				//					}
+				//				);
+				//			},
+				//			// 3rd parameter is the function call when everything is done
+				//			function(err){
+				//				// All tasks are done now
+				//				// all is done
+				//				if (!err)     {
+				//					for (var iUsToDo in arrUstodoPassedAllFilters) {
+				//						//arrUstodoPassedAllFilters[iUsToDo].username = mapUserIdToUserNameStr2[userId];
+				//						arrUstodoPassedAllFilters[iUsToDo].user.username = 'un:' + mapUserIdToUserNameStr2[userId];
+				//					}
+				//					res.jsonp(arrUstodoPassedAllFilters);
+				//					console.log("Everything is done.");
+				//				}
+				//				else{
+				//					res.send("ERRORHK!!!!!!!!!!!");
+				//					//res.jsonp(arrUstodoPassedAllFilters);
+				//				}
+				//			}
+				//		);
+				//	} catch (e) {
+				//		O.e ('era in asyncWrapperForTitle_levelOne async', e);
+				//	}
+				//} else
+			    {
 					res.jsonp(arrUstodoPassedAllFilters); // with no enrichment of user/id/name
 				}
 				//console.log('pushed:'+ustodos[k]._doc.datelastmod + "." + +ustodos[k]._doc.datelastmod);
