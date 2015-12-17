@@ -278,7 +278,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 				//var arrUstodoPassedAllFilters2 = [];
 				//arrUstodoPassedAllFilters2.push (arrUstodoPassedAllFilters[0]);
 
-				if (true)
+				if (false)
 				{
 
 					try
@@ -305,7 +305,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 								if (!err)     {
 									for (var iUsToDo in arrUstodoPassedAllFilters) {
 										//arrUstodoPassedAllFilters[iUsToDo].username = mapUserIdToUserNameStr2[userId];
-										arrUstodoPassedAllFilters[iUsToDo].user.username = mapUserIdToUserNameStr2[userId];
+										arrUstodoPassedAllFilters[iUsToDo].user.username = 'un:' + mapUserIdToUserNameStr2[userId];
 									}
 									res.jsonp(arrUstodoPassedAllFilters);
 									console.log("Everything is done.");
@@ -320,7 +320,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 						O.e ('era in asyncWrapperForTitle_levelOne async', e);
 					}
 				} else {
-					res.jsonp(arrUstodoPassedAllFilters);
+					res.jsonp(arrUstodoPassedAllFilters); // with no enrichment of user/id/name
 				}
 				//console.log('pushed:'+ustodos[k]._doc.datelastmod + "." + +ustodos[k]._doc.datelastmod);
 
