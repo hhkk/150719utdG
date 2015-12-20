@@ -14,6 +14,15 @@ http://jsfiddle.net/tqw6w/
 			<a href="{{feed}}" title="view at {{feed | hostName}}" data-toggle="tooltip">{{feed | strip_http}}</a>
 		</div>
 	</li>
+
+<div class="changeable" contenteditable="true" style="background-color:red"> 1111 Click this div to edit it </div>
+<br>
+<div class="changeable" contenteditable="true" style="background-color:blue"> 222222222222222  </div>
+<br>
+<div class="changeable" contenteditable="true" style="background-color:limegreen"> 33333333333 </div>
+
+
+
 </body>
 
 <link rel="stylesheet" href="http://www.wingo.com/bootstrap/css/bootstrap.css" type="text/css">
@@ -57,10 +66,34 @@ http://jsfiddle.net/tqw6w/
 
 				$scope.layoutDone = function() {
 					//$('a[data-toggle="tooltip"]').tooltip(); // NOT CORRECT!
-					alert('in done');
+					//alert('in done');
 					$timeout(function() { $('a[data-toggle="tooltip"]').tooltip(); }, 0); // wait...
 					var stopMusicExt = document.getElementsByClassName("hkhk").length;
 					stopMusicExt = document.getElementsByClassName("hkhk").length;
+
+
+
+					var contents = $('.changeable').html();
+					$('.changeable').blur(function() {
+						alert('blur.');
+						if (contents != $(this).html()){
+							alert('Handler for .change() called.');
+							contents = $(this).html();
+						}
+					});
+					//$('.editable').bind('focus', function() {
+					$('.changeable').bind('focus', function() {
+						alert('focus.');
+						var that = $(this);
+						//defaultTxt = that.data('default');
+						that.html('');
+					});
+
+
+
+
+
+
 					alert('in done2 ' + stopMusicExt);
 				}
 			})
