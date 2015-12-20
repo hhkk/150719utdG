@@ -1,0 +1,44 @@
+
+<!--
+http://localhost:3000/hk/htmltest/151218bContentEditableBlurEvent/test.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+</head>
+<body>
+<div contenteditable><em>Edit me</em></div>
+<br>
+<div contenteditable><em>Edit me</em></div>
+<script type="text/javascript">
+
+	$('div').on('activate', function() {
+		alert ('activated');
+		$(this).empty();
+		var range, sel;
+		if ( (sel = document.selection) && document.body.createTextRange) {
+			range = document.body.createTextRange();
+			range.moveToElementText(this);
+			range.select();
+		}
+	});
+
+	$('div').focus(function() {
+		alert ('focused');
+		if (this.hasChildNodes() && document.createRange && window.getSelection) {
+			$(this).empty();
+			var range, sel;
+			range = document.createRange();
+			range.selectNodeContents(this);
+			sel = window.getSelection();
+			sel.removeAllRanges();
+			sel.addRange(range);
+		}
+	});
+
+</script>
+
+</body>
+</html>

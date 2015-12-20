@@ -316,6 +316,7 @@
 									 ng-mouseover="this.eventMouseoverRow2($index)"
 								>
 
+
 									<!-- 1 PER ROW COUNT AND CHECK BOX -->
 									<td style="width:3%">
 										<span id='numberWrapForFade{{$index}}'>
@@ -391,6 +392,11 @@
 										<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
 									<!--</td>-->
 
+									<!-- 4.75 ID -->
+									<td style="font-size:8px; width:6%;overflow: hidden">
+										&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user._id"
+									></span>
+									</td>
 
 									<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
 									<td

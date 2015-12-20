@@ -237,7 +237,8 @@ app.factory('SppSvc', function() {
 //
 //	}]);
 
-angular.module('ustodos').controller('FooterController',
+angular.module('ustodos').controller
+('FooterController',
 	['$scope',
 		'SppSvc',
 		function($scope,
@@ -253,8 +254,6 @@ angular.module('ustodos').controller('FooterController',
 var callbackCommand = function(callbackResult) {
 	O.o  ('in callbackCommand');
 };
-
-
 
 
 //O.a ('oneOfSeveral controller with array - first?');
@@ -326,7 +325,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 //			//,	south__fxSpeed_open:			0
 //			//,	south__fxSpeed_close:			0
 //			//,	initClosed:						true
-		//			,	center__minWidth:				200
+			//			,	center__minWidth:				200
 //			,	center__minHeight:				200
 //
 //			// inner north  1/4
@@ -403,7 +402,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 			//alert ('added listener');
 			// oct 2015 seems not to be called at all even with add listener in place
 			function load(){
-				//alert('in angular addEventListener load');
+				// dec 2015 seems not to be called at all even with add listener in place
+				alert('inONLOADINIT#3.5  in addEventListener load in function load(){');
 
 				//var el = document.getElementById("foo");
 				//alert(el);
@@ -548,16 +548,23 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=ONLOAD%0A
 				// section_onload
 
-
+				//alert('inONLOADINIT#3  in onload base code');
 
 				$scope.$watch('$viewContentLoaded', function(){ // like onload YES
 					try {
 
-						//alert ('in $scope.$watch  onload'); // hbklrb11
+						//alert('inONLOADINIT#5  in $scope.$watch  onload');
+
 						//$scope.localTinyMceInit(); // hbklrb11
 
-						//var x = document.getElementById('idCkeEditorTextarea').innerHTML;
-						//alert ('in $viewContentLoaded:' + x);
+						////var x = document.getElementById('idCkeEditorTextarea').innerHTML;
+						//var x = document.getElementById('classContentEditablePerRow');
+						//var x = document.getElementsByClassName("classContentEditablePerRow");
+
+						// this is an HTMLObject I think, with main prop x[0].innerHTML aka x[0]['innerHTML']
+						var x = document.getElementsByClassName("WholePage");
+						alert ('inONLOADINIT#5 $viewContentLoaded:' + x);
+						alert ('inONLOADINIT#5 $viewContentLoaded:' + x.length);
 
 
 						//alert ('pre1 $state.get');
@@ -622,7 +629,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				$scope.ngInitTopLevel= function()
 				{
-					//alert ('in nginit');
+					//alert('inONLOADINIT#4  inSTARTUP nginit');
 					//if ($scope.howManyTimesInited == 1)
 					//alert ('in ngInitTopLevel');
 					//setTimeout(function(){ $scope.localTinyMceInit(); }, 300); // hbklrbb12
@@ -1661,11 +1668,12 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//};
 				$scope.onKeyUp_perrow_text = function (keyEvent, index, _id) // https://docs.angularjs.org/api/ng/directive/ngKeyup
 				{
+					alert('in onKeyUp_perrow_text');
 					var newHtml = document.getElementById('ustodorow'+index).innerHTML;
 					var newText = document.getElementById('ustodorow'+index).innerText;
 
 					// if not escape then return
-					if (keyEvent.keyCode !== 27 ) // if not escape key
+					if (keyEvent.keyCode !== 27 ) // if not escape key section_escape
 					{
 						// change local image to requiring a save
 						var savImgHtml = document.getElementById('savimg'+index);
@@ -3373,9 +3381,9 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					$scope.filterText = xTextCommandRemoved;
 					//$scope.searchedFor = utdUserCommand.xTextCommandRemoved;
 					////alert ('post write - search for $scope.searchedFor [' + $scope.searchedFor + ']');
-                    //
+					//
 					////alert ('in not a write xTextCommandRemoved.trim [' + xTextCommandRemoved.trim() + ']');
-                    //
+					//
 					//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_NotWrite',
 					//	{q:utdUserCommand.xTextCommandRemoved}, // same as x
 					//	callbackFromQuery);      // this is a GET - see RESOURCE
@@ -3394,7 +3402,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						$scope.setTextInShowingEditor($scope.ustodos[0].html, 'line 3329a2');
 					else
 						$scope.setTextInShowingEditor('', 'line 3329a2');
-						//alert ('in callbackFromQuery post get callback2');
+					//alert ('in callbackFromQuery post get callback2');
 				};  ///callbackfromquery
 
 				/**
@@ -3525,7 +3533,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 									$scope.error = errorResponse.data.message;
 								}
 							);
-								//alert  ('will search after write wasAwrite [' + wasAwrite +
+							//alert  ('will search after write wasAwrite [' + wasAwrite +
 							//'] for commandRemoved_toSearchFor_trimmed:' + commandRemoved_toSearchFor_trimmed);
 
 							//xTextCommandRemoved = commandRemoved_toSearchFor_trimmed;
@@ -3940,7 +3948,8 @@ window.onload = function()
 {
 	//var x = document.getElementById('imageIdRedPEncilbnw');
 	//try {
-	//	alert('in window.onload');
+	//alert('inONLOADINIT#1  in window.onload');
+
 	//setTimeout(function(){ $scope.localTinyMceInit() }, 2000); // hbklrb11
 	//setTimeout(function(){ $scope.focusOnId(mceId); }, 3000); // hbklrbb
 	//var x = angular.element('imageIdRedPEncilbnw');

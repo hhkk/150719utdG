@@ -1,0 +1,86 @@
+
+<!--
+http://localhost:3000/hk/htmltest/151218ContentEditableBlurEvent/test.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<span class="editable" contentEditable="true" data-default="default">Some text</span>
+<span class="editable2" contentEditable="true" data-default="default">Some text2</span>
+
+
+<div contenteditable><em>Edit me</em></div>
+<br>
+<div contenteditable><em>Edit me</em></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+	alert('running this');
+	$('.editable').bind('click', function(){
+		$(this).attr('contentEditable',true);
+	});
+
+	$('.editable').bind('focus', function() {
+		alert('focus');
+		var that = $(this);
+		//defaultTxt = that.data('default');
+		that.html('');
+	});
+
+	$('.editable').bind('blur', function() {
+		alert('blur');
+		var that = $(this);
+		var defaultTxt = that.data('default');
+		if(that.html() === ''){
+			that.html(defaultTxt);
+		}
+	});
+
+	$('.editable').on('activate', function() {
+		$(this).empty();
+		var range, sel;
+		if ( (sel = document.selection) && document.body.createTextRange) {
+			range = document.body.createTextRange();
+			range.moveToElementText(this);
+			range.select();
+		}
+	});
+
+	//		http://jsfiddle.net/hHLXr/12/
+
+	$('.editable').focus(function() {
+		alert ('focused');
+		if (this.hasChildNodes() && document.createRange && window.getSelection) {
+			$(this).empty();
+			var range, sel;
+			range = document.createRange();
+			range.selectNodeContents(this);
+			sel = window.getSelection();
+			sel.removeAllRanges();
+			sel.addRange(range);
+		}
+	});
+
+
+	$('div').focus(function() {
+		alert ('focused2	');
+		if (this.hasChildNodes() && document.createRange && window.getSelection) {
+			$(this).empty();
+			var range, sel;
+			range = document.createRange();
+			range.selectNodeContents(this);
+			sel = window.getSelection();
+			sel.removeAllRanges();
+			sel.addRange(range);
+		}
+	});
+
+
+	alert('running this 2');
+</script>
+
+</body>
+</html>

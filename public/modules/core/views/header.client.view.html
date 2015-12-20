@@ -44,11 +44,15 @@
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
 			<li class="dropdown" dropdown>
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
-					xxadisplayName [<span data-ng-bind="authentication.user.displayName"></span>]<b class="caret"></b>
+					xa <span data-ng-bind="authentication.user.displayName"></span> (<span data-ng-bind="authentication.user.username"></span>)<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
 					<li>
 						<a href="/#!/settings/profile">Edit Profile</a>
+					</li>
+					<li>
+
+						<span data-ng-bind="authentication.user._id"></span>
 					</li>
 					<li>
 						ori <a ui-sref="HKTestSref2">header.client.view.html HKTestSref2</a>

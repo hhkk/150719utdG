@@ -1,0 +1,43 @@
+
+<!--
+http://localhost:3000/hk/htmltest/151219ContentEditableBlurEvent/test.html
+http://jsfiddle.net/niklasvh/a4QNB/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<div class="changeable" contenteditable="true"> Click this div to edit it </div>
+<br>
+<div class="changeable" contenteditable="true"> 222222222222222  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+	var contents = $('.changeable').html();
+	$('.changeable').blur(function() {
+		alert('blur.');
+		if (contents!=$(this).html()){
+			alert('Handler for .change() called.');
+			contents = $(this).html();
+		}
+	});
+
+	//$('.editable').bind('focus', function() {
+	$('.changeable').bind('focus', function() {
+		alert('focus.');
+		var that = $(this);
+		//defaultTxt = that.data('default');
+		that.html('');
+	});
+
+
+
+
+</script>
+
+</body>
+</html>
