@@ -9,7 +9,9 @@ http://jsfiddle.net/tqw6w/
 <body ng-app="Repeat_Demo" ng-controller="AppCtrl" class="ng-scope">
 
 <h2>repeat-done directive - AngularJS Demo</h2>
-	<li ng-repeat="feed in feedList" repeat-done="layoutDone()" ng-cloak>
+	<li ng-repeat="feed in feedList"
+		repeat-done="layoutDone()" ng-cloak
+	>
 		<div class='hkhk changeable'
 			 contenteditable="true"
 			 id="hkid{{$index}}"
@@ -76,7 +78,8 @@ http://jsfiddle.net/tqw6w/
 				// 2 - how to get old value? in focus method find which went into focus with "this"
 
 				// TOOLTIP
-				$scope.layoutDone = function() {
+				$scope.layoutDone = function()
+				{
 					//$('a[data-toggle="tooltip"]').tooltip(); // NOT CORRECT!
 					alert('in layoutDone');
 					$timeout(function() { $('a[data-toggle="tooltip"]').tooltip(); }, 0); // wait...
@@ -88,6 +91,7 @@ http://jsfiddle.net/tqw6w/
 					$('.changeable').blur(function() {
 						//alert('blur $(this):' + $(this));
 						//alert('blur $(this).html():' + $(this).html());
+						//alert('blur');
 
 						if (contents != $(this).html()) { // diff? change?
 							// alert ('Handler for .change() called.  ' +'contents [' + contents + ']  ' + '$(this).html() [' + $(this).html() + ']');
@@ -97,7 +101,7 @@ http://jsfiddle.net/tqw6w/
 					// FOCUS
 					//$('.editable').bind('focus', function() {
 					$('.changeable').bind('focus', function() {
-						//alert('focus on this:' + $(this).html);
+						alert('focus on this:' + $(this).html);
 						var that = $(this);
 						//that.html('');
 						alert('that.id:' + that[0].id);

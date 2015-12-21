@@ -213,7 +213,7 @@
 				<!--<button ng-click="this.buttonClickSearchStar()">*</button>-->
 				<!--<button ng-click="this.buttonClickSearchClear()">Clear</button>-->
 
-				<!--<WORKS p ng-repeat="command in commands">{{command}}</p>-->
+				<!--<WORKS p ng- repeat="command in commands">{{command}}</p>-->
 
 				<!--<div id='div' contenteditable='true' onpaste='handlepaste(this, event)'>Paste</div>-->
 				<!--hbkk 1510 -->
@@ -227,7 +227,7 @@
 			<!--<div ng-controller="Ctrl1">-->
 				<!--<h2>Ctrl1 - List</h2>-->
 				<!--<ul>-->
-					<!--<li ng-repeat="item in list1()">{{item}}</li>-->
+					<!--<li ng- repeat="item in list1()">{{item}}</li>-->
 				<!--</ul>-->
 			<!--</div>-->
 			<!--<hr />-->
@@ -248,7 +248,7 @@
 		<!--<br><a ng-href="{{this.searchedForAsLink}}">{{this.searchedForAsLink}}</a>-->
 
 		<!--<button ng-click="testButton(-2)">TestButton</button>-->
-		<!--<p ng-repeat="operator in operators">{{operator.commandDescription}}</p>-->
+		<!--<p ng- repeat="operator in operators">{{operator.commandDescription}}</p>-->
 
 		<div id='hbkdiv1'
 			 style='xxheight:300px;
@@ -262,7 +262,7 @@
 				<!--<col style="width:2%">-->
 				<!--<col style="width:2%">-->
 				<!--<col style="width:2%">-->
-				<!--<tr ng-repeat="ustodo in ustodos ">f-->
+				<!--<tr ng- repeat="ustodo in ustodos ">f-->
 				<!--&lt;!&ndash; timeAgo &ndash;&gt;f-->
 				<!--<td><span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>f-->
 				<!--&lt;!&ndash; html &ndash;&gt;f-->
@@ -288,11 +288,11 @@
 				 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
 				-->
 
-				<!-- SECTION__ NG-REPEAT NG-IF FILTER PER ROW EXPERIMENTAL -->
-				<!--<tr  ng-repeat="ustodo in ustodosFiltered"-->
-				<!--<tr  ng-repeat="ustodo in ustodosFiltered"-->
-				<!--<tr  ng-repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
-				<!--<tr  ng-repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
+				<!-- SECTION__ NG- REPEAT NG-IF FILTER PER ROW EXPERIMENTAL -->
+				<!--<tr  ng- repeat="ustodo in ustodosFiltered"-->
+				<!--<tr  ng- repeat="ustodo in ustodosFiltered"-->
+				<!--<tr  ng- repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
+				<!--<tr  ng- repeat="ustodo in ustodosFiltered | filterUstodos:filterText"-->
 
 				<!--//height:80em;-->
 				<tbody
@@ -312,8 +312,12 @@
 									 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
 							 >
 
-								<tr  ng-repeat='ustodo in ustodosFiltered' ng-class-odd="'odd'" ng-class-even="'even'"
+								<tr  ng-repeat='ustodo in ustodosFiltered'
+									 ng-class-odd="'odd'"
+									 ng-class-even="'even'"
 									 ng-mouseover="this.eventMouseoverRow2($index)"
+									 repeat-done="layoutDone()"
+									 ng-cloak
 								>
 
 
@@ -339,7 +343,7 @@
 											>
 										&nbsp
 										<!--ng-show="nowShowing==$index"-->
-										<!--ng-repeat="image in images"-->
+										<!--ng- repeat="image in images"-->
 										<!--class="gallery-image fade-animation"-->
 									</td>
 
@@ -405,14 +409,16 @@
 										word-wrap: break-word;
 										zzbackground-color: yellow;
 										white-space: nowrap;
-										overflow: auto;' >
-										/*visible|hidden|scroll|auto|initial|inherit*/
-										/*-moz-hyphens:auto;*/
-										/*-webkit-hyphens:auto;*/
-										/*-o-hyphens:auto;*/
-										/*hyphens:auto;*/
+										overflow: auto;'
+									/*visible|hidden|scroll|auto|initial|inherit*/
+									/*-moz-hyphens:auto;*/
+									/*-webkit-hyphens:auto;*/
+									/*-o-hyphens:auto;*/
+									/*hyphens:auto;*/
+
+									>
 										<span class='hkcssContentedit' >
-											<div class="WholePage" id="ustodorow{{$index}}" contenteditable="true"
+											<div class="WholePage focusblurme" id="ustodorow{{$index}}" contenteditable="true"
 												 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
 												 ng-focus='hkngfocustest($index)'
 												 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"

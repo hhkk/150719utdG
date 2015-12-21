@@ -114,19 +114,19 @@ var angularModule = null;
 
 
 
-//myApp.controller('myCtrl', ['$scope', '$sce', function($scope, $sce) {
+//myApp. controller('myCtrl', ['$scope', '$sce', function($scope, $sce) {
 //    // ...
 //    $scope.preview_data.preview.embed.htmlSafe =
 //        $sce.trustAsHtml(preview_data.preview.embed.html);
 //}
-//myApp.controller('myCtrl', ['$scope', '$sce', function($scope, $sce)
+//myApp. controller('myCtrl', ['$scope', '$sce', function($scope, $sce)
 
 
 
 
-// works angularModule.controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'Authentication', 'Ustodos',
+// works angularModule. controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'Authentication', 'Ustodos',
 //    function($scope, $stateParams, $location, $rootScope, Authentication, Ustodos) {
-// angularModule.controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'ngSanitize', 'Authentication', 'Ustodos',
+// angularModule. controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'ngSanitize', 'Authentication', 'Ustodos',
 
 
 
@@ -144,6 +144,18 @@ var pasteHtmlContentEditableCleaner = function () {
 //alert ('initing app');
 
 var app = angular.module('ustodos');      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
+
+app.directive('repeatDone', function() {
+	console.log ('@@@@@@@@@@@@@@@@ in repeatdone1');
+	return function(scope, element, attrs) {
+		//alert('in repeatdone2');
+		if (scope.$last) { // all are rendered
+			scope.$eval(attrs.repeatDone);
+		}
+	}
+})
+
+
 //var app = angular.module('ustodos',['ngSanitize', 'ui.router']);      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
 
 ////http://jsfiddle.net/whnSs/
@@ -226,7 +238,7 @@ app.factory('SppSvc', function() {
 
 
 
-//angular.module('ustodos').controller('HeaderController',
+//angular.module('ustodos'). controller('HeaderController',
 //	['$scope',
 //	'SppSvc',
 //	function($scope,
@@ -248,7 +260,9 @@ angular.module('ustodos').controller
 			$scope.SppSvc = SppSvc;
 			//$scope.gblx = gblx;
 
-		}]);
+		}
+	]
+);
 
 
 var callbackCommand = function(callbackResult) {
@@ -257,9 +271,10 @@ var callbackCommand = function(callbackResult) {
 
 
 //O.a ('oneOfSeveral controller with array - first?');
-angular.module('ustodos').controller('SinglepageUstodosController',
-//angular.module('ustodos',['ngSanitize']).controller('UstodosController',
-// angular.module('ustodos',[]).controller('UstodosController',
+angular.module('ustodos').controller
+	('SinglepageUstodosController',
+	//angular.module('ustodos',['ngSanitize']). controller('UstodosController',
+	// angular.module('ustodos',[]). controller('UstodosController',
 
 	//function($scope, $window, $stateParams, $location, $document, $rootScope, $sce, $http, Authentication, Ustodos, Commands)
 	['$scope', '$window', '$stateParams',
@@ -418,6 +433,41 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 			//	//return '<div style="word-break:break-all>" xx' + s + '</div>';
 			//}
 
+			$scope.layoutDone = function() {
+				//$('a[data-toggle="tooltip"]').tooltip(); // NOT CORRECT!
+				//alert('start layoutDone');
+
+
+				// BLUR / CHANGE DETECT
+				$('.focusblurme').blur(function() {
+					//alert('blur $(this):' + $(this));
+					//alert('blur $(this).html():' + $(this).html());
+					alert('blur this id $(this)[0].id:' + $(this)[0].id);
+
+
+					// todo compare this against ustodo in mem array contents
+					//if (contents != $(this).html()) { // diff? change?
+						// alert ('Handler for .change() called.  ' +'contents [' + contents + ']  ' + '$(this).html() [' + $(this).html() + ']');
+						//contents = $(this).html();
+					//}
+				});
+				// FOCUS
+				//$('.editable').bind('focus', function() {
+				$('.focusblurme').bind('focus', function() {
+					//alert('focus on this:' + $(this).html);
+					alert('focus on $(this)[0].id:' + $(this)[0].id );
+					//alert('focus on $(this)[0].id:' + $scope.ustodosFiltered[$(this)[0].id] );
+					//alert('focus on $(this)[0].id:' + $scope.ustodosFiltered[$(this)[0].id].html );
+					alert('focus on $(this)[0].id:' + document.getElementById($(this)[0].id) );
+
+
+					var that = $(this);
+					//alert('that.id:' + that[0].id);
+				});
+				alert('done layoutDone');
+			}
+
+
 			$scope.preparePerRowHtml = function(s)
 			{
 				return s;
@@ -460,7 +510,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					console.log ('successful state change');
 				});
 
-				// works alert ('init ustodos.client.controller.js state:' + $state.$current);   // current state  .current
+				// works alert ('init ustodos.client. controller.js state:' + $state.$current);   // current state  .current
 				//alert('initing scope $stateParams' + $stateParams);
 
 				$scope.dynamicSearch = false; // bound via ng-model=lockMouseover to idcheckbox_dynamicSearch
@@ -519,10 +569,10 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				SppSvc.setWhichEditorShowing($scope.ns.Input.INPUT_NONE_IS_IN_FOCUS);
 
-				//angularModule.controller('UstodosController', ['$scope', '$stateParams', '$locationProvider', '$rootScope', '$sce',
+				//angularModule. controller('UstodosController', ['$scope', '$stateParams', '$locationProvider', '$rootScope', '$sce',
 				//    'Authentication', 'Ustodos',
 				//    function($scope, $stateParams, $locationProvider, $rootScope, $sce, Authentication, Ustodos) {
-				//angularModule.controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'ngSanitize', 'Authentication', 'Ustodos',
+				//angularModule. controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'ngSanitize', 'Authentication', 'Ustodos',
 				//    function($scope, $stateParams, $location, $rootScope, ngSanitize, Authentication, Ustodos) {
 				//$rootScope', $compile, $rootElement,
 				//    O.a ('sssa1');
@@ -563,8 +613,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 						// this is an HTMLObject I think, with main prop x[0].innerHTML aka x[0]['innerHTML']
 						var x = document.getElementsByClassName("WholePage");
-						alert ('inONLOADINIT#5 $viewContentLoaded:' + x);
-						alert ('inONLOADINIT#5 $viewContentLoaded:' + x.length);
+						//alert ('inONLOADINIT#5 $viewContentLoaded:' + x);
+						console.log (' @@@@@@@@@@inONLOADINIT#5 $viewContentLoaded:' + x.length);
 
 
 						//alert ('pre1 $state.get');
@@ -1668,7 +1718,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//};
 				$scope.onKeyUp_perrow_text = function (keyEvent, index, _id) // https://docs.angularjs.org/api/ng/directive/ngKeyup
 				{
-					alert('in onKeyUp_perrow_text');
+					//console.log ('!!!! in onKeyUp_perrow_text');
 					var newHtml = document.getElementById('ustodorow'+index).innerHTML;
 					var newText = document.getElementById('ustodorow'+index).innerText;
 
@@ -1711,7 +1761,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 								$scope.ustodos[i].html = newHtml;
 								$scope.ustodos[i].text = newText;
 								updateCallBackIfErrorIndex = index;
-								$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
+								$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server. controller.js exports.update = function(req, res) { in server controller
 									UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+index,'green', '#FFFFFF','1500');
 									//$scope.ustodos[i].html = newHtml;
 									alert('Record saved');
@@ -1964,7 +2014,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				//alert ('defined medium');
 
-				console.log ('000000000000000000000000000000 in ustodos.client.controller init');
+				console.log ('000000000000000000000000000000 in ustodos.client. controller init');
 
 				//tinymce.init({
 				//    selector: 'textarea'
@@ -2637,7 +2687,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 									//saveOneUstodo($scope.ustodos[i]);
 
-									// ends up in C:\utd\150719utdG \app\controllers\ustodos.server.controller.js
+									// ends up in C:\utd\150719utdG \app\controllers\ustodos.server. controller.js
 									// .exports.update
 								}
 								$scope.areThereChanges = true;
@@ -2948,7 +2998,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				// Remove existing Ustodo
 				$scope.remove = function(ustodo) {
-					console.log ('2 in ustodos.client.controller REMOVE');
+					console.log ('2 in ustodos.client. controller REMOVE');
 					if ( ustodo ) {
 						ustodo.$remove();
 
@@ -2967,7 +3017,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				// Update existing Ustodo
 				$scope.update = function() {
-					console.log ('3 in ustodos.client.controller UPDATE');
+					console.log ('3 in ustodos.client. controller UPDATE');
 					var ustodo = $scope.ustodo;
 
 					ustodo.$update(function() {
@@ -2985,7 +3035,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				//};
 				//
 				$scope.ustodosQueryCommon = function (caller, jsonquery, callback) {
-					// 1 corresponds to exports.list2 in ustodos.server.controller.js
+					// 1 corresponds to exports.list2 in ustodos.server. controller.js
 					// see also app.route('/ustodos').get in ustodos.server.routes.js
 					//alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller);
 					return Ustodos.query(jsonquery, callback); // Ustodosis a "resource"  // maps to a get? in ustodos.server.routes.js? is that a RESOURCE behavior?
@@ -2993,7 +3043,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				// Find a list of Ustodos
 				$scope.find = function() {
-					alert ('4 in ustodos.client.controller FIND');
+					alert ('4 in ustodos.client. controller FIND');
 					//getProperties('props Ustodos:', Ustodos);
 
 					//alert (' in scope.find');
@@ -3002,7 +3052,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					// seems to work but returns all? $scope.ustodos = Ustodos. query({name: 'ggggg'});
 					//$scope.ustodos = Ustodos. query({name: 'ggggg'}); // Works!
 
-					// 2 corresponds to exports.list2 in ustodos.server.controller.js
+					// 2 corresponds to exports.list2 in ustodos.server. controller.js
 					//$scope.ustodos = $scope.ustodosQueryCommon('caller$scope.find', {text: ''}, callbackhkhk_find);
 					// http://docs.mongodb.org/manual/reference/operator/query/and/
 					// http://docs.mongodb.org/manual/reference/operator/query/not/
@@ -3023,22 +3073,22 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 					//$scope.ustodos = Ustodos. query({ustodoId: '54929d5d1d3df384165f4fa2'});
 					//$scope.ustodos = Ustodos. query({ustodoId: '54929d5d1d3df384165f4fa2'});
 					//$scope.ustodos = Ustodos. query({ustodoId: '54929d5d1d3df384165f4fa2'});
-					//console.log ('in ustodos.client.controller FIND2 $scope.ustodos.length:' + $scope.ustodos.length);
-					//console.log ('in ustodos.client.controller FIND2');
+					//console.log ('in ustodos.client. controller FIND2 $scope.ustodos.length:' + $scope.ustodos.length);
+					//console.log ('in ustodos.client. controller FIND2');
 
 					//alert ('set commandsxx ');
 					//{
-					//alert('in ustodos.client.controller $scope.commands.length:' + $scope.commands.length);
+					//alert('in ustodos.client. controller $scope.commands.length:' + $scope.commands.length);
 					//};
 					//$scope.commands = Commandsss.query();
-					//alert ('in ustodos.client.controller $scope.commands.length:'+$scope.commands.length);
+					//alert ('in ustodos.client. controller $scope.commands.length:'+$scope.commands.length);
 
 
 				};
 
 				// Find existing Ustodo
 				$scope.findOne = function() {
-					console.log ('5 in ustodos.client.controller FINDONE');
+					console.log ('5 in ustodos.client. controller FINDONE');
 					$scope.ustodo = Ustodos.get({ // Ustodos is a $resource I think - .query on it maps to routes in ustodos.server.routes.js
 						// ORIGINAL A/B SPLIT
 						ustodoId: $stateParams.ustodoId    // original
@@ -3496,7 +3546,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 							// hbkk
 							ustodo.$save
 							(
-								function(response) // line 60 of 'ustodos.server.controller.js' exports.create
+								function(response) // line 60 of 'ustodos.server. controller.js' exports.create
 								{
 									//alert ('successful save');
 									ustodosQueryCommon_wrapper('*', callbackFromQuery);
@@ -3524,7 +3574,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 									// hbk 1505
 									//$location.search('q', commandRemoved_toSearchFor_trimmed);       // yoo bar foo bar baz
 									//UtilNLB_bgFade.NLBfadeBg('idInput0TypeText','green', '#FFFFFF','1500');
-									// pairs with ustodos.server.controller.js line 85 return res.status(400)
+									// pairs with ustodos.server. controller.js line 85 return res.status(400)
 									// return res.status(400).send
 									// hbkk error reply
 								},
@@ -3563,7 +3613,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						// ustodos.server.routes.js may be related to this
 						//app.route('/ustodos')
 						//	.get(users.requiresLogin, ustodos.list2)
-						// ustodos.server.controller.js and may map to exports.list2 = function(req, res) { in
+						// ustodos.server. controller.js and may map to exports.list2 = function(req, res) { in
 
 						//new RegExp(t, 'i')
 						//{ $regex: new RegExp(xTextCommandRemoved.trim(), 'i') }
@@ -3652,8 +3702,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 						//console.log (getClass('ssdfsdfdsf', this.commandFromInputBox));
 
 						//$scope.ustodos = Ustodos. query ({name: /141229/});
-						//setTimeout(function(){console.log ('in ustodos.client.controller SEARCH2 $scope.ustodos.length:' + $scope.ustodos.length);}, 1000);
-						//setTimeout(function(){alert ('in ustodos.client.controller SEARCH2 $scope.ustodos.length:' + $scope.ustodos.length);}, 1000);
+						//setTimeout(function(){console.log ('in ustodos.client. controller SEARCH2 $scope.ustodos.length:' + $scope.ustodos.length);}, 1000);
+						//setTimeout(function(){alert ('in ustodos.client. controller SEARCH2 $scope.ustodos.length:' + $scope.ustodos.length);}, 1000);
 						//$scope.$apply();
 
 
@@ -3685,7 +3735,7 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 
 				// Search for one  existing Ustodo by string
 				$scope.searchOne = function() {
-					alert ('7 in ustodos.client.controller SEARCHONE');
+					alert ('7 in ustodos.client. controller SEARCHONE');
 					console.log ('7  getting ustodo searchOne :' + $stateParams.ustodoId);
 					$scope.ustodo = Ustodos.get({
 						// ORIGINAL A/B SPLIT
@@ -3812,7 +3862,8 @@ angular.module('ustodos').controller('SinglepageUstodosController',
 				throw e;
 			}
 		}
-	])
+	]
+	)
 	.directive('myCustomer', function()  // section_ tail defined against app (e.g., myApp or userApp)
 	{
 		alert ('========================= in directive 1');
