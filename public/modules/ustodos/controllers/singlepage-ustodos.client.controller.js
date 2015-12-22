@@ -433,38 +433,54 @@ angular.module('ustodos').controller
 			//	//return '<div style="word-break:break-all>" xx' + s + '</div>';
 			//}
 
+
 			$scope.layoutDone = function() {
 				//$('a[data-toggle="tooltip"]').tooltip(); // NOT CORRECT!
 				//alert('start layoutDone');
 
+				$scope.preEditText = null;
+				$scope.preEditHtml = null;
+
+				// FOCUS
+				//$('.editable').bind('focus', function() {
+				$('.focusblurme').bind('focus', function() {
+					var hkindex = $(this)[0].getAttribute("hkindex"); // e.g., '3'
+					$scope.preEditText = document.getElementById("ustodorow" + hkindex)["innerText"];
+					$scope.preEditHtml = document.getElementById("ustodorow" + hkindex)["innerHtml"];
+					// some attributes by . (aka ["xx"]) and some by getAttribute("hkindex")
+					//var id1 = document.getElementById($(this)[0].id); //$(this)[0].id == eg "ustodorow3"
+					var hkindex = $(this)[0].getAttribute("hkindex"); // e.g., '3'
+					//alert('document.getElementById("ustodorow" + hkindex)["innerText"]:' + document.getElementById("ustodorow" + hkindex)["innerText"]);
+					//alert('document.getElementById("ustodorow" + hkindex)["innerHtml"]:' + document.getElementById("ustodorow" + hkindex)["innerHtml"]);
+
+					//alert('focus on $(this)[0].id:' +  htmlelement);
+					//for (var u in htmlelement) {
+					//	//if (htmlelement.hasOwnProperty(u))
+					//		console.log ('own prop of htmlelement :' + u);
+					//}
+				});
+
 
 				// BLUR / CHANGE DETECT
 				$('.focusblurme').blur(function() {
-					//alert('blur $(this):' + $(this));
-					//alert('blur $(this).html():' + $(this).html());
-					alert('blur this id $(this)[0].id:' + $(this)[0].id);
-
-
 					// todo compare this against ustodo in mem array contents
+					var hkindex = $(this)[0].getAttribute("hkindex"); // e.g., '3'
+					var postEditText = document.getElementById("ustodorow" + hkindex)["innerText"];
+					var postEditHtml = document.getElementById("ustodorow" + hkindex)["innerHtml"];
+
+					if ($scope.preEditText != postEditText || $scope.preEditHtml != postEditHtml)
+					{
+						alert('changed');
+						$scope.saveSweep(hkindex);
+
+					}
+
 					//if (contents != $(this).html()) { // diff? change?
 						// alert ('Handler for .change() called.  ' +'contents [' + contents + ']  ' + '$(this).html() [' + $(this).html() + ']');
 						//contents = $(this).html();
 					//}
 				});
-				// FOCUS
-				//$('.editable').bind('focus', function() {
-				$('.focusblurme').bind('focus', function() {
-					//alert('focus on this:' + $(this).html);
-					alert('focus on $(this)[0].id:' + $(this)[0].id );
-					//alert('focus on $(this)[0].id:' + $scope.ustodosFiltered[$(this)[0].id] );
-					//alert('focus on $(this)[0].id:' + $scope.ustodosFiltered[$(this)[0].id].html );
-					alert('focus on $(this)[0].id:' + document.getElementById($(this)[0].id) );
-
-
-					var that = $(this);
-					//alert('that.id:' + that[0].id);
-				});
-				alert('done layoutDone');
+				//alert('done layoutDone');
 			}
 
 
@@ -1716,6 +1732,8 @@ angular.module('ustodos').controller
 				//$scope.onKeyDown = function ($event) {
 				//    $scope.onKeyDownResult = getKeyboardEventResult($event, 'Key down');
 				//};
+
+
 				$scope.onKeyUp_perrow_text = function (keyEvent, index, _id) // https://docs.angularjs.org/api/ng/directive/ngKeyup
 				{
 					//console.log ('!!!! in onKeyUp_perrow_text');
@@ -1732,6 +1750,12 @@ angular.module('ustodos').controller
 						return;
 					}
 
+					$scope.saveSweep(_id);
+				};
+
+
+				$scope.saveSweep = function (_id) {
+					alert ('in $scope.saveSweep _id:' + _id);
 					//alert ('newHtml:' + newHtml);
 					//alert ('in onKeyUp_perrow_text escape id:' + 'ustodorow'+index); // not non-escape
 
@@ -1779,7 +1803,9 @@ angular.module('ustodos').controller
 					if (!found) {
 						alert ('ustodo not found - reload page');
 					}
-				};
+
+				}
+
 
 				$scope.onKeyUp = function (desc, keyEvent, ENUM_KEYEVENTcaller) // https://docs.angularjs.org/api/ng/directive/ngKeyup
 				{

@@ -418,7 +418,10 @@
 
 									>
 										<span class='hkcssContentedit' >
-											<div class="WholePage focusblurme" id="ustodorow{{$index}}" contenteditable="true"
+											<div class="WholePage focusblurme"
+												 id="ustodorow{{$index}}"
+												 hkindex="{{$index}}"
+												 contenteditable="true"
 												 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
 												 ng-focus='hkngfocustest($index)'
 												 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
