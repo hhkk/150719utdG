@@ -66,6 +66,7 @@
 			<div id='idDivForTinyMceEditorTextarea'>
 				<!--was Search / Input-->
 				<textarea xxng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
+				<button ng-click="testButton2(-2)" title="testButton2">butt2</button>
 			</div>
 
 
@@ -186,7 +187,7 @@
 
 				&nbsp;
 
-				<!-- ======================== SELECT DROPDOWN ONE OF 20 ACTIONS -->
+					<!-- ======================== SELECT DROPDOWN ONE OF 20 ACTIONS -->
 				<select
 						id='selectId'
 						ng-change="this.utdEventSelectedEngine()"
@@ -364,20 +365,24 @@
 									<!-- PER ROW COUNT -->
 									<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
 
+
+
+
 									<!-- 4 PER ROW TIME AGO -->
 									<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
 									<td style="width:3%">
-										&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
+										&nbsp;
+										<span class="per-row-count"
+													data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
 													ng-click="event_click_timeAgo(ustodo._id)"
-													title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}></span>
+													title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}>
+										</span>
 									</td>
 									<!--<td>{{ ustodo.text}}</td>f-->
-
 
 									<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
 									<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
 									<!--</td>-->
-
 
 									<!-- 4.5 USER NAME-->
 									<td style="font-size:12px; width:6%;overflow: hidden">
@@ -398,7 +403,7 @@
 
 									<!-- 4.75 ID -->
 									<td style="font-size:8px; width:6%;overflow: hidden">
-										&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user._id"
+											&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user._id"
 									></span>
 									</td>
 
@@ -421,6 +426,8 @@
 											<div class="WholePage focusblurme"
 												 id="ustodorow{{$index}}"
 												 hkindex="{{$index}}"
+												 hkustodoid="{{ustodo._id}}"
+
 												 contenteditable="true"
 												 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
 												 ng-focus='hkngfocustest($index)'
@@ -429,7 +436,9 @@
 											>
 											</div>
 										</span>
-										<!--/onclick = "this.contentEditable = true;"-->
+
+
+									<!--/onclick = "this.contentEditable = true;"-->
 									</td>
 								</tr>
 							</span>
