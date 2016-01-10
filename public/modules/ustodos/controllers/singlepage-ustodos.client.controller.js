@@ -190,7 +190,25 @@ app.factory('SppSvc', function() {
 	//	return data;
 	//};
 
+	/**
+	 * service to indicate if the editor contains non-saved content such that should not be overwritten
+	 * @param val
+     */
 	itemsServiceFns.setModelDirty = function(val) {
+		if (val)
+		{
+			//alert ('in eventMouseoverRow2:A');
+			//var id = 'tinymce';
+			//var id = 'mceu_0-body';
+			var id = 'HKTEST';
+
+			if (document.getElementById(id))
+			{
+				//alert ('in eventMouseoverRow2:B');
+				document.getElementById(id).style.color = 'red';
+			}
+		}
+
 		sppData.modelDirty = val;
 		var elemId = 'mceu_57';
 		if (document.getElementById(elemId) !== null)
@@ -2330,9 +2348,10 @@ angular.module('ustodos').controller
 					{
 						//alert ('$scope.getTextHtmlAndValueInShowingEditor() ['+ $scope.getTextHtmlAndValueInShowingEditor().xText + ']');
 						if (
-							// if not selected, if not
-						(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty()
-						) ||
+							// if no item is selected and model is  selected, if not
+							(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty()
+						)
+						||
 						$scope.isCurrentEditorEmpty())
 						{
 							//if ($scope.mouseoverlock !== 'on') {
@@ -2758,10 +2777,13 @@ angular.module('ustodos').controller
 					{
 
 						if (true) {
-							alert ('pre fade');
-							$scope.testNLBfadeBg();
-							alert ('post fade');
+							document.getElementById('HKTEST').style.color = 'blue';
 						}
+						//if (true) {
+						//	alert ('pre fade');
+						//	$scope.testNLBfadeBg();
+						//	alert ('post fade');
+						//}
 
 						//alert ('in keyup $scope.getTextHtmlAndValueInShowingEditor()'+$scope.getTextHtmlAndValueInShowingEditor());
 						//CKEDITOR.instances.editor.destroy();
@@ -3477,7 +3499,7 @@ angular.module('ustodos').controller
 						//alert ('in callbackFromQuery post get callback');
 						$scope.ustodos = arrayUstodosResources;
 						$scope.setUstodosFiltered('caller2', $scope.ustodos);
-						SppSvc.setModelDirty(false);
+						SppSvc.setModelDirty (false);
 						if ($scope.ustodos.length > 0)
 							$scope.setTextInShowingEditor($scope.ustodos[0].html, 'line 3329a2');
 						else

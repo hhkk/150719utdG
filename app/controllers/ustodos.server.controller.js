@@ -149,16 +149,18 @@ exports.update = function(req, res)
 	ustodo = _.extend(ustodo , req.body);
 	ustodo.text = ustodo.text;
 	ustodo.html = ustodo.html;
-	ustodo.jsonx = ustodo.jsonx;
+	ustodo.jsonx = ustodo.jsonx; // jsonx is for full text
 	//ustodo.text = 't2.' + ustodo.text;
 	//ustodo.html = 'h2.' + ustodo.html;
 	//ustodo.jsonx = 'j2.' + ustodo.jsonx;
-	O.o('in ustodos.server.controller.js: update ' );
-	O.o ('ustodo.jsonx pre delete:' + ustodo.jsonx);
-	delete ustodo.jsonx; // remove property
-	O.o ('ustodo.jsonx post delete:' + ustodo.jsonx);
+	//O.o('in ustodos.server.controller.js: update ' );
 	ustodo.datelastmod = new Date();
-	ustodo.jsonx = JSON.stringify(ustodo); // string
+	var ustodoForFulltext = _.extend(ustodo);
+	delete ustodoForFulltext._doc.jsonx; // remove property
+	//O.o('in ustodos.server.controller.js: update ' );
+
+	ustodo.jsonx = JSON.stringify(ustodoForFulltext); // string
+	O.o('in ustodos.server.controller.js: update [' + ustodo.jsonx + ']');
 
 
 

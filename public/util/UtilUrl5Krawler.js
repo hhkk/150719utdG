@@ -8,7 +8,12 @@ var Krawler = require('krawler');
 // var UtilUrl5Krawler = require('C:/utd/150719utdG/public/util/UtilUrl5Krawler.js');
 
 
-var krawl = function(urlUtds, callbackFromKrawl)
+/**
+ * enrich ustodo with     title
+ * @param urlUtds enriched - side effected
+ * @param callbackFromKrawl
+ */
+var krawlhk = function(urlUtds, callbackFromKrawl)
 {
 	//2. ologx:really done hk
 	//3. ologx:really done hk xxx: [http://localhost:6768/] -> [hbk6768]
@@ -99,7 +104,7 @@ var krawl = function(urlUtds, callbackFromKrawl)
 
 
 if (typeof exports !== 'undefined') {
-	exports.krawl = krawl;
+	exports.krawlhk = krawlhk;
 }
 
 

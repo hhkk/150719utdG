@@ -63,6 +63,13 @@ var findTitle_htmlParse = function(html) {
 var callCount_expandUrlsToHrefsReturnPatchedStr = 0
 var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js'); // for urlUtd
 // hbkk - from line 98 ustodos.server.controller.js
+/**
+ * convert an ustodo to embed urls in the text
+ * this is called on the way INTO the DB
+ * @param ustodoHtml
+ * @param ustodoText
+ * @param res
+ */
 var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 {
 	try {
@@ -122,11 +129,20 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 						if (
 							UtilHrefThisText.isUrl(token)) {
 							try {
+								// embed title into the text
+
+								var httpIfNeeded = "";
+								if (!token.startsWith('http://'))
+									httpIfNeeded = 'http://';
+
 								arrStr_tokensToJoinNowTitled[itokens]  = '[' +
 									urlUtdsEnrichedByKrawl_byOriginal[token].title + '] ' +
-									token;
+									//'<a href=' + httpIfNeeded + token + '>' + token + '</a>';
+									httpIfNeeded + token;
+
+
 							}   catch (err) {
-								throw 'error no urlUtd match found in krawl results for url token [' + token + ']';
+								throw 'internal error, no urlUtd match found in krawl results for url token [' + token + ']';
 							}
 						}
 					}
@@ -178,7 +194,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 			//	}
 			//});
 
-			UtilUrl5Krawler.krawl(urlUtdsFromText, callbackFromKrawl);
+			UtilUrl5Krawler.krawlhk(urlUtdsFromText, callbackFromKrawl);
 
 		}
 		else {

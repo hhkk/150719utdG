@@ -182,7 +182,8 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 					if (keeper) {
 						//O.o ('&&&&&&&&&&&&&&&&&&& in result loop a keeper' );
 						// convert to HREFs
-						ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text);
+						ustodos[k].textWithHrefs = UtilHrefThisText.hrefThisText(ustodos[k].text);
+						ustodos[k].htmlWithHrefs = UtilHrefThisText.hrefThisText(ustodos[k].html);
 
 						arrUstodoPassedAllFilters.push(ustodos[k]);
 						//O.o (ustodos[k]._id);
