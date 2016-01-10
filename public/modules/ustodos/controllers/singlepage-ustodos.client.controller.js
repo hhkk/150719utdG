@@ -197,16 +197,35 @@ app.factory('SppSvc', function() {
 	itemsServiceFns.setModelDirty = function(val) {
 		if (val)
 		{
+
+			/**
+			 * get internal frame mce window elem id, e.g. to color it
+			 * @returns {*}
+             */
+			var getMceWindowElement = function () {
+				var elem = null;
+				if (document.getElementById('idTinyMceTextArea_ifr'))
+				{
+					//alert ("is not null");
+					var mceWindowElement = document.getElementById('idTinyMceTextArea_ifr').contentWindow.document.getElementById('tinymce'); // http://stackoverflow.com/questions/14451358/how-to-pick-element-inside-iframe-using-document-getelementbyid
+					if (document.getElementById('idTinyMceTextArea_ifr').contentWindow.document.getElementById('tinymce'))
+					{
+						//alert ('in eventMouseoverRow2:C');
+						mceWindowElement.style['background-color'] = '#EEE'; // SETMODELLDIRTY
+					}
+				}
+				return elem;
+			}
+
+			var mceWindowElement = getMceWindowElement();
+			if (mceWindowElement)
+			{
+				mceWindowElement.style['background-color'] = '#EEE'; // SETMODELLDIRTY
+			}
+
 			//alert ('in eventMouseoverRow2:A');
 			//var id = 'tinymce';
 			//var id = 'mceu_0-body';
-			var id = 'HKTEST';
-
-			if (document.getElementById(id))
-			{
-				//alert ('in eventMouseoverRow2:B');
-				document.getElementById(id).style.color = 'red';
-			}
 		}
 
 		sppData.modelDirty = val;
@@ -2776,9 +2795,10 @@ angular.module('ustodos').controller
 					$scope.testButton= function(s)
 					{
 
-						if (true) {
-							document.getElementById('HKTEST').style.color = 'blue';
-						}
+						//if (true) {
+						//	document.getElementById('HKTEST').style['background-color'] = 'blue';
+						//}
+
 						//if (true) {
 						//	alert ('pre fade');
 						//	$scope.testNLBfadeBg();
