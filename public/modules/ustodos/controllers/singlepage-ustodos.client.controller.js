@@ -1785,6 +1785,13 @@ angular.module('ustodos').controller
 							var savImgHtml = document.getElementById('savimg'+index);
 							//alert ('savImgHtml.src:' + savImgHtml.src);
 							savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
+
+							// SET ROW BACKGGROUND COLOR ON EDITING MODE ENTRY
+							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+index)
+							areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'yellow'; // SETMODELLDIRTY
+
+
+
 							return;
 						}
 
@@ -1817,6 +1824,10 @@ angular.module('ustodos').controller
 								//alert ('savImgHtml.src:' + savImgHtml.src);
 								savImgHtml.src = savImgHtml.src.replaceAll('SaveIconBlue.png', 'saveIcon.jpg');
 
+								//var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+i)
+								//areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'white'; // SETMODELLDIRTY
+
+
 								//alert('compare [' + $scope.ustodos[i].html + '] to [' + newHtml + ']')
 								// section_update per row on update with escape key
 								var newHtml = document.getElementById('ustodorow'+i).innerHTML;
@@ -1830,7 +1841,11 @@ angular.module('ustodos').controller
 									$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server. controller.js exports.update = function(req, res) { in server controller
 										UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+i,'green', '#FFFFFF','1500');
 										//$scope.ustodos[i].html = newHtml;
+										var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+i)
+										areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'lightgreen'; // SETMODELLDIRTY
 										alert('Record saved');
+										areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'white'; // SETMODELLDIRTY
+
 									}, updateCallBackIfError);
 								}
 								document.getElementById('ustodorow'+i).blur();
