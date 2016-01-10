@@ -1790,8 +1790,6 @@ angular.module('ustodos').controller
 							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+index)
 							areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'yellow'; // SETMODELLDIRTY
 
-
-
 							return;
 						}
 
@@ -1810,7 +1808,9 @@ angular.module('ustodos').controller
 						// might have this passed in OK - check it and maybe can remove this loop
 						var updateCallBackIfErrorIndex = -1;
 						var updateCallBackIfError = function(errorResponse) {
-							UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+updateCallBackIfErrorIndex,'red', 'pink','500');
+							UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+updateCallBackIfErrorIndex,'red', 'pink','100');
+							UtilNLB_bgFade.NLBfadeBg('ustodorow'+updateCallBackIfErrorIndex,'red', 'pink','100');
+
 							alert('error on save errorResponse.data.message [' + errorResponse.data.message + ']');
 						};
 						for (var i = 0; i < $scope.ustodos.length; i++)
