@@ -57,7 +57,8 @@ var callcountSaved = 0;
  * @param res - into the response we push a json data structure of an ustodo which is a model
  */
 // called from >>>singlepage-ustodos.client.controller.js>>> line 3490 (was 2203)
-// search for "$scope.processCommand($scope.enumCommands.COMMAND_WRITE"
+//   1 search for "$scope.processCommand($scope.enumCommands.COMMAND_WRITE"
+//   2 more detailed: search for: var ustodo = new Ustodos
 exports.create = function(req, res)
 {
 	O.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');

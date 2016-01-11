@@ -750,7 +750,7 @@ angular.module('ustodos').controller
 					$scope.testNLBfadeBg = function() {
 						alert('in testNLBfadeBg')      ;
 						//UtilNLB_bgFade.NLBfadeBg('div1hk','green', '#FFFFFF','1500');
-						UtilNLB_bgFade.NLBfadeBg('ustodorow0','green', '#FFFFFF','1500');
+						UtilNLB_bgFade.NLBfadeBg('ustodorow0','green', '#FFFFFF','3500');
 					};
 
 
@@ -1809,7 +1809,8 @@ angular.module('ustodos').controller
 						var updateCallBackIfErrorIndex = -1;
 						var updateCallBackIfError = function(errorResponse) {
 							UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+updateCallBackIfErrorIndex,'red', 'pink','100');
-							UtilNLB_bgFade.NLBfadeBg('ustodorow'+updateCallBackIfErrorIndex,'red', 'pink','100');
+							document.getElementById('ustodorow'+updateCallBackIfErrorIndex).style['background-color'] = 'pink'; // SETMODELLDIRTY
+							//UtilNLB_bgFade.NLBfadeBg('ustodorow'+updateCallBackIfErrorIndex,'red', 'pink','100');
 
 							alert('error on save errorResponse.data.message [' + errorResponse.data.message + ']');
 						};
@@ -1838,7 +1839,7 @@ angular.module('ustodos').controller
 									$scope.ustodos[i].html = newHtml;
 									$scope.ustodos[i].text = newText;
 									updateCallBackIfErrorIndex = i;
-									$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server. controller.js exports.update = function(req, res) { in server controller
+									$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
 										UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+i,'green', '#FFFFFF','1500');
 										//$scope.ustodos[i].html = newHtml;
 										var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+i)
@@ -2809,6 +2810,15 @@ angular.module('ustodos').controller
 
 					$scope.testButton= function(s)
 					{
+
+						if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
+						{
+							var mycopy = jQuery.extend(true, {}, $scope.ustodos[0]);
+							//no work var copyUnderscore = _($scope.ustodos[0]).clone();
+							//alert ('mycopy:' + mycopy);
+							//var x = $scope.ustodos
+							$scope.ustodos.splice(0, 0, mycopy);
+						}
 
 						//if (true) {
 						//	document.getElementById('HKTEST').style['background-color'] = 'blue';
