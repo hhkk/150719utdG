@@ -185,6 +185,10 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 						ustodos[k].textWithHrefs = UtilHrefThisText.hrefThisText(ustodos[k].text);
 						ustodos[k].htmlWithHrefs = UtilHrefThisText.hrefThisText(ustodos[k].html);
 
+						// ADD TO RETURN - PASSES MONGO AND LOCAL FURTHER FILTER LIST
+
+
+
 						arrUstodoPassedAllFilters.push(ustodos[k]);
 						//O.o (ustodos[k]._id);
 

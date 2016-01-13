@@ -1844,8 +1844,10 @@ angular.module('ustodos').controller
 										//$scope.ustodos[i].html = newHtml;
 										var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+i)
 										areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'lightgreen'; // SETMODELLDIRTY
-										alert('Record saved');
-										areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'white'; // SETMODELLDIRTY
+										setTimeout(function(){
+											areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'white'; // SETMODELLDIRTY
+										}, 500);
+
 
 									}, updateCallBackIfError);
 								}

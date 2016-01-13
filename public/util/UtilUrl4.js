@@ -1,4 +1,4 @@
-'use strict';
+// THIS FILE IS OBSOLETE
 'use strict';
 
 /**
@@ -50,6 +50,7 @@ var findTitle_htmlParse = function(html) {
 
 //tokenize raw text, get array of http-urls to get titles.  expand to include title
 var callCount_expandUrlsToHrefsReturnPatchedStr =0
+// // THIS FILE IS OBSOLETE - see C:\utd\150719utdG\public\util\UtilUrl4bUsesKrawlerToSupportServerController.js
 var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 {
 	try {
