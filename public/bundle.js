@@ -176,14 +176,24 @@ var passesFilters = function(s) {
 var o = function (s)
 {
 	//console.log ('in o.o');
-    if (passesFilters(s))
-    {
-        var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s
-        console.log(t);
-        if (appendFileSync)
-            appendFileSync('c:/tmp/t.txt', t);
-        //console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
-    }
+	if (passesFilters(s))
+	{
+		var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s
+		console.log(t);
+		if (appendFileSync)
+			appendFileSync('c:/tmp/t.txt', t);
+		//console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
+	}
+}
+
+var oerr = function (s)
+{
+	//console.log ('in o.o');
+	var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologerr:' + s
+	console.error(t);
+	if (appendFileSync)
+		appendFileSync('c:/tmp/t.txt', 'ERROR: t:' + t);
+	//console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
 }
 
 
@@ -252,6 +262,7 @@ var a = function (s)
 }
 if (typeof exports !== 'undefined') {
     exports.o = o;
+    exports.oerr = oerr;
     exports.assert = assert;
     exports.a = a;
     exports.e = e;
@@ -911,6 +922,7 @@ var buildHrefFromUrlString= function(urlstr)
 }                  ;
 
 /**
+ * Given a full ustodo document, used on outbound side originally, find and process hrefs
  * make sure all urls (e.g., n  on whitespace string tokens ending in .net) strings have http preamble
  * and href tag is inserted
  * @param textToBeHrefed original string with possible urls not yet IDd with http prefix
@@ -923,7 +935,8 @@ var hrefThisText = function(textToBeHrefed)
     var tokens = textToBeHrefed.split(/\s+/);
     //console.log ('y.length:' + y.length);
     var i = 0;
-    tokens.forEach(function(token) {
+    tokens.forEach(function(token)
+	{
         if (isUrl(token)) {
             //console.log ('is a url:' + token);
             var replaceWith = null;
@@ -966,7 +979,7 @@ var getUrlsFromText = function(textWithUrls)
     // section_adds http to .coms .edu etc
 	var urls = [];
 	tokens.forEach(function(token) {
-		//UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre('asdasd',['a']);
+		//UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre('asdasd',['a']);
         if (isUrl(token)) {
             //O.o ('--------> is a url from text:' + token);
 			// some URLs will have the http:// prefix already, for others add it
@@ -1023,6 +1036,29 @@ var html2text = function (html) {
     return tag.innerText;
 }
 
+// var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
+var addNoContentEditableToHrefs = function (html) {
+
+	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
+		console.log ('a:' + a);
+		console.log ('b:' + c);
+		console.log ('c:' + d);
+		console.log ('d:' + a);
+		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+		//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+		html = a+'<div class=\'dfdfdf\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></div>' + d;
+		return html;
+	})
+
+	// http://stackoverflow.com/questions/3954927/js-regex-how-to-replace-the-captured-groups-only
+	//var t = html.replace(/(.*value="\w+)(\d+)(\w+".*)/, "$1!NEW_ID!$3")
+
+	//html
+	console.log ('html:' + html);
+    return html;
+}
+
 
 
 if (typeof exports !== 'undefined') {
@@ -1030,12 +1066,28 @@ if (typeof exports !== 'undefined') {
     exports.hrefThisText = hrefThisText;
     exports.html2text = html2text;
     exports.isUrl = isUrl;
+    exports.addNoContentEditableToHrefs = addNoContentEditableToHrefs;
+}
+
+
+var test160117 = false;
+if (test160117)
+{
+	//"hello _there_".replace(/_(.*)_/, function(a, b){
+	//		console.log ('<div>' + b + '</div>');
+	//})
+
+	var s = "prior<a href=\"http://www.ibm.com\">www.ibm.com</a>post";
+	console.log ('s:' + addNoContentEditableToHrefs(s));
 }
 
 },{"C:/utd/150719utdG/public/util/O.js":3}],9:[function(require,module,exports){
 'use strict';
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
+var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+
 
 /**
  * Created by henryms on 10/4/2015.
@@ -1063,8 +1115,11 @@ var privateSpace = new function() {
 }
 
 
-var utilHtmlCleaner = new function() {
-	// call this as utilHtmlCleaner.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
+/**
+ * strip html tags out of a string
+ */
+var utilHtmlCleanerFunctions = new function() {
+	// call this as utilHtmlCleanerFunctions.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
 	this.cleanHtmlPre = function(str, allowed_tags) {
 		//alert ('in tinymcePasteCleanFilter.cleanHtml [' + str+ ']');
 		O.o ("in cleanHtmlPre ");
@@ -1131,7 +1186,7 @@ var utilHtmlCleaner = new function() {
 			}
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
-			O.o ('ERROR: in utilHtmlCleaner.cleanHtmlPre() UtilHtmlCleaner:' + err);
+			O.o ('ERROR: in utilHtmlCleanerFunctions.cleanHtmlPre() UtilHtmlCleaner:' + err);
 		}
 
 		//return "bracketed << by cleanHtmlPre <<" + str + ">>";
@@ -1177,6 +1232,50 @@ var utilHtmlCleaner = new function() {
 
 		return post;
 	}
+
+
+	/**
+	 * eg remove what mce seems to add - these trailing   <p>&nbsp;</p>
+	 * <p><span style="text-decoration: underline;"><strong>jo</strong></span>e5 [IBM - United States] http://ibm.com</p>
+	   <p>&nbsp;</p>
+	   <p>&nbsp;</p>
+
+	 * @param html
+     */
+
+	// ToDo: bear in mind this is an ordered list currently, and the trim is not complete
+	// called CRUDE in that sense
+	this.arrTrimTokens = ['<p>&nbsp;</p>', '<p>', '</p>']
+	this.htmlTrimCrude = function(htmlToTrim)
+	{
+
+		var savhtmlToTrim = htmlToTrim;
+		//O.o ('in htmlTrimCrude');
+		do {
+
+			this.arrTrimTokens.forEach(function (htmlToMatchAndRemove) {
+				htmlToTrim = htmlToTrim.allAfterFirst(htmlToMatchAndRemove, true);
+			});
+
+			O.o('done htmlTrimCrude [' + htmlToTrim + ']');
+			// tail cleaner
+			this.arrTrimTokens.forEach(function (htmlToMatchAndRemove) {
+				var savepre = htmlToTrim;
+				htmlToTrim = htmlToTrim.allBeforeLast(htmlToMatchAndRemove, true);
+				O.o('removing tail:' + htmlToMatchAndRemove + ' from [' + savepre + '] to [' + htmlToTrim + ']')
+			});
+		}  while (savhtmlToTrim !== htmlToTrim);
+
+		if (savhtmlToTrim !== htmlToTrim && savhtmlToTrim.trim() === '') {
+			O.o('error? changed from   savhtmlToTrim[' + savhtmlToTrim + ']  to     htmlToTrim[' + htmlToTrim + ']');
+		}
+		return htmlToTrim;
+	}
+
+
+
+
+
 }
 
 
@@ -1256,23 +1355,30 @@ function processpaste (elem, savedcontent) {
 
 
 if (typeof exports !== 'undefined') {
-    exports.utilHtmlCleaner = utilHtmlCleaner;
+    exports.utilHtmlCleanerFunctions = utilHtmlCleanerFunctions;
     exports.handlepaste = handlepaste;
-	// UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(strm ...)
+	// UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(strm ...)
 }
 
 
 if (false)
 {
 	var prestrip = '<p>ibm.com</p>';
-	var stripped  = utilHtmlCleaner.cleanHtmlPre(prestrip, '');
+	var stripped  = utilHtmlCleanerFunctions.cleanHtmlPre(prestrip, '');
+	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
+}
+
+if (false)
+{
+	var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+	var stripped  = utilHtmlCleanerFunctions.htmlTrimCrude(prestrip);
 	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
 }
 
 
 
 
-},{"C:/utd/150719utdG/public/util/O.js":3}],10:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":9,"C:/utd/150719utdG/public/util/UtilString.js":12}],10:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1355,11 +1461,38 @@ String.prototype.replaceLast = function (what, replacement) {
 	return this.reverse().replace(new RegExp(what.reverse()), replacement.reverse()).reverse();
 };
 
-String.prototype.everythingAfterLast = function (allAfterLastOfThis) {
+String.prototype.allAfterLast = function (allAfterLastOfThis) {
 	return i = this.substring(this.lastIndexOf(allAfterLastOfThis)+1);
 };
 
-    /**
+	/**
+	 * remove one or all of a string at head
+	 * @param substr
+	 * @param moreThanOne
+	 * @returns {*}
+     */
+	String.prototype.allBeforeLast = function (substr, moreThanOne) {
+		var rtn = this;
+		do {
+			var nextIdx = rtn.lastIndexOf(substr);
+			if (nextIdx > 0 && rtn.endsWith(substr))
+				rtn = rtn.slice(0, nextIdx);
+		} while (moreThanOne && nextIdx > 0);
+		return rtn;
+	};
+
+	String.prototype.allAfterFirst = function (substr, moreThanOne) {
+		var rtn = this;
+		do
+		{
+			var nextIdx = rtn.indexOf(substr);
+			if (nextIdx === 0)
+				rtn = rtn.slice(substr.length);
+		} while (moreThanOne && nextIdx === 0);
+		return rtn;
+	};
+
+	/**
      *
      * @param s
      * @returns {*}
@@ -1447,6 +1580,10 @@ if (typeof exports !== 'undefined') {
 }
 
 
+var test = false;
+if (test)
+{
+}
 
 },{}],13:[function(require,module,exports){
 //utd = [];   // ustodo utilities

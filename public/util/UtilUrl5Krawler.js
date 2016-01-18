@@ -10,10 +10,10 @@ var Krawler = require('krawler');
 
 /**
  * enrich ustodo with     title
- * @param urlUtds enriched - side effected
+ * @param arrUrlUtds enriched - side effected
  * @param callbackFromKrawl
  */
-var krawlhk = function(urlUtds, callbackFromKrawl)
+var krawlhk = function(arrUrlUtds, callbackFromKrawl)
 {
 	//2. ologx:really done hk
 	//3. ologx:really done hk xxx: [http://localhost:6768/] -> [hbk6768]
@@ -33,8 +33,8 @@ var krawlhk = function(urlUtds, callbackFromKrawl)
 
 		// set up URLs to fetch title on
 		var sArrUrlStringsWhttp = [];
-		for (var iUrlUtd in urlUtds) {
-			sArrUrlStringsWhttp.push (urlUtds[iUrlUtd].addressWithHttp);
+		for (var iUrlUtd in arrUrlUtds) {
+			sArrUrlStringsWhttp.push (arrUrlUtds[iUrlUtd].addressWithHttp);
 		}
 
 		var mapUrlStringWhttp_Title = {};
@@ -57,7 +57,7 @@ var krawlhk = function(urlUtds, callbackFromKrawl)
 				}
 			})
 			.on('error', function(err, url) {
-				O.o ('err:' + err);
+				O.oerr ('err:' + err);  //hbkhbk
 				mapUrlStringWhttp_Title[urlString] = err.toString();
 				// there has been an 'error' on 'url'
 			})
@@ -68,11 +68,11 @@ var krawlhk = function(urlUtds, callbackFromKrawl)
 				for (var urlStringWhttpMapsToTitle_nameIndex in mapUrlStringWhttp_Title)
 				{
 					var foundMatch = false;
-					for (var iUrlUtd in urlUtds)
+					for (var iUrlUtd in arrUrlUtds)
 					{
-						if (urlStringWhttpMapsToTitle_nameIndex === urlUtds[iUrlUtd].addressWithHttp)
+						if (urlStringWhttpMapsToTitle_nameIndex === arrUrlUtds[iUrlUtd].addressWithHttp)
 						{
-							urlUtds[iUrlUtd].title = mapUrlStringWhttp_Title[urlStringWhttpMapsToTitle_nameIndex];
+							arrUrlUtds[iUrlUtd].title = mapUrlStringWhttp_Title[urlStringWhttpMapsToTitle_nameIndex];
 							foundMatch = true;
 							O.o ('title get success : [' + urlStringWhttpMapsToTitle_nameIndex + '] -> [' + mapUrlStringWhttp_Title[urlStringWhttpMapsToTitle_nameIndex] + ']');
 						}
@@ -84,16 +84,16 @@ var krawlhk = function(urlUtds, callbackFromKrawl)
 				}
 
 				// now verify that every urlUtd has a title
-				for (var iUrlUtd in urlUtds)
+				for (var iUrlUtd in arrUrlUtds)
 				{
-					if (!urlUtds[iUrlUtd].title)   {
-						throw  'failed to populate title in urlUtds[iUrlUtd].addressWithHttp [' + urlUtds[iUrlUtd].addressWithHttp + ']';
+					if (!arrUrlUtds[iUrlUtd].title)   {
+						throw  'failed to populate title in arrUrlUtds[iUrlUtd].addressWithHttp [' + arrUrlUtds[iUrlUtd].addressWithHttp + ']';
 					}
 				}
 
 
 				O.o ('really done hk results:' + mapUrlStringWhttp_Title);
-				callbackFromKrawl(urlUtds);
+				callbackFromKrawl(arrUrlUtds);
 				// all URLs has been fetched
 			});
 	} catch (err) {
@@ -108,7 +108,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-if (false)
+if (true)
 {
 	var urlUtds = [
 	];
@@ -125,11 +125,11 @@ if (false)
 		'http://tester.com/',
 		'http://hp.com/',
 		'http://ibm.com/',
-		'http://yahoo.com/',
+		'http://yahoo.com/';
 
 
 
-		krawl(urlUtds, function(s){
+		krawlhk(urlUtds, function(s){
 		O.o ('I did it Mom!');
 	});
 }

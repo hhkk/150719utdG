@@ -1,6 +1,9 @@
 'use strict';
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
+var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+
 
 /**
  * Created by henryms on 10/4/2015.
@@ -28,8 +31,11 @@ var privateSpace = new function() {
 }
 
 
-var utilHtmlCleaner = new function() {
-	// call this as utilHtmlCleaner.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
+/**
+ * strip html tags out of a string
+ */
+var utilHtmlCleanerFunctions = new function() {
+	// call this as utilHtmlCleanerFunctions.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
 	this.cleanHtmlPre = function(str, allowed_tags) {
 		//alert ('in tinymcePasteCleanFilter.cleanHtml [' + str+ ']');
 		O.o ("in cleanHtmlPre ");
@@ -96,7 +102,7 @@ var utilHtmlCleaner = new function() {
 			}
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
-			O.o ('ERROR: in utilHtmlCleaner.cleanHtmlPre() UtilHtmlCleaner:' + err);
+			O.o ('ERROR: in utilHtmlCleanerFunctions.cleanHtmlPre() UtilHtmlCleaner:' + err);
 		}
 
 		//return "bracketed << by cleanHtmlPre <<" + str + ">>";
@@ -142,6 +148,49 @@ var utilHtmlCleaner = new function() {
 
 		return post;
 	}
+
+
+	/**
+	 * eg remove what mce seems to add - these trailing   <p>&nbsp;</p>
+	 * <p><span style="text-decoration: underline;"><strong>jo</strong></span>e5 [IBM - United States] http://ibm.com</p>
+	   <p>&nbsp;</p>
+	   <p>&nbsp;</p>
+
+	 * @param html
+     */
+
+	// ToDo: bear in mind this is an ordered list currently, and the trim is not complete
+	// called CRUDE in that sense
+	this.arrTrimTokens = ['<p>&nbsp;</p>', '<p>', '</p>']
+	this.htmlTrimCrude = function(htmlToTrim)
+	{
+
+		//O.o ('in htmlTrimCrude');
+		do {
+			var savhtmlToTrim = htmlToTrim;
+			this.arrTrimTokens.forEach(function (htmlToMatchAndRemove) {
+				htmlToTrim = htmlToTrim.allAfterFirst(htmlToMatchAndRemove, true);
+			});
+
+			O.o('done htmlTrimCrude [' + htmlToTrim + ']');
+			// tail cleaner
+			this.arrTrimTokens.forEach(function (htmlToMatchAndRemove) {
+				var savepre = htmlToTrim;
+				htmlToTrim = htmlToTrim.allBeforeLast(htmlToMatchAndRemove, true);
+				O.o('removing tail:' + htmlToMatchAndRemove + ' from [' + savepre + '] to [' + htmlToTrim + ']')
+			});
+		}  while (savhtmlToTrim !== htmlToTrim);
+
+		if (savhtmlToTrim !== htmlToTrim && savhtmlToTrim.trim() === '') {
+			O.o('error? changed from   savhtmlToTrim[' + savhtmlToTrim + ']  to     htmlToTrim[' + htmlToTrim + ']');
+		}
+		return htmlToTrim;
+	}
+
+
+
+
+
 }
 
 
@@ -221,16 +270,23 @@ function processpaste (elem, savedcontent) {
 
 
 if (typeof exports !== 'undefined') {
-    exports.utilHtmlCleaner = utilHtmlCleaner;
+    exports.utilHtmlCleanerFunctions = utilHtmlCleanerFunctions;
     exports.handlepaste = handlepaste;
-	// UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(strm ...)
+	// UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(strm ...)
 }
 
 
 if (false)
 {
 	var prestrip = '<p>ibm.com</p>';
-	var stripped  = utilHtmlCleaner.cleanHtmlPre(prestrip, '');
+	var stripped  = utilHtmlCleanerFunctions.cleanHtmlPre(prestrip, '');
+	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
+}
+
+if (false)
+{
+	var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+	var stripped  = utilHtmlCleanerFunctions.htmlTrimCrude(prestrip);
 	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
 }
 

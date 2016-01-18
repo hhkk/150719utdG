@@ -21,11 +21,46 @@ String.prototype.replaceLast = function (what, replacement) {
 	return this.reverse().replace(new RegExp(what.reverse()), replacement.reverse()).reverse();
 };
 
-String.prototype.everythingAfterLast = function (allAfterLastOfThis) {
+String.prototype.allAfterLast = function (allAfterLastOfThis) {
 	return i = this.substring(this.lastIndexOf(allAfterLastOfThis)+1);
 };
 
-    /**
+	/**
+	 * remove one or all of a string at head
+	 * @param substr
+	 * @param moreThanOne
+	 * @returns {*}
+     */
+	String.prototype.allBeforeLast = function (substr, moreThanOne) {
+		var rtn = this;
+		do {
+			rtn = rtn.trim();
+			var nextIdx = rtn.lastIndexOf(substr);
+			var changed = false;
+			if (nextIdx > 0 && rtn.endsWith(substr)) {
+				changed = true;
+				rtn = rtn.slice(0, nextIdx);
+			}
+		} while (moreThanOne && changed);
+		return rtn;
+	};
+
+	String.prototype.allAfterFirst = function (substr, moreThanOne) {
+		var rtn = this;
+		do
+		{
+			rtn = rtn.trim();
+			var nextIdx = rtn.indexOf(substr);
+			var changed = false;
+			if (nextIdx === 0)  {
+				changed = true;
+				rtn = rtn.slice(substr.length);
+			}
+		} while (moreThanOne && changed);
+		return rtn;
+	};
+
+	/**
      *
      * @param s
      * @returns {*}
@@ -113,3 +148,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
+var test = false;
+if (test)
+{
+}

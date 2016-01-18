@@ -1325,9 +1325,9 @@ angular.module('ustodos').controller('UstodosController',
             //    $scope.editor.on('key', function(event) {
             //        var x = CKEDITOR.instances.idCkeEditorTextarea.getData();
             //        //var xText = CKEDITOR.instances.idCkeEditorTextarea.document.getBody().getText()
-            //        //o('raw key x:' + x); // hbkhbk
+            //        //o('raw key x:' + x); //
             //        $scope.respondToKeyboardEvent();
-            //        //console.log('raw key xText:' + xText); // hbkhbk
+            //        //console.log('raw key xText:' + xText); //
             //        //$scope.showFocus();
             //
             //
@@ -1601,14 +1601,14 @@ angular.module('ustodos').controller('UstodosController',
 
                 var keyCode= (window.event ? keyEvent.keyCode : keyEvent.which);
                 //O.o('onKeyUp:' + keyCode);
-                //O.o('onKeyUp:' + getKeyboardEventResult($event, 'Key up')); // hbkhbk
+                //O.o('onKeyUp:' + getKeyboardEventResult($event, 'Key up')); //
                 // $scope.respondToKeyboardEvent('line634', keyCode);
             };
 
             //$scope.onKeyUp = function(ev) {
-            //    ////alert('onKeyUp:' + ev); // hbkhbk
-            //    //console.log('onKeyUp:' + getKeyboardEventResult); // hbkhbk
-            //    ////console.log ('onKeyUp'); // hbkhbk
+            //    ////alert('onKeyUp:' + ev); //
+            //    //console.log('onKeyUp:' + getKeyboardEventResult); //
+            //    ////console.log ('onKeyUp'); //
             //    ////$scope.showFocus();
             //    //$scope.respondToKeyboardEvent()
             //    ////$scope.propagateTextChanges();

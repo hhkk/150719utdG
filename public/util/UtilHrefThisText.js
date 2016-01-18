@@ -86,6 +86,7 @@ var buildHrefFromUrlString= function(urlstr)
 }                  ;
 
 /**
+ * Given a full ustodo document, used on outbound side originally, find and process hrefs
  * make sure all urls (e.g., n  on whitespace string tokens ending in .net) strings have http preamble
  * and href tag is inserted
  * @param textToBeHrefed original string with possible urls not yet IDd with http prefix
@@ -98,7 +99,8 @@ var hrefThisText = function(textToBeHrefed)
     var tokens = textToBeHrefed.split(/\s+/);
     //console.log ('y.length:' + y.length);
     var i = 0;
-    tokens.forEach(function(token) {
+    tokens.forEach(function(token)
+	{
         if (isUrl(token)) {
             //console.log ('is a url:' + token);
             var replaceWith = null;
@@ -141,7 +143,7 @@ var getUrlsFromText = function(textWithUrls)
     // section_adds http to .coms .edu etc
 	var urls = [];
 	tokens.forEach(function(token) {
-		//UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre('asdasd',['a']);
+		//UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre('asdasd',['a']);
         if (isUrl(token)) {
             //O.o ('--------> is a url from text:' + token);
 			// some URLs will have the http:// prefix already, for others add it
@@ -198,6 +200,29 @@ var html2text = function (html) {
     return tag.innerText;
 }
 
+// var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
+var addNoContentEditableToHrefs = function (html) {
+
+	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
+		console.log ('a:' + a);
+		console.log ('b:' + c);
+		console.log ('c:' + d);
+		console.log ('d:' + a);
+		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+		//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+		html = a+'<div class=\'dfdfdf\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></div>' + d;
+		return html;
+	})
+
+	// http://stackoverflow.com/questions/3954927/js-regex-how-to-replace-the-captured-groups-only
+	//var t = html.replace(/(.*value="\w+)(\d+)(\w+".*)/, "$1!NEW_ID!$3")
+
+	//html
+	console.log ('html:' + html);
+    return html;
+}
+
 
 
 if (typeof exports !== 'undefined') {
@@ -205,4 +230,17 @@ if (typeof exports !== 'undefined') {
     exports.hrefThisText = hrefThisText;
     exports.html2text = html2text;
     exports.isUrl = isUrl;
+    exports.addNoContentEditableToHrefs = addNoContentEditableToHrefs;
+}
+
+
+var test160117 = false;
+if (test160117)
+{
+	//"hello _there_".replace(/_(.*)_/, function(a, b){
+	//		console.log ('<div>' + b + '</div>');
+	//})
+
+	var s = "prior<a href=\"http://www.ibm.com\">www.ibm.com</a>post";
+	console.log ('s:' + addNoContentEditableToHrefs(s));
 }

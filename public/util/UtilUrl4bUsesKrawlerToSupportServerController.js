@@ -25,6 +25,7 @@ var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.j
 var request = require('request');
 var unirest = require('unirest');
 var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //var UtilUrl4bUsesKrawlerToSupportServerController =
 	// require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
 
@@ -50,30 +51,25 @@ var findTitle_htmlParse = function(html) {
 }
 
 
-/**
- *
- * @param ustodoHtml
- * @param ustodoText
- // hbkk
- *  @param res - res2.json will send back an expnded ustodo
- *  // todo - send back a real data structure not a bag/ustodo
- *  // return data struct would be an array of URLs
- */
-//tokenize raw text, get array of http-urls to get titles.  expand to include title
 var callCount_expandUrlsToHrefsReturnPatchedStr = 0
 var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js'); // for urlUtd
-// hbkk - from line 98 ustodos.server.controller.js
+
+// hbkk - from line 119 ustodos.server.controller.js
 /**
- * convert an ustodo to embed urls in the text
- * this is called on the way INTO the DB
- * @param ustodoHtml
- * @param ustodoText
- * @param res
+ * tokenize user-input html
+ * get array of http-urls to get titles
+ * update/fetch title if not there or if needed to synch text and link
+ * expand to include title
+ * add http if none
+ * embed
+ *
+ *  @param res - res2.json will send back an expnded ustodo
  */
-var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
+var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 {
 	try {
-		//O.o ('################# in expandUrlsToHrefsReturnPatchedStr get titles [' + ustodoHtml + ']');
+		var savustodoHtml = ustodoHtml;
+		O.o ('################# in expandUrlsToHrefsReturnPatchedStr get titles [' + ustodoHtml + ']');
 		//var Item = function(url) {
 		//	this.url = url;
 		//	this.urlori = url;
@@ -81,11 +77,15 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 		//};
 
 		// ARE THERE ANY URLS
-		// get urls with urls as "http..." in their own array element
+		// get urls witth urls as "http..." in their own array element
 		// section_expand_ eg com to include http
-		var urlUtdsFromText = UtilHrefThisText.getUrlsFromText(ustodoText);
+		if (ustodoHtml.trim() ==='')
+		{
+			O.o ('why is this null?');
+		}
+		var arrUrlsFromHtml = UtilHrefThisText.getUrlsFromText(ustodoHtml);
 
-		//urlUtdsFromText.forEach(function(urlUtd)
+		//arrUrlsFromHtml.forEach(function(urlUtd)
 		//{
 		//	console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressOriMightHaveHttpNeededForSearchReplace);
 		//	console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressWithHttp);
@@ -95,19 +95,19 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 		//    //}
 		//});
 
-		if (urlUtdsFromText.length > 0)
+		if (arrUrlsFromHtml.length > 0)
 		{
 			//var res2 = {};
 			/**
 			 * once I have a title back from web call, knit the title back into both html and text
 			 */
 			// get title into each element of urlUtds
-			var callbackFromKrawl = function(urlUtdsEnrichedByKrawl)
+			var callbackFromKrawl = function(arrUrlUtds_EnrichedByKrawl)
 			{
-				// create index of urlUtdsEnrichedByKrawl by originals for performance so not O n**2 searching thru urlUtd array
-				var urlUtdsEnrichedByKrawl_byOriginal = {};
-				urlUtdsEnrichedByKrawl.forEach(function(urlUtdEnrichedByKrawl) {
-					urlUtdsEnrichedByKrawl_byOriginal[urlUtdEnrichedByKrawl.addressOriMightHaveHttpNeededForSearchReplace] = urlUtdEnrichedByKrawl;
+				// create index of arrUrlUtds_EnrichedByKrawl by originals for performance so not O n**2 searching thru urlUtd array
+	 			var arrUrlUtds_EnrichedByKrawl_byOriginal = {};
+				arrUrlUtds_EnrichedByKrawl.forEach(function(urlUtdEnrichedByKrawl) {
+					arrUrlUtds_EnrichedByKrawl_byOriginal[urlUtdEnrichedByKrawl.addressOriMightHaveHttpNeededForSearchReplace] = urlUtdEnrichedByKrawl;
 				});
 
 				//O.o ("in callback from ");
@@ -118,7 +118,9 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 				// section_knit_replace_text into text here
 				// now replace tokens with combo [title] + hrefed url
 				//textWithUrls = '=-=-=-=-=-=-=-=-' + textWithUrls;
-				var arrStr_tokensOriginal = ustodoText.split(/\s+/);
+
+				// interleave urlutd now-found titles back into unstructured text
+				var arrStr_tokensOriginal = ustodoHtml.split(/\s+/);
 				var arrStr_tokensToJoinNowTitled = [];
 				//console.log ('y.length:' + y.length);
 				try {
@@ -136,7 +138,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 									httpIfNeeded = 'http://';
 
 								arrStr_tokensToJoinNowTitled[itokens]  = '[' +
-									urlUtdsEnrichedByKrawl_byOriginal[token].title + '] ' +
+									arrUrlUtds_EnrichedByKrawl_byOriginal[token].title + '] ' +
 									//'<a href=' + httpIfNeeded + token + '>' + token + '</a>';
 									httpIfNeeded + token;
 
@@ -194,12 +196,14 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 			//	}
 			//});
 
-			UtilUrl5Krawler.krawlhk(urlUtdsFromText, callbackFromKrawl);
+			// krawl is the title fetcher
+			UtilUrl5Krawler.krawlhk(arrUrlsFromHtml, callbackFromKrawl);
 
 		}
 		else {
-			O.o ('reached res.json withOUT urls!!! ================================ [' + ustodoText + ']');
-			res.json(ustodoText);
+			O.o ('reached res.json withOUT urls!!! ================================ savustodoHtml [' + savustodoHtml + ']');
+			O.o ('reached res.json withOUT urls!!! ================================ ustodoHtml [' + ustodoHtml + ']');
+			res.json(ustodoHtml);
 		};
 
 		// hbkk
@@ -575,7 +579,7 @@ if (test) {
     //var x = '1111 http://www.dell.com 2222  '; // ok by itself at 40 seconds
     //var x = '1111 dell.com 2222  '; // ok by itself at 40 seconds
     var x = [];
-	x.push ('apple.com ');
+	//x.push ('apple.com ');
 	//x.push ('ibm.com ');
 	//x.push ('dell.com ');
 	//x.push ('apple.com ');
@@ -584,22 +588,21 @@ if (test) {
 	//x.push ('yahoo.com');
 	//x.push ('tester.com ');
 	//x.push ('get.com ');
-	//x.push ('time.com ');
+	x.push ('time.com ');
 	//x.push ('jpro.com ');
-
 
 	var res = {};
 	res.json = function(s) {
 		O.o ('FINAL OUT RES JSON in res.json [' + JSON.stringify(s) + ']');
 	}
 	async.series([
-			function(callback){
-				O.o ('11111111111111111111111111111111111111111111111111111111111111111111111');
-				var x = 'apple.com';
-				expandUrlsToHrefsReturnPatchedStr(x, x, res);
-				callback(null, 'a')
-			},
-			//function(callback){
+		function(callback){
+			O.o ('11111111111111111111111111111111111111111111111111111111111111111111111');
+			//var x = 'apple.com';
+			expandUrlsToHrefsReturnPatchedStr(x[0], res);
+			callback(null, 'a')
+		},
+		//function(callback){
 			//	O.o ('2222222222222222222222222222222222222222222222222');
 			//	var x = 'time.com';
 			//	expandUrlsToHrefsReturnPatchedStr(x, x, res);
@@ -690,4 +693,20 @@ if (false)
 
 }
 
+
+
+
+
+var test160118 = false; // hbkhbk
+if (test160118)
+{
+	var res = {};
+	res.json = function (processedHTML) {
+		O.o ('processedHTML [' + processedHTML + ']');
+	}
+	var htmlWithPreTitledUrl = '<p>ww time.com</p>';
+	htmlWithPreTitledUrl = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(htmlWithPreTitledUrl);
+
+	expandUrlsToHrefsReturnPatchedStr(htmlWithPreTitledUrl, res);
+}
 

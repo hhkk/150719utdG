@@ -13,6 +13,7 @@ var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 
 
@@ -66,26 +67,32 @@ exports.create = function(req, res)
 	// ustodo is a model object with getters and setters derived from the
 	var ustodo = new Ustodo(req.body);
 
-	O.o('12121212 in ustodos.server.controller.js: create :  req.user._doc.username [' + req.user._doc.username + ']  ustodo.html [' + ustodo.html + ']  ustodo.text [' + ustodo.text + ']');
+	ustodo._doc.html = ustodo._doc.html.trim();
+	ustodo._doc.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html);
 	ustodo.user = req.user;
 	try {
 	 // do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
 			//	if (false)
-		ustodo.html = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlPre(ustodo.html);
+		//ustodo.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
 		O.e('err in expandUrlsToHrefsReturnPatchedStr:' + err);
 	}
 
-	var res2 = {};
+	var res2WithJsonFn = {};
 	// section_exports.create
 	O.o ('xxxxxxxxxxxxxxxxxxxxxxxxxin server.controller exports.create');
-	res2.json = function(utdText)
+	res2WithJsonFn.json = function(rejoinedHtmlPostTitle)
 	{
 		try {
-			ustodo.text = utdText;
-			ustodo.html = utdText;
-			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + utdText + ']');
+			ustodo.html = rejoinedHtmlPostTitle;
+
+			ustodo.text = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
+
+			//ustodo.html = UtilHrefThisText.hrefThisText(ustodo.html);
+			//ustodo.html = UtilHrefThisText.addNoContentEditableToHrefs(ustodo.html);
+
+			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostTitle + ']');
 			ustodo.datelastmod = new Date();
 			ustodo.datecreated = new Date();
 
@@ -108,15 +115,21 @@ exports.create = function(req, res)
 
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
-			UtilErrorEmitter.emitError('err in res2.json:' + err);
+			UtilErrorEmitter.emitError('err in res2WithJsonFn.json:' + err);
 		}
 
 	};
 
 	try {
-		//UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(ustodo.html, ustodo.text, res2);
+		//UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(ustodo.html, ustodo.text, res2WithJsonFn);
 		// hbkk
-		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(ustodo.html, ustodo.text, res2);
+		var htmlPretitledTrimmed = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo.html);
+		O.o ('-=-=-=-= htmlPretitledTrimmed [' + htmlPretitledTrimmed + ']');
+		if (htmlPretitledTrimmed.trim() === '')
+		{
+			O.o ('-=-=-=-= nothing htmlPretitledTrimmed [' + htmlPretitledTrimmed + ']');
+		}
+		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
 		UtilErrorEmitter.emitError('err in expandUrlsToHrefsReturnPatchedStr:' + err);
@@ -463,8 +476,8 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//    ustodo.user = req.user;
 	//
 	//    try {
-	//        var res2 = {};
-	//        res2.json = function(s)
+	//        var res2WithJsonFn = {};
+	//        res2WithJsonFn.json = function(s)
 	//        {
 	//            O.o ('--------> saving content as both text and html [' + s + ']');
 	//
@@ -486,7 +499,7 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//            });
 	//        };
 	//
-	//        UtilUrl4.expandUrlsToHrefsReturnPatchedStr(commandRemoved, res2);
+	//        UtilUrl4.expandUrlsToHrefsReturnPatchedStr(commandRemoved, res2WithJsonFn);
 	//
 	//
 	//    } catch (e) {

@@ -141,6 +141,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
     //O.o ('sClassHK ustodo:' + sClass);
 	O.o ('xpre query querymongo [' + querymongo + ']');
     Ustodo.find(querymongo).sort('-datelastmod').limit(hklimit).populate('user', 'username displayName _id').exec (
+		// call back from find query:
 		function(err, ustodos)
 		{
 			//Ustodo.find(querymongo).populate('user', 'displayName').exec(function(err, ustodos) {
@@ -160,7 +161,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 
 
 				var mapUserIdToUserNameStr = {};
-				// for each recard from the DB
+				// for each record from the DB based only on the search portion retained
 				for (var k = 0; k < (ustodos.length) && arrUstodoPassedAllFilters.length < hklimit; k++)
 				{
 					mapUserIdToUserNameStr[ustodos[k].user._id] = null;
@@ -168,26 +169,42 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 					countResult = countResult + 1;
 					//ustodos[k].text = 'svr2,' + ustodos[k].text;
 					var tt = UtilHrefThisText.hrefThisText(ustodos[k].text);
-					var keeper = true;
+					var keeper = true; //assume keep until proven otherwise
 
-					// apply second filter - first was the pull by mongo - now check that list against user inputs not in the query
+					// if the user enters say 5 search keys, not all are applied to mongo, this is the remainder filter
+					// apply second (in mem not just mongo) filter - first was the pull by mongo - now check that list against user inputs not in the query
 					for (var i = 0; i < queryTokens.length; i++) {
 						//console.log ('&&&&&&&&&&&&&&&&&&& in result loop tt [' + tt + '] queryTokens[i] [' + queryTokens[i] + ']');
-						if (tt.toLowerCase().indexOf(queryTokens[i]) < 0) {
-							keeper = false;
+						if (tt.toLowerCase().indexOf(queryTokens[i]) < 0)
+						{
+							keeper = false; // failed one of the search keys, fail overall
 							break;
 						}
 					}
 
-					if (keeper) {
+					if (keeper)
+					{
 						//O.o ('&&&&&&&&&&&&&&&&&&& in result loop a keeper' );
-						// convert to HREFs
-						ustodos[k].textWithHrefs = UtilHrefThisText.hrefThisText(ustodos[k].text);
-						ustodos[k].htmlWithHrefs = UtilHrefThisText.hrefThisText(ustodos[k].html);
+
+						// convert text to HREFs
+						//var hrefdText = UtilHrefThisText.hrefThisText(ustodos[k].text);
+						//O.o ('-------------- kept text hrefd:' + hrefdText);
+						//ustodos[k]._doc.text = hrefdText;
+						// convert html to HREFs
+						//var hrefdHtml = UtilHrefThisText.hrefThisText(ustodos[k].html);
+						//O.o ('-------------- kept html hrefd:' + hrefdHtml);
+						//ustodos[k]._doc.html = hrefdHtml;
 
 						// ADD TO RETURN - PASSES MONGO AND LOCAL FURTHER FILTER LIST
 
 
+						ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html);   // hbkhbk
+
+						console.log ('pre contentEditableFalse:' + ustodos[k].html);
+
+						ustodos[k].html = UtilHrefThisText.addNoContentEditableToHrefs(ustodos[k].html);   // hbkhbk
+
+						console.log ('post contentEditableFalse:' + ustodos[k].html);
 
 						arrUstodoPassedAllFilters.push(ustodos[k]);
 						//O.o (ustodos[k]._id);

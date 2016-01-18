@@ -431,6 +431,7 @@
 									/*hyphens:auto;*/
 
 									>
+									<!--ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"-->
 										<span class='hkcssContentedit' >
 											<div class="WholePage focusblurme"
 												 id="ustodorow{{$index}}"
@@ -441,7 +442,7 @@
 												 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
 												 ng-focus='hkngfocustest($index)'
 												 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
-												 ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)"
+												 ng-bind-html="ustodosFiltered[$index].html"
 											>
 											</div>
 										</span>

@@ -27,9 +27,9 @@ var UtilNLB_bgFade = UtilNLB_bgFade;
 var UtilErrorEmitter = UtilErrorEmitter;
 var UtilClassz = UtilClassz;
 
-//var UtilHtmlCleaner = UtilHtmlCleaner; // this is a file name
-//alert('defining UtilHtmlCleaner2_pasteProcessForContentEditable ');
-//var UtilHtmlCleaner2_pasteProcessForContentEditable = UtilHtmlCleaner2_pasteProcessForContentEditable; // this is a file name
+//var utilHtmlCleanerFunctions = utilHtmlCleanerFunctions; // this is a file name
+//alert('defining utilHtmlCleanerFunctions2_pasteProcessForContentEditable ');
+//var utilHtmlCleanerFunctions2_pasteProcessForContentEditable = utilHtmlCleanerFunctions2_pasteProcessForContentEditable; // this is a file name
 
 var mceId = 'idTinyMceTextArea';
 
@@ -1086,7 +1086,7 @@ angular.module('ustodos').controller
 									//alert('posthk');
 									//o.content = "-: CLEANED PRE :-\n" + o.content;
 									// works
-									//o.content = UtilHtmlCleaner.utilHtmlCleaner.cleanHtmlStandard(o.content); // htmlcleaner
+									//o.content = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlStandard(o.content); // htmlcleaner
 								};
 								tinyMceparams_pasteFilter.paste_postprocess = function(pl, o) {
 									// Content DOM node containing the DOM structure of the clipboard
@@ -1654,9 +1654,9 @@ angular.module('ustodos').controller
 					//    $scope.editor.on('key', function(event) {
 					//        var x = CKEDITOR.instances.idCkeEditorTextarea.getData();
 					//        //var xText = CKEDITOR.instances.idCkeEditorTextarea.document.getBody().getText()
-					//        //o('raw key x:' + x); // hbkhbk
+					//        //o('raw key x:' + x); //
 					//        $scope.respondToKeyboardEvent();
-					//        //console.log('raw key xText:' + xText); // hbkhbk
+					//        //console.log('raw key xText:' + xText); //
 					//        //$scope.showFocus();
 					//
 					//
@@ -1895,14 +1895,14 @@ angular.module('ustodos').controller
 
 						var keyCode= (window.event ? keyEvent.keyCode : keyEvent.which);
 						//O.o('onKeyUp:' + keyCode);
-						//O.o('onKeyUp:' + getKeyboardEventResult($event, 'Key up')); // hbkhbk
+						//O.o('onKeyUp:' + getKeyboardEventResult($event, 'Key up')); //
 						// $scope.respondToKeyboardEvent('line634', keyCode);
 					};
 
 					//$scope.onKeyUp = function(ev) {
-					//    ////alert('onKeyUp:' + ev); // hbkhbk
-					//    //console.log('onKeyUp:' + getKeyboardEventResult); // hbkhbk
-					//    ////console.log ('onKeyUp'); // hbkhbk
+					//    ////alert('onKeyUp:' + ev); //
+					//    //console.log('onKeyUp:' + getKeyboardEventResult); //
+					//    ////console.log ('onKeyUp'); //
 					//    ////$scope.showFocus();
 					//    //$scope.respondToKeyboardEvent()
 					//    ////$scope.propagateTextChanges();
@@ -3990,6 +3990,23 @@ angular.module('ustodos').controller
 			}
 		};
 	})
+	.directive('onFinishRender', function ($timeout) {
+		// oct 2015 seems not called
+		O.a('sss2');
+		alert ('done onload');
+		return {
+			restrict: 'A',
+			link: function (scope, element, attr) {
+				if (scope.$last === true) {
+					$timeout(function () {
+						//O.a ('sss3');
+						scope.$emit('ngRepeatFinished');
+						alert('ngRepeatFinished');
+					});
+				}
+			}
+		};
+	})
 	.filter('filterUstodos', function()
 		{
 
@@ -4055,44 +4072,45 @@ angular.module('ustodos').controller
 
 
 //O.a ('oneOfSeveral $routeProvider', '$locationProvider');
-angular.module('ustodos')
-	//.config (
-	//['$locationProvider',
-	//    function ($locationProvider) {
-	//
-	//        //commenting out this line (switching to hashbang mode) breaks the app
-	//        //-- unless # is added to the templates
-	//        $locationProvider.html5Mode(true);
-	//
-	//        //$routeProvider.when('/', {
-	//        //    template: 'this is home. go to <a href='/about'/>about</a>'
-	//        //});
-	//        //$routeProvider.when('/about', {
-	//        //    template: 'this is about. go to <a href='/'/>home</a'
-	//        //});
-	//    }
-	//])
-	////.config(function($locationProvider ) {
-	////    $locationProvider.html5Mode(true);
-	////    //$routeProvider.otherwise({redirectTo: '/home', controller: HomeCtrl});
-	////})
-	.directive('onFinishRender', function ($timeout) {
-		// oct 2015 seems not called
-		O.a('sss2');
-		alert ('done onload');
-		return {
-			restrict: 'A',
-			link: function (scope, element, attr) {
-				if (scope.$last === true) {
-					$timeout(function () {
-						//O.a ('sss3');
-						scope.$emit('ngRepeatFinished');
-						alert('ngRepeatFinished');
-					});
-				}
-			}
-		};
-	});
+//angular.module('ustodos')
+//	//.config (
+//	//['$locationProvider',
+//	//    function ($locationProvider) {
+//	//
+//	//        //commenting out this line (switching to hashbang mode) breaks the app
+//	//        //-- unless # is added to the templates
+//	//        $locationProvider.html5Mode(true);
+//	//
+//	//        //$routeProvider.when('/', {
+//	//        //    template: 'this is home. go to <a href='/about'/>about</a>'
+//	//        //});
+//	//        //$routeProvider.when('/about', {
+//	//        //    template: 'this is about. go to <a href='/'/>home</a'
+//	//        //});
+//	//    }
+//	//])
+//	////.config(function($locationProvider ) {
+//	////    $locationProvider.html5Mode(true);
+//	////    //$routeProvider.otherwise({redirectTo: '/home', controller: HomeCtrl});
+//	////})
+//	.directive('onFinishRender', function ($timeout) {
+//		// oct 2015 seems not called
+//		O.a('sss2');
+//		alert ('done onload');
+//		return {
+//			restrict: 'A',
+//			link: function (scope, element, attr) {
+//				if (scope.$last === true) {
+//					$timeout(function () {
+//						//O.a ('sss3');
+//						scope.$emit('ngRepeatFinished');
+//						alert('ngRepeatFinished');
+//					});
+//				}
+//			}
+//		};
+//	}
+//	);
 
 window.onload = function()
 {

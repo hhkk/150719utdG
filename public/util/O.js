@@ -42,14 +42,24 @@ var passesFilters = function(s) {
 var o = function (s)
 {
 	//console.log ('in o.o');
-    if (passesFilters(s))
-    {
-        var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s
-        console.log(t);
-        if (appendFileSync)
-            appendFileSync('c:/tmp/t.txt', t);
-        //console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
-    }
+	if (passesFilters(s))
+	{
+		var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s
+		console.log(t);
+		if (appendFileSync)
+			appendFileSync('c:/tmp/t.txt', t);
+		//console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
+	}
+}
+
+var oerr = function (s)
+{
+	//console.log ('in o.o');
+	var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologerr:' + s
+	console.error(t);
+	if (appendFileSync)
+		appendFileSync('c:/tmp/t.txt', 'ERROR: t:' + t);
+	//console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
 }
 
 
@@ -118,6 +128,7 @@ var a = function (s)
 }
 if (typeof exports !== 'undefined') {
     exports.o = o;
+    exports.oerr = oerr;
     exports.assert = assert;
     exports.a = a;
     exports.e = e;
