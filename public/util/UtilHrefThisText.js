@@ -119,6 +119,32 @@ var hrefThisText = function(textToBeHrefed)
 };
 
 /**
+ * within a title, remove the period from a url so downstream will not become clickable
+ * motivated by tweeter.com which includes tweeter.com in the title and don't want it processed later
+ * @param textToBeHrefed original string with possible urls not yet IDd with http prefix
+ * @param textToBeHrefed
+ * @returns {string}
+ */
+var unUrlThisText = function(textToBeUnUrld)
+{
+    //textToBeHrefed = '=-=-=-=-=-=-=-=-' + textToBeHrefed;
+    var tokens = textToBeUnUrld.split(/\s+/);
+    //console.log ('y.length:' + y.length);
+    var i = 0;
+    tokens.forEach(function(token)
+	{
+        if (isUrl(token)) {
+            //console.log ('is a url:' + token);
+			tokens[i] = tokens[i].replace(/\./,' ');
+            console.log ('un url to [' + tokens[i] + ']');
+        }
+        i++;
+    });
+    return tokens.join(' ');
+
+};
+
+/**
  * 1 split string on whitespace
  * 2 if a token is a url, prefix each isurl with http://
  * 3
@@ -211,7 +237,7 @@ var addNoContentEditableToHrefs = function (html) {
 		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
 		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
 		//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
-		html = a+'<div class=\'dfdfdf\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></div>' + d;
+		html = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
 		return html;
 	})
 
@@ -231,6 +257,7 @@ if (typeof exports !== 'undefined') {
     exports.html2text = html2text;
     exports.isUrl = isUrl;
     exports.addNoContentEditableToHrefs = addNoContentEditableToHrefs;
+    exports.unUrlThisText = unUrlThisText;
 }
 
 

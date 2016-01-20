@@ -1047,7 +1047,7 @@ var addNoContentEditableToHrefs = function (html) {
 		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
 		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
 		//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
-		html = a+'<div class=\'dfdfdf\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></div>' + d;
+		html = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + '>' + c + '</a></span>' + d;
 		return html;
 	})
 
@@ -1249,10 +1249,9 @@ var utilHtmlCleanerFunctions = new function() {
 	this.htmlTrimCrude = function(htmlToTrim)
 	{
 
-		var savhtmlToTrim = htmlToTrim;
 		//O.o ('in htmlTrimCrude');
 		do {
-
+			var savhtmlToTrim = htmlToTrim;
 			this.arrTrimTokens.forEach(function (htmlToMatchAndRemove) {
 				htmlToTrim = htmlToTrim.allAfterFirst(htmlToMatchAndRemove, true);
 			});
@@ -1474,10 +1473,14 @@ String.prototype.allAfterLast = function (allAfterLastOfThis) {
 	String.prototype.allBeforeLast = function (substr, moreThanOne) {
 		var rtn = this;
 		do {
+			rtn = rtn.trim();
 			var nextIdx = rtn.lastIndexOf(substr);
-			if (nextIdx > 0 && rtn.endsWith(substr))
+			var changed = false;
+			if (nextIdx > 0 && rtn.endsWith(substr)) {
+				changed = true;
 				rtn = rtn.slice(0, nextIdx);
-		} while (moreThanOne && nextIdx > 0);
+			}
+		} while (moreThanOne && changed);
 		return rtn;
 	};
 
@@ -1485,10 +1488,14 @@ String.prototype.allAfterLast = function (allAfterLastOfThis) {
 		var rtn = this;
 		do
 		{
+			rtn = rtn.trim();
 			var nextIdx = rtn.indexOf(substr);
-			if (nextIdx === 0)
+			var changed = false;
+			if (nextIdx === 0)  {
+				changed = true;
 				rtn = rtn.slice(substr.length);
-		} while (moreThanOne && nextIdx === 0);
+			}
+		} while (moreThanOne && changed);
 		return rtn;
 	};
 

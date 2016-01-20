@@ -82,17 +82,16 @@ exports.create = function(req, res)
 	var res2WithJsonFn = {};
 	// section_exports.create
 	O.o ('xxxxxxxxxxxxxxxxxxxxxxxxxin server.controller exports.create');
-	res2WithJsonFn.json = function(rejoinedHtmlPostTitle)
+	res2WithJsonFn.json = function(rejoinedHtmlPostTitling)
 	{
 		try {
-			ustodo.html = rejoinedHtmlPostTitle;
-
+			ustodo.html = rejoinedHtmlPostTitling;
 			ustodo.text = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
 
 			//ustodo.html = UtilHrefThisText.hrefThisText(ustodo.html);
 			//ustodo.html = UtilHrefThisText.addNoContentEditableToHrefs(ustodo.html);
 
-			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostTitle + ']');
+			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostTitling + ']');
 			ustodo.datelastmod = new Date();
 			ustodo.datecreated = new Date();
 
@@ -120,19 +119,13 @@ exports.create = function(req, res)
 
 	};
 
+	// get titles for text
 	try {
-		//UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(ustodo.html, ustodo.text, res2WithJsonFn);
-		// hbkk
 		var htmlPretitledTrimmed = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo.html);
-		O.o ('-=-=-=-= htmlPretitledTrimmed [' + htmlPretitledTrimmed + ']');
-		if (htmlPretitledTrimmed.trim() === '')
-		{
-			O.o ('-=-=-=-= nothing htmlPretitledTrimmed [' + htmlPretitledTrimmed + ']');
-		}
 		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
-		UtilErrorEmitter.emitError('err in expandUrlsToHrefsReturnPatchedStr:' + err);
+		UtilErrorEmitter.emitError('err in expandUrlsToHrefsReturnPatchedStr during create:' + err);
 	}
 
 

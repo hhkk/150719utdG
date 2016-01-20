@@ -137,6 +137,7 @@ var callbackCommand = function(callbackResult) {
     O.o  ('in callbackCommand');
 };
 
+console.log ('in ustodos.client.controller.js')
 
 //O.a ('oneOfSeveral controller with array - first?');
 angular.module('ustodos').controller('UstodosController',
@@ -156,6 +157,7 @@ angular.module('ustodos').controller('UstodosController',
 		 Authentication, Ustodos, Commands)
     {
 
+		alert('in 2 ustodos.client.controller.js ')
 		// http://henriquat.re/basics-of-angular/services-dependency-injection/services-and-dependency-injection-in-angularjs.html
 
 		//var myInjector = angular.injector(["ng"]);
@@ -273,6 +275,7 @@ angular.module('ustodos').controller('UstodosController',
             // http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=ONLOAD%0A
             // section_onload
 
+			alert('in 2 ustodos.client.controller.js ')
 
 
             $scope.$watch('$viewContentLoaded', function(){ // like onload YES
@@ -465,6 +468,7 @@ angular.module('ustodos').controller('UstodosController',
             //});
             //
 
+			alert('in 2 ustodos.client.controller.js ')
 
             $scope.myCustomOnInit = function () // works
             {
@@ -3322,6 +3326,7 @@ angular.module('ustodos').controller('UstodosController',
             };
 
 
+			alert('in 2 ustodos.client.controller.js ')
 
             $scope.deleteDbUstotoOneByIndex = function(arrIntIndexesToDelete_or_oneUsToDo)
             {
@@ -3529,6 +3534,7 @@ angular.module('ustodos').controller('UstodosController',
                         //var target = '';
                         var x = $filter('linky')(commandTrimmed);
                         //alert ('x:' + x);
+						alert('in 2 ustodos.client.controller.js ')
 
                         var ustodo = new Ustodos ({
                             html: xHtml.replaceLast(' w', ''),// mystery
@@ -3737,6 +3743,7 @@ angular.module('ustodos').controller('UstodosController',
 
 
 
+			alert('in 2 ustodos.client.controller.js ')
 
             $scope.filterDoesThisRowHtmlMatch = function(s, filterText) {
                 alert ('in here hk');
@@ -4027,6 +4034,7 @@ angular.module('ustodos').controller('UstodosController',
 
 
 //O.a ('oneOfSeveral $routeProvider', '$locationProvider');
+//alert('initing ustodos.client.controller.js');
 angular.module('ustodos')
     //.config (
     //['$locationProvider',
@@ -4049,8 +4057,8 @@ angular.module('ustodos')
     ////    //$routeProvider.otherwise({redirectTo: '/home', controller: HomeCtrl});
     ////})
     .directive('onFinishRender', function ($timeout) {
-        O.a('sss2');
-        alert ('done onload');
+        //O.a('sss2');
+        //alert ('inONLOADINIT#B in onFinishRender');
         return {
             restrict: 'A',
             link: function (scope, element, attr) {
@@ -4058,7 +4066,7 @@ angular.module('ustodos')
                     $timeout(function () {
                         //O.a ('sss3');
                         scope.$emit('ngRepeatFinished');
-                        alert('ngRepeatFinished');
+                        //alert('inONLOADINIT#C onFinishRender');
                     });
                 }
             }

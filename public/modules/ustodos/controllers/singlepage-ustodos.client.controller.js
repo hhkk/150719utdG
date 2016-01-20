@@ -149,7 +149,8 @@ var app = angular.module('ustodos');      // worked before ui.router was added b
 app.directive('repeatDone', function() {
 	console.log ('@@@@@@@@@@@@@@@@ in repeatdone1');
 	return function(scope, element, attrs) {
-		//alert('in repeatdone2');
+		//alert('inONLOADINIT#7  in app.directive(repeatDone');
+
 		if (scope.$last) { // all are rendered
 			scope.$eval(attrs.repeatDone);
 		}
@@ -456,7 +457,7 @@ angular.module('ustodos').controller
 				// oct 2015 seems not to be called at all even with add listener in place
 				function load(){
 					// dec 2015 seems not to be called at all even with add listener in place
-					alert('inONLOADINIT#3.5  in addEventListener load in function load(){');
+					//alert('inONLOADINIT#3.5  in addEventListener load in function load(){');
 
 					//var el = document.getElementById("foo");
 					//alert(el);
@@ -472,9 +473,16 @@ angular.module('ustodos').controller
 				//}
 
 
-				$scope.layoutDone = function() {
+				$scope.layoutDone = function() // hbkhbk
+				{
 					//$('a[data-toggle="tooltip"]').tooltip(); // NOT CORRECT!
 					//alert('start layoutDone');
+					//alert('inONLOADINIT#6  in $scope.layoutDone(){');
+					//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
+					//alert('makeThisNotContentEditables.length:' + makeThisNotContentEditables.length); // was len 0
+
+
+
 
 					$scope.preEditText = null;
 					$scope.preEditHtml = null;
@@ -659,7 +667,7 @@ angular.module('ustodos').controller
 					$scope.$watch('$viewContentLoaded', function(){ // like onload YES
 						try {
 
-							//alert('inONLOADINIT#5  in $scope.$watch  onload');
+							//alert('inONLOADINIT#5  in $viewContentLoaded $scope.$watch  onload');
 
 							//$scope.localTinyMceInit(); // hbklrb11
 
@@ -668,9 +676,9 @@ angular.module('ustodos').controller
 							//var x = document.getElementsByClassName("classContentEditablePerRow");
 
 							// this is an HTMLObject I think, with main prop x[0].innerHTML aka x[0]['innerHTML']
-							var x = document.getElementsByClassName("WholePage");
+							//var x = document.getElementsByClassName("WholePage");
 							//alert ('inONLOADINIT#5 $viewContentLoaded:' + x);
-							console.log (' @@@@@@@@@@inONLOADINIT#5 $viewContentLoaded:' + x.length);
+							//console.log (' @@@@@@@@@@inONLOADINIT#5 $viewContentLoaded:' + x.length);
 
 
 							//alert ('pre1 $state.get');
@@ -705,10 +713,12 @@ angular.module('ustodos').controller
 							var q = $location.$$search.q;
 							if (q) {
 								$scope.q = q;
+								//alert('processcommand#1');
 								$scope.processCommand($scope.enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.URL, q, q, q);
 								//$scope.setTextInShowingEditor(q, 'line 275 main');
 
 							} else {
+								//alert('processcommand#2');
 								$scope.processCommand($scope.enumCommands.COMMAND_SEARCH, 'CLIENT JS line 2355', '*', '*', '*');
 							}
 						}
@@ -2809,18 +2819,38 @@ angular.module('ustodos').controller
 					//    console.log('in testfn');
 					//    return UtilDate.dateFromMongoString(dateStrFromMongo);
 					//}
+					$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+						//alert('inONLOADINIT#A ngRepeatFinished');
+					});
+
 
 					$scope.testButton= function(s)
 					{
 
-						if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
+						if (true) // hbkhbk
 						{
-							var mycopy = jQuery.extend(true, {}, $scope.ustodos[0]);
-							//no work var copyUnderscore = _($scope.ustodos[0]).clone();
-							//alert ('mycopy:' + mycopy);
-							//var x = $scope.ustodos
-							$scope.ustodos.splice(0, 0, mycopy);
+							//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
+							//alert('makeThisNotContentEditables.length:' + makeThisNotContentEditables.length);
+							//makeThisNotContentEditables.forEach (function (y) {
+							//	y.contentEditable = false;
+							//	alert('set one');
+							//});
+							var arrelems = $('.makeThisNotContentEditable');
+							arrelems.each (function(y) {
+								arrelems[y].contentEditable = false;
+								alert('set one:' + arrelems[y].contentEditable);
+							});
+
+
 						}
+						//if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
+						//{
+						//	var mycopy = jQuery.extend(true, {}, $scope.ustodos[0]);
+						//	//no work var copyUnderscore = _($scope.ustodos[0]).clone();
+						//	//alert ('mycopy:' + mycopy);
+						//	//var x = $scope.ustodos
+						//	$scope.ustodos.splice(0, 0, mycopy);
+						//}
 
 						//if (true) {
 						//	document.getElementById('HKTEST').style['background-color'] = 'blue';
@@ -3992,16 +4022,30 @@ angular.module('ustodos').controller
 	})
 	.directive('onFinishRender', function ($timeout) {
 		// oct 2015 seems not called
-		O.a('sss2');
-		alert ('done onload');
+		//O.a('sss2');
+		//alert('inONLOADINIT#8  in directive(onFinishRender{');
+
 		return {
 			restrict: 'A',
 			link: function (scope, element, attr) {
 				if (scope.$last === true) {
 					$timeout(function () {
 						//O.a ('sss3');
+						//alert('onFinishRender inONLOADINIT#8b  in directive(onFinishRender{'); // hbkhbk
+						if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
+						{
+							//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
+							var arrelems = $('.makeThisNotContentEditable');
+							arrelems.each (function(y) {
+								arrelems[y].contentEditable = false;
+								//alert('set one:' + arrelems[y].contentEditable);
+							});
+							//alert('onFinishRender inONLOADINIT#8c makeThisNotContentEditables.length:' + makeThisNotContentEditables.length);
+
+						}
+
 						scope.$emit('ngRepeatFinished');
-						alert('ngRepeatFinished');
+						//alert('ngRepeatFinished');
 					});
 				}
 			}

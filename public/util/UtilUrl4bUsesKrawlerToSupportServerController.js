@@ -137,8 +137,10 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 								if (!token.startsWith('http://'))
 									httpIfNeeded = 'http://';
 
-								arrStr_tokensToJoinNowTitled[itokens]  = '[' +
-									arrUrlUtds_EnrichedByKrawl_byOriginal[token].title + '] ' +
+								var title = arrUrlUtds_EnrichedByKrawl_byOriginal[token].title;
+								title = UtilHrefThisText.unUrlThisText(title);
+									arrStr_tokensToJoinNowTitled[itokens]  = '[' +
+										title + '] ' +
 									//'<a href=' + httpIfNeeded + token + '>' + token + '</a>';
 									httpIfNeeded + token;
 
