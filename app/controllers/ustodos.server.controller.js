@@ -154,19 +154,36 @@ exports.update = function(req, res)
 	var ustodo = req.ustodo ;
 
 	ustodo = _.extend(ustodo , req.body);
-	ustodo.text = ustodo.text;
-	ustodo.html = ustodo.html;
-	ustodo.jsonx = ustodo.jsonx; // jsonx is for full text
+
+	// ORI [tweeter com - This website is for sale! - Stereo Resources and Information.] <span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>&nbsp;
+	// minus title <span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>
+
+	var htmlToCleanSpansOutOf = ustodo._doc.html;
+
+	// working example from UtilHrefThisText.js
+	// 	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
+	//<span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>
+	var htmlToCleanSpansOutOf2 = htmlToCleanSpansOutOf.replace(/<span class="makeThisNotContentEditable" contenteditable="false"><a href=".*" target="_blank">(.*)\/\/(.*)<\/a><\/span>&nbsp;/,
+		function(ori, a, b) {
+			console.log ('a:' + a); //http or https
+			console.log ('b:' + b); //pure url no http or https
+			//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+			//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+			//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+			//var htmlx = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
+			return a + '//' + b;
+		});
+
 	//ustodo.text = 't2.' + ustodo.text;
-	//ustodo.html = 'h2.' + ustodo.html;
+	ustodo._doc.html = htmlToCleanSpansOutOf2;
 	//ustodo.jsonx = 'j2.' + ustodo.jsonx;
 	//O.o('in ustodos.server.controller.js: update ' );
 	ustodo.datelastmod = new Date();
 	var ustodoForFulltext = _.extend(ustodo);
-	delete ustodoForFulltext._doc.jsonx; // remove property
+	delete ustodoForFulltext._doc.jsonx;
 	//O.o('in ustodos.server.controller.js: update ' );
 
-	ustodo.jsonx = JSON.stringify(ustodoForFulltext); // string
+	//ustodo.jsonx = JSON.stringify(ustodoForFulltext); // string
 	O.o('in ustodos.server.controller.js: update [' + ustodo.jsonx + ']');
 
 
