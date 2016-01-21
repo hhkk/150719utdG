@@ -229,23 +229,31 @@ var html2text = function (html) {
 // var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var addNoContentEditableToHrefs = function (html) {
 
-	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
-		console.log ('a:' + a);
-		console.log ('b:' + c);
-		console.log ('c:' + d);
-		console.log ('d:' + a);
-		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-		//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
-		html = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
-		return html;
-	})
+	var htmlCompare;
+	do {
+		htmlCompare = html;
+		html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
+			//console.log ('a:' + a);
+			//console.log ('b:' + b);
+			//console.log ('c:' + c);
+			//console.log ('d:' + d);
+			//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+			//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+			//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+			// note: // hrefxx trick for multiple regex replace
+			html = a+'<span class=\'makeThisNotContentEditable\'><a hrefxx=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
+			O.o ('html:' + html);
+			return html; // internal return
+		})
+	} while (htmlCompare !== html);
+
+	html = html.replaceAll('hrefxx', 'href'); // hrefxx trick for multiple regex replace
 
 	// http://stackoverflow.com/questions/3954927/js-regex-how-to-replace-the-captured-groups-only
 	//var t = html.replace(/(.*value="\w+)(\d+)(\w+".*)/, "$1!NEW_ID!$3")
 
 	//html
-	console.log ('html:' + html);
+	O.o ('final html:' + html);
     return html;
 }
 

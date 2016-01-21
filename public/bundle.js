@@ -955,6 +955,32 @@ var hrefThisText = function(textToBeHrefed)
 };
 
 /**
+ * within a title, remove the period from a url so downstream will not become clickable
+ * motivated by tweeter.com which includes tweeter.com in the title and don't want it processed later
+ * @param textToBeHrefed original string with possible urls not yet IDd with http prefix
+ * @param textToBeHrefed
+ * @returns {string}
+ */
+var unUrlThisText = function(textToBeUnUrld)
+{
+    //textToBeHrefed = '=-=-=-=-=-=-=-=-' + textToBeHrefed;
+    var tokens = textToBeUnUrld.split(/\s+/);
+    //console.log ('y.length:' + y.length);
+    var i = 0;
+    tokens.forEach(function(token)
+	{
+        if (isUrl(token)) {
+            //console.log ('is a url:' + token);
+			tokens[i] = tokens[i].replace(/\./,' ');
+            console.log ('un url to [' + tokens[i] + ']');
+        }
+        i++;
+    });
+    return tokens.join(' ');
+
+};
+
+/**
  * 1 split string on whitespace
  * 2 if a token is a url, prefix each isurl with http://
  * 3
@@ -1038,25 +1064,38 @@ var html2text = function (html) {
 
 // var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var addNoContentEditableToHrefs = function (html) {
+	var splitVar = '<a href=';
+	var arrHrefSplit = html.split(splitVar);
+	var collector = '';
 
-	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
-		console.log ('a:' + a);
-		console.log ('b:' + c);
-		console.log ('c:' + d);
-		console.log ('d:' + a);
-		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-		//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
-		html = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + '>' + c + '</a></span>' + d;
-		return html;
-	})
+	arrHrefSplit.forEach(
+		function(htmlHrefpiece) {
+			htmlHrefpiece = splitVar + htmlHrefpiece;
+			console.log('htmlHrefpiece:' + htmlHrefpiece);
+			htmlHrefpiece = htmlHrefpiece.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/,
+				function(ori, a, b, c, d) {
+					console.log ('a:' + a);
+					console.log ('b:' + c);
+					console.log ('c:' + d);
+					console.log ('d:' + a);
+					//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+					//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+					//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+					htmlHrefpiece = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
+				});
+			collector = collector + htmlHrefpiece;
+			O.o ('collector:' + collector);
+		}
+
+
+	); // foreach
+
+	O.o ('final collector:' + collector);
+	return collector;
 
 	// http://stackoverflow.com/questions/3954927/js-regex-how-to-replace-the-captured-groups-only
 	//var t = html.replace(/(.*value="\w+)(\d+)(\w+".*)/, "$1!NEW_ID!$3")
 
-	//html
-	console.log ('html:' + html);
-    return html;
 }
 
 
@@ -1067,6 +1106,7 @@ if (typeof exports !== 'undefined') {
     exports.html2text = html2text;
     exports.isUrl = isUrl;
     exports.addNoContentEditableToHrefs = addNoContentEditableToHrefs;
+    exports.unUrlThisText = unUrlThisText;
 }
 
 

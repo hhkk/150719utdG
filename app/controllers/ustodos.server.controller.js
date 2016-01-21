@@ -60,19 +60,16 @@ var callcountSaved = 0;
 // called from >>>singlepage-ustodos.client.controller.js>>> line 3490 (was 2203)
 //   1 search for "$scope.processCommand($scope.enumCommands.COMMAND_WRITE"
 //   2 more detailed: search for: var ustodo = new Ustodos
-exports.create = function(req, res)
-{
-	O.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
-	O.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
-	// ustodo is a model object with getters and setters derived from the
-	var ustodo = new Ustodo(req.body);
 
+
+function createOrSave(ustodo, user, res) {
 	ustodo._doc.html = ustodo._doc.html.trim();
 	ustodo._doc.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html);
-	ustodo.user = req.user;
+	ustodo._doc.testArray = ['a','b'];
+	ustodo.user = user;
 	try {
-	 // do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
-			//	if (false)
+		// do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
+		//	if (false)
 		//ustodo.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
@@ -94,6 +91,10 @@ exports.create = function(req, res)
 			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostTitling + ']');
 			ustodo.datelastmod = new Date();
 			ustodo.datecreated = new Date();
+
+
+
+
 
 			O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.text:' + ustodo.text);
 			O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.html:' + ustodo.html);
@@ -121,6 +122,39 @@ exports.create = function(req, res)
 
 	// get titles for text
 	try {
+		O.o ('ustodo.html pre spans cleaned:' + ustodo.html);
+
+		var htmlToCleanSpansOutOf = ustodo._doc.html;
+		// working example from UtilHrefThisText.js
+		// 	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
+		//<span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>
+		var htmlToCleanSpansOutOf2 = htmlToCleanSpansOutOf.replace(/<span class="makeThisNotContentEditable" contenteditable="false"><a href=".*" target="_blank">(.*)\/\/(.*)<\/a><\/span>&nbsp;/,
+			function(ori, a, b) {
+				console.log ('a:' + a); //http or https
+				console.log ('b:' + b); //pure url no http or https
+				//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+				//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+				//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+				//var htmlx = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
+				return a + '//' + b;
+			});
+
+		//ustodo.text = 't2.' + ustodo.text;
+		ustodo._doc.html = htmlToCleanSpansOutOf2;
+
+
+		var htmlToCleanNbspOutOf = ustodo._doc.html;
+		// working example from UtilHrefThisText.js
+		// 	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
+		//<span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>
+		var htmlToCleanNbspOutOf2 = htmlToCleanNbspOutOf.replace(/&nbsp;/, ' ');
+		//ustodo.text = 't2.' + ustodo.text;
+		ustodo._doc.html = htmlToCleanNbspOutOf2;
+
+
+
+
+		O.o ('ustodo.html post spans cleaned:' + ustodo.html);
 		var htmlPretitledTrimmed = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo.html);
 		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn);
 	} catch (err) {
@@ -131,7 +165,16 @@ exports.create = function(req, res)
 
 
 
+}
 
+
+exports.create = function(req, res)
+{
+	O.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
+	O.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
+	// ustodo is a model object with getters and setters derived from the
+	var ustodo = new Ustodo(req.body);
+	createOrSave(ustodo, req.user, res);
 
 };
 
@@ -152,65 +195,69 @@ exports.update = function(req, res)
 {
 	O.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
 	var ustodo = req.ustodo ;
+	ustodo = _.extend(ustodo , req.body); // needed?
+	createOrSave(ustodo, req.user, res);
 
-	ustodo = _.extend(ustodo , req.body);
+
+
+
 
 	// ORI [tweeter com - This website is for sale! - Stereo Resources and Information.] <span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>&nbsp;
 	// minus title <span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>
 
-	var htmlToCleanSpansOutOf = ustodo._doc.html;
-
-	// working example from UtilHrefThisText.js
-	// 	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
-	//<span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>
-	var htmlToCleanSpansOutOf2 = htmlToCleanSpansOutOf.replace(/<span class="makeThisNotContentEditable" contenteditable="false"><a href=".*" target="_blank">(.*)\/\/(.*)<\/a><\/span>&nbsp;/,
-		function(ori, a, b) {
-			console.log ('a:' + a); //http or https
-			console.log ('b:' + b); //pure url no http or https
-			//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-			//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-			//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
-			//var htmlx = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
-			return a + '//' + b;
-		});
-
-	//ustodo.text = 't2.' + ustodo.text;
-	ustodo._doc.html = htmlToCleanSpansOutOf2;
-	//ustodo.jsonx = 'j2.' + ustodo.jsonx;
-	//O.o('in ustodos.server.controller.js: update ' );
-	ustodo.datelastmod = new Date();
-	var ustodoForFulltext = _.extend(ustodo);
-	delete ustodoForFulltext._doc.jsonx;
-	//O.o('in ustodos.server.controller.js: update ' );
-
-	//ustodo.jsonx = JSON.stringify(ustodoForFulltext); // string
-	O.o('in ustodos.server.controller.js: update [' + ustodo.jsonx + ']');
-
-
-
-	O.o ('xx################# saving 1 ustodo.text:' + ustodo.text);
-	O.o ('xx################# saving 2 ustodo.html:' + ustodo.html);
-	O.o ('xx################# saving 3 ustodo.jsonx:' + ustodo.jsonx);
-
-	ustodo.save(function (err, ustodosaved, numberAffected) {
-		if (err) {
-			O.o('!!!!!!!!!!!!!!!!ERROR in ustodos.server.controller.js exports.update .save*** save fail err [' +err + ']');
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			O.o('ustodo saved, html [' + ustodosaved.html +
-				'] numberAffected [' + numberAffected +
-				'] req.body._id [' + req.body._id + ']'
-			);
-
-			O.o ('^^^^^^^ method 1  req.user._doc.username [' + req.user._doc.username + ']');
-
-            //
-			res.jsonp(ustodo);
-		}
-	});
-
+	//var htmlToCleanSpansOutOf = ustodo._doc.html;
+    //
+	//// working example from UtilHrefThisText.js
+	//// 	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
+	////<span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>
+	//var htmlToCleanSpansOutOf2 = htmlToCleanSpansOutOf.replace(/<span class="makeThisNotContentEditable" contenteditable="false"><a href=".*" target="_blank">(.*)\/\/(.*)<\/a><\/span>&nbsp;/,
+	//	function(ori, a, b) {
+	//		console.log ('a:' + a); //http or https
+	//		console.log ('b:' + b); //pure url no http or https
+	//		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+	//		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
+	//		//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+	//		//var htmlx = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
+	//		return a + '//' + b;
+	//	});
+    //
+	////ustodo.text = 't2.' + ustodo.text;
+	//ustodo._doc.html = htmlToCleanSpansOutOf2;
+	////ustodo.jsonx = 'j2.' + ustodo.jsonx;
+	////O.o('in ustodos.server.controller.js: update ' );
+	//ustodo.datelastmod = new Date();
+	//var ustodoForFulltext = _.extend(ustodo);
+	//delete ustodoForFulltext._doc.jsonx;
+	////O.o('in ustodos.server.controller.js: update ' );
+    //
+	////ustodo.jsonx = JSON.stringify(ustodoForFulltext); // string
+	//O.o('in ustodos.server.controller.js: update [' + ustodo.jsonx + ']');
+    //
+    //
+    //
+	//O.o ('xx################# saving 1 ustodo.text:' + ustodo.text);
+	//O.o ('xx################# saving 2 ustodo.html:' + ustodo.html);
+	//O.o ('xx################# saving 3 ustodo.jsonx:' + ustodo.jsonx);
+    //
+	//ustodo.save(function (err, ustodosaved, numberAffected) {
+	//	if (err) {
+	//		O.o('!!!!!!!!!!!!!!!!ERROR in ustodos.server.controller.js exports.update .save*** save fail err [' +err + ']');
+	//		return res.status(400).send({
+	//			message: errorHandler.getErrorMessage(err)
+	//		});
+	//	} else {
+	//		O.o('ustodo saved, html [' + ustodosaved.html +
+	//			'] numberAffected [' + numberAffected +
+	//			'] req.body._id [' + req.body._id + ']'
+	//		);
+    //
+	//		O.o ('^^^^^^^ method 1  req.user._doc.username [' + req.user._doc.username + ']');
+    //
+     //       //
+	//		res.jsonp(ustodo);
+	//	}
+	//});
+    //
 
 	//ustodo.save(function(err) {
 	//	if (err) {
