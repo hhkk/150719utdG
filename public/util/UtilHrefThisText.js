@@ -17,13 +17,13 @@ var O = require('C:/utd/150719utdG/public/util/O.js');
 // var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 
-function UrlUtd(addressOriMightHaveHttpNeededForSearchReplace, addressWithHttp, title) {
-	this.addressOriMightHaveHttpNeededForSearchReplace = addressOriMightHaveHttpNeededForSearchReplace;
+function UrlUtd(addressOriUrlUtd, addressWithHttp, title) {
+	this.addressOriUrlUtd = addressOriUrlUtd;
 	this.addressWithHttp = addressWithHttp;
 	if (title)
 		this.title = title;
 	else
-		this.title = 'uninitialized';
+		this.title = 'Not Found';
 }
 
 
@@ -101,17 +101,19 @@ var hrefThisText = function(textToBeHrefed)
     var i = 0;
     tokens.forEach(function(token)
 	{
-        if (isUrl(token)) {
-            //console.log ('is a url:' + token);
-            var replaceWith = null;
-            if (tokens[i].toLowerCase().indexOf('http') !== 0)
-                    tokens[i] = 'http://' + tokens[i];
-            // replace old with new (has http expansion)
-            //replaceWith = '<p color=\'red\'>' + buildHrefFromUrlString(tokens[i]) + '</p>';
-            replaceWith = buildHrefFromUrlString(tokens[i]);
-            //console.log ('convert url from [' + tokens[i] + '] to [' + replaceWith+']');
-            tokens[i] = replaceWith;
+		console.log ('processing token [' + token + ']');   // hbkhbk
+		if (isUrl(token)) {
+			//console.log ('is a url:' + token);
+			var replaceWith = null;
+			if (tokens[i].toLowerCase().indexOf('http') !== 0)
+				tokens[i] = 'http://' + tokens[i];
+			// replace old with new (has http expansion)
+			//replaceWith = '<p color=\'red\'>' + buildHrefFromUrlString(tokens[i]) + '</p>';
+			replaceWith = buildHrefFromUrlString(tokens[i]);
+			//console.log ('convert url from [' + tokens[i] + '] to [' + replaceWith+']');
+			tokens[i] = replaceWith;
         }
+
         i++;
     });
     return tokens.join(' ');
@@ -156,7 +158,7 @@ var unUrlThisText = function(textToBeUnUrld)
  */
 
 //var url = new UrlUtd ('ibm.com', 'http://ibm.com');
-//console.log (url.addressOriMightHaveHttpNeededForSearchReplace);
+//console.log (url.addressOriUrlUtd);
 //console.log (url.addressWithHttp);
 
 //called by line 76 in \UtilUrl4bUsesKrawlerToSupportServerController.js  var urls = UtilHrefThisText.getUrlsFromText(ustodoText);
@@ -237,9 +239,9 @@ var addNoContentEditableToHrefs = function (html) {
 			//console.log ('b:' + b);
 			//console.log ('c:' + c);
 			//console.log ('d:' + d);
-			//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-			//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-			//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+			//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=xxx1' + b + '>xxx2' + c + '</a></spanhk>' + d;
+			//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=xxx1' + b + '>xxx2' + c + '</a></spanhk>' + d;
+			//html = a+'<a><a href=xxx1' + b + '>xxx2' + c + '</a></a>' + d;
 			// note: // hrefxx trick for multiple regex replace
 			html = a+'<span class=\'makeThisNotContentEditable\'><a hrefxx=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
 			O.o ('html:' + html);

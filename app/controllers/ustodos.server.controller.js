@@ -65,7 +65,8 @@ var callcountSaved = 0;
 function createOrSave(ustodo, user, res) {
 	ustodo._doc.html = ustodo._doc.html.trim();
 	ustodo._doc.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html);
-	ustodo._doc.testArray = ['a','b'];
+	ustodo._doc.testArray2 = ['a','b'];
+	//ustodo._doc.hkhkhk = 'hi hkhkhk'; _// doc gets to the DB and to the UI therefore
 	ustodo.user = user;
 	try {
 		// do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
@@ -76,19 +77,20 @@ function createOrSave(ustodo, user, res) {
 		O.e('err in expandUrlsToHrefsReturnPatchedStr:' + err);
 	}
 
-	var res2WithJsonFn = {};
+	var res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds = {};
 	// section_exports.create
 	O.o ('xxxxxxxxxxxxxxxxxxxxxxxxxin server.controller exports.create');
-	res2WithJsonFn.json = function(rejoinedHtmlPostTitling)
+	res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json = function(rejoinedHtmlPostEscapeWithPairedArrUrlUtd, arrUrlUtdsFromHtml)
 	{
 		try {
-			ustodo.html = rejoinedHtmlPostTitling;
+			ustodo.html = rejoinedHtmlPostEscapeWithPairedArrUrlUtd;
 			ustodo.text = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
+			ustodo._doc.arrUrlUtdsFromHtml = arrUrlUtdsFromHtml;
 
 			//ustodo.html = UtilHrefThisText.hrefThisText(ustodo.html);
 			//ustodo.html = UtilHrefThisText.addNoContentEditableToHrefs(ustodo.html);
 
-			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostTitling + ']');
+			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostEscapeWithPairedArrUrlUtd + ']');
 			ustodo.datelastmod = new Date();
 			ustodo.datecreated = new Date();
 
@@ -115,7 +117,7 @@ function createOrSave(ustodo, user, res) {
 
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
-			UtilErrorEmitter.emitError('err in res2WithJsonFn.json:' + err);
+			UtilErrorEmitter.emitError('err in res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json:' + err);
 		}
 
 	};
@@ -132,9 +134,9 @@ function createOrSave(ustodo, user, res) {
 			function(ori, a, b) {
 				console.log ('a:' + a); //http or https
 				console.log ('b:' + b); //pure url no http or https
-				//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-				//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-				//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+				//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=xxx1' + b + '>xxx2' + c + '</a></spanhk>' + d;
+				//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=xxx1' + b + '>xxx2' + c + '</a></spanhk>' + d;
+				//html = a+'<a><a href=xxx1' + b + '>xxx2' + c + '</a></a>' + d;
 				//var htmlx = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
 				return a + '//' + b;
 			});
@@ -142,21 +144,12 @@ function createOrSave(ustodo, user, res) {
 		//ustodo.text = 't2.' + ustodo.text;
 		ustodo._doc.html = htmlToCleanSpansOutOf2;
 
-
-		var htmlToCleanNbspOutOf = ustodo._doc.html;
-		// working example from UtilHrefThisText.js
-		// 	html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
-		//<span class="makeThisNotContentEditable" contenteditable="false"><a href="http://tweeter.com" target="_blank">http://tweeter.com</a></span>
-		var htmlToCleanNbspOutOf2 = htmlToCleanNbspOutOf.replace(/&nbsp;/, ' ');
-		//ustodo.text = 't2.' + ustodo.text;
-		ustodo._doc.html = htmlToCleanNbspOutOf2;
-
-
+		ustodo._doc.html = ustodo._doc.html.replace(/&nbsp;/, ' ');
 
 
 		O.o ('ustodo.html post spans cleaned:' + ustodo.html);
 		var htmlPretitledTrimmed = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo.html);
-		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn);
+		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
 		UtilErrorEmitter.emitError('err in expandUrlsToHrefsReturnPatchedStr during create:' + err);
@@ -214,9 +207,9 @@ exports.update = function(req, res)
 	//	function(ori, a, b) {
 	//		console.log ('a:' + a); //http or https
 	//		console.log ('b:' + b); //pure url no http or https
-	//		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-	//		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-	//		//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
+	//		//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=xxx1' + b + '>xxx2' + c + '</a></spanhk>' + d;
+	//		//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=xxx1' + b + '>xxx2' + c + '</a></spanhk>' + d;
+	//		//html = a+'<a><a href=xxx1' + b + '>xxx2' + c + '</a></a>' + d;
 	//		//var htmlx = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
 	//		return a + '//' + b;
 	//	});

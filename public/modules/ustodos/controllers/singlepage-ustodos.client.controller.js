@@ -473,7 +473,7 @@ angular.module('ustodos').controller
 				//}
 
 
-				$scope.layoutDone = function() // hbkhbk
+				$scope.layoutDone = function()
 				{
 					//$('a[data-toggle="tooltip"]').tooltip(); // NOT CORRECT!
 					//alert('start layoutDone');
@@ -2827,7 +2827,7 @@ angular.module('ustodos').controller
 					$scope.testButton= function(s)
 					{
 
-						if (true) // hbkhbk
+						if (true)
 						{
 							//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
 							//alert('makeThisNotContentEditables.length:' + makeThisNotContentEditables.length);
@@ -3531,13 +3531,14 @@ angular.module('ustodos').controller
 						this.xHtml = xHtml;
 						this.xTextTrimmed = xText.trim();
 						this.isWriteCommand = UtilString.endsWith(this.xTextTrimmed, ' w') || UtilString.endsWith(this.xTextTrimmed, ' W');
+						this.xTextCommandRemoved = null;
 
 						if (this.isWriteCommand) {
-							//alert ('in write xHtml [' + xHtml + ']');
+							alert ('in write xHtml [' + xHtml + ']');
 							//alert ('in write xTextCommandRemoved.asciiTable():' + xTextCommandRemoved.asciiTable());
 							//alert ('in endsWith w');
 							this.xTextCommandRemoved = this.xTextTrimmed.slice(0, this.xTextTrimmed.length - 1).trim();
-							//alert('in write xTextCommandRemoved [' + this.xTextCommandRemoved + ']');
+							alert('in write xTextCommandRemoved [' + this.xTextCommandRemoved + ']');
 						}
 						else {
 							this.xTextCommandRemoved = this.xTextTrimmed; //no command so removed is same
@@ -3575,6 +3576,8 @@ angular.module('ustodos').controller
 					var callbackFromQuery = function(arrayUstodosResources) {
 						//alert ('in callbackFromQuery post get callback');
 						$scope.ustodos = arrayUstodosResources;
+
+						// consider interleaving URLs here
 						$scope.setUstodosFiltered('caller2', $scope.ustodos);
 						SppSvc.setModelDirty (false);
 						if ($scope.ustodos.length > 0)
@@ -4031,7 +4034,7 @@ angular.module('ustodos').controller
 				if (scope.$last === true) {
 					$timeout(function () {
 						//O.a ('sss3');
-						//alert('onFinishRender inONLOADINIT#8b  in directive(onFinishRender{'); // hbkhbk
+						//alert('onFinishRender inONLOADINIT#8b  in directive(onFinishRender{');
 						if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
 						{
 							//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");

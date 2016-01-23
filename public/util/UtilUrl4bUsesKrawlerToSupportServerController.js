@@ -63,13 +63,13 @@ var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.j
  * add http if none
  * embed
  *
- *  @param res - res2.json will send back an expnded ustodo
+ *  @param res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds - res2.json will send back an expnded ustodo
  */
-var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
+var expandUrlsToHrefsReturnPatchedStr = function (htmlPretitledTrimmed, res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds)
 {
 	try {
-		var savustodoHtml = ustodoHtml;
-		O.o ('################# in expandUrlsToHrefsReturnPatchedStr get titles [' + ustodoHtml + ']');
+		var savustodoHtml = htmlPretitledTrimmed;
+		O.o ('################# in expandUrlsToHrefsReturnPatchedStr get titles [' + htmlPretitledTrimmed + ']');
 		//var Item = function(url) {
 		//	this.url = url;
 		//	this.urlori = url;
@@ -79,15 +79,15 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 		// ARE THERE ANY URLS
 		// get urls witth urls as "http..." in their own array element
 		// section_expand_ eg com to include http
-		if (ustodoHtml.trim() ==='')
+		if (htmlPretitledTrimmed.trim() ==='')
 		{
 			O.o ('why is this null?');
 		}
-		var arrUrlsFromHtml = UtilHrefThisText.getUrlsFromText(ustodoHtml);
+		var arrUrlUtdsFromHtml = UtilHrefThisText.getUrlsFromText(htmlPretitledTrimmed);
 
-		//arrUrlsFromHtml.forEach(function(urlUtd)
+		//arrUrlUtdsFromHtml.forEach(function(urlUtd)
 		//{
-		//	console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressOriMightHaveHttpNeededForSearchReplace);
+		//	console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressOriUrlUtd);
 		//	console.log ('SEARCH FOR UrlUtd:' + urlUtd.addressWithHttp);
 		//    //if (token.indexOf('http://') == 0) {
 		//    //    //hashUrlsToTitle[token] = token;
@@ -95,7 +95,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 		//    //}
 		//});
 
-		if (arrUrlsFromHtml.length > 0)
+		if (arrUrlUtdsFromHtml.length > 0)
 		{
 			//var res2 = {};
 			/**
@@ -105,14 +105,14 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 			var callbackFromKrawl = function(arrUrlUtds_EnrichedByKrawl)
 			{
 				// create index of arrUrlUtds_EnrichedByKrawl by originals for performance so not O n**2 searching thru urlUtd array
-	 			var arrUrlUtds_EnrichedByKrawl_byOriginal = {};
+	 			var mapUrlUtds_EnrichedByKrawl_byOriginal = {};
 				arrUrlUtds_EnrichedByKrawl.forEach(function(urlUtdEnrichedByKrawl) {
-					arrUrlUtds_EnrichedByKrawl_byOriginal[urlUtdEnrichedByKrawl.addressOriMightHaveHttpNeededForSearchReplace] = urlUtdEnrichedByKrawl;
+					mapUrlUtds_EnrichedByKrawl_byOriginal[urlUtdEnrichedByKrawl.addressOriUrlUtd] = urlUtdEnrichedByKrawl;
 				});
 
 				//O.o ("in callback from ");
 				//O.o ("ustodoText:" + ustodoText);
-				//O.o ("items have all been converted ustodoHtml:" + ustodoHtml);
+				//O.o ("items have all been converted htmlPretitledTrimmed:" + htmlPretitledTrimmed);
 
 				//O.o ("items have all been converted");
 				// section_knit_replace_text into text here
@@ -120,7 +120,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 				//textWithUrls = '=-=-=-=-=-=-=-=-' + textWithUrls;
 
 				// interleave urlutd now-found titles back into unstructured text
-				var arrStr_tokensOriginal = ustodoHtml.split(/\s+/);
+				var arrStr_tokensOriginal = htmlPretitledTrimmed.split(/\s+/);
 				var arrStr_tokensToJoinNowTitled = [];
 				//console.log ('y.length:' + y.length);
 				try {
@@ -137,12 +137,10 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 								if (!token.startsWith('http://'))
 									httpIfNeeded = 'http://';
 
-								var title = arrUrlUtds_EnrichedByKrawl_byOriginal[token].title;
+
+								var title = mapUrlUtds_EnrichedByKrawl_byOriginal[token].title;
 								title = UtilHrefThisText.unUrlThisText(title);
-									arrStr_tokensToJoinNowTitled[itokens]  = '[' +
-										title + '] ' +
-									//'<a href=' + httpIfNeeded + token + '>' + token + '</a>';
-									httpIfNeeded + token;
+									arrStr_tokensToJoinNowTitled[itokens]  = '$UrlUtd' + itokens;
 
 
 							}   catch (err) {
@@ -155,9 +153,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 					throw err;
 				}
 
-				var joinedTokens = arrStr_tokensToJoinNowTitled.join(' ');
-				O.o ('reached res.json with urls!!! ================================ [' + joinedTokens + ']');
-				res.json(joinedTokens);
+				res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json(arrStr_tokensToJoinNowTitled.join(' '), arrUrlUtdsFromHtml);
 			} // callbackFromKrawl
 
 
@@ -182,7 +178,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 			//		//O.o ('yes match found for  urlUtd.url:' + urlUtd.url);
 			//		//sbufStringsChecked += '\r\nand testing [' + urlUtd.urlori + '] against [' + urlUtds[iUrls] + '] ';
 			//
-			//		if (urlUtd.addressOriMightHaveHttpNeededForSearchReplace === urls[iUrls] )
+			//		if (urlUtd.addressOriUrlUtd === urls[iUrls] )
 			//		{
 			//			//O.o ('yes match found for  urlUtd.urlUtd:' + urlUtd.urlUtd);
 			//			foundMatch = true;
@@ -199,13 +195,13 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 			//});
 
 			// krawl is the title fetcher
-			UtilUrl5Krawler.krawlhk(arrUrlsFromHtml, callbackFromKrawl);
+			UtilUrl5Krawler.krawlhk(arrUrlUtdsFromHtml, callbackFromKrawl);
 
 		}
 		else {
-			O.o ('reached res.json withOUT urls!!! ================================ savustodoHtml [' + savustodoHtml + ']');
-			O.o ('reached res.json withOUT urls!!! ================================ ustodoHtml [' + ustodoHtml + ']');
-			res.json(ustodoHtml);
+			O.o ('reached res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json withOUT urls!!! ================================ savustodoHtml [' + savustodoHtml + ']');
+			O.o ('reached res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json withOUT urls!!! ================================ htmlPretitledTrimmed [' + htmlPretitledTrimmed + ']');
+			res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json(htmlPretitledTrimmed);
 		};
 
 		// hbkk
@@ -227,7 +223,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, res)
 //} else {
 //	var x = urls.join(' ')
 //	O.o ( 'x:' + x);
-//	res.json(x);
+//	res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json(x);
 //}
 
 
@@ -699,7 +695,7 @@ if (false)
 
 
 
-var test160118 = false; // hbkhbk
+var test160118 = false;
 if (test160118)
 {
 	var res = {};

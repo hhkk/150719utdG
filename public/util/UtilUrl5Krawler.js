@@ -57,7 +57,7 @@ var krawlhk = function(arrUrlUtds, callbackFromKrawl)
 				}
 			})
 			.on('error', function(err, url) {
-				O.oerr ('err:' + err);  //hbkhbk
+				O.oerr ('err:' + err);
 				mapUrlStringWhttp_Title[urlString] = err.toString();
 				// there has been an 'error' on 'url'
 			})

@@ -853,13 +853,13 @@ var O = require('C:/utd/150719utdG/public/util/O.js');
 // var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
 
-function UrlUtd(addressOriMightHaveHttpNeededForSearchReplace, addressWithHttp, title) {
-	this.addressOriMightHaveHttpNeededForSearchReplace = addressOriMightHaveHttpNeededForSearchReplace;
+function UrlUtd(addressOriUrlUtd, addressWithHttp, title) {
+	this.addressOriUrlUtd = addressOriUrlUtd;
 	this.addressWithHttp = addressWithHttp;
 	if (title)
 		this.title = title;
 	else
-		this.title = 'uninitialized';
+		this.title = 'Not Found';
 }
 
 
@@ -992,7 +992,7 @@ var unUrlThisText = function(textToBeUnUrld)
  */
 
 //var url = new UrlUtd ('ibm.com', 'http://ibm.com');
-//console.log (url.addressOriMightHaveHttpNeededForSearchReplace);
+//console.log (url.addressOriUrlUtd);
 //console.log (url.addressWithHttp);
 
 //called by line 76 in \UtilUrl4bUsesKrawlerToSupportServerController.js  var urls = UtilHrefThisText.getUrlsFromText(ustodoText);
@@ -1064,38 +1064,33 @@ var html2text = function (html) {
 
 // var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var addNoContentEditableToHrefs = function (html) {
-	var splitVar = '<a href=';
-	var arrHrefSplit = html.split(splitVar);
-	var collector = '';
 
-	arrHrefSplit.forEach(
-		function(htmlHrefpiece) {
-			htmlHrefpiece = splitVar + htmlHrefpiece;
-			console.log('htmlHrefpiece:' + htmlHrefpiece);
-			htmlHrefpiece = htmlHrefpiece.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/,
-				function(ori, a, b, c, d) {
-					console.log ('a:' + a);
-					console.log ('b:' + c);
-					console.log ('c:' + d);
-					console.log ('d:' + a);
-					//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-					//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></spanhk>' + d;
-					//html = a+'<a><a href=hbkhbk1' + b + '>hbkhbk2' + c + '</a></a>' + d;
-					htmlHrefpiece = a+'<span class=\'makeThisNotContentEditable\'><a href=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
-				});
-			collector = collector + htmlHrefpiece;
-			O.o ('collector:' + collector);
-		}
+	var htmlCompare;
+	do {
+		htmlCompare = html;
+		html = html.replace(/(.*)<a href=(.*)>(.*)<\/a>(.*)/, function(ori, a, b, c, d) {
+			//console.log ('a:' + a);
+			//console.log ('b:' + b);
+			//console.log ('c:' + c);
+			//console.log ('d:' + d);
+			//var rtn = a+'<spanhk xxxcontenteditable=\'false\'><a href=xxx1' + b + '>xxx2' + c + '</a></spanhk>' + d;
+			//html = a+'<spanhk xxxcontenteditable=\'false\'><a href=xxx1' + b + '>xxx2' + c + '</a></spanhk>' + d;
+			//html = a+'<a><a href=xxx1' + b + '>xxx2' + c + '</a></a>' + d;
+			// note: // hrefxx trick for multiple regex replace
+			html = a+'<span class=\'makeThisNotContentEditable\'><a hrefxx=' + b + ' target=\'_blank\'>' + c + '</a></span>&nbsp;' + d;
+			O.o ('html:' + html);
+			return html; // internal return
+		})
+	} while (htmlCompare !== html);
 
-
-	); // foreach
-
-	O.o ('final collector:' + collector);
-	return collector;
+	html = html.replaceAll('hrefxx', 'href'); // hrefxx trick for multiple regex replace
 
 	// http://stackoverflow.com/questions/3954927/js-regex-how-to-replace-the-captured-groups-only
 	//var t = html.replace(/(.*value="\w+)(\d+)(\w+".*)/, "$1!NEW_ID!$3")
 
+	//html
+	O.o ('final html:' + html);
+    return html;
 }
 
 

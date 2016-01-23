@@ -197,12 +197,12 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 
 						// ADD TO RETURN - PASSES MONGO AND LOCAL FURTHER FILTER LIST
 
-
-						ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html);   // hbkhbk
+						//hbkhbk ustodos[k] arrUrlUtdsFromHtml
+						ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html);
 
 						console.log ('pre contentEditableFalse:' + ustodos[k].html);
 
-						ustodos[k].html = UtilHrefThisText.addNoContentEditableToHrefs(ustodos[k].html);   // hbkhbk
+						ustodos[k].html = UtilHrefThisText.addNoContentEditableToHrefs(ustodos[k].html);
 
 						console.log ('post contentEditableFalse:' + ustodos[k].html);
 
