@@ -3534,13 +3534,15 @@ angular.module('ustodos').controller
 						this.xTextCommandRemoved = null;
 
 						if (this.isWriteCommand) {
-							alert ('in write xHtml [' + xHtml + ']');
-							//alert ('in write xTextCommandRemoved.asciiTable():' + xTextCommandRemoved.asciiTable());
 							//alert ('in endsWith w');
 							this.xTextCommandRemoved = this.xTextTrimmed.slice(0, this.xTextTrimmed.length - 1).trim();
-							alert('in write xTextCommandRemoved [' + this.xTextCommandRemoved + ']');
+							alert ('in write \r\n' +
+								' xHtml [' + xHtml + ']\r\n' +
+								' xTextCommandRemoved.asciiTable():' + this.xTextCommandRemoved.asciiTable());
+							//alert('in write xTextCommandRemoved [' + this.xTextCommandRemoved + ']');
 						}
-						else {
+						else
+						{
 							this.xTextCommandRemoved = this.xTextTrimmed; //no command so removed is same
 						}
 						console.log('UtdUserCommand instantiated this.xText [' + this.xText + '] this.xHtml [' + this.xHtml + ']');
@@ -3637,7 +3639,7 @@ angular.module('ustodos').controller
 							// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=WRITE
 
 							// section_write
-							if (utdUserCommand.isWriteCommand) // e.g., $scope.enumCommands.COMMAND_WRITE
+							if (utdUserCommand.isWriteCommand) // e.g., $scope.enumCommands.COMMAND_WRITE  // hbkhbk
 							{
 								//alert ('in write utdUserCommand.xTextCommandRemoved [' + utdUserCommand.xTextCommandRemoved + ']');
 								//alert ('in write xHtml [' + xHtml + ']');
@@ -3660,12 +3662,21 @@ angular.module('ustodos').controller
 
 								// section_routes_to_server_exports.create = function(req, res)
 								var ustodo = new Ustodos ({
+									// looks like mongoose
+									// http://mongoosejs.com/docs/index.html
+									// need to be model schema elements from ustodo.server.model.js
+									// joey: 'and pete', // not sufficient to just be here
 									html: utdUserCommand.xHtml.replaceLast(' w', ''),
 									text: utdUserCommand.xTextCommandRemoved,
 									datelastmod: (''+new Date()),
 									datecreated: (''+new Date()),
-									joey: 'and pete'
+									utdUserCommand: JSON.stringify(utdUserCommand)
 								});
+
+								//ustodo._doc.xxx = utdUserCommand; // hbkhbk
+								//ustodo.xxx = 'xxx2';
+								ustodo.yyy = 'yyy2';
+
 								//getProperties('props ustodo:', ustodo);
 								//alert ('saving ustodo.text:' + ustodo.text);
 								// Redirect after save

@@ -63,9 +63,12 @@ var callcountSaved = 0;
 
 
 function createOrSave(ustodo, user, res) {
-	ustodo._doc.html = ustodo._doc.html.trim();
-	ustodo._doc.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html);
-	ustodo._doc.testArray2 = ['a','b'];
+	// with or without _doc seems to work, at least for schema elements
+	ustodo.html = ustodo._doc.html.trim();
+	ustodo._doc.timely = 'yes';              // even w/o mongoose schema element, new attr here goes to db.
+	//ustodo.dog = 'cat';              // right: but not w/o _doc
+	ustodo.html = 'xxd:' + UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html);
+	// works ustodo._doc.testArray2 = ['a','b'];
 	//ustodo._doc.hkhkhk = 'hi hkhkhk'; _// doc gets to the DB and to the UI therefore
 	ustodo.user = user;
 	try {

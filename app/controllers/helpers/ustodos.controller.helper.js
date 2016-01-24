@@ -168,14 +168,15 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 					//console.log ('&&&&&&&&&&&&&&&&&&& in result loop');
 					countResult = countResult + 1;
 					//ustodos[k].text = 'svr2,' + ustodos[k].text;
-					var tt = UtilHrefThisText.hrefThisText(ustodos[k].text);
+					ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html, ustodos[k]._doc.arrUrlUtdsFromHtml);
+					ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text, ustodos[k]._doc.arrUrlUtdsFromHtml);
 					var keeper = true; //assume keep until proven otherwise
 
 					// if the user enters say 5 search keys, not all are applied to mongo, this is the remainder filter
 					// apply second (in mem not just mongo) filter - first was the pull by mongo - now check that list against user inputs not in the query
 					for (var i = 0; i < queryTokens.length; i++) {
 						//console.log ('&&&&&&&&&&&&&&&&&&& in result loop tt [' + tt + '] queryTokens[i] [' + queryTokens[i] + ']');
-						if (tt.toLowerCase().indexOf(queryTokens[i]) < 0)
+						if (ustodos[k].text.toLowerCase().indexOf(queryTokens[i]) < 0)
 						{
 							keeper = false; // failed one of the search keys, fail overall
 							break;
@@ -198,7 +199,7 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 						// ADD TO RETURN - PASSES MONGO AND LOCAL FURTHER FILTER LIST
 
 						//hbkhbk ustodos[k] arrUrlUtdsFromHtml
-						ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html);
+						//ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html);
 
 						console.log ('pre contentEditableFalse:' + ustodos[k].html);
 

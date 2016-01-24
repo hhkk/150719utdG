@@ -124,6 +124,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (htmlPretitledTrimmed, res2With
 				var arrStr_tokensToJoinNowTitled = [];
 				//console.log ('y.length:' + y.length);
 				try {
+					var urlCounter = 0;
 					for (var itokens = 0; itokens < arrStr_tokensOriginal.length; itokens++)
 					{
 						var token = arrStr_tokensOriginal[itokens];
@@ -140,7 +141,8 @@ var expandUrlsToHrefsReturnPatchedStr = function (htmlPretitledTrimmed, res2With
 
 								var title = mapUrlUtds_EnrichedByKrawl_byOriginal[token].title;
 								title = UtilHrefThisText.unUrlThisText(title);
-									arrStr_tokensToJoinNowTitled[itokens]  = '$UrlUtd' + itokens;
+								arrStr_tokensToJoinNowTitled[itokens]  = '$UrlUtd' + urlCounter;
+								urlCounter++;
 
 
 							}   catch (err) {

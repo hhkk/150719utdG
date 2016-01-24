@@ -50,11 +50,11 @@ String.prototype.allAfterLast = function (allAfterLastOfThis) {
 		do
 		{
 			rtn = rtn.trim();
-			var nextIdx = rtn.indexOf(substr);
+			var firstIdx = rtn.indexOf(substr);
 			var changed = false;
-			if (nextIdx === 0)  {
+			if (firstIdx >= 0)  {
 				changed = true;
-				rtn = rtn.slice(substr.length);
+				rtn = rtn.slice(firstIdx+1);
 			}
 		} while (moreThanOne && changed);
 		return rtn;

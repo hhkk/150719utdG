@@ -929,7 +929,7 @@ var buildHrefFromUrlString= function(urlstr)
  * @param textToBeHrefed
  * @returns {string}
  */
-var hrefThisText = function(textToBeHrefed)
+var hrefThisText = function(textToBeHrefed, arrUrlUtdsFromHtml)
 {
     //textToBeHrefed = '=-=-=-=-=-=-=-=-' + textToBeHrefed;
     var tokens = textToBeHrefed.split(/\s+/);
@@ -937,18 +937,31 @@ var hrefThisText = function(textToBeHrefed)
     var i = 0;
     tokens.forEach(function(token)
 	{
-        if (isUrl(token)) {
-            //console.log ('is a url:' + token);
-            var replaceWith = null;
-            if (tokens[i].toLowerCase().indexOf('http') !== 0)
-                    tokens[i] = 'http://' + tokens[i];
-            // replace old with new (has http expansion)
-            //replaceWith = '<p color=\'red\'>' + buildHrefFromUrlString(tokens[i]) + '</p>';
-            replaceWith = buildHrefFromUrlString(tokens[i]);
-            //console.log ('convert url from [' + tokens[i] + '] to [' + replaceWith+']');
-            tokens[i] = replaceWith;
-        }
-        i++;
+		console.log ('processing token [' + token + ']');   // hbkhbk
+        //if (isUrl(token)) {
+			////console.log ('is a url:' + token);
+			//var replaceWith = null;
+			//if (tokens[i].toLowerCase().indexOf('http') !== 0)
+			//	tokens[i] = 'http://' + tokens[i];
+			//// replace old with new (has http expansion)
+			////replaceWith = '<p color=\'red\'>' + buildHrefFromUrlString(tokens[i]) + '</p>';
+			//replaceWith = buildHrefFromUrlString(tokens[i]);
+			////console.log ('convert url from [' + tokens[i] + '] to [' + replaceWith+']');
+			//tokens[i] = replaceWith;
+        //}
+        //i++;
+
+		if (token.startsWith('$UrlUtd'))
+		{
+			var index = token.allAfterFirst('d');
+			var urlUtd = arrUrlUtdsFromHtml[index];
+			//console.log ('is a url:' + token);
+			var replaceWith = '[[' + urlUtd.title + ']] ' + buildHrefFromUrlString(urlUtd.addressWithHttp) ;
+			//console.log ('convert url from [' + tokens[i] + '] to [' + replaceWith+']');
+			tokens[i] = replaceWith;
+		}
+		i++;
+
     });
     return tokens.join(' ');
 
@@ -1524,11 +1537,11 @@ String.prototype.allAfterLast = function (allAfterLastOfThis) {
 		do
 		{
 			rtn = rtn.trim();
-			var nextIdx = rtn.indexOf(substr);
+			var firstIdx = rtn.indexOf(substr);
 			var changed = false;
-			if (nextIdx === 0)  {
+			if (firstIdx >= 0)  {
 				changed = true;
-				rtn = rtn.slice(substr.length);
+				rtn = rtn.slice(firstIdx+1);
 			}
 		} while (moreThanOne && changed);
 		return rtn;
