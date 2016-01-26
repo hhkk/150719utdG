@@ -12,22 +12,10 @@ var mongoose = require('mongoose'),
 var UstodoSchema = new Schema({
 
 	// presence of a name here forces its being saved
-	//utdUserCommand: {
-	//	type: String
-	//	//default: '',
-	//	//trim: true
-	//},
-	zzz2: {
-		type: String,
-		default: 'defaultzzz',
-		required: 'Please enter Ustodoori html',
-		trim: true
-	},
-	ttt5: {
-		type: String,
-		default: 'defaultttt',
-		required: 'Please enter ttthtml',
-		trim: true
+	utdUserCommand: {
+		type: String
+		//default: '',
+		//trim: true
 	},
 	text: {
 		type: String,

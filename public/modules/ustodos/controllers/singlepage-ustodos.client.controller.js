@@ -8,6 +8,7 @@
 //var O = require('C:/utd/150719utdG/public/util/O.js');
 //var UtilClass = null;
 //var UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 
 
 
@@ -19,6 +20,7 @@ var UtilHrefThisText = UtilHrefThisText;
 var UtilString = UtilString;
 var Medium = Medium;
 var UtilDate = UtilDate;
+var UtilHtmlCleaner = UtilHtmlCleaner;
 
 var $ = $;
 var UtilPrintObjects = UtilPrintObjects;
@@ -2840,8 +2842,6 @@ angular.module('ustodos').controller
 								arrelems[y].contentEditable = false;
 								alert('set one:' + arrelems[y].contentEditable);
 							});
-
-
 						}
 						//if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
 						//{
@@ -3641,6 +3641,9 @@ angular.module('ustodos').controller
 							// section_write
 							if (utdUserCommand.isWriteCommand) // e.g., $scope.enumCommands.COMMAND_WRITE  // hbkhbk
 							{
+
+
+
 								//alert ('in write utdUserCommand.xTextCommandRemoved [' + utdUserCommand.xTextCommandRemoved + ']');
 								//alert ('in write xHtml [' + xHtml + ']');
 								//alert ('in write xTextCommandRemoved.asciiTable():' + xTextCommandRemoved.asciiTable());
@@ -3660,6 +3663,12 @@ angular.module('ustodos').controller
 								//alert ('saving ustodo with html:utdUserCommand.xHtml.replaceLast(\' w\', \'\')' + utdUserCommand.xHtml.replaceLast(' w', ''));
 								//alert ('saving ustodo with text:utdUserCommand.xTextCommandRemoved' + utdUserCommand.xTextCommandRemoved);
 
+								// be sure not a spurious replacement in case html formatting
+								var htmlWindex = utdUserCommand.xHtml.indexOf(' w');
+								if (htmlWindex > 0 && htmlWindex <  utdUserCommand.xHtml.length -2 )
+								{
+									alert('erra345');
+								}
 								// section_routes_to_server_exports.create = function(req, res)
 								var ustodo = new Ustodos ({
 									// looks like mongoose
@@ -3670,12 +3679,21 @@ angular.module('ustodos').controller
 									text: utdUserCommand.xTextCommandRemoved,
 									datelastmod: (''+new Date()),
 									datecreated: (''+new Date()),
-									utdUserCommand: JSON.stringify(utdUserCommand)
+									// (I guess "if in schema" covers both client-server and server-db)
+									utdUserCommand: JSON.stringify(utdUserCommand)  // this goes to the DB if in schema
 								});
 
-								//ustodo._doc.xxx = utdUserCommand; // hbkhbk
+								// hbkhbk
+								if (UtilHtmlCleaner.isHTML2Regex(utdUserCommand.xHtml))
+								{
+									alert('html detected');
+								} else {
+									alert('no html detected');
+								}
+
+								//ustodo._doc.x1212 = 'x1212'; // hbkhbk
 								//ustodo.xxx = 'xxx2';
-								ustodo.yyy = 'yyy2';
+								//ustodo.y1212 = 'y1212';
 
 								//getProperties('props ustodo:', ustodo);
 								//alert ('saving ustodo.text:' + ustodo.text);

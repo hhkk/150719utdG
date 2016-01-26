@@ -1397,16 +1397,43 @@ function processpaste (elem, savedcontent) {
 
 
 
+// to decide is user entered html so this should be a hands off record past first text
+// trim first
+
+// may only work on browser
+
+function isHTML(str) {
+	var a = convertHtmlStringToDocForParse(str);
+	for (var c = a.childNodes, i = c.length; i--; ) {
+		if (c[i].nodeType == 1) return true;
+	}
+	return false;
+}
+
+// return a parsable doc element given a potentially HTML string
+function convertHtmlStringToDocForParse (str) {
+	var a = document.createElement('div');
+	a.innerHTML = str;
+	return a
+}
+
+//This searches for empty tags (some predefined) and / terminated XHTML empty tags and validates as HTML because of the empty tag OR will capture the tag name and attempt to find it's closing tag somewhere in the string to validate as HTML.
+function isHTML2Regex(str) {
+// /<(?=.*? .*?\/ ?>|br|hr|input|!--|wbr)[a-z]+.*?>|<([a-z]+).*?<\/\1>/i.test(htmlStringHere)
+// Explained demo: http://regex101.com/r/cX0eP2
+	return /<(br|basefont|hr|input|source|frame|param|area|meta|!--|col|link|option|base|img|wbr|!DOCTYPE).*?>|<(a|abbr|acronym|address|applet|article|aside|audio|b|bdi|bdo|big|blockquote|body|button|canvas|caption|center|cite|code|colgroup|command|datalist|dd|del|details|dfn|dialog|dir|div|dl|dt|em|embed|fieldset|figcaption|figure|font|footer|form|frameset|head|header|hgroup|h1|h2|h3|h4|h5|h6|html|i|iframe|ins|kbd|keygen|label|legend|li|map|mark|menu|meter|nav|noframes|noscript|object|ol|optgroup|output|p|pre|progress|q|rp|rt|ruby|s|samp|script|section|select|small|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video).*?<\/\2>/i.test(str);
+}
 
 
-
-
-if (typeof exports !== 'undefined') {
+if (typeof exports !== 'undefined')
+{
     exports.utilHtmlCleanerFunctions = utilHtmlCleanerFunctions;
     exports.handlepaste = handlepaste;
+    exports.isHTML2Regex = isHTML2Regex;
 	// UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(strm ...)
 }
 
+// TESTS
 
 if (false)
 {
