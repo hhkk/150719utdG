@@ -1134,7 +1134,9 @@ if (test160117)
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
-var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+//var UtilHtmlCleaner = UtilHtmlCleaner;
+// UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText
 
 
 /**
@@ -1241,44 +1243,52 @@ var utilHtmlCleanerFunctions = new function() {
 		return str;
 	}
 
-	this.cleanHtmlStandard = function(html) {
-		var pre = html;
-		var post = pre;
-		if (confirm('Do you want the HTML cleaned?'))
-		{
-			var post = this.cleanHtmlPre(html,
-				// allowed tags list
-				//''
-				'<a>' +
-				'<b>' +
-				'<br>' +
-				'<code>' +
-				'<div>' +
-				'<h1>' +
-				'<h2>' +
-				'<h3>' +
-				'<h4>' +
-				'<h5>' +
-				'<i>' +
-				'<li>' +
-				'<p>' +
-				'<pre>' +
-				'<span>' +
-				'<strong>' +
-				'<table>' +
-				'<tbody>' +
-				'<td>' +
-				'<tr>' +
-				'<u>' +
-				'<ul>'
-			);
-		}
-		if (pre !== post)
-			alert('changed [' + pre + '] to ['+ post + ']');
-		else
-			alert('no change from pre to post [' + pre + ']');
+	this.convertHtmltoText = function(html) {
+		//var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+		var poststrip = html.replace(/&nbsp;/gm, ' ');
+		poststrip = poststrip.replace(/<(?:.|\n)*?>/gm, '');
+		poststrip = poststrip.trim();
+		//console.log ('prestrip [' + prestrip + ']');
+		//console.log ('poststrip [' + poststrip + ']');
+		return poststrip;
 
-		return post;
+		//var pre = html;
+		//var post = pre;
+		//if (confirm('Do you want the HTML cleaned?'))
+		//{
+		//	var post = this.cleanHtmlPre(html,
+		//		// allowed tags list
+		//		//''
+		//		'<a>' +
+		//		'<b>' +
+		//		'<br>' +
+		//		'<code>' +
+		//		'<div>' +
+		//		'<h1>' +
+		//		'<h2>' +
+		//		'<h3>' +
+		//		'<h4>' +
+		//		'<h5>' +
+		//		'<i>' +
+		//		'<li>' +
+		//		'<p>' +
+		//		'<pre>' +
+		//		'<span>' +
+		//		'<strong>' +
+		//		'<table>' +
+		//		'<tbody>' +
+		//		'<td>' +
+		//		'<tr>' +
+		//		'<u>' +
+		//		'<ul>'
+		//	);
+		//}
+		//if (pre !== post)
+		//	alert('changed [' + pre + '] to ['+ post + ']');
+		//else
+		//	alert('no change from pre to post [' + pre + ']');
+        //
+		//return post;
 	}
 
 
@@ -1417,10 +1427,36 @@ function convertHtmlStringToDocForParse (str) {
 	return a
 }
 
+
+function removeHtmlWhiteSpace(str)
+{
+	var pt = '';
+	['br','div','p'].forEach(function(x)
+		{
+			pt = pt + '|' + x + '|/' + x
+		}
+	);
+	pt = '(<(' + pt.slice(1) + ')>|&nbsp;)';
+
+	O.o ('pt:' + pt);
+
+	//var pattern = "(<(br|/br|div|/div|p|/p)>";
+	var re = new RegExp(pt, "gi");
+	str = str.replace(re, ' ');
+	O.o ('str:' + str);
+	return str;
+}
+
 //This searches for empty tags (some predefined) and / terminated XHTML empty tags and validates as HTML because of the empty tag OR will capture the tag name and attempt to find it's closing tag somewhere in the string to validate as HTML.
-function isHTML2Regex(str) {
+function isHTML2(str, ignoreHtmlWhiteSpace) {
 // /<(?=.*? .*?\/ ?>|br|hr|input|!--|wbr)[a-z]+.*?>|<([a-z]+).*?<\/\1>/i.test(htmlStringHere)
 // Explained demo: http://regex101.com/r/cX0eP2
+
+	if (ignoreHtmlWhiteSpace)
+		str = removeHtmlWhiteSpace(str)
+
+	// is it still html after removing whitespace?  if not then we'll treat it like just text
+	//O.o ('str:' + str);
 	return /<(br|basefont|hr|input|source|frame|param|area|meta|!--|col|link|option|base|img|wbr|!DOCTYPE).*?>|<(a|abbr|acronym|address|applet|article|aside|audio|b|bdi|bdo|big|blockquote|body|button|canvas|caption|center|cite|code|colgroup|command|datalist|dd|del|details|dfn|dialog|dir|div|dl|dt|em|embed|fieldset|figcaption|figure|font|footer|form|frameset|head|header|hgroup|h1|h2|h3|h4|h5|h6|html|i|iframe|ins|kbd|keygen|label|legend|li|map|mark|menu|meter|nav|noframes|noscript|object|ol|optgroup|output|p|pre|progress|q|rp|rt|ruby|s|samp|script|section|select|small|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video).*?<\/\2>/i.test(str);
 }
 
@@ -1429,7 +1465,7 @@ if (typeof exports !== 'undefined')
 {
     exports.utilHtmlCleanerFunctions = utilHtmlCleanerFunctions;
     exports.handlepaste = handlepaste;
-    exports.isHTML2Regex = isHTML2Regex;
+    exports.isHTML2 = isHTML2;
 	// UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(strm ...)
 }
 
@@ -1449,10 +1485,27 @@ if (false)
 	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
 }
 
+if (false)
+{
+	var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+	console.log ('[' + isHTML2(prestrip, true) + ']' + prestrip);
+	var prestrip = '<P>&NbSp;</P><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+	console.log ('[' + isHTML2(prestrip, true) + ']' + prestrip);
+	var prestrip = 'testing';
+	console.log ('[' + isHTML2(prestrip) + ']' + prestrip);
+}
+
+if (true) // test html to text converter
+{
+	var html = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+	console.log ('html  [' + html + ']');
+	console.log ('text [' + utilHtmlCleanerFunctions.convertHtmltoText(html) + ']');
+}
 
 
 
-},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":9,"C:/utd/150719utdG/public/util/UtilString.js":12}],10:[function(require,module,exports){
+
+},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilString.js":12}],10:[function(require,module,exports){
 'use strict';
 
 /**

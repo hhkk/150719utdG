@@ -3,6 +3,8 @@
 var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+//var UtilHtmlCleaner = UtilHtmlCleaner;
+// UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText
 
 
 /**
@@ -109,44 +111,52 @@ var utilHtmlCleanerFunctions = new function() {
 		return str;
 	}
 
-	this.cleanHtmlStandard = function(html) {
-		var pre = html;
-		var post = pre;
-		if (confirm('Do you want the HTML cleaned?'))
-		{
-			var post = this.cleanHtmlPre(html,
-				// allowed tags list
-				//''
-				'<a>' +
-				'<b>' +
-				'<br>' +
-				'<code>' +
-				'<div>' +
-				'<h1>' +
-				'<h2>' +
-				'<h3>' +
-				'<h4>' +
-				'<h5>' +
-				'<i>' +
-				'<li>' +
-				'<p>' +
-				'<pre>' +
-				'<span>' +
-				'<strong>' +
-				'<table>' +
-				'<tbody>' +
-				'<td>' +
-				'<tr>' +
-				'<u>' +
-				'<ul>'
-			);
-		}
-		if (pre !== post)
-			alert('changed [' + pre + '] to ['+ post + ']');
-		else
-			alert('no change from pre to post [' + pre + ']');
+	this.convertHtmltoText = function(html) {
+		//var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+		var poststrip = html.replace(/&nbsp;/gm, ' ');
+		poststrip = poststrip.replace(/<(?:.|\n)*?>/gm, '');
+		poststrip = poststrip.trim();
+		//console.log ('prestrip [' + prestrip + ']');
+		//console.log ('poststrip [' + poststrip + ']');
+		return poststrip;
 
-		return post;
+		//var pre = html;
+		//var post = pre;
+		//if (confirm('Do you want the HTML cleaned?'))
+		//{
+		//	var post = this.cleanHtmlPre(html,
+		//		// allowed tags list
+		//		//''
+		//		'<a>' +
+		//		'<b>' +
+		//		'<br>' +
+		//		'<code>' +
+		//		'<div>' +
+		//		'<h1>' +
+		//		'<h2>' +
+		//		'<h3>' +
+		//		'<h4>' +
+		//		'<h5>' +
+		//		'<i>' +
+		//		'<li>' +
+		//		'<p>' +
+		//		'<pre>' +
+		//		'<span>' +
+		//		'<strong>' +
+		//		'<table>' +
+		//		'<tbody>' +
+		//		'<td>' +
+		//		'<tr>' +
+		//		'<u>' +
+		//		'<ul>'
+		//	);
+		//}
+		//if (pre !== post)
+		//	alert('changed [' + pre + '] to ['+ post + ']');
+		//else
+		//	alert('no change from pre to post [' + pre + ']');
+        //
+		//return post;
 	}
 
 
@@ -351,6 +361,13 @@ if (false)
 	console.log ('[' + isHTML2(prestrip, true) + ']' + prestrip);
 	var prestrip = 'testing';
 	console.log ('[' + isHTML2(prestrip) + ']' + prestrip);
+}
+
+if (true) // test html to text converter
+{
+	var html = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+	console.log ('html  [' + html + ']');
+	console.log ('text [' + utilHtmlCleanerFunctions.convertHtmltoText(html) + ']');
 }
 
 

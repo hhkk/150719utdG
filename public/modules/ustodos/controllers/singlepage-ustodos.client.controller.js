@@ -22,6 +22,7 @@ var Medium = Medium;
 var UtilDate = UtilDate;
 var UtilHtmlCleaner = UtilHtmlCleaner;
 
+
 var $ = $;
 var UtilPrintObjects = UtilPrintObjects;
 
@@ -1098,7 +1099,7 @@ angular.module('ustodos').controller
 									//alert('posthk');
 									//o.content = "-: CLEANED PRE :-\n" + o.content;
 									// works
-									//o.content = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlStandard(o.content); // htmlcleaner
+									//o.content = UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(o.content); // htmlcleaner
 								};
 								tinyMceparams_pasteFilter.paste_postprocess = function(pl, o) {
 									// Content DOM node containing the DOM structure of the clipboard
@@ -1440,7 +1441,8 @@ angular.module('ustodos').controller
 												ed.getContent({format : 'text'})
 											);
 										}
-									} else if (e.keyCode === 32) {
+									} else if (e.keyCode === 32) // hbkhbk
+									{
 										$scope.eventHandlerEditorcontentChange (
 											$scope.enumKeyEvent.SPACE,
 											ed.getContent({format : 'data'}),
@@ -1528,8 +1530,8 @@ angular.module('ustodos').controller
 						// hbkeak http://stackoverflow.com/questions/4651676/how-do-i-remove-tinymce-and-then-re-add-it
 						tinyMCE.remove(); // tinymce init
 						tinyMCE.init (tinyMceparams); // tinymce init
-						tinyMCE.execCommand('mceFocus',false,'idTinyMceTextArea');
-						setTimeout(function(){ tinymce.execCommand('mceFocus',false,'idTinyMceTextArea') }, 100); // hbklrbb12
+						//tinyMCE.execCommand('mceFocus',false,'idTinyMceTextArea');
+						//	setTimeout(function(){ tinymce.execCommand('mceFocus',false,'idTinyMceTextArea') }, 100); // hbklrbb12
 
 
 						//setTimeout(function(){ $scope.focusOnId(mceId) }, 2000); // hbklrbb
@@ -1747,6 +1749,14 @@ angular.module('ustodos').controller
 					//tinyMCE.get('idTinyMceTextArea').setContent('<span>some2</span> html');
 
 
+					$scope.testContentEditableCleaner = function() {
+						var html = $('div[id="idDivMainContentEditableInput"]')[0].innerHTML;
+						var text = UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(html);
+						alert ('editor innerhtml:' + html);
+						alert ('editor text:' + text);
+					};
+
+
 					// section_per_editor 0
 					$scope.inputbind ='search or inputx';
 
@@ -1784,6 +1794,72 @@ angular.module('ustodos').controller
 					//$scope.onKeyDown = function ($event) {
 					//    $scope.onKeyDownResult = getKeyboardEventResult($event, 'Key down');
 					//};
+
+
+					// hbkhbk2
+					// onchange for contentedtable http://stackoverflow.com/questions/8694054/onchange-event-with-contenteditable
+					//https://www.google.com/search?num=100&q=contenteditable+onchange
+					$scope.onKeyUp_MainContentEditable = function (keyEvent, index, _id)
+					{
+						//alert ('!!!! in onKeyUp_MainContentEditable');
+
+						// if not escape then return
+						if (keyEvent.keyCode !== 27 ) // if not escape key section_escape
+						{
+							//alert ('!!!! in onKeyUp_MainContentEditable not escape');
+							//// change local image to requiring a save
+							//var savImgHtml = document.getElementById('savimg'+index);
+							////alert ('savImgHtml.src:' + savImgHtml.src);
+							//savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
+                            //
+							//// SET ROW BACKGGROUND COLOR ON EDITING MODE ENTRY
+							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('idDivMainContentEditableInput')
+							areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'yellow'; // SETMODELLDIRTY
+
+							return;
+						}
+						else // save hbkhbk maincontenteditable
+						{
+							// save
+							//alert( 'in eventHandlerEditorcontentChange save');
+							try {
+
+								var maincontenteditableHtml = document.getElementById('idDivMainContentEditableInput').innerHTML;
+								alert ('maincontenteditableHtml:' + maincontenteditableHtml);
+
+								//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
+								// hbkhbk2
+								var text =
+									UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(maincontenteditableHtml);
+								alert ('maincontenteditableText:' + maincontenteditableText);
+
+								//text = UtilString.convertNonBreakingSpace(text);
+								//text = UtilString.convertRemoveTrailing10(text);
+								//alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
+
+								//alert('eventHandlerEditorcontentChange text:' + text);
+								//if (text.endsWith(' ') && $scope.dynamicSearch ) {
+								if (text.endsWith(' ') && $scope.dynamicSearch ) {
+									//alert ('not skipping')
+									$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
+										'caller eventHandler space and ends w space', text, html, data);
+								}
+								else if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
+									//alert ('not skipping 2')
+									$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
+										'caller eventHandler ENTER key pressed', text, html, data);
+								}
+								else if (text.endsWith(' w')) {
+									$scope.processCommand($scope.enumCommands.COMMAND_WRITE,
+										'caller eventHandlerEditorcontentChange write', text, html, data);
+									//alert('calling processCommand');
+								}
+							} catch (e) {
+								UtilErrorEmitter.emitError('in eventHandlerEditorcontentChange', e);
+								//alert ('sdfsdfsdf:' + e);
+							}
+						}
+					};
 
 
 					$scope.onKeyUp_perrow_text = function (keyEvent, index, _id) // https://docs.angularjs.org/api/ng/directive/ngKeyup
@@ -2251,7 +2327,7 @@ angular.module('ustodos').controller
 					// eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
 					$scope.eventHandlerEditorcontentChange = function(enumKeyEvent, data, html, text)
 					{
-						//alert( 'in eventHandlerEditorcontentChange');
+						alert( 'in eventHandlerEditorcontentChange');
 						try {
 
 							//document.getElementById('idInputTextFilter').value = text;
@@ -2309,6 +2385,7 @@ angular.module('ustodos').controller
 							text = UtilString.convertRemoveTrailing10(text);
 							//alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
 
+							alert('eventHandlerEditorcontentChange text:' + text);
 							//if (text.endsWith(' ') && $scope.dynamicSearch ) {
 							if (text.endsWith(' ') && $scope.dynamicSearch ) {
 								//alert ('not skipping')
@@ -2830,6 +2907,12 @@ angular.module('ustodos').controller
 					{
 
 						if (true)
+						{
+							// works $('div[contenteditable="true"]').trigger('focus');
+							$scope.testContentEditableCleaner();
+						}
+
+						if (false)
 						{
 							//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
 							//alert('makeThisNotContentEditables.length:' + makeThisNotContentEditables.length);
@@ -3664,11 +3747,11 @@ angular.module('ustodos').controller
 								//alert ('saving ustodo with text:utdUserCommand.xTextCommandRemoved' + utdUserCommand.xTextCommandRemoved);
 
 								// be sure not a spurious replacement in case html formatting
-								var htmlWindex = utdUserCommand.xHtml.indexOf(' w');
-								if (htmlWindex > 0 && htmlWindex <  utdUserCommand.xHtml.length -2 )
-								{
-									alert('erra345');
-								}
+								//var htmlWindex = utdUserCommand.xHtml.indexOf(' w');
+								//if (htmlWindex > 0 && htmlWindex <  utdUserCommand.xHtml.length -2 )
+								//{
+								//	alert('erra345');
+								//}
 								// section_routes_to_server_exports.create = function(req, res)
 								var ustodo = new Ustodos ({
 									// looks like mongoose
@@ -3684,12 +3767,12 @@ angular.module('ustodos').controller
 								});
 
 								// hbkhbk
-								if (UtilHtmlCleaner.isHTML2Regex(utdUserCommand.xHtml))
-								{
-									alert('html detected');
-								} else {
-									alert('no html detected');
-								}
+								//if (UtilHtmlCleaner.isHTML2Regex(utdUserCommand.xHtml))
+								//{
+								//	alert('html detected');
+								//} else {
+								//	alert('no html detected');
+								//}
 
 								//ustodo._doc.x1212 = 'x1212'; // hbkhbk
 								//ustodo.xxx = 'xxx2';
@@ -4056,6 +4139,8 @@ angular.module('ustodos').controller
 		// oct 2015 seems not called
 		//O.a('sss2');
 		//alert('inONLOADINIT#8  in directive(onFinishRender{');
+		$('div[id="idDivMainContentEditableInput"]').trigger('focus');
+
 
 		return {
 			restrict: 'A',
@@ -4063,7 +4148,7 @@ angular.module('ustodos').controller
 				if (scope.$last === true) {
 					$timeout(function () {
 						//O.a ('sss3');
-						//alert('onFinishRender inONLOADINIT#8b  in directive(onFinishRender{');
+						// not hit? alert('onFinishRender inONLOADINIT#8b  in directive(onFinishRender{');
 						if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
 						{
 							//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
