@@ -363,9 +363,13 @@ if (false)
 	console.log ('[' + isHTML2(prestrip) + ']' + prestrip);
 }
 
-if (true) // test html to text converter
+if (false) // test html to text converter
 {
 	var html = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
+	console.log ('html  [' + html + ']');
+	console.log ('text [' + utilHtmlCleanerFunctions.convertHtmltoText(html) + ']');
+
+	var html = '<p>&nbsp;</p>cccc <p>&nbsp;</p><a href="ibm.com">hp.com</a><p>&nbsp;</p>';
 	console.log ('html  [' + html + ']');
 	console.log ('text [' + utilHtmlCleanerFunctions.convertHtmltoText(html) + ']');
 }

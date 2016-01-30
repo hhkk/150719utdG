@@ -101,7 +101,7 @@ var hrefThisText = function(textToBeHrefed, arrUrlUtdsFromHtml)
     var i = 0;
     tokens.forEach(function(token)
 	{
-		console.log ('processing token [' + token + ']');   // hbkhbk
+		//console.log ('processing token [' + token + ']');   // hbkhbk
         //if (isUrl(token)) {
 			////console.log ('is a url:' + token);
 			//var replaceWith = null;

@@ -22,7 +22,7 @@ var Medium = Medium;
 var UtilDate = UtilDate;
 var UtilHtmlCleaner = UtilHtmlCleaner;
 
-
+var CONST_SHOW_INIT_ALERTS = false;
 var $ = $;
 var UtilPrintObjects = UtilPrintObjects;
 
@@ -152,9 +152,13 @@ var app = angular.module('ustodos');      // worked before ui.router was added b
 app.directive('repeatDone', function() {
 	console.log ('@@@@@@@@@@@@@@@@ in repeatdone1');
 	return function(scope, element, attrs) {
-		//alert('inONLOADINIT#7  in app.directive(repeatDone');
+		//if (CONST_SHOW_INIT_ALERTS)
+		//	alert('inONLOADINIT#7  in app.directive(repeatDone'); // happens per row!!!
 
 		if (scope.$last) { // all are rendered
+			if (CONST_SHOW_INIT_ALERTS)
+				alert('inONLOADINIT#7b  in app.directive(repeatDone');
+
 			scope.$eval(attrs.repeatDone);
 		}
 	}
@@ -460,7 +464,8 @@ angular.module('ustodos').controller
 				// oct 2015 seems not to be called at all even with add listener in place
 				function load(){
 					// dec 2015 seems not to be called at all even with add listener in place
-					//alert('inONLOADINIT#3.5  in addEventListener load in function load(){');
+					if (CONST_SHOW_INIT_ALERTS)
+					   alert('inONLOADINIT#3.5  in addEventListener load in function load(){');
 
 					//var el = document.getElementById("foo");
 					//alert(el);
@@ -480,7 +485,10 @@ angular.module('ustodos').controller
 				{
 					//$('a[data-toggle="tooltip"]').tooltip(); // NOT CORRECT!
 					//alert('start layoutDone');
-					//alert('inONLOADINIT#6  in $scope.layoutDone(){');
+					if (CONST_SHOW_INIT_ALERTS)
+						alert('inONLOADINIT#6  in $scope.layoutDone(){');
+
+
 					//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
 					//alert('makeThisNotContentEditables.length:' + makeThisNotContentEditables.length); // was len 0
 
@@ -665,12 +673,20 @@ angular.module('ustodos').controller
 					// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=ONLOAD%0A
 					// section_onload
 
-					//alert('inONLOADINIT#3  in onload base code');
+					if (CONST_SHOW_INIT_ALERTS)
+						alert('inONLOADINIT#3  in onload base code'); // repeat content not ready yet I suspect
 
 					$scope.$watch('$viewContentLoaded', function(){ // like onload YES
 						try {
 
-							//alert('inONLOADINIT#5  in $viewContentLoaded $scope.$watch  onload');
+							// hbkhbk3
+							if (CONST_SHOW_INIT_ALERTS)
+								alert('inONLOADINIT#5  in $viewContentLoaded $scope.$watch  onload');
+
+
+
+
+
 
 							//$scope.localTinyMceInit(); // hbklrb11
 
@@ -680,7 +696,8 @@ angular.module('ustodos').controller
 
 							// this is an HTMLObject I think, with main prop x[0].innerHTML aka x[0]['innerHTML']
 							//var x = document.getElementsByClassName("WholePage");
-							//alert ('inONLOADINIT#5 $viewContentLoaded:' + x);
+							if (CONST_SHOW_INIT_ALERTS)
+								alert ('inONLOADINIT#5 $viewContentLoaded:');
 							//console.log (' @@@@@@@@@@inONLOADINIT#5 $viewContentLoaded:' + x.length);
 
 
@@ -748,7 +765,8 @@ angular.module('ustodos').controller
 
 					$scope.ngInitTopLevel= function()
 					{
-						//alert('inONLOADINIT#4  inSTARTUP nginit');
+						if (CONST_SHOW_INIT_ALERTS)
+							alert('inONLOADINIT#4  inSTARTUP nginit');
 						//if ($scope.howManyTimesInited == 1)
 						//alert ('in ngInitTopLevel');
 						//setTimeout(function(){ $scope.localTinyMceInit(); }, 300); // hbklrbb12
@@ -1801,7 +1819,7 @@ angular.module('ustodos').controller
 					//https://www.google.com/search?num=100&q=contenteditable+onchange
 					$scope.onKeyUp_MainContentEditable = function (keyEvent, index, _id)
 					{
-						//alert ('!!!! in onKeyUp_MainContentEditable');
+						alert ('!!!! in onKeyUp_MainContentEditable');
 
 						// if not escape then return
 						if (keyEvent.keyCode !== 27 ) // if not escape key section_escape
@@ -2899,7 +2917,20 @@ angular.module('ustodos').controller
 					//    return UtilDate.dateFromMongoString(dateStrFromMongo);
 					//}
 					$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
-						//alert('inONLOADINIT#A ngRepeatFinished');
+						if (CONST_SHOW_INIT_ALERTS)
+							alert('inONLOADINIT#A ngRepeatFinished');
+						// hbkhbk3
+						//alert("made it to start :");
+						alert("made it to start in ngRepeatFinished $scope.ustodos.length:" + $scope.ustodos.length);
+						var html_string= "contenthbk";
+
+						document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
+						//document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
+						//document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
+						document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' _0');
+						document.getElementById('idPerRowIframe1').src = "data:text/html;charset=utf-8," + escape(html_string +' _1');
+						alert("made it to end ");
+
 					});
 
 
@@ -2907,6 +2938,18 @@ angular.module('ustodos').controller
 					{
 
 						if (true)
+						{
+							// hbkhbk3
+							alert("made it to start");
+							var html_string= "contenthbk";
+							document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
+							//document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
+							//document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
+							document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
+							alert("made it to end ");
+						}
+
+						if (false)
 						{
 							// works $('div[contenteditable="true"]').trigger('focus');
 							$scope.testContentEditableCleaner();
@@ -4138,8 +4181,14 @@ angular.module('ustodos').controller
 	.directive('onFinishRender', function ($timeout) {
 		// oct 2015 seems not called
 		//O.a('sss2');
-		//alert('inONLOADINIT#8  in directive(onFinishRender{');
+		if (CONST_SHOW_INIT_ALERTS)
+			alert('inONLOADINIT#8  in directive(onFinishRender{');
 		$('div[id="idDivMainContentEditableInput"]').trigger('focus');
+
+
+		if (CONST_SHOW_INIT_ALERTS)
+			alert('inONLOADINIT#8d  in directive(onFinishRender{');
+		//document.getElementById('perRowIframe').src = "data:text/html;charset=utf-8," + escape(html_string);
 
 
 		return {
@@ -4148,7 +4197,10 @@ angular.module('ustodos').controller
 				if (scope.$last === true) {
 					$timeout(function () {
 						//O.a ('sss3');
-						// not hit? alert('onFinishRender inONLOADINIT#8b  in directive(onFinishRender{');
+						// not hit?
+
+						if (CONST_SHOW_INIT_ALERTS)
+							alert('onFinishRender inONLOADINIT#8b  in directive(onFinishRender{');
 						if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
 						{
 							//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
@@ -4157,7 +4209,9 @@ angular.module('ustodos').controller
 								arrelems[y].contentEditable = false;
 								//alert('set one:' + arrelems[y].contentEditable);
 							});
-							//alert('onFinishRender inONLOADINIT#8c makeThisNotContentEditables.length:' + makeThisNotContentEditables.length);
+							if (CONST_SHOW_INIT_ALERTS)
+								alert('onFinishRender inONLOADINIT#8c makeThisNotContentEditables' );
+								//alert('onFinishRender inONLOADINIT#8c makeThisNotContentEditables.length:' + makeThisNotContentEditables.length);
 
 						}
 
@@ -4277,7 +4331,8 @@ window.onload = function()
 {
 	//var x = document.getElementById('imageIdRedPEncilbnw');
 	//try {
-	//alert('inONLOADINIT#1  in window.onload');
+	if (CONST_SHOW_INIT_ALERTS)
+		alert('inONLOADINIT#1  in window.onload');
 
 	//setTimeout(function(){ $scope.localTinyMceInit() }, 2000); // hbklrb11
 	//setTimeout(function(){ $scope.focusOnId(mceId); }, 3000); // hbklrbb

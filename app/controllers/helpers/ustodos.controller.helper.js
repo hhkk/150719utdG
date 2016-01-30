@@ -201,11 +201,11 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 						//hbkhbk ustodos[k] arrUrlUtdsFromHtml
 						//ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html);
 
-						console.log ('pre contentEditableFalse:' + ustodos[k].html);
+						//console.log ('pre contentEditableFalse:' + ustodos[k].html);
 
 						ustodos[k].html = UtilHrefThisText.addNoContentEditableToHrefs(ustodos[k].html);
 
-						console.log ('post contentEditableFalse:' + ustodos[k].html);
+						//console.log ('post contentEditableFalse:' + ustodos[k].html);
 
 						arrUstodoPassedAllFilters.push(ustodos[k]);
 						//O.o (ustodos[k]._id);

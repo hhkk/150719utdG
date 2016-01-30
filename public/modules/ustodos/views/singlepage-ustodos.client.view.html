@@ -42,6 +42,9 @@
 		<!--style='height:32px;'-->
 		<!--/>-->
 		<button ng-click="alert('hi mom')">Allalerty1</button>
+		<!--hbkhbk3-->
+		<iframe id="idPerRowIframeTop" class="classPerRowIframe" >
+		</iframe>
 
 		<span ng-keyup='onKeyUp("line 63", $event, this.ENUM_KEYEVENTCALLER_KEYUPSPAN)'>
 
@@ -435,7 +438,12 @@
 									<!--&gt;</span>-->
 									<!--</td>-->
 
-									<!-- 5 PER ROW TEXT CONTENTEDITABLE ROW -->
+
+
+
+
+
+									<!-- 5.0 PER ROW TEXT CONTENTEDITABLE ROW -->
 									<td
 										id="idConentEditableRow{{$index}}"
 										style='xxwidth:50%;
@@ -451,8 +459,14 @@
 
 									>
 									<!--ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)" hbkhbk-->
+									cc{{$index}}dd
+									<!--<iframe id="idPerRowIframe{{$index}}" >-->
+									<!--</iframe >-->
+									<!--&lt;!&ndash;hbkhbk3&ndash;&gt;-->
+
 										<span class='hkcssContentedit' >
 											<div class="WholePage focusblurme"
+												 state="nonIframed"
 												 id="ustodorow{{$index}}"
 												 hkindex="{{$index}}"
 												 hkustodoid="{{ustodo._id}}"
@@ -472,6 +486,7 @@
 								</tr>
 							</span>
 					</div>
+
 				</tbody>
 			</table>
 		</div>

@@ -1,0 +1,57 @@
+<!--
+http://localhost:3000/hk/htmltest/160126iframeContentEditableExeccomandHowtoPerformance/test.html
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script>
+		function test() {
+			//alert ('hi mom');
+			var s = "<div contenteditable=\"true\">"+
+					"xxxx"+
+					"</div>";
+			//$('iframe').get()[0].contentWindow.document.write("<h1>Injected from parent frame</h1>")
+			var tt = $('.hbkk').get();
+			tt[0].contentWindow.document.write(s);
+			tt[1].contentWindow.document.write(s);
+
+
+			var doc=document.getElementById("frame").contentDocument;
+		}
+	</script>
+</head>
+
+<body>
+	<button type="button" onclick="test() ">Click Me!</button>
+
+	<!--<table>-->
+		<!--<tr>-->
+			<!--<td>-->
+		<!--<iframe id="hbk">-->
+			<!--<div id="hbk2" contenteditable="true">-->
+			<!--yyy-->
+			<!--</div>-->
+
+		<div class=".ggg" contenteditable="true">
+			1111
+		</div>
+
+		<div class=".ggg" contenteditable="true">
+			1111
+		</div>
+
+		<div class=".ggg" contenteditable="true">
+			222
+		</div>
+
+		<div class=".ggg" contenteditable="true">
+			333
+		</div>
+
+		<!--</td>-->
+	<!--</tr>-->
+<!--</table>-->
+
+</body>
+</html>
