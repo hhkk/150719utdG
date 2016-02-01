@@ -67,7 +67,9 @@ function createOrSave(ustodo, user, res) {
 	ustodo.html = ustodo._doc.html.trim();
 	ustodo._doc.timely = 'yes';              // even w/o mongoose schema element, on server side, new attr here goes to db.
 	//ustodo.dog = 'cat';                    // right: but same not true w/o _doc
-	ustodo.html = 'xxd:' + UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html);
+
+
+	// hbkhbk ustodo.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html); // xxd
 	// works ustodo._doc.testArray2 = ['a','b'];
 	//ustodo._doc.hkhkhk = 'hi hkhkhk'; _// doc gets to the DB and to the UI therefore
 	ustodo.user = user;

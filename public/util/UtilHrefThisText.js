@@ -118,6 +118,7 @@ var hrefThisText = function(textToBeHrefed, arrUrlUtdsFromHtml)
 		if (token.startsWith('$UrlUtd'))
 		{
 			var index = token.allAfterFirst('d');
+			O.o ('index:'+index + ', token:' + token);
 			var urlUtd = arrUrlUtdsFromHtml[index];
 			//console.log ('is a url:' + token);
 			var replaceWith = '[[' + urlUtd.title + ']] ' + buildHrefFromUrlString(urlUtd.addressWithHttp) ;
@@ -266,7 +267,7 @@ var addNoContentEditableToHrefs = function (html) {
 	//var t = html.replace(/(.*value="\w+)(\d+)(\w+".*)/, "$1!NEW_ID!$3")
 
 	//html
-	O.o ('final html:' + html);
+	//O.o ('final addNoContentEditableToHrefs html:' + html);
     return html;
 }
 

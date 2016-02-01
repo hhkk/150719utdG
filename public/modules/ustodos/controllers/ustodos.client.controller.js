@@ -179,7 +179,7 @@ angular.module('ustodos').controller('UstodosController',
 		//    return $sce.trustAsHtml(s);
 		//};
 
-        //alert ('reiniting scope');
+        alert ('reiniting ustodos controller scope');
         try
         {
 
@@ -4058,14 +4058,14 @@ angular.module('ustodos')
     ////})
     .directive('onFinishRender', function ($timeout) {
         //O.a('sss2');
-        //alert ('inONLOADINIT#B in onFinishRender');
+        //alert ('yes running ustodos controller!!!!!!!!!');
         return {
             restrict: 'A',
             link: function (scope, element, attr) {
                 if (scope.$last === true) {
                     $timeout(function () {
                         //O.a ('sss3');
-                        scope.$emit('ngRepeatFinished');
+							//scope.$emit('ngRepeatFinished');
                         //alert('inONLOADINIT#C onFinishRender');
                     });
                 }

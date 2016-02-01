@@ -937,7 +937,7 @@ var hrefThisText = function(textToBeHrefed, arrUrlUtdsFromHtml)
     var i = 0;
     tokens.forEach(function(token)
 	{
-		console.log ('processing token [' + token + ']');   // hbkhbk
+		//console.log ('processing token [' + token + ']');   // hbkhbk
         //if (isUrl(token)) {
 			////console.log ('is a url:' + token);
 			//var replaceWith = null;
@@ -954,6 +954,7 @@ var hrefThisText = function(textToBeHrefed, arrUrlUtdsFromHtml)
 		if (token.startsWith('$UrlUtd'))
 		{
 			var index = token.allAfterFirst('d');
+			O.o ('index:'+index + ', token:' + token);
 			var urlUtd = arrUrlUtdsFromHtml[index];
 			//console.log ('is a url:' + token);
 			var replaceWith = '[[' + urlUtd.title + ']] ' + buildHrefFromUrlString(urlUtd.addressWithHttp) ;
@@ -1102,7 +1103,7 @@ var addNoContentEditableToHrefs = function (html) {
 	//var t = html.replace(/(.*value="\w+)(\d+)(\w+".*)/, "$1!NEW_ID!$3")
 
 	//html
-	O.o ('final html:' + html);
+	//O.o ('final addNoContentEditableToHrefs html:' + html);
     return html;
 }
 

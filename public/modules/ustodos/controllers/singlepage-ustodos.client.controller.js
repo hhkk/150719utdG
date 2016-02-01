@@ -1,4 +1,5 @@
 
+
 'use strict';
 
 
@@ -161,7 +162,7 @@ app.directive('repeatDone', function() {
 
 			scope.$eval(attrs.repeatDone);
 		}
-	}
+	};
 })
 
 
@@ -679,7 +680,6 @@ angular.module('ustodos').controller
 					$scope.$watch('$viewContentLoaded', function(){ // like onload YES
 						try {
 
-							// hbkhbk3
 							if (CONST_SHOW_INIT_ALERTS)
 								alert('inONLOADINIT#5  in $viewContentLoaded $scope.$watch  onload');
 
@@ -1414,7 +1414,9 @@ angular.module('ustodos').controller
 									var allDots = true && text.length !== 0;
 									while (i-- && allDots) {
 										if (text[i] !== '.') {
-											allDots = false;
+											allDots = false; // hbkhbk3
+											//allDots = true; // to default to detail view allDots true;
+											//alert('alldots');
 											break;
 										}
 									}
@@ -1814,12 +1816,12 @@ angular.module('ustodos').controller
 					//};
 
 
-					// hbkhbk2
 					// onchange for contentedtable http://stackoverflow.com/questions/8694054/onchange-event-with-contenteditable
+					// hbkhbk3
 					//https://www.google.com/search?num=100&q=contenteditable+onchange
 					$scope.onKeyUp_MainContentEditable = function (keyEvent, index, _id)
 					{
-						alert ('!!!! in onKeyUp_MainContentEditable');
+							alert ('!!!! in onKeyUp_MainContentEditable');
 
 						// if not escape then return
 						if (keyEvent.keyCode !== 27 ) // if not escape key section_escape
@@ -1843,27 +1845,28 @@ angular.module('ustodos').controller
 							try {
 
 								var maincontenteditableHtml = document.getElementById('idDivMainContentEditableInput').innerHTML;
-								alert ('maincontenteditableHtml:' + maincontenteditableHtml);
+								//	alert ('maincontenteditableHtml:' + maincontenteditableHtml);
 
 								//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
 								// hbkhbk2
 								var text =
 									UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(maincontenteditableHtml);
-								alert ('maincontenteditableText:' + maincontenteditableText);
 
 								//text = UtilString.convertNonBreakingSpace(text);
 								//text = UtilString.convertRemoveTrailing10(text);
 								//alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
 
 								//alert('eventHandlerEditorcontentChange text:' + text);
+
 								//if (text.endsWith(' ') && $scope.dynamicSearch ) {
-								if (text.endsWith(' ') && $scope.dynamicSearch ) {
-									//alert ('not skipping')
-									$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
-										'caller eventHandler space and ends w space', text, html, data);
-								}
-								else if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
-									//alert ('not skipping 2')
+								//	//alert ('not skipping')
+								//	$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
+								//		'caller eventHandler space and ends w space', text, html, data);
+								//}
+								//else
+								// IF ENTER
+								if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
+									alert ('not skipping 2')
 									$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
 										'caller eventHandler ENTER key pressed', text, html, data);
 								}
@@ -1882,7 +1885,8 @@ angular.module('ustodos').controller
 
 					$scope.onKeyUp_perrow_text = function (keyEvent, index, _id) // https://docs.angularjs.org/api/ng/directive/ngKeyup
 					{
-						//console.log ('!!!! in onKeyUp_perrow_text');
+						// hbkhbk3
+						//alert ('!!!! in onKeyUp_perrow_text');
 
 						// if not escape then return
 						if (keyEvent.keyCode !== 27 ) // if not escape key section_escape
@@ -2345,7 +2349,8 @@ angular.module('ustodos').controller
 					// eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
 					$scope.eventHandlerEditorcontentChange = function(enumKeyEvent, data, html, text)
 					{
-						alert( 'in eventHandlerEditorcontentChange');
+						// hbkhbk3
+						//alert( 'in eventHandlerEditorcontentChange');
 						try {
 
 							//document.getElementById('idInputTextFilter').value = text;
@@ -2403,8 +2408,9 @@ angular.module('ustodos').controller
 							text = UtilString.convertRemoveTrailing10(text);
 							//alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
 
-							alert('eventHandlerEditorcontentChange text:' + text);
-							//if (text.endsWith(' ') && $scope.dynamicSearch ) {
+							// hbkhbk3
+							// alert ('eventHandlerEditorcontentChange text:' + text);
+							// if (text.endsWith(' ') && $scope.dynamicSearch ) {
 							if (text.endsWith(' ') && $scope.dynamicSearch ) {
 								//alert ('not skipping')
 								$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
@@ -2919,17 +2925,61 @@ angular.module('ustodos').controller
 					$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
 						if (CONST_SHOW_INIT_ALERTS)
 							alert('inONLOADINIT#A ngRepeatFinished');
-						// hbkhbk3
-						//alert("made it to start :");
-						alert("made it to start in ngRepeatFinished $scope.ustodos.length:" + $scope.ustodos.length);
-						var html_string= "contenthbk";
 
-						document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
-						//document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
-						//document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
-						document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' _0');
-						document.getElementById('idPerRowIframe1').src = "data:text/html;charset=utf-8," + escape(html_string +' _1');
-						alert("made it to end ");
+
+						//alert ('$scope.ustodosFiltered:' + $scope.ustodosFiltered);
+						var i = 0;
+						var sPre = '\
+							<span class="hkcssContentedit" >   \
+							<div class="WholePage focusblurme"  \
+								state="nonIframed"  \
+								id="ustodorow{{$index}}"  \
+								hkindex="{{$index}}"  \
+								hkustodoid="{{ustodo._id}}"  \
+							  \
+								contenteditable="true"  \
+								xxonpaste="UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)"  \
+								ng-focus="hkngfocustest($index)"  \
+								ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"  \
+							>';
+
+						var sPost = '</div>  \
+							</span>  \
+							';
+
+						var sMid = encodeURIComponent($scope.ustodosFiltered[0].html);
+						var sAll = sPre + sMid + sPost;
+						//var sAll = sPre + sPost;
+						document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + sAll;
+
+						//$scope.ustodosFiltered.forEach (function (x)
+						//{
+						//	var sMid = encodeURIComponent($scope.ustodosFiltered[i].html);
+						//	var sAll = sPre + sMid + sPost;
+						//	//var sAll = sPre + sPost;
+						//	document.getElementById('idPerRowIframe'+i).src = "data:text/html;charset=utf-8," +
+						//		//escape($scope.ustodosFiltered.html);
+						//		i + ', ' + sAll;
+						//		//$scope.ustodosFiltered[i].html;
+						//	//alert ('x:' + x);
+						//	i++;
+						//});
+                        //
+
+						// // hbkhbk3
+						// //alert("made it to start :");
+						// var html_string= "contenthbk";
+                        //
+						// document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
+						// //document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
+						// //document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
+						// var x = document.getElementById('idPerRowIframe0');
+						// ///alert("hbkhbk3 made it to start in x ["+x+"] ngRepeatFinished $scope.ustodos.length:" + $scope.ustodos.length);
+                        //
+						// document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +'_0');
+						// document.getElementById('idPerRowIframe1').src = "data:text/html;charset=utf-8," + escape(html_string +'_1');
+						// // hbkhbk3
+						// //alert("made it to end ");
 
 					});
 
@@ -2938,6 +2988,11 @@ angular.module('ustodos').controller
 					{
 
 						if (true)
+						{
+							$scope.ustodosFiltered[0].html = "hi mom";
+						}
+
+						if (false)
 						{
 							// hbkhbk3
 							alert("made it to start");
@@ -4215,7 +4270,7 @@ angular.module('ustodos').controller
 
 						}
 
-						scope.$emit('ngRepeatFinished');
+						scope.$emit('ngRepeatFinished'); // this
 						//alert('ngRepeatFinished');
 					});
 				}

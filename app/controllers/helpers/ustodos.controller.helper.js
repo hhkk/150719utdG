@@ -164,12 +164,16 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 				// for each record from the DB based only on the search portion retained
 				for (var k = 0; k < (ustodos.length) && arrUstodoPassedAllFilters.length < hklimit; k++)
 				{
-					mapUserIdToUserNameStr[ustodos[k].user._id] = null;
-					//console.log ('&&&&&&&&&&&&&&&&&&& in result loop');
-					countResult = countResult + 1;
-					//ustodos[k].text = 'svr2,' + ustodos[k].text;
-					ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html, ustodos[k]._doc.arrUrlUtdsFromHtml);
-					ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text, ustodos[k]._doc.arrUrlUtdsFromHtml);
+					if (ustodos[k]._doc.arrUrlUtdsFromHtml) // older records may not have it
+					{
+						mapUserIdToUserNameStr[ustodos[k].user._id] = null;
+						//console.log ('&&&&&&&&&&&&&&&&&&& in result loop');
+						countResult = countResult + 1;
+						//ustodos[k].text = 'svr2,' + ustodos[k].text;
+						ustodos[k].html = UtilHrefThisText.hrefThisText(ustodos[k].html, ustodos[k]._doc.arrUrlUtdsFromHtml);
+						ustodos[k].text = UtilHrefThisText.hrefThisText(ustodos[k].text, ustodos[k]._doc.arrUrlUtdsFromHtml);
+					}
+
 					var keeper = true; //assume keep until proven otherwise
 
 					// if the user enters say 5 search keys, not all are applied to mongo, this is the remainder filter

@@ -443,6 +443,7 @@
 
 
 
+									<!--consider http://weblogs.asp.net/bleroy/css-isolation-there-has-got-to-be-a-better-way-->
 									<!-- 5.0 PER ROW TEXT CONTENTEDITABLE ROW -->
 									<td
 										id="idConentEditableRow{{$index}}"
@@ -459,27 +460,31 @@
 
 									>
 									<!--ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)" hbkhbk-->
-									cc{{$index}}dd
+									<!-- works cc{{$index}}dd-->
 									<!--<iframe id="idPerRowIframe{{$index}}" >-->
 									<!--</iframe >-->
-									<!--&lt;!&ndash;hbkhbk3&ndash;&gt;-->
+									<!--hbkhbk3-->
 
-										<span class='hkcssContentedit' >
-											<div class="WholePage focusblurme"
-												 state="nonIframed"
-												 id="ustodorow{{$index}}"
-												 hkindex="{{$index}}"
-												 hkustodoid="{{ustodo._id}}"
+									<span class='hkcssContentedit' >
+										<!--<iframe>-->
+										<div class="WholePage focusblurme"
+											 state="nonIframed"
+											 id="ustodorow{{$index}}"
+											 hkindex="{{$index}}"
+											 hkustodoid="{{ustodo._id}}"
 
-												 contenteditable="true"
-												 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
-												 ng-focus='hkngfocustest($index)'
-												 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
-												 ng-bind-html="ustodosFiltered[$index].html"
-											>
-											</div>
-										</span>
+											 contenteditable="true"
+											 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
+											 ng-focus='hkngfocustest($index)'
+											 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
+											 ng-bind-html="ustodosFiltered[$index].html"
+										>
+										<!--hbkhbk3-->
 
+										</div>
+
+										<!--</iframe>-->
+									</span>
 
 									<!--/onclick = "this.contentEditable = true;"-->
 									</td>
