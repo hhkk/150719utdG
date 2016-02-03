@@ -49,7 +49,7 @@ var parseUserInputStringCreateMongoQuery = function(querystringTrimmed, req)
             arrRegExpsToOr.push ({text:re});
             //[{text:rea}, {text:reb}]
         } catch (e) {
-			O.e ('error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ', e)
+			O.e ('error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ', e);
         }
         if (arrRegExpsToOr.length > 4) // keep only n for the mongo query, the rest we will constrain for
             break;

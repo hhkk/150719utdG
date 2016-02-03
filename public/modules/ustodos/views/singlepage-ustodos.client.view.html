@@ -41,11 +41,17 @@
 		<!--title="Next Editor"-->
 		<!--style='height:32px;'-->
 		<!--/>-->
+
+		<div id="testIframeReplace">
+			this is a test
+		</div>
+
 		<button ng-click="alert('hi mom')">Allalerty1</button>
 		<!--hbkhbk3-->
-		<iframe id="idPerRowIframeTop" class="classPerRowIframe" >
+			xxx
+		<iframe id="idPerRowIframeTop" class="classPerRowIframexxx" width="100%" height="200" >
 		</iframe>
-
+		rrr
 		<span ng-keyup='onKeyUp("line 63", $event, this.ENUM_KEYEVENTCALLER_KEYUPSPAN)'>
 
 			<!--<input class="hkToolbarElement" type='image'-->
@@ -82,9 +88,12 @@
 
 
 			<!-- hbkhbk -->
-			<div id='idDivMainContentEditableInput' contenteditable="true" style='background-color:lightgrey'
+			<div id='idDivMainContentEditableInput'
+				 contenteditable="true" style='background-color:lightgrey'
 				 ng-keyup="onKeyUp_MainContentEditable($event)"
 				 ng-bind-html="ustodosFiltered[$index].html"
+				 style="isolation: isolate"
+
 			>
 				<!--was Search / Input-->
 			</div>

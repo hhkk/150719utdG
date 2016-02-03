@@ -1,5 +1,4 @@
 'use strict';
-'use strict';
 
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
@@ -75,8 +74,8 @@ function createOrSave(ustodo, user, res) {
 	ustodo.user = user;
 	try {
 		// do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
-		//	if (false)
-		//ustodo.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
+		if (false)
+		 ustodo.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
 		O.e('err in expandUrlsToHrefsReturnPatchedStr:' + err);

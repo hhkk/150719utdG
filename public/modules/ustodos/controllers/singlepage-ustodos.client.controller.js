@@ -2,6 +2,8 @@
 
 'use strict';
 
+/*jshint multistr: true */
+
 
 // hbklrb6 invoked by C:\utd\150719utdG\public\modules\ustodos\views\singlepage-ustodos.client.view.html
 
@@ -163,7 +165,7 @@ app.directive('repeatDone', function() {
 			scope.$eval(attrs.repeatDone);
 		}
 	};
-})
+});
 
 
 //var app = angular.module('ustodos',['ngSanitize', 'ui.router']);      // worked before ui.router was added but this video showed its use https://youtu.be/5JJFiAS1ys4
@@ -224,7 +226,7 @@ app.factory('SppSvc', function() {
 					}
 				}
 				return elem;
-			}
+			};
 
 			var mceWindowElement = getMceWindowElement();
 			if (mceWindowElement)
@@ -502,12 +504,11 @@ angular.module('ustodos').controller
 					// FOCUS
 					//$('.editable').bind('focus', function() {
 					$('.focusblurme').bind('focus', function() {
-						var hkindex = $(this)[0].getAttribute("hkindex"); // e.g., '3'
-						$scope.preEditText = document.getElementById("ustodorow" + hkindex)["innerText"];
-						$scope.preEditHtml = document.getElementById("ustodorow" + hkindex)["innerHtml"];
-						// some attributes by . (aka ["xx"]) and some by getAttribute("hkindex")
-						//var id1 = document.getElementById($(this)[0].id); //$(this)[0].id == eg "ustodorow3"
-						var hkindex = $(this)[0].getAttribute("hkindex"); // e.g., '3'
+						var hkindex = $(this)[0].getAttribute('hkindex'); // e.g., '3'
+						$scope.preEditText = document.getElementById('ustodorow' + hkindex).innerText;
+						$scope.preEditHtml = document.getElementById('ustodorow' + hkindex).innerText;
+						// some attributes by . (aka ['xx']) and some by getAttribute('hkindex')
+						//var id1 = document.getElementById($(this)[0].id); //$(this)[0].id == eg 'ustodorow3'
 						//alert('document.getElementById("ustodorow" + hkindex)["innerText"]:' + document.getElementById("ustodorow" + hkindex)["innerText"]);
 						//alert('document.getElementById("ustodorow" + hkindex)["innerHtml"]:' + document.getElementById("ustodorow" + hkindex)["innerHtml"]);
 
@@ -523,12 +524,12 @@ angular.module('ustodos').controller
 					// BLUR / CHANGE DETECT
 					$('.focusblurme').blur(function() {
 						// todo compare this against ustodo in mem array contents
-						var hkindex = $(this)[0].getAttribute("hkindex"); // e.g., '3'
-						var hkustodoid = $(this)[0].getAttribute("hkustodoid"); // e.g., '3'
-						var postEditText = document.getElementById("ustodorow" + hkindex)["innerText"];
-						var postEditHtml = document.getElementById("ustodorow" + hkindex)["innerHtml"];
+						var hkindex = $(this)[0].getAttribute('hkindex'); // e.g., '3'
+						var hkustodoid = $(this)[0].getAttribute('hkustodoid'); // e.g., '3'
+						var postEditText = document.getElementById('ustodorow' + hkindex).innerText;
+						var postEditHtml = document.getElementById('ustodorow' + hkindex).innerText;
 
-						if ($scope.preEditText != postEditText || $scope.preEditHtml != postEditHtml)
+						if ($scope.preEditText !== postEditText || $scope.preEditHtml !== postEditHtml)
 						{
 							//alert('changed hkindex:' + hkindex);
 							//alert('changed hkustodoid:' + hkustodoid);
@@ -541,7 +542,7 @@ angular.module('ustodos').controller
 						//}
 					});
 					//alert('done layoutDone');
-				}
+				};
 
 
 				$scope.preparePerRowHtml = function(s)
@@ -694,7 +695,7 @@ angular.module('ustodos').controller
 							//var x = document.getElementById('classContentEditablePerRow');
 							//var x = document.getElementsByClassName("classContentEditablePerRow");
 
-							// this is an HTMLObject I think, with main prop x[0].innerHTML aka x[0]['innerHTML']
+							// this is an HTMLObject I think, with main prop x[0].innerHTML aka x[0].innerText
 							//var x = document.getElementsByClassName("WholePage");
 							if (CONST_SHOW_INIT_ALERTS)
 								alert ('inONLOADINIT#5 $viewContentLoaded:');
@@ -945,14 +946,14 @@ angular.module('ustodos').controller
 							if (id === 'idDivForTinyMceEditorTextarea')
 							{
 								alert (' should not be here: in focusOnId 3:'+ id);
-								var el = document.getElementById(id);
-								var range = document.createRange();
-								var sel = window.getSelection();
-								//range.setStart(el.childNodes[0], 5);
-								//range.collapse(true);
-								//sel.removeAllRanges();
-								//sel.addRange(range);
-								el.focus();
+								var elx = document.getElementById(id);
+								var rangex = document.createRange();
+								var selx = window.getSelection();
+								//rangex.setStart(el.childNodes[0], 5);
+								//rangex.collapse(true);
+								//selx.removeAllRanges();
+								//selx.addRange(rangex);
+								elx.focus();
 							}
 							else if (id === 'idTinyMceTextArea')
 							{
@@ -968,7 +969,7 @@ angular.module('ustodos').controller
 							}
 							else
 							{
-								//alert ('in focusOnId else');
+								alert ('in focusOnId else');
 								//    //var editor = CKEDITOR.instances.idCkeEditorTextarea;
 								//    //editor.focusManager.focus( editor.editable() );
 								//
@@ -1147,7 +1148,7 @@ angular.module('ustodos').controller
 
 									menubar : 'false'
 
-								}
+								};
 							}
 							else{
 								{
@@ -1165,7 +1166,7 @@ angular.module('ustodos').controller
 
 										menubar : 'false'
 
-									}
+									};
 								}
 
 							}
@@ -1243,7 +1244,7 @@ angular.module('ustodos').controller
 						{
 							elementpath: false,
 							statusbar: false,
-							content_css : "modules/core/css/core_mce.css",
+							content_css : 'modules/core/css/core_mce.css',
 
 							//mode : 'exact',
 							//mode : 'textareas',
@@ -1275,6 +1276,7 @@ angular.module('ustodos').controller
 							init_instance_callback : function()
 							{
 								if ($scope.q)   {
+									console.log('in init_instance_callback');
 									//if ($scope.q !== '*')
 									//	$scope.setTextInShowingEditor($scope.searchedFor, 'line 3329a1');
 									//else
@@ -1424,7 +1426,7 @@ angular.module('ustodos').controller
 									if (allDots)
 									{
 
-										if (text.length % 2 == 1)
+										if (text.length % 2 === 1)
 										{
 											document.getElementById('hkheader').style.display = 'block';
 											document.getElementById('hkidtoolbars').style.display = 'block';
@@ -1527,19 +1529,19 @@ angular.module('ustodos').controller
 
 						};
 
-						for (var propertyName in tinyMceparams_pasteFilter) {
+						for (var propertyName1 in tinyMceparams_pasteFilter) {
 							//alert (propertyName + ':' + tinyMceparams_pasteFilter[propertyName]);
-							tinyMceparams[propertyName] = tinyMceparams_pasteFilter[propertyName];
+							tinyMceparams[propertyName1] = tinyMceparams_pasteFilter[propertyName1];
 						}
 
-						for (var propertyName in tinyMceparams_toolbars) {
+						for (var propertyName2 in tinyMceparams_toolbars) {
 							//alert (propertyName + ':' + tinyMceparams_pasteFilter[propertyName]);
-							tinyMceparams[propertyName] = tinyMceparams_toolbars[propertyName];
+							tinyMceparams[propertyName2] = tinyMceparams_toolbars[propertyName2];
 						}
 
-						for (var propertyName in tinyMceparams_theme) {
+						for (var propertyName3 in tinyMceparams_theme) {
 							//alert (propertyName + ':' + tinyMceparams_pasteFilter[propertyName]);
-							tinyMceparams[propertyName] = tinyMceparams_theme[propertyName];
+							tinyMceparams[propertyName3] = tinyMceparams_theme[propertyName3];
 						}
 
 						//for (var propertyName in tinyMceparams_size) {
@@ -1810,20 +1812,111 @@ angular.module('ustodos').controller
 						return keyEventDesc + ' (keyCode: ' + (window.event ? keyEvent.keyCode : keyEvent.which) + ')';
 					};
 
+					// hbkhbk4
 					// Event handlers
 					//$scope.onKeyDown = function ($event) {
 					//    $scope.onKeyDownResult = getKeyboardEventResult($event, 'Key down');
 					//};
 
+					// good one! http://jsfiddle.net/kwc6mvcp/
+					// copied this down to the ngRepeatFinished
+					//$("#idDivMainContentEditableInput").bind("keydown", function(event) {
+					// works
+					//alert("$([contenteditable=true].length" + $("[contenteditable='true']").length);
+					//$("[contenteditable='true']").bind("keydown", function(event) {
+					//	// var target = $(event.target);
+					//	if(event.keyCode === 13 || event.keyCode === 27)
+					//	{
+					//		$('<div contenteditable="true"></div>').appendTo('body').focus().remove();
+					//		alert ('save here');
+					//	}
+					//})
+
+
+
+					// seems no work
+					//$("#idDivMainContentEditableInput").on('keydown', '.option-item.new', function(e) {
+					//	if(e.keyCode == 13)
+					//	{
+					//		e.preventDefault();
+					//	}
+					//});
+
+
+
+					//$("#idDivMainContentEditableInput").on('keydown', '.option-item.new', function(e) {
+					//	alert('tried');
+					//	if(e.keyCode == 13)
+					//	{
+					//		e.preventDefault();
+					//	}
+					//});
+                    //
+
+
+
+					//alert('start set up idDivMainContentEditableInput handler');
+					// http://codepen.io/mightyiam/pen/KDlri
+
+					// hbkhbk4
+					// also seems to work - try this in ng-repeat
+					//$(function () {
+					//	$('#idDivMainContentEditableInput').keydown(
+					//		function (evt)
+					//		{
+					//			if (evt.which == 13)
+					//			{
+					//				//alert('tried2');
+					//				evt.preventDefault();
+					//				return false;
+					//				//alert("All your bugs are belong to us.");
+					//				//return false;
+					//			}
+					//			return ;
+					//		});
+					//	});
+
+
+
+				//// http://stackoverflow.com/questions/18552336/prevent-contenteditable-adding-div-on-enter-chrome
+				//$('div[contenteditable]').keydown(function(e) {
+				//	// trap the return key being pressed
+				//	if (e.keyCode === 13) {
+				//		alert('hi hk');
+				//		// insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
+				//		document.execCommand('insertHTML', false, '<br><br>');
+				//		// prevent the default behaviour of return key pressed
+				//		return false;
+				//	}
+				//});
+
+
+
+				//$('#idDivMainContentEditableInput').on('keydown', function(e) {
+				//	if (e.which == 13 && e.shiftKey == false) {
+				//		//Prevent insertion of a return
+				//		//You could do other things here, for example
+				//		//focus on the next field
+				//		alert('nada');
+				//		return false;
+				//	}
+				//});
+					//alert('done set up idDivMainContentEditableInput handler');
 
 					// onchange for contentedtable http://stackoverflow.com/questions/8694054/onchange-event-with-contenteditable
 					// hbkhbk3
 					//https://www.google.com/search?num=100&q=contenteditable+onchange
 					$scope.onKeyUp_MainContentEditable = function (keyEvent, index, _id)
 					{
-							alert ('!!!! in onKeyUp_MainContentEditable');
+						// alert ('!!!! in onKeyUp_MainContentEditable');
 
 						// if not escape then return
+						//if (keyEvent.keyCode == 13 ) // if not escape key section_escape
+						//{
+						//	alert('== 13');
+						//	return false;
+						//}
+
 						if (keyEvent.keyCode !== 27 ) // if not escape key section_escape
 						{
 							//alert ('!!!! in onKeyUp_MainContentEditable not escape');
@@ -1833,7 +1926,7 @@ angular.module('ustodos').controller
 							//savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
                             //
 							//// SET ROW BACKGGROUND COLOR ON EDITING MODE ENTRY
-							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('idDivMainContentEditableInput')
+							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('idDivMainContentEditableInput');
 							areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'yellow'; // SETMODELLDIRTY
 
 							return;
@@ -1841,44 +1934,45 @@ angular.module('ustodos').controller
 						else // save hbkhbk maincontenteditable
 						{
 							// save
-							//alert( 'in eventHandlerEditorcontentChange save');
-							try {
-
-								var maincontenteditableHtml = document.getElementById('idDivMainContentEditableInput').innerHTML;
-								//	alert ('maincontenteditableHtml:' + maincontenteditableHtml);
-
-								//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
-								// hbkhbk2
-								var text =
-									UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(maincontenteditableHtml);
-
-								//text = UtilString.convertNonBreakingSpace(text);
-								//text = UtilString.convertRemoveTrailing10(text);
-								//alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
-
-								//alert('eventHandlerEditorcontentChange text:' + text);
-
-								//if (text.endsWith(' ') && $scope.dynamicSearch ) {
-								//	//alert ('not skipping')
-								//	$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
-								//		'caller eventHandler space and ends w space', text, html, data);
-								//}
-								//else
-								// IF ENTER
-								if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
-									alert ('not skipping 2')
-									$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
-										'caller eventHandler ENTER key pressed', text, html, data);
-								}
-								else if (text.endsWith(' w')) {
-									$scope.processCommand($scope.enumCommands.COMMAND_WRITE,
-										'caller eventHandlerEditorcontentChange write', text, html, data);
-									//alert('calling processCommand');
-								}
-							} catch (e) {
-								UtilErrorEmitter.emitError('in eventHandlerEditorcontentChange', e);
-								//alert ('sdfsdfsdf:' + e);
-							}
+							alert( 'in eventHandlerEditorcontentChange save');
+							//try {
+                            //
+							//	var maincontenteditableHtml = document.getElementById('idDivMainContentEditableInput').innerHTML;
+							//	//	alert ('maincontenteditableHtml:' + maincontenteditableHtml);
+                            //
+							//	//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
+							//	// hbkhbk2
+							//	var text =
+							//		UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(maincontenteditableHtml);
+                            //
+							//	//text = UtilString.convertNonBreakingSpace(text);
+							//	//text = UtilString.convertRemoveTrailing10(text);
+							//	//alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
+                            //
+							//	//alert('eventHandlerEditorcontentChange text:' + text);
+                            //
+							//	//if (text.endsWith(' ') && $scope.dynamicSearch ) {
+							//	//	//alert ('not skipping')
+							//	//	$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
+							//	//		'caller eventHandler space and ends w space', text, html, data);
+							//	//}
+							//	//else
+							//	// IF ENTER
+							//	alert('in trouble spot');
+							//	if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
+							//		alert ('not skipping 2');
+							//		$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
+							//			'caller eventHandler ENTER key pressed', text, html, data);
+							//	}
+							//	else if (text.endsWith(' w')) {
+							//		$scope.processCommand($scope.enumCommands.COMMAND_WRITE,
+							//			'caller eventHandlerEditorcontentChange write', text, html, data);
+							//		//alert('calling processCommand');
+							//	}
+							//} catch (e) {
+							//	UtilErrorEmitter.emitError('in eventHandlerEditorcontentChange', e);
+							//	//alert ('sdfsdfsdf:' + e);
+							//}
 						}
 					};
 
@@ -1897,7 +1991,7 @@ angular.module('ustodos').controller
 							savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
 
 							// SET ROW BACKGGROUND COLOR ON EDITING MODE ENTRY
-							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+index)
+							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+index);
 							areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'yellow'; // SETMODELLDIRTY
 
 							return;
@@ -1911,7 +2005,6 @@ angular.module('ustodos').controller
 					{
 						//alert ('in $scope.saveSweep _id:' + _id);
 						//alert ('newHtml:' + newHtml);
-						//alert ('in onKeyUp_perrow_text escape id:' + 'ustodorow'+index); // not non-escape
 
 						var found = false;
 						//find the element in memory matching the id passed from the UI on the click
@@ -1952,13 +2045,11 @@ angular.module('ustodos').controller
 									$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
 										UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+i,'green', '#FFFFFF','1500');
 										//$scope.ustodos[i].html = newHtml;
-										var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+i)
+										var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+i);
 										areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'lightgreen'; // SETMODELLDIRTY
 										setTimeout(function(){
 											areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'white'; // SETMODELLDIRTY
 										}, 500);
-
-
 									}, updateCallBackIfError);
 								}
 								document.getElementById('ustodorow'+i).blur();
@@ -1973,7 +2064,7 @@ angular.module('ustodos').controller
 							alert ('ustodo not found - reload page');
 						}
 
-					}
+					};
 
 
 					$scope.onKeyUp = function (desc, keyEvent, ENUM_KEYEVENTcaller) // https://docs.angularjs.org/api/ng/directive/ngKeyup
@@ -2358,7 +2449,7 @@ angular.module('ustodos').controller
 							callcounteventHandlerEditorcontentChange++;
 							if (enumKeyEvent === $scope.enumKeyEvent.ENTER)
 							{
-								//alert ('enter pressed1');
+								alert ('enter pressed1');
 							}
 							else if (enumKeyEvent === $scope.enumKeyEvent.SPACE)
 							{
@@ -2500,9 +2591,7 @@ angular.module('ustodos').controller
 						if (
 							// if no item is selected and model is  selected, if not
 							(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty()
-						)
-						||
-						$scope.isCurrentEditorEmpty())
+						) 						|| 						$scope.isCurrentEditorEmpty())
 						{
 							//if ($scope.mouseoverlock !== 'on') {
 							//$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));
@@ -2922,14 +3011,56 @@ angular.module('ustodos').controller
 					//    console.log('in testfn');
 					//    return UtilDate.dateFromMongoString(dateStrFromMongo);
 					//}
-					$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+					/**
+					 * this includes an example of how to dynamically insert an iframe
+					 */
+					$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent)
+					{
 						if (CONST_SHOW_INIT_ALERTS)
 							alert('inONLOADINIT#A ngRepeatFinished');
+
+
+						// hbkhbk4
+						//alert("22222222 $([contenteditable=true].length" + $("[contenteditable='true']").length);
+						//$("[contenteditable='true']").bind("keydown", function(event)
+						//{
+						//	// var target = $(event.target);
+						//	if(event.keyCode === 13 || event.keyCode === 27)
+						//	{
+						//		$('<div contenteditable="true"></div>').appendTo('body').focus().remove();
+						//		alert ('save here');
+						//	}
+						//});
+
+						// hbkhbk4 copied down
+						$(function () {
+							$('[contenteditable=\'true\']').keydown
+							(
+								function (evt)
+								{
+									if (evt.which === 13)
+									{
+										//alert('tried2');
+										evt.preventDefault();
+										setTimeout(function(){ alert('Hello2'); }, 10);
+										return false;
+										//alert("All your bugs are belong to us.");
+										//return false;
+									}
+									return ;
+								});
+							});
+
+
+
+
+
 
 
 						//alert ('$scope.ustodosFiltered:' + $scope.ustodosFiltered);
 						var i = 0;
 						var sPre = '\
+						    HBK HERE dddfff \
 							<span class="hkcssContentedit" >   \
 							<div class="WholePage focusblurme"  \
 								state="nonIframed"  \
@@ -2950,7 +3081,7 @@ angular.module('ustodos').controller
 						var sMid = encodeURIComponent($scope.ustodosFiltered[0].html);
 						var sAll = sPre + sMid + sPost;
 						//var sAll = sPre + sPost;
-						document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + sAll;
+						document.getElementById('idPerRowIframeTop').src = 'data:text/html;charset=utf-8,' + sAll;
 
 						//$scope.ustodosFiltered.forEach (function (x)
 						//{
@@ -2987,21 +3118,34 @@ angular.module('ustodos').controller
 					$scope.testButton= function(s)
 					{
 
+						// hbkhbk4
 						if (true)
 						{
-							$scope.ustodosFiltered[0].html = "hi mom";
+							//$('#testIframeReplace').html('your iframe code goes here');
+							$('#testIframeReplace').replaceWith('<iframe>your iframe code goes here</iframe>');
+						}
+
+						if (false)
+						{
+
+							alert (window.clipboardData.getData('Text'));
+						}
+
+						if (false)
+						{
+							$scope.ustodosFiltered[0].html = 'hi mom';
 						}
 
 						if (false)
 						{
 							// hbkhbk3
-							alert("made it to start");
-							var html_string= "contenthbk";
-							document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
-							//document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
-							//document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
-							document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
-							alert("made it to end ");
+							alert('made it to start');
+							//var html_string= "contenthbk";
+							//document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
+							////document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
+							////document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
+							//document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
+							//alert("made it to end ");
 						}
 
 						if (false)
@@ -3079,18 +3223,19 @@ angular.module('ustodos').controller
 
 						if (false)    // works to set text as mce window // TEST changing one of the text rows to a textarea
 						{
-							//var x = document.getElementById('topLevelTableRow1');
-							//alert ('x:' + x);
-							//alert ('x.firstElementChild.innerHTML:' + x.firstElementChild.innerHTML);
-							//alert ('x.firstChild.innerHTML:' + x.firstChild.innerHTML);
-							//x.innerHTML= '<textarea id="hktestTinyMceTextArea"></textarea>';
-
-							//<textarea ng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
-
-							//$scope.localTinyMceInit();
-							// hbkeak tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
-							setTimeout(function(){ tinymce.execCommand('mceFocus',false,'idTinyMceTextArea') }, 100); // hbklrbb12
-							//setTimeout(function(){ alert('done') }, 100); // hbklrbb12
+							alert ('x:' );
+							////var x = document.getElementById('topLevelTableRow1');
+							////alert ('x:' + x);
+							////alert ('x.firstElementChild.innerHTML:' + x.firstElementChild.innerHTML);
+							////alert ('x.firstChild.innerHTML:' + x.firstChild.innerHTML);
+							////x.innerHTML= '<textarea id="hktestTinyMceTextArea"></textarea>';
+                            //
+							////<textarea ng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
+                            //
+							////$scope.localTinyMceInit();
+							//// hbkeak tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
+							//setTimeout(function(){ tinymce.execCommand('mceFocus',false,'idTinyMceTextArea') }, 100); // hbklrbb12
+							////setTimeout(function(){ alert('done') }, 100); // hbklrbb12
 						}
 
 						if (false)
@@ -3753,7 +3898,7 @@ angular.module('ustodos').controller
 						//$location.search('q', utdUserCommand.xTextCommandRemoved);       // yoo bar foo bar baz not $location.path
 						//$scope.filterText = utdUserCommand.xTextCommandRemoved;
 
-					}
+					};
 
 
 					var callbackFromQuery = function(arrayUstodosResources) {
@@ -4067,7 +4212,7 @@ angular.module('ustodos').controller
 							//	$scope.error = errorResponse.data.message;
 
 						} catch (e) {
-							alert ('got error calling UtilErrorEmitter.emitError')
+							alert ('got error calling UtilErrorEmitter.emitError');
 							UtilErrorEmitter.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
 							throw e;
 						}
