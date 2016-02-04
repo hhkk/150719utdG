@@ -24,6 +24,7 @@ var UtilString = UtilString;
 var Medium = Medium;
 var UtilDate = UtilDate;
 var UtilHtmlCleaner = UtilHtmlCleaner;
+var UtilHtmlDocumentManipulate = UtilHtmlDocumentManipulate;
 
 var CONST_SHOW_INIT_ALERTS = false;
 var $ = $;
@@ -3119,10 +3120,39 @@ angular.module('ustodos').controller
 					{
 
 						// hbkhbk4
-						if (true)
+						if (true) // convert div to iframe
 						{
+
+							//	alert('document.getElementById(testIframeReplace).innerHTML :' + document.getElementById('testIframeReplace').innerHTML);
+
+							//alert('$(#testIframeReplace) :' + $('#testIframeReplace') );
+							//alert('$(#testIframeReplace).val() :' + $('#testIframeReplace').val() );
 							//$('#testIframeReplace').html('your iframe code goes here');
-							$('#testIframeReplace').replaceWith('<iframe>your iframe code goes here</iframe>');
+
+							//$('#testIframeReplace').replaceWith('<iframe><html><head></head><body>dddddddddddd' +
+							//		 '</body></html></iframe>');
+
+
+
+
+
+							//var div = document.getElementById("testIframeReplace");
+							//alert('div.innerHTML:' + div.innerHTML);
+							//var iframe = document.createElement("iframe");
+							//document.body.appendChild(iframe);
+							//iframe.innerHTML = div.innerHTML;
+							//div.parentNode.removeChild(div);
+
+							// WORKS!
+							//var divIdToReplace = 'testIframeReplace';
+							//var newIframeId = 'newIframeIdx';
+							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
+
+							UtilHtmlDocumentManipulate.fns.convertElementToIframeById(
+								'testIframeReplace', 'newIframeIdx', true)
+
+							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
+							//document.getElementById(newIframeId).contentDocument.write(savDivInnerHtml);
 						}
 
 						if (false)

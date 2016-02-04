@@ -1244,7 +1244,8 @@ var utilHtmlCleanerFunctions = new function() {
 		return str;
 	}
 
-	this.convertHtmltoText = function(html) {
+	this.convertHtmltoText = function(html)
+	{
 		//var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
 		var poststrip = html.replace(/&nbsp;/gm, ' ');
 		poststrip = poststrip.replace(/<(?:.|\n)*?>/gm, '');
@@ -1510,7 +1511,57 @@ if (false) // test html to text converter
 
 
 
-},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilString.js":12}],10:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilString.js":13}],10:[function(require,module,exports){
+'use strict';
+
+var O = require('C:/utd/150719utdG/public/util/O.js');
+//var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+//var UtilHtmlCleaner = UtilHtmlCleaner;
+// UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText
+
+
+
+/**
+ * strip html tags out of a string
+ */
+var fns = new function() {
+	// call this as utilHtmlCleanerFunctions.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
+	this.convertElementToIframeById = function (elementIdToReplace, newIframeId, contentEditableTF) {
+		O.o("in cleanHtmlPre ");
+		try {
+			var savDivInnerHtml = document.getElementById(elementIdToReplace).innerHTML;
+			$('#' + elementIdToReplace).html('<iframe id=\'' + newIframeId +
+				'\'><html><head></head><body></body></html></iframe>');
+			if (contentEditableTF) {
+				savDivInnerHtml = '<div contenteditable=\'true\'>' + savDivInnerHtml + '</div>';
+			}
+			document.getElementById(newIframeId).contentDocument.write(savDivInnerHtml);
+
+		} catch (err) {
+			//console.log(UtilClass.UtilClass('err', err));
+			O.o('ERROR: in UtilHtmlDocumentManipulate:' + err);
+		}
+	}
+
+}
+
+if (typeof exports !== 'undefined')
+{
+    exports.fns = fns;
+}
+
+// TESTS
+
+if (false)
+{
+}
+
+
+
+
+
+},{"C:/utd/150719utdG/public/util/O.js":3}],11:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1532,7 +1583,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 // var UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
 // in entry.js
@@ -1569,7 +1620,7 @@ if (typeof exports !== 'undefined') {
     exports.printObjJSONstringify = printObjJSONstringify;
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
     // var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 
 var endsWith = function (str, suffix) {
@@ -1725,7 +1776,7 @@ if (test)
 {
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 //utd = [];   // ustodo utilities
 //utd[Date] = require('C:/utd/150719utdG/public/util/UtilDate.js');
 //utd[Class] = require('C:/utd/150719utdG/public/util/UtilClass.js');
@@ -1742,6 +1793,7 @@ UtilNLB_bgFade = require('C:/utd/150719utdG/public/util/NLB_bgFade.js');
 UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
 UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+UtilHtmlDocumentManipulate = require('C:/utd/150719utdG/public/util/UtilHtmlDocumentManipulate.js');
 //ModuleTinymcePasteCleanFilter = require('C:/utd/150719utdG/public/lib/ustodo-browser-util/ModuleTinymcePasteCleanFilter.js');
 
 O = require('C:/utd/150719utdG/public/util/O.js');
@@ -1751,4 +1803,4 @@ O = require('C:/utd/150719utdG/public/util/O.js');
 
 
 
-},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilClass.js":4,"C:/utd/150719utdG/public/util/UtilDate.js":5,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":6,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":7,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":8,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":9,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":10,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":11,"C:/utd/150719utdG/public/util/UtilString.js":12}]},{},[13]);
+},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilClass.js":4,"C:/utd/150719utdG/public/util/UtilDate.js":5,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":6,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":7,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":8,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":9,"C:/utd/150719utdG/public/util/UtilHtmlDocumentManipulate.js":10,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":11,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":12,"C:/utd/150719utdG/public/util/UtilString.js":13}]},{},[14]);
