@@ -3059,9 +3059,9 @@ angular.module('ustodos').controller
 
 
 						//alert ('$scope.ustodosFiltered:' + $scope.ustodosFiltered);
-						var i = 0;
+						//alert ('hkhkhk');
 						var sPre = '\
-						    HBK HERE dddfff \
+						    this text and its surrounding Iframe were injected \
 							<span class="hkcssContentedit" >   \
 							<div class="WholePage focusblurme"  \
 								state="nonIframed"  \
@@ -3118,6 +3118,16 @@ angular.module('ustodos').controller
 
 					$scope.testButton= function(s)
 					{
+						if (false) // set style for contenteditable focus
+						{
+							$("[contenteditable='true']").on("focus", function() {
+								$(".editable").toggleClass("focus");
+							});
+
+							$("[contenteditable='true']").on("blur", function() {
+								$(".editable").toggleClass("focus");
+							}) ;
+						}
 
 						// hbkhbk4
 						if (true) // convert div to iframe
@@ -3149,7 +3159,7 @@ angular.module('ustodos').controller
 							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
 
 							UtilHtmlDocumentManipulate.fns.convertElementToIframeById(
-								'testIframeReplace', 'newIframeIdx', true)
+								'testIframeReplace', 'newIframeIdx', true, "this text was passed into convertElementToIframeById ")
 
 							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
 							//document.getElementById(newIframeId).contentDocument.write(savDivInnerHtml);
@@ -4590,3 +4600,12 @@ window.onload = function()
 };
 
 //alert ('done onload');
+
+
+//$("[contenteditable='true']").on("focus", function() {
+//	$(".editable").toggleClass("focus");
+//})
+//
+//$("[contenteditable='true']").on("blur", function() {
+//	$(".editable").toggleClass("focus");
+//})

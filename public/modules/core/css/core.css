@@ -241,3 +241,12 @@ body.ng-cloak
 .mce-path-item  {
 	display: none;
 }
+
+
+div.focus {
+	box-shadow: 0 0 10px rgba(26, 154, 245, .5);
+	border: 10px solid #1a9af5;
+	outline: 10px solid transparent;
+	background-color:greenyellow;
+
+}

@@ -13,16 +13,24 @@ var O = require('C:/utd/150719utdG/public/util/O.js');
  */
 var fns = new function() {
 	// call this as utilHtmlCleanerFunctions.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
-	this.convertElementToIframeById = function (elementIdToReplace, newIframeId, contentEditableTF) {
-		O.o("in cleanHtmlPre ");
+	this.convertElementToIframeById = function (elementIdToReplace, newIframeId, contentEditableTF, innerHtml_optional) {
+		alert("in cleanHtmlPre innerHtml_optional:" + innerHtml_optional);
+		alert("in cleanHtmlPre elementIdToReplace:" + elementIdToReplace);
+		var elementHtml = document.getElementById(elementIdToReplace).outerHTML;
+		//encodeURIComponent
+		alert("elementHtml:" + elementHtml);
+		alert("in cleanHtmlPre innerHtml_optional:" + innerHtml_optional);
+
 		try {
-			var savDivInnerHtml = document.getElementById(elementIdToReplace).innerHTML;
+			if (!innerHtml_optional)
+				innerHtml_optional = document.getElementById(elementIdToReplace).outerHTML;
+
 			$('#' + elementIdToReplace).html('<iframe id=\'' + newIframeId +
 				'\'><html><head></head><body></body></html></iframe>');
 			if (contentEditableTF) {
-				savDivInnerHtml = '<div contenteditable=\'true\'>' + savDivInnerHtml + '</div>';
+				innerHtml_optional = '<div contenteditable=\'true\'>' + innerHtml_optional + '</div>';
 			}
-			document.getElementById(newIframeId).contentDocument.write(savDivInnerHtml);
+			document.getElementById(newIframeId).contentDocument.write(innerHtml_optional);
 
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
