@@ -1,4 +1,5 @@
-    // var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+'use strict';
+// var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 
 var endsWith = function (str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;

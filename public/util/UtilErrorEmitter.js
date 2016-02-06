@@ -18,7 +18,7 @@ function emitError (desc, err)
     try {
 		console.error ('ERROR [' + desc + '] in err.message:' + err.message);
 		console.error ('ERROR [' + desc + '] in err.stack:' + err.stack);
-		//alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
+		alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
 
     } catch (e) {
         console.error ('ERROR [' + desc + '] in getClass:e:' + e.message);

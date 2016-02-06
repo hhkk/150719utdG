@@ -24,7 +24,7 @@ var UtilString = UtilString;
 var Medium = Medium;
 var UtilDate = UtilDate;
 var UtilHtmlCleaner = UtilHtmlCleaner;
-var UtilHtmlDocumentManipulate = UtilHtmlDocumentManipulate;
+var HtmlDocManipulate = HtmlDocManipulate;
 
 var CONST_SHOW_INIT_ALERTS = false;
 var $ = $;
@@ -783,6 +783,7 @@ angular.module('ustodos').controller
 					$scope.testNLBfadeBg = function() {
 						alert('in testNLBfadeBg')      ;
 						//UtilNLB_bgFade.NLBfadeBg('div1hk','green', '#FFFFFF','1500');
+						alert('at this fade 1');
 						UtilNLB_bgFade.NLBfadeBg('ustodorow0','green', '#FFFFFF','3500');
 					};
 
@@ -2044,13 +2045,15 @@ angular.module('ustodos').controller
 									$scope.ustodos[i].text = newText;
 									updateCallBackIfErrorIndex = i;
 									$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
-										UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+i,'green', '#FFFFFF','1500');
+										//alert('at this fade 2');
+										UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+i,'greenyellow', '#FFFFFF','1500');
 										//$scope.ustodos[i].html = newHtml;
 										var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+i);
-										areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'lightgreen'; // SETMODELLDIRTY
+										//alert('at this fade 3');
+										areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'greenyellow'; // SETMODELLDIRTY
 										setTimeout(function(){
 											areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'white'; // SETMODELLDIRTY
-										}, 500);
+										}, 700);
 									}, updateCallBackIfError);
 								}
 								document.getElementById('ustodorow'+i).blur();
@@ -3158,7 +3161,8 @@ angular.module('ustodos').controller
 							//var newIframeId = 'newIframeIdx';
 							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
 
-							UtilHtmlDocumentManipulate.fns.convertElementToIframeById(
+							//alert('at utilclient');
+							UtilClient.HtmlDocManipulate.convertElementToIframeById(
 								'testIframeReplace', 'newIframeIdx', true, "this text was passed into convertElementToIframeById ")
 
 							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
