@@ -1,8 +1,8 @@
 'use strict';
 
 
-// this file runs only in server mode ;
-
+// this file runs only on the server side ;
+console.log ('hbkhbkhbk============================================');
 module.exports = {
 	app: {
 		title: 'MEAN.JS',
@@ -63,7 +63,7 @@ module.exports = {
 			'public/modules/**/css/*.css'
 		],
 		js: [
-			'public/config.js',
+			'public/config.js',  // I don't know of a higher level js file loaded on the client
 			'public/application.js',
 			'public/modules/*/*.js',
 			'public/modules/*/*[!tests]*/*.js',
