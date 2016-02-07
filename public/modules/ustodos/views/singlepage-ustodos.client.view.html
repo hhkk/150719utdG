@@ -77,7 +77,9 @@
 			<div id='idDivForTinyMceEditorTextarea'>
 				<!--was Search / Input-->
 				<textarea xxng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
-				<button ng-click="testButton(-2)" title="testButton2">Test</button>
+				<!--NOTE THERE ARE ALSO TESTBUTTONS IN > 1 place-->
+				<button ng-click="testButton(-2)" title="testButton0">Test0</button>
+				<button ng-click="UtilClient.UcHtmlDocManipulate.testScopeAccess()" title="testButton1">Test1</button>
 				<button ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*')" title="yy">
 					All
 				</button>
@@ -250,7 +252,7 @@
 				<span id='div' contenteditable='true' onpaste='UtilHtmlCleaner.handlepaste (this, event)'>PasteIntoContentEditableTest</span>
 			</span>
 
-
+			<!--NOTE THERE ARE ALSO TESTBUTTONS IN > 1 place-->
 			<button ng-click="testButton(-2)" title="testButton">TestButton</button>
 
 

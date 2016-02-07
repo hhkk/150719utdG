@@ -8,8 +8,10 @@
 
 	<img src='/img/EditPencil.png' alt="Smiley face" height="42" width="42" data-ng-show="SppSvc.getModelDirty()">
 	<img src='/img/EditPencilBnW.png' alt="Smiley face" height="42" width="42" data-ng-hide="SppSvc.getModelDirty()">
+	<div data-ng-show='SppSvc.getModelDirty()'>Save</div>
+	<button data-ng-hide='SppSvc.getModelDirty()'>Saved</button>
 
-
+	<!--<div data-ng-hide='SppSvc.getModelDirty()'>Saved</div>-->
 
 	whichEditorShowing[<span ng-bind="SppSvc.getWhichEditorShowing()" ></span>]
 	Selected [<span ng-bind="SppSvc.getSelectedItem()"></span>]

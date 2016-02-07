@@ -18,12 +18,16 @@ var O = O;
 
 //alert('hi mom 3');
 
-UtilClient.HtmlDocManipulate = {}; // once at top should be OK
+UtilClient.UcHtmlDocManipulate = {}; // once at top should be OK
 
 try {
 	// call this as utilHtmlCleanerFunctions.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
-	UtilClient.HtmlDocManipulate.convertElementToIframeById =
+	UtilClient.UcHtmlDocManipulate.testScopeAccess =
+		function () {
+			alert('in UtilClient.UcHtmlDocManipulate.testScopeAccess');
+		};
 
+	UtilClient.UcHtmlDocManipulate.convertElementToIframeById =
 		function (elementIdToReplace, newIframeId, contentEditableTF, innerHtml_optional)
 		{
 			//alert("in cleanHtmlPre innerHtml_optional:" + innerHtml_optional);
@@ -47,13 +51,13 @@ try {
 
 			} catch (err) {
 				//console.log(UtilClass.UtilClass('err', err));
-				O.o('ERROR: in HtmlDocManipulate:' + err);
+				O.o('ERROR: in UcHtmlDocManipulate:' + err);
 			}
 		}
 
 } catch (err) {
 	alert('hi mom uh oh');
-	UtilErrorEmitter.emitError('error in HtmlDocManipulate.js', err);
+	UtilErrorEmitter.emitError('error in UcHtmlDocManipulate.js', err);
 }
 
 //alert('hi mom 4');

@@ -24,7 +24,7 @@ var UtilString = UtilString;
 var Medium = Medium;
 var UtilDate = UtilDate;
 var UtilHtmlCleaner = UtilHtmlCleaner;
-var HtmlDocManipulate = HtmlDocManipulate;
+var UcHtmlDocManipulate = UcHtmlDocManipulate;
 
 var CONST_SHOW_INIT_ALERTS = false;
 var $ = $;
@@ -206,9 +206,10 @@ app.factory('SppSvc', function() {
 	 * service to indicate if the editor contains non-saved content such that should not be overwritten
 	 * @param val
      */
-	itemsServiceFns.setModelDirty = function(val) {
+	itemsServiceFns.setModelDirty = function(val, caller) {
 		if (val)
 		{
+			//alert('setting dirty true caller:'+caller);
 
 			/**
 			 * get internal frame mce window elem id, e.g. to color it
@@ -263,7 +264,8 @@ app.factory('SppSvc', function() {
 		//}
 
 	};
-	itemsServiceFns.getModelDirty = function() {
+	itemsServiceFns.getModelDirty = function(caller) {
+		//alert ('in getModelDirty caller:' + caller + ', sppData.modelDirty:' + sppData.modelDirty);
 		return sppData.modelDirty;
 	};
 
@@ -323,7 +325,7 @@ var callbackCommand = function(callbackResult) {
 //O.a ('oneOfSeveral controller with array - first?');
 angular.module('ustodos').controller
 	('SinglepageUstodosController',
-		//angular.module('ustodos',['ngSanitize']). controller('UstodosController',
+		// angular.module('ustodos',['ngSanitize']). controller('UstodosController',
 		// angular.module('ustodos',[]). controller('UstodosController',
 
 		//function($scope, $window, $stateParams, $location, $document, $rootScope, $sce, $http, Authentication, Ustodos, Commands)
@@ -346,8 +348,7 @@ angular.module('ustodos').controller
 					//alert(windowhk.width() + 'x' + windowhk.height());
 				});
 
-
-
+				$scope.UtilClient = UtilClient;
 
 
 				//function northOnresize ()
@@ -460,7 +461,7 @@ angular.module('ustodos').controller
 
 				$scope.SppSvc = SppSvc;
 				//alert ('in def');
-				SppSvc.setModelDirty (true);
+				//SppSvc.setModelDirty (true, 'single cont 465');
 
 				//works first time load only
 				//addEventListener('load', load, false);
@@ -1398,9 +1399,9 @@ angular.module('ustodos').controller
 									if (ed.getContent({format : 'text'}).trim() === '*' ||
 										ed.getContent({format : 'text'}).trim() === '')
 									{
-										SppSvc.setModelDirty (false);
+										SppSvc.setModelDirty (false, 'single cont 1403');
 									} else {
-										SppSvc.setModelDirty (true);
+										SppSvc.setModelDirty (true, 'single cont 1405');
 									}
 
 									$scope.$apply();
@@ -2594,7 +2595,7 @@ angular.module('ustodos').controller
 						//alert ('$scope.getTextHtmlAndValueInShowingEditor() ['+ $scope.getTextHtmlAndValueInShowingEditor().xText + ']');
 						if (
 							// if no item is selected and model is  selected, if not
-							(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty()
+							(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty('singlepage')
 						) 						|| 						$scope.isCurrentEditorEmpty())
 						{
 							//if ($scope.mouseoverlock !== 'on') {
@@ -3119,8 +3120,18 @@ angular.module('ustodos').controller
 					});
 
 
-					$scope.testButton= function(s)
+					$scope.testButton= function(fn)
 					{
+						if (fn)
+					{
+							if (fn === '')
+							{
+								SppSvc.setModelDirty (!SppSvc.getModelDirty(), 'ln 3130');
+							}
+
+
+						}
+
 						if (false) // set style for contenteditable focus
 						{
 							$("[contenteditable='true']").on("focus", function() {
@@ -3162,7 +3173,7 @@ angular.module('ustodos').controller
 							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
 
 							//alert('at utilclient');
-							UtilClient.HtmlDocManipulate.convertElementToIframeById(
+							UtilClient.UcHtmlDocManipulate.convertElementToIframeById(
 								'testIframeReplace', 'newIframeIdx', true, "this text was passed into convertElementToIframeById ")
 
 							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
@@ -3376,7 +3387,7 @@ angular.module('ustodos').controller
 						}
 						if (false)
 						{
-							SppSvc.setModelDirty (!SppSvc.getModelDirty());
+							SppSvc.setModelDirty (!SppSvc.getModelDirty('singlepage'));
 						}
 
 						if (false) // green fade text
@@ -4384,7 +4395,7 @@ angular.module('ustodos').controller
 					{
 						//if ($scope.reloadWarning)
 						//    return 'Are you sure?';
-						if (SppSvc.getModelDirty())
+						if (SppSvc.getModelDirty('singlepage'))
 							return 'Exit?  A record changed.  Exiting will lose it.';
 					};
 
