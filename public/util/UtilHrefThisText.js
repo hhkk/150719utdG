@@ -29,7 +29,10 @@ function UrlUtd(addressOriUrlUtd, addressWithHttp, title) {
 
 
 
-
+var testUtilHrefThisText = function (s) {
+	O.o ('in testUtilHrefThisText');
+	return 'returned from testUtilHrefThisText';
+};
 
 
 var seeIfConnectedToThisClass = function (s) {

@@ -12,8 +12,8 @@ var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
-var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 
+var UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
 
 
 //var _ = require('lodash'),
@@ -457,8 +457,22 @@ exports.ustodobulkdel = function(req, res) {
  * return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
  */
 exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
+
+	// hbkhbk5
+	O.o(' ********* hbkhbk5 Uutil.');
+
+
+	var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
+	Uutil.UtilErrorEmitter.emitError('testerrorhbkhbk5');
+
+	O.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js] s:' + s);
+
+
 	O.o(' *************** Top of [exports.list2] in [ustodos.server.controller.js]');
 	//O.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))
+
+	//UcHtmlDocManipulate.testScopeAccess();
+	O.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js]');
 
 	var query = req.query;
 	//O.o('in ustodos.server.controller.js: list query.querystring [' + query.q + ']');

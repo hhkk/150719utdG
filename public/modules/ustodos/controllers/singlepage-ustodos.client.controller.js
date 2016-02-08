@@ -12,6 +12,7 @@
 //var UtilClass = null;
 //var UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 
 
 
@@ -24,7 +25,6 @@ var UtilString = UtilString;
 var Medium = Medium;
 var UtilDate = UtilDate;
 var UtilHtmlCleaner = UtilHtmlCleaner;
-var UcHtmlDocManipulate = UcHtmlDocManipulate;
 
 var CONST_SHOW_INIT_ALERTS = false;
 var $ = $;
@@ -348,7 +348,14 @@ angular.module('ustodos').controller
 					//alert(windowhk.width() + 'x' + windowhk.height());
 				});
 
-				$scope.UtilClient = UtilClient;
+				// hbkhbk5
+				$scope.Uutil = Uutil;
+				console.log ('=================== hbkhbk5');
+				//Uutil.testScopeAccess();
+
+				//$scope.UcHtmlDocManipulate = UcHtmlDocManipulate;
+				//$scope.UtilErrorEmitter = UtilErrorEmitter;
+				//$scope.UtilClient = UtilClient;
 
 
 				//function northOnresize ()
@@ -3120,17 +3127,17 @@ angular.module('ustodos').controller
 					});
 
 
+					//$scope.testScopeAccess = UcHtmlDocManipulate.testScopeAccess;
+
 					$scope.testButton= function(fn)
 					{
-						if (fn)
-					{
-							if (fn === '')
-							{
-								SppSvc.setModelDirty (!SppSvc.getModelDirty(), 'ln 3130');
-							}
 
+						var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
 
-						}
+						Uutil.UtilErrorEmitter.emitError('testerrorhbkhbk5');
+
+						O.o ('in testbutton1');
+						//$scope.O.o ('in testbutton2');
 
 						if (false) // set style for contenteditable focus
 						{
@@ -3146,6 +3153,10 @@ angular.module('ustodos').controller
 						// hbkhbk4
 						if (true) // convert div to iframe
 						{
+							//alert('pre');
+							//console.log(__dirname); // not on client
+							//console.log(__filename); // not on client
+							//alert('post');
 
 							//	alert('document.getElementById(testIframeReplace).innerHTML :' + document.getElementById('testIframeReplace').innerHTML);
 
@@ -3173,7 +3184,7 @@ angular.module('ustodos').controller
 							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
 
 							//alert('at utilclient');
-							UtilClient.UcHtmlDocManipulate.convertElementToIframeById(
+							UcHtmlDocManipulate.convertElementToIframeById(
 								'testIframeReplace', 'newIframeIdx', true, "this text was passed into convertElementToIframeById ")
 
 							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
@@ -3548,6 +3559,8 @@ angular.module('ustodos').controller
 						// 1 corresponds to exports.list2 in ustodos.server. controller.js
 						// see also app.route('/ustodos').get in ustodos.server.routes.js
 						//alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller);
+						//O.o('gg:' + UtilHrefThisText.testUtilHrefThisText());
+						//alert('hh:' + UtilHrefThisText.testUtilHrefThisText());
 						return Ustodos.query(jsonquery, callback); // Ustodosis a "resource"  // maps to a get? in ustodos.server.routes.js? is that a RESOURCE behavior?
 					} ;
 

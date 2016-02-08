@@ -302,7 +302,126 @@ if (test) {
 
 
 
-},{"C:/utd/150719utdG/public/util/UtilDate.js":5,"fs":1}],4:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/UtilDate.js":6,"fs":1}],4:[function(require,module,exports){
+(function (global){
+'use strict';
+
+// loaded on client in C:\utd\150719utdG\app\views\layout.server.view.html
+//			    <script type="text/javascript" src="/util/UcHtmlDocManipulate.js"></script>
+//from client view : 				<button ng-click="UtilClient.UcHtmlDocManipulate.testScopeAccess()" title="testButton1">Test1</button>
+//from within the scope UtilClient.UcHtmlDocManipulate.convertElementToIframeById
+// from server? C:\utd\150719utdG\public\util\UcHtmlDocManipulate.js
+// from server?  require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
+
+
+
+// var UtilClient = UtilClient || {};
+
+//var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+//var UtilHtmlCleaner = UtilHtmlCleaner;
+// UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText
+var UtilErrorEmitter = UtilErrorEmitter;
+var O = O;
+
+
+
+
+/**
+ * strip html tags out of a string
+ */
+
+//alert('hi mom 3');
+
+//UtilClient.UcHtmlDocManipulate = {}; // once at top should be OK
+
+// define functions inside this try block
+//try {
+	// call this as utilHtmlCleanerFunctions.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
+
+
+// hbkhbk5
+function testScopeAccess() {
+	try {
+		//alert('in testScopeAccess');
+		console.log (' oo hbkhbk5 =================================== cc in UtilClient.UcHtmlDocManipulate.testScopeAccess');
+		return 'hi mommy';
+
+	} catch (err) {
+		UtilErrorEmitter.emitError('error in UcHtmlDocManipulate.testScopeAccess', err);
+	}
+};
+
+function convertElementToIframeById (elementIdToReplace, newIframeId, contentEditableTF, innerHtml_optional) {
+	try {
+		alert("in cleanHtmlPre innerHtml_optional:" + innerHtml_optional);
+		//O.o ('hi mom2');
+		//alert("in cleanHtmlPre elementIdToReplace:" + elementIdToReplace);
+		var elementHtml = document.getElementById(elementIdToReplace).outerHTML;
+		//encodeURIComponent
+		//alert("elementHtml:" + elementHtml);
+		//alert("in cleanHtmlPre innerHtml_optional:" + innerHtml_optional);
+
+		if (!innerHtml_optional)
+			innerHtml_optional = document.getElementById(elementIdToReplace).outerHTML;
+
+		$('#' + elementIdToReplace).html('<iframe id=\'' + newIframeId +
+			'\'><html><head></head><body></body></html></iframe>');
+		if (contentEditableTF) {
+			innerHtml_optional = '<div contenteditable=\'true\'>' + innerHtml_optional + '</div>';
+		}
+		document.getElementById(newIframeId).contentDocument.write(innerHtml_optional);
+
+	} catch (err) {
+		//console.log(UtilClass.UtilClass('err', err));
+		O.o('ERROR: in UtilClient.UcHtmlDocManipulate.convertElementToIframeById:' + err);
+	}
+}
+
+// main catch for function definition
+//} catch (err) {
+//	alert('error defining functions in UcHtmlDocManipulate.js');
+//	UtilErrorEmitter.emitError('error defining functions in UcHtmlDocManipulate.js', err);
+//}
+
+
+
+
+// hbkhbk5
+try {
+	global.Uutil = global.Uutil || {};
+} catch (err) {
+	// do nothing - no global on client
+}
+
+console.log ('hbkhbk5 =================== loaded UcHtmlDocManipulate.js');
+
+Uutil.UcHtmlDocManipulate = {};
+Uutil.UcHtmlDocManipulate.testScopeAccess = testScopeAccess;
+
+
+console.log ('hbkhbk5 =================== defined Uutil.testScopeAccess');
+
+if (typeof exports !== 'undefined') {
+	exports.testScopeAccess = testScopeAccess;
+	exports.convertElementToIframeById  = convertElementToIframeById ;
+}
+
+
+//alert('hi mom 4');
+
+// TESTS
+
+if (false)
+{
+}
+
+
+
+
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],5:[function(require,module,exports){
 'use strict';
 /**
  * // UtilNodeVsBrowser
@@ -476,7 +595,7 @@ if (typeof exports !== 'undefined') {
     exports.getProperties = getProperties;
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 
@@ -773,7 +892,8 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{"C:/utd/150719utdG/public/util/UtilClass.js":4}],6:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/UtilClass.js":5}],7:[function(require,module,exports){
+(function (global){
 'use strict';
 /**
  * // UtilNodeVsBrowser
@@ -792,16 +912,37 @@ function emitError (desc, err)
 {
 
     try {
-		console.error ('ERROR [' + desc + '] in err.message:' + err.message);
-		console.error ('ERROR [' + desc + '] in err.stack:' + err.stack);
-		alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
+		if (err)
+		{
+			console.error ('ERROR [' + desc + '] in err.message:' + err.message);
+			console.error ('ERROR [' + desc + '] in err.stack:' + err.stack);
+			alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
+		}
+		else {
+			console.error ('ERROR [' + desc + ']');
+			console.error ('ERROR [' + desc + ']');
+		}
 
     } catch (e) {
         console.error ('ERROR [' + desc + '] in getClass:e:' + e.message);
         console.error ('ERROR [' + desc + '] in getClass:estack:' + e.stack);
+
     }
 }  //
 
+try {
+	global.Uutil = global.Uutil || {};
+} catch (err) {
+	// do nothing - no global on client
+}
+
+console.log ('hbkhbk5 =================== loaded UcHtmlDocManipulate.js');
+Uutil.UtilErrorEmitter = {};
+Uutil.UtilErrorEmitter.emitError = emitError;
+
+
+
+// Uutil.UtilErrorEmitter.emitError
 
 if (typeof exports !== 'undefined') {
     exports.emitError = emitError;
@@ -810,7 +951,8 @@ if (typeof exports !== 'undefined') {
 
 
 
-},{}],7:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],8:[function(require,module,exports){
 'use strict';
 
 
@@ -839,7 +981,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 /**
@@ -871,7 +1013,10 @@ function UrlUtd(addressOriUrlUtd, addressWithHttp, title) {
 
 
 
-
+var testUtilHrefThisText = function (s) {
+	O.o ('in testUtilHrefThisText');
+	return 'returned from testUtilHrefThisText';
+};
 
 
 var seeIfConnectedToThisClass = function (s) {
@@ -1136,7 +1281,7 @@ if (test160117)
 	console.log ('s:' + addNoContentEditableToHrefs(s));
 }
 
-},{"C:/utd/150719utdG/public/util/O.js":3}],9:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":3}],10:[function(require,module,exports){
 'use strict';
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
@@ -1469,11 +1614,19 @@ function isHTML2(str, ignoreHtmlWhiteSpace) {
 }
 
 
+function testHBK2()
+{
+	console.log ('++++++++++++++++++++++++++++++++++++ testHBK2');
+}
+
+
+
 if (typeof exports !== 'undefined')
 {
     exports.utilHtmlCleanerFunctions = utilHtmlCleanerFunctions;
     exports.handlepaste = handlepaste;
     exports.isHTML2 = isHTML2;
+
 	// UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(strm ...)
 }
 
@@ -1517,7 +1670,7 @@ if (false) // test html to text converter
 
 
 
-},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilString.js":12}],10:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilString.js":13}],11:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1539,7 +1692,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 // var UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
 // in entry.js
@@ -1576,7 +1729,7 @@ if (typeof exports !== 'undefined') {
     exports.printObjJSONstringify = printObjJSONstringify;
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 // var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 
@@ -1733,7 +1886,7 @@ if (test)
 {
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 //utd = [];   // ustodo utilities
 //utd[Date] = require('C:/utd/150719utdG/public/util/UtilDate.js');
 //utd[Class] = require('C:/utd/150719utdG/public/util/UtilClass.js');
@@ -1750,7 +1903,7 @@ UtilNLB_bgFade = require('C:/utd/150719utdG/public/util/NLB_bgFade.js');
 UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
 UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
-//UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
+UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
 //ModuleTinymcePasteCleanFilter = require('C:/utd/150719utdG/public/lib/ustodo-browser-util/ModuleTinymcePasteCleanFilter.js');
 
 O = require('C:/utd/150719utdG/public/util/O.js');
@@ -1760,4 +1913,4 @@ O = require('C:/utd/150719utdG/public/util/O.js');
 
 
 
-},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilClass.js":4,"C:/utd/150719utdG/public/util/UtilDate.js":5,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":6,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":7,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":8,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":9,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":10,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":11,"C:/utd/150719utdG/public/util/UtilString.js":12}]},{},[13]);
+},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js":4,"C:/utd/150719utdG/public/util/UtilClass.js":5,"C:/utd/150719utdG/public/util/UtilDate.js":6,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":7,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":8,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":9,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":10,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":11,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":12,"C:/utd/150719utdG/public/util/UtilString.js":13}]},{},[14]);

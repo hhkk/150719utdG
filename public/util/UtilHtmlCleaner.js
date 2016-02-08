@@ -330,11 +330,19 @@ function isHTML2(str, ignoreHtmlWhiteSpace) {
 }
 
 
+function testHBK2()
+{
+	console.log ('++++++++++++++++++++++++++++++++++++ testHBK2');
+}
+
+
+
 if (typeof exports !== 'undefined')
 {
     exports.utilHtmlCleanerFunctions = utilHtmlCleanerFunctions;
     exports.handlepaste = handlepaste;
     exports.isHTML2 = isHTML2;
+
 	// UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(strm ...)
 }
 
