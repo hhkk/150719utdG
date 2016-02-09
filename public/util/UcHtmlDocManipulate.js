@@ -12,9 +12,19 @@
 // var UtilClient = UtilClient || {};
 
 //var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+//var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //var UtilHtmlCleaner = UtilHtmlCleaner;
 // UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText
+var O = O;
+	if (!O) {
+		try {
+			O = require('C:/utd/150719utdG/public/util/O.js');
+		} catch(err ) {
+			console.log (err);
+		}
+	}
+
 var UtilErrorEmitter = UtilErrorEmitter;
 var O = O;
 
@@ -39,6 +49,11 @@ function testScopeAccess() {
 	try {
 		//alert('in testScopeAccess');
 		console.log (' oo hbkhbk5 =================================== cc in UtilClient.UcHtmlDocManipulate.testScopeAccess');
+		try {
+			O.o ('this is from o.o hk');
+		}   catch (err ) {
+			console.log(err);
+		}
 		return 'hi mommy';
 
 	} catch (err) {
