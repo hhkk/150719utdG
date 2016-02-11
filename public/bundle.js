@@ -1,6 +1,223 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 },{}],2:[function(require,module,exports){
+(function (global){
+
+'use strict';
+
+/**
+ * Created by henryms on 3/2/2015.
+ */
+// var O = require('C:/utd/150719utdG/public/util/O.js');
+var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
+var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+
+
+
+//var filters = ['htmlxxy', 'titlexx'];
+//var filters = ['htmlxx', 'title'];
+//var filters = ['completed'];
+var filters = [];
+
+
+//alert ('redefine alerthistory');
+var alertHistory = [];
+
+/**
+ * output only
+ * @param s
+ */
+// one and only console logger
+// private
+var callcount_o = 0;
+
+var passesFilters = function(s) {
+
+	//  var filters = ['Two'];
+	var passes = false;
+	if (filters.length > 0) {
+		filters.forEach(function (f) {
+			if (s.indexOf(f) >= 0) {
+				passes = true;
+			}
+		});
+	}
+	else
+		passes = true;
+	return passes;
+};
+
+var orare = function (s) {
+	return o(s);
+}
+
+var dt_o = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within dt_o');
+	return o(s);
+}
+
+var dt_o2b = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within dt_o2b');
+	return o(s);
+}
+
+var uu_a = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within uu_a');
+	return o(s);
+}
+
+var o = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within o');
+	return o(s);
+}
+
+var x = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within x');
+	return o(s);
+}
+
+var o = function (s)
+{
+	UtilErrorEmitter.testWithinEmitError('called UtilErrorEmitter.testWithinEmitError from within O.o');
+	console.log ('within ');
+
+	//console.log ('in o.o');
+	if (passesFilters(s))
+	{
+		var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologx:' + s
+		console.log(t);
+		//if (appendFileSync)
+		//appendFileSync('c:/tmp/t.txt', t);
+		console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
+	}
+};
+4
+var oerr = function (s)
+{
+	//console.log ('in o.o');
+	var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ologerr:' + s
+	console.error(t);
+	if (appendFileSync)
+		appendFileSync('c:/tmp/t.txt', 'ERROR: t:' + t);
+	//console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
+};
+
+
+// http://stackoverflow.com/questions/15313418/javascript-assert
+var assert = function (condition, message) {
+	if (!condition) {
+
+		if (typeof Error === "undefined") {
+			Error = function(message) {
+				this.message = message;
+			};
+			Error.prototype.message = "";
+		}
+
+		message = message || "Assertion failed";
+		if (typeof Error !== "undefined") {
+			throw new Error(message);
+		}
+		throw message; // Fallback
+	}
+};
+
+// error
+var lastOutputTimeStamp = -1;
+var callCountaddLineFeedsIfnSeconds = -1;
+var addLineFeedsIfnSeconds = function() {
+	var returnStr = '';
+	var newTimeInMillis = UtilDate.getTimeInMillis();
+	if (lastOutputTimeStamp < 0){
+		lastOutputTimeStamp = newTimeInMillis;
+	} else {
+		if (newTimeInMillis - lastOutputTimeStamp > 3000) {
+			returnStr = '\r\n\r\n\r\nNEWSTR #' + callCountaddLineFeedsIfnSeconds++ +': ' + UtilDate.getDateStringForLogsWithMillis() +'\r\n';
+		}
+	}
+	lastOutputTimeStamp = newTimeInMillis;
+	return returnStr;
+}
+
+
+
+var e = function (s)
+{
+
+	if (passesFilters(s))
+	{
+		var t = addLineFeedsIfnSeconds() + callcount_o++ + '. ology:' + s
+		console.error(t);
+		console.log("!!!!!!!!!!ERRA ERRA ERRA ERRA ERRA ERRA ERRA ERRA ");
+		appendFileSync('c:/tmp/t.txt', t);
+		//console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
+	}
+};
+/**
+ * alert - implies output with alert history log
+ * @param s
+ */
+var a = function (s)
+{
+	if (passesFilters(s)) {
+		//alert ('old len:' + alertHistory.length);
+		var s = '[' + alertHistory.length + '.' + s + ';' + ']';
+		alertHistory.push(s);
+		//alert ('new len:' + alertHistory.length);
+		o('a:' + s);
+		alert(s + ' hist:' + alertHistory);
+	}
+};
+
+var fs = require('fs');
+// erases existing content
+var writeFileSync = function (filefqname, s) {
+	fs.writeFileSync(filefqname, s + '\r\n');
+};
+
+// does not erase existing content
+var appendFileSync = null;
+try {
+	appendFileSync = function (filefqname, s) {
+		if (fs.appendFileSync)
+			fs.appendFileSync(filefqname, s + '\r\n');
+	}
+} catch (e) {
+	console.log ('error:' + e);
+}
+
+var test = false;
+if (test) {
+	writeFileSync('c:/tmp/t.txt', 'time in a bottle\r\n');
+	appendFileSync('c:/tmp/t.txt', 'time in a bottle2\r\n');
+	appendFileSync('c:/tmp/t.txt', 'time in a bottle3\r\n');
+	appendFileSync('c:/tmp/t.txt', 'time in a bottle4\r\n');
+	appendFileSync('c:/tmp/t.txt', 'time in a bottle5\r\n');
+}
+
+
+global.Uutil2_ = global.Uutil2_ || {};
+global.Uutil2_['Dt_O'] = {};
+
+
+if (typeof exports !== 'undefined') {
+	exports.o = o;
+	exports.oerr = oerr;
+	exports.assert = assert;
+	exports.a = a;
+	exports.e = e;
+	exports.orare = orare;
+	exports.uu_a = uu_a;
+	exports.dt_o = dt_o;
+}
+
+global.Uutil2_.Dt_O.dt_o2b = dt_o2b;
+global.Uutil2_.Dt_O.uu_a = uu_a;
+global.Uutil2_.Dt_O.o = o;
+global.Uutil2_.Dt_O.x = x;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"C:/utd/150719utdG/public/util/UtilDate.js":7,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":8,"fs":1}],3:[function(require,module,exports){
 
 // http://www.netlobo.com/javascript_background_fade.html
 /*************************************************************
@@ -131,7 +348,7 @@ if (typeof exports !== 'undefined') {
 	exports.NLBfadeBg = NLBfadeBg;
 }
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 
 'use strict';
 
@@ -140,6 +357,7 @@ if (typeof exports !== 'undefined') {
  */
 // var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
+var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 
 
 
@@ -179,6 +397,10 @@ var passesFilters = function(s) {
 
 var o = function (s)
 {
+
+	UtilErrorEmitter.testWithinEmitError('called UtilErrorEmitter.testWithinEmitError from within O.o');
+	console.log ('within ');
+
 	//console.log ('in o.o');
 	if (passesFilters(s))
 	{
@@ -302,7 +524,7 @@ if (test) {
 
 
 
-},{"C:/utd/150719utdG/public/util/UtilDate.js":6,"fs":1}],4:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/UtilDate.js":7,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":8,"fs":1}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -436,7 +658,7 @@ if (false)
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"C:/utd/150719utdG/public/util/O.js":3}],5:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":4}],6:[function(require,module,exports){
 'use strict';
 /**
  * // UtilNodeVsBrowser
@@ -610,7 +832,7 @@ if (typeof exports !== 'undefined') {
     exports.getProperties = getProperties;
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 
@@ -907,7 +1129,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{"C:/utd/150719utdG/public/util/UtilClass.js":5}],7:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/UtilClass.js":6}],8:[function(require,module,exports){
 (function (global){
 'use strict';
 /**
@@ -922,6 +1144,16 @@ if (typeof exports !== 'undefined') {
  */
 // from entry.js UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 
+function dt_testEmitter(desc)
+{
+	console.log ('from UtilErrorEmitter.dt_testEmitter:' + desc);
+
+}
+function testWithinEmitError (desc)
+{
+	console.log ('from UtilErrorEmitter.testWithinEmitError:' + desc);
+
+}
 
 function emitError (desc, err)
 {
@@ -961,13 +1193,15 @@ Uutil.UtilErrorEmitter.emitError = emitError;
 
 if (typeof exports !== 'undefined') {
     exports.emitError = emitError;
+    exports.testWithinEmitError = testWithinEmitError;
+    exports.dt_testEmitter = dt_testEmitter;
 }
 
 
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 
@@ -996,7 +1230,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1296,7 +1530,7 @@ if (test160117)
 	console.log ('s:' + addNoContentEditableToHrefs(s));
 }
 
-},{"C:/utd/150719utdG/public/util/O.js":3}],10:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":4}],11:[function(require,module,exports){
 'use strict';
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
@@ -1685,7 +1919,7 @@ if (false) // test html to text converter
 
 
 
-},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilString.js":13}],11:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":4,"C:/utd/150719utdG/public/util/UtilString.js":14}],12:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1707,7 +1941,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 // var UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
 // in entry.js
@@ -1744,7 +1978,7 @@ if (typeof exports !== 'undefined') {
     exports.printObjJSONstringify = printObjJSONstringify;
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 // var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 
@@ -1901,7 +2135,7 @@ if (test)
 {
 }
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 //utd = [];   // ustodo utilities
 //utd[Date] = require('C:/utd/150719utdG/public/util/UtilDate.js');
 //utd[Class] = require('C:/utd/150719utdG/public/util/UtilClass.js');
@@ -1922,10 +2156,16 @@ UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate
 //ModuleTinymcePasteCleanFilter = require('C:/utd/150719utdG/public/lib/ustodo-browser-util/ModuleTinymcePasteCleanFilter.js');
 
 O = require('C:/utd/150719utdG/public/util/O.js');
+O2 = require('C:/utd/150719utdG/public/util/O.js');
+O3 = require('C:/utd/150719utdG/public/util/O.js');
 
+var Uutil2 = {};
+Uutil2.O3 = require('C:/utd/150719utdG/public/util/O.js');
+uut_O3 = require('C:/utd/150719utdG/public/util/O.js');
+Dt_O = require('C:/utd/150719utdG/public/util/Dt_O.js');
 
     // browserify C:/utd/150719utdG/public/util/entry.js > C:/utd/150719utdG/public/bundle.js
 
 
 
-},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js":4,"C:/utd/150719utdG/public/util/UtilClass.js":5,"C:/utd/150719utdG/public/util/UtilDate.js":6,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":7,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":8,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":9,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":10,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":11,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":12,"C:/utd/150719utdG/public/util/UtilString.js":13}]},{},[14]);
+},{"C:/utd/150719utdG/public/util/Dt_O.js":2,"C:/utd/150719utdG/public/util/NLB_bgFade.js":3,"C:/utd/150719utdG/public/util/O.js":4,"C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js":5,"C:/utd/150719utdG/public/util/UtilClass.js":6,"C:/utd/150719utdG/public/util/UtilDate.js":7,"C:/utd/150719utdG/public/util/UtilErrorEmitter.js":8,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":9,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":10,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":11,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":12,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":13,"C:/utd/150719utdG/public/util/UtilString.js":14}]},{},[15]);

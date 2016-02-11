@@ -3,6 +3,10 @@
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 var O = require('C:/utd/150719utdG/public/util/O.js');
+var O2 = require('C:/utd/150719utdG/public/util/O.js');
+var Ut_o = require('C:/utd/150719utdG/public/util/Ut_o.js');
+var uut_O3 = require('C:/utd/150719utdG/public/util/O.js');
+var Dt_O = require('C:/utd/150719utdG/public/util/Dt_O.js');
 //var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
 var UtilUrl4bUsesKrawlerToSupportServerController =
 	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
@@ -15,6 +19,8 @@ var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.j
 
 var UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
 
+
+''
 
 //var _ = require('lodash'),
 //var xyhbk2 = 'C:/utd/150719utdG/app/models/user.server.model.js';
@@ -47,6 +53,8 @@ var mongoose = require('mongoose'),
 	 * Create a Ustodo
  */
 O.o ('&&&&&&&&&&000 init var callcountSaved = 0');
+
+uut_O3.o ('called uut_O3 outside a f in ustodos.server.controller.js');
 var callcountSaved = 0;
 
 // section_create_new not section_write
@@ -456,14 +464,25 @@ exports.ustodobulkdel = function(req, res) {
  * line 2983
  * return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
  */
+
+	Dt_O.dt_o('dto1');
+
 exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
 
 	// hbkhbk5
+	uut_O3.o ('called uut_O3 inside a f in ustodos.server.controller.js');
 	O.o(' ********* hbkhbk5 Uutil.');
+	O2.o(' ********* hbkhbk5 UutilO2.');
+	//Uutil.O3.o(' ********* hbkhbk5 UutilO2.');
+	uut_O3.o(' ********* hbkhbk5 uut_O3.o.');
+	Ut_o.o(' ********* hbkhbk5 uut_O3.o.');
+	Ut_o.ut_o(' ********* hbkhbk5 uut_O3.o.');
+	Dt_O.dt_o(' ********* hbkhbk5 Dt_o2.');
 
 
 	var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
 	Uutil.UtilErrorEmitter.emitError('testerrorhbkhbk5');
+	UtilErrorEmitter.emitError('testerrorhbkhbk9');
 
 	O.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js] s:' + s);
 

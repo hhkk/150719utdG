@@ -11,6 +11,16 @@
  */
 // from entry.js UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
 
+function dt_testEmitter(desc)
+{
+	console.log ('from UtilErrorEmitter.dt_testEmitter:' + desc);
+
+}
+function testWithinEmitError (desc)
+{
+	console.log ('from UtilErrorEmitter.testWithinEmitError:' + desc);
+
+}
 
 function emitError (desc, err)
 {
@@ -35,7 +45,8 @@ function emitError (desc, err)
 }  //
 
 try {
-	global.Uutil = global.Uutil || {};
+	global.uu_ = global.uu_|| {};
+	global.uu_.UtilErrorEmitter = uu_|| {};
 } catch (err) {
 	// do nothing - no global on client
 }
@@ -50,7 +61,11 @@ Uutil.UtilErrorEmitter.emitError = emitError;
 
 if (typeof exports !== 'undefined') {
     exports.emitError = emitError;
+    exports.testWithinEmitError = testWithinEmitError;
+    exports.dt_testEmitter = dt_testEmitter;
 }
+
+uu_.UtilErrorEmitter.emitError = emitError;
 
 
 

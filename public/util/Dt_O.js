@@ -43,10 +43,37 @@ var passesFilters = function(s) {
 	return passes;
 };
 
+var orare = function (s) {
+	return o(s);
+}
+
+var dt_o = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within dt_o');
+	return o(s);
+}
+
+var dt_o2b = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within dt_o2b');
+	return o(s);
+}
+
+var uu_a = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within uu_a');
+	return o(s);
+}
+
+var o = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within o');
+	return o(s);
+}
+
+var x = function (s) {
+	UtilErrorEmitter.dt_testEmitter('calling dt_testEmitter within x');
+	return o(s);
+}
 
 var o = function (s)
 {
-
 	UtilErrorEmitter.testWithinEmitError('called UtilErrorEmitter.testWithinEmitError from within O.o');
 	console.log ('within ');
 
@@ -137,13 +164,6 @@ var a = function (s)
 		alert(s + ' hist:' + alertHistory);
 	}
 };
-if (typeof exports !== 'undefined') {
-	exports.o = o;
-	exports.oerr = oerr;
-	exports.assert = assert;
-	exports.a = a;
-	exports.e = e;
-}
 
 var fs = require('fs');
 // erases existing content
@@ -172,3 +192,22 @@ if (test) {
 }
 
 
+global.Uutil2_ = global.Uutil2_ || {};
+global.Uutil2_['Dt_O'] = {};
+
+
+if (typeof exports !== 'undefined') {
+	exports.o = o;
+	exports.oerr = oerr;
+	exports.assert = assert;
+	exports.a = a;
+	exports.e = e;
+	exports.orare = orare;
+	exports.uu_a = uu_a;
+	exports.dt_o = dt_o;
+}
+
+global.Uutil2_.Dt_O.dt_o2b = dt_o2b;
+global.Uutil2_.Dt_O.uu_a = uu_a;
+global.Uutil2_.Dt_O.o = o;
+global.Uutil2_.Dt_O.x = x;

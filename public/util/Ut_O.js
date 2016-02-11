@@ -43,6 +43,13 @@ var passesFilters = function(s) {
 	return passes;
 };
 
+var orare = function (s) {
+	return o(s);
+}
+
+var ut_o = function (s) {
+	return o(s);
+}
 
 var o = function (s)
 {
@@ -137,13 +144,6 @@ var a = function (s)
 		alert(s + ' hist:' + alertHistory);
 	}
 };
-if (typeof exports !== 'undefined') {
-	exports.o = o;
-	exports.oerr = oerr;
-	exports.assert = assert;
-	exports.a = a;
-	exports.e = e;
-}
 
 var fs = require('fs');
 // erases existing content
@@ -172,3 +172,13 @@ if (test) {
 }
 
 
+
+if (typeof exports !== 'undefined') {
+	exports.o = o;
+	exports.oerr = oerr;
+	exports.assert = assert;
+	exports.a = a;
+	exports.e = e;
+	exports.orare = orare;
+	exports.ut_o = ut_o;
+}

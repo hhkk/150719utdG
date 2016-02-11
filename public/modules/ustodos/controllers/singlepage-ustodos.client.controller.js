@@ -3128,15 +3128,31 @@ angular.module('ustodos').controller
 
 
 					//$scope.testScopeAccess = UcHtmlDocManipulate.testScopeAccess;
+					UtilErrorEmitter.testWithinEmitError('testerrorhbkhbk7');
+					$scope.UtilErrorEmitter = UtilErrorEmitter;
 
+					uut_O3.o ('called uut_O3 outside $scope.testButton in singlepage-ustodos.client.controller.js');
+					$scope.uut_O3 = uut_O3;
+					$scope.Dt_O = Dt_O;
+					$scope.Uutil2_ = Uutil2_;
+					Uutil2_.Dt_O.dt_o2b('calling dt_o2b1 a');
+					Uutil2_.Dt_O.uu_a('calling uu_a');
+					Uutil2_.Dt_O.o('calling o');
+					Uutil2_.Dt_O.e('calling e');
+					Uutil2_.Dt_O.x('calling o');
 					$scope.testButton= function(fn)
 					{
 
-						var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
+						Uutil2_.Dt_O.dt_o2b('calling dt_o2b2');
 
-						Uutil.UtilErrorEmitter.emitError('testerrorhbkhbk5');
+						uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
+						//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
+
+						//Uutil.UtilErrorEmitter.emitError('testerrorhbkhbk5');
+						UtilErrorEmitter.testWithinEmitError('testerrorhbkhbk6');
 
 						O.o ('in testbutton1');
+						O2.o ('in testbutton1O2');
 						//$scope.O.o ('in testbutton2');
 
 						if (false) // set style for contenteditable focus
