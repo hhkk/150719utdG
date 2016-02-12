@@ -3,7 +3,7 @@
 // http://12devs.co.uk/articles/promises-an-alternative-way-to-approach-asynchronous-javascript/
 //var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
 var O = require('C:/utd/150719utdG/public/util/O.js');
-var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 var Krawler = require('krawler');
 // var UtilUrl5Krawler = require('C:/utd/150719utdG/public/util/UtilUrl5Krawler.js');
 
@@ -53,7 +53,7 @@ var krawlhk = function(arrUrlUtds, callbackFromKrawl)
 					//O.o ('title [' + titleCheerio + ']');
 
 				} catch (err) {
-					UtilErrorEmitter.emitError('err in ondata', err);
+					U_error.emitError('err in ondata', err);
 				}
 			})
 			.on('error', function(err, url) {
@@ -97,7 +97,7 @@ var krawlhk = function(arrUrlUtds, callbackFromKrawl)
 				// all URLs has been fetched
 			});
 	} catch (err) {
-		UtilErrorEmitter.emitError('error i krawler', err);
+		U_error.emitError('error i krawler', err);
 	}
 }
 

@@ -9,18 +9,7 @@
  * Time: 3:55 PM
  * To change this template use File | Settings | File Templates.
  */
-// from entry.js UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
-
-function dt_testEmitter(desc)
-{
-	console.log ('from UtilErrorEmitter.dt_testEmitter:' + desc);
-
-}
-function testWithinEmitError (desc)
-{
-	console.log ('from UtilErrorEmitter.testWithinEmitError:' + desc);
-
-}
+// from entry.js U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 
 function emitError (desc, err)
 {
@@ -33,8 +22,8 @@ function emitError (desc, err)
 			alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
 		}
 		else {
-			console.error ('ERROR [' + desc + ']');
-			console.error ('ERROR [' + desc + ']');
+			console.error ('HKERROR [' + desc + ']');
+			console.error ('HKERROR [' + desc + ']');
 		}
 
     } catch (e) {
@@ -46,26 +35,20 @@ function emitError (desc, err)
 
 try {
 	global.uu_ = global.uu_|| {};
-	global.uu_.UtilErrorEmitter = uu_|| {};
+	global.uu_.U_error = uu_|| {};
+	uu_.U_error.emitError = emitError;
 } catch (err) {
 	// do nothing - no global on client
 }
 
-console.log ('hbkhbk5 =================== loaded UcHtmlDocManipulate.js');
-Uutil.UtilErrorEmitter = {};
-Uutil.UtilErrorEmitter.emitError = emitError;
-
-
-
-// Uutil.UtilErrorEmitter.emitError
+// Uutil.U_error.emitError
 
 if (typeof exports !== 'undefined') {
-    exports.emitError = emitError;
-    exports.testWithinEmitError = testWithinEmitError;
-    exports.dt_testEmitter = dt_testEmitter;
+    //exports.emitError = emitError;
+    //exports.testWithinEmitError = testWithinEmitError;
+    //exports.dt_testEmitter = dt_testEmitter;
 }
 
-uu_.UtilErrorEmitter.emitError = emitError;
 
 
 

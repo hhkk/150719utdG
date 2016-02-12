@@ -7,7 +7,7 @@
 var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
-var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 //var UserController = require('C:/utd/150719utdG/app/controllers/users/users.authorization.server.controller.js');
 var async = require('async');
 //var	mongoose = require('mongoose');
@@ -224,12 +224,12 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 						//			O.o ('hbksdfsdfs:' + user);
 						//			O.o ('hbksdfsdfs user.username:' + user.username);
 						//		} else {
-						//			UtilErrorEmitter.emitError("fail getting user name", err);
+						//			U_error.emitError("fail getting user name", err);
 						//		}
 						//	});
 						//
 						//} catch (err ) {
-						//	UtilErrorEmitter.emitError('error in user access', err);
+						//	U_error.emitError('error in user access', err);
 						//}
 
 						//try {
@@ -245,13 +245,13 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 						//				O.o ('hbksdfsdfs1:' + user);
 						//				O.o ('hbksdfsdfs1 user.username:' + user.username);
 						//			} else {
-						//				UtilErrorEmitter.emitError("fail getting user name", err);
+						//				U_error.emitError("fail getting user name", err);
 						//			}
 						//		},
 						//		ustodos[k]._id
 						//	);
 						//} catch (err ) {
-						//	UtilErrorEmitter.emitError('error in user access2', err);
+						//	U_error.emitError('error in user access2', err);
 						//}
 					}
 					//else {
@@ -290,14 +290,14 @@ exports.processCommandReadPortion = function(Ustodo, querystringTrimmed, req, er
 				//				//O.o ('hbksdfsdfs user.username:' + user.username);
 				//			} else {
 				//				O.o('erraffffffffff');
-				//				UtilErrorEmitter.emitError("fail getting user name", err);
+				//				U_error.emitError("fail getting user name", err);
 				//				callback();
 				//			}
 				//		});
                 //
 				//	} catch (err ) {
 				//		O.o('erraffffffffff');
-				//		UtilErrorEmitter.emitError('error in user access', err);
+				//		U_error.emitError('error in user access', err);
 				//		callback();
 				//	}
 				//};

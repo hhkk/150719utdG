@@ -2,7 +2,7 @@
 // http://12devs.co.uk/articles/promises-an-alternative-way-to-approach-asynchronous-javascript/
 var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
 var O = require('C:/utd/150719utdG/public/util/O.js');
-var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 
 // readFileUsingPromises.js
 if (false)
@@ -162,7 +162,7 @@ if (true) // 4
 		try {
 			rtn = Q.nfcall(request, url, options)
 		}   catch (err) {
-			UtilErrorEmitter.emitError('error in rereieve', err);
+			U_error.emitError('error in rereieve', err);
 		}
 		return rtn;
 	}

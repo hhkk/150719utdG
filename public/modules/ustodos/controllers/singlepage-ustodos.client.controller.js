@@ -31,7 +31,7 @@ var $ = $;
 var UtilPrintObjects = UtilPrintObjects;
 
 var UtilNLB_bgFade = UtilNLB_bgFade;
-var UtilErrorEmitter = UtilErrorEmitter;
+//var U_error = U_error;
 var UtilClassz = UtilClassz;
 
 //var utilHtmlCleanerFunctions = utilHtmlCleanerFunctions; // this is a file name
@@ -349,12 +349,13 @@ angular.module('ustodos').controller
 				});
 
 				// hbkhbk5
-				$scope.Uutil = Uutil;
+				$scope.uu_ = uu_;
+				$scope.uu2_ = uu2_;
 				console.log ('=================== hbkhbk5');
 				//Uutil.testScopeAccess();
 
 				//$scope.UcHtmlDocManipulate = UcHtmlDocManipulate;
-				//$scope.UtilErrorEmitter = UtilErrorEmitter;
+				//$scope.U_error = U_error;
 				//$scope.UtilClient = UtilClient;
 
 
@@ -754,7 +755,7 @@ angular.module('ustodos').controller
 						}
 						catch(err)
 						{
-							UtilErrorEmitter.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
+							uu_.U_error.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
 						}
 
 
@@ -1980,7 +1981,7 @@ angular.module('ustodos').controller
 							//		//alert('calling processCommand');
 							//	}
 							//} catch (e) {
-							//	UtilErrorEmitter.emitError('in eventHandlerEditorcontentChange', e);
+							//	U_error.emitError('in eventHandlerEditorcontentChange', e);
 							//	//alert ('sdfsdfsdf:' + e);
 							//}
 						}
@@ -2270,7 +2271,7 @@ angular.module('ustodos').controller
 							//}
 						} catch (e) {
 							if (processFailure)
-								UtilErrorEmitter.emitError ('era3', e);
+								U_error.emitError ('era3', e);
 							throw e;
 						}
 					};
@@ -2530,7 +2531,7 @@ angular.module('ustodos').controller
 								//alert('calling processCommand');
 							}
 						} catch (e) {
-							UtilErrorEmitter.emitError('in eventHandlerEditorcontentChange', e);
+							U_error.emitError('in eventHandlerEditorcontentChange', e);
 							//alert ('sdfsdfsdf:' + e);
 						}
 					};
@@ -3128,28 +3129,23 @@ angular.module('ustodos').controller
 
 
 					//$scope.testScopeAccess = UcHtmlDocManipulate.testScopeAccess;
-					UtilErrorEmitter.testWithinEmitError('testerrorhbkhbk7');
-					$scope.UtilErrorEmitter = UtilErrorEmitter;
-
-					uut_O3.o ('called uut_O3 outside $scope.testButton in singlepage-ustodos.client.controller.js');
-					$scope.uut_O3 = uut_O3;
-					$scope.Dt_O = Dt_O;
-					$scope.Uutil2_ = Uutil2_;
-					Uutil2_.Dt_O.dt_o2b('calling dt_o2b1 a');
-					Uutil2_.Dt_O.uu_a('calling uu_a');
-					Uutil2_.Dt_O.o('calling o');
-					Uutil2_.Dt_O.e('calling e');
-					Uutil2_.Dt_O.x('calling o');
+					uu_.U_error.emitError('xxxe');
+					//Uutil2_.Dt_O.dt_o2b('calling dt_o2b1 a');
+					//Uutil2_.Dt_O.uu_a('calling uu_a');
+					//Uutil2_.Dt_O.o('calling o');
+					//Uutil2_.Dt_O.e('calling e');
+					//Uutil2_.Dt_O.x('calling o');
 					$scope.testButton= function(fn)
 					{
 
-						Uutil2_.Dt_O.dt_o2b('calling dt_o2b2');
+						uu_.U_error.emitError('xxxe');
+						//Uutil2_.Dt_O.dt_o2b('calling dt_o2b2');
 
-						uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
+						//uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
 						//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
 
-						//Uutil.UtilErrorEmitter.emitError('testerrorhbkhbk5');
-						UtilErrorEmitter.testWithinEmitError('testerrorhbkhbk6');
+						//Uutil.U_error.emitError('testerrorhbkhbk5');
+						//U_error.testWithinEmitError('testerrorhbkhbk6');
 
 						O.o ('in testbutton1');
 						O2.o ('in testbutton1O2');
@@ -3723,7 +3719,7 @@ angular.module('ustodos').controller
 						catch(err)
 						{
 							alert ('error here');
-							UtilErrorEmitter.emitError('error in synchNumberCheckboxesChecked()', err);
+							U_error.emitError('error in synchNumberCheckboxesChecked()', err);
 						}
 
 					};
@@ -4296,8 +4292,8 @@ angular.module('ustodos').controller
 							//	$scope.error = errorResponse.data.message;
 
 						} catch (e) {
-							alert ('got error calling UtilErrorEmitter.emitError');
-							UtilErrorEmitter.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
+							alert ('got error calling U_error.emitError');
+							U_error.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
 							throw e;
 						}
 						$scope.mouseoverlock = 'off';
@@ -4635,7 +4631,7 @@ window.onload = function()
 	//catch(err)
 	//{
 //		alert ('in error catcher');
-	//UtilErrorEmitter.emitError('in onload error', err);
+	//U_error.emitError('in onload error', err);
 	//}
 
 //CKEDITOR.replace( 'editor1' );

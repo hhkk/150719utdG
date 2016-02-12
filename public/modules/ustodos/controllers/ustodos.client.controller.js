@@ -20,7 +20,7 @@ var $ = $;
 var UtilPrintObjects = UtilPrintObjects;
 
 var UtilNLB_bgFade = UtilNLB_bgFade;
-var UtilErrorEmitter = UtilErrorEmitter;
+var U_error = U_error;
 
 //var unirest = require('unirest');
 //var fn = function()
@@ -323,7 +323,7 @@ angular.module('ustodos').controller('UstodosController',
 				}
 				catch(err)
 				{
-					UtilErrorEmitter.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
+					U_error.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
 				}
 
 
@@ -2068,7 +2068,7 @@ angular.module('ustodos').controller('UstodosController',
                     }
                 } catch (e) {
                     if (processFailure)
-                        UtilErrorEmitter.emitError ('era3', e);
+                        U_error.emitError ('era3', e);
                     throw e;
                 }
             };
@@ -2365,7 +2365,7 @@ angular.module('ustodos').controller('UstodosController',
                         //alert('calling processCommand');
                     }
                 } catch (e) {
-                    UtilErrorEmitter.emitError('in eventHandlerEditorcontentChange', e);
+                    U_error.emitError('in eventHandlerEditorcontentChange', e);
                     //alert ('sdfsdfsdf:' + e);
                 }
             };
@@ -3705,7 +3705,7 @@ angular.module('ustodos').controller('UstodosController',
                     //	$scope.error = errorResponse.data.message;
 
                 } catch (e) {
-                    UtilErrorEmitter.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
+                    U_error.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
                     throw e;
                 }
                 $scope.mouseoverlock = 'off';

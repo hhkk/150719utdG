@@ -6,7 +6,6 @@ var O = require('C:/utd/150719utdG/public/util/O.js');
 var O2 = require('C:/utd/150719utdG/public/util/O.js');
 var Ut_o = require('C:/utd/150719utdG/public/util/Ut_o.js');
 var uut_O3 = require('C:/utd/150719utdG/public/util/O.js');
-var Dt_O = require('C:/utd/150719utdG/public/util/Dt_O.js');
 //var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
 var UtilUrl4bUsesKrawlerToSupportServerController =
 	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
@@ -15,12 +14,10 @@ var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
-var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 
 var UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
 
-
-''
 
 //var _ = require('lodash'),
 //var xyhbk2 = 'C:/utd/150719utdG/app/models/user.server.model.js';
@@ -129,7 +126,7 @@ function createOrSave(ustodo, user, res) {
 
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
-			UtilErrorEmitter.emitError('err in res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json:' + err);
+			U_error.emitError('err in res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json:' + err);
 		}
 
 	};
@@ -164,7 +161,7 @@ function createOrSave(ustodo, user, res) {
 		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
-		UtilErrorEmitter.emitError('err in expandUrlsToHrefsReturnPatchedStr during create:' + err);
+		U_error.emitError('err in expandUrlsToHrefsReturnPatchedStr during create:' + err);
 	}
 
 
@@ -465,26 +462,26 @@ exports.ustodobulkdel = function(req, res) {
  * return Ustodos.query(jsonquery, callback);     // maps to a get? in routes? is that a RESOURCE behavior?
  */
 
-	Dt_O.dt_o('dto1');
+	//Dt_O.dt_o('dto1');
 
 exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
 
 	// hbkhbk5
-	uut_O3.o ('called uut_O3 inside a f in ustodos.server.controller.js');
-	O.o(' ********* hbkhbk5 Uutil.');
-	O2.o(' ********* hbkhbk5 UutilO2.');
-	//Uutil.O3.o(' ********* hbkhbk5 UutilO2.');
-	uut_O3.o(' ********* hbkhbk5 uut_O3.o.');
-	Ut_o.o(' ********* hbkhbk5 uut_O3.o.');
-	Ut_o.ut_o(' ********* hbkhbk5 uut_O3.o.');
-	Dt_O.dt_o(' ********* hbkhbk5 Dt_o2.');
+	//uut_O3.o ('called uut_O3 inside a f in ustodos.server.controller.js');
+	//O.o(' ********* hbkhbk5 Uutil.');
+	//O2.o(' ********* hbkhbk5 UutilO2.');
+	////Uutil.O3.o(' ********* hbkhbk5 UutilO2.');
+	//uut_O3.o(' ********* hbkhbk5 uut_O3.o.');
+	//Ut_o.o(' ********* hbkhbk5 uut_O3.o.');
+	//Ut_o.ut_o(' ********* hbkhbk5 uut_O3.o.');
+	//Dt_O.dt_o(' ********* hbkhbk5 Dt_o2.');
+	uu_.U_error.emitError('emitError hi ustodos.server.controller.js');
 
+	//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
+	//Uutil.U_error.emitError('testerrorhbkhbk5');
+	//U_error.emitError('testerrorhbkhbk9');
 
-	var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
-	Uutil.UtilErrorEmitter.emitError('testerrorhbkhbk5');
-	UtilErrorEmitter.emitError('testerrorhbkhbk9');
-
-	O.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js] s:' + s);
+	//O.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js] s:' + s);
 
 
 	O.o(' *************** Top of [exports.list2] in [ustodos.server.controller.js]');
@@ -648,7 +645,7 @@ exports.hasAuthorization = function(req, res, next) {
 	//			'user [' + user +
 	//			']  user.username [' + user.username + ']' );
 	//	} else {
-	//		UtilErrorEmitter.emitError("CHECKED AUTH ", err);
+	//		U_error.emitError("CHECKED AUTH ", err);
 	//	}
 	//});
 

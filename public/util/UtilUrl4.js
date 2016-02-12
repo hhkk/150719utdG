@@ -22,7 +22,7 @@ var async = require("async");
 var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var request = require('request');
 var unirest = require('unirest');
-var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 
 var findTitle_htmlParse = function(html) {
 
@@ -132,7 +132,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (ustodoHtml, ustodoText, res)
 		//if (hashUrlsToTitle.size() > 0) {
 		//    }
 	} catch (err) {
-		UtilErrorEmitter.emitError ('from outside: error in expandUrlsToHrefsReturnPatchedStr', err);
+		U_error.emitError ('from outside: error in expandUrlsToHrefsReturnPatchedStr', err);
 		throw err;
 	}
 }

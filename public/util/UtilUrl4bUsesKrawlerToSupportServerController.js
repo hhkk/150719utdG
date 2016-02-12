@@ -24,7 +24,7 @@ var async = require("async");
 var UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
 var request = require('request');
 var unirest = require('unirest');
-var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //var UtilUrl4bUsesKrawlerToSupportServerController =
 	// require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
@@ -151,7 +151,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (htmlPretitledTrimmed, res2With
 						}
 					}
 				} catch (err) {
-					UtilErrorEmitter.emitError ('xxfrom outside: error in expandUrlsToHrefsReturnPatchedStr', err);
+					U_error.emitError ('xxfrom outside: error in expandUrlsToHrefsReturnPatchedStr', err);
 					throw err;
 				}
 
@@ -213,7 +213,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (htmlPretitledTrimmed, res2With
 		//if (hashUrlsToTitle.size() > 0) {
 		//    }
 	} catch (err) {
-		UtilErrorEmitter.emitError ('from outside: error in expandUrlsToHrefsReturnPatchedStr', err);
+		U_error.emitError ('from outside: error in expandUrlsToHrefsReturnPatchedStr', err);
 		throw err;
 	}
 
@@ -517,7 +517,7 @@ var getUrlContent_levelTwo = function(callback, url) {
         return xmlhttp.responseText;
         //return ('xmlHttp.responseText:'+xmlhttp.responseText);
     } catch (e) {
-		UtilErrorEmitter.emitError('x13 errrta:', e);
+		U_error.emitError('x13 errrta:', e);
         O.e('x14:' + url.url + '->' + url.title);
         throw e;
     }

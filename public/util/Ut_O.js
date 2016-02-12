@@ -6,7 +6,7 @@
  */
 // var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
-var UtilErrorEmitter = require('C:/utd/150719utdG/public/util/UtilErrorEmitter.js');
+var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 
 
 
@@ -54,7 +54,7 @@ var ut_o = function (s) {
 var o = function (s)
 {
 
-	UtilErrorEmitter.testWithinEmitError('called UtilErrorEmitter.testWithinEmitError from within O.o');
+	U_error.testWithinEmitError('called U_error.testWithinEmitError from within O.o');
 	console.log ('within ');
 
 	//console.log ('in o.o');

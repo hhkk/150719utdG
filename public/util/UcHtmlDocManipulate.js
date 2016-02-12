@@ -25,7 +25,7 @@ var O = O;
 		}
 	}
 
-var UtilErrorEmitter = UtilErrorEmitter;
+var U_error = U_error;
 var O = O;
 
 
@@ -57,7 +57,7 @@ function testScopeAccess() {
 		return 'hi mommy';
 
 	} catch (err) {
-		UtilErrorEmitter.emitError('error in UcHtmlDocManipulate.testScopeAccess', err);
+		U_error.emitError('error in UcHtmlDocManipulate.testScopeAccess', err);
 	}
 };
 
@@ -90,7 +90,7 @@ function convertElementToIframeById (elementIdToReplace, newIframeId, contentEdi
 // main catch for function definition
 //} catch (err) {
 //	alert('error defining functions in UcHtmlDocManipulate.js');
-//	UtilErrorEmitter.emitError('error defining functions in UcHtmlDocManipulate.js', err);
+//	U_error.emitError('error defining functions in UcHtmlDocManipulate.js', err);
 //}
 
 
