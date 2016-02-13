@@ -140,7 +140,7 @@ if (typeof exports !== 'undefined') {
  */
 // var O = require('C:/utd/150719utdG/public/util/O.js');
 var UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
-var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
+//var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 
 
 
@@ -307,69 +307,7 @@ if (test) {
 
 
 
-},{"C:/utd/150719utdG/public/util/U_error.js":4,"C:/utd/150719utdG/public/util/UtilDate.js":7,"fs":1}],4:[function(require,module,exports){
-(function (global){
-'use strict';
-/**
- * // UtilNodeVsBrowser
- */
-/**
- * Created with IntelliJ IDEA.
- * User: hkon
- * Date: 3/3/13
- * Time: 3:55 PM
- * To change this template use File | Settings | File Templates.
- */
-// from entry.js U_error = require('C:/utd/150719utdG/public/util/U_error.js');
-function o (s) { // hbkhbk7
-	console.log('from test o hbkhbk7 :' + s);
-}
-
-	function emitError (desc, err)
-{
-
-    try {
-		if (err)
-		{
-			console.error ('ERROR [' + desc + '] in err.message:' + err.message);
-			console.error ('ERROR [' + desc + '] in err.stack:' + err.stack);
-			alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
-		}
-		else {
-			console.error ('HKERROR [' + desc + ']');
-			console.error ('HKERROR [' + desc + ']');
-		}
-
-    } catch (e) {
-        console.error ('ERROR [' + desc + '] in getClass:e:' + e.message);
-        console.error ('ERROR [' + desc + '] in getClass:estack:' + e.stack);
-
-    }
-}  //
-
-try {
-	global.uu_ = global.uu_|| {}; // hbkhbk7b
-		global.uu_.U_error = uu_|| {};
-	uu_.U_error.emitError = emitError;
-	uu_.U_error.o = o;  // hbkhbk7
-} catch (err) {
-	// do nothing - no global on client
-}
-
-// Uutil.U_error.emitError
-
-if (typeof exports !== 'undefined') {
-    //exports.emitError = emitError;
-    //exports.testWithinEmitError = testWithinEmitError;
-    //exports.dt_testEmitter = dt_testEmitter;
-}
-
-
-
-
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],5:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/UtilDate.js":6,"fs":1}],4:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -503,7 +441,7 @@ if (false)
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"C:/utd/150719utdG/public/util/O.js":3}],6:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":3}],5:[function(require,module,exports){
 'use strict';
 /**
  * // UtilNodeVsBrowser
@@ -677,7 +615,7 @@ if (typeof exports !== 'undefined') {
     exports.getProperties = getProperties;
 }
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 
@@ -974,7 +912,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{"C:/utd/150719utdG/public/util/UtilClass.js":6}],8:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/UtilClass.js":5}],7:[function(require,module,exports){
 'use strict';
 
 
@@ -1003,7 +941,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1303,7 +1241,7 @@ if (test160117)
 	console.log ('s:' + addNoContentEditableToHrefs(s));
 }
 
-},{"C:/utd/150719utdG/public/util/O.js":3}],10:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":3}],9:[function(require,module,exports){
 'use strict';
 
 var O = require('C:/utd/150719utdG/public/util/O.js');
@@ -1692,7 +1630,7 @@ if (false) // test html to text converter
 
 
 
-},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilString.js":13}],11:[function(require,module,exports){
+},{"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UtilString.js":12}],10:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1714,7 +1652,7 @@ if (typeof exports !== 'undefined') {
 }
 
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 // var UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
 // in entry.js
@@ -1751,7 +1689,7 @@ if (typeof exports !== 'undefined') {
     exports.printObjJSONstringify = printObjJSONstringify;
 }
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 // var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 
@@ -1908,7 +1846,7 @@ if (test)
 {
 }
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 //utd = [];   // ustodo utilities
 //utd[Date] = require('C:/utd/150719utdG/public/util/UtilDate.js');
 //utd[Class] = require('C:/utd/150719utdG/public/util/UtilClass.js');
@@ -1938,4 +1876,4 @@ O3 = require('C:/utd/150719utdG/public/util/O.js');
 
 
 
-},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js":5,"C:/utd/150719utdG/public/util/UtilClass.js":6,"C:/utd/150719utdG/public/util/UtilDate.js":7,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":8,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":9,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":10,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":11,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":12,"C:/utd/150719utdG/public/util/UtilString.js":13}]},{},[14]);
+},{"C:/utd/150719utdG/public/util/NLB_bgFade.js":2,"C:/utd/150719utdG/public/util/O.js":3,"C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js":4,"C:/utd/150719utdG/public/util/UtilClass.js":5,"C:/utd/150719utdG/public/util/UtilDate.js":6,"C:/utd/150719utdG/public/util/UtilExceptionStack.js":7,"C:/utd/150719utdG/public/util/UtilHrefThisText.js":8,"C:/utd/150719utdG/public/util/UtilHtmlCleaner.js":9,"C:/utd/150719utdG/public/util/UtilJsTypeDetect.js":10,"C:/utd/150719utdG/public/util/UtilPrintObjects.js":11,"C:/utd/150719utdG/public/util/UtilString.js":12}]},{},[13]);

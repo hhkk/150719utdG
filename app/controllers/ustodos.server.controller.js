@@ -15,10 +15,19 @@ var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 
+
+if (global !== 'undefined')
+	require ('C:/utd/150719utdG/public/util/U_setup.js');
+
+u_.req ('C:/utd/150719utdG/public/util/U_error2.js');
+
+
+
 //var uu_ = uu_ || {};
 
 //var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
-require('C:/utd/150719utdG/public/util/U_error2.js');
+//require('C:/utd/150719utdG/public/util/U_setup.js');
+//require('C:/utd/150719utdG/public/util/U_error2.js');
 // hbkhbk8
 //var U_error2 = require('C:/utd/150719utdG/public/util/U_error2.js');
 //var U_error3 = require('C:/utd/150719utdG/public/util/U_error3.js');
@@ -478,7 +487,8 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 
 	// hbkhbk8
 	//alert('at tophbk');
-	u_.U_error2.o	('U_error2.o from o in list2'); // hbkhbk7
+	u_.U_error2.ox	('U_error2.o from o in list2'); // hbkhbk7
+	//u_.U_error2.o	('U_error2.o from o in list2'); // hbkhbk7
 	//uu_.U_error2.o('uu_.U_error2.o from o in list2'); // hbkhbk7
 	//uu_.U_error3.o3('uu_.U_error3.o3 from o in list2'); // hbkhbk7
 

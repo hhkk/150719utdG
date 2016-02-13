@@ -3140,7 +3140,7 @@ angular.module('ustodos').controller
 
 						// hbkhbk8
 						//alert('tiptop');
-						u_.U_error2.o('U_error2.o from singlepage-ustodos.client.controller.js'); // hbkhbk7
+						u_.U_error2.ox('U_error2.o from singlepage-ustodos.client.controller.js'); // hbkhbk7
 						//uu_.U_error.emitError('xxxe');
 						//Uutil2_.Dt_O.dt_o2b('calling dt_o2b2');
 

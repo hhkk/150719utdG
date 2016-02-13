@@ -1,47 +1,54 @@
 'use strict';
 
+var uberglobal = null;
+
+if (typeof global !== 'undefined')
+	uberglobal = global;
+else if (typeof window !== 'undefined')
+	uberglobal = window;
+else
+	throw ('')
+
+uberglobal.u_ = uberglobal.u_ || {};
+
+
+uberglobal.u_.req = function(disklocation) {
+	var window;
+	if (!window)
+	// if (window === undefined) // error
+	{
+		return require (disklocation);
+	}
+}
+
+//if (typeof global !== 'undefined')  // hbkhbk8
+//{
+//
+uberglobal.u_setup = function (clasz, methodname, method)
+{
+	// for server only, require to avoid 'require' not defined error on client
+
+	try {
+		// if first method from this clasz
+		if (typeof uberglobal.u_[clasz] === 'undefined')
+			uberglobal.u_[clasz] = {};
+		// define it
+		uberglobal.u_[clasz][methodname] = method;
+	} catch (err) {
+		// do nothing - no global on client
+		console.log('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+	}
+	//}
+}
+//}
+
+
+
 /**
  * initialize u_ for global (server) and window (client) utility usage
  */
+// hbkhbk8
 
-var u_setup = function(clasz, method) {
-	if (typeof global !== 'undefined') {
-		global.u_ = global.u_ || {};
-
-		try {
-			if (typeof global.u_[clasz] !== 'undefined') {
-				global.u_[clasz] = {};
-			}
-			global.u_
-				//u_.U_error2.emitError2 = emitError2;
-				global.u_.U_error2.o = o;
-				global.u_.hbk1 = 'hbk2';
-				global.u_.hbk2 = 'hbk3';
-			}
-		} catch (err) {
-			// do nothing - no global on client
-			console.log('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
-		}
-	}
-
-	if (typeof window !== 'undefined')
-	{
-		window.u_ = window.u_ || {};
-
-		try {
-			window.u_.U_error2 = {};
-			//u_.U_error2.emitError2 = emitError2;
-			window.u_.U_error2.o = o;
-			window.u_.hbk1 = 'hbk2';
-			window.u_.hbk2 = 'hbk3';
-		} catch (err) {
-			// do nothing - no global on client
-			console.log ('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
-		}
-
-	}
-
-}
 
 
 
