@@ -14,7 +14,17 @@ var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
-var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
+
+//var uu_ = uu_ || {};
+
+//var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
+require('C:/utd/150719utdG/public/util/U_error2.js');
+// hbkhbk8
+//var U_error2 = require('C:/utd/150719utdG/public/util/U_error2.js');
+//var U_error3 = require('C:/utd/150719utdG/public/util/U_error3.js');
+//uu_.U_error2 = U_error2; // hbkhbk7
+//uu_.U_error3 = U_error3; // hbkhbk7
+
 
 var UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
 
@@ -466,6 +476,12 @@ exports.ustodobulkdel = function(req, res) {
 
 exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
 
+	// hbkhbk8
+	//alert('at tophbk');
+	u_.U_error2.o	('U_error2.o from o in list2'); // hbkhbk7
+	//uu_.U_error2.o('uu_.U_error2.o from o in list2'); // hbkhbk7
+	//uu_.U_error3.o3('uu_.U_error3.o3 from o in list2'); // hbkhbk7
+
 	// hbkhbk5
 	//uut_O3.o ('called uut_O3 inside a f in ustodos.server.controller.js');
 	//O.o(' ********* hbkhbk5 Uutil.');
@@ -475,7 +491,8 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//Ut_o.o(' ********* hbkhbk5 uut_O3.o.');
 	//Ut_o.ut_o(' ********* hbkhbk5 uut_O3.o.');
 	//Dt_O.dt_o(' ********* hbkhbk5 Dt_o2.');
-	uu_.U_error.emitError('emitError hi ustodos.server.controller.js');
+	//global.uu_.U_error2.o('global.uu_.U_error2.o from o in list2'); // hbkhbk7
+	//uu_.U_error2.o('uu_.U_error2.o from o in list2'); // hbkhbk7
 
 	//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
 	//Uutil.U_error.emitError('testerrorhbkhbk5');
@@ -484,7 +501,7 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//O.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js] s:' + s);
 
 
-	O.o(' *************** Top of [exports.list2] in [ustodos.server.controller.js]');
+		O.o(' *************** Top of [exports.list2] in [ustodos.server.controller.js]');
 	//O.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))
 
 	//UcHtmlDocManipulate.testScopeAccess();

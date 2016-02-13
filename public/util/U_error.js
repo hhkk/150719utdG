@@ -10,8 +10,11 @@
  * To change this template use File | Settings | File Templates.
  */
 // from entry.js U_error = require('C:/utd/150719utdG/public/util/U_error.js');
+function o (s) { // hbkhbk7
+	console.log('from test o hbkhbk7 :' + s);
+}
 
-function emitError (desc, err)
+	function emitError (desc, err)
 {
 
     try {
@@ -34,9 +37,10 @@ function emitError (desc, err)
 }  //
 
 try {
-	global.uu_ = global.uu_|| {};
-	global.uu_.U_error = uu_|| {};
-	uu_.U_error.emitError = emitError;
+//	global.uu_ = global.uu_|| {}; // hbkhbk7b
+//	global.uu_.U_error = {};
+	//uu_.U_error.emitError = emitError;
+	//uu_.U_error.o = o;  // hbkhbk7
 } catch (err) {
 	// do nothing - no global on client
 }

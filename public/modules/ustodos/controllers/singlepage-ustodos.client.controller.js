@@ -40,6 +40,7 @@ var UtilClassz = UtilClassz;
 
 var mceId = 'idTinyMceTextArea';
 
+var uu_ = uu_ || {};
 
 //alert ('in here 2');
 //var myapplication = exports.myapplication;
@@ -348,9 +349,9 @@ angular.module('ustodos').controller
 					//alert(windowhk.width() + 'x' + windowhk.height());
 				});
 
-				// hbkhbk5
-				$scope.uu_ = uu_;
-				$scope.uu2_ = uu2_;
+				// hbkhbk8
+				$scope.u_ = u_;
+				//$scope.uu2_ = uu2_;
 				console.log ('=================== hbkhbk5');
 				//Uutil.testScopeAccess();
 
@@ -1952,7 +1953,6 @@ angular.module('ustodos').controller
 							//	//	alert ('maincontenteditableHtml:' + maincontenteditableHtml);
                             //
 							//	//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
-							//	// hbkhbk2
 							//	var text =
 							//		UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(maincontenteditableHtml);
                             //
@@ -3138,7 +3138,10 @@ angular.module('ustodos').controller
 					$scope.testButton= function(fn)
 					{
 
-						uu_.U_error.emitError('xxxe');
+						// hbkhbk8
+						//alert('tiptop');
+						u_.U_error2.o('U_error2.o from singlepage-ustodos.client.controller.js'); // hbkhbk7
+						//uu_.U_error.emitError('xxxe');
 						//Uutil2_.Dt_O.dt_o2b('calling dt_o2b2');
 
 						//uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
@@ -3147,8 +3150,6 @@ angular.module('ustodos').controller
 						//Uutil.U_error.emitError('testerrorhbkhbk5');
 						//U_error.testWithinEmitError('testerrorhbkhbk6');
 
-						O.o ('in testbutton1');
-						O2.o ('in testbutton1O2');
 						//$scope.O.o ('in testbutton2');
 
 						if (false) // set style for contenteditable focus

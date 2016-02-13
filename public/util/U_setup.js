@@ -1,60 +1,49 @@
 'use strict';
+
 /**
- * // UtilNodeVsBrowser
+ * initialize u_ for global (server) and window (client) utility usage
  */
-/**
- * Created with IntelliJ IDEA.
- * User: hkon
- * Date: 3/3/13
- * Time: 3:55 PM
- * To change this template use File | Settings | File Templates.
- */
-// from entry.js U_error = require('C:/utd/150719utdG/public/util/U_error.js');
 
-function o (desc, err)
-{
-	console.log('from u_.U_error2.emitError2 hbkhbk7:' + desc);
-}  //
+var u_setup = function(clasz, method) {
+	if (typeof global !== 'undefined') {
+		global.u_ = global.u_ || {};
 
-function emitError2 (desc, err)
-{
-	console.log('from u_.U_error2.emitError2:' + desc);
-}  //
-
-// hbkhbk8
-//var global = global || {};
-
-if (typeof global !== 'undefined') {
-	global.u_ = global.u_ || {};
-
-	try {
-		global.u_.U_error2 = {};
-		//u_.U_error2.emitError2 = emitError2;
-		global.u_.U_error2.o = o;
-		global.u_.hbk1 = 'hbk2';
-		global.u_.hbk2 = 'hbk3';
-	} catch (err) {
-		// do nothing - no global on client
-		console.log('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+		try {
+			if (typeof global.u_[clasz] !== 'undefined') {
+				global.u_[clasz] = {};
+			}
+			global.u_
+				//u_.U_error2.emitError2 = emitError2;
+				global.u_.U_error2.o = o;
+				global.u_.hbk1 = 'hbk2';
+				global.u_.hbk2 = 'hbk3';
+			}
+		} catch (err) {
+			// do nothing - no global on client
+			console.log('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+		}
 	}
-}
 
-if (typeof window !== 'undefined')
-{
-	window.u_ = window.u_ || {};
+	if (typeof window !== 'undefined')
+	{
+		window.u_ = window.u_ || {};
 
-	try {
-		window.u_.U_error2 = {};
-		//u_.U_error2.emitError2 = emitError2;
-		window.u_.U_error2.o = o;
-		window.u_.hbk1 = 'hbk2';
-		window.u_.hbk2 = 'hbk3';
-	} catch (err) {
-		// do nothing - no global on client
-		console.log ('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+		try {
+			window.u_.U_error2 = {};
+			//u_.U_error2.emitError2 = emitError2;
+			window.u_.U_error2.o = o;
+			window.u_.hbk1 = 'hbk2';
+			window.u_.hbk2 = 'hbk3';
+		} catch (err) {
+			// do nothing - no global on client
+			console.log ('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+		}
+
 	}
 
 }
+
+
 
 //try {
 //	global.u_ = global.u_ || {};
