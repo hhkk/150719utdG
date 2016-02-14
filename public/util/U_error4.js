@@ -13,15 +13,14 @@ function emitError (desc, err)
     try {
 		if (err)
 		{
-			console.error ('ERROR 1/3 [' + desc + '] in err:' + err);
-			console.error ('ERROR 2/3 [' + desc + '] in err.message:' + err.message);
-			console.error ('ERROR 3/3 [' + desc + '] in err.stack:' + err.stack);
-			alert ('error desc [' + desc + '] err[' + err + ']');
+			console.error ('ERROR [' + desc + '] in err.message:' + err.message);
+			console.error ('ERROR [' + desc + '] in err.stack:' + err.stack);
+			alert ('error [' + desc + '], see log for stacktrace [' + err.message + ']');
 		}
 		else {
 			console.error ('HKERROR [' + desc + ']');
+			console.error ('HKERROR [' + desc + ']');
 		}
-		console.error ('HKERROR stack [' + (new Error()).stack + ']');
 
     } catch (e) {
         console.error ('ERROR [' + desc + '] in getClass:e:' + e.message);
@@ -35,14 +34,18 @@ function emitError (desc, err)
 
 //console.log ('!@!#!#!#!####### # __filename:'+ __filename)
 
-u_setup('U_error', 'emitError', emitError);  // hbkhbk8 u_.U_error.emitError
+u_setup('u_error4', 'emitError', emitError);  // hbkhbk8 u_.U_error.emitError
 
-var U_error;
+var u_error4;
 
 if (typeof exports !== 'undefined') {
-	//exports.emitError = emitError;
-	//exports.testWithinEmitError = testWithinEmitError;
-	//exports.dt_testEmitter = dt_testEmitter;
-	exports.U_error = U_error;
-	exports.emitError = emitError;
+    //exports.emitError = emitError;
+    //exports.testWithinEmitError = testWithinEmitError;
+    //exports.dt_testEmitter = dt_testEmitter;
+	exports.u_error4 = u_error4;
+    exports.emitError = emitError;
 }
+
+
+
+

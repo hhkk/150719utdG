@@ -1,11 +1,15 @@
 'use strict';
 
+//if (global !== 'undefined')
+//	require ('C:/utd/150719utdG/public/util/U_setup.js');
+
+//var O = require('C:/utd/150719utdG/public/util/U_o.js');
+
 var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
-var O = require('C:/utd/150719utdG/public/util/O.js');
-var O2 = require('C:/utd/150719utdG/public/util/O.js');
+var O2 = require('C:/utd/150719utdG/public/util/U_o.js');
 var Ut_o = require('C:/utd/150719utdG/public/util/Ut_o.js');
-var uut_O3 = require('C:/utd/150719utdG/public/util/O.js');
+var uut_O3 = require('C:/utd/150719utdG/public/util/U_o.js');
 //var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
 var UtilUrl4bUsesKrawlerToSupportServerController =
 	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
@@ -15,11 +19,6 @@ var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
 var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 
-
-if (global !== 'undefined')
-	require ('C:/utd/150719utdG/public/util/U_setup.js');
-
-u_.req ('C:/utd/150719utdG/public/util/U_error2.js');
 
 
 
@@ -46,7 +45,7 @@ var	mongoose = require('mongoose'),
 
 
 //var UtilClass = require('.././UtilClass');
-// O.o ('__dirname:' + __dirname);  // __dirname:c:\utd\141213UtdV6\app\controllers
+// u_.U_o.o ('__dirname:' + __dirname);  // __dirname:c:\utd\141213UtdV6\app\controllers
 // C:\utd\141213UtdV6\app\controllers\ustodos.server.controller.js
 //var UtilClass = require('../../public/modules/ustodo/UtilClass');
 //var UtilNodeVsBrowser = require('../../public/modules/ustodo/UtilNodeVsBrowser');
@@ -68,9 +67,8 @@ var mongoose = require('mongoose'),
 /**
 	 * Create a Ustodo
  */
-O.o ('&&&&&&&&&&000 init var callcountSaved = 0');
+u_.U_o.o ('&&&&&&&&&&000 init var callcountSaved = 0');
 
-uut_O3.o ('called uut_O3 outside a f in ustodos.server.controller.js');
 var callcountSaved = 0;
 
 // section_create_new not section_write
@@ -107,7 +105,7 @@ function createOrSave(ustodo, user, res) {
 
 	var res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds = {};
 	// section_exports.create
-	O.o ('xxxxxxxxxxxxxxxxxxxxxxxxxin server.controller exports.create');
+	u_.U_o.o ('xxxxxxxxxxxxxxxxxxxxxxxxxin server.controller exports.create');
 	res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json = function(rejoinedHtmlPostEscapeWithPairedArrUrlUtd, arrUrlUtdsFromHtml)
 	{
 		try {
@@ -118,7 +116,7 @@ function createOrSave(ustodo, user, res) {
 			//ustodo.html = UtilHrefThisText.hrefThisText(ustodo.html);
 			//ustodo.html = UtilHrefThisText.addNoContentEditableToHrefs(ustodo.html);
 
-			O.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostEscapeWithPairedArrUrlUtd + ']');
+			u_.U_o.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostEscapeWithPairedArrUrlUtd + ']');
 			ustodo.datelastmod = new Date();
 			ustodo.datecreated = new Date();
 
@@ -126,14 +124,14 @@ function createOrSave(ustodo, user, res) {
 
 
 
-			O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.text:' + ustodo.text);
-			O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.html:' + ustodo.html);
-			O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsonx:' + ustodo.jsonx);
-			//O.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsony:' + ustodo.jsony);
+			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.text:' + ustodo.text);
+			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.html:' + ustodo.html);
+			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsonx:' + ustodo.jsonx);
+			//u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsony:' + ustodo.jsony);
 			ustodo.save(function(err) {
 				if (err) {
 					console.log ('xxxxxxxxxxxxxxxxxxxxxxx error on save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
-					O.o('!!!!!!!!!!!!!!!!ERROR *** write fail err [' +err + ']');
+					u_.U_o.o('!!!!!!!!!!!!!!!!ERROR *** write fail err [' +err + ']');
 					return res.status(400).send({ // pairs with singlepage-ustodos.client.controller.js line 3512 function(errorResponse) {
 						message: errorHandler.getErrorMessage(err)
 					});
@@ -152,7 +150,7 @@ function createOrSave(ustodo, user, res) {
 
 	// get titles for text
 	try {
-		O.o ('ustodo.html pre spans cleaned:' + ustodo.html);
+		u_.U_o.o ('ustodo.html pre spans cleaned:' + ustodo.html);
 
 		var htmlToCleanSpansOutOf = ustodo._doc.html;
 		// working example from UtilHrefThisText.js
@@ -175,7 +173,7 @@ function createOrSave(ustodo, user, res) {
 		ustodo._doc.html = ustodo._doc.html.replace(/&nbsp;/, ' ');
 
 
-		O.o ('ustodo.html post spans cleaned:' + ustodo.html);
+		u_.U_o.o ('ustodo.html post spans cleaned:' + ustodo.html);
 		var htmlPretitledTrimmed = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo.html);
 		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds);
 	} catch (err) {
@@ -191,8 +189,8 @@ function createOrSave(ustodo, user, res) {
 
 exports.create = function(req, res)
 {
-	O.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
-	O.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
+	u_.U_o.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
+	u_.U_o.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
 	// ustodo is a model object with getters and setters derived from the
 	var ustodo = new Ustodo(req.body);
 	createOrSave(ustodo, req.user, res);
@@ -203,8 +201,8 @@ exports.create = function(req, res)
  * Show the current Ustodo
  */
 exports.read = function(req, res) {
-	O.o(' *************** Top of [exports.read] in [ustodos.server.controller.js]');
-	//O.o ('in ustodos.server.controller.js: read');
+	u_.U_o.o(' *************** Top of [exports.read] in [ustodos.server.controller.js]');
+	//u_.U_o.o ('in ustodos.server.controller.js: read');
 	res.jsonp(req.ustodo);
 };
 
@@ -214,7 +212,7 @@ exports.read = function(req, res) {
 // section_update_existing section_save_Existing
 exports.update = function(req, res)
 {
-	O.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
+	u_.U_o.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
 	var ustodo = req.ustodo ;
 	ustodo = _.extend(ustodo , req.body); // needed?
 	createOrSave(ustodo, req.user, res);
@@ -245,34 +243,34 @@ exports.update = function(req, res)
 	////ustodo.text = 't2.' + ustodo.text;
 	//ustodo._doc.html = htmlToCleanSpansOutOf2;
 	////ustodo.jsonx = 'j2.' + ustodo.jsonx;
-	////O.o('in ustodos.server.controller.js: update ' );
+	////u_.U_o.o('in ustodos.server.controller.js: update ' );
 	//ustodo.datelastmod = new Date();
 	//var ustodoForFulltext = _.extend(ustodo);
 	//delete ustodoForFulltext._doc.jsonx;
-	////O.o('in ustodos.server.controller.js: update ' );
+	////u_.U_o.o('in ustodos.server.controller.js: update ' );
     //
 	////ustodo.jsonx = JSON.stringify(ustodoForFulltext); // string
-	//O.o('in ustodos.server.controller.js: update [' + ustodo.jsonx + ']');
+	//u_.U_o.o('in ustodos.server.controller.js: update [' + ustodo.jsonx + ']');
     //
     //
     //
-	//O.o ('xx################# saving 1 ustodo.text:' + ustodo.text);
-	//O.o ('xx################# saving 2 ustodo.html:' + ustodo.html);
-	//O.o ('xx################# saving 3 ustodo.jsonx:' + ustodo.jsonx);
+	//u_.U_o.o ('xx################# saving 1 ustodo.text:' + ustodo.text);
+	//u_.U_o.o ('xx################# saving 2 ustodo.html:' + ustodo.html);
+	//u_.U_o.o ('xx################# saving 3 ustodo.jsonx:' + ustodo.jsonx);
     //
 	//ustodo.save(function (err, ustodosaved, numberAffected) {
 	//	if (err) {
-	//		O.o('!!!!!!!!!!!!!!!!ERROR in ustodos.server.controller.js exports.update .save*** save fail err [' +err + ']');
+	//		u_.U_o.o('!!!!!!!!!!!!!!!!ERROR in ustodos.server.controller.js exports.update .save*** save fail err [' +err + ']');
 	//		return res.status(400).send({
 	//			message: errorHandler.getErrorMessage(err)
 	//		});
 	//	} else {
-	//		O.o('ustodo saved, html [' + ustodosaved.html +
+	//		u_.U_o.o('ustodo saved, html [' + ustodosaved.html +
 	//			'] numberAffected [' + numberAffected +
 	//			'] req.body._id [' + req.body._id + ']'
 	//		);
     //
-	//		O.o ('^^^^^^^ method 1  req.user._doc.username [' + req.user._doc.username + ']');
+	//		u_.U_o.o ('^^^^^^^ method 1  req.user._doc.username [' + req.user._doc.username + ']');
     //
      //       //
 	//		res.jsonp(ustodo);
@@ -282,7 +280,7 @@ exports.update = function(req, res)
 
 	//ustodo.save(function(err) {
 	//	if (err) {
-	//       O.o ('err in save:' + err);
+	//       u_.U_o.o ('err in save:' + err);
 	//		return res.status(400).send({
 	//			message: errorHandler.getErrorMessage(err)
 	//
@@ -297,16 +295,16 @@ exports.update = function(req, res)
  * Delete an Ustodo
  */
 exports.delete2 = function(req, res) {
-	O.o(' *************** Top of [exports.delete2] in [ustodos.server.controller.js]');
-	O.o('_______________________ in ustodos.server.controller.js exports.delete ');
+	u_.U_o.o(' *************** Top of [exports.delete2] in [ustodos.server.controller.js]');
+	u_.U_o.o('_______________________ in ustodos.server.controller.js exports.delete ');
 
 	var ustodo = req.ustodo;
 	//if (!req.ustodo.isArray)
-	O.o('in ustodos.server.controller.js: delete ' + ustodo.toString());
+	u_.U_o.o('in ustodos.server.controller.js: delete ' + ustodo.toString());
 
 	ustodo.remove(function (err) {
 		if (err) {
-			O.o('!!!!!!!!!!!!!!!!ERROR in ustodos.server.controller.js exports.delete2  .remove*** save fail err [' +err + ']');
+			u_.U_o.o('!!!!!!!!!!!!!!!!ERROR in ustodos.server.controller.js exports.delete2  .remove*** save fail err [' +err + ']');
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -322,21 +320,21 @@ exports.delete2 = function(req, res) {
 
 
 exports.ustodobulkdel = function(req, res) {
-	O.o(' *************** Top of [exports.ustodobulkdel] in [ustodos.server.controller.js]');
+	u_.U_o.o(' *************** Top of [exports.ustodobulkdel] in [ustodos.server.controller.js]');
 	try
 	{
-		//O.o ('in 1 exports.ustodobulkdel ');
+		//u_.U_o.o ('in 1 exports.ustodobulkdel ');
 		console.log ('in exports.ustodobulkdel');
-		//O.o('_______________________ in exports.ustodobulkdel  req.body.form:'+req.body.form);
-		//O.o('_______________________ in exports.ustodobulkdel  req.body.form.arrIdsToDelete:'+req.body.form.arrOidsToDelete);
+		//u_.U_o.o('_______________________ in exports.ustodobulkdel  req.body.form:'+req.body.form);
+		//u_.U_o.o('_______________________ in exports.ustodobulkdel  req.body.form.arrIdsToDelete:'+req.body.form.arrOidsToDelete);
 
 		var arrIdsToDelete = req.body.form.arrOidsToDelete;
-		//O.o('_______________________ in exports.ustodobulkdel arrIdsToDelete:'+arrIdsToDelete);
+		//u_.U_o.o('_______________________ in exports.ustodobulkdel arrIdsToDelete:'+arrIdsToDelete);
 
 
 		// http://docs.mongodb.org/manual/reference/method/db.collection.remove/
 
-		O.o('require_Development.db.uri:' + require_Development.db.uri.everythingAfterLast('/'));
+		u_.U_o.o('require_Development.db.uri:' + require_Development.db.uri.everythingAfterLast('/'));
 
 		var dbWrite = new Db(require_Development.db.uri.everythingAfterLast('/'), new Server('localhost', 27017), {safe: false});
 		dbWrite.open(function (err, dbWrite)
@@ -350,7 +348,7 @@ exports.ustodobulkdel = function(req, res) {
 					for (var j = 0; j < arrIdsToDelete.length; j++ )
 					{
 						arrOidsToDelete.push (new ObjectID(arrIdsToDelete[j]));
-						//O.o ('deleting id:' + arrIdsToDelete[j]);
+						//u_.U_o.o ('deleting id:' + arrIdsToDelete[j]);
 					}
 
 					collRemove_ustodos.update(
@@ -366,8 +364,8 @@ exports.ustodobulkdel = function(req, res) {
 
 					//	collRemove_ustodos.remove({_id: {$in:arrOidsToDelete}} );
 
-					O.o('removed to dbWrite.collRemove_ustodos:' + dbWrite.databaseName+'.'+collRemove_ustodos.collectionName);
-					O.o('removed this many:' + arrOidsToDelete.length);
+					u_.U_o.o('removed to dbWrite.collRemove_ustodos:' + dbWrite.databaseName+'.'+collRemove_ustodos.collectionName);
+					u_.U_o.o('removed this many:' + arrOidsToDelete.length);
 				} catch (err) {
 					//console.log(UtilClass.UtilClass('err', err));
 					O.e('err:' + err);
@@ -380,7 +378,7 @@ exports.ustodobulkdel = function(req, res) {
 					console.log('collRemove_ustodos.ensureIndex({ lastmoddate: ok');
 				}
 
-				O.o ('done with remote');
+				u_.U_o.o ('done with remote');
 				var x = {result:'success'};
 				res.json(x);
 			});
@@ -396,13 +394,13 @@ exports.ustodobulkdel = function(req, res) {
 //exports.ustodobulkdel = function(req, res) {
 //	try
 //	{
-//		//O.o ('in 1 exports.ustodobulkdel ');
+//		//u_.U_o.o ('in 1 exports.ustodobulkdel ');
 //		console.log ('in exports.ustodobulkdel');
-//		//O.o('_______________________ in exports.ustodobulkdel  req.body.form:'+req.body.form);
-//		//O.o('_______________________ in exports.ustodobulkdel  req.body.form.arrIdsToDelete:'+req.body.form.arrOidsToDelete);
+//		//u_.U_o.o('_______________________ in exports.ustodobulkdel  req.body.form:'+req.body.form);
+//		//u_.U_o.o('_______________________ in exports.ustodobulkdel  req.body.form.arrIdsToDelete:'+req.body.form.arrOidsToDelete);
 //
 //		var arrIdsToDelete = req.body.form.arrOidsToDelete;
-//		//O.o('_______________________ in exports.ustodobulkdel arrIdsToDelete:'+arrIdsToDelete);
+//		//u_.U_o.o('_______________________ in exports.ustodobulkdel arrIdsToDelete:'+arrIdsToDelete);
 //
 //
 //		// http://docs.mongodb.org/manual/reference/method/db.collection.remove/
@@ -426,7 +424,7 @@ exports.ustodobulkdel = function(req, res) {
 //		 )*
 //		 */
 //
-//		O.o("require_Development.db.uri:" + require_Development.db.uri.everythingAfterLast("/"));
+//		u_.U_o.o("require_Development.db.uri:" + require_Development.db.uri.everythingAfterLast("/"));
 //
 //		var dbWrite = new Db(require_Development.db.uri.everythingAfterLast("/"), new Server('localhost', 27017), {safe: false});
 //		dbWrite.open(function (err, dbWrite)
@@ -440,12 +438,12 @@ exports.ustodobulkdel = function(req, res) {
 //					for (var j = 0; j < arrIdsToDelete.length; j++ )
 //					{
 //						arrOidsToDelete.push (new ObjectID(arrIdsToDelete[j]));
-//						//O.o ('deleting id:' + arrIdsToDelete[j]);
+//						//u_.U_o.o ('deleting id:' + arrIdsToDelete[j]);
 //					}
 //					collRemove_ustodos.remove({_id: {$in:arrOidsToDelete}} );
 //
-//					O.o('removed to dbWrite.collRemove_ustodos:' + dbWrite.databaseName+'.'+collRemove_ustodos.collectionName);
-//					O.o('removed this many:' + arrOidsToDelete.length);
+//					u_.U_o.o('removed to dbWrite.collRemove_ustodos:' + dbWrite.databaseName+'.'+collRemove_ustodos.collectionName);
+//					u_.U_o.o('removed this many:' + arrOidsToDelete.length);
 //				} catch (err) {
 //					//console.log(UtilClass.UtilClass('err', err));
 //					O.e('err:' + err);
@@ -458,7 +456,7 @@ exports.ustodobulkdel = function(req, res) {
 //					console.log('collRemove_ustodos.ensureIndex({ lastmoddate: ok');
 //				}
 //
-//				O.o ('done with remote');
+//				u_.U_o.o ('done with remote');
 //				var x = {result:'success'};
 //				res.json(x);
 //			});
@@ -485,73 +483,52 @@ exports.ustodobulkdel = function(req, res) {
 
 exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.routes.js
 
-	// hbkhbk8
-	//alert('at tophbk');
-	u_.U_error2.ox	('U_error2.o from o in list2'); // hbkhbk7
-	//u_.U_error2.o	('U_error2.o from o in list2'); // hbkhbk7
-	//uu_.U_error2.o('uu_.U_error2.o from o in list2'); // hbkhbk7
-	//uu_.U_error3.o3('uu_.U_error3.o3 from o in list2'); // hbkhbk7
 
-	// hbkhbk5
-	//uut_O3.o ('called uut_O3 inside a f in ustodos.server.controller.js');
-	//O.o(' ********* hbkhbk5 Uutil.');
-	//O2.o(' ********* hbkhbk5 UutilO2.');
-	////Uutil.O3.o(' ********* hbkhbk5 UutilO2.');
-	//uut_O3.o(' ********* hbkhbk5 uut_O3.o.');
-	//Ut_o.o(' ********* hbkhbk5 uut_O3.o.');
-	//Ut_o.ut_o(' ********* hbkhbk5 uut_O3.o.');
-	//Dt_O.dt_o(' ********* hbkhbk5 Dt_o2.');
-	//global.uu_.U_error2.o('global.uu_.U_error2.o from o in list2'); // hbkhbk7
-	//uu_.U_error2.o('uu_.U_error2.o from o in list2'); // hbkhbk7
-
-	//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
-	//Uutil.U_error.emitError('testerrorhbkhbk5');
-	//U_error.emitError('testerrorhbkhbk9');
-
-	//O.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js] s:' + s);
+	//u_.U_o.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js] s:' + s);
 
 
-		O.o(' *************** Top of [exports.list2] in [ustodos.server.controller.js]');
-	//O.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))
+	//u_.U_o.o ('utilclass.getclass of s:' + UtilClass.getClass(' res:', res))
 
 	//UcHtmlDocManipulate.testScopeAccess();
-	O.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js]');
+	u_.U_o.o(' *************** bottom of [exports.list2] in [ustodos.server.controller.js]');
+
+	u_.U_o.o('using back door');
 
 	var query = req.query;
-	//O.o('in ustodos.server.controller.js: list query.querystring [' + query.q + ']');
+	//u_.U_o.o('in ustodos.server.controller.js: list query.querystring [' + query.q + ']');
 	if (query.q !== null && query.q !== undefined)
 		query.q = query.q.trim();
 	else
 		query.q = '';
 
 	if (query.q === '*')   {
-		//O.o ('resetting * star to blank');
+		//u_.U_o.o ('resetting * star to blank');
 		query.q = '';
 	}
 	var require_ustodos_controller_helper = require('C:/utd/150719utdG/app/controllers/helpers/ustodos.controller.helper.js');
-	//O.o('in ustodos.server.controller.js: list, query.querystring: ' + query.q);
+	//u_.U_o.o('in ustodos.server.controller.js: list, query.querystring: ' + query.q);
 	require_ustodos_controller_helper.processCommandReadPortion(Ustodo, query.q.trim(), req, errorHandler, res, User);
 
-	//O.o ('query.querystring post trim [' + query.querystring+ ']');
+	//u_.U_o.o ('query.querystring post trim [' + query.querystring+ ']');
 	//54b143dde898903429ce32b1
 
 	//try {
 	//	var d = JSON.parse(query.querystring);
-	//O.o ('q is json [' + query.querystring + ']');
+	//u_.U_o.o ('q is json [' + query.querystring + ']');
 	//} catch (err) {
-	//O.o ('q is not json [' + query.querystring + ']');
+	//u_.U_o.o ('q is not json [' + query.querystring + ']');
 	//}
 
-	//O.o ('in ustodos.server.controller.js: list, query: ' + query);
+	//u_.U_o.o ('in ustodos.server.controller.js: list, query: ' + query);
 
 
 	//
 	//
 	//try {
 	//	re = new RegExp(query.querystring);
-	//	//O.o ('************************** legal reg exp input query.querystring [' + query.querystring + ']');
+	//	//u_.U_o.o ('************************** legal reg exp input query.querystring [' + query.querystring + ']');
 	//} catch (err) {
-	//	//O.o ('************************** illegal reg exp input query.querystring [' + query.querystring + ']');
+	//	//u_.U_o.o ('************************** illegal reg exp input query.querystring [' + query.querystring + ']');
 	//	re = new RegExp('');
 	//}
 
@@ -572,7 +549,7 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 
 	//if (query.querystring.endsWith())
 	//var commandTrimmed = ;
-	//O.o ('not endswith w');
+	//u_.U_o.o ('not endswith w');
 
 
 
@@ -580,9 +557,9 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//if (UtilString.endsWith(commandTrimmed, ' w'))
 	//{
 	//    var commandRemoved = commandTrimmed.slice(0, commandTrimmed.length-2);
-	//    //O.o(' ========================================= in ustodos.server.controller.js: w save ' +
+	//    //u_.U_o.o(' ========================================= in ustodos.server.controller.js: w save ' +
 	//        //', commandTrimmed [' + commandTrimmed + '] ' + ', commandRemoved [' + commandRemoved + '] ' );
-	//    O.o ('in endswith w commandTrimmed [' + commandTrimmed + ']');
+	//    u_.U_o.o ('in endswith w commandTrimmed [' + commandTrimmed + ']');
 	//    var ustodo = new Ustodo();
 	//    ustodo.user = req.user;
 	//
@@ -590,22 +567,22 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//        var res2WithJsonFn = {};
 	//        res2WithJsonFn.json = function(s)
 	//        {
-	//            O.o ('--------> saving content as both text and html [' + s + ']');
+	//            u_.U_o.o ('--------> saving content as both text and html [' + s + ']');
 	//
 	//            ustodo.text = s;
 	//            ustodo.html = s;
 	//
 	//            ustodo.save(function(err) {
 	//                if (err) {
-	//                    O.o('*** write fail commandTrimmed [' +commandTrimmed + ']');
-	//                    O.o('*** write fail err [' +err + ']');
+	//                    u_.U_o.o('*** write fail commandTrimmed [' +commandTrimmed + ']');
+	//                    u_.U_o.o('*** write fail err [' +err + ']');
 	//                    return res.status(400).send({
 	//                        message: errorHandler.getErrorMessage(err)
 	//                    });
 	//                } else {
 	//                    //now process read aspect only of query
 	//                    require_ustodos_controller_helper.processCommandReadPortion(Ustodo, commandTrimmed, req, errorHandler, res);
-	//                    O.o('*** write success commandTrimmed [' +commandTrimmed + ']');
+	//                    u_.U_o.o('*** write success commandTrimmed [' +commandTrimmed + ']');
 	//                }
 	//            });
 	//        };
@@ -614,7 +591,7 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//
 	//
 	//    } catch (e) {
-	//        O.o('erra:' + e);
+	//        u_.U_o.o('erra:' + e);
 	//        throw e;
 	//    }
 	//
@@ -630,7 +607,7 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//
 	//}
 	//else{
-	//    O.o ('not endswith w');
+	//    u_.U_o.o ('not endswith w');
 	//    require_ustodos_controller_helper.processCommandReadPortion(Ustodo, commandTrimmed, req, errorHandler, res);
 	//    }
 
@@ -639,36 +616,41 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 /**   * Ustodo middleware  */
 exports.ustodoByID = function(req, res, next, id)
 {
-	O.o(' *************** Top of [exports.ustodoByID] in [ustodos.server.controller.js]');
-	O.o('in ustodoByID id:'+id);
-	//var s = Ustodo.findById(id);
+	try
+	{
+		u_.U_o.o(' *************** Top of [exports.ustodoByID] in [ustodos.server.controller.js]');
+		u_.U_o.o('in ustodoByID id:' + id);
+		//var s = Ustodo.findById(id);
 
-	// ORIGINAL A/B SPLIT
-	// A
-	Ustodo.findById(id).populate('user', 'username').exec(function(err, ustodo) {
-		// B
-		// Ustodo.findOne({name:/ia/}).populate('user', 'displayName').exec(function(err, ustodo) {
-		if (err)
-			return next(err);
-		if (! ustodo)
-			return next(new Error('Failed to load Ustodo ' + id));
-		req.ustodo = ustodo ;
-		next();
-	});
+		// ORIGINAL A/B SPLIT
+		// A
+		Ustodo.findById(id).populate('user', 'username').exec(function (err, ustodo) {
+			// B
+			// Ustodo.findOne({name:/ia/}).populate('user', 'displayName').exec(function(err, ustodo) {
+			if (err)
+				return next(err);
+			if (!ustodo)
+				return next(new Error('Failed to load Ustodo ' + id));
+			req.ustodo = ustodo;
+			next();
+		});
+	} catch (e) {
+		u_.U_error.emitError ('o from o in list2', e); // hbkhbk7
+	}
 };
 
 /**  * Ustodo authorization middleware  */
 exports.hasAuthorization = function(req, res, next) {
-	O.o(' *************** Top of [exports.hasAuthorization] in [ustodos.server.controller.js]');
-	O.o('@@@@@@@@@@@@@@@@@ Checking auth for req.user.username [' + req.user.username + ']');
-	O.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.id [' + req.ustodo.user.id + ']');
-	O.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.username [' + req.ustodo.user.username + ']');
+	u_.U_o.o(' *************** Top of [exports.hasAuthorization] in [ustodos.server.controller.js]');
+	u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.user.username [' + req.user.username + ']');
+	u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.id [' + req.ustodo.user.id + ']');
+	u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.username [' + req.ustodo.user.username + ']');
 
 	// also works
 	//User.findById(req.user.id, function (err, user) {
 	//	//done(err, user);
 	//	if (!err) {
-	//		O.o ('CHECKED AUTH OK:  ' +
+	//		u_.U_o.o ('CHECKED AUTH OK:  ' +
 	//			'user [' + user +
 	//			']  user.username [' + user.username + ']' );
 	//	} else {
@@ -678,7 +660,7 @@ exports.hasAuthorization = function(req, res, next) {
 
 	if (req.ustodo.user.id !== req.user.id) {
 
-		O.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).  req.ustodo.user.id  [' + req.ustodo.user.id  + ']  req.user.id [' + req.user.id + ']');
+		u_.U_o.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).  req.ustodo.user.id  [' + req.ustodo.user.id  + ']  req.user.id [' + req.user.id + ']');
 		return res.status(403).send('User is not authorized');
 	}
 	next();

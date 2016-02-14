@@ -8,7 +8,8 @@
 // hbklrb6 invoked by C:\utd\150719utdG\public\modules\ustodos\views\singlepage-ustodos.client.view.html
 
 //var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
-//var O = require('C:/utd/150719utdG/public/util/O.js');
+//var O = require('C:/utd/150719utdG/public/util/U_o.js');
+var UtilString;
 //var UtilClass = null;
 //var UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
@@ -40,7 +41,7 @@ var UtilClassz = UtilClassz;
 
 var mceId = 'idTinyMceTextArea';
 
-var uu_ = uu_ || {};
+//var uu_ = uu_ || {}; // hbkhbk8 hbkhbk9
 
 //alert ('in here 2');
 //var myapplication = exports.myapplication;
@@ -257,6 +258,185 @@ app.factory('SppSvc', function() {
 		//else
 		//	document.getElementById('mceu_57-body').style.visibility='hidden';
 		//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		//
 		//{
 		//	if (document.getElementById(elemId).style.visibility==='visible')
@@ -756,7 +936,7 @@ angular.module('ustodos').controller
 						}
 						catch(err)
 						{
-							uu_.U_error.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
+							u_.U_error.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
 						}
 
 
@@ -2250,7 +2430,7 @@ angular.module('ustodos').controller
 							//alert ('+++++++++ in setTextInShowingEditor target INPUT_3_MCE e:' + e);
 							if (tinyMCE.activeEditor !== null)
 							{
-								if (UtilJsTypeDetect.isString(e)) {
+								if (u_.UtilJsTypeDetect.isString(e)) {
 									//tinyMCE.get('idTinyMceTextArea').setContent(e);
 									//alert('setttt');
 									//alert ('in setTextInShowingEditor as string e [' + e + '] callerID [' + callerID + ']');
@@ -3129,7 +3309,7 @@ angular.module('ustodos').controller
 
 
 					//$scope.testScopeAccess = UcHtmlDocManipulate.testScopeAccess;
-					uu_.U_error.emitError('xxxe');
+					//u_.U_error.emitError('xxxe');
 					//Uutil2_.Dt_O.dt_o2b('calling dt_o2b1 a');
 					//Uutil2_.Dt_O.uu_a('calling uu_a');
 					//Uutil2_.Dt_O.o('calling o');
@@ -3137,20 +3317,30 @@ angular.module('ustodos').controller
 					//Uutil2_.Dt_O.x('calling o');
 					$scope.testButton= function(fn)
 					{
+						if (true)
+						{
+							try {
+								u_.U_o.o('using front door');
+								//O.o('using back door');
+								//throw "erra"
+							} catch (err) {
+								u_.U_error.emitError('r', err);
+							}
 
-						// hbkhbk8
-						//alert('tiptop');
-						u_.U_error2.ox('U_error2.o from singlepage-ustodos.client.controller.js'); // hbkhbk7
-						//uu_.U_error.emitError('xxxe');
-						//Uutil2_.Dt_O.dt_o2b('calling dt_o2b2');
+							// hbkhbk8
+							//alert('tiptop');wwwwwwwwwwwwwww
+							//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwu_.U_error.emitError('U_error2.o from singlepage-ustodos.client.controller.js'); // hbkhbk7
+							//uu_.U_error.emitError('xxxe');
+							//Uutil2_.Dt_O.dt_o2b('calling dt_o2b2');
 
-						//uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
-						//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
+							//uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
+							//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
 
-						//Uutil.U_error.emitError('testerrorhbkhbk5');
-						//U_error.testWithinEmitError('testerrorhbkhbk6');
+							//Uutil.U_error.emitError('testerrorhbkhbk5');
+							//U_error.testWithinEmitError('testerrorhbkhbk6');
 
-						//$scope.O.o ('in testbutton2');
+							//$scope.O.o ('in testbutton2');
+						}
 
 						if (false) // set style for contenteditable focus
 						{
@@ -3197,7 +3387,7 @@ angular.module('ustodos').controller
 							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
 
 							//alert('at utilclient');
-							UcHtmlDocManipulate.convertElementToIframeById(
+							u_.UcHtmlDocManipulate.convertElementToIframeById(
 								'testIframeReplace', 'newIframeIdx', true, "this text was passed into convertElementToIframeById ")
 
 							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
@@ -3937,7 +4127,7 @@ angular.module('ustodos').controller
 						this.xText = xText;
 						this.xHtml = xHtml;
 						this.xTextTrimmed = xText.trim();
-						this.isWriteCommand = UtilString.endsWith(this.xTextTrimmed, ' w') || UtilString.endsWith(this.xTextTrimmed, ' W');
+						this.isWriteCommand = u_.UtilString.endsWith(this.xTextTrimmed, ' w') || u_.UtilString.endsWith(this.xTextTrimmed, ' W');
 						this.xTextCommandRemoved = null;
 
 						if (this.isWriteCommand) {

@@ -165,6 +165,8 @@ var getProperties = function (desc, obj)
     }
 };
 
+u_setup('UtilClass', 'getClass', getClass);
+u_setup('getProperties', 'getClass', getProperties);
 
 if (typeof exports !== 'undefined') {
     exports.getClass = getClass;

@@ -19,7 +19,7 @@
 var O = O;
 	if (!O) {
 		try {
-			O = require('C:/utd/150719utdG/public/util/O.js');
+			O = require('C:/utd/150719utdG/public/util/U_o.js');
 		} catch(err ) {
 			console.log (err);
 		}
@@ -105,11 +105,12 @@ try {
 
 console.log ('hbkhbk5 =================== loaded UcHtmlDocManipulate.js');
 
-Uutil.UcHtmlDocManipulate = {};
-Uutil.UcHtmlDocManipulate.testScopeAccess = testScopeAccess;
-
-
 console.log ('hbkhbk5 =================== defined Uutil.testScopeAccess');
+
+//var UcHtmlDocManipulate;
+
+u_setup('UcHtmlDocManipulate', 'testScopeAccess', testScopeAccess);  // hbkhbk8 u_.U_error.emitError
+u_setup('UcHtmlDocManipulate', 'convertElementToIframeById', convertElementToIframeById);  // hbkhbk8 u_.U_error.emitError
 
 if (typeof exports !== 'undefined') {
 	exports.testScopeAccess = testScopeAccess;

@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * define the global namespace (one variable/object gets added "u_" which houses all util.
+ * where util is state free utility code shared potentially by client browser and server
+ * @type {null}
+ */
 var uberglobal = null;
 
 if (typeof global !== 'undefined')
@@ -9,17 +14,31 @@ else if (typeof window !== 'undefined')
 else
 	throw ('')
 
+if (typeof uberglobal === "undefined") // error
+{
+	throw "uberglobal cannot be undefined";
+}
+
 uberglobal.u_ = uberglobal.u_ || {};
+
+uberglobal.u_.isServer = function() {
+	return (typeof window === "undefined");
+}
+
+
+
+
 
 
 uberglobal.u_.req = function(disklocation) {
-	var window;
-	if (!window)
-	// if (window === undefined) // error
+	//var window;
+	//if (!window)
+	if (typeof window === "undefined") // error
 	{
 		return require (disklocation);
 	}
 }
+
 
 //if (typeof global !== 'undefined')  // hbkhbk8
 //{
@@ -42,7 +61,11 @@ uberglobal.u_setup = function (clasz, methodname, method)
 }
 //}
 
-
+// here you can list the utils wanted always and both client and server
+u_.req ('C:/utd/150719utdG/public/util/U_o.js');
+u_.req ('C:/utd/150719utdG/public/util/U_error.js');
+u_.req ('C:/utd/150719utdG/public/util/UtilDate.js');
+u_.req ('C:/utd/150719utdG/public/util/UtilString.js');
 
 /**
  * initialize u_ for global (server) and window (client) utility usage

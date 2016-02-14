@@ -1,5 +1,9 @@
 'use strict';
-var O = require('C:/utd/150719utdG/public/util/O.js');
+
+if (global !== 'undefined')
+	require ('C:/utd/150719utdG/public/util/U_setup.js');
+
+var O = require('C:/utd/150719utdG/public/util/U_o.js');
 
 /**
  * Module dependencies.

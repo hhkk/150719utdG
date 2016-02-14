@@ -15,7 +15,7 @@
 // var UtilDate = require('C:/utd/150719utdG/public/modules/ustodo/UtilDate.js');
 // var UtilDate = require('C:/utd/150719utdG  150719utdG /public/util/UtilDate.js');
 
-var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
+//var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 
 //console.log (' herehk =========================-----------------=============------------- ');
 //console.log (' herehk =====:'+ UtilClass.getClass(UtilClass) );
@@ -281,6 +281,10 @@ var getTimeInMillis = function() {
 }
 
 // on getClassSub (desc, obj)
+
+//u_setup('U_error', 'emitError', emitError);  // hbkhbk8 u_.U_error.emitError
+u_setup('UtilDate', 'getTimeInMillis', getTimeInMillis);  // hbkhbk8 u_.U_error.emitError
+u_setup('UtilDate', 'getDateStringForLogsWithMillis', getDateStringForLogsWithMillis);  // hbkhbk8 u_.U_error.emitError
 
 if (typeof exports !== 'undefined') {
     exports.dateFromComponents = dateFromComponents;
