@@ -5,19 +5,28 @@
 
 //var O = require('C:/utd/150719utdG/public/util/U_o.js');
 
-var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
-var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
-var O2 = require('C:/utd/150719utdG/public/util/U_o.js');
-var Ut_o = require('C:/utd/150719utdG/public/util/Ut_o.js');
-var uut_O3 = require('C:/utd/150719utdG/public/util/U_o.js');
-//var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
-var UtilUrl4bUsesKrawlerToSupportServerController =
-	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
+//var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
+//var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+//var O2 = require('C:/utd/150719utdG/public/util/U_o.js');
+//var Ut_o = require('C:/utd/150719utdG/public/util/Ut_o.js');
+//var uut_O3 = require('C:/utd/150719utdG/public/util/U_o.js');
+////var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
+//var UtilUrl4bUsesKrawlerToSupportServerController =
+//	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
 var require_Development = require('C:/utd/150719utdG/config/env/development.js');
-var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+
+//var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
+//var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+//var O2 = require('C:/utd/150719utdG/public/util/U_o.js');
+//var Ut_o = require('C:/utd/150719utdG/public/util/Ut_o.js');
+//var uut_O3 = require('C:/utd/150719utdG/public/util/U_o.js');
+////var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
+//var UtilUrl4bUsesKrawlerToSupportServerController =
+//	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 
 
 
@@ -34,7 +43,7 @@ var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js'
 //uu_.U_error3 = U_error3; // hbkhbk7
 
 
-var UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
+//var UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
 
 
 //var _ = require('lodash'),
@@ -85,19 +94,19 @@ var callcountSaved = 0;
 
 function createOrSave(ustodo, user, res) {
 	// with or without _doc seems to work, at least for schema elements
-	ustodo.html = ustodo._doc.html.trim();
+	ustodo._doc.html = ustodo._doc.html.trim();
 	ustodo._doc.timely = 'yes';              // even w/o mongoose schema element, on server side, new attr here goes to db.
 	//ustodo.dog = 'cat';                    // right: but same not true w/o _doc
 
 
-	// hbkhbk ustodo.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html); // xxd
+	// hbkhbk ustodo._doc.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html); // xxd
 	// works ustodo._doc.testArray2 = ['a','b'];
 	//ustodo._doc.hkhkhk = 'hi hkhkhk'; _// doc gets to the DB and to the UI therefore
-	ustodo.user = user;
+	ustodo._doc.user = user; // is this a test of an object sav?
 	try {
 		// do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
 		if (false)
-		 ustodo.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
+		 ustodo._doc.html = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
 		O.e('err in expandUrlsToHrefsReturnPatchedStr:' + err);
@@ -109,48 +118,48 @@ function createOrSave(ustodo, user, res) {
 	res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json = function(rejoinedHtmlPostEscapeWithPairedArrUrlUtd, arrUrlUtdsFromHtml)
 	{
 		try {
-			ustodo.html = rejoinedHtmlPostEscapeWithPairedArrUrlUtd;
-			ustodo.text = UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo.html);
+			ustodo._doc.html = rejoinedHtmlPostEscapeWithPairedArrUrlUtd;
+			ustodo._doc.text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
 			ustodo._doc.arrUrlUtdsFromHtml = arrUrlUtdsFromHtml;
 
-			//ustodo.html = UtilHrefThisText.hrefThisText(ustodo.html);
-			//ustodo.html = UtilHrefThisText.addNoContentEditableToHrefs(ustodo.html);
+			//ustodo._doc.html = UtilHrefThisText.hrefThisText(ustodo._doc.html);
+			//ustodo._doc.html = UtilHrefThisText.addNoContentEditableToHrefs(ustodo._doc.html);
 
 			u_.U_o.o ('--------> xxxxxxxxxxxxxxxx saving content as both text and html [' + rejoinedHtmlPostEscapeWithPairedArrUrlUtd + ']');
-			ustodo.datelastmod = new Date();
-			ustodo.datecreated = new Date();
+			ustodo._doc.datelastmod = new Date();
+			ustodo._doc.datecreated = new Date();
 
 
 
 
 
-			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.text:' + ustodo.text);
-			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.html:' + ustodo.html);
-			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsonx:' + ustodo.jsonx);
+			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo._doc.text:' + ustodo._doc.text);
+			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo._doc.html:' + ustodo._doc.html);
+			u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo._doc.jsonx:' + ustodo._doc.jsonx);
 			//u_.U_o.o ('^^^^^^^^^^^^^^^^^^^^^^^^ save new ustodo.jsony:' + ustodo.jsony);
 			ustodo.save(function(err) {
 				if (err) {
-					console.log ('xxxxxxxxxxxxxxxxxxxxxxx error on save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
+					console.log ('xxxxxxxxxxxxxxxxxxxxxxx error on save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo._doc.html + ']');
 					u_.U_o.o('!!!!!!!!!!!!!!!!ERROR *** write fail err [' +err + ']');
 					return res.status(400).send({ // pairs with singlepage-ustodos.client.controller.js line 3512 function(errorResponse) {
 						message: errorHandler.getErrorMessage(err)
 					});
 				} else {
-					console.log ('xxxxxxxxxxxxxxxxxxxxxxx completed save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo.html + ']');
+					console.log ('xxxxxxxxxxxxxxxxxxxxxxx completed save # [' + callcountSaved++ + '] of a created USTODO [' + ustodo._doc.html + ']');
 					res.jsonp(ustodo);
 				}
 			});
 
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
-			U_error.emitError('err in res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json:' + err);
+			u_.U_error.emitError('err in res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json:' + err);
 		}
 
 	};
 
 	// get titles for text
 	try {
-		u_.U_o.o ('ustodo.html pre spans cleaned:' + ustodo.html);
+		u_.U_o.o ('ustodo._doc.html pre spans cleaned:' + ustodo._doc.html);
 
 		var htmlToCleanSpansOutOf = ustodo._doc.html;
 		// working example from UtilHrefThisText.js
@@ -167,18 +176,18 @@ function createOrSave(ustodo, user, res) {
 				return a + '//' + b;
 			});
 
-		//ustodo.text = 't2.' + ustodo.text;
+		//ustodo._doc.text = 't2.' + ustodo._doc.text;
 		ustodo._doc.html = htmlToCleanSpansOutOf2;
 
 		ustodo._doc.html = ustodo._doc.html.replace(/&nbsp;/, ' ');
 
 
-		u_.U_o.o ('ustodo.html post spans cleaned:' + ustodo.html);
-		var htmlPretitledTrimmed = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo.html);
-		UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds);
+		u_.U_o.o ('ustodo._doc.html post spans cleaned:' + ustodo._doc.html);
+		var htmlPretitledTrimmed = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html);
+		u_.UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
-		U_error.emitError('err in expandUrlsToHrefsReturnPatchedStr during create:' + err);
+		u_.U_error.emitError('err in expandUrlsToHrefsReturnPatchedStr during create:' + err);
 	}
 
 
@@ -240,23 +249,23 @@ exports.update = function(req, res)
 	//		return a + '//' + b;
 	//	});
     //
-	////ustodo.text = 't2.' + ustodo.text;
+	////ustodo._doc.text = 't2.' + ustodo._doc.text;
 	//ustodo._doc.html = htmlToCleanSpansOutOf2;
-	////ustodo.jsonx = 'j2.' + ustodo.jsonx;
+	////ustodo._doc.jsonx = 'j2.' + ustodo._doc.jsonx;
 	////u_.U_o.o('in ustodos.server.controller.js: update ' );
-	//ustodo.datelastmod = new Date();
+	//ustodo._doc.datelastmod = new Date();
 	//var ustodoForFulltext = _.extend(ustodo);
 	//delete ustodoForFulltext._doc.jsonx;
 	////u_.U_o.o('in ustodos.server.controller.js: update ' );
     //
-	////ustodo.jsonx = JSON.stringify(ustodoForFulltext); // string
-	//u_.U_o.o('in ustodos.server.controller.js: update [' + ustodo.jsonx + ']');
+	////ustodo._doc.jsonx = JSON.stringify(ustodoForFulltext); // string
+	//u_.U_o.o('in ustodos.server.controller.js: update [' + ustodo._doc.jsonx + ']');
     //
     //
     //
-	//u_.U_o.o ('xx################# saving 1 ustodo.text:' + ustodo.text);
-	//u_.U_o.o ('xx################# saving 2 ustodo.html:' + ustodo.html);
-	//u_.U_o.o ('xx################# saving 3 ustodo.jsonx:' + ustodo.jsonx);
+	//u_.U_o.o ('xx################# saving 1 ustodo._doc.text:' + ustodo._doc.text);
+	//u_.U_o.o ('xx################# saving 2 ustodo._doc.html:' + ustodo._doc.html);
+	//u_.U_o.o ('xx################# saving 3 ustodo._doc.jsonx:' + ustodo._doc.jsonx);
     //
 	//ustodo.save(function (err, ustodosaved, numberAffected) {
 	//	if (err) {
@@ -569,8 +578,8 @@ exports.list2 = function(req, res) { // 1509  from \app\routes\ustodos.server.ro
 	//        {
 	//            u_.U_o.o ('--------> saving content as both text and html [' + s + ']');
 	//
-	//            ustodo.text = s;
-	//            ustodo.html = s;
+	//            ustodo._doc.text = s;
+	//            ustodo._doc.html = s;
 	//
 	//            ustodo.save(function(err) {
 	//                if (err) {
@@ -642,9 +651,14 @@ exports.ustodoByID = function(req, res, next, id)
 /**  * Ustodo authorization middleware  */
 exports.hasAuthorization = function(req, res, next) {
 	u_.U_o.o(' *************** Top of [exports.hasAuthorization] in [ustodos.server.controller.js]');
-	u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.user.username [' + req.user.username + ']');
-	u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.id [' + req.ustodo.user.id + ']');
-	u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.username [' + req.ustodo.user.username + ']');
+	u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.user.username [' + req.user._doc.username + ']');
+	if (!req.ustodo._doc.user)
+		u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.id but: !req.ustodo._doc.user');
+	else
+	{
+		u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.id [' + req.ustodo._doc.user._doc.id + ']');
+		u_.U_o.o('@@@@@@@@@@@@@@@@@ Checking auth for req.ustodo.user.username [' + req.ustodo._doc.user._doc.username + ']');
+	}
 
 	// also works
 	//User.findById(req.user.id, function (err, user) {
@@ -653,15 +667,30 @@ exports.hasAuthorization = function(req, res, next) {
 	//		u_.U_o.o ('CHECKED AUTH OK:  ' +
 	//			'user [' + user +
 	//			']  user.username [' + user.username + ']' );
-	//	} else {
+	//	}ReferenceError: _id is not defined else {
 	//		U_error.emitError("CHECKED AUTH ", err);
 	//	}
 	//});
 
-	if (req.ustodo.user.id !== req.user.id) {
+	try {
+		if (req.body.id)
+			u_.U_o.o ('req.user.id:'+req.body.id);
+		else
+			u_.U_o.o ('no req.body.id');
 
-		u_.U_o.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).  req.ustodo.user.id  [' + req.ustodo.user.id  + ']  req.user.id [' + req.user.id + ']');
-		return res.status(403).send('User is not authorized');
+		if (req.user.id)
+			u_.U_o.o ('req.user.id:'+req.user.id);
+		else
+			u_.U_o.o ('no req.user.id');
+
+		if (req.ustodo._doc.user.id !== req.user.id) // eg, req.user.id = 5673beb86797f3643033dbf7
+		{
+
+			u_.U_o.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).  req.ustodo.user.id  [' + req.ustodo.user.id  + ']  req.user.id [' + req.user.id + ']');
+			return res.status(403).send('User is not authorized');
+		}
+	} catch (e) {
+		u_.U_error.emitError(e);
 	}
 	next();
 };

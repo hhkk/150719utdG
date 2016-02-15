@@ -103,11 +103,6 @@ var krawlhk = function(arrUrlUtds, callbackFromKrawl)
 
 
 
-if (typeof exports !== 'undefined') {
-	exports.krawlhk = krawlhk;
-}
-
-
 if (true)
 {
 	var urlUtds = [
@@ -133,4 +128,14 @@ if (true)
 		O.o ('I did it Mom!');
 	});
 }
+
+
+var UtilUrl5Krawler;
+
+u_setup('UtilUrl5Krawler', 'krawlhk', krawlhk);
+
+if (typeof exports !== 'undefined') {
+	exports.krawlhk = krawlhk;
+}
+
 

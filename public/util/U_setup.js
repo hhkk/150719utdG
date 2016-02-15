@@ -63,10 +63,26 @@ uberglobal.u_setup = function (clasz, methodname, method)
 
 // here you can list the utils wanted always and both client and server
 u_.req ('C:/utd/150719utdG/public/util/U_o.js');
+u_.req ('C:/utd/150719utdG/public/util/UtilClass.js');
 u_.req ('C:/utd/150719utdG/public/util/U_error.js');
 u_.req ('C:/utd/150719utdG/public/util/UtilDate.js');
 u_.req ('C:/utd/150719utdG/public/util/UtilString.js');
 u_.req ('C:/utd/150719utdG/public/util/NLB_bgFade.js');
+u_.req ('C:/utd/150719utdG/public/util/UtilUrl4.js');
+u_.req ('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
+u_.req ('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+
+//var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
+//var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+//var O2 = require('C:/utd/150719utdG/public/util/U_o.js');
+//var Ut_o = require('C:/utd/150719utdG/public/util/Ut_o.js');
+//var uut_O3 = require('C:/utd/150719utdG/public/util/U_o.js');
+////var UtilUrl4 = require('C:/utd/150719utdG/public/util/UtilUrl4.js');
+//var UtilUrl4bUsesKrawlerToSupportServerController =
+//	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
+//var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+
+
 
 /**
  * initialize u_ for global (server) and window (client) utility usage

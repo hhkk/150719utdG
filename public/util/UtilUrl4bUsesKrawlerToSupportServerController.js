@@ -213,7 +213,7 @@ var expandUrlsToHrefsReturnPatchedStr = function (htmlPretitledTrimmed, res2With
 		//if (hashUrlsToTitle.size() > 0) {
 		//    }
 	} catch (err) {
-		U_error.emitError ('from outside: error in expandUrlsToHrefsReturnPatchedStr', err);
+		u_.U_error.emitError ('from outside: error in expandUrlsToHrefsReturnPatchedStr', err);
 		throw err;
 	}
 
@@ -525,11 +525,6 @@ var getUrlContent_levelTwo = function(callback, url) {
 
 
 
-if (typeof exports !== 'undefined') {
-	exports.expandUrlsToHrefsReturnPatchedStr = expandUrlsToHrefsReturnPatchedStr;
-	exports.findTitle_htmlParse = findTitle_htmlParse;
-}
-
 
 
 
@@ -708,5 +703,16 @@ if (test160118)
 	htmlWithPreTitledUrl = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(htmlWithPreTitledUrl);
 
 	expandUrlsToHrefsReturnPatchedStr(htmlWithPreTitledUrl, res);
+}
+
+var UtilUrl4bUsesKrawlerToSupportServerController;
+
+u_setup('UtilUrl4bUsesKrawlerToSupportServerController', 'expandUrlsToHrefsReturnPatchedStr', expandUrlsToHrefsReturnPatchedStr);
+u_setup('UtilUrl4bUsesKrawlerToSupportServerController', 'findTitle_htmlParse', findTitle_htmlParse);
+
+
+if (typeof exports !== 'undefined') {
+	exports.expandUrlsToHrefsReturnPatchedStr = expandUrlsToHrefsReturnPatchedStr;
+	exports.findTitle_htmlParse = findTitle_htmlParse;
 }
 

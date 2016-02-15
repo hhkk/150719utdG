@@ -335,7 +335,11 @@ function testHBK2()
 	console.log ('++++++++++++++++++++++++++++++++++++ testHBK2');
 }
 
+var UtilHtmlCleaner;
 
+u_setup('UtilHtmlCleaner', 'utilHtmlCleanerFunctions', utilHtmlCleanerFunctions);
+u_setup('UtilHtmlCleaner', 'handlepaste', handlepaste);
+u_setup('UtilHtmlCleaner', 'isHTML2', isHTML2);
 
 if (typeof exports !== 'undefined')
 {

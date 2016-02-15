@@ -9,7 +9,7 @@
 
 //var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 //var O = require('C:/utd/150719utdG/public/util/U_o.js');
-var UtilString;
+//var UtilString;
 //var UtilClass = null;
 //var UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
@@ -17,15 +17,15 @@ var UtilString;
 
 
 
-var O = O;
+//var O = O;
 //var CKEDITOR = CKEDITOR;
 var tinyMCE = tinyMCE;
-var UtilJsTypeDetect = UtilJsTypeDetect;
-var UtilHrefThisText = UtilHrefThisText;
+//var UtilJsTypeDetect = UtilJsTypeDetect;
+//var UtilHrefThisText = UtilHrefThisText;
 var UtilString = UtilString;
 var Medium = Medium;
-var UtilDate = UtilDate;
-var UtilHtmlCleaner = UtilHtmlCleaner;
+//var UtilDate = UtilDate;
+//var UtilHtmlCleaner = UtilHtmlCleaner;
 
 var CONST_SHOW_INIT_ALERTS = false;
 var $ = $;
@@ -49,7 +49,7 @@ var mceId = 'idTinyMceTextArea';
 //var unirest = require('unirest');
 //var fn = function()
 //{
-//    O.o ('got callback from unirequest get');
+//    u_.U_o.o ('got callback from unirequest get');
 //}
 //var unirequest = unirest.get('/ustodos');
 //unirequest.timeout(5000);
@@ -101,7 +101,7 @@ var angularModule = null;
 //angularModule = angular.module('ustodos');
 
 
-//O.a ('sssa1.5');
+//u_.U_o.a ('sssa1.5');
 
 
 
@@ -499,11 +499,11 @@ angular.module('ustodos').controller
 
 
 var callbackCommand = function(callbackResult) {
-	O.o  ('in callbackCommand');
+	u_.U_o.o  ('in callbackCommand');
 };
 
 
-//O.a ('oneOfSeveral controller with array - first?');
+//u_.U_o.a ('oneOfSeveral controller with array - first?');
 angular.module('ustodos').controller
 	('SinglepageUstodosController',
 		// angular.module('ustodos',['ngSanitize']). controller('UstodosController',
@@ -843,7 +843,7 @@ angular.module('ustodos').controller
 					//angularModule. controller('UstodosController', ['$scope', '$stateParams', '$location', '$rootScope', 'ngSanitize', 'Authentication', 'Ustodos',
 					//    function($scope, $stateParams, $location, $rootScope, ngSanitize, Authentication, Ustodos) {
 					//$rootScope', $compile, $rootElement,
-					//    O.a ('sssa1');
+					//    u_.U_o.a ('sssa1');
 
 
 					//$scope.pickCkEditorBasedOnPlatform = function()
@@ -1068,7 +1068,7 @@ angular.module('ustodos').controller
 					//        alert ('logic error2 $scope.toggleCkeToolebarRich :' + $scope.toggleCkeToolebarRich );
 					//    }
 					//    //alert ('leaving cke $scope.toggleCkeToolebarRich:' + $scope.toggleCkeToolebarRich);
-					//    O.o ('$scope.toggleCkeToolebarRich :' + $scope.toggleCkeToolebarRich );
+					//    u_.U_o.o ('$scope.toggleCkeToolebarRich :' + $scope.toggleCkeToolebarRich );
 					//
 					//};
 
@@ -1802,7 +1802,7 @@ angular.module('ustodos').controller
 					var callcountContentDom = 0;
 					//alert( 'hi hk e:' + e );
 					//e.on( 'change', function() {
-					//    O.o ('callcountContentDom keyup:' + callcountContentDom++);
+					//    u_.U_o.o ('callcountContentDom keyup:' + callcountContentDom++);
 					//    //$scope.contentChange();
 					//    //$scope.contentChange(CKEDITOR.instances.idCkeEditorTextarea.document.getBody().getHtml()+'ggg');
 					//    //$scope.contentChange(+'hhh');
@@ -1812,7 +1812,7 @@ angular.module('ustodos').controller
 					//e.on( 'contentDom', function() {
 					//    var editable = e.editable();
 					//    editable.attachListener( editable, 'keyup', function() {
-					//        O.o ('callcountContentDom keyup:' + callcountContentDom++);
+					//        u_.U_o.o ('callcountContentDom keyup:' + callcountContentDom++);
 					//        $scope.eventHandlerEditorcontentChange(e.getData(), e.document.getBody().getHtml(), e.document.getBody().getText());
 					//    } );
 					//} );
@@ -1830,22 +1830,22 @@ angular.module('ustodos').controller
 					//    editable.attachListener( editable, 'keyup', function(event) {
 					//        //var keyCode= (window.event ? keyEvent.keyCode : keyEvent.which);
 					//
-					//        O.o ( '0 in contentdom ' );
+					//        u_.U_o.o ( '0 in contentdom ' );
 					//        if ( !event.data.$.ctrlKey && !event.data.$.metaKey )
 					//        {
 					//            // something changed
-					//            //O.o ( '1 in contentdom ' + $scope.editor.getData() );
-					//            //O.o ( '2 in contentdom ' + event.data.$.keyCode);
-					//            //O.o ( '3 in contentdom ' + !event.data.$.ctrlKey && !event.data.$.metaKey);
+					//            //u_.U_o.o ( '1 in contentdom ' + $scope.editor.getData() );
+					//            //u_.U_o.o ( '2 in contentdom ' + event.data.$.keyCode);
+					//            //u_.U_o.o ( '3 in contentdom ' + !event.data.$.ctrlKey && !event.data.$.metaKey);
 					//            $scope.respondToKeyboardEvent('line360', event.data.$.keyCode);
 					//        }
 					//
 					//
 					//        //var keyCode= keyEvent.getKey();
-					//        //O.o ( '1 in contentdom ' + $scope.editor.getData() );
-					//        //O.o ( '2 in contentdom ' + keyCode);
-					//        //O.o ( '2 in contentdom ' + !event.data.$.ctrlKey && !event.data.$.metaKey);
-					//        //O.o ( $scope.editor.getData() );
+					//        //u_.U_o.o ( '1 in contentdom ' + $scope.editor.getData() );
+					//        //u_.U_o.o ( '2 in contentdom ' + keyCode);
+					//        //u_.U_o.o ( '2 in contentdom ' + !event.data.$.ctrlKey && !event.data.$.metaKey);
+					//        //u_.U_o.o ( $scope.editor.getData() );
 					//        //$scope.respondToKeyboardEvent();
 					//    } );
 					//} );
@@ -1874,7 +1874,7 @@ angular.module('ustodos').controller
 					//    //    //alert ('in contentDom1');
 					//    //    var editable = $scope.editor.editable();
 					//    //    editable.attachListener( editable, 'keyup', function(ev) {
-					//    //        O.o ('in contentDom2 ' + ev);
+					//    //        u_.U_o.o ('in contentDom2 ' + ev);
 					//    //
 					//    //        console.log( $scope.editor.getData() );
 					//    //    } );
@@ -2251,7 +2251,7 @@ angular.module('ustodos').controller
 							}
 
 						}
-						//O.o ('========== $scope.state_delectedItem set to -1');
+						//u_.U_o.o ('========== $scope.state_delectedItem set to -1');
 						SppSvc.setSelectedItem(-1);
 
 						if (!found) {
@@ -2272,10 +2272,10 @@ angular.module('ustodos').controller
 						//    $scope.mouseoverlock = 'off';
 						//else
 						//    $scope.mouseoverlock = 'on';
-						//O.o ('========== set mouseoverlock:' + $scope.mouseoverlock);
+						//u_.U_o.o ('========== set mouseoverlock:' + $scope.mouseoverlock);
 
 
-						//O.o ('in onkeyup desc ['+ desc +'] ENUM_KEYEVENTcaller [' + ENUM_KEYEVENTcaller + 'keyEvent.keyCode:' + keyEvent.keyCode);
+						//u_.U_o.o ('in onkeyup desc ['+ desc +'] ENUM_KEYEVENTcaller [' + ENUM_KEYEVENTcaller + 'keyEvent.keyCode:' + keyEvent.keyCode);
 						if (keyEvent.ctrlKey)
 							return;
 						if (keyEvent.altKey)
@@ -2289,8 +2289,8 @@ angular.module('ustodos').controller
 
 
 						var keyCode= (window.event ? keyEvent.keyCode : keyEvent.which);
-						//O.o('onKeyUp:' + keyCode);
-						//O.o('onKeyUp:' + getKeyboardEventResult($event, 'Key up')); //
+						//u_.U_o.o('onKeyUp:' + keyCode);
+						//u_.U_o.o('onKeyUp:' + getKeyboardEventResult($event, 'Key up')); //
 						// $scope.respondToKeyboardEvent('line634', keyCode);
 					};
 
@@ -2601,7 +2601,7 @@ angular.module('ustodos').controller
 					//    //$('#edit_container').scrollTop(0);
 					//});
 
-					//var o = O.o;
+					//var o = u_.U_o.o;
 
 					// Handler 1
 					var callcounteventHandlerEditorcontentChange = 0;
@@ -2647,14 +2647,14 @@ angular.module('ustodos').controller
 							}
 							else if (enumKeyEvent === $scope.enumKeyEvent.SPACE)
 							{
-								O.o ('space pressed');
+								u_.U_o.o ('space pressed');
 							}
 							//if (html === priorhtml)
 							//    alert('same html');
 
 							priorhtml = html;
 
-							//O.o ( 'callcnt [' + callcounteventHandlerEditorcontentChange +
+							//u_.U_o.o ( 'callcnt [' + callcounteventHandlerEditorcontentChange +
 							//'] in eventHandlerEditorcontentChange ' +
 							//'] \r\n1 data [' + data + '] ascii [' + data.asciiTable('data (1/3)') + ']' +
 							//'] \r\n2 html [' + html + '] ascii [' + html.asciiTable('html (2/3)') + ']' +
@@ -2662,8 +2662,8 @@ angular.module('ustodos').controller
 							//alert( 'data  [' + data + ']');
 							//alert( 'html [' + html + ']');
 							//alert( 'text [' + text + ']');
-							//O.o('text [' + text + ']');
-							//O.o('text.charCodeAt(text.length-1) [' + text.charCodeAt(text.length - 1) + ']');
+							//u_.U_o.o('text [' + text + ']');
+							//u_.U_o.o('text.charCodeAt(text.length-1) [' + text.charCodeAt(text.length - 1) + ']');
 
 							//var lastCharacter = text.charCodeAt(text.length - 1);
 							////alert ('testing if I should be calling processCommand');
@@ -2689,9 +2689,9 @@ angular.module('ustodos').controller
 
 							//              alert ('text.asciiTable()1:');
 							//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
-							text = UtilString.convertNonBreakingSpace(text);
-							text = UtilString.convertRemoveTrailing10(text);
-							//alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
+							text = u_.UtilString.convertNonBreakingSpace(text);
+							text = u_.UtilString.convertRemoveTrailing10(text);
+							alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
 
 							// hbkhbk3
 							// alert ('eventHandlerEditorcontentChange text:' + text);
@@ -2712,7 +2712,7 @@ angular.module('ustodos').controller
 								//alert('calling processCommand');
 							}
 						} catch (e) {
-							U_error.emitError('in eventHandlerEditorcontentChange', e);
+							u_.U_error.emitError('in eventHandlerEditorcontentChange', e);
 							//alert ('sdfsdfsdf:' + e);
 						}
 					};
@@ -2734,8 +2734,8 @@ angular.module('ustodos').controller
 
 					// Handler
 					$scope.myFnOnKeyDown = function($index, $event) { // onkey
-						//O.o ('inkey myFnOnKeyDown $index:' + $index + ', $event.keyCode:' + $event.keyCode);
-						//O.o ( ' [ ' + $scope.ustodo.$index + ']');
+						//u_.U_o.o ('inkey myFnOnKeyDown $index:' + $index + ', $event.keyCode:' + $event.keyCode);
+						//u_.U_o.o ( ' [ ' + $scope.ustodo.$index + ']');
 
 					};
 
@@ -2855,7 +2855,7 @@ angular.module('ustodos').controller
 					//var commandLastProcessedHash = {};
 					//$scope.respondToKeyboardEvent = function(desc, keyCode)
 					//{
-					//    //O.o ('in $scope.respondToKeyboardEvent() desc ['+ desc + ']');
+					//    //u_.U_o.o ('in $scope.respondToKeyboardEvent() desc ['+ desc + ']');
 					//    // 0 idInput0TypeText
 					//    // 1 idMediumEditor
 					//    // 2 parent like CKE
@@ -2880,11 +2880,11 @@ angular.module('ustodos').controller
 					//            xText = document.getElementById('idInput0TypeText').innerText;
 					//            xHtml = document.getElementById('idInput0TypeText').innerHTML;
 					//            xValue = document.getElementById('idInput0TypeText').value;
-					//            O.o ('in 1 respondToKeyboardEventkey 1 xText:' + xText);
-					//            O.o ('in 2 respondToKeyboardEventkey 2 xHtml:' + xHtml);
-					//            O.o ('in 3 respondToKeyboardEventkey 3 xValue:' + xValue);
-					//            //O.o ('keyCode:' + keyCode);
-					//            //O.o ('keyCode:' + keyCode);
+					//            u_.U_o.o ('in 1 respondToKeyboardEventkey 1 xText:' + xText);
+					//            u_.U_o.o ('in 2 respondToKeyboardEventkey 2 xHtml:' + xHtml);
+					//            u_.U_o.o ('in 3 respondToKeyboardEventkey 3 xValue:' + xValue);
+					//            //u_.U_o.o ('keyCode:' + keyCode);
+					//            //u_.U_o.o ('keyCode:' + keyCode);
 					//
 					//            if (keyCode === 13)
 					//            {
@@ -2896,18 +2896,18 @@ angular.module('ustodos').controller
 					//                alert ('xValue.charCodeAt(xValue.length-1) === 32');
 					//                if (xValue.trim().charCodeAt(xValue.trim().length-1) === 87)
 					//                {
-					//                    //O.o ('bShouldIcommand based on space and lastchar 87 big w');
+					//                    //u_.U_o.o ('bShouldIcommand based on space and lastchar 87 big w');
 					//                    bShouldIcommand = true;
 					//                }
 					//                else if (xValue.trim().charCodeAt(xValue.trim().length-1) === 119)
 					//                {
-					//                    //O.o ('bShouldIcommand based on space and lastchar 119 little w');
+					//                    //u_.U_o.o ('bShouldIcommand based on space and lastchar 119 little w');
 					//                    bShouldIcommand = true;
 					//                }
 					//                //else if (document.getElementById('idcheckbox_dynamicSearch').checked)
 					//                else if ($scope.dynamicSearch)
 					//                {
-					//                    //O.o ('bShouldIcommand based on space and idcheckbox_dynamicSearch checked');
+					//                    //u_.U_o.o ('bShouldIcommand based on space and idcheckbox_dynamicSearch checked');
 					//                    bShouldIcommand = true;
 					//                }
 					//
@@ -2920,30 +2920,30 @@ angular.module('ustodos').controller
 					//            xText = $scope.mmmm.element.innerText;
 					//            xHtml = $scope.mmmm.element.innerHTML;
 					//            xValue = $scope.mmmm.element.innerText;
-					//            O.o ('xHtml [' + xHtml + ']');
+					//            u_.U_o.o ('xHtml [' + xHtml + ']');
 					//            //xHtmlStripped = xHtml.replace('<p>','');
 					//            //xHtmlStripped = xHtmlStripped.replace('</p>','');
 					//            //xHtmlStripped = xHtmlStripped.trim();
 					//            //if (xHtmlStripped.endsWith('&nbsp;')) {
 					//                //bShouldIcommand = true;
-					//                //O.o ('yes ends with space');
+					//                //u_.U_o.o ('yes ends with space');
 					//            //}
 					//
 					//            //if (xValue.charCodeAt(xValue.length-1) === 32)
 					//            //{
 					//            //    if (xValue.trim().charCodeAt(xValue.trim().length-1) === 87)
 					//            //    {
-					//            //        //O.o ('bShouldIcommand based on space and lastchar 87 big w');
+					//            //        //u_.U_o.o ('bShouldIcommand based on space and lastchar 87 big w');
 					//            //        bShouldIcommand = true;
 					//            //    }
 					//            //    else if (xValue.trim().charCodeAt(xValue.trim().length-1) === 119)
 					//            //    {
-					//            //        //O.o ('bShouldIcommand based on space and lastchar 119 little w');
+					//            //        //u_.U_o.o ('bShouldIcommand based on space and lastchar 119 little w');
 					//            //        bShouldIcommand = true;
 					//            //    }
 					//            //    else if (document.getElementById('idcheckbox_dynamicSearch').checked)
 					//            //    {
-					//            //        //O.o ('bShouldIcommand based on space and idcheckbox_dynamicSearch checked');
+					//            //        //u_.U_o.o ('bShouldIcommand based on space and idcheckbox_dynamicSearch checked');
 					//            //        bShouldIcommand = true;
 					//            //    }
 					//            //}
@@ -2967,7 +2967,7 @@ angular.module('ustodos').controller
 					//            xHtmlStripped = xHtmlStripped.trim();
 					//            if (xHtmlStripped.endsWith('&nbsp;')) {
 					//                bShouldIcommand = true;
-					//                O.o ('ske editor ends with nbsp');
+					//                u_.U_o.o ('ske editor ends with nbsp');
 					//                //alert ('yes search');
 					//            }
 					//            break;
@@ -2993,22 +2993,22 @@ angular.module('ustodos').controller
 					//    if (bShouldIcommand)
 					//    {
 					//        // if not a sup command
-					//        O.o ('1 set search xValue:'+ xValue);
+					//        u_.U_o.o ('1 set search xValue:'+ xValue);
 					//        // hbk 1505
 					//        $location.search('q', xValue.trim());
-					//        O.o ('2 set search xValue:'+ xValue);
-					//        O.o ('######## in bShouldIcommand');
+					//        u_.U_o.o ('2 set search xValue:'+ xValue);
+					//        u_.U_o.o ('######## in bShouldIcommand');
 					//        var skipThisCommandAlreadProcessed = false;
 					//        var timeLastEncountered = commandLastProcessedHash[xText];
 					//        if (timeLastEncountered && (UtilDate.getTimeInMillis()-timeLastEncountered) < 200) {
 					//            skipThisCommandAlreadProcessed = true;
-					//            //O.o ('skipping command too quick');
+					//            //u_.U_o.o ('skipping command too quick');
 					//        }
 					//        commandLastProcessedHash[xText] = UtilDate.getTimeInMillis();
 					//
 					//        //alert ('yes need to process command');
 					//        if (!skipThisCommandAlreadProcessed) {
-					//            O.o ('############ not skipping');
+					//            u_.U_o.o ('############ not skipping');
 					//            $scope.processCommand('CLIENT JS line 1383', xText, xHtml, xValue, callbackCommand);
 					//        }
 					//    }
@@ -3060,7 +3060,7 @@ angular.module('ustodos').controller
 						//Shift - 16
 						//Ctrl - 17
 						//Alt - 18
-						//O.o ('reinit window.keyStates.keyStateShiftDown');
+						//u_.U_o.o ('reinit window.keyStates.keyStateShiftDown');
 						window.keyStates = {};
 						window.keyStates.keyStateShiftDown = false;
 						window.keyStates.keyStateCtrlDown = false;
@@ -3069,8 +3069,8 @@ angular.module('ustodos').controller
 						document.addEventListener('keydown', function(evt) {
 							var e = window.event || evt;
 							var key = e.which || e.keyCode;
-							//O.o ('keydown:' + key );
-							//O.o ('turn on shift');
+							//u_.U_o.o ('keydown:' + key );
+							//u_.U_o.o ('turn on shift');
 							if (16 === key) {
 								window.keyStates.keyStateShiftDown = true;
 							} else if (17 === key) {
@@ -3083,7 +3083,7 @@ angular.module('ustodos').controller
 						document.addEventListener('keyup', function(evt) {
 							var e = window.event || evt;
 							var key = e.which || e.keyCode;
-							//O.o ('turn off shift');
+							//u_.U_o.o ('turn off shift');
 							if (16 === key) {
 								window.keyStates.keyStateShiftDown = false;
 							} else if (17 === key) {
@@ -3093,7 +3093,7 @@ angular.module('ustodos').controller
 							}
 						}, false);
 
-						//O.o ('reinit window.keyStates.keyStateShiftDown:' + window.keyStates.keyStateShiftDown);
+						//u_.U_o.o ('reinit window.keyStates.keyStateShiftDown:' + window.keyStates.keyStateShiftDown);
 
 					}
 
@@ -3311,18 +3311,18 @@ angular.module('ustodos').controller
 
 					//$scope.testScopeAccess = UcHtmlDocManipulate.testScopeAccess;
 					//u_.U_error.emitError('xxxe');
-					//Uutil2_.Dt_O.dt_o2b('calling dt_o2b1 a');
-					//Uutil2_.Dt_O.uu_a('calling uu_a');
-					//Uutil2_.Dt_O.o('calling o');
-					//Uutil2_.Dt_O.e('calling e');
-					//Uutil2_.Dt_O.x('calling o');
+					//Uutil2_.Dt_u_.U_o.dt_o2b('calling dt_o2b1 a');
+					//Uutil2_.Dt_u_.U_o.uu_a('calling uu_a');
+					//Uutil2_.Dt_u_.U_o.o('calling o');
+					//Uutil2_.Dt_u_.U_o.e('calling e');
+					//Uutil2_.Dt_u_.U_o.x('calling o');
 					$scope.testButton= function(fn)
 					{
 						if (true)
 						{
 							try {
 								u_.U_o.o('using front door');
-								//O.o('using back door');
+								//u_.U_o.o('using back door');
 								//throw "erra"
 							} catch (err) {
 								u_.U_error.emitError('r', err);
@@ -3332,7 +3332,7 @@ angular.module('ustodos').controller
 							//alert('tiptop');wwwwwwwwwwwwwww
 							//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwu_.U_error.emitError('U_error2.o from singlepage-ustodos.client.controller.js'); // hbkhbk7
 							//uu_.U_error.emitError('xxxe');
-							//Uutil2_.Dt_O.dt_o2b('calling dt_o2b2');
+							//Uutil2_.Dt_u_.U_o.dt_o2b('calling dt_o2b2');
 
 							//uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
 							//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
@@ -3340,7 +3340,7 @@ angular.module('ustodos').controller
 							//Uutil.U_error.emitError('testerrorhbkhbk5');
 							//U_error.testWithinEmitError('testerrorhbkhbk6');
 
-							//$scope.O.o ('in testbutton2');
+							//$scope.u_.U_o.o ('in testbutton2');
 						}
 
 						if (false) // set style for contenteditable focus
@@ -3763,7 +3763,7 @@ angular.module('ustodos').controller
 						// 1 corresponds to exports.list2 in ustodos.server. controller.js
 						// see also app.route('/ustodos').get in ustodos.server.routes.js
 						//alert ('xxxxxxxxxxxxx in ustodosQueryCommon caller:' + caller);
-						//O.o('gg:' + UtilHrefThisText.testUtilHrefThisText());
+						//u_.U_o.o('gg:' + UtilHrefThisText.testUtilHrefThisText());
 						//alert('hh:' + UtilHrefThisText.testUtilHrefThisText());
 						return Ustodos.query(jsonquery, callback); // Ustodosis a "resource"  // maps to a get? in ustodos.server.routes.js? is that a RESOURCE behavior?
 					} ;
@@ -3852,16 +3852,16 @@ angular.module('ustodos').controller
 					$scope.checkBoxClickedToggleAll = function()
 					{
 						var checkboxFirst = document.getElementById('idcheckbox0');
-						O.assert (checkboxFirst);
+						u_.U_o.assert (checkboxFirst);
 						var areAllCbStatesSame = true;
 						var checkboxFirstState = checkboxFirst.checked;
 
 						var x = $('.chkbox');
-						//O.o ('x.length:' + x.length);
+						//u_.U_o.o ('x.length:' + x.length);
 						// check if all are checked so it's just a toggle
 						for (var i = 0; i < x.length; i++ )
 						{
-							//O.o ('testing for cb index :' + 'idcheckbox'+i);
+							//u_.U_o.o ('testing for cb index :' + 'idcheckbox'+i);
 							if (document.getElementById('idcheckbox'+i).checked !== checkboxFirstState) {
 								areAllCbStatesSame = false;
 								break;
@@ -3947,7 +3947,7 @@ angular.module('ustodos').controller
 
 						//if(!$scope.lastChecked) {
 
-						//O.o ('set $scope.lastChecked to:' + $scope.lastChecked.id);
+						//u_.U_o.o ('set $scope.lastChecked to:' + $scope.lastChecked.id);
 						//}
 
 						if( window.keyStates.keyStateShiftDown === true)
@@ -3960,7 +3960,7 @@ angular.module('ustodos').controller
 								//alert('using lastchecked start [' + start + '] end [' + end + '] ');
 								$chkboxes.slice(Math.min(start,end), Math.max(start,end)+ 1).prop('checked', $scope.lastChecked.checked);
 								//alert('used lastchecked successfully');
-								//O.o ('set $scope.lastChecked to:' + $scope.lastChecked.id);
+								//u_.U_o.o ('set $scope.lastChecked to:' + $scope.lastChecked.id);
 							}
 						}
 
@@ -4008,7 +4008,7 @@ angular.module('ustodos').controller
 							//        method: 'delete',
 							//    params: {jsnkey: jsnval}
 							//}).success(function(data) {
-							//    O.o ('data:' + data.toString());
+							//    u_.U_o.o ('data:' + data.toString());
 							//});
 
 
@@ -4018,7 +4018,7 @@ angular.module('ustodos').controller
 							//    .delete(users.requiresLogin, ustodos.ustodobulkdel);
 							//$http.delete('/ustodobulkdel', {form:{key:'hkvalue'}}).
 							//    success(function(data) {
-							//        O.o ('data:' + data.toString());
+							//        u_.U_o.o ('data:' + data.toString());
 							//    });
 
 
@@ -4028,7 +4028,7 @@ angular.module('ustodos').controller
 							success(function(data)
 							{
 								//alert('success on return from exports.ustodobulkdel ');
-								//O.o ('data:' + data.toString());
+								//u_.U_o.o ('data:' + data.toString());
 								$scope.find(); // to $scope.find = function() {in
 								$scope.synchNumberCheckboxesChecked();
 
@@ -4037,27 +4037,27 @@ angular.module('ustodos').controller
 								// called asynchronously if an error occurs
 								// or server returns response with an error status.
 								alert('error on return from exports.ustodobulkdel ');
-								O.o ('dataxx:' + data);
-								O.o ('statusxx:' + status);
-								O.o ('headersxx:' + headers);
-								O.o ('configxx:' + config);
+								u_.U_o.o ('dataxx:' + data);
+								u_.U_o.o ('statusxx:' + status);
+								u_.U_o.o ('headersxx:' + headers);
+								u_.U_o.o ('configxx:' + config);
 							});
 							//alert('posted to exports.ustodobulkdel ');
 
 							//$http.delete('/ustodobulkdel', {
 							//    params: { user_id: user.id }
 							//}).success(function(data) {
-							//        O.o ('data:' + data.toString());
+							//        u_.U_o.o ('data:' + data.toString());
 							//});
 
 							// http://stackoverflow.com/questions/12190166/angularjs-any-way-for-http-post-to-send-request-parameters-instead-of-json
 							//$http.post('/ustodobulkdel', {
 							//    params: { user_id: user.id }
 							//}).success(function(data) {
-							//        O.o ('data:' + data.toString());
+							//        u_.U_o.o ('data:' + data.toString());
 							//});
 						} catch (e) {
-							O.e ('errrra:' + e);
+							u_.U_o.e ('errrra:' + e);
 						}
 						$scope.synchNumberCheckboxesChecked();
 					};
@@ -4066,8 +4066,8 @@ angular.module('ustodos').controller
 
 					$scope.deleteDbUstotoOneByIndex = function(arrIntIndexesToDelete_or_oneUsToDo)
 					{
-						//O.assert (false, 'asdasd');
-						O.assert ((arrIntIndexesToDelete_or_oneUsToDo.length === 1), 'support only delete one right now, not:' + arrIntIndexesToDelete_or_oneUsToDo.length);
+						//u_.U_o.assert (false, 'asdasd');
+						u_.U_o.assert ((arrIntIndexesToDelete_or_oneUsToDo.length === 1), 'support only delete one right now, not:' + arrIntIndexesToDelete_or_oneUsToDo.length);
 
 						// Still support only one delete at a time!!!!!!!!!!!!!!
 
@@ -4078,7 +4078,7 @@ angular.module('ustodos').controller
 							var ustodo = $scope.ustodos[intIndexToDelete];
 
 							var savOid = ustodo._id;
-							O.o('33333333333333333333333333333 splicing: i' + intIndexToDelete );
+							u_.U_o.o('33333333333333333333333333333 splicing: i' + intIndexToDelete );
 							$scope.ustodos.splice(intIndexToDelete, 1);
 
 							ustodo.$delete(function() {
@@ -4199,9 +4199,9 @@ angular.module('ustodos').controller
 					{
 						var utdUserCommand = new UtdUserCommand(xText, xHtml);
 						//alert ('in processCommand caller [' + enumProcessCommandCaller + ']')
-						//O.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
-						//O.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
-						//O.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
+						//u_.U_o.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
+						//u_.U_o.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
+						//u_.U_o.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
 
 						SppSvc.setSelectedItem(-1);
 
@@ -4212,8 +4212,8 @@ angular.module('ustodos').controller
 						try
 						{
 							//$scope.searchedForAsLink = 'http://ibm.com/test';
-							//O.o ('============================= in xValue [' + xValue + ']');
-							//O.o ('============================= in html2text [' + UtilHrefThisText.html2text(xValue)+ ']');
+							//u_.U_o.o ('============================= in xValue [' + xValue + ']');
+							//u_.U_o.o ('============================= in html2text [' + UtilHrefThisText.html2text(xValue)+ ']');
 							// <a target='_blank' href='http://ibm.com'>http://ibm.com</a>
 
 							$scope.callCountSearch++;
@@ -4296,11 +4296,11 @@ angular.module('ustodos').controller
 								//getProperties('props ustodo:', ustodo);
 								//alert ('saving ustodo.text:' + ustodo.text);
 								// Redirect after save
-								//O.o ('1 $$$$$$$$$$$$$$$$$$ save callerId 1 [' + callerId + '] ustodo.html [' + ustodo.html+ ']');
-								//O.o ('2 $$$$$$$$$$$$$$$$$$ save callerId 2 [' + callerId + '] ustodo.text [' + ustodo.text + ']');
-								//O.o ('3 $$$$$$$$$$$$$$$$$$ save callerId 3 [' + callerId + '] ustodo.value [' + ustodo.value + ']');
-								//O.o ('4 $$$$$$$$$$$$$$$$$$ save callerId 4 [' + callerId + '] ustodo.jsonx [' + ustodo.jsonx + ']');
-								//O.o ('5 $$$$$$$$$$$$$$$$$$ save callerId 5 [' + callerId + '] commandRemoved_toSearchFor_trimmed [' + commandRemoved_toSearchFor_trimmed + ']');
+								//u_.U_o.o ('1 $$$$$$$$$$$$$$$$$$ save callerId 1 [' + callerId + '] ustodo.html [' + ustodo.html+ ']');
+								//u_.U_o.o ('2 $$$$$$$$$$$$$$$$$$ save callerId 2 [' + callerId + '] ustodo.text [' + ustodo.text + ']');
+								//u_.U_o.o ('3 $$$$$$$$$$$$$$$$$$ save callerId 3 [' + callerId + '] ustodo.value [' + ustodo.value + ']');
+								//u_.U_o.o ('4 $$$$$$$$$$$$$$$$$$ save callerId 4 [' + callerId + '] ustodo.jsonx [' + ustodo.jsonx + ']');
+								//u_.U_o.o ('5 $$$$$$$$$$$$$$$$$$ save callerId 5 [' + callerId + '] commandRemoved_toSearchFor_trimmed [' + commandRemoved_toSearchFor_trimmed + ']');
 								//alert('pre ustodo save ');
 								// hbkk
 								ustodo.$save
@@ -4327,7 +4327,7 @@ angular.module('ustodos').controller
 										//'----------------' '----------------' '----------------' '----------------' '----------------'
 
 										//alert ('in write query [' + commandRemoved_toSearchFor_trimmed + ']');
-										//O.o ('=============== in section QUERY1');
+										//u_.U_o.o ('=============== in section QUERY1');
 										//$scope.ustodos = $scope.ustodosQueryCommon('caller_$scope.processCommand_Write', {q: '*'}, callbackFromQuery);
 
 										// hbk 1505
@@ -4357,7 +4357,7 @@ angular.module('ustodos').controller
 
 
 							// POST WRIT IF IT WAS A WRITE
-							//O.o ('=============== in section QUERY2')
+							//u_.U_o.o ('=============== in section QUERY2')
 							//var t = new RegExp(xTextCommandRemoved.trim(), 'i');
 
 
@@ -4505,7 +4505,7 @@ angular.module('ustodos').controller
 						});
 					};
 
-					//O.a ('sssa2');
+					//u_.U_o.a ('sssa2');
 
 					// <select> element displays its options on mousedown, not click.
 					//        $scope.showSelectDropdown = function () { // WORKS
@@ -4521,9 +4521,9 @@ angular.module('ustodos').controller
 						var s2 = '';
 						var arrTokens = s.split(/\s/);
 						for (var i = 0; i < arrTokens.length; i++) {
-							//O.o ('testing for filterText [' + filterText + '] :' + arrTokens[i]);
+							//u_.U_o.o ('testing for filterText [' + filterText + '] :' + arrTokens[i]);
 							if (arrTokens[i].indexOf(filterText) > 0) {
-								//O.o ('found:');
+								//u_.U_o.o ('found:');
 								s2 = s2 + ' ' + arrTokens[i];
 							}
 						}
@@ -4546,13 +4546,13 @@ angular.module('ustodos').controller
 						}
 
 						$scope.ustodosFiltered = [];
-						O.o ('in updateUstodosFiltered() s  [' + s + ']');
+						u_.U_o.o ('in updateUstodosFiltered() s  [' + s + ']');
 						var useCaseSensitiveRestrict = false;
 						if (s && s.hasUpperCase()) {
-							O.o ('USE CASE SENS');
+							u_.U_o.o ('USE CASE SENS');
 							useCaseSensitiveRestrict = true;
 						} else {
-							O.o ('DO NOT USE CASE SENS');
+							u_.U_o.o ('DO NOT USE CASE SENS');
 						}
 
 						for (var i = 0; i < $scope.ustodos.length; i++)
@@ -4566,19 +4566,19 @@ angular.module('ustodos').controller
 
 							if (!s || strOneOfManyIterThru.indexOf(s) >= 0) {
 								$scope.ustodosFiltered.push($scope.ustodos[i]);
-								//O.o ('MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru +  '] index [' + i + ']');
+								//u_.U_o.o ('MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru +  '] index [' + i + ']');
 							}
 							//else {
-							//O.o ('NO MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru + '] index [' + i + ']');
+							//u_.U_o.o ('NO MATCH in dyamic client-only filter updateUstodosFiltered matching s [' + s + '] vs strOneOfManyIterThru [' + strOneOfManyIterThru + '] index [' + i + ']');
 							//}
 							//if (i % 2 == 0)
 						}
-						O.o ('---------------updateUstodosFiltered done from len [' + $scope.ustodos.length + '] len [' + $scope.ustodosFiltered.length + '] ');
+						u_.U_o.o ('---------------updateUstodosFiltered done from len [' + $scope.ustodos.length + '] len [' + $scope.ustodosFiltered.length + '] ');
 					};
 
 
 					$scope.hkngfocustest = function(index) {
-						//O.o('================ from hkngfocustest:' + index);
+						//u_.U_o.o('================ from hkngfocustest:' + index);
 						SppSvc.setSelectedItem(index);
 
 					};
@@ -4652,7 +4652,7 @@ angular.module('ustodos').controller
 	})
 	.directive('onFinishRender', function ($timeout) {
 		// oct 2015 seems not called
-		//O.a('sss2');
+		//u_.U_o.a('sss2');
 		if (CONST_SHOW_INIT_ALERTS)
 			alert('inONLOADINIT#8  in directive(onFinishRender{');
 		$('div[id="idDivMainContentEditableInput"]').trigger('focus');
@@ -4668,7 +4668,7 @@ angular.module('ustodos').controller
 			link: function (scope, element, attr) {
 				if (scope.$last === true) {
 					$timeout(function () {
-						//O.a ('sss3');
+						//u_.U_o.a ('sss3');
 						// not hit?
 
 						if (CONST_SHOW_INIT_ALERTS)
@@ -4701,7 +4701,7 @@ angular.module('ustodos').controller
 			// see also
 			return function( ustodos, s)
 			{
-				//O.o ('========================= in filter 1b');
+				//u_.U_o.o ('========================= in filter 1b');
 				if ( document.ustodosFilterCacheDirty !== true )
 				{
 					alert ('returning cached ustodos ['+ustodos+'] filtered s [' + s + '] TimeSynched [' + document.ustodosLastCommitTimeSynched + ']');
@@ -4728,7 +4728,7 @@ angular.module('ustodos').controller
 					i++;
 
 					if (i % 100 === 0)
-						O.o ('======  filter do not keep');
+						u_.U_o.o ('======  filter do not keep');
 					//}
 
 					ustodosFiltered.push(ustodo);
@@ -4737,7 +4737,7 @@ angular.module('ustodos').controller
 				document.ustodosFilterCache = ustodosFiltered;
 				document.ustodosFilterCacheDirty = false;
 
-				//O.o ('@@@@@@@@@ filter done ustodosFiltered.length:'+ustodosFiltered.length);
+				//u_.U_o.o ('@@@@@@@@@ filter done ustodosFiltered.length:'+ustodosFiltered.length);
 
 				return document.ustodosFilterCache;
 			};
@@ -4758,7 +4758,7 @@ angular.module('ustodos').controller
 
 
 
-//O.a ('oneOfSeveral $routeProvider', '$locationProvider');
+//u_.U_o.a ('oneOfSeveral $routeProvider', '$locationProvider');
 //angular.module('ustodos')
 //	//.config (
 //	//['$locationProvider',
@@ -4782,14 +4782,14 @@ angular.module('ustodos').controller
 //	////})
 //	.directive('onFinishRender', function ($timeout) {
 //		// oct 2015 seems not called
-//		O.a('sss2');
+//		u_.U_o.a('sss2');
 //		alert ('done onload');
 //		return {
 //			restrict: 'A',
 //			link: function (scope, element, attr) {
 //				if (scope.$last === true) {
 //					$timeout(function () {
-//						//O.a ('sss3');
+//						//u_.U_o.a ('sss3');
 //						scope.$emit('ngRepeatFinished');
 //						alert('ngRepeatFinished');
 //					});
