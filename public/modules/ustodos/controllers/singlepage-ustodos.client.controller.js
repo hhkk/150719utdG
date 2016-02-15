@@ -31,7 +31,7 @@ var CONST_SHOW_INIT_ALERTS = false;
 var $ = $;
 var UtilPrintObjects = UtilPrintObjects;
 
-var UtilNLB_bgFade = UtilNLB_bgFade;
+var NLB_bgFade = NLB_bgFade;
 //var U_error = U_error;
 var UtilClassz = UtilClassz;
 
@@ -974,7 +974,8 @@ angular.module('ustodos').controller
 						alert('in testNLBfadeBg')      ;
 						//UtilNLB_bgFade.NLBfadeBg('div1hk','green', '#FFFFFF','1500');
 						alert('at this fade 1');
-						UtilNLB_bgFade.NLBfadeBg('ustodorow0','green', '#FFFFFF','3500');
+						u_.NLB_bgFade.NLBfadeBg('ustodorow0','green', '#FFFFFF','3500');
+
 					};
 
 
@@ -2202,7 +2203,7 @@ angular.module('ustodos').controller
 						// might have this passed in OK - check it and maybe can remove this loop
 						var updateCallBackIfErrorIndex = -1;
 						var updateCallBackIfError = function(errorResponse) {
-							UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+updateCallBackIfErrorIndex,'red', 'pink','100');
+							u_.NLB_bgFade.NLBfadeBg('numberWrapForFade'+updateCallBackIfErrorIndex,'red', 'pink','100');
 							document.getElementById('ustodorow'+updateCallBackIfErrorIndex).style['background-color'] = 'pink'; // SETMODELLDIRTY
 							//UtilNLB_bgFade.NLBfadeBg('ustodorow'+updateCallBackIfErrorIndex,'red', 'pink','100');
 
@@ -2235,7 +2236,7 @@ angular.module('ustodos').controller
 									updateCallBackIfErrorIndex = i;
 									$scope.ustodos[i].$update(function() { // bridge maps to ustodos.server.controller.js exports.update = function(req, res) { in server controller
 										//alert('at this fade 2');
-										UtilNLB_bgFade.NLBfadeBg('numberWrapForFade'+i,'greenyellow', '#FFFFFF','1500');
+										u_.NLB_bgFade.NLBfadeBg('numberWrapForFade'+i,'greenyellow', '#FFFFFF','1500');
 										//$scope.ustodos[i].html = newHtml;
 										var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+i);
 										//alert('at this fade 3');
@@ -3606,7 +3607,7 @@ angular.module('ustodos').controller
 
 						if (false) // green fade text
 						{
-							UtilNLB_bgFade.NLBfadeBg('numberWrapForFade1', 'green', '#FFFFFF', '1500');
+							u_.NLB_bgFade.NLBfadeBg('numberWrapForFade1', 'green', '#FFFFFF', '1500');
 						}
 
 						if (false) {

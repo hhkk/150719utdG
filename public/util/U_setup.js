@@ -66,6 +66,7 @@ u_.req ('C:/utd/150719utdG/public/util/U_o.js');
 u_.req ('C:/utd/150719utdG/public/util/U_error.js');
 u_.req ('C:/utd/150719utdG/public/util/UtilDate.js');
 u_.req ('C:/utd/150719utdG/public/util/UtilString.js');
+u_.req ('C:/utd/150719utdG/public/util/NLB_bgFade.js');
 
 /**
  * initialize u_ for global (server) and window (client) utility usage

@@ -4,22 +4,21 @@
 //utd[HtmlHref] = require('C:/utd/150719utdG/public/util/UtilHtmlHref.js');
 
 // 1107
-UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
-UtilClassz = require('C:/utd/150719utdG/public/util/UtilClass.js');
-UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
-UtilExceptionStack = require('C:/utd/150719utdG/public/util/UtilExceptionStack.js');
-UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
-UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
-UtilNLB_bgFade = require('C:/utd/150719utdG/public/util/NLB_bgFade.js');
-// hbkhbk7 U_error2 = require('C:/utd/150719utdG/public/util/U_error2.js');
-UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
-UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
-UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
-//ModuleTinymcePasteCleanFilter = require('C:/utd/150719utdG/public/lib/ustodo-browser-util/ModuleTinymcePasteCleanFilter.js');
+//UtilDate = require('C:/utd/150719utdG/public/util/UtilDate.js');
+//UtilClassz = require('C:/utd/150719utdG/public/util/UtilClass.js');
+//UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+//UtilExceptionStack = require('C:/utd/150719utdG/public/util/UtilExceptionStack.js');
+//UtilJsTypeDetect = require('C:/utd/150719utdG/public/util/UtilJsTypeDetect.js');
+//UtilHrefThisText = require('C:/utd/150719utdG/public/util/UtilHrefThisText.js');
+////UtilNLB_bgFade = require('C:/utd/150719utdG/public/util/UNLB_bgFade.js' +
+//	'');
+//// hbkhbk7 U_error2 = require('C:/utd/150719utdG/public/util/U_error2.js');
+//UtilPrintObjects = require('C:/utd/150719utdG/public/util/UtilPrintObjects.js');
+//UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+//UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
+////ModuleTinymcePasteCleanFilter = require('C:/utd/150719utdG/public/lib/ustodo-browser-util/ModuleTinymcePasteCleanFilter.js');
 
-O = require('C:/utd/150719utdG/public/util/U_o.js');
-O2 = require('C:/utd/150719utdG/public/util/U_o.js');
-O3 = require('C:/utd/150719utdG/public/util/U_o.js');
+//O = require('C:/utd/150719utdG/public/util/U_o.js');
 
 
 

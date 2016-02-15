@@ -139,21 +139,24 @@ String.prototype.hasUpperCase = function () {
 
 
 
+
+
+
+
+var test = false;
+if (test)
+{
+}
+
+
 var UtilString;
 
 u_setup('UtilString', 'endsWith', endsWith);  // hbkhbk8 u_.U_error.emitError
 u_setup('UtilString', 'convertNonBreakingSpace', convertNonBreakingSpace);  // hbkhbk8 u_.U_error.emitError
 u_setup('UtilString', 'convertRemoveTrailing10', convertRemoveTrailing10);  // hbkhbk8 u_.U_error.emitError
 
-
 if (typeof exports !== 'undefined') {
-    exports.endsWith = endsWith;
-    exports.convertNonBreakingSpace = convertNonBreakingSpace;
-    exports.convertRemoveTrailing10 = convertRemoveTrailing10;
-}
-
-
-var test = false;
-if (test)
-{
+	exports.endsWith = endsWith;
+	exports.convertNonBreakingSpace = convertNonBreakingSpace;
+	exports.convertRemoveTrailing10 = convertRemoveTrailing10;
 }
