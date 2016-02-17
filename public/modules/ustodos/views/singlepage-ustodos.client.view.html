@@ -417,11 +417,12 @@
 									<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
 									<!--</td>-->
 
-									<!-- 4.5 USER NAME-->
-									<td style="font-size:12px; width:6%;overflow: hidden">
-											&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.username"
-											  ></span>
+									<!--4.75 USER NAME (TITLE=ID) -->
+									<td style="font-size:8px; width:16%;overflow: hidden">
+										&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.username" title="'_id:' + {{ustodo.user._id}}"
+									></span>
 									</td>
+
 
 
 									<!--test hbkhbk see createOrSave in ustodos.server.controller.js -->
@@ -441,13 +442,6 @@
 
 									<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
 										<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
-									<!--</td>-->
-
-
-									<!-- 4.75 USER ID -->
-									<!--<td style="font-size:8px; width:6%;overflow: hidden">-->
-											<!--&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user._id"-->
-									<!--&gt;</span>-->
 									<!--</td>-->
 
 
@@ -490,6 +484,7 @@
 											 ng-focus='hkngfocustest($index)'
 											 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
 											 ng-bind-html="ustodosFiltered[$index].html"
+											 title="'_id:'+{{ustodo._id}}"
 										>
 										<!--hbkhbk3-->
 

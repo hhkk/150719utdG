@@ -208,7 +208,8 @@ app.factory('SppSvc', function() {
 	 * service to indicate if the editor contains non-saved content such that should not be overwritten
 	 * @param val
      */
-	itemsServiceFns.setModelDirty = function(val, caller) {
+	itemsServiceFns.setModelDirty = function(val, caller)
+	{
 		if (val)
 		{
 			//alert('setting dirty true caller:'+caller);
@@ -221,8 +222,9 @@ app.factory('SppSvc', function() {
 				var elem = null;
 				if (document.getElementById('idTinyMceTextArea_ifr'))
 				{
-					//alert ("is not null");
-					var mceWindowElement = document.getElementById('idTinyMceTextArea_ifr').contentWindow.document.getElementById('tinymce'); // http://stackoverflow.com/questions/14451358/how-to-pick-element-inside-iframe-using-document-getelementbyid
+					alert ("is not null");
+					// http://stackoverflow.com/questions/14451358/how-to-pick-element-inside-iframe-using-document-getelementbyid
+					var mceWindowElement = document.getElementById('idTinyMceTextArea_ifr').contentWindow.document.getElementById('tinymce');
 					if (document.getElementById('idTinyMceTextArea_ifr').contentWindow.document.getElementById('tinymce'))
 					{
 						//alert ('in eventMouseoverRow2:C');
@@ -253,189 +255,12 @@ app.factory('SppSvc', function() {
 				document.getElementById(elemId).style.visibility='hidden';
 
 		}
+
 		//if (document.getElementById('mceu_57-body').style.visibility==='hidden')
 		//	document.getElementById('mceu_57-body').style.visibility='visible';
 		//else
 		//	document.getElementById('mceu_57-body').style.visibility='hidden';
 		//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		//
 		//{

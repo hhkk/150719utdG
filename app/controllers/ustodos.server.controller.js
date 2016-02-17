@@ -1,3 +1,4 @@
+
 'use strict';
 
 //if (global !== 'undefined')
@@ -92,21 +93,20 @@ var callcountSaved = 0;
 //   2 more detailed: search for: var ustodo = new Ustodos
 
 
-function createOrSave(ustodo, user, res) {
-	// with or without _doc seems to work, at least for schema elements
-	ustodo._doc.html = ustodo._doc.html.trim();
-	ustodo._doc.timely = 'yes';              // even w/o mongoose schema element, on server side, new attr here goes to db.
-	//ustodo.dog = 'cat';                    // right: but same not true w/o _doc
-
+function createOrSave(ustodo, res) {
 
 	// hbkhbk ustodo._doc.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html); // xxd
 	// works ustodo._doc.testArray2 = ['a','b'];
 	//ustodo._doc.hkhkhk = 'hi hkhkhk'; _// doc gets to the DB and to the UI therefore
-	ustodo._doc.user = user; // is this a test of an object sav?
+	//ustodo._doc.username = user.username; // is this a test of an object sav?
+	//ustodo._doc.user = user; // is this a test of an object sav?
+	ustodo._doc.timely = 'yes';              // even w/o mongoose schema element, on server side, new attr here goes to db.
 	try {
 		// do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
-		if (false)
-		 ustodo._doc.html = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
+		// with or without _doc seems to work, at least for schema elements
+		ustodo._doc.html = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
+		ustodo._doc.html = ustodo._doc.html.trim();
+		//ustodo.dog = 'cat';                    // right: but same not true w/o _doc
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
 		O.e('err in expandUrlsToHrefsReturnPatchedStr:' + err);
@@ -202,7 +202,9 @@ exports.create = function(req, res)
 	u_.U_o.o('2222222222233333333333333333333 in ustodos.server.controller.js: create');
 	// ustodo is a model object with getters and setters derived from the
 	var ustodo = new Ustodo(req.body);
-	createOrSave(ustodo, req.user, res);
+	ustodo.user = req.user;
+
+	createOrSave(ustodo, res);
 
 };
 
@@ -224,7 +226,7 @@ exports.update = function(req, res)
 	u_.U_o.o(' *************** Top of [exports.create] in [ustodos.server.controller.js]');
 	var ustodo = req.ustodo ;
 	ustodo = _.extend(ustodo , req.body); // needed?
-	createOrSave(ustodo, req.user, res);
+	createOrSave(ustodo, res);
 
 
 
@@ -677,13 +679,16 @@ exports.hasAuthorization = function(req, res, next) {
 			u_.U_o.o ('req.user.id:'+req.body.id);
 		else
 			u_.U_o.o ('no req.body.id');
-
-		if (req.user.id)
-			u_.U_o.o ('req.user.id:'+req.user.id);
-		else
-			u_.U_o.o ('no req.user.id');
-
-		if (req.ustodo._doc.user.id !== req.user.id) // eg, req.user.id = 5673beb86797f3643033dbf7
+        //
+		u_.U_o.o ('donehk');
+		//if (req.user.id)
+		//	u_.U_o.o ('req.user.id:'+req.user.id);
+		//else
+		//	u_.U_o.o ('no req.user.id');
+        //
+		//if (req.ustodo._doc.username !== req.user._doc.username ) // eg, req.user.id = 5673beb86797f3643033dbf7
+		// does doc.user._id == req.user._id
+		if (req.ustodo._doc.user._doc._id.id !== req.user._doc._id.id ) // eg, req.user.id = 5673beb86797f3643033dbf7
 		{
 
 			u_.U_o.o ('!!!!!!!!!!!!!!!!ERROR User is not authorized for action (not owns the record?).  req.ustodo.user.id  [' + req.ustodo.user.id  + ']  req.user.id [' + req.user.id + ']');
