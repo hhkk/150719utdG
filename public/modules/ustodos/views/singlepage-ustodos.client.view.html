@@ -419,7 +419,7 @@
 
 									<!--4.75 USER NAME (TITLE=ID) -->
 									<td style="font-size:8px; width:16%;overflow: hidden">
-										&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.username" title="'_id:' + {{ustodo.user._id}}"
+										&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.username" title="{{ustodo.user._id}}"
 									></span>
 									</td>
 
@@ -484,7 +484,7 @@
 											 ng-focus='hkngfocustest($index)'
 											 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
 											 ng-bind-html="ustodosFiltered[$index].html"
-											 title="'_id:'+{{ustodo._id}}"
+											 title="'xx:'+{{ustodo._id}}"
 										>
 										<!--hbkhbk3-->
 
@@ -503,15 +503,15 @@
 			</table>
 		</div>
 
-	<!--<span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span>f-->
-	<!--<span id="contentx{{$index}}" contenteditable="true"f-->
-	<!--onclick = "this.contentEditable = true;"f-->
-	<!--onmouseover="this.contentEditable = false;f-->
-	<!--this.ustodo_innerhtmlpre = this.innerHTML;"f-->
-	<!--onmouseout = "this.contentEditable = false;f-->
-	<!--"f-->
-	<!--ng-bind-html="ustodos[$index].html"></span>f-->
-	</div>
+		<!--<span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span>f-->
+		<!--<span id="contentx{{$index}}" contenteditable="true"f-->
+		<!--onclick = "this.contentEditable = true;"f-->
+		<!--onmouseover="this.contentEditable = false;f-->
+		<!--this.ustodo_innerhtmlpre = this.innerHTML;"f-->
+		<!--onmouseout = "this.contentEditable = false;f-->
+		<!--"f-->
+		<!--ng-bind-html="ustodos[$index].html"></span>f-->
+	</span>
 	<!--<section class="navbar-fixed-bottom" style="background-color:pink"-->
 			 <!--data-ng-controller="FooterController"-->
 			 <!--ng-init="keyCount=0;ngInitTopLevel()">-->

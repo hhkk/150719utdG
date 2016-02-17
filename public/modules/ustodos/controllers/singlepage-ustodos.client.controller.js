@@ -210,6 +210,8 @@ app.factory('SppSvc', function() {
      */
 	itemsServiceFns.setModelDirty = function(val, caller)
 	{
+		alert('setting service model ditry flag to:' + val);
+
 		if (val)
 		{
 			//alert('setting dirty true caller:'+caller);
