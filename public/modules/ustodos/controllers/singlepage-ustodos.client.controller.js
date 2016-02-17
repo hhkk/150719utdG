@@ -210,7 +210,7 @@ app.factory('SppSvc', function() {
      */
 	itemsServiceFns.setModelDirty = function(val, caller)
 	{
-		alert('setting service model ditry flag to:' + val);
+		//	alert('setting service model ditry flag to:' + val);
 
 		if (val)
 		{
@@ -224,7 +224,7 @@ app.factory('SppSvc', function() {
 				var elem = null;
 				if (document.getElementById('idTinyMceTextArea_ifr'))
 				{
-					alert ("is not null");
+					//alert ("is not null");
 					// http://stackoverflow.com/questions/14451358/how-to-pick-element-inside-iframe-using-document-getelementbyid
 					var mceWindowElement = document.getElementById('idTinyMceTextArea_ifr').contentWindow.document.getElementById('tinymce');
 					if (document.getElementById('idTinyMceTextArea_ifr').contentWindow.document.getElementById('tinymce'))
@@ -2279,7 +2279,7 @@ angular.module('ustodos').controller
 							//}
 						} catch (e) {
 							if (processFailure)
-								U_error.emitError ('era3', e);
+								u_.U_error.emitError ('era3', e);
 							throw e;
 						}
 					};
@@ -2611,8 +2611,10 @@ angular.module('ustodos').controller
 						//alert ('$scope.getTextHtmlAndValueInShowingEditor() ['+ $scope.getTextHtmlAndValueInShowingEditor().xText + ']');
 						if (
 							// if no item is selected and model is  selected, if not
-							(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty('singlepage')
-						) 						|| 						$scope.isCurrentEditorEmpty())
+							(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty('singlepage'))
+							||
+							$scope.isCurrentEditorEmpty()
+						)
 						{
 							//if ($scope.mouseoverlock !== 'on') {
 							//$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));

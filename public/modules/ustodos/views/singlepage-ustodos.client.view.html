@@ -11,11 +11,6 @@
 
 
 
-
-
-
-
-
 	<!--<div data-ng-include="'/modules/ustodos/views/singlepage-ustodos-top-part.client.view.html'"></div>-->
 
 	<!--<div data-ng-include="'/modules/core/views/footer.client.view.html'" class="navbar-fixed-bottom"></div >-->
@@ -116,6 +111,7 @@
 			 '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
 			 -->
 		</span>
+
 		<span id='hkidtoolbars' style="display: none">
 			<!-- section_toolbar
 			.----------------. .----------------. .----------------. .----------------. .----------------. .----------------. .----------------.
@@ -340,131 +336,124 @@
     					'
 					>
 					<div id='perRowOnly'>
-							 <span id="topLevelTableRow{{$index}}"
-									 ng-mouseover="this.eventMouseoverRow2($index)"
-									 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
-							 >
+						<span id="topLevelTableRow{{$index}}"
+								 ng-mouseover="this.eventMouseoverRow2($index)"
+								 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
+						>
 
-								<tr  ng-repeat='ustodo in ustodosFiltered'
-									 ng-class-odd="'odd'"
-									 ng-class-even="'even'"
-									 ng-mouseover="this.eventMouseoverRow2($index)"
-									 repeat-done="layoutDone()"
-									 on-finish-render="ngRepeatFinished"
-									 ng-cloak
-								>
+							<tr id="hbkid"  ng-repeat='ustodo in ustodosFiltered'
+								 ng-class-odd="'odd'"
+								 ng-class-even="'even'"
+								 ng-mouseover="this.eventMouseoverRow2($index)"
+								 repeat-done="layoutDone()"
+								 on-finish-render="ngRepeatFinished"
+								 ng-cloak
+							>
 
 
-									<!-- 1 PER ROW COUNT AND CHECK BOX -->
-									<td style="width:3%">
-										<span id='numberWrapForFade{{$index}}'>
-										{{$index+1}}
-										</span>
+								<!-- 1 PER ROW COUNT AND CHECK BOX -->
+								<td style="width:3%">
+									<span id='numberWrapForFade{{$index}}'>
+									{{$index+1}}
+									</span>
 
-										<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
-										<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox{{ustodo.html}}"' type="checkbox"/>-->
-										<!--&nbsp;<input ng-click='checkBoxClickedSingle(ustodos[$index]._id)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>-->
-										&nbsp;<input ng-click='checkBoxClickedSingle($index)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>
-										<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox"' type="checkbox"/>-->
-									</td>
+									<!--ustodo[$index].html.indexOf("http"):{{this.ustodos[$index].html.indexOf("http")}}-->
+									<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox{{ustodo.html}}"' type="checkbox"/>-->
+									<!--&nbsp;<input ng-click='checkBoxClickedSingle(ustodos[$index]._id)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>-->
+									&nbsp;<input ng-click='checkBoxClickedSingle($index)' id='idcheckbox{{$index}}' class='chkbox' title='Select for bulk operation' type="checkbox"/>
+									<!--&nbsp;<input ng-click='testButton($index)' id='idcheckbox"' type="checkbox"/>-->
+								</td>
 
-									<!-- 2 PER ROW DELETE BUTTON -->
-									<td style="width:3%">
-										<!-- trash garbage icon -->
-										&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
-														 alt="{{image.name}}"  title='Delete immediately'
-														 ng-click="deleteDbUstotoOneByIndex([$index])"
+								<!-- 2 PER ROW DELETE BUTTON -->
+								<td style="width:3%">
+									<!-- trash garbage icon -->
+									&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
+													 alt="{{image.name}}"  title='Delete immediately'
+													 ng-click="deleteDbUstotoOneByIndex([$index])"
+										>
+									&nbsp
+									<!--ng-show="nowShowing==$index"-->
+									<!--ng- repeat="image in images"-->
+									<!--class="gallery-image fade-animation"-->
+								</td>
+
+								<!-- 3 PER ROW SAVE BUTTON -->
+								<td style="width:3%" >
+									<!--<button ng-click="count = count + 1" ng-init="count=0">-->
+									<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
+
+									<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
+
+									<img id="savimg{{$index}}" class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
+										 alt="{{image.name}}"
+										 ng-click="saveUstodoGiven(ustodo, $index)"
 											>
-										&nbsp
-										<!--ng-show="nowShowing==$index"-->
-										<!--ng- repeat="image in images"-->
-										<!--class="gallery-image fade-animation"-->
-									</td>
+									&nbsp;
+								</td>
 
-									<!-- 3 PER ROW SAVE BUTTON -->
-									<td style="width:3%" >
-										<!--<button ng-click="count = count + 1" ng-init="count=0">-->
-										<!--<button ng-click="alignAnUstodoWithUstodoHtmlByIndex($index)">SAV</button>-->
-
-										<!--<img height=15 ng-src="/img/gnome_edit_save.jpg"-->
-
-										<img id="savimg{{$index}}" class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
-											 alt="{{image.name}}"
-											 ng-click="saveUstodoGiven(ustodo, $index)"
-												>
-										&nbsp;
-									</td>
-
-									<!-- PER ROW COUNT -->
-									<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
+								<!-- PER ROW COUNT -->
+								<!--<td>{{$index+1}} <span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span></td>-->
 
 
 
 
-									<!-- 4 PER ROW TIME AGO -->
-									<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
-									<td style="width:3%">
-										&nbsp;
-										<span class="per-row-count"
-													data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
-													ng-click="event_click_timeAgo(ustodo._id)"
-													title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}>
-										</span>
-									</td>
-									<!--<td>{{ ustodo.text}}</td>f-->
+								<!-- 4 PER ROW TIME AGO -->
+								<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
+								<td style="width:3%">
+									&nbsp;
+									<span class="per-row-count"
+												data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
+												ng-click="event_click_timeAgo(ustodo._id)"
+												title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}>
+									</span>
+								</td>
+								<!--<td>{{ ustodo.text}}</td>f-->
 
-									<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
+								<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
+								<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
+								<!--</td>-->
+
+								<!--4.75 USER NAME (TITLE=ID) -->
+								<td style="font-size:8px; width:16%;overflow: hidden">
+									&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.username" title="{{ustodo.user._id}}"
+								></span>
+								</td>
+
+
+
+								<!--test hbkhbk see createOrSave in ustodos.server.controller.js -->
+								<td alt={{ustodo.arrUrlUtdsFromHtml[0].title}}  style="font-size:12px; width:6%;overflow: hidden">
+									&nbsp;<span data-ng-bind="ustodo.arrUrlUtdsFromHtml[0].title"></span>
+								</td>
+
+								<!-- 4.5 DISPLAY NAME-->
+								<!--<td style="font-size:12px; width:6%;overflow: hidden">-->
+									<!--&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.displayName"-->
+										  <!--&gt;</span>-->
+								<!--</td>-->
+								<!--<td>{{ ustodo.text}}</td>f-->
+
+
+								<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
 									<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
-									<!--</td>-->
-
-									<!--4.75 USER NAME (TITLE=ID) -->
-									<td style="font-size:8px; width:16%;overflow: hidden">
-										&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.username" title="{{ustodo.user._id}}"
-									></span>
-									</td>
+								<!--</td>-->
 
 
 
-									<!--test hbkhbk see createOrSave in ustodos.server.controller.js -->
-									<td alt={{ustodo.arrUrlUtdsFromHtml[0].title}}  style="font-size:12px; width:6%;overflow: hidden">
-										&nbsp;<span data-ng-bind="ustodo.arrUrlUtdsFromHtml[0].title"
-									></span>
-									</td>
-
-
-									<!-- 4.5 DISPLAY NAME-->
-									<!--<td style="font-size:12px; width:6%;overflow: hidden">-->
-										<!--&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.displayName"-->
-											  <!--&gt;</span>-->
-									<!--</td>-->
-									<!--<td>{{ ustodo.text}}</td>f-->
-
-
-									<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
-										<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
-									<!--</td>-->
-
-
-
-
-
-
-									<!--consider http://weblogs.asp.net/bleroy/css-isolation-there-has-got-to-be-a-better-way-->
-									<!-- 5.0 PER ROW TEXT CONTENTEDITABLE ROW -->
-									<td
-										id="idConentEditableRow{{$index}}"
-										style='xxwidth:50%;
-										word-wrap: break-word;
-										zzbackground-color: yellow;
-										white-space: nowrap;
-										overflow: auto;'
+								<!--consider http://weblogs.asp.net/bleroy/css-isolation-there-has-got-to-be-a-better-way-->
+								<!-- 5.0 PER ROW TEXT CONTENTEDITABLE ROW -->
+								<td id="idConentEditableRow{{$index}}"
+									style='xxwidth:50%;
+									word-wrap: break-word;
+									zzbackground-color: yellow;
+									white-space: nowrap;
+									overflow: auto;'
 									/*visible|hidden|scroll|auto|initial|inherit*/
 									/*-moz-hyphens:auto;*/
 									/*-webkit-hyphens:auto;*/
 									/*-o-hyphens:auto;*/
 									/*hyphens:auto;*/
-
-									>
+								                    >
 									<!--ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)" hbkhbk-->
 									<!-- works cc{{$index}}dd-->
 									<!--<iframe id="idPerRowIframe{{$index}}" >-->
@@ -487,21 +476,18 @@
 											 title="'xx:'+{{ustodo._id}}"
 										>
 										<!--hbkhbk3-->
-
 										</div>
-
-										<!--</iframe>-->
 									</span>
-
-									<!--/onclick = "this.contentEditable = true;"-->
-									</td>
-								</tr>
-							</span>
+								</td>
+							</tr>
+						</span>
 					</div>
-
 				</tbody>
+
+					<!--/onclick = "this.contentEditable = true;"-->
 			</table>
 		</div>
+	</span>
 
 		<!--<span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span>f-->
 		<!--<span id="contentx{{$index}}" contenteditable="true"f-->
@@ -511,7 +497,6 @@
 		<!--onmouseout = "this.contentEditable = false;f-->
 		<!--"f-->
 		<!--ng-bind-html="ustodos[$index].html"></span>f-->
-	</span>
 	<!--<section class="navbar-fixed-bottom" style="background-color:pink"-->
 			 <!--data-ng-controller="FooterController"-->
 			 <!--ng-init="keyCount=0;ngInitTopLevel()">-->
@@ -525,45 +510,41 @@
 	<!--<script type="text/javascript" src="/util/U_errorsx.js"></script>-->
 
 	<script>
-
-
 		$(document).ready(function() {
-			//alert('in view file (document).ready');
-			var elemId = 'mceu_57';
-			//if (document.getElementById(elemId) !== null)
+				//alert('in view file (document).ready');
+				var elemId = 'mceu_57';
+			});
+		//if (document.getElementById(elemId) !== null)
+		//{
+			//alert ('1123123');
+			//	if (document.getElementById('mceu_57').style.visibility==='hidden')
+			//		document.getElementById('mceu_57').style.visibility='visible';
+			//	else
+			//		document.getElementById('mceu_57').style.visibility='hidden';
+			//if (document.getElementById(elemId).style.visibility==='visible')
 			//{
-				//alert ('1123123');
-				//	if (document.getElementById('mceu_57').style.visibility==='hidden')
-				//		document.getElementById('mceu_57').style.visibility='visible';
-				//	else
-				//		document.getElementById('mceu_57').style.visibility='hidden';
-				//if (document.getElementById(elemId).style.visibility==='visible')
-				//{
-				//document.getElementById(elemId).style.visibility='hidden';
-				//alert ('1123123c');
+			//document.getElementById(elemId).style.visibility='hidden';
+			//alert ('1123123c');
 
-				//}
-				//else
-				//	document.getElementById(elemId).style.visibility='hidden';
 			//}
+			//else
+			//	document.getElementById(elemId).style.visibility='hidden';
+		//}
 
-			//document.getElementById('imageIdRedPEncilbnw').width= 1000;
-			//alert ("asdasda:"+document.getElementById('imageIdRedPEncil').style.visibility);
-			//document.getElementById('imageIdRedPEncil').style.visibility='visible';
+		//document.getElementById('imageIdRedPEncilbnw').width= 1000;
+		//alert ("asdasda:"+document.getElementById('imageIdRedPEncil').style.visibility);
+		//document.getElementById('imageIdRedPEncil').style.visibility='visible';
 
-			//alert ('ttttttt in ready ['+ document.getElementById('imageIdRedPEncilbnw').width +']');
-			//document.getElementById('imageIdRedPEncilbnw').width = 200;
-//			document.getElementById('imageIdRedPEncil').style.visibility='visible';
+		//alert ('ttttttt in ready ['+ document.getElementById('imageIdRedPEncilbnw').width +']');
+		//document.getElementById('imageIdRedPEncilbnw').width = 200;
+		//			document.getElementById('imageIdRedPEncil').style.visibility='visible';
 
-//			setTimeout(function(){
-//				//alert ('you stopped typing seconds are up - filter  !!');
-//				document.getElementById('imageIdRedPEncil').style.visibility='visible';
-//			}
-//			,500); // millisecond timer
+		//			setTimeout(function(){
+		//				//alert ('you stopped typing seconds are up - filter  !!');
+		//				document.getElementById('imageIdRedPEncil').style.visibility='visible';
+		//			}
+		//			,500); // millisecond timer
 
-
-
-		});
 	</script>
 </section>
 
