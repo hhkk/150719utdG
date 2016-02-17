@@ -158,6 +158,12 @@ body.ng-cloak
 	width:90%
 }
 
+
+#idDivMainContentEditableInput
+{
+	height:200px
+}
+
 /*#idDivForTinyMceEditorTextarea*/
 /*{*/
 /*display:block*/
