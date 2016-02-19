@@ -608,6 +608,7 @@ angular.module('ustodos').controller
 					$scope.modelCheckboxCtrlEnterToSave = false;
 					$scope.reloadWarning = false;
 					$scope.q = null; // current query
+					$scope.bindToTextBox = null; // current textbox to display
 					$scope.numberCheckboxesChecked = 0;
 					$scope.includeMceHtmlPasteFilter = true;
 					//alert ('set gblx.modelDirty  = false;')
@@ -710,10 +711,7 @@ angular.module('ustodos').controller
 
 							// this is an HTMLObject I think, with main prop x[0].innerHTML aka x[0].innerText
 							//var x = document.getElementsByClassName("WholePage");
-							if (CONST_SHOW_INIT_ALERTS)
-								alert ('inONLOADINIT#5 $viewContentLoaded:');
 							//console.log (' @@@@@@@@@@inONLOADINIT#5 $viewContentLoaded:' + x.length);
-
 
 							//alert ('pre1 $state.get');
 							//alert ($state.get());
@@ -744,17 +742,34 @@ angular.module('ustodos').controller
 							$scope.title2 = '$scope.title2 from ustodo client controller';
 
 
-							var q = $location.$$search.q;
-							if (q) {
-								$scope.q = q;
-								//alert('processcommand#1');
-								$scope.processCommand($scope.enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.URL, q, q, q);
-								//$scope.setTextInShowingEditor(q, 'line 275 main');
 
-							} else {
-								//alert('processcommand#2');
-								$scope.processCommand($scope.enumCommands.COMMAND_SEARCH, 'CLIENT JS line 2355', '*', '*', '*');
-							}
+							// from Chrome debugger
+							//LocationHashbangUrl {$$protocol: "http", $$host: "localhost", $$port: 3000, $$path: "/", $$search: Object…}
+							//$$absUrl: "http://localhost:3000/#!/?q=4444ffccffckkk"
+							//$$compose: ()
+							//$$hash: ""
+							//$$host: "localhost"
+							//$$parse: (url)
+							//$$parseLinkUrl: (url, relHref)
+							//$$path: "/"
+							//$$port: 3000
+							//$$protocol: "http"
+							//$$replace: false
+							//$$search: Object
+							//q: "4444ffccffckkk"   <----------------------------------------
+							//__proto__: Object
+							//$$url: "/?q=4444ffccffckkk"
+							//__proto__: Object
+
+							// hbkhbk10
+							if (typeof ($location.$$search.q) === 'undefined')
+								$scope.q = '*';
+							else
+								$scope.q = $location.$$search.q
+							//alert('call processCommand w $scope.q:' + $
+							// scope.q);
+							$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
+																$scope.enumProcessCommandCaller.URL, $scope.q, $scope.q, $scope.q);
 						}
 						catch(err)
 						{
@@ -789,7 +804,7 @@ angular.module('ustodos').controller
 
 						//$scope.localTinyMceInit(); // hbklrb11
 						// $scope.localTinyMceInit();  // hbkeak
-						alert('may want to focus on input editor here');
+						//alert('may want to focus on input editor here'); // hbkhbk10
 						//tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
 					};
 
@@ -798,9 +813,7 @@ angular.module('ustodos').controller
 						//UtilNLB_bgFade.NLBfadeBg('div1hk','green', '#FFFFFF','1500');
 						alert('at this fade 1');
 						u_.NLB_bgFade.NLBfadeBg('ustodorow0','green', '#FFFFFF','3500');
-
 					};
-
 
 					$scope.ngInitTinyMceButton = function()
 					{
@@ -1020,6 +1033,7 @@ angular.module('ustodos').controller
 
 
 
+					// bulk commented 160217
 					//$scope.localTinyMceInit = function (includeHtmlCleaner) //
 					//{
                     //
@@ -1412,7 +1426,7 @@ angular.module('ustodos').controller
 					//			}					);
                     //
                     //
-					//			ed.addButton('example', {
+					//			ed.addButton('example', {                            qq
 					//				text: 'My title',
 					//				//image: '/img/EditPencilBnW.png',
 					//				onclick: function() {
@@ -2286,6 +2300,7 @@ angular.module('ustodos').controller
 					// set text shown for mouseover
 
 					// section_per_editor 3
+					// hbkhbk10
 					$scope.setTextInShowingEditor = function(e, callerID, processFailure)
 					{
 						try {
@@ -2297,6 +2312,7 @@ angular.module('ustodos').controller
 							//alert ('+++++++++ in setTextInShowingEditor target INPUT_3_MCE e:' + e);
 							if (tinyMCE.activeEditor !== null)
 							{
+								alert ('in tinyMCE.activeEditor');
 								if (u_.UtilJsTypeDetect.isString(e)) {
 									//tinyMCE.get('idTinyMceTextArea').setContent(e);
 									//alert('setttt');
@@ -2310,6 +2326,13 @@ angular.module('ustodos').controller
 									//alert ('in setTextInShowingEditor NOT as string e [' + e + '] callerID [' + callerID + ']');
 									tinyMCE.activeEditor.setContent(e.innerHTML);
 								}
+							}
+							else {
+								//if ($scope.ustodos && $scope.ustodos.length > 0 ) // hbkhbk10
+									//$scope.bindToTextBox = 'hi mom!'; // $scope.ustodos[0];
+									//$scope.bindToTextBox = $scope.ustodos[0].html; // $scope.ustodos[0];
+								//else
+									$scope.bindToTextBox = $scope.q;
 							}
 							//        break;
 							//
@@ -2501,7 +2524,7 @@ angular.module('ustodos').controller
 					$scope.eventHandlerEditorcontentChange = function(enumKeyEvent, data, html, text)
 					{
 						// hbkhbk3
-						//alert( 'in eventHandlerEditorcontentChange');
+						alert( 'in eventHandlerEditorcontentChange');
 						try {
 
 							//document.getElementById('idInputTextFilter').value = text;
@@ -2554,7 +2577,7 @@ angular.module('ustodos').controller
 							//
 
 							//              alert ('text.asciiTable()1:');
-							//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
+							alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
 							text = u_.UtilString.convertNonBreakingSpace(text);
 							text = u_.UtilString.convertRemoveTrailing10(text);
 							alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
@@ -3094,6 +3117,16 @@ angular.module('ustodos').controller
 						//	}
 						//});
 
+						// from http://stackoverflow.com/questions/3553041/how-can-you-catch-a-contenteditable-paste-event
+						document.getElementById('idDivMainContentEditableInput').onpaste = function(d) {
+							alert(d.clipboardData.);
+							// doSomething()
+							//alert('in mainContentEditable onpaste');
+							//return false; // to prevent user insert
+							return false; // to allow user insert
+						}
+
+
 						// hbkhbk4 copied down
 						$(function () {
 							$('[contenteditable=\'true\']').keydown
@@ -3112,6 +3145,7 @@ angular.module('ustodos').controller
 									return ;
 								});
 							});
+
 
 
 
@@ -3141,7 +3175,7 @@ angular.module('ustodos').controller
 							';
 
 						var sMid = encodeURIComponent($scope.ustodosFiltered[0].html);
-						var sAll = sPre + sMid + sPost;
+						var sAll = sPre + 'hi dad!' + sMid + sPost;
 						//var sAll = sPre + sPost;
 						document.getElementById('idPerRowIframeTop').src = 'data:text/html;charset=utf-8,' + sAll;
 
@@ -4013,7 +4047,7 @@ angular.module('ustodos').controller
 
 
 					var callbackFromQuery = function(arrayUstodosResources) {
-						//alert ('in callbackFromQuery post get callback');
+						//alert ('in callbackFromQuery post get callback:'+$scope.ustodos);
 						$scope.ustodos = arrayUstodosResources;
 
 						// consider interleaving URLs here
@@ -4034,24 +4068,20 @@ angular.module('ustodos').controller
 					 * @param xHtml
 					 * @param xValue maybe aka data?
 					 */
-					$scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml, xValue)
+					$scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml)
 					{
 						var utdUserCommand = new UtdUserCommand(xText, xHtml);
 						//alert ('in processCommand caller [' + enumProcessCommandCaller + ']')
 						//u_.U_o.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');
 						//u_.U_o.o ('2 ===================== in processCommand for 2 xHtml [' + xHtml + ']');
-						//u_.U_o.o ('3 ===================== in processCommand for 3 xValue [' + xValue + ']');
 
 						SppSvc.setSelectedItem(-1);
 
 						//$scope.setTextInShowingEditor(xValue);
 
-						//alert (' =========================== in processcommand callerId [' +
-						//callerId + '] xValue' + '[' + xValue + ']' );
 						try
 						{
 							//$scope.searchedForAsLink = 'http://ibm.com/test';
-							//u_.U_o.o ('============================= in xValue [' + xValue + ']');
 							//u_.U_o.o ('============================= in html2text [' + UtilHrefThisText.html2text(xValue)+ ']');
 							// <a target='_blank' href='http://ibm.com'>http://ibm.com</a>
 

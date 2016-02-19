@@ -335,20 +335,6 @@ function testHBK2()
 	console.log ('++++++++++++++++++++++++++++++++++++ testHBK2');
 }
 
-var UtilHtmlCleaner;
-
-u_setup('UtilHtmlCleaner', 'utilHtmlCleanerFunctions', utilHtmlCleanerFunctions);
-u_setup('UtilHtmlCleaner', 'handlepaste', handlepaste);
-u_setup('UtilHtmlCleaner', 'isHTML2', isHTML2);
-
-if (typeof exports !== 'undefined')
-{
-    exports.utilHtmlCleanerFunctions = utilHtmlCleanerFunctions;
-    exports.handlepaste = handlepaste;
-    exports.isHTML2 = isHTML2;
-
-	// UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(strm ...)
-}
 
 // TESTS
 
@@ -389,3 +375,20 @@ if (false) // test html to text converter
 
 
 
+//from C:\utd\150719utdG\app\controllers\ustodos.server.controller.js
+//ustodo._doc.html = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
+
+var UtilHtmlCleaner;
+
+u_setup('UtilHtmlCleaner', 'utilHtmlCleanerFunctions', utilHtmlCleanerFunctions);
+u_setup('UtilHtmlCleaner', 'handlepaste', handlepaste);
+u_setup('UtilHtmlCleaner', 'isHTML2', isHTML2);
+
+if (typeof exports !== 'undefined')
+{
+	exports.utilHtmlCleanerFunctions = utilHtmlCleanerFunctions;
+	exports.handlepaste = handlepaste;
+	exports.isHTML2 = isHTML2;
+
+	// UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(strm ...)
+}

@@ -37,6 +37,12 @@
 		<!--style='height:32px;'-->
 		<!--/>-->
 
+
+
+
+
+
+
 		<div id="testIframeReplace">
 			this <span style="color:red">is</span> a test
 		</div>
@@ -46,7 +52,13 @@
 			xxx
 		<iframe id="idPerRowIframeTop" class="classPerRowIframexxx" width="100%" height="200" >
 		</iframe>
-		rrr
+
+
+
+
+
+
+
 		<span ng-keyup='onKeyUp("line 63", $event, this.ENUM_KEYEVENTCALLER_KEYUPSPAN)'>
 
 			<!--<input class="hkToolbarElement" type='image'-->
@@ -75,6 +87,7 @@
 
 
 
+			<!-- commented feb 17 2016 -->
 			<!--&lt;!&ndash; ================ INPUT#3 ======================== &ndash;&gt;-->
 			<!--<div id='idDivForTinyMceEditorTextarea'>-->
 				<!--&lt;!&ndash;was Search / Input&ndash;&gt;-->
@@ -104,15 +117,15 @@
 			<!-- hbkhbk -->
 			<div
 
-				id='idDivMainContentEditableInput'
-				 contenteditable="true" style='background-color:lightgrey'
-				 ng-keyup="onKeyUp_MainContentEditable($event)"
-				 ng-bind-html="ustodosFiltered[$index].html"
-				 style="isolation: isolate"
-
+					id='idDivMainContentEditableInput'
+					contenteditable="true" style='background-color:lightgrey'
+					ng-keyup="onKeyUp_MainContentEditable($event)"
+					ng-bind-html="bindToTextBox"
+					style="isolation: isolate"
 			>
-				Search / Input
+				<!--ng-bind-html="ustodosFiltered[$index].html"-->
 			</div>
+			xxd
 			<br>
 			<span>
 			</span>
