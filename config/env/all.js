@@ -2,7 +2,7 @@
 
 
 // this file runs only on the server side ;
-console.log ('hbkhbkhbk============================================');
+console.log ('in all.js ============================================');
 module.exports = {
 	app: {
 		title: 'MEAN.JS',

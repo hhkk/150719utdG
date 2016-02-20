@@ -9,13 +9,14 @@
  * Time: 3:55 PM
  * To change this template use File | Settings | File Templates.
  */
-// from entry.js U_error = require('C:/utd/150719utdG/public/util/U_error.js');
+// from entry.js U_error = require('C:/utd/150719utdG/public/util/UtilError.js');
 
 console.log ('in U_error2.js');
 
-function ox (desc) // hbkhbk8
+function ox (desc)
 {
-	console.log('+_+_+_+_+_+_+_+_+_+_+_ from ox u_.U_error2.emitError2 hbkhbk7:' + desc);
+	console.log('+_+_+_+_+_+_+_+_+_+_+_ from ox u_.U_error2.emitError2 :' + desc);
+	console.log('+_+_+_+_+_+_+_+_+_+_+_ from ox u_.U_error2.emitError2 :' + desc);
 }  //
 
 function emitError2 (desc, err)
@@ -23,7 +24,7 @@ function emitError2 (desc, err)
 	console.log('from u_.U_error2.emitError2:' + desc);
 }  //
 
-// hbkhbk8
+//
 //var global = global || {};
 
 
@@ -41,7 +42,7 @@ function emitError2 (desc, err)
 //		global.u_.hbk2 = 'hbk3';
 //	} catch (err) {
 //		// do nothing - no global on client
-//		console.log('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+//		console.log('xxxxxxxxxxxxxxx0:' + err); //
 //	}
 //}
 //
@@ -57,7 +58,7 @@ function emitError2 (desc, err)
 //		window.u_.hbk2 = 'hbk3';
 //	} catch (err) {
 //		// do nothing - no global on client
-//		console.log ('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+//		console.log ('xxxxxxxxxxxxxxx0:' + err); //
 //	}
 //
 //}
@@ -69,7 +70,7 @@ function emitError2 (desc, err)
 //	global.u_.U_error2.o = o;
 //} catch (err) {
 //	// do nothing - no global on client
-//	console.log ('xxxxxxxxxxxxxxx1:' + err); // hbkhbk7
+//	console.log ('xxxxxxxxxxxxxxx1:' + err); //
 //}
 //
 //try {
@@ -79,7 +80,7 @@ function emitError2 (desc, err)
 //	u_.U_error2.o = o;
 //} catch (err) {
 //	// do nothing - no global on client
-//	console.log ('xxxxxxxxxxxxxxx1.5:' + err); // hbkhbk7
+//	console.log ('xxxxxxxxxxxxxxx1.5:' + err); //
 //}
 //
 //try {
@@ -89,12 +90,12 @@ function emitError2 (desc, err)
 //	u_.U_error2.o = o;
 //} catch (err) {
 //	// do nothing - no global on client
-//	console.log ('xxxxxxxxxxxxxxx2:' + err); // hbkhbk7
+//	console.log ('xxxxxxxxxxxxxxx2:' + err); //
 //}
 
-// Uutil.U_error.emitError
+// Uutil.UtilError.emitError
 
-u_setup('U_error2', 'ox', ox);  // hbkhbk8
+u_setup('U_error2', 'ox', ox);  //
 
 if (typeof exports !== 'undefined') {
     //exports.emitError = emitError;

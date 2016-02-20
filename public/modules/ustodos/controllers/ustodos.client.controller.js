@@ -323,7 +323,7 @@ angular.module('ustodos').controller('UstodosController',
 				}
 				catch(err)
 				{
-					U_error.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
+					UtilError.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
 				}
 
 
@@ -2068,7 +2068,7 @@ angular.module('ustodos').controller('UstodosController',
                     }
                 } catch (e) {
                     if (processFailure)
-                        U_error.emitError ('era3', e);
+                        UtilError.emitError ('era3', e);
                     throw e;
                 }
             };
@@ -2365,7 +2365,7 @@ angular.module('ustodos').controller('UstodosController',
                         //alert('calling processCommand');
                     }
                 } catch (e) {
-                    U_error.emitError('in eventHandlerEditorcontentChange', e);
+                    UtilError.emitError('in eventHandlerEditorcontentChange', e);
                     //alert ('sdfsdfsdf:' + e);
                 }
             };
@@ -3705,7 +3705,7 @@ angular.module('ustodos').controller('UstodosController',
                     //	$scope.error = errorResponse.data.message;
 
                 } catch (e) {
-                    U_error.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
+                    UtilError.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
                     throw e;
                 }
                 $scope.mouseoverlock = 'off';

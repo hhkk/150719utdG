@@ -282,9 +282,9 @@ var getTimeInMillis = function() {
 
 // on getClassSub (desc, obj)
 
-//u_setup('U_error', 'emitError', emitError);  // hbkhbk8 u_.U_error.emitError
-u_setup('UtilDate', 'getTimeInMillis', getTimeInMillis);  // hbkhbk8 u_.U_error.emitError
-u_setup('UtilDate', 'getDateStringForLogsWithMillis', getDateStringForLogsWithMillis);  // hbkhbk8 u_.U_error.emitError
+//u_setup('U_error', 'emitError', emitError);  //  u_.UtilError.emitError
+u_setup('UtilDate', 'getTimeInMillis', getTimeInMillis);  //  u_.UtilError.emitError
+u_setup('UtilDate', 'getDateStringForLogsWithMillis', getDateStringForLogsWithMillis);  //  u_.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
     exports.dateFromComponents = dateFromComponents;

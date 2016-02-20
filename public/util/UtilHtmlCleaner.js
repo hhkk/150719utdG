@@ -1,10 +1,10 @@
 'use strict';
 
-var O = require('C:/utd/150719utdG/public/util/U_o.js');
-var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
+//var O = require('C:/utd/150719utdG/public/util/U_o.js');
+//var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //var UtilHtmlCleaner = UtilHtmlCleaner;
-// UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText
+// UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText
 
 
 /**
@@ -40,7 +40,7 @@ var utilHtmlCleanerFunctions = new function() {
 	// call this as utilHtmlCleanerFunctions.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
 	this.cleanHtmlPre = function(str, allowed_tags) {
 		//alert ('in tinymcePasteCleanFilter.cleanHtml [' + str+ ']');
-		O.o ("in cleanHtmlPre ");
+		u_.U_o.o ("in cleanHtmlPre ");
 		try {
 
 			// no need to remove trailing or whatever htmlwhitespace
@@ -51,7 +51,7 @@ var utilHtmlCleanerFunctions = new function() {
 			//	str = str.trim();
 			//	if (xHtml.endsWith('<p>&nbsp;</p>')) {
 			//		str = str.replaceLast('<p>&nbsp;</p>','').trim();
-			//		O.o ('replaced <p>&nbsp;</p> to get str [' + str + ']');
+			//		u_.U_o.o ('replaced <p>&nbsp;</p> to get str [' + str + ']');
 			//	}
 			//}  while (xHtmlPre !== str);
 
@@ -104,14 +104,14 @@ var utilHtmlCleanerFunctions = new function() {
 			}
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
-			O.o ('ERROR: in utilHtmlCleanerFunctions.cleanHtmlPre() UtilHtmlCleaner:' + err);
+			u_.U_o.o ('ERROR: in utilHtmlCleanerFunctions.cleanHtmlPre() UtilHtmlCleaner:' + err);
 		}
 
 		//return "bracketed << by cleanHtmlPre <<" + str + ">>";
 		return str;
 	}
 
-	this.convertHtmltoText = function(html)
+	this.testConvertHtmltoText = function(html)
 	{
 		//var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
 		var poststrip = html.replace(/&nbsp;/gm, ' ');
@@ -176,24 +176,24 @@ var utilHtmlCleanerFunctions = new function() {
 	this.htmlTrimCrude = function(htmlToTrim)
 	{
 
-		//O.o ('in htmlTrimCrude');
+		//u_.U_o.o ('in htmlTrimCrude');
 		do {
 			var savhtmlToTrim = htmlToTrim;
 			this.arrTrimTokens.forEach(function (htmlToMatchAndRemove) {
 				htmlToTrim = htmlToTrim.allAfterFirst(htmlToMatchAndRemove, true);
 			});
 
-			O.o('done htmlTrimCrude [' + htmlToTrim + ']');
+			u_.U_o.o('done htmlTrimCrude [' + htmlToTrim + ']');
 			// tail cleaner
 			this.arrTrimTokens.forEach(function (htmlToMatchAndRemove) {
 				var savepre = htmlToTrim;
 				htmlToTrim = htmlToTrim.allBeforeLast(htmlToMatchAndRemove, true);
-				O.o('removing tail:' + htmlToMatchAndRemove + ' from [' + savepre + '] to [' + htmlToTrim + ']')
+				u_.U_o.o('removing tail:' + htmlToMatchAndRemove + ' from [' + savepre + '] to [' + htmlToTrim + ']')
 			});
 		}  while (savhtmlToTrim !== htmlToTrim);
 
 		if (savhtmlToTrim !== htmlToTrim && savhtmlToTrim.trim() === '') {
-			O.o('error? changed from   savhtmlToTrim[' + savhtmlToTrim + ']  to     htmlToTrim[' + htmlToTrim + ']');
+			u_.U_o.o('error? changed from   savhtmlToTrim[' + savhtmlToTrim + ']  to     htmlToTrim[' + htmlToTrim + ']');
 		}
 		return htmlToTrim;
 	}
@@ -307,12 +307,12 @@ function removeHtmlWhiteSpace(str)
 	);
 	pt = '(<(' + pt.slice(1) + ')>|&nbsp;)';
 
-	O.o ('pt:' + pt);
+	u_.U_o.o ('pt:' + pt);
 
 	//var pattern = "(<(br|/br|div|/div|p|/p)>";
 	var re = new RegExp(pt, "gi");
 	str = str.replace(re, ' ');
-	O.o ('str:' + str);
+	u_.U_o.o ('str:' + str);
 	return str;
 }
 
@@ -325,7 +325,7 @@ function isHTML2(str, ignoreHtmlWhiteSpace) {
 		str = removeHtmlWhiteSpace(str)
 
 	// is it still html after removing whitespace?  if not then we'll treat it like just text
-	//O.o ('str:' + str);
+	//u_.U_o.o ('str:' + str);
 	return /<(br|basefont|hr|input|source|frame|param|area|meta|!--|col|link|option|base|img|wbr|!DOCTYPE).*?>|<(a|abbr|acronym|address|applet|article|aside|audio|b|bdi|bdo|big|blockquote|body|button|canvas|caption|center|cite|code|colgroup|command|datalist|dd|del|details|dfn|dialog|dir|div|dl|dt|em|embed|fieldset|figcaption|figure|font|footer|form|frameset|head|header|hgroup|h1|h2|h3|h4|h5|h6|html|i|iframe|ins|kbd|keygen|label|legend|li|map|mark|menu|meter|nav|noframes|noscript|object|ol|optgroup|output|p|pre|progress|q|rp|rt|ruby|s|samp|script|section|select|small|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video).*?<\/\2>/i.test(str);
 }
 
@@ -342,14 +342,14 @@ if (false)
 {
 	var prestrip = '<p>ibm.com</p>';
 	var stripped  = utilHtmlCleanerFunctions.cleanHtmlPre(prestrip, '');
-	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
+	u_.U_o.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
 }
 
 if (false)
 {
 	var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
 	var stripped  = utilHtmlCleanerFunctions.htmlTrimCrude(prestrip);
-	O.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
+	u_.U_o.o ('[' + prestrip + '] -> [' + stripped + ']');  // 1. ologx:[<p>ibm.com</p>] -> [ibm.com]
 }
 
 if (false)
@@ -366,11 +366,11 @@ if (false) // test html to text converter
 {
 	var html = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
 	console.log ('html  [' + html + ']');
-	console.log ('text [' + utilHtmlCleanerFunctions.convertHtmltoText(html) + ']');
+	console.log ('text [' + utilHtmlCleanerFunctions.testConvertHtmltoText(html) + ']');
 
 	var html = '<p>&nbsp;</p>cccc <p>&nbsp;</p><a href="ibm.com">hp.com</a><p>&nbsp;</p>';
 	console.log ('html  [' + html + ']');
-	console.log ('text [' + utilHtmlCleanerFunctions.convertHtmltoText(html) + ']');
+	console.log ('text [' + utilHtmlCleanerFunctions.testConvertHtmltoText(html) + ']');
 }
 
 

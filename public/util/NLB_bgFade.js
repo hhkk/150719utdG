@@ -126,7 +126,7 @@ function padLeft( string, character, paddedWidth )
 
 var NLB_bgFade;
 
-u_setup('NLB_bgFade', 'NLBfadeBg', NLBfadeBg);  // hbkhbk8 u_.U_error.emitError
+u_setup('NLB_bgFade', 'NLBfadeBg', NLBfadeBg);  // u_.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
 	exports.NLBfadeBg = NLBfadeBg;

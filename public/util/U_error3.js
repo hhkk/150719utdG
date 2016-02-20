@@ -9,12 +9,12 @@
  * Time: 3:55 PM
  * To change this template use File | Settings | File Templates.
  */
-// from entry.js U_error = require('C:/utd/150719utdG/public/util/U_error.js');
+// from entry.js U_error = require('C:/utd/150719utdG/public/util/UtilError.js');
 
 function o3 (desc, err)
 {
 	uu_.U_error2.o('calling uu2_.U_error2.o from uu2_.U_error3.o3')
-	console.log('from uu2_.U_error3.emitError2 hbkhbk7:' + desc);
+	console.log('from uu2_.U_error3.emitError2 :' + desc);
 }  //
 
 function emitError2 (desc, err)
@@ -22,7 +22,7 @@ function emitError2 (desc, err)
 	console.log('from uu2_.U_error3.emitError2:' + desc);
 }  //
 
-// hbkhbk8
+//
 var uu2_ = uu2_ || {};
 
 try {
@@ -31,7 +31,7 @@ try {
 	uu2_.U_error3.o3 = o3;
 } catch (err) {
 	// do nothing - no global on client
-	console.log ('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+	console.log ('xxxxxxxxxxxxxxx0:' + err); //
 }
 
 //try {
@@ -41,7 +41,7 @@ try {
 //	global.uu2_.U_error3.o3 = o3;
 //} catch (err) {
 //	// do nothing - no global on client
-//	console.log ('xxxxxxxxxxxxxxx1:' + err); // hbkhbk7
+//	console.log ('xxxxxxxxxxxxxxx1:' + err); //
 //}
 //
 //try {
@@ -51,10 +51,10 @@ try {
 //	uu2_.U_error3.o3 = o3;
 //} catch (err) {
 //	// do nothing - no global on client
-//	console.log ('xxxxxxxxxxxxxxx2:' + err); // hbkhbk7
+//	console.log ('xxxxxxxxxxxxxxx2:' + err); //
 //}
 
-// Uutil.U_error.emitError
+// Uutil.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
     //exports.emitError = emitError;

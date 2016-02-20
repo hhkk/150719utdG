@@ -14,7 +14,7 @@ var isString = function(s) {
 }
 
 var UtilJsTypeDetect;
-u_setup('UtilJsTypeDetect', 'isString', isString);  // hbkhbk8 u_.U_error.emitError
+u_setup('UtilJsTypeDetect', 'isString', isString);  //  u_.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
         exports.isString = isString;

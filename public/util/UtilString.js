@@ -151,9 +151,9 @@ if (test)
 
 var UtilString;
 
-u_setup('UtilString', 'endsWith', endsWith);  // hbkhbk8 u_.U_error.emitError
-u_setup('UtilString', 'convertNonBreakingSpace', convertNonBreakingSpace);  // hbkhbk8 u_.U_error.emitError
-u_setup('UtilString', 'convertRemoveTrailing10', convertRemoveTrailing10);  // hbkhbk8 u_.U_error.emitError
+u_setup('UtilString', 'endsWith', endsWith);  //  u_.UtilError.emitError
+u_setup('UtilString', 'convertNonBreakingSpace', convertNonBreakingSpace);  //  u_.UtilError.emitError
+u_setup('UtilString', 'convertRemoveTrailing10', convertRemoveTrailing10);  //  u_.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
 	exports.endsWith = endsWith;

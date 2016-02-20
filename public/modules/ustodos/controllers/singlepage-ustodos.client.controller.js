@@ -41,7 +41,7 @@ var UtilClassz = UtilClassz;
 
 var mceId = 'idTinyMceTextArea';
 
-//var uu_ = uu_ || {}; // hbkhbk8 hbkhbk9
+//var uu_ = uu_ || {};
 
 //alert ('in here 2');
 //var myapplication = exports.myapplication;
@@ -351,10 +351,8 @@ angular.module('ustodos').controller
 					//alert(windowhk.width() + 'x' + windowhk.height());
 				});
 
-				// hbkhbk8
 				$scope.u_ = u_;
 				//$scope.uu2_ = uu2_;
-				console.log ('=================== hbkhbk5');
 				//Uutil.testScopeAccess();
 
 				//$scope.UcHtmlDocManipulate = UcHtmlDocManipulate;
@@ -761,7 +759,7 @@ angular.module('ustodos').controller
 							//$$url: "/?q=4444ffccffckkk"
 							//__proto__: Object
 
-							// hbkhbk10
+							//
 							if (typeof ($location.$$search.q) === 'undefined')
 								$scope.q = '*';
 							else
@@ -773,7 +771,7 @@ angular.module('ustodos').controller
 						}
 						catch(err)
 						{
-							u_.U_error.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
+							u_.UtilError.emitError('error in $scope.$watch($viewContentLoaded, function(){ // like onload YES', err);
 						}
 
 
@@ -804,7 +802,7 @@ angular.module('ustodos').controller
 
 						//$scope.localTinyMceInit(); // hbklrb11
 						// $scope.localTinyMceInit();  // hbkeak
-						//alert('may want to focus on input editor here'); // hbkhbk10
+						//alert('may want to focus on input editor here'); //
 						//tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
 					};
 
@@ -1165,7 +1163,7 @@ angular.module('ustodos').controller
 					//				//alert('posthk');
 					//				//o.content = "-: CLEANED PRE :-\n" + o.content;
 					//				// works
-					//				//o.content = UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(o.content); // htmlcleaner
+					//				//o.content = UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(o.content); // htmlcleaner
 					//			};
 					//			tinyMceparams_pasteFilter.paste_postprocess = function(pl, o) {
 					//				// Content DOM node containing the DOM structure of the clipboard
@@ -1463,7 +1461,7 @@ angular.module('ustodos').controller
 					//				var allDots = true && text.length !== 0;
 					//				while (i-- && allDots) {
 					//					if (text[i] !== '.') {
-					//						allDots = false; // hbkhbk3
+					//						allDots = false;
 					//						//allDots = true; // to default to detail view allDots true;
 					//						//alert('alldots');
 					//						break;
@@ -1510,7 +1508,7 @@ angular.module('ustodos').controller
 					//							ed.getContent({format : 'text'})
 					//						);
 					//					}
-					//				} else if (e.keyCode === 32) // hbkhbk
+					//				} else if (e.keyCode === 32) //
 					//				{
 					//					$scope.eventHandlerEditorcontentChange (
 					//						$scope.enumKeyEvent.SPACE,
@@ -1844,11 +1842,17 @@ angular.module('ustodos').controller
 					//tinyMCE.get('idTinyMceTextArea').setContent('<span>some2</span> html');
 
 
-					$scope.testContentEditableCleaner = function() {
-						var html = $('div[id="idDivMainContentEditableInput"]')[0].innerHTML;
-						var text = UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(html);
-						alert ('editor innerhtml:' + html);
-						alert ('editor text:' + text);
+					$scope.testConvertHtmltoText = function() {
+
+						try {
+							var html = $('div[id="idDivMainContentEditableInput"]')[0].innerHTML;
+							var text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(html);
+							//alert('editor innerhtml:' + html);
+							//alert('editor text:' + text);
+
+						} catch (e) {
+							u_.UtilError.emitError('error in testConvertHtmltoText', e)
+						}
 					};
 
 
@@ -1885,7 +1889,7 @@ angular.module('ustodos').controller
 						return keyEventDesc + ' (keyCode: ' + (window.event ? keyEvent.keyCode : keyEvent.which) + ')';
 					};
 
-					// hbkhbk4
+					// hhkk2
 					// Event handlers
 					//$scope.onKeyDown = function ($event) {
 					//    $scope.onKeyDownResult = getKeyboardEventResult($event, 'Key down');
@@ -1931,7 +1935,7 @@ angular.module('ustodos').controller
 					//alert('start set up idDivMainContentEditableInput handler');
 					// http://codepen.io/mightyiam/pen/KDlri
 
-					// hbkhbk4
+					//
 					// also seems to work - try this in ng-repeat
 					//$(function () {
 					//	$('#idDivMainContentEditableInput').keydown(
@@ -1977,11 +1981,85 @@ angular.module('ustodos').controller
 					//alert('done set up idDivMainContentEditableInput handler');
 
 					// onchange for contentedtable http://stackoverflow.com/questions/8694054/onchange-event-with-contenteditable
-					// hbkhbk3
+					//
 					//https://www.google.com/search?num=100&q=contenteditable+onchange
+
+					// called from an initializer
+					$scope.installContentEditableEventHandlers = function () {
+						$('[contenteditable=\'true\']').keydown
+						(
+							function (evt)
+							{
+								if (evt.which === 13) // enter key
+								{
+									//alert('tried2');
+									evt.preventDefault();
+									setTimeout(function(){ alert('Hello2'); }, 10);
+									return false;
+									//alert("All your bugs are belong to us.");
+									//return false;
+								}
+								return ;
+							});
+
+
+
+
+						// test method 1 onpaste
+						// from http://stackoverflow.com/questions/3553041/how-can-you-catch-a-contenteditable-paste-event
+						// http://www.w3schools.com/jsref/event_onpaste.asp
+						document.getElementById('idDivMainContentEditableInput').onpaste = function(d) {
+							//alert(d.clipboardData.);
+							alert('in mainContentEditable onpaste');
+							return true; // to allow or not the user insert
+						}
+
+
+
+
+						// test method 2 addevenslistener
+						// from http://jsfiddle.net/MBags/
+						// http://stackoverflow.com/questions/8694054/onchange-event-with-contenteditable
+						// https://www.google.com/search?num=100&q=contenteditable+onchange+event
+						var x = 1;
+						function listener(evt)
+						{
+							x++;
+							var typ = evt.type;
+							//if (typ === 'DOMCharacterDataModified') {
+							var htmlValue = document.getElementById("idDivMainContentEditableInput").innerHTML;
+
+							var logStr = x + 'typ:' + typ + ' new htmlValue [' +  htmlValue  + ']';
+							console.log (logStr);
+							alert (logStr);
+
+							document.getElementById('utdlog').value = x + '. ' + logStr + '\n' + document.getElementById('utdlog').value;
+							//alert(evt);
+						}
+						var editable = document.getElementById("idDivMainContentEditableInput");
+						if (editable.addEventListener)
+						{
+							editable.addEventListener("input", listener, false);
+							editable.addEventListener("DOMNodeInserted", listener, false);
+							editable.addEventListener("DOMNodeRemoved", listener, false);
+							editable.addEventListener("DOMCharacterDataModified", listener, false);
+						}
+
+
+
+
+
+					};
+
+
+
+
+
+
 					$scope.onKeyUp_MainContentEditable = function (keyEvent, index, _id)
 					{
-						// alert ('!!!! in onKeyUp_MainContentEditable');
+						//hhkk2
+						alert ('!!!! in onKeyUp_MainContentEditable');
 
 						// if not escape then return
 						//if (keyEvent.keyCode == 13 ) // if not escape key section_escape
@@ -2004,7 +2082,7 @@ angular.module('ustodos').controller
 
 							return;
 						}
-						else // save hbkhbk maincontenteditable
+						else // save  maincontenteditable
 						{
 							// save
 							alert( 'in eventHandlerEditorcontentChange save');
@@ -2015,7 +2093,7 @@ angular.module('ustodos').controller
                             //
 							//	//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
 							//	var text =
-							//		UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText(maincontenteditableHtml);
+							//		UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(maincontenteditableHtml);
                             //
 							//	//text = UtilString.convertNonBreakingSpace(text);
 							//	//text = UtilString.convertRemoveTrailing10(text);
@@ -2042,7 +2120,7 @@ angular.module('ustodos').controller
 							//		//alert('calling processCommand');
 							//	}
 							//} catch (e) {
-							//	U_error.emitError('in eventHandlerEditorcontentChange', e);
+							//	UtilError.emitError('in eventHandlerEditorcontentChange', e);
 							//	//alert ('sdfsdfsdf:' + e);
 							//}
 						}
@@ -2051,7 +2129,7 @@ angular.module('ustodos').controller
 
 					$scope.onKeyUp_perrow_text = function (keyEvent, index, _id) // https://docs.angularjs.org/api/ng/directive/ngKeyup
 					{
-						// hbkhbk3
+						//
 						//alert ('!!!! in onKeyUp_perrow_text');
 
 						// if not escape then return
@@ -2300,7 +2378,7 @@ angular.module('ustodos').controller
 					// set text shown for mouseover
 
 					// section_per_editor 3
-					// hbkhbk10
+					//
 					$scope.setTextInShowingEditor = function(e, callerID, processFailure)
 					{
 						try {
@@ -2328,7 +2406,7 @@ angular.module('ustodos').controller
 								}
 							}
 							else {
-								//if ($scope.ustodos && $scope.ustodos.length > 0 ) // hbkhbk10
+								//if ($scope.ustodos && $scope.ustodos.length > 0 ) //
 									//$scope.bindToTextBox = 'hi mom!'; // $scope.ustodos[0];
 									//$scope.bindToTextBox = $scope.ustodos[0].html; // $scope.ustodos[0];
 								//else
@@ -2341,7 +2419,7 @@ angular.module('ustodos').controller
 							//}
 						} catch (e) {
 							if (processFailure)
-								u_.U_error.emitError ('era3', e);
+								u_.UtilError.emitError ('era3', e);
 							throw e;
 						}
 					};
@@ -2520,11 +2598,12 @@ angular.module('ustodos').controller
 						alert('Completed init of TinyMCE');
 					};
 
+					// hhkk3
 					// eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
 					$scope.eventHandlerEditorcontentChange = function(enumKeyEvent, data, html, text)
 					{
-						// hbkhbk3
-						alert( 'in eventHandlerEditorcontentChange');
+						//
+						alert( '######### hhkk3 in eventHandlerEditorcontentChange');
 						try {
 
 							//document.getElementById('idInputTextFilter').value = text;
@@ -2582,7 +2661,7 @@ angular.module('ustodos').controller
 							text = u_.UtilString.convertRemoveTrailing10(text);
 							alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
 
-							// hbkhbk3
+							//
 							// alert ('eventHandlerEditorcontentChange text:' + text);
 							// if (text.endsWith(' ') && $scope.dynamicSearch ) {
 							if (text.endsWith(' ') && $scope.dynamicSearch ) {
@@ -2601,7 +2680,7 @@ angular.module('ustodos').controller
 								//alert('calling processCommand');
 							}
 						} catch (e) {
-							u_.U_error.emitError('in eventHandlerEditorcontentChange', e);
+							u_.UtilError.emitError('in eventHandlerEditorcontentChange', e);
 							//alert ('sdfsdfsdf:' + e);
 						}
 					};
@@ -3105,7 +3184,7 @@ angular.module('ustodos').controller
 							alert('inONLOADINIT#A ngRepeatFinished');
 
 
-						// hbkhbk4
+						//
 						//alert("22222222 $([contenteditable=true].length" + $("[contenteditable='true']").length);
 						//$("[contenteditable='true']").bind("keydown", function(event)
 						//{
@@ -3117,41 +3196,15 @@ angular.module('ustodos').controller
 						//	}
 						//});
 
-						// from http://stackoverflow.com/questions/3553041/how-can-you-catch-a-contenteditable-paste-event
-						document.getElementById('idDivMainContentEditableInput').onpaste = function(d) {
-							alert(d.clipboardData.);
-							// doSomething()
-							//alert('in mainContentEditable onpaste');
-							//return false; // to prevent user insert
-							return false; // to allow user insert
-						}
-
-
-						// hbkhbk4 copied down
-						$(function () {
-							$('[contenteditable=\'true\']').keydown
-							(
-								function (evt)
-								{
-									if (evt.which === 13)
-									{
-										//alert('tried2');
-										evt.preventDefault();
-										setTimeout(function(){ alert('Hello2'); }, 10);
-										return false;
-										//alert("All your bugs are belong to us.");
-										//return false;
-									}
-									return ;
-								});
-							});
 
 
 
 
 
 
-
+						//  copied down
+						//hhkk2
+						$scope.installContentEditableEventHandlers();
 
 						//alert ('$scope.ustodosFiltered:' + $scope.ustodosFiltered);
 						//alert ('hkhkhk');
@@ -3177,7 +3230,7 @@ angular.module('ustodos').controller
 						var sMid = encodeURIComponent($scope.ustodosFiltered[0].html);
 						var sAll = sPre + 'hi dad!' + sMid + sPost;
 						//var sAll = sPre + sPost;
-						document.getElementById('idPerRowIframeTop').src = 'data:text/html;charset=utf-8,' + sAll;
+						document.getElementById('idPerRowIframeTop2').src = 'data:text/html;charset=utf-8,' + sAll;
 
 						//$scope.ustodosFiltered.forEach (function (x)
 						//{
@@ -3193,7 +3246,7 @@ angular.module('ustodos').controller
 						//});
                         //
 
-						// // hbkhbk3
+						// //
 						// //alert("made it to start :");
 						// var html_string= "contenthbk";
                         //
@@ -3201,18 +3254,18 @@ angular.module('ustodos').controller
 						// //document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
 						// //document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
 						// var x = document.getElementById('idPerRowIframe0');
-						// ///alert("hbkhbk3 made it to start in x ["+x+"] ngRepeatFinished $scope.ustodos.length:" + $scope.ustodos.length);
+						// ///alert(" made it to start in x ["+x+"] ngRepeatFinished $scope.ustodos.length:" + $scope.ustodos.length);
                         //
 						// document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +'_0');
 						// document.getElementById('idPerRowIframe1').src = "data:text/html;charset=utf-8," + escape(html_string +'_1');
-						// // hbkhbk3
+						// //
 						// //alert("made it to end ");
 
 					});
 
 
 					//$scope.testScopeAccess = UcHtmlDocManipulate.testScopeAccess;
-					//u_.U_error.emitError('xxxe');
+					//u_.UtilError.emitError('xxxe');
 					//Uutil2_.Dt_u_.U_o.dt_o2b('calling dt_o2b1 a');
 					//Uutil2_.Dt_u_.U_o.uu_a('calling uu_a');
 					//Uutil2_.Dt_u_.U_o.o('calling o');
@@ -3220,27 +3273,96 @@ angular.module('ustodos').controller
 					//Uutil2_.Dt_u_.U_o.x('calling o');
 					$scope.testButton= function(fn)
 					{
-						if (true)
+						//document.getElementById("idDivMainContentEditableInput").innerHTML = 'testbutton';
+
+						if (false) // test $scope.testConvertHtmltoText();
+						{
+							// works $('div[contenteditable="true"]').trigger('focus');
+							$scope.testConvertHtmltoText();
+						}
+
+
+
+						//
+						if (true ) // alldots alternate
+						{
+							//if (text.length % 2 === 1)
+							//{
+								document.getElementById('hkheader').style.display = 'block';
+								document.getElementById('hkidtoolba	rs').style.display = 'block';
+								document.getElementById('hkfooter').style.display = 'block';
+							//					}
+							//					else
+							//					{
+							//						document.getElementById('hkheader').style.display = 'none';
+							//						document.getElementById('hkidtoolbars').style.display = 'none';
+							//						document.getElementById('hkfooter').style.display = 'none';
+							////					}
+
+						}
+
+
+						if (true) // convert div to iframe
+						{
+							//idPerRowIframeTop
+
+							//alert('pre');
+							//console.log(__dirname); // not on client
+							//console.log(__filename); // not on client
+							//alert('post');
+
+							//	alert('document.getElementById(testIframeReplace).innerHTML :' + document.getElementById('testIframeReplace').innerHTML);
+
+							//alert('$(#testIframeReplace) :' + $('#testIframeReplace') );
+							//alert('$(#testIframeReplace).val() :' + $('#testIframeReplace').val() );
+							//$('#testIframeReplace').html('your iframe code goes here');
+
+							//$('#testIframeReplace').replaceWith('<iframe><html><head></head><body>dddddddddddd' +
+							//		 '</body></html></iframe>');
+
+							//var div = document.getElementById("testIframeReplace");
+							//alert('div.innerHTML:' + div.innerHTML);
+							//var iframe = document.createElement("iframe");
+							//document.body.appendChild(iframe);
+							//iframe.innerHTML = div.innerHTML;
+							//div.parentNode.removeChild(div);
+
+							// WORKS!
+							//var divIdToReplace = 'testIframeReplace';
+							//var newIframeId = 'newIframeIdx';
+							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
+
+							//alert('at utilclient');
+							//hhkk1
+							u_.UcHtmlDocManipulate.convertElementToIframeById (
+								'idDivCumIframe', 'idDivCumIframePostTransform', true, "this is a new iframe with id idDivCumIframePostTransform", 80, 300);
+
+							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
+							//document.getElementById(newIframeId).contentDocument.write(savDivInnerHtml);
+						}
+
+
+						if (false)
 						{
 							try {
 								u_.U_o.o('using front door');
 								//u_.U_o.o('using back door');
 								//throw "erra"
 							} catch (err) {
-								u_.U_error.emitError('r', err);
+								u_.UtilError.emitError('r', err);
 							}
 
-							// hbkhbk8
+							//
 							//alert('tiptop');wwwwwwwwwwwwwww
-							//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwu_.U_error.emitError('U_error2.o from singlepage-ustodos.client.controller.js'); // hbkhbk7
-							//uu_.U_error.emitError('xxxe');
+							//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwu_.UtilError.emitError('U_error2.o from singlepage-ustodos.client.controller.js'); //
+							//uu_.UtilError.emitError('xxxe');
 							//Uutil2_.Dt_u_.U_o.dt_o2b('calling dt_o2b2');
 
 							//uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
 							//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
 
-							//Uutil.U_error.emitError('testerrorhbkhbk5');
-							//U_error.testWithinEmitError('testerrorhbkhbk6');
+							//Uutil.UtilError.emitError('testerror');
+							//U_error.testWithinEmitError('testerror');
 
 							//$scope.u_.U_o.o ('in testbutton2');
 						}
@@ -3256,46 +3378,6 @@ angular.module('ustodos').controller
 							}) ;
 						}
 
-						// hbkhbk4
-						if (true) // convert div to iframe
-						{
-							//alert('pre');
-							//console.log(__dirname); // not on client
-							//console.log(__filename); // not on client
-							//alert('post');
-
-							//	alert('document.getElementById(testIframeReplace).innerHTML :' + document.getElementById('testIframeReplace').innerHTML);
-
-							//alert('$(#testIframeReplace) :' + $('#testIframeReplace') );
-							//alert('$(#testIframeReplace).val() :' + $('#testIframeReplace').val() );
-							//$('#testIframeReplace').html('your iframe code goes here');
-
-							//$('#testIframeReplace').replaceWith('<iframe><html><head></head><body>dddddddddddd' +
-							//		 '</body></html></iframe>');
-
-
-
-
-
-							//var div = document.getElementById("testIframeReplace");
-							//alert('div.innerHTML:' + div.innerHTML);
-							//var iframe = document.createElement("iframe");
-							//document.body.appendChild(iframe);
-							//iframe.innerHTML = div.innerHTML;
-							//div.parentNode.removeChild(div);
-
-							// WORKS!
-							//var divIdToReplace = 'testIframeReplace';
-							//var newIframeId = 'newIframeIdx';
-							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
-
-							//alert('at utilclient');
-							u_.UcHtmlDocManipulate.convertElementToIframeById(
-								'testIframeReplace', 'newIframeIdx', true, "this text was passed into convertElementToIframeById ")
-
-							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
-							//document.getElementById(newIframeId).contentDocument.write(savDivInnerHtml);
-						}
 
 						if (false)
 						{
@@ -3310,7 +3392,7 @@ angular.module('ustodos').controller
 
 						if (false)
 						{
-							// hbkhbk3
+							//
 							alert('made it to start');
 							//var html_string= "contenthbk";
 							//document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
@@ -3320,11 +3402,6 @@ angular.module('ustodos').controller
 							//alert("made it to end ");
 						}
 
-						if (false)
-						{
-							// works $('div[contenteditable="true"]').trigger('focus');
-							$scope.testContentEditableCleaner();
-						}
 
 						if (false)
 						{
@@ -3784,7 +3861,7 @@ angular.module('ustodos').controller
 						catch(err)
 						{
 							alert ('error here');
-							U_error.emitError('error in synchNumberCheckboxesChecked()', err);
+							UtilError.emitError('error in synchNumberCheckboxesChecked()', err);
 						}
 
 					};
@@ -4106,9 +4183,8 @@ angular.module('ustodos').controller
 							// http://patorjk.com/software/taag/#p=display&h=2&v=1&f=Blocks&t=WRITE
 
 							// section_write
-							if (utdUserCommand.isWriteCommand) // e.g., $scope.enumCommands.COMMAND_WRITE  // hbkhbk
+							if (utdUserCommand.isWriteCommand) // e.g., $scope.enumCommands.COMMAND_WRITE  // 							{
 							{
-
 
 
 								//alert ('in write utdUserCommand.xTextCommandRemoved [' + utdUserCommand.xTextCommandRemoved + ']');
@@ -4150,7 +4226,7 @@ angular.module('ustodos').controller
 									utdUserCommand: JSON.stringify(utdUserCommand)  // this goes to the DB if in schema
 								});
 
-								// hbkhbk
+								//
 								//if (UtilHtmlCleaner.isHTML2Regex(utdUserCommand.xHtml))
 								//{
 								//	alert('html detected');
@@ -4158,7 +4234,7 @@ angular.module('ustodos').controller
 								//	alert('no html detected');
 								//}
 
-								//ustodo._doc.x1212 = 'x1212'; // hbkhbk
+								//ustodo._doc.x1212 = 'x1212'; //
 								//ustodo.xxx = 'xxx2';
 								//ustodo.y1212 = 'y1212';
 
@@ -4353,8 +4429,8 @@ angular.module('ustodos').controller
 							//	$scope.error = errorResponse.data.message;
 
 						} catch (e) {
-							alert ('got error calling U_error.emitError');
-							U_error.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
+							alert ('got error calling UtilError.emitError');
+							UtilError.emitError('processCommand enumProcessCommandCaller [' + enumProcessCommandCaller + ']', e);
 							throw e;
 						}
 						$scope.mouseoverlock = 'off';
@@ -4692,7 +4768,7 @@ window.onload = function()
 	//catch(err)
 	//{
 //		alert ('in error catcher');
-	//U_error.emitError('in onload error', err);
+	//UtilError.emitError('in onload error', err);
 	//}
 
 //CKEDITOR.replace( 'editor1' );

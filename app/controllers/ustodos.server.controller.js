@@ -34,14 +34,14 @@ var require_Development = require('C:/utd/150719utdG/config/env/development.js')
 
 //var uu_ = uu_ || {};
 
-//var U_error = require('C:/utd/150719utdG/public/util/U_error.js');
+//var U_error = require('C:/utd/150719utdG/public/util/UtilError.js');
 //require('C:/utd/150719utdG/public/util/U_setup.js');
 //require('C:/utd/150719utdG/public/util/U_error2.js');
-// hbkhbk8
+//
 //var U_error2 = require('C:/utd/150719utdG/public/util/U_error2.js');
 //var U_error3 = require('C:/utd/150719utdG/public/util/U_error3.js');
-//uu_.U_error2 = U_error2; // hbkhbk7
-//uu_.U_error3 = U_error3; // hbkhbk7
+//uu_.U_error2 = U_error2; //
+//uu_.U_error3 = U_error3; //
 
 
 //var UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
@@ -95,7 +95,7 @@ var callcountSaved = 0;
 
 function createOrSave(ustodo, res) {
 
-	// hbkhbk ustodo._doc.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html); // xxd
+	// ustodo._doc.html = UtilHtmlCleaner.utilHtmlCleanerFunctions.htmlTrimCrude(ustodo._doc.html); // xxd
 	// works ustodo._doc.testArray2 = ['a','b'];
 	//ustodo._doc.hkhkhk = 'hi hkhkhk'; _// doc gets to the DB and to the UI therefore
 	//ustodo._doc.username = user.username; // is this a test of an object sav?
@@ -152,7 +152,7 @@ function createOrSave(ustodo, res) {
 
 		} catch (err) {
 			//console.log(UtilClass.UtilClass('err', err));
-			u_.U_error.emitError('err in res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json:' + err);
+			u_.UtilError.emitError('err in res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json:' + err);
 		}
 
 	};
@@ -187,7 +187,7 @@ function createOrSave(ustodo, res) {
 		u_.UtilUrl4bUsesKrawlerToSupportServerController.expandUrlsToHrefsReturnPatchedStr(htmlPretitledTrimmed, res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds);
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
-		u_.U_error.emitError('err in expandUrlsToHrefsReturnPatchedStr during create:' + err);
+		u_.UtilError.emitError('err in expandUrlsToHrefsReturnPatchedStr during create:' + err);
 	}
 
 
@@ -646,7 +646,7 @@ exports.ustodoByID = function(req, res, next, id)
 			next();
 		});
 	} catch (e) {
-		u_.U_error.emitError ('o from o in list2', e); // hbkhbk7
+		u_.UtilError.emitError ('o from o in list2', e); //
 	}
 };
 
@@ -670,7 +670,7 @@ exports.hasAuthorization = function(req, res, next) {
 	//			'user [' + user +
 	//			']  user.username [' + user.username + ']' );
 	//	}ReferenceError: _id is not defined else {
-	//		U_error.emitError("CHECKED AUTH ", err);
+	//		UtilError.emitError("CHECKED AUTH ", err);
 	//	}
 	//});
 
@@ -695,7 +695,7 @@ exports.hasAuthorization = function(req, res, next) {
 			return res.status(403).send('User is not authorized');
 		}
 	} catch (e) {
-		u_.U_error.emitError(e);
+		u_.UtilError.emitError(e);
 	}
 	next();
 };

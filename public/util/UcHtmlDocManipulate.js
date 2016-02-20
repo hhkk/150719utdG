@@ -15,7 +15,7 @@
 //var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //var UtilHtmlCleaner = UtilHtmlCleaner;
-// UtilHtmlCleaner.utilHtmlCleanerFunctions.convertHtmltoText
+// UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText
 var O = O;
 	if (!O) {
 		try {
@@ -44,11 +44,11 @@ var O = O;
 	// call this as utilHtmlCleanerFunctions.cleanHtmlPre()("<p>ibm.com</p>", '<b><strong><u><i><p>');
 
 
-// hbkhbk5
+//
 function testScopeAccess() {
 	try {
 		//alert('in testScopeAccess');
-		console.log (' oo hbkhbk5 =================================== cc in UtilClient.UcHtmlDocManipulate.testScopeAccess');
+		console.log (' oo  =================================== cc in UtilClient.UcHtmlDocManipulate.testScopeAccess');
 		try {
 			O.o ('this is from o.o hk');
 		}   catch (err ) {
@@ -57,13 +57,13 @@ function testScopeAccess() {
 		return 'hi mommy';
 
 	} catch (err) {
-		U_error.emitError('error in UcHtmlDocManipulate.testScopeAccess', err);
+		UtilError.emitError('error in UcHtmlDocManipulate.testScopeAccess', err);
 	}
 };
 
-function convertElementToIframeById (elementIdToReplace, newIframeId, contentEditableTF, innerHtml_optional) {
+function convertElementToIframeById (elementIdToReplace, newIframeId, contentEditableTF, innerHtml_optional, height, width) {
 	try {
-		alert("in cleanHtmlPre innerHtml_optional:" + innerHtml_optional);
+		//alert("in cleanHtmlPre innerHtml_optional:" + innerHtml_optional);
 		//O.o ('hi mom2');
 		//alert("in cleanHtmlPre elementIdToReplace:" + elementIdToReplace);
 		var elementHtml = document.getElementById(elementIdToReplace).outerHTML;
@@ -74,8 +74,33 @@ function convertElementToIframeById (elementIdToReplace, newIframeId, contentEdi
 		if (!innerHtml_optional)
 			innerHtml_optional = document.getElementById(elementIdToReplace).outerHTML;
 
+		// hhkk1
+		var styleString = "style=\"" +
+			"width:" + width + "px; " +
+			"height :" + height + "px; " +
+			"resize: both \"";
+		//alert('styleString:' + styleString);
+
+
+		// hhkk1
+		// Paste plain text into contenteditable. - JSFiddle
+		// http://jsfiddle.net/erikwoods/Ee3yC/
+		// document.execCommand
+		// https://www.google.com/search?num=100&biw=2133&bih=1032&q=html+paste+into+contenteditable+iframe&oq=html+paste+into+contenteditable+iframe&gs_l=serp.3...2827.7738.0.8090.5.5.0.0.0.0.82.376.5.5.0....0...1c.1.64.serp..0.0.0.TmtlRgzXKTs
+
+
+		// hhkk1
+		// javascript document.execCommand examples
+		// https://www.google.com/search?num=100&q=javascript+document.execCommand+examples&oq=javascript+document.execCommand+examples&gs_l=serp.3..0i22i30.1661.2851.0.2962.9.3.0.6.6.0.103.253.2j1.3.0....0...1c.1.64.serp..0.9.256.KhPhDkMMGnw
+		// document.execCommand before pasteHTML not working
+		// http://stackoverflow.com/questions/16944429/document-execcommand-before-pastehtml-not-working
+
+
 		$('#' + elementIdToReplace).html('<iframe id=\'' + newIframeId +
-			'\'><html><head></head><body></body></html></iframe>');
+			'\'' + styleString +
+			'>  <html><head></head><body></body></html>' +
+			'</iframe>');
+
 		if (contentEditableTF) {
 			innerHtml_optional = '<div contenteditable=\'true\'>' + innerHtml_optional + '</div>';
 		}
@@ -90,27 +115,27 @@ function convertElementToIframeById (elementIdToReplace, newIframeId, contentEdi
 // main catch for function definition
 //} catch (err) {
 //	alert('error defining functions in UcHtmlDocManipulate.js');
-//	U_error.emitError('error defining functions in UcHtmlDocManipulate.js', err);
+//	UtilError.emitError('error defining functions in UcHtmlDocManipulate.js', err);
 //}
 
 
 
 
-// hbkhbk5
+//
 try {
 	global.Uutil = global.Uutil || {};
 } catch (err) {
 	// do nothing - no global on client
 }
 
-console.log ('hbkhbk5 =================== loaded UcHtmlDocManipulate.js');
+console.log (' =================== loaded UcHtmlDocManipulate.js');
 
-console.log ('hbkhbk5 =================== defined Uutil.testScopeAccess');
+console.log (' =================== defined Uutil.testScopeAccess');
 
 //var UcHtmlDocManipulate;
 
-u_setup('UcHtmlDocManipulate', 'testScopeAccess', testScopeAccess);  // hbkhbk8 u_.U_error.emitError
-u_setup('UcHtmlDocManipulate', 'convertElementToIframeById', convertElementToIframeById);  // hbkhbk8 u_.U_error.emitError
+u_setup('UcHtmlDocManipulate', 'testScopeAccess', testScopeAccess);  //  u_.UtilError.emitError
+u_setup('UcHtmlDocManipulate', 'convertElementToIframeById', convertElementToIframeById);  //  u_.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
 	exports.testScopeAccess = testScopeAccess;

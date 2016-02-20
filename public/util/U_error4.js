@@ -6,7 +6,7 @@
  * Time: 3:55 PM
  * To change this template use File | Settings | File Templates.
  */
-// from entry.js U_error = require('C:/utd/150719utdG/public/util/U_error.js');
+// from entry.js U_error = require('C:/utd/150719utdG/public/util/UtilError.js');
 
 function emitError (desc, err)
 {
@@ -30,11 +30,11 @@ function emitError (desc, err)
 }  //
 
 
-// Uutil.U_error.emitError
+// Uutil.UtilError.emitError
 
 //console.log ('!@!#!#!#!####### # __filename:'+ __filename)
 
-u_setup('u_error4', 'emitError', emitError);  // hbkhbk8 u_.U_error.emitError
+u_setup('u_error4', 'emitError', emitError);  //  u_.UtilError.emitError
 
 var u_error4;
 

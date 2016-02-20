@@ -30,17 +30,9 @@ uberglobal.u_.isServer = function() {
 
 
 
-uberglobal.u_.req = function(disklocation) {
-	//var window;
-	//if (!window)
-	if (typeof window === "undefined") // error
-	{
-		return require (disklocation);
-	}
-}
 
 
-//if (typeof global !== 'undefined')  // hbkhbk8
+//if (typeof global !== 'undefined')  //
 //{
 //
 uberglobal.u_setup = function (clasz, methodname, method)
@@ -55,22 +47,27 @@ uberglobal.u_setup = function (clasz, methodname, method)
 		uberglobal.u_[clasz][methodname] = method;
 	} catch (err) {
 		// do nothing - no global on client
-		console.log('xxxxxxxxxxxxxxx0:' + err); // hbkhbk7
+		console.log('xxxxxxxxxxxxxxx0:' + err); //
 	}
 	//}
 }
 //}
 
-// here you can list the utils wanted always and both client and server
-u_.req ('C:/utd/150719utdG/public/util/U_o.js');
-u_.req ('C:/utd/150719utdG/public/util/UtilClass.js');
-u_.req ('C:/utd/150719utdG/public/util/U_error.js');
-u_.req ('C:/utd/150719utdG/public/util/UtilDate.js');
-u_.req ('C:/utd/150719utdG/public/util/UtilString.js');
-u_.req ('C:/utd/150719utdG/public/util/NLB_bgFade.js');
-u_.req ('C:/utd/150719utdG/public/util/UtilUrl4.js');
-u_.req ('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
-u_.req ('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+// list server utils U_setup.js
+// client files go here C:\utd\150719utdG\app\views\layout.server.view.html
+// hhkk2
+if (typeof window === "undefined") // error
+{
+	require('C:/utd/150719utdG/public/util/U_o.js');
+	require('C:/utd/150719utdG/public/util/UtilClass.js');
+	require('C:/utd/150719utdG/public/util/UtilError.js');
+	require('C:/utd/150719utdG/public/util/UtilDate.js');
+	require('C:/utd/150719utdG/public/util/UtilString.js');
+	require('C:/utd/150719utdG/public/util/NLB_bgFade.js');
+	require('C:/utd/150719utdG/public/util/UtilUrl4.js');
+	require('C:/utd/150719utdG/public/util/UtilUrl4bUsesKrawlerToSupportServerController.js');
+	require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
+}
 
 //var UtilClass = require('C:/utd/150719utdG/public/util/UtilClass.js');
 //var UtilString = require('C:/utd/150719utdG/public/util/UtilString.js');
@@ -87,7 +84,7 @@ u_.req ('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 /**
  * initialize u_ for global (server) and window (client) utility usage
  */
-// hbkhbk8
+//
 
 
 
@@ -99,7 +96,7 @@ u_.req ('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //	global.u_.U_error2.o = o;
 //} catch (err) {
 //	// do nothing - no global on client
-//	console.log ('xxxxxxxxxxxxxxx1:' + err); // hbkhbk7
+//	console.log ('xxxxxxxxxxxxxxx1:' + err); //
 //}
 //
 //try {
@@ -109,7 +106,7 @@ u_.req ('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //	u_.U_error2.o = o;
 //} catch (err) {
 //	// do nothing - no global on client
-//	console.log ('xxxxxxxxxxxxxxx1.5:' + err); // hbkhbk7
+//	console.log ('xxxxxxxxxxxxxxx1.5:' + err); //
 //}
 //
 //try {
@@ -119,10 +116,10 @@ u_.req ('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //	u_.U_error2.o = o;
 //} catch (err) {
 //	// do nothing - no global on client
-//	console.log ('xxxxxxxxxxxxxxx2:' + err); // hbkhbk7
+//	console.log ('xxxxxxxxxxxxxxx2:' + err); //
 //}
 
-// Uutil.U_error.emitError
+// Uutil.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
     //exports.emitError = emitError;
