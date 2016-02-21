@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
+<!--see also for server side U_setup.js -->
+
 <head>
 	<title>{{title}}</title>
 
@@ -52,23 +54,26 @@
 
 	<!--<script type="text/javascript" src="/lib/tinymce3/tiny_mce.js"></script>-->
 
+	<!-- hhkk3 -->
+	<script type="text/javascript" src="/util/U_setup.js"></script>
     <script type="text/javascript" src="bundle.js"></script>
+
+
 	<script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
 	<!--<script type="text/javascript" src="/lib/jquery-layout/jquery.layout-latest.js"></script>-->
 	<!--<script type="text/javascript" src="/lib/tinymce4obsolete/tinymce.min.js"></script>-->
     <script type="text/javascript" src="/lib/tinymce425/js/tinymce/tinymce.min.js"></script>
 
-
-	// hhkk2
 	<!--// list server utils U_setup.js-->
 	<!--// client files go here C:\utd\150719utdG\app\views\layout.server.view.html-->
-	<script type="text/javascript" src="/util/U_setup.js"></script>
+	<!-- keep just U_o in browserify land: entry.js > bundle.js -->
+	<!--<script type="text/javascript" src="/util/U_o.js"></script>-->
+
 	<script type="text/javascript" src="/util/UtilError.js"></script>
 	<script type="text/javascript" src="/util/UtilIdle.js"></script>
 	<script type="text/javascript" src="/util/UtilString.js"></script>
 	<script type="text/javascript" src="/util/UtilClass.js"></script>
 	<script type="text/javascript" src="/util/UtilDate.js"></script>
-	<script type="text/javascript" src="/util/U_o.js"></script>
 	<script type="text/javascript" src="/util/UtilJsTypeDetect.js"></script>
 	<script type="text/javascript" src="/util/UcHtmlDocManipulate.js"></script>
 	<script type="text/javascript" src="/util/NLB_bgFade.js"></script>

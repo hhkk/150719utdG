@@ -111,12 +111,13 @@ var utilHtmlCleanerFunctions = new function() {
 		return str;
 	}
 
-	this.testConvertHtmltoText = function(html)
+	this.testConvertHtmltoText = function(html, trim)
 	{
 		//var prestrip = '<p>&nbsp;</p><p>&nbsp;</p>ibm.com<p>&nbsp;</p>';
 		var poststrip = html.replace(/&nbsp;/gm, ' ');
 		poststrip = poststrip.replace(/<(?:.|\n)*?>/gm, '');
-		poststrip = poststrip.trim();
+		if (trim)
+			poststrip = poststrip.trim();
 		//console.log ('prestrip [' + prestrip + ']');
 		//console.log ('poststrip [' + poststrip + ']');
 		return poststrip;

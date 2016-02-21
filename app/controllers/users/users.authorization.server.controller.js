@@ -1,8 +1,8 @@
 'use strict';
 
+// see also C:\utd\150719utdG\app\views\layout.server.view.html
 if (global !== 'undefined')
 	require ('C:/utd/150719utdG/public/util/U_setup.js');
-var O = require('C:/utd/150719utdG/public/util/U_o.js');
 
 /**
  * Module dependencies.
@@ -33,7 +33,7 @@ exports.userByID = function(req, res, next, id) {
 exports.requiresLogin = function(req, res, next) {
 
 	if (!req.isAuthenticated()) {
-		O.o ('Error in exports.requiresLogin: user is not logged in and action apparently requires isAuthenticated' );
+		u_.U_o.o ('Error in exports.requiresLogin: user is not logged in and action apparently requires isAuthenticated' );
 		return res.status(401	).send({
 			message: 'User is not logged in'
 		});
@@ -44,7 +44,7 @@ exports.requiresLogin = function(req, res, next) {
 		//O.o ('user is logged in req.user._doc.firstName:' + req.user._doc.firstName );
 		//O.o ('user is logged in req.user._doc.lastName:' + req.user._doc.lastName );
 		//O.o ('user is logged in req.user._doc.displayName:' + req.user._doc.displayName );
-		O.o ('in exports.requiresLogin: user is logged in req.user._doc.username:' + req.user._doc.username );
+		u_.U_o.o ('in exports.requiresLogin: user is logged in req.user._doc.username:' + req.user._doc.username );
 		//O.o ('user is logged in req.user._doc.email:' + req.user._doc.email );
 	}
 

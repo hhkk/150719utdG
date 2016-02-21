@@ -54,7 +54,7 @@ uberglobal.u_setup = function (clasz, methodname, method)
 //}
 
 // list server utils U_setup.js
-// client files go here C:\utd\150719utdG\app\views\layout.server.view.html
+// see also for client side layout.server.view.html
 // hhkk2
 if (typeof window === "undefined") // error
 {

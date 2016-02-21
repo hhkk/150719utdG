@@ -18,7 +18,8 @@
 //UcHtmlDocManipulate = require('C:/utd/150719utdG/public/util/UcHtmlDocManipulate.js');
 ////ModuleTinymcePasteCleanFilter = require('C:/utd/150719utdG/public/lib/ustodo-browser-util/ModuleTinymcePasteCleanFilter.js');
 
-//O = require('C:/utd/150719utdG/public/util/U_o.js');
+//keep this just as a test that browserify mechanism is working.  use manual <script> method for others for dev purposes
+U_o = require('C:/utd/150719utdG/public/util/U_o.js');
 
 
 

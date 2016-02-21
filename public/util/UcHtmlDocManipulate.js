@@ -16,17 +16,20 @@
 //var UtilHtmlCleaner = require('C:/utd/150719utdG/public/util/UtilHtmlCleaner.js');
 //var UtilHtmlCleaner = UtilHtmlCleaner;
 // UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText
-var O = O;
-	if (!O) {
-		try {
-			O = require('C:/utd/150719utdG/public/util/U_o.js');
-		} catch(err ) {
-			console.log (err);
-		}
-	}
 
-var U_error = U_error;
-var O = O;
+
+//hhkk3
+//var O = O;
+//	if (!O) {
+//		try {
+//			O = require('C:/utd/150719utdG/public/util/U_o.js');
+//		} catch(err ) {
+//			console.log (err);
+//		}
+//	}
+
+//var U_error = U_error;
+//var O = O;
 
 
 
@@ -120,17 +123,6 @@ function convertElementToIframeById (elementIdToReplace, newIframeId, contentEdi
 
 
 
-
-//
-try {
-	global.Uutil = global.Uutil || {};
-} catch (err) {
-	// do nothing - no global on client
-}
-
-console.log (' =================== loaded UcHtmlDocManipulate.js');
-
-console.log (' =================== defined Uutil.testScopeAccess');
 
 //var UcHtmlDocManipulate;
 

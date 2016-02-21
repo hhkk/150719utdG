@@ -62,7 +62,7 @@ var o = function (s)
 		console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
 	}
 };
-4
+
 var oerr = function (s)
 {
 	//console.log ('in o.o');
@@ -71,6 +71,17 @@ var oerr = function (s)
 	if (appendFileSync)
 		appendFileSync('c:/tmp/t.txt', 'ERROR: t:' + t);
 	//console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
+};
+
+var liveLog = function (s)
+{
+	var liveUtdLogFilter = document.getElementById('idTextFieldLiveUtdLogFilter').value.trim();
+	if (liveUtdLogFilter.length === 0 || s.contains(liveUtdLogFilter))
+	{
+		liveLog.counter = liveLog.counter || 0;
+		liveLog.counter++;
+		document.getElementById('utdlog').value = liveLog.counter + '. ' + s + '\n' + document.getElementById('utdlog').value;
+	}
 };
 
 
@@ -178,6 +189,7 @@ u_setup('U_o', 'oerr', oerr);
 u_setup('U_o', 'assert', assert);
 u_setup('U_o', 'a', a);
 u_setup('U_o', 'e', e);
+u_setup('U_o', 'liveLog', liveLog);
 
 
 var U_o;
@@ -188,6 +200,7 @@ if (typeof exports !== 'undefined') {
 	exports.assert = assert;
 	exports.a = a;
 	exports.e = e;
+	exports.liveLog = liveLog;
 }
 
 

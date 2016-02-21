@@ -742,7 +742,7 @@ angular.module('ustodos').controller
 
 
 							// from Chrome debugger
-							//LocationHashbangUrl {$$protocol: "http", $$host: "localhost", $$port: 3000, $$path: "/", $$search: Object…}
+							//LocationHashbangUrl {$$protocol: "http", $$host: "localhost", $$port: 3000, $$path: "/", $$search: Object�}
 							//$$absUrl: "http://localhost:3000/#!/?q=4444ffccffckkk"
 							//$$compose: ()
 							//$$hash: ""
@@ -1985,6 +1985,7 @@ angular.module('ustodos').controller
 					//https://www.google.com/search?num=100&q=contenteditable+onchange
 
 					// called from an initializer
+					// all contenteditables keydown event
 					$scope.installContentEditableEventHandlers = function () {
 						$('[contenteditable=\'true\']').keydown
 						(
@@ -1993,13 +1994,45 @@ angular.module('ustodos').controller
 								if (evt.which === 13) // enter key
 								{
 									//alert('tried2');
+									var ceHtml = $('div[id="idDivMainContentEditableInput"]')[0].innerHTML;
+									var ceText = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(ceHtml, false);
+
 									evt.preventDefault();
-									setTimeout(function(){ alert('Hello2'); }, 10);
+									//setTimeout(function(){ alert('Hello2'); }, 10);
+									$scope.eventHandlerEditorcontentChange("CE keydown added across the board line 1995", $scope.enumKeyEvent.ENTER,
+										ceHtml, ceText, ceText);
 									return false;
 									//alert("All your bugs are belong to us.");
 									//return false;
 								}
 								return ;
+
+								//$scope.eventHandlerEditorcontentChange($scope.enumKeyEvent.ENTER, htmlValue, htmlValue, htmlValue);
+								//if (evt.which === 13) // enter key
+								//{
+								//	//alert('tried2');
+								//	evt.preventDefault();
+								//	var htmlValue = document.getElementById("idDivMainContentEditableInput").innerHTML;
+                                //
+								//	//setTimeout(function(){ alert('hello2enter'); }, 10);
+                                //
+                                //
+								//	return false;
+								//	//alert("All your bugs are belong to us.");
+								//	//return false;
+								//}
+								//else if (evt.which === 27) // escape key
+								//{
+								//	//alert('tried2');
+								//	evt.preventDefault();
+								//	var htmlValue = document.getElementById("idDivMainContentEditableInput").innerHTML;
+                                //
+								//	setTimeout(function(){ alert('hello2escape'); }, 10);
+								//	return false;
+								//	//alert("All your bugs are belong to us.");
+								//	//return false;
+									//}
+								return false;
 							});
 
 
@@ -2021,19 +2054,20 @@ angular.module('ustodos').controller
 						// from http://jsfiddle.net/MBags/
 						// http://stackoverflow.com/questions/8694054/onchange-event-with-contenteditable
 						// https://www.google.com/search?num=100&q=contenteditable+onchange+event
-						var x = 1;
 						function listener(evt)
 						{
-							x++;
 							var typ = evt.type;
 							//if (typ === 'DOMCharacterDataModified') {
 							var htmlValue = document.getElementById("idDivMainContentEditableInput").innerHTML;
 
-							var logStr = x + 'typ:' + typ + ' new htmlValue [' +  htmlValue  + ']';
-							console.log (logStr);
-							alert (logStr);
+							//hhkk2
+							var logStr = 'event typ:' + typ 		 + ' new htmlValue [' +  htmlValue  + ']';
+							u_.U_o.liveLog(logStr);
+							//console.log (logStr);
+							//alert (logStr);
 
-							document.getElementById('utdlog').value = x + '. ' + logStr + '\n' + document.getElementById('utdlog').value;
+
+
 							//alert(evt);
 						}
 						var editable = document.getElementById("idDivMainContentEditableInput");
@@ -2059,7 +2093,7 @@ angular.module('ustodos').controller
 					$scope.onKeyUp_MainContentEditable = function (keyEvent, index, _id)
 					{
 						//hhkk2
-						alert ('!!!! in onKeyUp_MainContentEditable');
+						//alert ('!!!! in onKeyUp_MainContentEditable');
 
 						// if not escape then return
 						//if (keyEvent.keyCode == 13 ) // if not escape key section_escape
@@ -2592,6 +2626,7 @@ angular.module('ustodos').controller
 
 					};
 
+
 					$scope.eventNgChange_idcheckbox_includeMceHtmlPasteFilter = function()
 					{
 						$scope.localTinyMceInit();
@@ -2600,10 +2635,15 @@ angular.module('ustodos').controller
 
 					// hhkk3
 					// eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
-					$scope.eventHandlerEditorcontentChange = function(enumKeyEvent, data, html, text)
+					$scope.callCounter_eventHandlerEditorcontentChange = 0;
+					$scope.eventHandlerEditorcontentChange = function(caller, enumKeyEvent, data, html, text)
 					{
+						$scope.callCounter_eventHandlerEditorcontentChange++;
+						console.log ('$scope.callCounter_eventHandlerEditorcontentChange:' + $scope.callCounter_eventHandlerEditorcontentChange);
+
 						//
-						alert( '######### hhkk3 in eventHandlerEditorcontentChange');
+						//alert( '######### hhkk3 in eventHandlerEditorcontentChange');
+
 						try {
 
 							//document.getElementById('idInputTextFilter').value = text;
@@ -2611,11 +2651,11 @@ angular.module('ustodos').controller
 							callcounteventHandlerEditorcontentChange++;
 							if (enumKeyEvent === $scope.enumKeyEvent.ENTER)
 							{
-								alert ('enter pressed1');
+								//alert ('enter pressed1');
 							}
 							else if (enumKeyEvent === $scope.enumKeyEvent.SPACE)
 							{
-								u_.U_o.o ('space pressed');
+								//u_.U_o.o ('space pressed');
 							}
 							//if (html === priorhtml)
 							//    alert('same html');
@@ -2656,10 +2696,10 @@ angular.module('ustodos').controller
 							//
 
 							//              alert ('text.asciiTable()1:');
-							alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
+							//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
 							text = u_.UtilString.convertNonBreakingSpace(text);
 							text = u_.UtilString.convertRemoveTrailing10(text);
-							alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
+							//alert('text.asciiTable 2():' + text.asciiTable('POST NBSP AND 10 CONVERT'));
 
 							//
 							// alert ('eventHandlerEditorcontentChange text:' + text);
@@ -3273,6 +3313,8 @@ angular.module('ustodos').controller
 					//Uutil2_.Dt_u_.U_o.x('calling o');
 					$scope.testButton= function(fn)
 					{
+						u_.U_o.o('hi sister!');
+
 						//document.getElementById("idDivMainContentEditableInput").innerHTML = 'testbutton';
 
 						if (false) // test $scope.testConvertHtmltoText();
@@ -3283,13 +3325,13 @@ angular.module('ustodos').controller
 
 
 
-						//
+						// hhkk2
 						if (true ) // alldots alternate
 						{
 							//if (text.length % 2 === 1)
 							//{
 								document.getElementById('hkheader').style.display = 'block';
-								document.getElementById('hkidtoolba	rs').style.display = 'block';
+								document.getElementById('hkidtoolbars').style.display = 'block';
 								document.getElementById('hkfooter').style.display = 'block';
 							//					}
 							//					else
@@ -4338,7 +4380,7 @@ angular.module('ustodos').controller
 							//{q:{$regex:xTextCommandRemoved.trim()}});      // this is a GET - see RESOURCE
 							//{q:{$regex:xTextCommandRemoved.trim(), $options:'i'}});      // this is a GET - see RESOURCE
 							//{q:xTextCommandRemoved.trim() }, callbackFromQuery);      // this is a GET - see RESOURCE
-							// {key:{$regex:value, $options:â€˜iâ€™}}
+							// {key:{$regex:value, $options:‘i’}}
 
 							//{q:new RegExp(xTextCommandRemoved.trim(), 'i') }, callbackFromQuery);      // this is a GET - see RESOURCE
 							// {q:{ '$regex' : xTextCommandRemoved.trim(), '$options' : '-i' }}, callbackFromQuery);      // this is a GET - see RESOURCE

@@ -26,6 +26,10 @@ String.prototype.allAfterLast = function (allAfterLastOfThis) {
 	return i = this.substring(this.lastIndexOf(allAfterLastOfThis)+1);
 };
 
+String.prototype.contains = function (s) {
+	return this.indexOf(s) >= 0;
+};
+
 	/**
 	 * remove one or all of a string at head
 	 * @param substr
