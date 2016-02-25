@@ -3341,7 +3341,7 @@ angular.module('ustodos').controller('UstodosController',
                 try {
                     var ustodo = $scope.ustodos[intIndexToDelete];
 
-                    var savOid = ustodo._id;
+                    //var savOid = ustodo._id;
                     O.o('33333333333333333333333333333 splicing: i' + intIndexToDelete );
                     $scope.ustodos.splice(intIndexToDelete, 1);
 

@@ -98,6 +98,7 @@ var callCount_timeAgo = 0;
 var timeAgo =function (dtStrMongoStyle) // date obj
 {
     callCount_timeAgo++;
+	//alert('in timeago');
     //console.log('enter callCount_timeAgo:' + callCount_timeAgo + ' dtStrMongoStyle:' + dtStrMongoStyle);
 
     if (dtStrMongoStyle === '2013-04-09T00:06:09.000Z')
@@ -285,15 +286,16 @@ var getTimeInMillis = function() {
 //u_setup('U_error', 'emitError', emitError);  //  u_.UtilError.emitError
 u_setup('UtilDate', 'getTimeInMillis', getTimeInMillis);  //  u_.UtilError.emitError
 u_setup('UtilDate', 'getDateStringForLogsWithMillis', getDateStringForLogsWithMillis);  //  u_.UtilError.emitError
+u_setup('UtilDate', 'timeAgo', timeAgo);  //  u_.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
-    exports.dateFromComponents = dateFromComponents;
-    exports.timeAgo = timeAgo;
-    exports.dateStringYYYYetcFromDate = dateStringYYYYetcFromDate;
-    exports.browserifyTest = browserifyTest;
-    exports.padnum = padnum;
-    exports.dateObjFromMongoString = dateObjFromMongoString;
-    exports.getTimeInMillis = getTimeInMillis;
-    exports.getDateStringForLogsWithMillis = getDateStringForLogsWithMillis;
+    //exports.dateFromComponents = dateFromComponents;
+    //exports.timeAgo = timeAgo;
+    //exports.dateStringYYYYetcFromDate = dateStringYYYYetcFromDate;
+    //exports.browserifyTest = browserifyTest;
+    //exports.padnum = padnum;
+    //exports.dateObjFromMongoString = dateObjFromMongoString;
+    //exports.getTimeInMillis = getTimeInMillis;
+    //exports.getDateStringForLogsWithMillis = getDateStringForLogsWithMillis;
 }
 

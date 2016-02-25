@@ -50,7 +50,7 @@ var o = function (s)
 {
 
 	//U_error.testWithinEmitError('called U_error.testWithinEmitError from within O.o');
-	console.log ('within ');
+	//console.log ('within ');
 
 	//console.log ('in o.o');
 	if (passesFilters(s))
@@ -70,17 +70,19 @@ var oerr = function (s)
 	console.error(t);
 	if (appendFileSync)
 		appendFileSync('c:/tmp/t.txt', 'ERROR: t:' + t);
+	if (typeof(window) !== undefined)
+		alert ('hkoerr:' + s);
 	//console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
 };
 
 var liveLog = function (s)
 {
-	var liveUtdLogFilter = document.getElementById('idTextFieldLiveUtdLogFilter').value.trim();
+	var liveUtdLogFilter = document.getElementById('idInputtextUtdLogFilter').value.trim();
 	if (liveUtdLogFilter.length === 0 || s.contains(liveUtdLogFilter))
 	{
 		liveLog.counter = liveLog.counter || 0;
 		liveLog.counter++;
-		document.getElementById('utdlog').value = liveLog.counter + '. ' + s + '\n' + document.getElementById('utdlog').value;
+		document.getElementById('idTextareaUtdLog').value = liveLog.counter + '. ' + s + '\n' + document.getElementById('idTextareaUtdLog').value;
 	}
 };
 

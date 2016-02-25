@@ -5,6 +5,7 @@
 
 <section class="WholePage"
 		 data-ng-controller="SinglepageUstodosController"
+		 resize="alert('resizehk)"
 		 style="top:0px"
 		 data-ng-init="ngInitTopLevel()">
 
@@ -42,8 +43,9 @@
 
 
 
-		<textarea rows="4" cols="200" style="font-size:8pt" id="utdlog">utdlog</textarea>
-		filter:<input type='text' id='idTextFieldLiveUtdLogFilter'>
+		<textarea id='idTextareaUtdLog' resize="alert('resizehk')" rows='4' cols='200' style='resize:both;font-size:8pt'>idTextareaUtdLog</textarea>
+
+		filter:<input type='text' id='idInputtextUtdLogFilter' value='hhkk'>
 
 		<div id="testIframeReplace">
 			this <span style="color:red">is</span> a test
@@ -51,6 +53,7 @@
 
 
 		<button ng-click="alert('hi mom')">Allalerty1</button>
+		<button id='showHideDetails' ng-click="toggleShowDetails()">Show</button>
 		<!---->
 
 		<br>
@@ -107,7 +110,8 @@
 				<!--&lt;!&ndash;was Search / Input&ndash;&gt;-->
 				<!--<textarea xxng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>-->
 				<!--&lt;!&ndash;NOTE THERE ARE ALSO TESTBUTTONS IN > 1 place&ndash;&gt;-->
-				<button ng-click="testButton(-2)" title="testButton0">Test0</button>
+
+				<button ng-click="testButton(-2)" title="testButton0">Test</button>
 				<!--<button ng-click="u_.U_error2.o('from in view')" title="testButton1">Test1</button>-->
 				<!--&lt;!&ndash;<button ng-click="UcHtmlDocManipulate.testScopeAccess()" title="testButton1">Test1</button>&ndash;&gt;-->
 				<!--<button ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*')" title="yy">-->
@@ -123,16 +127,19 @@
 
 
 			<!--  -->
+				<!--style='isolation: isolate'-->
+			<span style='font-size:8px'>idDivCEOmniBox</span>
 			<div
-				id='idDivMainContentEditableInput'
-				contenteditable="true" style='background-color:lightgrey'
-				ng-keyup="onKeyUp_MainContentEditable($event)"
-				ng-bind-html="bindToTextBox"
-				style="isolation: isolate"
+				id='idDivCEOmniBox'
+				contenteditable="true" style='background-color:lightgrey; width:100%; height:24px; xxdisplay:auto; overflow:auto; overflow-x: hidden;'
+				ng-keyup='onKeyUp_MainContentEditable($event)'
+				ng-bind-html='bindToTextBox'
+				ng-mouseover = testButton()
+				ng-mouseleave = mouseOut()
+				style='resize:both'
 			>
-				<!--ng-bind-html="ustodosFiltered[$index].html"-->
+				<!--ng-bind-html='ustodosFiltered[$index].html'-->
 			</div>
-			xxd
 			<br>
 			<span>
 			</span>
@@ -442,10 +449,11 @@
 
 								<!-- 4 PER ROW TIME AGO -->
 								<!--<td>&nbsp;<span class="per-row-count" data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod) + ustodo.datelastmod+'.'+ustodo._id"-->
+
 								<td style="width:3%">
 									&nbsp;
 									<span class="per-row-count"
-												data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)"
+												data-ng-bind="u_.UtilDate.timeAgo(ustodo.datelastmod)"
 												ng-click="event_click_timeAgo(ustodo._id)"
 												title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}>
 									</span>
@@ -457,7 +465,7 @@
 								<!--</td>-->
 
 								<!--4.75 USER NAME (TITLE=ID) -->
-								<td style="font-size:8px; width:16%;overflow: hidden">
+								<td style="font-size:8px; width:3%;overflow: hidden">
 									&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.username" title="{{ustodo.user._id}}"
 								></span>
 								</td>
@@ -465,9 +473,9 @@
 
 
 								<!--test  see createOrSave in ustodos.server.controller.js -->
-								<td alt={{ustodo.arrUrlUtdsFromHtml[0].title}}  style="font-size:12px; width:6%;overflow: hidden">
-									&nbsp;<span data-ng-bind="ustodo.arrUrlUtdsFromHtml[0].title"></span>
-								</td>
+								<!--<td alt={{ustodo.arrUrlUtdsFromHtml[0].title}}  style="font-size:12px; width:6%;overflow: hidden">-->
+									<!--&nbsp;<span data-ng-bind="ustodo.arrUrlUtdsFromHtml[0].title"></span>-->
+								<!--</td>-->
 
 								<!-- 4.5 DISPLAY NAME-->
 								<!--<td style="font-size:12px; width:6%;overflow: hidden">-->

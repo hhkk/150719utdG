@@ -556,6 +556,22 @@ angular.module('ustodos').controller
 				};
 
 
+				$scope.toggleShowDetails = function(s)
+				{
+					if (document.getElementById('hkheader').style.display === 'block') {
+						document.getElementById('hkheader').style.display = 'none';
+						document.getElementById('hkidtoolbars').style.display = 'none';
+						document.getElementById('hkfooter').style.display = 'none';
+						document.getElementById('showHideDetails').innerHTML = 'Show';
+					}
+					else {
+						document.getElementById('hkheader').style.display = 'block';
+						document.getElementById('hkidtoolbars').style.display = 'block';
+						document.getElementById('hkfooter').style.display = 'block';
+						document.getElementById('showHideDetails').innerHTML = 'Hide';
+					}
+				};
+
 				$scope.preparePerRowHtml = function(s)
 				{
 					return s;
@@ -1845,10 +1861,10 @@ angular.module('ustodos').controller
 					$scope.testConvertHtmltoText = function() {
 
 						try {
-							var html = $('div[id="idDivMainContentEditableInput"]')[0].innerHTML;
+							var html = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
 							var text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(html);
-							//alert('editor innerhtml:' + html);
-							//alert('editor text:' + text);
+							alert('editor innerhtml:' + html);
+							alert('editor text:' + text);
 
 						} catch (e) {
 							u_.UtilError.emitError('error in testConvertHtmltoText', e)
@@ -1897,7 +1913,7 @@ angular.module('ustodos').controller
 
 					// good one! http://jsfiddle.net/kwc6mvcp/
 					// copied this down to the ngRepeatFinished
-					//$("#idDivMainContentEditableInput").bind("keydown", function(event) {
+					//$("#idDivCEOmniBox").bind("keydown", function(event) {
 					// works
 					//alert("$([contenteditable=true].length" + $("[contenteditable='true']").length);
 					//$("[contenteditable='true']").bind("keydown", function(event) {
@@ -1912,7 +1928,7 @@ angular.module('ustodos').controller
 
 
 					// seems no work
-					//$("#idDivMainContentEditableInput").on('keydown', '.option-item.new', function(e) {
+					//$("#idDivCEOmniBox").on('keydown', '.option-item.new', function(e) {
 					//	if(e.keyCode == 13)
 					//	{
 					//		e.preventDefault();
@@ -1921,7 +1937,7 @@ angular.module('ustodos').controller
 
 
 
-					//$("#idDivMainContentEditableInput").on('keydown', '.option-item.new', function(e) {
+					//$("#idDivCEOmniBox").on('keydown', '.option-item.new', function(e) {
 					//	alert('tried');
 					//	if(e.keyCode == 13)
 					//	{
@@ -1932,13 +1948,13 @@ angular.module('ustodos').controller
 
 
 
-					//alert('start set up idDivMainContentEditableInput handler');
+					//alert('start set up idDivCEOmniBox handler');
 					// http://codepen.io/mightyiam/pen/KDlri
 
 					//
 					// also seems to work - try this in ng-repeat
 					//$(function () {
-					//	$('#idDivMainContentEditableInput').keydown(
+					//	$('#idDivCEOmniBox').keydown(
 					//		function (evt)
 					//		{
 					//			if (evt.which == 13)
@@ -1969,7 +1985,7 @@ angular.module('ustodos').controller
 
 
 
-				//$('#idDivMainContentEditableInput').on('keydown', function(e) {
+				//$('#idDivCEOmniBox').on('keydown', function(e) {
 				//	if (e.which == 13 && e.shiftKey == false) {
 				//		//Prevent insertion of a return
 				//		//You could do other things here, for example
@@ -1978,7 +1994,7 @@ angular.module('ustodos').controller
 				//		return false;
 				//	}
 				//});
-					//alert('done set up idDivMainContentEditableInput handler');
+					//alert('done set up idDivCEOmniBox handler');
 
 					// onchange for contentedtable http://stackoverflow.com/questions/8694054/onchange-event-with-contenteditable
 					//
@@ -1994,13 +2010,14 @@ angular.module('ustodos').controller
 								if (evt.which === 13) // enter key
 								{
 									//alert('tried2');
-									var ceHtml = $('div[id="idDivMainContentEditableInput"]')[0].innerHTML;
+									var ceHtml = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
 									var ceText = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(ceHtml, false);
 
 									evt.preventDefault();
 									//setTimeout(function(){ alert('Hello2'); }, 10);
 									$scope.eventHandlerEditorcontentChange("CE keydown added across the board line 1995", $scope.enumKeyEvent.ENTER,
 										ceHtml, ceText, ceText);
+									u_.U_o.liveLog ('hhkk4 returning false');
 									return false;
 									//alert("All your bugs are belong to us.");
 									//return false;
@@ -2012,7 +2029,7 @@ angular.module('ustodos').controller
 								//{
 								//	//alert('tried2');
 								//	evt.preventDefault();
-								//	var htmlValue = document.getElementById("idDivMainContentEditableInput").innerHTML;
+								//	var htmlValue = document.getElementById("idDivCEOmniBox").innerHTML;
                                 //
 								//	//setTimeout(function(){ alert('hello2enter'); }, 10);
                                 //
@@ -2025,7 +2042,7 @@ angular.module('ustodos').controller
 								//{
 								//	//alert('tried2');
 								//	evt.preventDefault();
-								//	var htmlValue = document.getElementById("idDivMainContentEditableInput").innerHTML;
+								//	var htmlValue = document.getElementById("idDivCEOmniBox").innerHTML;
                                 //
 								//	setTimeout(function(){ alert('hello2escape'); }, 10);
 								//	return false;
@@ -2041,7 +2058,7 @@ angular.module('ustodos').controller
 						// test method 1 onpaste
 						// from http://stackoverflow.com/questions/3553041/how-can-you-catch-a-contenteditable-paste-event
 						// http://www.w3schools.com/jsref/event_onpaste.asp
-						document.getElementById('idDivMainContentEditableInput').onpaste = function(d) {
+						document.getElementById('idDivCEOmniBox').onpaste = function(d) {
 							//alert(d.clipboardData.);
 							alert('in mainContentEditable onpaste');
 							return true; // to allow or not the user insert
@@ -2058,7 +2075,7 @@ angular.module('ustodos').controller
 						{
 							var typ = evt.type;
 							//if (typ === 'DOMCharacterDataModified') {
-							var htmlValue = document.getElementById("idDivMainContentEditableInput").innerHTML;
+							var htmlValue = document.getElementById("idDivCEOmniBox").innerHTML;
 
 							//hhkk2
 							var logStr = 'event typ:' + typ 		 + ' new htmlValue [' +  htmlValue  + ']';
@@ -2070,7 +2087,7 @@ angular.module('ustodos').controller
 
 							//alert(evt);
 						}
-						var editable = document.getElementById("idDivMainContentEditableInput");
+						var editable = document.getElementById("idDivCEOmniBox");
 						if (editable.addEventListener)
 						{
 							editable.addEventListener("input", listener, false);
@@ -2111,7 +2128,7 @@ angular.module('ustodos').controller
 							//savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
                             //
 							//// SET ROW BACKGGROUND COLOR ON EDITING MODE ENTRY
-							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('idDivMainContentEditableInput');
+							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('idDivCEOmniBox');
 							areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'yellow'; // SETMODELLDIRTY
 
 							return;
@@ -2122,7 +2139,7 @@ angular.module('ustodos').controller
 							alert( 'in eventHandlerEditorcontentChange save');
 							//try {
                             //
-							//	var maincontenteditableHtml = document.getElementById('idDivMainContentEditableInput').innerHTML;
+							//	var maincontenteditableHtml = document.getElementById('idDivCEOmniBox').innerHTML;
 							//	//	alert ('maincontenteditableHtml:' + maincontenteditableHtml);
                             //
 							//	//alert('text.asciiTable 1():' + text.asciiTable('PRE NBSP AND 10 CONVERT'));
@@ -2416,42 +2433,48 @@ angular.module('ustodos').controller
 					$scope.setTextInShowingEditor = function(e, callerID, processFailure)
 					{
 						try {
+							$('div[id="idDivCEOmniBox"]')[0].innerHTML = e;
+
+							//		$scope.bindToTextBox = $scope.q;
+
+
 							//switch($scope.whichInputIsInFocus())
 							//{
 							//    case $scope.ns.Input.INPUT_3_MCE:
 							//alert ('in settext 3 e [' + e + '] callerID [' + callerID + ']');
 							//alert ('in settext 3');
 							//alert ('+++++++++ in setTextInShowingEditor target INPUT_3_MCE e:' + e);
-							if (tinyMCE.activeEditor !== null)
-							{
-								alert ('in tinyMCE.activeEditor');
-								if (u_.UtilJsTypeDetect.isString(e)) {
-									//tinyMCE.get('idTinyMceTextArea').setContent(e);
-									//alert('setttt');
-									//alert ('in setTextInShowingEditor as string e [' + e + '] callerID [' + callerID + ']');
-									tinyMCE.activeEditor.setContent(e);
-								}
-								//alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
-								else {
-									//tinyMCE.get('idTinyMceTextArea').setContent(e.innerHTML);
-									//alert('settttt');
-									//alert ('in setTextInShowingEditor NOT as string e [' + e + '] callerID [' + callerID + ']');
-									tinyMCE.activeEditor.setContent(e.innerHTML);
-								}
-							}
-							else {
-								//if ($scope.ustodos && $scope.ustodos.length > 0 ) //
-									//$scope.bindToTextBox = 'hi mom!'; // $scope.ustodos[0];
-									//$scope.bindToTextBox = $scope.ustodos[0].html; // $scope.ustodos[0];
-								//else
-									$scope.bindToTextBox = $scope.q;
-							}
-							//        break;
-							//
-							//    default:
-							//        alert ('era - bad input resolution');
+							//if (tinyMCE.activeEditor !== null)
+							//{
+							//	alert ('in tinyMCE.activeEditor');
+							//	if (u_.UtilJsTypeDetect.isString(e)) {
+							//		//tinyMCE.get('idTinyMceTextArea').setContent(e);
+							//		//alert('setttt');
+							//		//alert ('in setTextInShowingEditor as string e [' + e + '] callerID [' + callerID + ']');
+							//		tinyMCE.activeEditor.setContent(e);
+							//	}
+							//	//alert('logic error - setting CKE rich editor with string [' + e + '] leaving at prior value');
+							//	else {
+							//		//tinyMCE.get('idTinyMceTextArea').setContent(e.innerHTML);
+							//		//alert('settttt');
+							//		//alert ('in setTextInShowingEditor NOT as string e [' + e + '] callerID [' + callerID + ']');
+							//		tinyMCE.activeEditor.setContent(e.innerHTML);
+							//	}
 							//}
-						} catch (e) {
+							//else {
+							//	//if ($scope.ustodos && $scope.ustodos.length > 0 ) //
+							//		//$scope.bindToTextBox = 'hi mom!'; // $scope.ustodos[0];
+							//		//$scope.bindToTextBox = $scope.ustodos[0].html; // $scope.ustodos[0];
+							//	//else
+							//		$scope.bindToTextBox = $scope.q;
+							//}
+							////        break;
+							////
+							////    default:
+							////        alert ('era - bad input resolution');
+							////}
+						}
+						catch (e) {
 							if (processFailure)
 								u_.UtilError.emitError ('era3', e);
 							throw e;
@@ -2461,17 +2484,31 @@ angular.module('ustodos').controller
 					// section_per_editor 5
 					$scope.getTextHtmlAndValueInShowingEditor = function()
 					{
+						var rtn = {};
+						rtn.xText = null;
+						rtn.xHtml = null;
+						rtn.xValue = null;
+						rtn.xHtmlStripped = null;
+
+
 						var xText = null;
 						var xHtml = null;
 						var xValue = null;
 						var xHtmlStripped = null;
-						try {
+						try
+						{
 							//switch($scope.whichInputIsInFocus())
 							//{
 							//    case $scope.ns.Input.INPUT_3_MCE:
 							//alert ('in setTextInShowingEditor for input2cke');
-							xText = tinyMCE.activeEditor.getContent({format: 'text'});
-							xHtml= tinyMCE.activeEditor.getContent();
+
+
+							//xText = tinyMCE.activeEditor.getContent({format: 'text'});
+							//xHtml= tinyMCE.activeEditor.getContent();
+
+							xHtml = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
+							xText = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(xHtml);
+
 							//alert ('xHtml from 3 mce [' + xHtml + ']');
 							//        break;
 							//    default:
@@ -2483,7 +2520,6 @@ angular.module('ustodos').controller
 							throw e;
 						}
 
-						var rtn = {};
 						rtn.xText = xText;
 						rtn.xHtml = xHtml;
 						rtn.xValue = xValue;
@@ -2784,12 +2820,15 @@ angular.module('ustodos').controller
 					};
 
 					$scope.isCurrentEditorEmpty = function()  {
+
+						//alert('in isCurrentEditorEmpty 1');
 						return $scope.getTextHtmlAndValueInShowingEditor().xText.trim() === '';
+						//alert('in isCurrentEditorEmpty 2');
 					};
 
 					$scope.eventMouseoverRow2 = function(i)
 					{
-						//alert ('$scope.getTextHtmlAndValueInShowingEditor() ['+ $scope.getTextHtmlAndValueInShowingEditor().xText + ']');
+						//alert ('in eventMouseoverRow2  $scope.getTextHtmlAndValueInShowingEditor() ['+ $scope.getTextHtmlAndValueInShowingEditor().xText + ']');
 						if (
 							// if no item is selected and model is  selected, if not
 							(SppSvc.getSelectedItem() === -1 && !SppSvc.getModelDirty('singlepage'))
@@ -3311,375 +3350,391 @@ angular.module('ustodos').controller
 					//Uutil2_.Dt_u_.U_o.o('calling o');
 					//Uutil2_.Dt_u_.U_o.e('calling e');
 					//Uutil2_.Dt_u_.U_o.x('calling o');
+					$scope.mouseOut = function(fn) {
+						//alert('in mouseout');
+						document.getElementById('idDivCEOmniBox').style.height = '24px';
+						document.getElementById('idDivCEOmniBox').style.display = 'compact';
+
+					}
 					$scope.testButton= function(fn)
 					{
-						u_.U_o.o('hi sister!');
 
-						//document.getElementById("idDivMainContentEditableInput").innerHTML = 'testbutton';
+						try {
+							u_.U_o.o('hi sister!');
+							//u_.U_o.a('hi sister!');
 
-						if (false) // test $scope.testConvertHtmltoText();
-						{
-							// works $('div[contenteditable="true"]').trigger('focus');
-							$scope.testConvertHtmltoText();
-						}
+							if (true) {
+								//document.getElementById('idDivCEOmniBox').style['max-height'] = '500px';
+								//document.getElementById('idDivCEOmniBox').style.height = '200px';
+								//document.getElementById('idDivCEOmniBox').style.resize = 'both';
+
+								//document.getElementById('idDivCEOmniBox').style.width = '1000px';
+								//document.getElementById('idDivCEOmniBox').style.height = '25px';
+								document.getElementById('idDivCEOmniBox').style.height = 'auto';
+								//delete o.height;
+								document.getElementById('idDivCEOmniBox').style.display = 'block';
+							}
+
+							if (false) {
+								document.getElementById('idTextareaUtdLog').style.resize = "myFunction()";
+								document.getElementById('idDivCEOmniBox').style.resize = "myFunction()";
+							}
+
+							//document.getElementById("idDivCEOmniBox").innerHTML = 'testbutton';
+
+							if (false) // test $scope.testConvertHtmltoText();
+							{
+								// works $('div[contenteditable="true"]').trigger('focus');
+								$scope.testConvertHtmltoText();
+							}
 
 
-
-						// hhkk2
-						if (true ) // alldots alternate
-						{
-							//if (text.length % 2 === 1)
-							//{
+							// hhkk2
+							if (false) // alldots alternate
+							{
+								//if (text.length % 2 === 1)
+								//{
 								document.getElementById('hkheader').style.display = 'block';
 								document.getElementById('hkidtoolbars').style.display = 'block';
 								document.getElementById('hkfooter').style.display = 'block';
-							//					}
-							//					else
-							//					{
-							//						document.getElementById('hkheader').style.display = 'none';
-							//						document.getElementById('hkidtoolbars').style.display = 'none';
-							//						document.getElementById('hkfooter').style.display = 'none';
-							////					}
+								//					}
+								//					else
+								//					{
+								//						document.getElementById('hkheader').style.display = 'none';
+								//						document.getElementById('hkidtoolbars').style.display = 'none';
+								//						document.getElementById('hkfooter').style.display = 'none';
+								////					}
 
-						}
-
-
-						if (true) // convert div to iframe
-						{
-							//idPerRowIframeTop
-
-							//alert('pre');
-							//console.log(__dirname); // not on client
-							//console.log(__filename); // not on client
-							//alert('post');
-
-							//	alert('document.getElementById(testIframeReplace).innerHTML :' + document.getElementById('testIframeReplace').innerHTML);
-
-							//alert('$(#testIframeReplace) :' + $('#testIframeReplace') );
-							//alert('$(#testIframeReplace).val() :' + $('#testIframeReplace').val() );
-							//$('#testIframeReplace').html('your iframe code goes here');
-
-							//$('#testIframeReplace').replaceWith('<iframe><html><head></head><body>dddddddddddd' +
-							//		 '</body></html></iframe>');
-
-							//var div = document.getElementById("testIframeReplace");
-							//alert('div.innerHTML:' + div.innerHTML);
-							//var iframe = document.createElement("iframe");
-							//document.body.appendChild(iframe);
-							//iframe.innerHTML = div.innerHTML;
-							//div.parentNode.removeChild(div);
-
-							// WORKS!
-							//var divIdToReplace = 'testIframeReplace';
-							//var newIframeId = 'newIframeIdx';
-							//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
-
-							//alert('at utilclient');
-							//hhkk1
-							u_.UcHtmlDocManipulate.convertElementToIframeById (
-								'idDivCumIframe', 'idDivCumIframePostTransform', true, "this is a new iframe with id idDivCumIframePostTransform", 80, 300);
-
-							//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
-							//document.getElementById(newIframeId).contentDocument.write(savDivInnerHtml);
-						}
-
-
-						if (false)
-						{
-							try {
-								u_.U_o.o('using front door');
-								//u_.U_o.o('using back door');
-								//throw "erra"
-							} catch (err) {
-								u_.UtilError.emitError('r', err);
 							}
 
+
+							if (false) // convert div to iframe
+							{
+								//idPerRowIframeTop
+
+								//alert('pre');
+								//console.log(__dirname); // not on client
+								//console.log(__filename); // not on client
+								//alert('post');
+
+								//	alert('document.getElementById(testIframeReplace).innerHTML :' + document.getElementById('testIframeReplace').innerHTML);
+
+								//alert('$(#testIframeReplace) :' + $('#testIframeReplace') );
+								//alert('$(#testIframeReplace).val() :' + $('#testIframeReplace').val() );
+								//$('#testIframeReplace').html('your iframe code goes here');
+
+								//$('#testIframeReplace').replaceWith('<iframe><html><head></head><body>dddddddddddd' +
+								//		 '</body></html></iframe>');
+
+								//var div = document.getElementById("testIframeReplace");
+								//alert('div.innerHTML:' + div.innerHTML);
+								//var iframe = document.createElement("iframe");
+								//document.body.appendChild(iframe);
+								//iframe.innerHTML = div.innerHTML;
+								//div.parentNode.removeChild(div);
+
+								// WORKS!
+								//var divIdToReplace = 'testIframeReplace';
+								//var newIframeId = 'newIframeIdx';
+								//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
+
+								//alert('at utilclient');
+								//hhkk1
+								u_.UcHtmlDocManipulate.convertElementToIframeById(
+									'idDivCumIframe', 'idDivCumIframePostTransform', true, "this is a new iframe with id idDivCumIframePostTransform", 80, 300);
+
+								//$('#' + divIdToReplace).html('<iframe id=\'' + newIframeId + '\'><html><head></head><body></body></html></iframe>');
+								//document.getElementById(newIframeId).contentDocument.write(savDivInnerHtml);
+							}
+
+
+							if (false) {
+								try {
+									u_.U_o.o('using front door');
+									//u_.U_o.o('using back door');
+									//throw "erra"
+								} catch (err) {
+									u_.UtilError.emitError('r', err);
+								}
+
+								//
+								//alert('tiptop');wwwwwwwwwwwwwww
+								//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwu_.UtilError.emitError('U_error2.o from singlepage-ustodos.client.controller.js'); //
+								//uu_.UtilError.emitError('xxxe');
+								//Uutil2_.Dt_u_.U_o.dt_o2b('calling dt_o2b2');
+
+								//uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
+								//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
+
+								//Uutil.UtilError.emitError('testerror');
+								//U_error.testWithinEmitError('testerror');
+
+								//$scope.u_.U_o.o ('in testbutton2');
+							}
+
+							if (false) // set style for contenteditable focus
+							{
+								$("[contenteditable='true']").on("focus", function () {
+									$(".editable").toggleClass("focus");
+								});
+
+								$("[contenteditable='true']").on("blur", function () {
+									$(".editable").toggleClass("focus");
+								});
+							}
+
+
+							if (false) {
+
+								alert(window.clipboardData.getData('Text'));
+							}
+
+							if (false) {
+								$scope.ustodosFiltered[0].html = 'hi mom';
+							}
+
+							if (false) {
+								//
+								alert('made it to start');
+								//var html_string= "contenthbk";
+								//document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
+								////document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
+								////document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
+								//document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
+								//alert("made it to end ");
+							}
+
+
+							if (false) {
+								//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
+								//alert('makeThisNotContentEditables.length:' + makeThisNotContentEditables.length);
+								//makeThisNotContentEditables.forEach (function (y) {
+								//	y.contentEditable = false;
+								//	alert('set one');
+								//});
+								var arrelems = $('.makeThisNotContentEditable');
+								arrelems.each(function (y) {
+									arrelems[y].contentEditable = false;
+									alert('set one:' + arrelems[y].contentEditable);
+								});
+							}
+							//if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
+							//{
+							//	var mycopy = jQuery.extend(true, {}, $scope.ustodos[0]);
+							//	//no work var copyUnderscore = _($scope.ustodos[0]).clone();
+							//	//alert ('mycopy:' + mycopy);
+							//	//var x = $scope.ustodos
+							//	$scope.ustodos.splice(0, 0, mycopy);
+							//}
+
+							//if (true) {
+							//	document.getElementById('HKTEST').style['background-color'] = 'blue';
+							//}
+
+							//if (true) {
+							//	alert ('pre fade');
+							//	$scope.testNLBfadeBg();
+							//	alert ('post fade');
+							//}
+
+							//alert ('in keyup $scope.getTextHtmlAndValueInShowingEditor()'+$scope.getTextHtmlAndValueInShowingEditor());
+							//CKEDITOR.instances.editor.destroy();
+
+							//alert ('in testbutton');
+							//if (true)    //
+							//{
+							//	var x = document.getElementById('topLevelTableRow1');
 							//
-							//alert('tiptop');wwwwwwwwwwwwwww
-							//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwu_.UtilError.emitError('U_error2.o from singlepage-ustodos.client.controller.js'); //
-							//uu_.UtilError.emitError('xxxe');
-							//Uutil2_.Dt_u_.U_o.dt_o2b('calling dt_o2b2');
-
-							//uut_O3.o ('called uut_O3 inside $scope.testButton in singlepage-ustodos.client.controller.js');
-							//var s = Uutil.UcHtmlDocManipulate.testScopeAccess();
-
-							//Uutil.UtilError.emitError('testerror');
-							//U_error.testWithinEmitError('testerror');
-
-							//$scope.u_.U_o.o ('in testbutton2');
-						}
-
-						if (false) // set style for contenteditable focus
-						{
-							$("[contenteditable='true']").on("focus", function() {
-								$(".editable").toggleClass("focus");
-							});
-
-							$("[contenteditable='true']").on("blur", function() {
-								$(".editable").toggleClass("focus");
-							}) ;
-						}
-
-
-						if (false)
-						{
-
-							alert (window.clipboardData.getData('Text'));
-						}
-
-						if (false)
-						{
-							$scope.ustodosFiltered[0].html = 'hi mom';
-						}
-
-						if (false)
-						{
+							//	//x.
 							//
-							alert('made it to start');
-							//var html_string= "contenthbk";
-							//document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
-							////document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
-							////document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
-							//document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
-							//alert("made it to end ");
-						}
-
-
-						if (false)
-						{
-							//var makeThisNotContentEditables = document.getElementsByClassName("makeThisNotContentEditable");
-							//alert('makeThisNotContentEditables.length:' + makeThisNotContentEditables.length);
-							//makeThisNotContentEditables.forEach (function (y) {
-							//	y.contentEditable = false;
-							//	alert('set one');
-							//});
-							var arrelems = $('.makeThisNotContentEditable');
-							arrelems.each (function(y) {
-								arrelems[y].contentEditable = false;
-								alert('set one:' + arrelems[y].contentEditable);
-							});
-						}
-						//if (true) // WORKS YAY - adds to location 0 in the list - then confirms saved when done
-						//{
-						//	var mycopy = jQuery.extend(true, {}, $scope.ustodos[0]);
-						//	//no work var copyUnderscore = _($scope.ustodos[0]).clone();
-						//	//alert ('mycopy:' + mycopy);
-						//	//var x = $scope.ustodos
-						//	$scope.ustodos.splice(0, 0, mycopy);
-						//}
-
-						//if (true) {
-						//	document.getElementById('HKTEST').style['background-color'] = 'blue';
-						//}
-
-						//if (true) {
-						//	alert ('pre fade');
-						//	$scope.testNLBfadeBg();
-						//	alert ('post fade');
-						//}
-
-						//alert ('in keyup $scope.getTextHtmlAndValueInShowingEditor()'+$scope.getTextHtmlAndValueInShowingEditor());
-						//CKEDITOR.instances.editor.destroy();
-
-						//alert ('in testbutton');
-						//if (true)    //
-						//{
-						//	var x = document.getElementById('topLevelTableRow1');
-						//
-						//	//x.
-						//
-						//	if (confirm('Do you want to convert this to text?'))
-						//	{
-						//		var foo = window.clipboardData.getData('Text');
-						//		window.clipboardData.setData('Text', foo);
-						//	} else
-						//	{
-						//		// Do nothing!
-						//	}
-						//
-						//
-						//}
-
-						if (false)
-						{
-							var o = document.getElementById('idTinyMceTextArea');
-							//alert('myCustomOnInit from mce o.ng-blur:' + o['ng-blur']);
-							alert('myCustomOnInit from mce o.style.display:' + o.style.display);
-						}
-
-						if (false)
-						{
-							alert('w:' + windowhk.width() + ', x ht:' + windowhk.height());
-						}
-
-						if (false)    // works to set text as mce window // TEST changing one of the text rows to a textarea
-						{
-							alert ('x:' );
-							////var x = document.getElementById('topLevelTableRow1');
-							////alert ('x:' + x);
-							////alert ('x.firstElementChild.innerHTML:' + x.firstElementChild.innerHTML);
-							////alert ('x.firstChild.innerHTML:' + x.firstChild.innerHTML);
-							////x.innerHTML= '<textarea id="hktestTinyMceTextArea"></textarea>';
-                            //
-							////<textarea ng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
-                            //
-							////$scope.localTinyMceInit();
-							//// hbkeak tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
-							//setTimeout(function(){ tinymce.execCommand('mceFocus',false,'idTinyMceTextArea') }, 100); // hbklrbb12
-							////setTimeout(function(){ alert('done') }, 100); // hbklrbb12
-						}
-
-						if (false)
-						{
-							//alert ('document.getElementById(checkBoxAll).value = :' + document.getElementById('checkBoxAll').checked);
-							document.getElementById('checkBoxAll').checked = false;
-						}
-
-						if (false)
-						{
-							//document.getElementById('mceu_34').style.visibility='hidden';
-							if (document.getElementById('mceu_57-body').style.visibility==='hidden')
-								document.getElementById('mceu_57-body').style.visibility='visible';
-							else
-								document.getElementById('mceu_57-body').style.visibility='hidden';
-
-							//if (document.getElementById('mceu_58-body').style.visibility==='hidden')
-							//	document.getElementById('mceu_58-body').style.visibility='visible';
-							//else
-							//	document.getElementById('mceu_58-body').style.visibility='hidden';
-
-							//if (document.getElementById('mceu_34').style.display==='none')
-							//	document.getElementById('mceu_34').style.display='inline'
-							//else
-							//	document.getElementById('mceu_34').style.display='none'
+							//	if (confirm('Do you want to convert this to text?'))
+							//	{
+							//		var foo = window.clipboardData.getData('Text');
+							//		window.clipboardData.setData('Text', foo);
+							//	} else
+							//	{
+							//		// Do nothing!
+							//	}
 							//
-
-
-
-							//var ed = tinymce.activeEditor;
-							//ed.addButton('mybutton2', {
-							//	//type: 'menubutton',
-							//	//text: 'My button',
-							//	//id: 'mcebuttonid2',
-							//	image: '/img/EditPencil.png',
-							//	icon: false,
-							//	onclick: function() {ed.insertContent('Menu item 0')},
-							//	//menu: [
-							//	//	{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
-							//	//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
-							//	//]
-							//});
 							//
-							//tinymce.execCommand("mceRepaint");
-							//alert ('done repaint');
-						}
+							//}
+
+							if (false) {
+								var o = document.getElementById('idTinyMceTextArea');
+								//alert('myCustomOnInit from mce o.ng-blur:' + o['ng-blur']);
+								alert('myCustomOnInit from mce o.style.display:' + o.style.display);
+							}
+
+							if (false) {
+								alert('w:' + windowhk.width() + ', x ht:' + windowhk.height());
+							}
+
+							if (false)    // works to set text as mce window // TEST changing one of the text rows to a textarea
+							{
+								alert('x:');
+								////var x = document.getElementById('topLevelTableRow1');
+								////alert ('x:' + x);
+								////alert ('x.firstElementChild.innerHTML:' + x.firstElementChild.innerHTML);
+								////alert ('x.firstChild.innerHTML:' + x.firstChild.innerHTML);
+								////x.innerHTML= '<textarea id="hktestTinyMceTextArea"></textarea>';
+								//
+								////<textarea ng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>
+								//
+								////$scope.localTinyMceInit();
+								//// hbkeak tinymce.execCommand('mceFocus',false,'idTinyMceTextArea');
+								//setTimeout(function(){ tinymce.execCommand('mceFocus',false,'idTinyMceTextArea') }, 100); // hbklrbb12
+								////setTimeout(function(){ alert('done') }, 100); // hbklrbb12
+							}
+
+							if (false) {
+								//alert ('document.getElementById(checkBoxAll).value = :' + document.getElementById('checkBoxAll').checked);
+								document.getElementById('checkBoxAll').checked = false;
+							}
+
+							if (false) {
+								//document.getElementById('mceu_34').style.visibility='hidden';
+								if (document.getElementById('mceu_57-body').style.visibility === 'hidden')
+									document.getElementById('mceu_57-body').style.visibility = 'visible';
+								else
+									document.getElementById('mceu_57-body').style.visibility = 'hidden';
+
+								//if (document.getElementById('mceu_58-body').style.visibility==='hidden')
+								//	document.getElementById('mceu_58-body').style.visibility='visible';
+								//else
+								//	document.getElementById('mceu_58-body').style.visibility='hidden';
+
+								//if (document.getElementById('mceu_34').style.display==='none')
+								//	document.getElementById('mceu_34').style.display='inline'
+								//else
+								//	document.getElementById('mceu_34').style.display='none'
+								//
 
 
-						if (false) {
-							var documentx = document.getElementById('mcebuttonid2').firstElementChild.firstElementChild;
-							alert ('UtilClassz.getClass(documentx):' + UtilClassz.getClass(documentx));
-							//var documentx = document.getElementById('mcebuttonid2').children.children;
-							//<div id="mcebuttonid2" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mcebuttonid2"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i></button></div>
-							//	<button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i></button>
-							//    <i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i>				}
-							//alert ("documentx" + documentx)
-							alert ('documentx.style:' + documentx.style);
-							alert ('documentx.style.height:' + documentx.style.height);
-							alert ('documentx.style.length:' + documentx.style.length);
-							alert ('documentx.style.item(0):' + documentx.style.item(0));
-							alert ('documentx.style.item(4):' + documentx.style.item(4));
-							alert ('documentx.style.getParentRule:' + documentx.style.getParentRule());
-							alert ('documentx.style.getLength():' + documentx.style.getLength());
-							alert ('documentx.style.getCssText():' + documentx.style.getCssText());
-							alert ('UtilClassz.getClass(documentx.style):' + UtilClassz.getClass(documentx.style));
-							//getProperties is not a function alert ('UtilClassz.getClass(documentx.style.getProperties()):' + documentx.style.getProperties())
-							alert ('UtilClassz.getClass(documentx.style.getOwnPropertyNames()):' + documentx.style.getOwnPropertyNames());
-							alert ('documentx.className:' + documentx.className);
-							alert ('documentx.style:' + documentx.style);
-							//alert ('documentx.style.background-image' + documentx.style.background-image);
-							alert ('documentx.style.cssText:' + documentx.style.cssText);
-							alert ('documentx.style.getPropertyValue(background-image):' + documentx.style.getPropertyValue('background-image'));
-							//alert ('documentx.style.getPropertyCSSValue(background-image)' + documentx.style.getPropertyCSSValue('background-image'));
-						}
-						if (false)
-						{
-							document.getElementById('imageIdRedPEncil').style.visibility='visible';
+								//var ed = tinymce.activeEditor;
+								//ed.addButton('mybutton2', {
+                                //	//type: 'menubutton',
+                                //	//text: 'My button',
+                                //	//id: 'mcebuttonid2',
+                                //	image: '/img/EditPencil.png',
+                                //	icon: false,
+                                //	onclick: function() {ed.insertContent('Menu item 0')},
+                                //	//menu: [
+                                //	//	{text: 'Menu item 1', onclick: function() {ed.insertContent('Menu item 1');}},
+                                //	//	{text: 'Menu item 2', onclick: function() {ed.insertContent('Menu item 2');}}
+                                //	//]
+                                //});
+                                //
+                                //tinymce.execCommand("mceRepaint");
+                                //alert ('done repaint');
+                            }
+
+
+                            if (false) {
+                                var documentx = document.getElementById('mcebuttonid2').firstElementChild.firstElementChild;
+                                alert('UtilClassz.getClass(documentx):' + UtilClassz.getClass(documentx));
+                                //var documentx = document.getElementById('mcebuttonid2').children.children;
+                                //<div id="mcebuttonid2" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mcebuttonid2"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i></button></div>
+                                //	<button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i></button>
+                                //    <i class="mce-ico mce-i-none" style="background-image: url('/img/EditPencilBnW.png')"></i>				}
+                                //alert ("documentx" + documentx)
+                                alert('documentx.style:' + documentx.style);
+                                alert('documentx.style.height:' + documentx.style.height);
+                                alert('documentx.style.length:' + documentx.style.length);
+                                alert('documentx.style.item(0):' + documentx.style.item(0));
+                                alert('documentx.style.item(4):' + documentx.style.item(4));
+                                alert('documentx.style.getParentRule:' + documentx.style.getParentRule());
+                                alert('documentx.style.getLength():' + documentx.style.getLength());
+                                alert('documentx.style.getCssText():' + documentx.style.getCssText());
+                                alert('UtilClassz.getClass(documentx.style):' + UtilClassz.getClass(documentx.style));
+                                //getProperties is not a function alert ('UtilClassz.getClass(documentx.style.getProperties()):' + documentx.style.getProperties())
+                                alert('UtilClassz.getClass(documentx.style.getOwnPropertyNames()):' + documentx.style.getOwnPropertyNames());
+                                alert('documentx.className:' + documentx.className);
+                                alert('documentx.style:' + documentx.style);
+                                //alert ('documentx.style.background-image' + documentx.style.background-image);
+                                alert('documentx.style.cssText:' + documentx.style.cssText);
+                                alert('documentx.style.getPropertyValue(background-image):' + documentx.style.getPropertyValue('background-image'));
+                                //alert ('documentx.style.getPropertyCSSValue(background-image)' + documentx.style.getPropertyCSSValue('background-image'));
+                            }
+                            if (false) {
+                                document.getElementById('imageIdRedPEncil').style.visibility = 'visible';
 //alert('pre:' + angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src);
-							//angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src = '/img/ClearText.png';
-							//alert('post:' + angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src);
+                                //angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src = '/img/ClearText.png';
+                                //alert('post:' + angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).src);
 
-							//alert('pre:' + document.getElementById( 'imageIdRedPEncilbnw' ).src);
-							//alert('post:' + document.getElementById( 'imageIdRedPEncilbnw' ).src);
+                                //alert('pre:' + document.getElementById( 'imageIdRedPEncilbnw' ).src);
+                                //alert('post:' + document.getElementById( 'imageIdRedPEncilbnw' ).src);
 
-							//angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).width = '15';
+                                //angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).width = '15';
 //					alert ('onload - set width to:'+angular.element( document.querySelector( '#imageIdRedPEncilbnw' ) ).width);
-							//alert ('onload - set width to:'+document.getElementById('imageIdRedPEncilbnw').width);
-							//alert ('onload - set style.width to:'+document.getElementById('imageIdRedPEncilbnw').style.width);
-							//document.getElementById('imageIdRedPEncilbnw').width = 300;
-							//document.getElementById('imageIdRedPEncil').style.visibility='visible';
-							//document.getElementById( 'imageIdRedPEncilbnw' ).src = '/img/ClearText.png';
-							//document.getElementById( 'imageIdRedPEncil' ).src = '/img/ClearText.png';
+                                //alert ('onload - set width to:'+document.getElementById('imageIdRedPEncilbnw').width);
+                                //alert ('onload - set style.width to:'+document.getElementById('imageIdRedPEncilbnw').style.width);
+                                //document.getElementById('imageIdRedPEncilbnw').width = 300;
+                                //document.getElementById('imageIdRedPEncil').style.visibility='visible';
+                                //document.getElementById( 'imageIdRedPEncilbnw' ).src = '/img/ClearText.png';
+                                //document.getElementById( 'imageIdRedPEncil' ).src = '/img/ClearText.png';
 
-						}
-						if (false)
-						{
-							SppSvc.setModelDirty (!SppSvc.getModelDirty('singlepage'));
-						}
+                            }
+                            if (false) {
+                                SppSvc.setModelDirty(!SppSvc.getModelDirty('singlepage'));
+                            }
 
-						if (false) // green fade text
-						{
-							u_.NLB_bgFade.NLBfadeBg('numberWrapForFade1', 'green', '#FFFFFF', '1500');
-						}
+                            if (false) // green fade text
+                            {
+                                u_.NLB_bgFade.NLBfadeBg('numberWrapForFade1', 'green', '#FFFFFF', '1500');
+                            }
 
-						if (false) {
-							var xText = tinyMCE.activeEditor.getContent({format: 'text'});
-							var xHtml= tinyMCE.activeEditor.getContent();
-							alert ('xHtml:' + xHtml);
-						}
+                            if (false) {
+                                var xText = tinyMCE.activeEditor.getContent({format: 'text'});
+                                var xHtml = tinyMCE.activeEditor.getContent();
+                                alert('xHtml:' + xHtml);
+                            }
 
-						if (false)
-							document.getElementById('idInputTextFilter').value = ' hi mom';
+                            if (false)
+                                document.getElementById('idInputTextFilter').value = ' hi mom';
 
-						if (false)
-							alert ('$scope.dynamicSearch:' + $scope.dynamicSearch);
+                            if (false)
+                                alert('$scope.dynamicSearch:' + $scope.dynamicSearch);
 
-						// TEST WORKED?
-						//if (false) {
-						//    document.getElementsByClassName('cke_top')[0].style.display = 'none';
-						//    document.getElementsByClassName('cke_bottom')[0].style.display = 'none';
-						//    CKEDITOR.instances.idCkeEditorTextarea.execCommand('maximize');
-						//    setTimeout(function(){ CKEDITOR.instances.idCkeEditorTextarea.execCommand('minimize'); }, 2000);
-						//}
+                            // TEST WORKED?
+                            //if (false) {
+                            //    document.getElementsByClassName('cke_top')[0].style.display = 'none';
+                            //    document.getElementsByClassName('cke_bottom')[0].style.display = 'none';
+                            //    CKEDITOR.instances.idCkeEditorTextarea.execCommand('maximize');
+                            //    setTimeout(function(){ CKEDITOR.instances.idCkeEditorTextarea.execCommand('minimize'); }, 2000);
+                            //}
 
-						//CKEDITOR.instances.idCkeEditorTextarea.resize('100%',height);
+                            //CKEDITOR.instances.idCkeEditorTextarea.resize('100%',height);
 
-						// WORKS $scope.getTextHtmlAndValueInShowingEditor();
-						//var xText = tinyMCE.getInstanceById('idTinyMceTextArea').getContent({format: 'text'});
-						//var xHtml= tinyMCE.getInstanceById('idTinyMceTextArea').getContent();
-						//alert ('got mce content xText:' + xText)
-						//alert ('got mce content xHtml:' + xHtml)
-						//tinyMCE.getInstanceById('idTinyMceTextArea').setContent('hi mom');
+                            // WORKS $scope.getTextHtmlAndValueInShowingEditor();
+                            //var xText = tinyMCE.getInstanceById('idTinyMceTextArea').getContent({format: 'text'});
+                            //var xHtml= tinyMCE.getInstanceById('idTinyMceTextArea').getContent();
+                            //alert ('got mce content xText:' + xText)
+                            //alert ('got mce content xHtml:' + xHtml)
+                            //tinyMCE.getInstanceById('idTinyMceTextArea').setContent('hi mom');
 
 
-						//alert('in testbutton');
-						//document.getElementById('ustodorow0').blur();
-						//$window.location.href = 'http://www.google.com/search?q=';
-						//alert ('in eventClickedTheAnimals line 542');
-						//$window.location.href = 'http://jpro.co?q=*';
-						//$window.location.href = 'http://www.google.com/search?q=';
-						//window.location.href = 'sdsdf';
-						//$location.path('/sdsdf').replace();
+                            //alert('in testbutton');
+                            //document.getElementById('ustodorow0').blur();
+                            //$window.location.href = 'http://www.google.com/search?q=';
+                            //alert ('in eventClickedTheAnimals line 542');
+                            //$window.location.href = 'http://jpro.co?q=*';
+                            //$window.location.href = 'http://www.google.com/search?q=';
+                            //window.location.href = 'sdsdf';
+                            //$location.path('/sdsdf').replace();
 
-						//$location.path('/')
-						//$location.url('http://www.yahoo.com')
-						//$window.location.href = '#/tab/category/1';
-						//var target = angular.element('#textHKKH');
-						//$scope.commandUrl = $scope.commands[idxSelected].commandUrl;
-						//var idxSelected = parseInt(document.getElementById('selectId').value);
-						//var selectedCommandUrl = $scope.commands[idxSelected].commandUrl;
-						//isDirtySetFlag_updateScopeStateFlag_SaveDiffsOption(true);
+                            //$location.path('/')
+                            //$location.url('http://www.yahoo.com')
+                            //$window.location.href = '#/tab/category/1';
+                            //var target = angular.element('#textHKKH');
+                            //$scope.commandUrl = $scope.commands[idxSelected].commandUrl;
+                            //var idxSelected = parseInt(document.getElementById('selectId').value);
+                            //var selectedCommandUrl = $scope.commands[idxSelected].commandUrl;
+                            //isDirtySetFlag_updateScopeStateFlag_SaveDiffsOption(true);
 
-						//$location.search('hk', 'sdfsdf');
+                            //$location.search('hk', 'sdfsdf');
+                        } catch (e) {
+							u_.U_o.oerr('error in testbutton', e)
+                        }
 
 					};
 
@@ -4126,7 +4181,7 @@ angular.module('ustodos').controller
 						if (this.isWriteCommand) {
 							//alert ('in endsWith w');
 							this.xTextCommandRemoved = this.xTextTrimmed.slice(0, this.xTextTrimmed.length - 1).trim();
-							alert ('in write \r\n' +
+							u_.U_o.liveLog('hhkk in write \r\n' +
 								' xHtml [' + xHtml + ']\r\n' +
 								' xTextCommandRemoved.asciiTable():' + this.xTextCommandRemoved.asciiTable());
 							//alert('in write xTextCommandRemoved [' + this.xTextCommandRemoved + ']');
@@ -4171,7 +4226,7 @@ angular.module('ustodos').controller
 
 						// consider interleaving URLs here
 						$scope.setUstodosFiltered('caller2', $scope.ustodos);
-						SppSvc.setModelDirty (false);
+						SppSvc.setModelDirty (false, 'caller_callbackFromQuery');
 						if ($scope.ustodos.length > 0)
 							$scope.setTextInShowingEditor($scope.ustodos[0].html, 'line 3329a2');
 						else
@@ -4642,7 +4697,7 @@ angular.module('ustodos').controller
 		//u_.U_o.a('sss2');
 		if (CONST_SHOW_INIT_ALERTS)
 			alert('inONLOADINIT#8  in directive(onFinishRender{');
-		$('div[id="idDivMainContentEditableInput"]').trigger('focus');
+		$('div[id="idDivCEOmniBox"]').trigger('focus');
 
 
 		if (CONST_SHOW_INIT_ALERTS)
