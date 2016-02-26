@@ -112,6 +112,7 @@
 				<!--&lt;!&ndash;NOTE THERE ARE ALSO TESTBUTTONS IN > 1 place&ndash;&gt;-->
 
 				<button ng-click="testButton(-2)" title="testButton0">Test</button>
+				<button ng-click="clearOmniBox()" title="testButton0">Clear</button>
 				<!--<button ng-click="u_.U_error2.o('from in view')" title="testButton1">Test1</button>-->
 				<!--&lt;!&ndash;<button ng-click="UcHtmlDocManipulate.testScopeAccess()" title="testButton1">Test1</button>&ndash;&gt;-->
 				<!--<button ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*')" title="yy">-->
@@ -134,7 +135,12 @@
 				contenteditable="true" style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
 				ng-keyup='omniboxKey_EventHandler($event)'
 				ng-bind-html='bindToTextBox'
-				ng-mouseover = testButton()
+				ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover()
+
+				document.getElementById('idDivCEOmniBox').style.height = 'auto';
+								//delete o.height;
+								document.getElementById('idDivCEOmniBox').style.display = 'block';
+
 				ng-mouseleave = mouseOut()
 				style='resize:both'
 			>

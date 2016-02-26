@@ -2119,7 +2119,15 @@ angular.module('ustodos').controller
 							var html = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
 							var text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(html, false);
 
+							// if write
 							if (text.endsWith(' w'))
+							{
+								$scope.omniOrAddressBarCommandTextHandler("CE keydown added across the board line 1995", $scope.enumKeyEvent.ENTER,
+									html, text, text);
+								u_.U_o.liveLog ('returning false');
+								return false;
+							}
+							else // search
 							{
 								$scope.omniOrAddressBarCommandTextHandler("CE keydown added across the board line 1995", $scope.enumKeyEvent.ENTER,
 									html, text, text);
@@ -3366,6 +3374,16 @@ angular.module('ustodos').controller
 						document.getElementById('idDivCEOmniBox').style.display = 'compact';
 
 					}
+					$scope.idDivCEOmniBox_eventHandler_ngMouseover = function() {
+						document.getElementById('idDivCEOmniBox').style.height = 'auto';
+						document.getElementById('idDivCEOmniBox').style.display = 'block';
+
+					}
+
+					$scope.clearOmniBox = function() {
+						document.getElementById('idDivCEOmniBox').innerHTML = ''
+					}
+
 					$scope.testButton= function(fn)
 					{
 
@@ -3373,16 +3391,11 @@ angular.module('ustodos').controller
 							u_.U_o.o('hi sister!');
 							//u_.U_o.a('hi sister!');
 
-							if (true) {
-								//document.getElementById('idDivCEOmniBox').style['max-height'] = '500px';
-								//document.getElementById('idDivCEOmniBox').style.height = '200px';
-								//document.getElementById('idDivCEOmniBox').style.resize = 'both';
 
-								//document.getElementById('idDivCEOmniBox').style.width = '1000px';
-								//document.getElementById('idDivCEOmniBox').style.height = '25px';
-								document.getElementById('idDivCEOmniBox').style.height = 'auto';
-								//delete o.height;
-								document.getElementById('idDivCEOmniBox').style.display = 'block';
+							if (true) {
+								alert('xx:' + document.getElementById('idDivCEOmniBox').innerHTML);
+								document.getElementById('idDivCEOmniBox').style.backgroundColor = "red";
+								alert('yy:' + document.getElementById('idDivCEOmniBox').innerHTML);
 							}
 
 							if (false) {
@@ -4330,7 +4343,7 @@ angular.module('ustodos').controller
 									// need to be model schema elements from ustodo.server.model.js
 									// joey: 'and pete', // not sufficient to just be here
 									//html: 'htmlhk:'+utdUserCommand.xHtml.replaceLast(' w', ''),
-									html: encodeURI('yay:' + decodeURI(encodeURI('htmlhk<br>:'+utdUserCommand.xHtml))),
+									html: encodeURI(utdUserCommand.xHtml),
 									text: utdUserCommand.xTextCommandRemoved,
 									datelastmod: (''+new Date()),
 									datecreated: (''+new Date()),
