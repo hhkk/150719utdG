@@ -701,7 +701,7 @@ angular.module('ustodos').controller('UstodosController',
                             if ((!(!$scope.modelCheckboxCtrlEnterToSave && e.ctrlKey)) &&
 								(!$scope.modelCheckboxCtrlEnterToSave || e.ctrlKey))
                             {
-                                $scope.eventHandlerEditorcontentChange (
+                                $scope.omniOrAddressBarCommandTextHandler (
                                     $scope.enumKeyEvent.ENTER,
                                     ed.getContent({format : 'data'}),
                                     ed.getContent({format : 'html'}),
@@ -709,7 +709,7 @@ angular.module('ustodos').controller('UstodosController',
                                 );
                             }
                         } else if (e.keyCode === 32) {
-                            $scope.eventHandlerEditorcontentChange (
+                            $scope.omniOrAddressBarCommandTextHandler (
                                 $scope.enumKeyEvent.SPACE,
                                 ed.getContent({format : 'data'}),
                                 ed.getContent({format : 'html'}),
@@ -2290,7 +2290,7 @@ angular.module('ustodos').controller('UstodosController',
             };
 
             // eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
-            $scope.eventHandlerEditorcontentChange = function(enumKeyEvent, data, html, text)
+            $scope.omniOrAddressBarCommandTextHandler = function(enumKeyEvent, data, html, text)
             {
                 try {
 
@@ -2361,11 +2361,11 @@ angular.module('ustodos').controller('UstodosController',
                     }
                     else if (text.endsWith(' w')) {
                         $scope.processCommand($scope.enumCommands.COMMAND_WRITE,
-                            'caller eventHandlerEditorcontentChange write', text, html, data);
+                            'caller omniOrAddressBarCommandTextHandler write', text, html, data);
                         //alert('calling processCommand');
                     }
                 } catch (e) {
-                    UtilError.emitError('in eventHandlerEditorcontentChange', e);
+                    UtilError.emitError('in omniOrAddressBarCommandTextHandler', e);
                     //alert ('sdfsdfsdf:' + e);
                 }
             };

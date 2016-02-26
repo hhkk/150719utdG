@@ -622,7 +622,7 @@ angular.module('ustodos').controller
 					$scope.modelCheckboxCtrlEnterToSave = false;
 					$scope.reloadWarning = false;
 					$scope.q = null; // current query
-					$scope.bindToTextBox = null; // current textbox to display
+					//$scope.bindToTextBox = null; // current textbox to display
 					$scope.numberCheckboxesChecked = 0;
 					$scope.includeMceHtmlPasteFilter = true;
 					//alert ('set gblx.modelDirty  = false;')
@@ -650,9 +650,15 @@ angular.module('ustodos').controller
 					};
 
 					// input ENUM
-					$scope.enumKeyEvent= {
+					$scope.enumKeyEvent = {
 						ENTER: 1,
 						SPACE: 2
+					};
+
+					// container ENUM
+					$scope.enumContainer = {
+						ADDRESSBAR_OR_OMNIBOXCE: 1,
+						PERROWCE: 2
 					};
 
 					// enumProcessCommandCaller ENUM
@@ -1905,7 +1911,6 @@ angular.module('ustodos').controller
 						return keyEventDesc + ' (keyCode: ' + (window.event ? keyEvent.keyCode : keyEvent.which) + ')';
 					};
 
-					// hhkk2
 					// Event handlers
 					//$scope.onKeyDown = function ($event) {
 					//    $scope.onKeyDownResult = getKeyboardEventResult($event, 'Key down');
@@ -2002,27 +2007,33 @@ angular.module('ustodos').controller
 
 					// called from an initializer
 					// all contenteditables keydown event
-					$scope.installContentEditableEventHandlers = function () {
-						$('[contenteditable=\'true\']').keydown
+					$scope.addPerrowCE_EventHandlers = function () // hhkk
+					{
+						//$('[contenteditable=\'true\']').keydown
+						// instr adds an event handler after the fact
+						$('[class=\'classSpanPerrowCE\']').keydown
 						(
 							function (evt)
 							{
-								if (evt.which === 13) // enter key
-								{
-									//alert('tried2');
-									var ceHtml = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
-									var ceText = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(ceHtml, false);
+								// not sure if this works ...
+								// evt.preventDefault();
+								alert('in keydown from addPerrowCE_EventHandlers()');
 
-									evt.preventDefault();
-									//setTimeout(function(){ alert('Hello2'); }, 10);
-									$scope.eventHandlerEditorcontentChange("CE keydown added across the board line 1995", $scope.enumKeyEvent.ENTER,
-										ceHtml, ceText, ceText);
-									u_.U_o.liveLog ('hhkk4 returning false');
-									return false;
-									//alert("All your bugs are belong to us.");
-									//return false;
+								// escape in perrow CE - save
+								if (evt.which !== 27 ) // if not escape key section_escape
+								{
+									//alert ('!!!! in onKeyUp_MainContentEditable not escape');
+									//// change local image to requiring a save
+									//var savImgHtml = document.getElementById('savimg'+index);
+									////alert ('savImgHtml.src:' + savImgHtml.src);
+									//savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
+									//
+									//// SET ROW BACKGGROUND COLOR ON EDITING MODE ENTRY
+
+									return;
 								}
-								return ;
+
+								//return ;
 
 								//$scope.eventHandlerEditorcontentChange($scope.enumKeyEvent.ENTER, htmlValue, htmlValue, htmlValue);
 								//if (evt.which === 13) // enter key
@@ -2049,7 +2060,7 @@ angular.module('ustodos').controller
 								//	//alert("All your bugs are belong to us.");
 								//	//return false;
 									//}
-								return false;
+								return ;
 							});
 
 
@@ -2073,17 +2084,15 @@ angular.module('ustodos').controller
 						// https://www.google.com/search?num=100&q=contenteditable+onchange+event
 						function listener(evt)
 						{
+							alert ('in listener');
 							var typ = evt.type;
 							//if (typ === 'DOMCharacterDataModified') {
 							var htmlValue = document.getElementById("idDivCEOmniBox").innerHTML;
 
-							//hhkk2
 							var logStr = 'event typ:' + typ 		 + ' new htmlValue [' +  htmlValue  + ']';
 							u_.U_o.liveLog(logStr);
 							//console.log (logStr);
 							//alert (logStr);
-
-
 
 							//alert(evt);
 						}
@@ -2095,48 +2104,43 @@ angular.module('ustodos').controller
 							editable.addEventListener("DOMNodeRemoved", listener, false);
 							editable.addEventListener("DOMCharacterDataModified", listener, false);
 						}
-
-
-
-
-
 					};
 
 
-
-
-
-
-					$scope.onKeyUp_MainContentEditable = function (keyEvent, index, _id)
+					/**
+					 * make omnibox execute command or yellow the field due to key action
+                     */
+					$scope.omniboxKey_EventHandler = function (keyEvent) // hhkk
 					{
-						//hhkk2
 						//alert ('!!!! in onKeyUp_MainContentEditable');
-
-						// if not escape then return
-						//if (keyEvent.keyCode == 13 ) // if not escape key section_escape
-						//{
-						//	alert('== 13');
-						//	return false;
-						//}
-
-						if (keyEvent.keyCode !== 27 ) // if not escape key section_escape
+						if (keyEvent.keyCode === 13) // enter key
 						{
-							//alert ('!!!! in onKeyUp_MainContentEditable not escape');
-							//// change local image to requiring a save
-							//var savImgHtml = document.getElementById('savimg'+index);
-							////alert ('savImgHtml.src:' + savImgHtml.src);
-							//savImgHtml.src = savImgHtml.src.replaceAll('saveIcon.jpg', 'SaveIconBlue.png');
-                            //
-							//// SET ROW BACKGGROUND COLOR ON EDITING MODE ENTRY
-							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('idDivCEOmniBox');
-							areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'yellow'; // SETMODELLDIRTY
+							//alert('in omniboxKey_EventHandler keyEvent.keyCode === 13');
+							var html = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
+							var text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(html, false);
 
-							return;
+							if (text.endsWith(' w'))
+							{
+								$scope.omniOrAddressBarCommandTextHandler("CE keydown added across the board line 1995", $scope.enumKeyEvent.ENTER,
+									html, text, text);
+								u_.U_o.liveLog ('returning false');
+								return false;
+							}
+
+							//evt.preventDefault();
+							//setTimeout(function(){ alert('Hello2'); }, 10);
+							//alert("All your bugs are belong to us.");
+							//return false;
 						}
-						else // save  maincontenteditable
-						{
+						//document.getElementById('idDivCEOmniBox').style['background-color'] = 'yellow'; // SETMODELLDIRTY hhkk
+
+						//alert('color yellow');
+						document.getElementById("idDivCEOmniBox").style.borderWidth = "3px";
+						document.getElementById("idDivCEOmniBox").style.borderColor = "yellow";
+
+						// yellow if not escape
 							// save
-							alert( 'in eventHandlerEditorcontentChange save');
+							//alert( 'in omniOrAddressBarCommandTextHandler save');
 							//try {
                             //
 							//	var maincontenteditableHtml = document.getElementById('idDivCEOmniBox').innerHTML;
@@ -2174,7 +2178,6 @@ angular.module('ustodos').controller
 							//	UtilError.emitError('in eventHandlerEditorcontentChange', e);
 							//	//alert ('sdfsdfsdf:' + e);
 							//}
-						}
 					};
 
 
@@ -2193,7 +2196,13 @@ angular.module('ustodos').controller
 
 							// SET ROW BACKGGROUND COLOR ON EDITING MODE ENTRY
 							var areaPerRowToChangeColorOnToIndicateEditing = document.getElementById('ustodorow'+index);
-							areaPerRowToChangeColorOnToIndicateEditing.style['background-color'] = 'yellow'; // SETMODELLDIRTY
+							//alert('setyellow');
+
+							areaPerRowToChangeColorOnToIndicateEditing.style.borderStyle = 'solid'; // SETMODELLDIRTY
+							areaPerRowToChangeColorOnToIndicateEditing.style.borderWidth = '3px'; // SETMODELLDIRTY
+							areaPerRowToChangeColorOnToIndicateEditing.style.borderColor = 'yellow'; // SETMODELLDIRTY
+							//areaPerRowToChangeColorOnToIndicateEditing.style.backgroundColor = 'green'; // SETMODELLDIRTY
+							//alert('setyellow done');
 
 							return;
 						}
@@ -2432,6 +2441,7 @@ angular.module('ustodos').controller
 					//
 					$scope.setTextInShowingEditor = function(e, callerID, processFailure)
 					{
+						//alert('in setTextInShowingEditor callerID' + callerID);
 						try {
 							$('div[id="idDivCEOmniBox"]')[0].innerHTML = e;
 
@@ -2669,16 +2679,17 @@ angular.module('ustodos').controller
 						alert('Completed init of TinyMCE');
 					};
 
-					// hhkk3
 					// eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
 					$scope.callCounter_eventHandlerEditorcontentChange = 0;
-					$scope.eventHandlerEditorcontentChange = function(caller, enumKeyEvent, data, html, text)
+					// hhkk
+					$scope.omniOrAddressBarCommandTextHandler = function(caller, enumKeyEvent, html, text, data)
 					{
 						$scope.callCounter_eventHandlerEditorcontentChange++;
+
 						console.log ('$scope.callCounter_eventHandlerEditorcontentChange:' + $scope.callCounter_eventHandlerEditorcontentChange);
 
 						//
-						//alert( '######### hhkk3 in eventHandlerEditorcontentChange');
+						//alert( '######### in eventHandlerEditorcontentChange');
 
 						try {
 
@@ -2752,11 +2763,11 @@ angular.module('ustodos').controller
 							}
 							else if (text.endsWith(' w')) {
 								$scope.processCommand($scope.enumCommands.COMMAND_WRITE,
-									'caller eventHandlerEditorcontentChange write', text, html, data);
+									'caller omniOrAddressBarCommandTextHandler write', text, html, data);
 								//alert('calling processCommand');
 							}
 						} catch (e) {
-							u_.UtilError.emitError('in eventHandlerEditorcontentChange', e);
+							u_.UtilError.emitError('in omniOrAddressBarCommandTextHandler', e);
 							//alert ('sdfsdfsdf:' + e);
 						}
 					};
@@ -2838,7 +2849,7 @@ angular.module('ustodos').controller
 						{
 							//if ($scope.mouseoverlock !== 'on') {
 							//$scope.setTextInShowingEditor(document.getElementById('ustodorow'+i));
-							$scope.setTextInShowingEditor($scope.ustodosFiltered[i].html, 'line 2254');
+							$scope.setTextInShowingEditor(decodeURI($scope.ustodosFiltered[i].html), 'line 2254');
 
 							SppSvc.setModelDirty (false);
 						}
@@ -3282,8 +3293,7 @@ angular.module('ustodos').controller
 
 
 						//  copied down
-						//hhkk2
-						$scope.installContentEditableEventHandlers();
+						// hhkk $scope.addPerrowCE_EventHandlers();
 
 						//alert ('$scope.ustodosFiltered:' + $scope.ustodosFiltered);
 						//alert ('hkhkhk');
@@ -3389,7 +3399,6 @@ angular.module('ustodos').controller
 							}
 
 
-							// hhkk2
 							if (false) // alldots alternate
 							{
 								//if (text.length % 2 === 1)
@@ -3439,7 +3448,7 @@ angular.module('ustodos').controller
 								//var savDivInnerHtml = document.getElementById(divIdToReplace).innerHTML;
 
 								//alert('at utilclient');
-								//hhkk1
+
 								u_.UcHtmlDocManipulate.convertElementToIframeById(
 									'idDivCumIframe', 'idDivCumIframePostTransform', true, "this is a new iframe with id idDivCumIframePostTransform", 80, 300);
 
@@ -4181,7 +4190,7 @@ angular.module('ustodos').controller
 						if (this.isWriteCommand) {
 							//alert ('in endsWith w');
 							this.xTextCommandRemoved = this.xTextTrimmed.slice(0, this.xTextTrimmed.length - 1).trim();
-							u_.U_o.liveLog('hhkk in write \r\n' +
+							u_.U_o.liveLog('in write \r\n' +
 								' xHtml [' + xHtml + ']\r\n' +
 								' xTextCommandRemoved.asciiTable():' + this.xTextCommandRemoved.asciiTable());
 							//alert('in write xTextCommandRemoved [' + this.xTextCommandRemoved + ']');
@@ -4228,7 +4237,7 @@ angular.module('ustodos').controller
 						$scope.setUstodosFiltered('caller2', $scope.ustodos);
 						SppSvc.setModelDirty (false, 'caller_callbackFromQuery');
 						if ($scope.ustodos.length > 0)
-							$scope.setTextInShowingEditor($scope.ustodos[0].html, 'line 3329a2');
+							$scope.setTextInShowingEditor(decodeURI($scope.ustodos[0].html), 'line 3329a2');
 						else
 							$scope.setTextInShowingEditor('', 'line 3329a2');
 						//alert ('in callbackFromQuery post get callback2');
@@ -4242,6 +4251,11 @@ angular.module('ustodos').controller
 					 * @param xHtml
 					 * @param xValue maybe aka data?
 					 */
+					$scope.hkdecodeURI = function(s)
+					{
+						return decodeURI(s);
+					};
+
 					$scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml)
 					{
 						var utdUserCommand = new UtdUserCommand(xText, xHtml);
@@ -4315,7 +4329,8 @@ angular.module('ustodos').controller
 									// http://mongoosejs.com/docs/index.html
 									// need to be model schema elements from ustodo.server.model.js
 									// joey: 'and pete', // not sufficient to just be here
-									html: utdUserCommand.xHtml.replaceLast(' w', ''),
+									//html: 'htmlhk:'+utdUserCommand.xHtml.replaceLast(' w', ''),
+									html: encodeURI('yay:' + decodeURI(encodeURI('htmlhk<br>:'+utdUserCommand.xHtml))),
 									text: utdUserCommand.xTextCommandRemoved,
 									datelastmod: (''+new Date()),
 									datecreated: (''+new Date()),

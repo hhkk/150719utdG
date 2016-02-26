@@ -45,7 +45,7 @@
 
 		<textarea id='idTextareaUtdLog' resize="alert('resizehk')" rows='4' cols='200' style='resize:both;font-size:8pt'>idTextareaUtdLog</textarea>
 
-		filter:<input type='text' id='idInputtextUtdLogFilter' value='hhkk'>
+		filter:<input type='text' id='idInputtextUtdLogFilter' value='hkk'>
 
 		<div id="testIframeReplace">
 			this <span style="color:red">is</span> a test
@@ -131,8 +131,8 @@
 			<span style='font-size:8px'>idDivCEOmniBox</span>
 			<div
 				id='idDivCEOmniBox'
-				contenteditable="true" style='background-color:lightgrey; width:100%; height:24px; xxdisplay:auto; overflow:auto; overflow-x: hidden;'
-				ng-keyup='onKeyUp_MainContentEditable($event)'
+				contenteditable="true" style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
+				ng-keyup='omniboxKey_EventHandler($event)'
 				ng-bind-html='bindToTextBox'
 				ng-mouseover = testButton()
 				ng-mouseleave = mouseOut()
@@ -511,7 +511,7 @@
 									<!--</iframe >-->
 									<!---->
 
-									<span class='hkcssContentedit' >
+									<span class='classSpanPerrowCE' >
 										<!--<iframe>-->
 										<div class="WholePage focusblurme"
 											 state="nonIframed"
@@ -523,7 +523,7 @@
 											 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
 											 ng-focus='hkngfocustest($index)'
 											 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
-											 ng-bind-html="ustodosFiltered[$index].html"
+											 ng-bind-html="hkdecodeURI(ustodosFiltered[$index].html)"
 											 title="'xx:'+{{ustodo._id}}"
 										>
 										<!---->

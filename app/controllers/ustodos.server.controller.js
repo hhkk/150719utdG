@@ -104,8 +104,8 @@ function createOrSave(ustodo, res) {
 	try {
 		// do we want to clean?   we want to preserve the whole html - unless it's for rendering, but right now only
 		// with or without _doc seems to work, at least for schema elements
-		ustodo._doc.html = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
-		ustodo._doc.html = ustodo._doc.html.trim();
+		//ustodo._doc.html = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
+		//ustodo._doc.html = ustodo._doc.html.trim();
 		//ustodo.dog = 'cat';                    // right: but same not true w/o _doc
 	} catch (err) {
 		//console.log(UtilClass.UtilClass('err', err));
@@ -118,8 +118,8 @@ function createOrSave(ustodo, res) {
 	res2WithJsonFn_receiveEscapedHtmlAndArrUrlUtds.json = function(rejoinedHtmlPostEscapeWithPairedArrUrlUtd, arrUrlUtdsFromHtml)
 	{
 		try {
-			ustodo._doc.html = rejoinedHtmlPostEscapeWithPairedArrUrlUtd;
-			ustodo._doc.text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
+			//ustodo._doc.html = rejoinedHtmlPostEscapeWithPairedArrUrlUtd;
+			//ustodo._doc.text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.cleanHtmlPre(ustodo._doc.html);
 			ustodo._doc.arrUrlUtdsFromHtml = arrUrlUtdsFromHtml;
 
 			//ustodo._doc.html = UtilHrefThisText.hrefThisText(ustodo._doc.html);
