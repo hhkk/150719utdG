@@ -1,0 +1,57 @@
+<!--
+http://localhost:3000/hk/htmltest/160227_zIndexTest\160227_zIndexTest.html
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+var setit = function(xid) {
+	var currenthk = document.getElementById(xid).style.zIndex ;
+	alert("current zindex of [" + xid + "] is [" + currenthk + "]");
+	document.getElementById(xid).style.zIndex=prompt("set id [" + xid + "] z-index", currenthk);
+};
+
+var eventDropdown = function() {
+	var item = document.getElementById("category").value
+	if (item === 'bigger')
+	{
+		document.getElementById('hhimg').height='302px';
+		document.getElementById('hhimg').style.height='302px';
+	}
+	else if (item === 'smaller')
+	{
+		document.getElementById('hhimg').height='102px';
+		document.getElementById('hhimg').style.height='102px';
+	}
+	else
+	{
+		alert ('error no such command :' + item );
+	}
+
+};
+
+</script>
+<style>
+
+</style>
+</head>
+<body>
+
+<select id="category" class="icon-menu" onchange="eventDropdown()">
+	<option value="all">All</option>
+	<option value="bigger">bigger</option>
+	<option value="smaller">smaller</option>
+</select>
+<br>
+
+<img id="hhimg"  style="z-index:3; position: absolute; 	xxleft: 0px; 	xxtop: 0px; 	height:100px; "  src="w3css.gif" width="100" height="140">
+<h1  id="hhtext" style="z-index:2; position: absolute; 	xxleft: 0px; 	xxtop: 0px; 	height:100px; "> 22222222</h1>
+
+<button type="button" onclick="setit('hhtext')">hhtext</button>
+<button type="button" onclick="setit('hhimg')">hhimg</button>
+
+
+</body>
+</html>

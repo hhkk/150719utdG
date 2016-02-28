@@ -2007,7 +2007,7 @@ angular.module('ustodos').controller
 
 					// called from an initializer
 					// all contenteditables keydown event
-					$scope.addPerrowCE_EventHandlers = function () // hhkk
+					$scope.addPerrowCE_EventHandlers = function ()
 					{
 						//$('[contenteditable=\'true\']').keydown
 						// instr adds an event handler after the fact
@@ -2110,7 +2110,7 @@ angular.module('ustodos').controller
 					/**
 					 * make omnibox execute command or yellow the field due to key action
                      */
-					$scope.omniboxKey_EventHandler = function (keyEvent) // hhkk
+					$scope.omniboxKey_EventHandler = function (keyEvent) //
 					{
 						//alert ('!!!! in onKeyUp_MainContentEditable');
 						if (keyEvent.keyCode === 13) // enter key
@@ -2140,7 +2140,7 @@ angular.module('ustodos').controller
 							//alert("All your bugs are belong to us.");
 							//return false;
 						}
-						//document.getElementById('idDivCEOmniBox').style['background-color'] = 'yellow'; // SETMODELLDIRTY hhkk
+						//document.getElementById('idDivCEOmniBox').style['background-color'] = 'yellow'; // SETMODELLDIRTY
 
 						//alert('color yellow');
 						document.getElementById("idDivCEOmniBox").style.borderWidth = "3px";
@@ -2451,7 +2451,9 @@ angular.module('ustodos').controller
 					{
 						//alert('in setTextInShowingEditor callerID' + callerID);
 						try {
-							$('div[id="idDivCEOmniBox"]')[0].innerHTML = e;
+							$('div[id="idDivCEOmniBox"]')[0].innerHTML = e; // hhkk
+							$('div[id="idDivCEOmniBox2"]')[0].innerHTML = e;
+
 
 							//		$scope.bindToTextBox = $scope.q;
 
@@ -2493,6 +2495,9 @@ angular.module('ustodos').controller
 							////}
 						}
 						catch (e) {
+							if (typeof(window) !== 'undefined')
+								alert('errorxxx'+e);
+							u_.UtilError.emitError ('era3', e);
 							if (processFailure)
 								u_.UtilError.emitError ('era3', e);
 							throw e;
@@ -2689,7 +2694,7 @@ angular.module('ustodos').controller
 
 					// eventHandlerEditorcontentChange was eventHandlerCKEcontentChange
 					$scope.callCounter_eventHandlerEditorcontentChange = 0;
-					// hhkk
+					//
 					$scope.omniOrAddressBarCommandTextHandler = function(caller, enumKeyEvent, html, text, data)
 					{
 						$scope.callCounter_eventHandlerEditorcontentChange++;
@@ -3301,7 +3306,7 @@ angular.module('ustodos').controller
 
 
 						//  copied down
-						// hhkk $scope.addPerrowCE_EventHandlers();
+						//  $scope.addPerrowCE_EventHandlers();
 
 						//alert ('$scope.ustodosFiltered:' + $scope.ustodosFiltered);
 						//alert ('hkhkhk');
@@ -3374,9 +3379,15 @@ angular.module('ustodos').controller
 						document.getElementById('idDivCEOmniBox').style.display = 'compact';
 
 					}
-					$scope.idDivCEOmniBox_eventHandler_ngMouseover = function() {
-						document.getElementById('idDivCEOmniBox').style.height = 'auto';
-						document.getElementById('idDivCEOmniBox').style.display = 'block';
+
+					// hhkk mouseover and focus
+					$scope.idDivCEOmniBox_eventHandler_ngMouseover = function(id)
+					{
+						//document.getElementById('idDivCEOmniBox').style.maxHeight = 'none';
+						//document.getElementById('idDivCEOmniBox').style.height = 'auto';
+						//document.getElementById('idDivCEOmniBox').style.display = 'block';
+
+						//alert('idDivCEOmniBox_eventHandler_ngMouseover:' + id);
 
 					}
 
@@ -3386,16 +3397,22 @@ angular.module('ustodos').controller
 
 					$scope.testButton= function(fn)
 					{
-
-						try {
+						try
+						{
 							u_.U_o.o('hi sister!');
 							//u_.U_o.a('hi sister!');
 
-
-							if (true) {
-								alert('xx:' + document.getElementById('idDivCEOmniBox').innerHTML);
-								document.getElementById('idDivCEOmniBox').style.backgroundColor = "red";
-								alert('yy:' + document.getElementById('idDivCEOmniBox').innerHTML);
+							// hhkk testbutton
+							if (true) // why this makes error
+							{
+								$('div[id="xxxyyyxxyy"]')[0].innerHTML = 'xx:';
+							}
+							if (true) // show settings
+							{
+					            alert ('idDivCEOmniBox2.innerHTML:' + document.getElementById('idDivCEOmniBox2').innerHTML);
+					            alert ('idDivCEOmniBox.maxHeight:' + document.getElementById('idDivCEOmniBox').style.maxHeight);
+								alert ('idDivCEOmniBox.height:' + document.getElementById('idDivCEOmniBox').style.height);
+								document.getElementById('idDivCEOmniBox').style.zIndex=2;
 							}
 
 							if (false) {

@@ -51,9 +51,40 @@
 			this <span style="color:red">is</span> a test
 		</div>
 
+		<script id="defines eventDropdown_hhkk ">
+			var eventDropdown = function() {
+				var item = document.getElementById("category").value
+				if (item === 'bigger')
+				{
+					//alert('display was:' + document.getElementById('idDivCEOmniBox').style.display);
+					document.getElementById('idDivCEOmniBox').style.maxHeight = 'none';
+					document.getElementById('idDivCEOmniBox').style.height = 'auto';
+					document.getElementById('idDivCEOmniBox').style.display = 'block';
+				}
+				else if (item === 'smaller')
+				{
+					document.getElementById('idDivCEOmniBox').style.maxHeight = '20px';
+					document.getElementById('idDivCEOmniBox').style.height = '20px';
+					document.getElementById('idDivCEOmniBox').style.display = 'inline';
+				}
+				else
+				{
+					alert ('error no such command :' + item );
+				}
+
+			};
+
+		</script>
+
 
 		<button ng-click="alert('hi mom')">Allalerty1</button>
 		<button id='showHideDetails' ng-click="toggleShowDetails()">Show</button>
+		<select id="category" class="icon-menu" onchange="eventDropdown()">
+			<option value="all">All</option>
+			<option value="bigger">bigger</option>
+			<option value="smaller">smaller</option>
+		</select>
+
 		<!---->
 
 		<br>
@@ -129,27 +160,51 @@
 
 			<!--  -->
 				<!--style='isolation: isolate'-->
-			<span style='font-size:8px'>idDivCEOmniBox</span>
+			<span style='position:absolute; font-size:8px;'>idDivCEOmniBox</span>
+			<!-- hhkk -->
 			<div
 				id='idDivCEOmniBox'
-				contenteditable="true" style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
+				style='
+					position:absolute;
+					resize:both;
+					/*top:300px;*/
+					max-height: 20px;
+					height: 20px;
+					background-color:lightgrey;
+					border-width:0px; border-style:solid; border-color:green;
+					width:500px; xxheight:auto;
+					display:inline;
+					xxoverflow:auto; overflow-x: hidden;
+					z-index:5
+					'
+				contenteditable="true"
 				ng-keyup='omniboxKey_EventHandler($event)'
 				ng-bind-html='bindToTextBox'
-				ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover()
-
-				document.getElementById('idDivCEOmniBox').style.height = 'auto';
-								//delete o.height;
-								document.getElementById('idDivCEOmniBox').style.display = 'block';
-
-				ng-mouseleave = mouseOut()
-				style='resize:both'
+				ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover(1)
+				ng-focus= idDivCEOmniBox_eventHandler_ngMouseover(2)
+				xxng-mouseleave = mouseOut()
 			>
 				<!--ng-bind-html='ustodosFiltered[$index].html'-->
 			</div>
-			<br>
-			<span>
-			</span>
-			<div>
+			<div id='idDivCEOmniBox2'
+				style='
+					position:absolute;
+					resize:both;
+					/*top:300px;*/
+					height:auto;
+					xxmax-height: 20px;
+					background-color:transparent;
+					color:transparent;
+					border-width:3px; border-style:solid; border-color:green;
+					width: 4px;00px;
+					display:inline;
+					xxoverflow:auto; overflow-x: hidden;
+					z-index:7
+					'
+				contenteditable="true"
+			>
+				sample text in idDivCEOmniBox2
+				<!--ng-bind-html='ustodosFiltered[$index].html'-->
 			</div>
 
 
@@ -182,6 +237,7 @@
 			| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
 			'----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
 			-->
+
 
 			<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
 				   ng-click="clearText()"                src='/img/ClearText.png'
@@ -335,13 +391,14 @@
 		<!--<button ng-click="testButton(-2)">TestButton</button>-->
 		<!--<p ng- repeat="operator in operators">{{operator.commandDescription}}</p>-->
 
+		<!-- hhkk -->
 		<div id='hbkdiv1'
-			 style='xxheight:300px;
+			 style='position:relative; top:40px;
 				overflow:auto;
 				'
 			>
 			<!-- hbkk 1509 hktable -->
-			<table id='maincsstableid'>
+			<table id='maincsstableid' >
 				<!--<col style="width:2%">-->
 				<!--<col style="width:2%">-->
 				<!--<col style="width:2%">-->
@@ -381,14 +438,14 @@
 
 				<!--//height:80em;-->
 				<tbody
+						id="idNotUsedSoNoMatter"
 						style='
     					overflow:scroll;
 						width:100%;
 						height:85%;
-						/*top:5px;*/
 						z-index: 0;
 						/*background-color: lightgrey;*/
-						position:static;
+						position:relative;
     					'
 					>
 					<div id='perRowOnly'>
@@ -517,7 +574,7 @@
 									<!--</iframe >-->
 									<!---->
 
-									<span class='classSpanPerrowCE' >
+									<span class='classSpanPerrowCE'>
 										<!--<iframe>-->
 										<div class="WholePage focusblurme"
 											 state="nonIframed"
