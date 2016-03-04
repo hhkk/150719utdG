@@ -2452,7 +2452,7 @@ angular.module('ustodos').controller
 						//alert('in setTextInShowingEditor callerID' + callerID);
 						try {
 							$('div[id="idDivCEOmniBox"]')[0].innerHTML = e; // hhkk
-							$('div[id="idDivCEOmniBox2"]')[0].innerHTML = e;
+							//$('div[id="idDivCEOmniBox2"]')[0].innerHTML = e;
 
 
 							//		$scope.bindToTextBox = $scope.q;
@@ -3405,14 +3405,7 @@ angular.module('ustodos').controller
 							// hhkk testbutton
 							if (true) // why this makes error
 							{
-								$('div[id="xxxyyyxxyy"]')[0].innerHTML = 'xx:';
-							}
-							if (true) // show settings
-							{
-					            alert ('idDivCEOmniBox2.innerHTML:' + document.getElementById('idDivCEOmniBox2').innerHTML);
-					            alert ('idDivCEOmniBox.maxHeight:' + document.getElementById('idDivCEOmniBox').style.maxHeight);
-								alert ('idDivCEOmniBox.height:' + document.getElementById('idDivCEOmniBox').style.height);
-								document.getElementById('idDivCEOmniBox').style.zIndex=2;
+								alert(document.activeElement.id);
 							}
 
 							if (false) {
@@ -4664,10 +4657,30 @@ angular.module('ustodos').controller
 					};
 
 
+
+					$scope.hkngfocustest_original = {};
 					$scope.hkngfocustest = function(index) {
+
 						//u_.U_o.o('================ from hkngfocustest:' + index);
 						SppSvc.setSelectedItem(index);
+						// hhkk
+						//alert('in hkngfocustest:' + index);
 
+						var x = document.getElementById('ustodorow'+index);
+						var expanded = (x.style.maxHeight === 'none');
+						if (!expanded)
+						{
+						    if (Object.keys($scope.hkngfocustest_original).length === 0) {
+								$scope.hkngfocustest_original.maxHeight = x.style.maxHeight; // save original
+								$scope.hkngfocustest_original.height = x.style.height; // save original
+							}
+							x.style.maxHeight = 'none';
+							x.style.height = 'auto';
+						} else {
+
+							x.style.maxHeight = $scope.hkngfocustest_original.maxHeight;
+							x.style.height = $scope.hkngfocustest_original.eight;
+						}
 					};
 
 					//alert ('done defining medium');

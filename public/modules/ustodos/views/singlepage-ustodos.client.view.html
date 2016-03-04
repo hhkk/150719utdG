@@ -142,7 +142,7 @@
 				<!--<textarea xxng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>-->
 				<!--&lt;!&ndash;NOTE THERE ARE ALSO TESTBUTTONS IN > 1 place&ndash;&gt;-->
 
-				<button ng-click="testButton(-2)" title="testButton0">Test</button>
+				<button id='himom' ng-click="testButton(-2)" title="testButton0">Test0</button>
 				<button ng-click="clearOmniBox()" title="testButton0">Clear</button>
 				<!--<button ng-click="u_.U_error2.o('from in view')" title="testButton1">Test1</button>-->
 				<!--&lt;!&ndash;<button ng-click="UcHtmlDocManipulate.testScopeAccess()" title="testButton1">Test1</button>&ndash;&gt;-->
@@ -168,8 +168,8 @@
 					position:absolute;
 					resize:both;
 					/*top:300px;*/
-					max-height: 20px;
-					height: 20px;
+					max-height: 60px;
+					height: 30px;
 					background-color:lightgrey;
 					border-width:0px; border-style:solid; border-color:green;
 					width:500px; xxheight:auto;
@@ -186,26 +186,26 @@
 			>
 				<!--ng-bind-html='ustodosFiltered[$index].html'-->
 			</div>
-			<div id='idDivCEOmniBox2'
-				style='
-					position:absolute;
-					resize:both;
-					/*top:300px;*/
-					height:auto;
-					xxmax-height: 20px;
-					background-color:transparent;
-					color:transparent;
-					border-width:3px; border-style:solid; border-color:green;
-					width: 4px;00px;
-					display:inline;
-					xxoverflow:auto; overflow-x: hidden;
-					z-index:7
-					'
-				contenteditable="true"
-			>
-				sample text in idDivCEOmniBox2
-				<!--ng-bind-html='ustodosFiltered[$index].html'-->
-			</div>
+			<!--<div id='idDivCEOmniBox2'-->
+				<!--style='-->
+					<!--position:absolute;-->
+					<!--resize:both;-->
+					<!--/*top:300px;*/-->
+					<!--height:auto;-->
+					<!--xxmax-height: 20px;-->
+					<!--background-color:transparent;-->
+					<!--color:transparent;-->
+					<!--border-width:3px; border-style:solid; border-color:green;-->
+					<!--width:400px;-->
+					<!--display:inline;-->
+					<!--xxoverflow:auto; overflow-x: hidden;-->
+					<!--z-index:7-->
+					<!--'-->
+				<!--contenteditable="true"-->
+			<!--&gt;-->
+				<!--sample text in idDivCEOmniBox2-->
+				<!--&lt;!&ndash;ng-bind-html='ustodosFiltered[$index].html'&ndash;&gt;-->
+			<!--</div>-->
 
 
 			<!-- section_ABOVE_TABLE_CHECKALL_ETC
@@ -561,13 +561,13 @@
 									word-wrap: break-word;
 									zzbackground-color: yellow;
 									white-space: nowrap;
-									overflow: auto;'
-									/*visible|hidden|scroll|auto|initial|inherit*/
-									/*-moz-hyphens:auto;*/
-									/*-webkit-hyphens:auto;*/
-									/*-o-hyphens:auto;*/
-									/*hyphens:auto;*/
+									overflow: auto'
 								                    >
+									<!--/*hyphens:auto;*/-->
+								<!--/*visible|hidden|scroll|auto|initial|inherit*/-->
+								<!--/*-moz-hyphens:auto;*/-->
+								<!--/*-webkit-hyphens:auto;*/-->
+								<!--/*-o-hyphens:auto;*/-->
 									<!--ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)" -->
 									<!-- works cc{{$index}}dd-->
 									<!--<iframe id="idPerRowIframe{{$index}}" >-->
@@ -577,17 +577,23 @@
 									<span class='classSpanPerrowCE'>
 										<!--<iframe>-->
 										<div class="WholePage focusblurme"
-											 state="nonIframed"
 											 id="ustodorow{{$index}}"
-											 hkindex="{{$index}}"
-											 hkustodoid="{{ustodo._id}}"
+											 style='
+											 	max-height: 5em;
+											 	height: auto;
+											 '
+											state="nonIframed"
+												 hkindex="{{$index}}"
+											hkustodoid="{{ustodo._id}}"
 
-											 contenteditable="true"
-											 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
-											 ng-focus='hkngfocustest($index)'
-											 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
-											 ng-bind-html="hkdecodeURI(ustodosFiltered[$index].html)"
-											 title="'xx:'+{{ustodo._id}}"
+											contenteditable="true"
+											xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
+											onclick="console.log('1')"
+											onfocus="console.log('2')"
+											xxng-focus='hkngfocustest($index)'
+											ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
+											ng-bind-html="hkdecodeURI(ustodosFiltered[$index].html)"
+											title="'xx:'+{{ustodo._id}}"
 										>
 										<!---->
 										</div>
