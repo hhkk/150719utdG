@@ -1,0 +1,63 @@
+<!--
+http://localhost:3000/hk/htmltest/160306_AngularStandaloneTest.html
+C:\utd\150719utdG\public\hk\htmltest\160306_AngularStandaloneTest.html
+-->
+
+<!doctype html>
+<html lang="en">
+
+<body >
+	<div ng-app="scopeExample">
+			<div ng-controller="MyController">
+			Your name:
+			<input type="text" ng-model="username">
+			<button ng-click='sayHello()'>greet</button>
+			<hr>
+			a{{greeting}}b <br>
+			c <div ng-bind='greeting'></div>d
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+	<script type="text/javascript">
+		(function(angular) {
+			'use strict';
+			angular.module('scopeExample', []).controller('MyController', ['$scope', function($scope) {
+				$scope.username = 'hkon';
+				$scope.sayHello = function() {
+					$scope.greeting = 'Hello ' + $scope.username + '!';
+				};
+			}]);
+		})(window.angular);
+	</script>
+
+</body>
+
+
+
+
+
+</html>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
+
+<!--simpler -->
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
+<!--<body>-->
+
+<!--<div ng-app="">-->
+
+	<!--<p>Input something in the input box:</p>-->
+	<!--<p>Name : <input type="text" ng-model="name" placeholder="Enter name here"></p>-->
+	<!--<h1>Hello {{name}}</h1>-->
+
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->

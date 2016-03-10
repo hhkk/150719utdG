@@ -1,12 +1,14 @@
 
 <!--
 http://localhost:3000/hk/htmltest/160302_QueryLayoutTest\public\test.html
+	C:\utd\150719utdG\public\hk\htmltest\160302_QueryLayoutTest\public\css\complex.css
 
 -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<!--xxhkhead-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
 
@@ -22,7 +24,7 @@ http://localhost:3000/hk/htmltest/160302_QueryLayoutTest\public\test.html
 
 	<script type="text/javascript" src="lib/jquery-ui/jquery-ui.js"></script>
 	<script type="text/javascript" src="lib/jquery.layout-latest.js"></script>
-	<script type="text/javascript" src="complex.js"></script>
+	<script type="text/javascript" src=complex.js></script>
 	<!--<script type="text/javascript" src="/lib/js/debug.js"></script>-->
 
 	<script type="text/javascript">
@@ -43,6 +45,7 @@ http://localhost:3000/hk/htmltest/160302_QueryLayoutTest\public\test.html
 		 */
 		$(document).ready( function() {
 			// create the OUTER LAYOUT
+			//alert('initinghk');
 			outerLayout = $("body").layout( layoutSettings_Outer );
 
 			/*******************************
@@ -239,6 +242,8 @@ http://localhost:3000/hk/htmltest/160302_QueryLayoutTest\public\test.html
 </head>
 <body>
 
+<!--xxhkbody-->
+
 <div class="ui-layout-west">
 
 	<div class="header">Outer - West</div>
@@ -377,23 +382,12 @@ http://localhost:3000/hk/htmltest/160302_QueryLayoutTest\public\test.html
 
 			<p><a href="../demos.html">Go to the Demos page</a></p>
 
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
 		</div>
-		<div class="footer">Center panes can have headers &amp; footers too</div>
+		<!--<div class="footer">Center panes can have headers &amp; footers too</div>-->
 	</div>
 
-	<div class="ui-layout-north"> Inner - North</div>
-	<div class="ui-layout-south"> Inner - South</div>
-	<div class="ui-layout-west">  Inner - West</div>
-	<div class="ui-layout-east">  Inner - East
-		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-	</div>
 
 </div>
 
