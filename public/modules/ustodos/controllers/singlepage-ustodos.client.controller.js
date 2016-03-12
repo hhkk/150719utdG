@@ -4145,6 +4145,9 @@ angular.module('ustodos').controller
 
 					$scope.deleteDbUstotoOneByIndex = function(arrIntIndexesToDelete_or_oneUsToDo)
 					{
+						//try {
+                        //
+						//}
 						//u_.U_o.assert (false, 'asdasd');
 						u_.U_o.assert ((arrIntIndexesToDelete_or_oneUsToDo.length === 1), 'support only delete one right now, not:' + arrIntIndexesToDelete_or_oneUsToDo.length);
 
