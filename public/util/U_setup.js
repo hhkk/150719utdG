@@ -55,7 +55,7 @@ uberglobal.u_setup = function (clasz, methodname, method)
 
 // list server utils U_setup.js
 // see also for client side layout.server.view.html
-// hhkk2
+
 if (typeof window === "undefined") // error
 {
 	require('C:/utd/150719utdG/public/util/U_o.js');

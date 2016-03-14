@@ -177,6 +177,7 @@ app.directive('repeatDone', function() {
 
 //alert ('defining SppSvc');
 
+
 // archetype prototype service for access to data across controllers
 app.factory('SppSvc', function() {
 	//alert ('in SppSvc');
@@ -459,7 +460,7 @@ angular.module('ustodos').controller
 //			//}
 //		};
 //
-//		$("body").layout({applyDemoStyles:false});
+//		$('body').layout({applyDemoStyles:false});
 //		var innerLayout = $("div.ui-layout-center").layout( layoutSettings_Inner );
 
 
@@ -2451,7 +2452,7 @@ angular.module('ustodos').controller
 					{
 						//alert('in setTextInShowingEditor callerID' + callerID);
 						try {
-							$('div[id="idDivCEOmniBox"]')[0].innerHTML = e; // hhkk
+							$('div[id="idDivCEOmniBox"]')[0].innerHTML = e;
 							//$('div[id="idDivCEOmniBox2"]')[0].innerHTML = e;
 
 
@@ -3380,7 +3381,6 @@ angular.module('ustodos').controller
 
 					}
 
-					// hhkk mouseover and focus
 					$scope.idDivCEOmniBox_eventHandler_ngMouseover = function(id)
 					{
 						//document.getElementById('idDivCEOmniBox').style.maxHeight = 'none';
@@ -3395,6 +3395,7 @@ angular.module('ustodos').controller
 						document.getElementById('idDivCEOmniBox').innerHTML = ''
 					}
 
+					// hhkk testbutton
 					$scope.testButton= function(fn)
 					{
 						try
@@ -3402,7 +3403,6 @@ angular.module('ustodos').controller
 							u_.U_o.o('hi sister!');
 							//u_.U_o.a('hi sister!');
 
-							// hhkk testbutton
 							if (true) // why this makes error
 							{
 								alert(document.activeElement.id);
@@ -4666,7 +4666,6 @@ angular.module('ustodos').controller
 
 						//u_.U_o.o('================ from hkngfocustest:' + index);
 						SppSvc.setSelectedItem(index);
-						// hhkk
 						//alert('in hkngfocustest:' + index);
 
 						var x = document.getElementById('ustodorow'+index);

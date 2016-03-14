@@ -3,11 +3,21 @@
 <!-- hbklrb5 invoked by core client routes -->
 
 
-<section class="WholePage"
-		 data-ng-controller="SinglepageUstodosController"
-		 resize="alert('resizehk)"
-		 style="top:0px"
-		 data-ng-init="ngInitTopLevel()">
+<!--hhkk1-->
+<!--<section class="WholePage" style="top:0px" >-->
+	<!--&lt;!&ndash;data-ng-controller="SinglepageUstodosController"&ndash;&gt;-->
+	<!--&lt;!&ndash;resize="alert('resizehk)"&ndash;&gt;-->
+	<!--&lt;!&ndash;data-ng-init="ngInitTopLevel()"&ndash;&gt;-->
+
+<!--hhkk100 -->
+ <section class="WholePage"
+		             data-ng-controller="SinglepageUstodosController"
+		             resize="alert('resizehk)"
+		             style="top:0px"
+		             data-ng-init="ngInitTopLevel()">
+
+
+
 
 
 
@@ -47,11 +57,7 @@
 
 		filter:<input type='text' id='idInputtextUtdLogFilter' value='hkk'>
 
-		<div id="testIframeReplace">
-			this <span style="color:red">is</span> a test
-		</div>
-
-		<script id="defines eventDropdown_hhkk ">
+		<script id="defines eventDropdown ">
 			var eventDropdown = function() {
 				var item = document.getElementById("category").value
 				if (item === 'bigger')
@@ -161,51 +167,6 @@
 			<!--  -->
 				<!--style='isolation: isolate'-->
 			<span style='position:absolute; font-size:8px;'>idDivCEOmniBox</span>
-			<!-- hhkk -->
-			<div
-				id='idDivCEOmniBox'
-				style='
-					position:absolute;
-					resize:both;
-					/*top:300px;*/
-					max-height: 60px;
-					height: 30px;
-					background-color:lightgrey;
-					border-width:0px; border-style:solid; border-color:green;
-					width:500px; xxheight:auto;
-					display:inline;
-					xxoverflow:auto; overflow-x: hidden;
-					z-index:5
-					'
-				contenteditable="true"
-				ng-keyup='omniboxKey_EventHandler($event)'
-				ng-bind-html='bindToTextBox'
-				ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover(1)
-				ng-focus= idDivCEOmniBox_eventHandler_ngMouseover(2)
-				xxng-mouseleave = mouseOut()
-			>
-				<!--ng-bind-html='ustodosFiltered[$index].html'-->
-			</div>
-			<!--<div id='idDivCEOmniBox2'-->
-				<!--style='-->
-					<!--position:absolute;-->
-					<!--resize:both;-->
-					<!--/*top:300px;*/-->
-					<!--height:auto;-->
-					<!--xxmax-height: 20px;-->
-					<!--background-color:transparent;-->
-					<!--color:transparent;-->
-					<!--border-width:3px; border-style:solid; border-color:green;-->
-					<!--width:400px;-->
-					<!--display:inline;-->
-					<!--xxoverflow:auto; overflow-x: hidden;-->
-					<!--z-index:7-->
-					<!--'-->
-				<!--contenteditable="true"-->
-			<!--&gt;-->
-				<!--sample text in idDivCEOmniBox2-->
-				<!--&lt;!&ndash;ng-bind-html='ustodosFiltered[$index].html'&ndash;&gt;-->
-			<!--</div>-->
 
 
 			<!-- section_ABOVE_TABLE_CHECKALL_ETC
@@ -339,7 +300,7 @@
 						>
 				</select>
 
-				<!-- ========================= SECTION_FILTER ICON AND TEXTBOX ===================== -->
+					<!-- ========================= SECTION_FILTER ICON AND TEXTBOX ===================== -->
 				<img ng-src="/img/filterIcon2.jpg" class="per-row-icons-trashimage"
 					 alt="{{image.name}}"  title='Filter within search results below'
 					 xxxxng-mouseover="this.filterToLinksOnly ()"
@@ -391,7 +352,6 @@
 		<!--<button ng-click="testButton(-2)">TestButton</button>-->
 		<!--<p ng- repeat="operator in operators">{{operator.commandDescription}}</p>-->
 
-		<!-- hhkk -->
 		<div id='hbkdiv1'
 			 style='position:relative; top:40px;
 				overflow:auto;
@@ -666,9 +626,9 @@
 		//			,500); // millisecond timer
 
 	</script>
+
+	<!-- hhkk1 end section-->
 </section>
-
-
 
 
 

@@ -18,7 +18,6 @@
 // UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText
 
 
-//hhkk3
 //var O = O;
 //	if (!O) {
 //		try {
@@ -64,7 +63,8 @@ function testScopeAccess() {
 	}
 };
 
-function convertElementToIframeById (elementIdToReplace, newIframeId, contentEditableTF, innerHtml_optional, height, width) {
+function convertElementToIframeById (elementIdToReplace, newIframeId, contentEditableTF, innerHtml_optional, height, width) // hhkk convertElementToIframeById
+{
 	try {
 		//alert("in cleanHtmlPre innerHtml_optional:" + innerHtml_optional);
 		//O.o ('hi mom2');
@@ -77,7 +77,6 @@ function convertElementToIframeById (elementIdToReplace, newIframeId, contentEdi
 		if (!innerHtml_optional)
 			innerHtml_optional = document.getElementById(elementIdToReplace).outerHTML;
 
-		// hhkk1
 		var styleString = "style=\"" +
 			"width:" + width + "px; " +
 			"height :" + height + "px; " +
@@ -85,7 +84,6 @@ function convertElementToIframeById (elementIdToReplace, newIframeId, contentEdi
 		//alert('styleString:' + styleString);
 
 
-		// hhkk1
 		// Paste plain text into contenteditable. - JSFiddle
 		// http://jsfiddle.net/erikwoods/Ee3yC/
 		// document.execCommand
