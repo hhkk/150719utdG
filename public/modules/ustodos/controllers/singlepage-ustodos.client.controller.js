@@ -31,6 +31,8 @@ var CONST_SHOW_INIT_ALERTS = false;
 var $ = $;
 var UtilPrintObjects = UtilPrintObjects;
 
+//alert('initing singlepage-ustodos.client.controller.js');
+
 var NLB_bgFade = NLB_bgFade;
 //var U_error = U_error;
 var UtilClassz = UtilClassz;
@@ -557,19 +559,19 @@ angular.module('ustodos').controller
 				};
 
 
-				$scope.toggleShowDetails = function(s)
+				$scope.toggleShowDetails = function(s)  // hhkk103
 				{
 					if (document.getElementById('hkheader').style.display === 'block') {
 						document.getElementById('hkheader').style.display = 'none';
-						document.getElementById('hkidtoolbars').style.display = 'none';
-						document.getElementById('hkfooter').style.display = 'none';
-						document.getElementById('showHideDetails').innerHTML = 'Show';
+						//document.getElementById('hkidtoolbars').style.display = 'none';
+						//document.getElementById('hkfooter').style.display = 'none';
+						//document.getElementById('showHideDetails').innerHTML = 'Show';
 					}
 					else {
 						document.getElementById('hkheader').style.display = 'block';
-						document.getElementById('hkidtoolbars').style.display = 'block';
-						document.getElementById('hkfooter').style.display = 'block';
-						document.getElementById('showHideDetails').innerHTML = 'Hide';
+						//document.getElementById('hkidtoolbars').style.display = 'block';
+						//document.getElementById('hkfooter').style.display = 'block';
+						//document.getElementById('showHideDetails').innerHTML = 'Hide';
 					}
 				};
 
@@ -2113,7 +2115,7 @@ angular.module('ustodos').controller
                      */
 					$scope.omniboxKey_EventHandler = function (keyEvent) //
 					{
-						//alert ('!!!! in onKeyUp_MainContentEditable');
+						//	alert ('!!!! in onKeyUp_MainContentEditable');
 						if (keyEvent.keyCode === 13) // enter key
 						{
 							//alert('in omniboxKey_EventHandler keyEvent.keyCode === 13');
@@ -4256,8 +4258,8 @@ angular.module('ustodos').controller
 
 
 					var callbackFromQuery = function(arrayUstodosResources) {
-						//alert ('in callbackFromQuery post get callback:'+$scope.ustodos);
 						$scope.ustodos = arrayUstodosResources;
+						//alert ('in callbackFromQuery post get callback:'+$scope.ustodos);
 
 						// consider interleaving URLs here
 						$scope.setUstodosFiltered('caller2', $scope.ustodos);

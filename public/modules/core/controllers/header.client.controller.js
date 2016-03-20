@@ -12,7 +12,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$window', '$lo
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
 
-        //alert ('defining HeaderController');
+        //alert ('defining HeaderController $scope.authentication:'+$scope.authentication);
 
         $scope.eventClickedTheAnimals = function() {
             //alert ('in eventClickedTheAnimals');

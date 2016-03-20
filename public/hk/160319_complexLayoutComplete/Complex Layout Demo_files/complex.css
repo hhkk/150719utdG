@@ -1,0 +1,318 @@
+body {
+	font-family: Lucida Grande, Lucida Sans, Arial, Helvetica, sans-serif; font-size: 100%; background-color: rgb(238, 238, 238);
+}
+h1 {
+	margin: 1em 0px 0.75em; font-size: 2em; font-weight: normal; page-break-after: avoid;
+}
+h2 {
+	margin: 1.25em 0px 0.75em; color: navy; font-size: 1.2em; font-weight: bold; page-break-after: avoid;
+}
+h3 {
+	margin: 0px 0px 1ex; font-size: 1.2em; font-weight: bold; white-space: nowrap; page-break-after: avoid;
+}
+p {
+	margin: 1ex 0px;
+}
+code {
+	margin: 0px; font-size: 1.1em;
+}
+pre {
+	margin: 1em 0px 1em 1em;
+}
+ul {
+	margin: 0px; padding: 0px 0px 20px; list-style-type: square;
+}
+li {
+	margin: 0.5ex 0px 0.5ex 1.2em; padding: 0px;
+}
+table {
+	border-color: rgb(102, 102, 102);
+}
+th {
+	border-color: rgb(102, 102, 102); padding: 4px 7px 5px; text-align: left; background-color: rgb(238, 238, 238);
+}
+td {
+	border-color: rgb(102, 102, 102) rgb(204, 204, 204); padding: 2px 7px 3px; vertical-align: top;
+}
+.pane {
+	padding: 0px; border: 1px solid rgb(119, 119, 119); border-image: none; overflow: auto; background-color: rgb(255, 255, 255);
+}
+.ui-layout-pane {
+	padding: 0px; border: 1px solid rgb(119, 119, 119); border-image: none; overflow: auto; background-color: rgb(255, 255, 255);
+}
+.pane-north {
+	overflow: hidden;
+}
+.pane-south {
+	overflow: hidden;
+}
+.pane-west {
+	overflow: hidden;
+}
+.pane-east {
+	overflow: hidden;
+}
+.pane-north {
+	border-bottom-color: currentColor; border-bottom-width: medium; border-bottom-style: none;
+}
+.pane-north .content {
+	text-align: center;
+}
+.pane-south .content {
+	text-align: center;
+}
+.pane-center {
+	padding: 15px; background-color: rgb(246, 246, 246);
+}
+.header {
+	background: url("../img/80ade5_40x100_textures_04_highlight_hard_100.png") repeat-x 0px 50% rgb(128, 173, 229); padding: 2px 0px 4px; text-align: center; overflow: hidden; font-weight: bold; border-bottom-color: rgb(119, 119, 119); border-bottom-width: 1px; border-bottom-style: solid; position: relative;
+}
+.subhead {
+	background: url("../img/d6d6d6_40x100_textures_02_glass_80.png") repeat-x 0px 50% rgb(214, 214, 214); padding: 3px 10px; overflow: hidden; font-size: 0.85em; white-space: nowrap; position: relative;
+}
+.footer {
+	background: url("../img/d6d6d6_40x100_textures_02_glass_80.png") repeat-x 0px 50% rgb(214, 214, 214); padding: 3px 10px; overflow: hidden; font-size: 0.85em; white-space: nowrap; position: relative;
+}
+.subhead {
+	border-bottom-color: rgb(119, 119, 119); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.footer {
+	border-top-color: rgb(119, 119, 119); border-top-width: 1px; border-top-style: solid;
+}
+#mainContent .footer {
+	border-top-color: rgb(187, 187, 187); border-top-width: 1px; border-top-style: solid;
+}
+.content {
+	padding: 10px; overflow: auto; position: relative;
+}
+#mainContent .ui-layout-pane {
+	padding: 10px;
+}
+#mainContent .ui-layout-north {
+	text-align: center;
+}
+#mainContent .ui-layout-south {
+	text-align: center;
+}
+#mainContent .ui-layout-center {
+	padding: 0px !important;
+}
+#mainContent .ui-layout-content {
+	padding: 10px;
+}
+#mainContent .ui-layout-center h3 {
+	margin: 0px; padding: 5px; font-size: 1em;
+}
+.resizer-south-dragging {
+	background: url("../img/resizable-s.gif") repeat-x center;
+}
+.resizer-south:hover {
+	background: url("../img/resizable-s.gif") repeat-x center;
+}
+.resizer-west-dragging {
+	background: url("../img/resizable-w.gif") repeat-y center;
+}
+.resizer-west-open:hover {
+	background: url("../img/resizable-w.gif") repeat-y center;
+}
+.resizer-east-dragging {
+	background: url("../img/resizable-e.gif") repeat-y center;
+}
+.resizer-east-open:hover {
+	background: url("../img/resizable-e.gif") repeat-y center;
+}
+.resizer-west-open {
+	opacity: 0.1; background-color: rgb(153, 153, 153);
+}
+.resizer-east-open {
+	opacity: 0.1; background-color: rgb(153, 153, 153);
+}
+.resizer-west-open:hover {
+	opacity: 1;
+}
+.resizer-east-open:hover {
+	opacity: 1;
+}
+.resizer-dragging {
+	
+}
+.resizer-dragging-limit {
+	background: rgb(255, 51, 0) !important;
+}
+* html .resizer-south {
+	background: url("../img/resizable-s.gif") repeat-x center !important;
+}
+* html .resizer-west-open {
+	background: url("../img/resizable-w.gif") repeat-y center !important;
+}
+* html .resizer-east-open {
+	background: url("../img/resizable-e.gif") repeat-y center !important;
+}
+* html .resizer-south {
+	opacity: 0.1 !important;
+}
+* html .resizer-west-open {
+	opacity: 0.1 !important;
+}
+* html .resizer-east-open {
+	opacity: 0.1 !important;
+}
+.toggler-north-open {
+	background: url("../img/toggle-up.gif") no-repeat bottom;
+}
+.toggler-south-closed {
+	background: url("../img/toggle-up.gif") no-repeat bottom;
+}
+.toggler-north-closed {
+	background: url("../img/toggle-dn.gif") no-repeat top;
+}
+.toggler-south-open {
+	background: url("../img/toggle-dn.gif") no-repeat top;
+}
+.resizer-west-closed {
+	background: url("../img/D1E6FC_40x100_textures_10_dots_medium_90.png") 0px 0px rgb(209, 230, 252); border-top-color: rgb(119, 119, 119); border-bottom-color: rgb(119, 119, 119); border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid;
+}
+.resizer-east-closed {
+	background: url("../img/D1E6FC_40x100_textures_10_dots_medium_90.png") 0px 0px rgb(209, 230, 252); border-top-color: rgb(119, 119, 119); border-bottom-color: rgb(119, 119, 119); border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid;
+}
+.resizer-west-closed:hover {
+	background: rgb(209, 230, 252);
+}
+.resizer-east-closed:hover {
+	background: rgb(209, 230, 252);
+}
+ul.toolbar {
+	background: url("../img/d6d6d6_40x100_textures_02_glass_80.png") repeat-x 0px 50% rgb(214, 214, 214); list-style: none; margin: 0px; padding: 2px; width: 100%; height: auto; text-align: left; overflow: hidden; border-top-color: rgb(187, 187, 187); border-top-width: 1px; border-top-style: solid; position: relative;
+}
+ul.toolbar li {
+	border-width: 1px; border-style: solid; border-color: transparent rgb(187, 187, 187) transparent transparent; margin: 0px; padding: 2px 7px; border-image: none; color: rgb(0, 0, 0); font-size: 0.9em; float: left; cursor: pointer;
+}
+ul.toolbar li:hover {
+	background: url("../img/eeeeee_40x100_textures_02_glass_90.png") repeat-x 0px 50% rgb(238, 238, 238); color: rgb(0, 0, 85); border-top-color: rgb(187, 187, 187); border-bottom-color: rgb(187, 187, 187);
+}
+ul.toolbar li.first:hover {
+	border-left-color: rgb(187, 187, 187);
+}
+ul.toolbar li span {
+	width: 15px; height: 15px; margin-right: 0.75ex; margin-left: -3px; vertical-align: middle; display: inline-block; opacity: 0.6;
+}
+ul.toolbar li:hover span {
+	opacity: 1;
+}
+li.button-toggle-north span {
+	background: url("../img/go-up-on.gif") no-repeat center;
+}
+li.button-open-south span {
+	background: url("../img/go-up-on.gif") no-repeat center;
+}
+li.button-close-south span {
+	background: url("../img/go-dn-on.gif") no-repeat center;
+}
+li.button-pin-up span {
+	background: url("../img/pin-up-on.gif") no-repeat center;
+}
+li.button-pin-down span {
+	background: url("../img/pin-dn-on.gif") no-repeat center;
+}
+span.button-pin {
+	top: 0px; width: 20px; height: 20px; display: block; position: absolute; z-index: 2; cursor: pointer;
+}
+span.button-close {
+	top: 0px; width: 20px; height: 20px; display: block; position: absolute; z-index: 2; cursor: pointer;
+}
+span.button-close-west {
+	left: 0px;
+}
+span.button-close-east {
+	right: 0px;
+}
+span.button-pin-west {
+	right: 1px;
+}
+span.button-pin-east {
+	left: 1px;
+}
+span.button-pin-up {
+	background: url("../img/pin-up-off.gif") no-repeat center;
+}
+span.button-pin-up:hover {
+	background: url("../img/pin-up-on.gif") no-repeat center;
+}
+span.button-pin-down {
+	background: url("../img/pin-dn-off.gif") no-repeat center;
+}
+span.button-pin-down:hover {
+	background: url("../img/pin-dn-on.gif") no-repeat center;
+}
+span.button-close-west {
+	background: url("../img/go-lt-off.gif") no-repeat center;
+}
+span.button-close-west:hover {
+	background: url("../img/go-lt-on.gif") no-repeat center;
+}
+span.button-close-east {
+	background: url("../img/go-rt-off.gif") no-repeat center;
+}
+span.button-close-east:hover {
+	background: url("../img/go-rt-on.gif") no-repeat center;
+}
+.toggler-west-closed {
+	background: url("../img/go-rt-off.gif") no-repeat center;
+}
+.toggler-west-closed:hover {
+	background: url("../img/go-rt-on.gif") no-repeat center;
+}
+.toggler-east-closed {
+	background: url("../img/go-lt-off.gif") no-repeat center;
+}
+.toggler-east-closed:hover {
+	background: url("../img/go-lt-on.gif") no-repeat center;
+}
+#mainContent .ui-layout-resizer-closed:hover {
+	background: rgb(255, 237, 202) !important;
+}
+#mainContent .ui-layout-resizer-open:hover {
+	background: rgb(196, 225, 164) !important;
+}
+#mainContent .ui-layout-resizer-dragging {
+	background: rgb(196, 225, 164) !important;
+}
+#mainContent .ui-layout-resizer-dragging-limit {
+	background: rgb(255, 51, 0) !important;
+}
+#mainContent .ui-layout-resizer-north {
+	border-right-color: rgb(187, 187, 187) !important; border-left-color: rgb(187, 187, 187) !important; border-right-width: 1px !important; border-left-width: 1px !important; border-right-style: solid !important; border-left-style: solid !important;
+}
+#mainContent .ui-layout-resizer-south {
+	border-right-color: rgb(187, 187, 187) !important; border-left-color: rgb(187, 187, 187) !important; border-right-width: 1px !important; border-left-width: 1px !important; border-right-style: solid !important; border-left-style: solid !important;
+}
+#mainContent .ui-layout-resizer-north-closed {
+	border-top-color: rgb(187, 187, 187) !important; border-top-width: 1px !important; border-top-style: solid !important;
+}
+#mainContent .ui-layout-resizer-south-closed {
+	border-bottom-color: rgb(187, 187, 187) !important; border-bottom-width: 1px !important; border-bottom-style: solid !important;
+}
+#mainContent .ui-layout-resizer-west-closed {
+	border-left-color: rgb(187, 187, 187) !important; border-left-width: 1px !important; border-left-style: solid !important;
+}
+#mainContent .ui-layout-resizer-east-closed {
+	border-right-color: rgb(187, 187, 187) !important; border-right-width: 1px !important; border-right-style: solid !important;
+}
+#mainContent .ui-layout-resizer:hover .ui-layout-toggler {
+	opacity: 0.4;
+}
+#mainContent .ui-layout-resizer:hover .ui-layout-toggler:hover {
+	background: rgb(255, 221, 153) !important; border-color: rgb(204, 187, 119) !important; opacity: 1;
+}
+#mainContent .ui-layout-resizer-sliding {
+	opacity: 0.3;
+}
+#mainContent .ui-layout-resizer-sliding:hover {
+	opacity: 1;
+}
+#mainContent .ui-layout-resizer-sliding .ui-layout-toggler {
+	display: none !important;
+}
+#mainContent .ui-layout-resizer-sliding:hover .ui-layout-toggler {
+	display: block !important;
+}

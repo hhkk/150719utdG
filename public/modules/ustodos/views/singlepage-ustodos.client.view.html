@@ -3,21 +3,11 @@
 <!-- hbklrb5 invoked by core client routes -->
 
 
-<!--hhkk1-->
-<!--<section class="WholePage" style="top:0px" >-->
-	<!--&lt;!&ndash;data-ng-controller="SinglepageUstodosController"&ndash;&gt;-->
-	<!--&lt;!&ndash;resize="alert('resizehk)"&ndash;&gt;-->
-	<!--&lt;!&ndash;data-ng-init="ngInitTopLevel()"&ndash;&gt;-->
-
-<!--hhkk100 -->
- <section class="WholePage"
-		             data-ng-controller="SinglepageUstodosController"
-		             resize="alert('resizehk)"
-		             style="top:0px"
-		             data-ng-init="ngInitTopLevel()">
-
-
-
+<section class="WholePage"
+		 data-ng-controller="SinglepageUstodosController"
+		 resize="alert('resizehk)"
+		 style="top:0px"
+		 data-ng-init="ngInitTopLevel()">
 
 
 
@@ -57,40 +47,13 @@
 
 		filter:<input type='text' id='idInputtextUtdLogFilter' value='hkk'>
 
-		<script id="defines eventDropdown ">
-			var eventDropdown = function() {
-				var item = document.getElementById("category").value
-				if (item === 'bigger')
-				{
-					//alert('display was:' + document.getElementById('idDivCEOmniBox').style.display);
-					document.getElementById('idDivCEOmniBox').style.maxHeight = 'none';
-					document.getElementById('idDivCEOmniBox').style.height = 'auto';
-					document.getElementById('idDivCEOmniBox').style.display = 'block';
-				}
-				else if (item === 'smaller')
-				{
-					document.getElementById('idDivCEOmniBox').style.maxHeight = '20px';
-					document.getElementById('idDivCEOmniBox').style.height = '20px';
-					document.getElementById('idDivCEOmniBox').style.display = 'inline';
-				}
-				else
-				{
-					alert ('error no such command :' + item );
-				}
-
-			};
-
-		</script>
+		<div id="testIframeReplace">
+			this <span style="color:red">is</span> a test
+		</div>
 
 
 		<button ng-click="alert('hi mom')">Allalerty1</button>
 		<button id='showHideDetails' ng-click="toggleShowDetails()">Show</button>
-		<select id="category" class="icon-menu" onchange="eventDropdown()">
-			<option value="all">All</option>
-			<option value="bigger">bigger</option>
-			<option value="smaller">smaller</option>
-		</select>
-
 		<!---->
 
 		<br>
@@ -144,20 +107,20 @@
 			<!-- commented feb 17 2016 -->
 			<!--&lt;!&ndash; ================ INPUT#3 ======================== &ndash;&gt;-->
 			<!--<div id='idDivForTinyMceEditorTextarea'>-->
-				<!--&lt;!&ndash;was Search / Input&ndash;&gt;-->
-				<!--<textarea xxng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>-->
-				<!--&lt;!&ndash;NOTE THERE ARE ALSO TESTBUTTONS IN > 1 place&ndash;&gt;-->
+			<!--&lt;!&ndash;was Search / Input&ndash;&gt;-->
+			<!--<textarea xxng-blur="eventBlur3mce()" id="idTinyMceTextArea"></textarea>-->
+			<!--&lt;!&ndash;NOTE THERE ARE ALSO TESTBUTTONS IN > 1 place&ndash;&gt;-->
 
-				<button id='himom' ng-click="testButton(-2)" title="testButton0">Test0</button>
+				<button ng-click="testButton(-2)" title="testButton0">Test</button>
 				<button ng-click="clearOmniBox()" title="testButton0">Clear</button>
-				<!--<button ng-click="u_.U_error2.o('from in view')" title="testButton1">Test1</button>-->
-				<!--&lt;!&ndash;<button ng-click="UcHtmlDocManipulate.testScopeAccess()" title="testButton1">Test1</button>&ndash;&gt;-->
-				<!--<button ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*')" title="yy">-->
-					<!--All-->
-				<!--</button>-->
-				<!--<button ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, 'timing', 'timing')" title="xx">-->
-					<!--Timing-->
-				<!--</button>-->
+			<!--<button ng-click="u_.U_error2.o('from in view')" title="testButton1">Test1</button>-->
+			<!--&lt;!&ndash;<button ng-click="UcHtmlDocManipulate.testScopeAccess()" title="testButton1">Test1</button>&ndash;&gt;-->
+			<!--<button ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*')" title="yy">-->
+			<!--All-->
+			<!--</button>-->
+			<!--<button ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, 'timing', 'timing')" title="xx">-->
+			<!--Timing-->
+			<!--</button>-->
 			<!--</div>-->
 
 
@@ -165,8 +128,12 @@
 
 
 			<!--  -->
-				<!--style='isolation: isolate'-->
-			<span style='position:absolute; font-size:8px;'>idDivCEOmniBox</span>
+			<!--style='isolation: isolate'-->
+			<br>
+			<span>
+			</span>
+			<div>
+			</div>
 
 
 			<!-- section_ABOVE_TABLE_CHECKALL_ETC
@@ -199,16 +166,15 @@
 			'----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
 			-->
 
-
 			<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
 				   ng-click="clearText()"                src='/img/ClearText.png'
 				   title="Clear Text"
-					/>
+			/>
 			&nbsp;
 			<input class="hkToolbarElement" type='image' style="border:0px solid gray;height:20px;"
 				   ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*', '*')"                src='/img/Asterisk.png'
 				   title="Search all"
-					/>
+			/>
 			&nbsp;
 			<!--<input class="hkToolbarElement" type='image'  style='height:25px;'-->
 			<!--ng-click='toggleVisibilityTo2()'                src='/img/input2.png'-->
@@ -256,7 +222,7 @@
 					&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
 							   alt="{{image.name}}"  title='Delete Selected'
 							   ng-click="operationOnChecked_Delete()"
-					>
+				>
 
 					<span style="display: inline-block width:500px" ng-bind='numberCheckboxesChecked'></span>
 
@@ -288,7 +254,7 @@
 
 				&nbsp;
 
-					<!-- ======================== SELECT DROPDOWN ONE OF 20 ACTIONS -->
+				<!-- ======================== SELECT DROPDOWN ONE OF 20 ACTIONS -->
 				<select
 						id='selectId'
 						ng-change="this.utdEventSelectedEngine()"
@@ -297,15 +263,15 @@
 						ng-options="command as command.commandDescription2 for
 					command in commands | orderBy:'commandDescription2'"
 						ng-mouseover="showSelectDropdown()"
-						>
+				>
 				</select>
 
-					<!-- ========================= SECTION_FILTER ICON AND TEXTBOX ===================== -->
+				<!-- ========================= SECTION_FILTER ICON AND TEXTBOX ===================== -->
 				<img ng-src="/img/filterIcon2.jpg" class="per-row-icons-trashimage"
 					 alt="{{image.name}}"  title='Filter within search results below'
 					 xxxxng-mouseover="this.filterToLinksOnly ()"
 					 xxng-click="this.filterToLinksOnly ()"
-						>
+				>
 				&nbsp;
 
 				<!-- RESEARCH SECTION_FILTER ICON AND TEXTBOX -->
@@ -327,19 +293,19 @@
 
 
 			<!--<div ng-controller="Ctrl1">-->
-				<!--<h2>Ctrl1 - List</h2>-->
-				<!--<ul>-->
-					<!--<li ng- repeat="item in list1()">{{item}}</li>-->
-				<!--</ul>-->
+			<!--<h2>Ctrl1 - List</h2>-->
+			<!--<ul>-->
+			<!--<li ng- repeat="item in list1()">{{item}}</li>-->
+			<!--</ul>-->
 			<!--</div>-->
 			<!--<hr />-->
 			<!--<div ng-controller="Ctrl2">-->
-				<!--<h2>Ctrl2 - Add</h2>-->
-				<!--<form ng-submit="add(newItem); newItem = '';">-->
-					<!--<input type="text" ng-model="newItem">-->
-					<!--<br />-->
-					<!--<input class="btn" type="submit">-->
-				<!--</form>-->
+			<!--<h2>Ctrl2 - Add</h2>-->
+			<!--<form ng-submit="add(newItem); newItem = '';">-->
+			<!--<input type="text" ng-model="newItem">-->
+			<!--<br />-->
+			<!--<input class="btn" type="submit">-->
+			<!--</form>-->
 			<!--</div>-->
 		</span>
 
@@ -353,12 +319,12 @@
 		<!--<p ng- repeat="operator in operators">{{operator.commandDescription}}</p>-->
 
 		<div id='hbkdiv1'
-			 style='position:relative; top:40px;
+			 style='xxheight:300px;
 				overflow:auto;
 				'
-			>
+		>
 			<!-- hbkk 1509 hktable -->
-			<table id='maincsstableid' >
+			<table id='maincsstableid'>
 				<!--<col style="width:2%">-->
 				<!--<col style="width:2%">-->
 				<!--<col style="width:2%">-->
@@ -398,29 +364,29 @@
 
 				<!--//height:80em;-->
 				<tbody
-						id="idNotUsedSoNoMatter"
 						style='
     					overflow:scroll;
 						width:100%;
 						height:85%;
+						/*top:5px;*/
 						z-index: 0;
 						/*background-color: lightgrey;*/
-						position:relative;
+						position:static;
     					'
-					>
-					<div id='perRowOnly'>
+				>
+				<div id='perRowOnly'>
 						<span id="topLevelTableRow{{$index}}"
-								 ng-mouseover="this.eventMouseoverRow2($index)"
-								 ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
+							  ng-mouseover="this.eventMouseoverRow2($index)"
+							  ng-keyup="event=$event; myFnOnKeyUp($index, $event)" ng-keydown="myFnOnKeyDown($index, $event)"
 						>
 
 							<tr id="hbkid"  ng-repeat='ustodo in ustodosFiltered'
-								 ng-class-odd="'odd'"
-								 ng-class-even="'even'"
-								 ng-mouseover="this.eventMouseoverRow2($index)"
-								 repeat-done="layoutDone()"
-								 on-finish-render="ngRepeatFinished"
-								 ng-cloak
+								ng-class-odd="'odd'"
+								ng-class-even="'even'"
+								ng-mouseover="this.eventMouseoverRow2($index)"
+								repeat-done="layoutDone()"
+								on-finish-render="ngRepeatFinished"
+								ng-cloak
 							>
 
 
@@ -443,7 +409,7 @@
 									&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
 													 alt="{{image.name}}"  title='Delete immediately'
 													 ng-click="deleteDbUstotoOneByIndex([$index])"
-										>
+								>
 									&nbsp
 									<!--ng-show="nowShowing==$index"-->
 									<!--ng- repeat="image in images"-->
@@ -460,7 +426,7 @@
 									<img id="savimg{{$index}}" class="per-row-icons" ng-src="/img/saveIcon.jpg" title='Save changes (if any)'
 										 alt="{{image.name}}"
 										 ng-click="saveUstodoGiven(ustodo, $index)"
-											>
+									>
 									&nbsp;
 								</td>
 
@@ -476,9 +442,9 @@
 								<td style="width:3%">
 									&nbsp;
 									<span class="per-row-count"
-												data-ng-bind="u_.UtilDate.timeAgo(ustodo.datelastmod)"
-												ng-click="event_click_timeAgo(ustodo._id)"
-												title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}>
+										  data-ng-bind="u_.UtilDate.timeAgo(ustodo.datelastmod)"
+										  ng-click="event_click_timeAgo(ustodo._id)"
+										  title={{ustodo.datelastmod+'.'+ustodo._id+'ClickForID'}}>
 									</span>
 								</td>
 								<!--<td>{{ ustodo.text}}</td>f-->
@@ -497,19 +463,19 @@
 
 								<!--test  see createOrSave in ustodos.server.controller.js -->
 								<!--<td alt={{ustodo.arrUrlUtdsFromHtml[0].title}}  style="font-size:12px; width:6%;overflow: hidden">-->
-									<!--&nbsp;<span data-ng-bind="ustodo.arrUrlUtdsFromHtml[0].title"></span>-->
+								<!--&nbsp;<span data-ng-bind="ustodo.arrUrlUtdsFromHtml[0].title"></span>-->
 								<!--</td>-->
 
 								<!-- 4.5 DISPLAY NAME-->
 								<!--<td style="font-size:12px; width:6%;overflow: hidden">-->
-									<!--&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.displayName"-->
-										  <!--&gt;</span>-->
+								<!--&nbsp;<span xxclass="per-row-count" data-ng-bind="ustodo.user.displayName"-->
+								<!--&gt;</span>-->
 								<!--</td>-->
 								<!--<td>{{ ustodo.text}}</td>f-->
 
 
 								<!--&lt;!&ndash; 4.5 PER ROW DELETED DEBUG INFO &ndash;&gt;-->
-									<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
+								<!--<td>&nbsp;Del [<span class="per-row-count" data-ng-bind="ustodo.deleted"></span>]-->
 								<!--</td>-->
 
 
@@ -521,94 +487,304 @@
 									word-wrap: break-word;
 									zzbackground-color: yellow;
 									white-space: nowrap;
-									overflow: auto'
-								                    >
-									<!--/*hyphens:auto;*/-->
-								<!--/*visible|hidden|scroll|auto|initial|inherit*/-->
-								<!--/*-moz-hyphens:auto;*/-->
-								<!--/*-webkit-hyphens:auto;*/-->
-								<!--/*-o-hyphens:auto;*/-->
-									<!--ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)" -->
-									<!-- works cc{{$index}}dd-->
-									<!--<iframe id="idPerRowIframe{{$index}}" >-->
-									<!--</iframe >-->
-									<!---->
+									overflow: auto;'
+								/*visible|hidden|scroll|auto|initial|inherit*/
+								/*-moz-hyphens:auto;*/
+								/*-webkit-hyphens:auto;*/
+								/*-o-hyphens:auto;*/
+								/*hyphens:auto;*/
+								>
+								<!--ng-bind-html="preparePerRowHtml(ustodosFiltered[$index].html)" -->
+								<!-- works cc{{$index}}dd-->
+								<!--<iframe id="idPerRowIframe{{$index}}" >-->
+								<!--</iframe >-->
+								<!---->
 
-									<span class='classSpanPerrowCE'>
+									<span class='classSpanPerrowCE' >
 										<!--<iframe>-->
 										<div class="WholePage focusblurme"
+											 state="nonIframed"
 											 id="ustodorow{{$index}}"
-											 style='
-											 	max-height: 5em;
-											 	height: auto;
-											 '
-											state="nonIframed"
-												 hkindex="{{$index}}"
-											hkustodoid="{{ustodo._id}}"
+											 hkindex="{{$index}}"
+											 hkustodoid="{{ustodo._id}}"
 
-											contenteditable="true"
-											xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
-											onclick="console.log('1')"
-											onfocus="console.log('2')"
-											xxng-focus='hkngfocustest($index)'
-											ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
-											ng-bind-html="hkdecodeURI(ustodosFiltered[$index].html)"
-											title="'xx:'+{{ustodo._id}}"
+											 contenteditable="true"
+											 xxonpaste='UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)'
+											 ng-focus='hkngfocustest($index)'
+											 ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"
+											 ng-bind-html="hkdecodeURI(ustodosFiltered[$index].html)"
+											 title="'xx:'+{{ustodo._id}}"
 										>
-										<!---->
+											<!---->
 										</div>
 									</span>
 								</td>
 							</tr>
 						</span>
-					</div>
+				</div>
 				</tbody>
 
-					<!--/onclick = "this.contentEditable = true;"-->
+				<!--/onclick = "this.contentEditable = true;"-->
 			</table>
 		</div>
 	</span>
 
-		<!--<span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span>f-->
-		<!--<span id="contentx{{$index}}" contenteditable="true"f-->
-		<!--onclick = "this.contentEditable = true;"f-->
-		<!--onmouseover="this.contentEditable = false;f-->
-		<!--this.ustodo_innerhtmlpre = this.innerHTML;"f-->
-		<!--onmouseout = "this.contentEditable = false;f-->
-		<!--"f-->
-		<!--ng-bind-html="ustodos[$index].html"></span>f-->
+	<!--<span data-ng-bind="UtilDate.timeAgo(ustodo.datelastmod)" title={{UtilDate.dateObjFromMongoString(ustodo.datelastmod).toString()}}></span>f-->
+	<!--<span id="contentx{{$index}}" contenteditable="true"f-->
+	<!--onclick = "this.contentEditable = true;"f-->
+	<!--onmouseover="this.contentEditable = false;f-->
+	<!--this.ustodo_innerhtmlpre = this.innerHTML;"f-->
+	<!--onmouseout = "this.contentEditable = false;f-->
+	<!--"f-->
+	<!--ng-bind-html="ustodos[$index].html"></span>f-->
 	<!--<section class="navbar-fixed-bottom" style="background-color:pink"-->
-			 <!--data-ng-controller="FooterController"-->
-			 <!--ng-init="keyCount=0;ngInitTopLevel()">-->
-		<!--&lt;!&ndash;Dirty[<span ng-bind="singlePageStatesFactory['modelDirty']" ></span>]&ndash;&gt;-->
-		<!--Dirty[<span ng-bind='modelDirty' ></span>]-->
+	<!--data-ng-controller="FooterController"-->
+	<!--ng-init="keyCount=0;ngInitTopLevel()">-->
+	<!--&lt;!&ndash;Dirty[<span ng-bind="singlePageStatesFactory['modelDirty']" ></span>]&ndash;&gt;-->
+	<!--Dirty[<span ng-bind='modelDirty' ></span>]-->
 
-		<!--footerhk-->
+	<!--footerhk-->
 	<!--</section>-->
 	<!--<div data-ng-include="'/modules/core/views/footer.client.view.html'" class="navbar-fixed-bottom"></div >-->
 
 	<!--<script type="text/javascript" src="/util/U_errorsx.js"></script>-->
 
+
+
+
+
+
+
+
+
+
+	<!--<SCRIPT type="text/javascript">-->
+		<!--/*-->
+		 <!--* complex.html-->
+		 <!--*-->
+		 <!--* This is a demonstration page for the jQuery layout widget-->
+		 <!--*-->
+		 <!--*	NOTE: For best code readability, view this with a fixed-space font and tabs equal to 4-chars-->
+		 <!--*/-->
+
+<!--//		hhkk103-->
+		<!--var outerLayout, innerLayout;-->
+
+		<!--/*-->
+		 <!--*#######################-->
+		 <!--*     ON PAGE LOAD-->
+		 <!--*#######################-->
+		 <!--*/-->
+		<!--$(document).ready( function() {-->
+			<!--// create the OUTER LAYOUT-->
+			<!--// hhkk103-->
+			<!--//outerLayout = $("body").layout( layoutSettings_Outer );-->
+
+			<!--/*******************************-->
+			 <!--***  CUSTOM LAYOUT BUTTONS  ***-->
+			 <!--*******************************-->
+			 <!--*-->
+			 <!--* Add SPANs to the east/west panes for customer "close" and "pin" buttons-->
+			 <!--*-->
+			 <!--* COULD have hard-coded span, div, button, image, or any element to use as a 'button'...-->
+			 <!--* ... but instead am adding SPANs via script - THEN attaching the layout-events to them-->
+			 <!--*-->
+			 <!--* CSS will size and position the spans, as well as set the background-images-->
+			 <!--*/-->
+
+				<!--// BIND events to hard-coded buttons in the NORTH toolbar-->
+			<!--outerLayout.addToggleBtn( "#tbarToggleNorth", "north" );-->
+			<!--outerLayout.addOpenBtn( "#tbarOpenSouth", "south" );-->
+			<!--outerLayout.addCloseBtn( "#tbarCloseSouth", "south" );-->
+			<!--outerLayout.addPinBtn( "#tbarPinWest", "west" );-->
+			<!--outerLayout.addPinBtn( "#tbarPinEast", "east" );-->
+
+			<!--// save selector strings to vars so we don't have to repeat it-->
+			<!--// must prefix paneClass with "body > " to target ONLY the outerLayout panes-->
+			<!--var westSelector = "body > .ui-layout-west"; // outer-west pane-->
+			<!--var eastSelector = "body > .ui-layout-east"; // outer-east pane-->
+
+			<!--// CREATE SPANs for pin-buttons - using a generic class as identifiers-->
+			<!--$("<span></span>").addClass("pin-button").prependTo( westSelector );-->
+			<!--$("<span></span>").addClass("pin-button").prependTo( eastSelector );-->
+			<!--// BIND events to pin-buttons to make them functional-->
+			<!--outerLayout.addPinBtn( westSelector +" .pin-button", "west");-->
+			<!--outerLayout.addPinBtn( eastSelector +" .pin-button", "east" );-->
+
+			<!--// CREATE SPANs for close-buttons - using unique IDs as identifiers-->
+			<!--$("<span></span>").attr("id", "west-closer" ).prependTo( westSelector );-->
+			<!--$("<span></span>").attr("id", "east-closer").prependTo( eastSelector );-->
+			<!--// BIND layout events to close-buttons to make them functional-->
+			<!--outerLayout.addCloseBtn("#west-closer", "west");-->
+			<!--outerLayout.addCloseBtn("#east-closer", "east");-->
+
+
+			<!--/* Create the INNER LAYOUT - nested inside the 'center pane' of the outer layout-->
+			 <!--* Inner Layout is create by createInnerLayout() function - on demand-->
+			 <!--*-->
+			 <!--innerLayout = $("div.pane-center").layout( layoutSettings_Inner );-->
+			 <!--*-->
+			 <!--*/-->
+
+
+			<!--// DEMO HELPER: prevent hyperlinks from reloading page when a 'base.href' is set-->
+			<!--$("a").each(function () {-->
+				<!--var path = document.location.href;-->
+				<!--if (path.substr(path.length-1)=="#") path = path.substr(0,path.length-1);-->
+				<!--if (this.href.substr(this.href.length-1) == "#") this.href = path +"#";-->
+			<!--});-->
+
+		<!--});-->
+
+
+		<!--/*-->
+		 <!--*#######################-->
+		 <!--* INNER LAYOUT SETTINGS-->
+		 <!--*#######################-->
+		 <!--*-->
+		 <!--* These settings are set in 'list format' - no nested data-structures-->
+		 <!--* Default settings are specified with just their name, like: fxName:"slide"-->
+		 <!--* Pane-specific settings are prefixed with the pane name + 2-underscores: north__fxName:"none"-->
+		 <!--*/-->
+
+		<!--/*-->
+		 <!--*#######################-->
+		 <!--* OUTER LAYOUT SETTINGS-->
+		 <!--*#######################-->
+		 <!--*-->
+		 <!--* This configuration illustrates how extensively the layout can be customized-->
+		 <!--* ALL SETTINGS ARE OPTIONAL - and there are more available than shown below-->
+		 <!--*-->
+		 <!--* These settings are set in 'sub-key format' - ALL data must be in a nested data-structures-->
+		 <!--* All default settings (applied to all panes) go inside the defaults:{} key-->
+		 <!--* Pane-specific settings go inside their keys: north:{}, south:{}, center:{}, etc-->
+		 <!--*/-->
+
+		<!--// hhkk103-->
+		<!--var layoutSettings_Outer = {-->
+			<!--name: "outerLayout" // NO FUNCTIONAL USE, but could be used by custom code to 'identify' a layout-->
+			<!--// options.defaults apply to ALL PANES - but overridden by pane-specific settings-->
+			<!--,	defaults: {-->
+				<!--size:					"auto"-->
+				<!--,	minSize:				50-->
+				<!--,	paneClass:				"pane" 		// default = 'ui-layout-pane'-->
+				<!--,	resizerClass:			"resizer"	// default = 'ui-layout-resizer'-->
+				<!--,	togglerClass:			"toggler"	// default = 'ui-layout-toggler'-->
+				<!--,	buttonClass:			"button"	// default = 'ui-layout-button'-->
+				<!--,	contentSelector:		".content"	// inner div to auto-size so only it scrolls, not the entire pane!-->
+				<!--,	contentIgnoreSelector:	"span"		// 'paneSelector' for content to 'ignore' when measuring room for content-->
+				<!--,	togglerLength_open:		35			// WIDTH of toggler on north/south edges - HEIGHT on east/west edges-->
+				<!--,	togglerLength_closed:	35			// "100%" OR -1 = full height-->
+				<!--,	hideTogglerOnSlide:		true		// hide the toggler when pane is 'slid open'-->
+				<!--,	togglerTip_open:		"Close This Pane"-->
+				<!--,	togglerTip_closed:		"Open This Pane"-->
+				<!--,	resizerTip:				"Resize This Pane"-->
+				<!--//	effect defaults - overridden on some panes-->
+				<!--,	fxName:					"slide"		// none, slide, drop, scale-->
+				<!--,	fxSpeed_open:			750-->
+				<!--,	fxSpeed_close:			1500-->
+				<!--,	fxSettings_open:		{ easing: "easeInQuint" }-->
+				<!--,	fxSettings_close:		{ easing: "easeOutQuint" }-->
+			<!--}-->
+			<!--,	north: {-->
+				<!--spacing_open:			1			// cosmetic spacing-->
+				<!--,	togglerLength_open:		0			// HIDE the toggler button-->
+				<!--,	togglerLength_closed:	-1			// "100%" OR -1 = full width of pane-->
+				<!--,	resizable: 				false-->
+				<!--,	slidable:				false-->
+				<!--//	override default effect-->
+				<!--,	fxName:					"none"-->
+			<!--}-->
+			<!--,	south: {-->
+				<!--maxSize:				200-->
+				<!--,	spacing_closed:			0			// HIDE resizer & toggler when 'closed'-->
+				<!--,	slidable:				false		// REFERENCE - cannot slide if spacing_closed = 0-->
+				<!--,	initClosed:				true-->
+				<!--//	CALLBACK TESTING...-->
+				<!--,	onhide_start:			function () { return confirm("START South pane hide \n\n onhide_start callback \n\n Allow pane to hide?"); }-->
+				<!--,	onhide_end:				function () { alert("END South pane hide \n\n onhide_end callback"); }-->
+				<!--,	onshow_start:			function () { return confirm("START South pane show \n\n onshow_start callback \n\n Allow pane to show?"); }-->
+				<!--,	onshow_end:				function () { alert("END South pane show \n\n onshow_end callback"); }-->
+				<!--,	onopen_start:			function () { return confirm("START South pane open \n\n onopen_start callback \n\n Allow pane to open?"); }-->
+				<!--,	onopen_end:				function () { alert("END South pane open \n\n onopen_end callback"); }-->
+				<!--,	onclose_start:			function () { return confirm("START South pane close \n\n onclose_start callback \n\n Allow pane to close?"); }-->
+				<!--,	onclose_end:			function () { alert("END South pane close \n\n onclose_end callback"); }-->
+				<!--//,	onresize_start:			function () { return confirm("START South pane resize \n\n onresize_start callback \n\n Allow pane to be resized?)"); }-->
+				<!--,	onresize_end:			function () { alert("END South pane resize \n\n onresize_end callback \n\n NOTE: onresize_start event was skipped."); }-->
+			<!--}-->
+			<!--,	west: {-->
+				<!--size:					250-->
+				<!--,	spacing_closed:			21			// wider space when closed-->
+				<!--,	togglerLength_closed:	21			// make toggler 'square' - 21x21-->
+				<!--,	togglerAlign_closed:	"top"		// align to top of resizer-->
+				<!--,	togglerLength_open:		0			// NONE - using custom togglers INSIDE west-pane-->
+				<!--,	togglerTip_open:		"Close West Pane"-->
+				<!--,	togglerTip_closed:		"Open West Pane"-->
+				<!--,	resizerTip_open:		"Resize West Pane"-->
+				<!--,	slideTrigger_open:		"click" 	// default-->
+				<!--,	initClosed:				true-->
+				<!--//	add 'bounce' option to default 'slide' effect-->
+				<!--,	fxSettings_open:		{ easing: "easeOutBounce" }-->
+			<!--}-->
+			<!--,	east: {-->
+				<!--size:					250-->
+				<!--,	spacing_closed:			21			// wider space when closed-->
+				<!--,	togglerLength_closed:	21			// make toggler 'square' - 21x21-->
+				<!--,	togglerAlign_closed:	"top"		// align to top of resizer-->
+				<!--,	togglerLength_open:		0 			// NONE - using custom togglers INSIDE east-pane-->
+				<!--,	togglerTip_open:		"Close East Pane"-->
+				<!--,	togglerTip_closed:		"Open East Pane"-->
+				<!--,	resizerTip_open:		"Resize East Pane"-->
+				<!--,	slideTrigger_open:		"mouseover"-->
+				<!--,	initClosed:				true-->
+				<!--//	override default effect, speed, and settings-->
+				<!--,	fxName:					"drop"-->
+				<!--,	fxSpeed:				"normal"-->
+				<!--,	fxSettings:				{ easing: "" } // nullify default easing-->
+			<!--}-->
+			<!--,	center: {-->
+				<!--paneSelector:			"#mainContent" 			// sample: use an ID to select pane instead of a class-->
+				<!--,	minWidth:				200-->
+				<!--,	minHeight:				200-->
+			<!--}-->
+		<!--};-->
+
+	<!--</SCRIPT>-->
+
+
+
+
+
+
+
+
 	<script>
+
+		var outerLayout;
+
 		$(document).ready(function() {
-				//alert('in view file (document).ready');
-				var elemId = 'mceu_57';
-			});
+			//alert('in view file (document).ready');
+
+			//outerLayout = $("body").layout( layoutSettings_Outer );
+
+
+			var elemId = 'mceu_57';
+		});
 		//if (document.getElementById(elemId) !== null)
 		//{
-			//alert ('1123123');
-			//	if (document.getElementById('mceu_57').style.visibility==='hidden')
-			//		document.getElementById('mceu_57').style.visibility='visible';
-			//	else
-			//		document.getElementById('mceu_57').style.visibility='hidden';
-			//if (document.getElementById(elemId).style.visibility==='visible')
-			//{
-			//document.getElementById(elemId).style.visibility='hidden';
-			//alert ('1123123c');
+		//alert ('1123123');
+		//	if (document.getElementById('mceu_57').style.visibility==='hidden')
+		//		document.getElementById('mceu_57').style.visibility='visible';
+		//	else
+		//		document.getElementById('mceu_57').style.visibility='hidden';
+		//if (document.getElementById(elemId).style.visibility==='visible')
+		//{
+		//document.getElementById(elemId).style.visibility='hidden';
+		//alert ('1123123c');
 
-			//}
-			//else
-			//	document.getElementById(elemId).style.visibility='hidden';
+		//}
+		//else
+		//	document.getElementById(elemId).style.visibility='hidden';
 		//}
 
 		//document.getElementById('imageIdRedPEncilbnw').width= 1000;
@@ -626,9 +802,8 @@
 		//			,500); // millisecond timer
 
 	</script>
-
-	<!-- hhkk1 end section-->
 </section>
+
 
 
 
