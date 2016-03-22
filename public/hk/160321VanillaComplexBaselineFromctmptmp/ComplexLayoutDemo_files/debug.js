@@ -3,7 +3,7 @@
  *
  *	Pass me a data structure {} and I'll output all the key/value pairs - recursively
  *
- *	@example var HTML = debugData( oElem.style, "Element.style", { keys: "top,left,width,height", recurse: true, sort: true, display: true, returnHTML: true });
+ *	@example var HTML = debugData( oElem.style, "Element.style", { keys: "top,left,width,height", recurse: true, sort: true, display: true, returnHTML: true });	
  *
  *	@param Object	o_Data   A JSON-style data structure
  *	@param String	s_Title  Title for dialog (optional)

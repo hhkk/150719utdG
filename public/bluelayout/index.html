@@ -1,34 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
-<!--
-localhost:3000/bluelayout/test.html
-	C:\utd\150719utdG\public\bluelayout\test.html
-
--->
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<!--xxhkhead-->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
 
-	<title>Complex Layout Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<!-- DEMO styles - specific to this page -->
-	<link rel="stylesheet" type="text/css" href="css/complex.css" />
-	<!--[if lte IE 7]>
-	<style type="text/css"> body { font-size: 85%; } </style>
-	<![endif]-->
+	<!--<link rel="stylesheet" type="text/css" href="./Complex Layout Demo_files/complex.css">-->
+	<link rel="stylesheet" type="text/css" href="/bluelayout/css/complex.css" />
 
-	<script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
-	<script type="text/javascript" src="lib/jquery-ui/jquery-ui.js"></script>
-	<script type="text/javascript" src="lib/jquery.layout-latest.js"></script>
-	<script type="text/javascript" src=complex.js></script>
-	<!--<script type="text/javascript" src="/lib/js/debug.js"></script>-->
+
+	<script type="text/javascript" src="../lib/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="../lib/jquery-layout/jquery.layout-latest.js"></script>
+	<script type="text/javascript" src="../bluelayout/lib/jquery-ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="../bluelayout/complex.js"></script>
 
 
 
-	<!-- hhkk100 missing from layout -->
+<!--ori-->
+	<!--<script type="text/javascript" src="./Complex Layout Demo_files/jquery-latest.js"></script><style type="text/css"></style>-->
+	<!--<script type="text/javascript" src="./Complex Layout Demo_files/jquery-ui-latest.js"></script>-->
+	<!--<script type="text/javascript" src="./Complex Layout Demo_files/jquery.layout-latest.js"></script>-->
+	<!--<script type="text/javascript" src="./Complex Layout Demo_files/complex.js"></script>-->
+	<script type="text/javascript" src="/bluelayout2/debug.js"></script>
+
 	<script type="text/javascript">
 		/*
 		 * complex.html
@@ -45,10 +40,8 @@ localhost:3000/bluelayout/test.html
 		 *     ON PAGE LOAD
 		 *#######################
 		 */
-//		hhkk100 looks like this belongs somewhere too
 		$(document).ready( function() {
 			// create the OUTER LAYOUT
-			//alert('initinghk');
 			outerLayout = $("body").layout( layoutSettings_Outer );
 
 			/*******************************
@@ -242,6 +235,9 @@ localhost:3000/bluelayout/test.html
 
 	</script>
 
+
+
+
 </head>
 
 
@@ -260,40 +256,40 @@ localhost:3000/bluelayout/test.html
 										<div class="content">
 											<h3><b>Outer Layout</b></h3>
 											<ul>
-												<li><a href="#" onClick="outerLayout.toggle('north')">Toggle North</a></li>
-												<li><a href="#" onClick="outerLayout.toggle('south')">Toggle South</a></li>
-												<li><a href="#" onClick="outerLayout.toggle('west')"> Toggle West</a></li>
-												<li><a href="#" onClick="outerLayout.toggle('east')"> Toggle East</a></li>
-												<li><a href="#" onClick="outerLayout.hide('north')">Hide North</a></li>
-												<li><a href="#" onClick="outerLayout.hide('south')">Hide South</a></li>
-												<li><a href="#" onClick="outerLayout.show('south', false)">Unhide South</a></li>
-												<li><a href="#" onClick="outerLayout.hide('east')"> Hide East</a></li>
-												<li><a href="#" onClick="outerLayout.show('east', false)">Unhide East</a></li>
-												<li><a href="#" onClick="outerLayout.open('east')"> Open East</a></li>
-												<li><a href="#" onClick="outerLayout.open('north'); outerLayout.sizePane('north', 'auto')">  Resize North="auto"</a></li>
-												<li><a href="#" onClick="outerLayout.sizePane('north', 100); outerLayout.open('north')">  Resize North=100</a></li>
-												<li><a href="#" onClick="outerLayout.sizePane('north', 300); outerLayout.open('north')">  Resize North=300</a></li>
-												<li><a href="#" onClick="outerLayout.sizePane('north', 10000); outerLayout.open('north')">Resize North=10000</a></li>
-												<li><a href="#" onClick="outerLayout.open('south'); outerLayout.sizePane('south', 'auto')">  Resize South="auto"</a></li>
-												<li><a href="#" onClick="outerLayout.sizePane('south', 100); outerLayout.open('south')">  Resize South=100</a></li>
-												<li><a href="#" onClick="outerLayout.sizePane('south', 300); outerLayout.open('south')">  Resize South=300</a></li>
-												<li><a href="#" onClick="outerLayout.sizePane('south', 10000); outerLayout.open('south')">Resize South=10000</a></li>
-												<li><a href="#" onClick="outerLayout.panes.north.css('backgroundColor','#FCC')">North Color = Red</a></li>
-												<li><a href="#" onClick="outerLayout.panes.north.css('backgroundColor','#CFC')">North Color = Green</a></li>
-												<li><a href="#" onClick="outerLayout.panes.north.css('backgroundColor','')">    North Color = Default</a></li>
-												<li><a href="#" onClick="alert('outerLayout.name = \''+outerLayout.options.name+'\'')">Show Layout Name</a></li>
-												<li><a href="#" onClick="showOptions(outerLayout,'defaults')">Show Options.Defaults</a></li>
-												<li><a href="#" onClick="showOptions(outerLayout,'north')">   Show Options.North</a></li>
-												<li><a href="#" onClick="showOptions(outerLayout,'south')">   Show Options.South</a></li>
-												<li><a href="#" onClick="showOptions(outerLayout,'west')">    Show Options.West</a></li>
-												<li><a href="#" onClick="showOptions(outerLayout,'east')">    Show Options.East</a></li>
-												<li><a href="#" onClick="showOptions(outerLayout,'center')">  Show Options.Center</a></li>
-												<li><a href="#" onClick="showState(outerLayout,'container')"> Show State.Container</a></li>
-												<li><a href="#" onClick="showState(outerLayout,'north')">     Show State.North</a></li>
-												<li><a href="#" onClick="showState(outerLayout,'south')">     Show State.South</a></li>
-												<li><a href="#" onClick="showState(outerLayout,'west')">      Show State.West</a></li>
-												<li><a href="#" onClick="showState(outerLayout,'east')">      Show State.East</a></li>
-												<li><a href="#" onClick="showState(outerLayout,'center')">    Show State.Center</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.toggle(&#39;north&#39;)">Toggle North</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.toggle(&#39;south&#39;)">Toggle South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.toggle(&#39;west&#39;)"> Toggle West</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.toggle(&#39;east&#39;)"> Toggle East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.hide(&#39;north&#39;)">Hide North</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.hide(&#39;south&#39;)">Hide South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.show(&#39;south&#39;, false)">Unhide South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.hide(&#39;east&#39;)"> Hide East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.show(&#39;east&#39;, false)">Unhide East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.open(&#39;east&#39;)"> Open East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.open(&#39;north&#39;); outerLayout.sizePane(&#39;north&#39;, &#39;auto&#39;)">  Resize North="auto"</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.sizePane(&#39;north&#39;, 100); outerLayout.open(&#39;north&#39;)">  Resize North=100</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.sizePane(&#39;north&#39;, 300); outerLayout.open(&#39;north&#39;)">  Resize North=300</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.sizePane(&#39;north&#39;, 10000); outerLayout.open(&#39;north&#39;)">Resize North=10000</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.open(&#39;south&#39;); outerLayout.sizePane(&#39;south&#39;, &#39;auto&#39;)">  Resize South="auto"</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.sizePane(&#39;south&#39;, 100); outerLayout.open(&#39;south&#39;)">  Resize South=100</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.sizePane(&#39;south&#39;, 300); outerLayout.open(&#39;south&#39;)">  Resize South=300</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.sizePane(&#39;south&#39;, 10000); outerLayout.open(&#39;south&#39;)">Resize South=10000</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;#FCC&#39;)">North Color = Red</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;#CFC&#39;)">North Color = Green</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;&#39;)">    North Color = Default</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="alert(&#39;outerLayout.name = \&#39;&#39;+outerLayout.options.name+&#39;\&#39;&#39;)">Show Layout Name</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(outerLayout,&#39;defaults&#39;)">Show Options.Defaults</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(outerLayout,&#39;north&#39;)">   Show Options.North</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(outerLayout,&#39;south&#39;)">   Show Options.South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(outerLayout,&#39;west&#39;)">    Show Options.West</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(outerLayout,&#39;east&#39;)">    Show Options.East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(outerLayout,&#39;center&#39;)">  Show Options.Center</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(outerLayout,&#39;container&#39;)"> Show State.Container</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(outerLayout,&#39;north&#39;)">     Show State.North</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(outerLayout,&#39;south&#39;)">     Show State.South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(outerLayout,&#39;west&#39;)">      Show State.West</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(outerLayout,&#39;east&#39;)">      Show State.East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(outerLayout,&#39;center&#39;)">    Show State.Center</a></li>
 											</ul>
 										</div>
 
@@ -310,40 +306,40 @@ localhost:3000/bluelayout/test.html
 										<div class="content">
 											<h3><b>Inner Layout</b></h3>
 											<ul id="createInner">
-												<li><a href="#" onClick="createInnerLayout(); return false;">CREATE Inner Layout</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="createInnerLayout(); return false;">CREATE Inner Layout</a></li>
 											</ul>
 											<ul id="innerCommands" style="display: none;">
-												<li><a href="#" onClick="innerLayout.toggle('north')">Toggle North</a></li>
-												<li><a href="#" onClick="innerLayout.toggle('south')">Toggle South</a></li>
-												<li><a href="#" onClick="innerLayout.toggle('west')"> Toggle West</a></li>
-												<li><a href="#" onClick="innerLayout.toggle('east')"> Toggle East</a></li>
-												<li><a href="#" onClick="innerLayout.hide('north')">Hide North</a></li>
-												<li><a href="#" onClick="innerLayout.hide('south')">Hide South</a></li>
-												<li><a href="#" onClick="innerLayout.hide('west')"> Hide West</a></li>
-												<li><a href="#" onClick="innerLayout.hide('east')"> Hide East</a></li>
-												<li><a href="#" onClick="innerLayout.show('east')"> Show East</a></li>
-												<li><a href="#" onClick="innerLayout.sizePane('north', 50); innerLayout.open('north')">   Resize North=50</a></li>
-												<li><a href="#" onClick="innerLayout.sizePane('north', 300); innerLayout.open('north')">  Resize North=300</a></li>
-												<li><a href="#" onClick="innerLayout.sizePane('north', 10000); innerLayout.open('north')">Resize North=10000</a></li>
-												<li><a href="#" onClick="innerLayout.sizePane('south', 50); innerLayout.open('south')">   Resize South=50</a></li>
-												<li><a href="#" onClick="innerLayout.sizePane('south', 300); innerLayout.open('south')">  Resize South=300</a></li>
-												<li><a href="#" onClick="innerLayout.sizePane('south', 10000); innerLayout.open('south')">Resize South=10000</a></li>
-												<li><a href="#" onClick="innerLayout.panes.north.css('backgroundColor','#FCC')">North Color = Red</a></li>
-												<li><a href="#" onClick="innerLayout.panes.north.css('backgroundColor','#CFC')">North Color = Green</a></li>
-												<li><a href="#" onClick="innerLayout.panes.north.css('backgroundColor','')">    North Color = Default</a></li>
-												<li><a href="#" onClick="alert('innerLayout.name = \''+innerLayout.options.name+'\'')">Show Layout Name</a></li>
-												<li><a href="#" onClick="showOptions(innerLayout,'defaults')">Show Options.Defaults</a></li>
-												<li><a href="#" onClick="showOptions(innerLayout,'north')">   Show Options.North</a></li>
-												<li><a href="#" onClick="showOptions(innerLayout,'south')">   Show Options.South</a></li>
-												<li><a href="#" onClick="showOptions(innerLayout,'west')">    Show Options.West</a></li>
-												<li><a href="#" onClick="showOptions(innerLayout,'east')">    Show Options.East</a></li>
-												<li><a href="#" onClick="showOptions(innerLayout,'center')">  Show Options.Center</a></li>
-												<li><a href="#" onClick="showState(innerLayout,'container')"> Show State.Container</a></li>
-												<li><a href="#" onClick="showState(innerLayout,'north')">     Show State.North</a></li>
-												<li><a href="#" onClick="showState(innerLayout,'south')">     Show State.South</a></li>
-												<li><a href="#" onClick="showState(innerLayout,'west')">      Show State.West</a></li>
-												<li><a href="#" onClick="showState(innerLayout,'east')">      Show State.East</a></li>
-												<li><a href="#" onClick="showState(innerLayout,'center')">    Show State.Center</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.toggle(&#39;north&#39;)">Toggle North</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.toggle(&#39;south&#39;)">Toggle South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.toggle(&#39;west&#39;)"> Toggle West</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.toggle(&#39;east&#39;)"> Toggle East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.hide(&#39;north&#39;)">Hide North</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.hide(&#39;south&#39;)">Hide South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.hide(&#39;west&#39;)"> Hide West</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.hide(&#39;east&#39;)"> Hide East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.show(&#39;east&#39;)"> Show East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.sizePane(&#39;north&#39;, 50); innerLayout.open(&#39;north&#39;)">   Resize North=50</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.sizePane(&#39;north&#39;, 300); innerLayout.open(&#39;north&#39;)">  Resize North=300</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.sizePane(&#39;north&#39;, 10000); innerLayout.open(&#39;north&#39;)">Resize North=10000</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.sizePane(&#39;south&#39;, 50); innerLayout.open(&#39;south&#39;)">   Resize South=50</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.sizePane(&#39;south&#39;, 300); innerLayout.open(&#39;south&#39;)">  Resize South=300</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.sizePane(&#39;south&#39;, 10000); innerLayout.open(&#39;south&#39;)">Resize South=10000</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;#FCC&#39;)">North Color = Red</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;#CFC&#39;)">North Color = Green</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="innerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;&#39;)">    North Color = Default</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="alert(&#39;innerLayout.name = \&#39;&#39;+innerLayout.options.name+&#39;\&#39;&#39;)">Show Layout Name</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(innerLayout,&#39;defaults&#39;)">Show Options.Defaults</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(innerLayout,&#39;north&#39;)">   Show Options.North</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(innerLayout,&#39;south&#39;)">   Show Options.South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(innerLayout,&#39;west&#39;)">    Show Options.West</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(innerLayout,&#39;east&#39;)">    Show Options.East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showOptions(innerLayout,&#39;center&#39;)">  Show Options.Center</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(innerLayout,&#39;container&#39;)"> Show State.Container</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(innerLayout,&#39;north&#39;)">     Show State.North</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(innerLayout,&#39;south&#39;)">     Show State.South</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(innerLayout,&#39;west&#39;)">      Show State.West</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(innerLayout,&#39;east&#39;)">      Show State.East</a></li>
+				<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="showState(innerLayout,&#39;center&#39;)">    Show State.Center</a></li>
 											</ul>
 										</div>
 
@@ -399,6 +395,9 @@ localhost:3000/bluelayout/test.html
 
 
 			</div>
+
+<!--<script type="text/javascript" src="../lib/angular/angular.js"></script>-->
+<!--<script type="text/javascript" src="../lib/angular-resource/angular-resource.js"></script>-->
 
 
 </body>
