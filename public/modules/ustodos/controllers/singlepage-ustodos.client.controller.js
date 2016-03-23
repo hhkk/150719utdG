@@ -4290,7 +4290,7 @@ angular.module('ustodos').controller
 						}
 						catch (err) {
 							//alert('erra33 in singlepage-ustodos.client.controller.js' + s);
-							console.log('malformed erra33 in singlepage-ustodos.client.controller.js:');
+							//console.log('malformed erra33 in singlepage-ustodos.client.controller.js:');
 							//console.log('malformed erra33 in singlepage-ustodos.client.controller.js:' + err.toString() + ':' + err.stack);
 						}
 						return rtn;
