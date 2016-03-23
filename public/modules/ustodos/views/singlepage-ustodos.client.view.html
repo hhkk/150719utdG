@@ -41,6 +41,19 @@
 
 
 
+		<!--hhkk103 -->
+		<div
+				id='idDivCEOmniBox'
+				contenteditable="true"
+				style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
+				ng-keyup='omniboxKey_EventHandler($event)'
+				ng-bind-html='bindToTextBox'
+				ng-mouseover = 'idDivCEOmniBox_eventHandler_ngMouseover()'
+				ng-mouseleave = mouseOut()
+				style='resize:both'
+		>
+			<!--ng-bind-html='ustodosFiltered[$index].html'-->
+		</div>
 
 
 		<textarea id='idTextareaUtdLog' resize="alert('resizehk')" rows='4' cols='200' style='resize:both;font-size:8pt'>idTextareaUtdLog</textarea>
@@ -122,18 +135,6 @@
 			<!--Timing-->
 			<!--</button>-->
 			<!--</div>-->
-
-
-
-
-
-			<!--  -->
-			<!--style='isolation: isolate'-->
-			<br>
-			<span>
-			</span>
-			<div>
-			</div>
 
 
 			<!-- section_ABOVE_TABLE_CHECKALL_ETC

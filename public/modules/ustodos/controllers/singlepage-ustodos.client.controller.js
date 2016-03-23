@@ -1,5 +1,3 @@
-
-
 'use strict';
 
 /*jshint multistr: true */
@@ -2113,12 +2111,14 @@ angular.module('ustodos').controller
 					/**
 					 * make omnibox execute command or yellow the field due to key action
                      */
+					//hhkk104
 					$scope.omniboxKey_EventHandler = function (keyEvent) //
 					{
-						//	alert ('!!!! in onKeyUp_MainContentEditable');
+						u_.U_o.o ('!!!! in onKeyUp_MainContentEditable');
+							//alert ('!!!! in onKeyUp_MainContentEditable');
 						if (keyEvent.keyCode === 13) // enter key
 						{
-							//alert('in omniboxKey_EventHandler keyEvent.keyCode === 13');
+							alert('in omniboxKey_EventHandler keyEvent.keyCode === 13');
 							var html = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
 							var text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(html, false);
 
@@ -3385,6 +3385,7 @@ angular.module('ustodos').controller
 
 					$scope.idDivCEOmniBox_eventHandler_ngMouseover = function(id)
 					{
+						//alert('idDivCEOmniBox_eventHandler_ngMouseover:');
 						//document.getElementById('idDivCEOmniBox').style.maxHeight = 'none';
 						//document.getElementById('idDivCEOmniBox').style.height = 'auto';
 						//document.getElementById('idDivCEOmniBox').style.display = 'block';
@@ -4279,9 +4280,20 @@ angular.module('ustodos').controller
 					 * @param xHtml
 					 * @param xValue maybe aka data?
 					 */
+					// hhkk104
 					$scope.hkdecodeURI = function(s)
 					{
-						return decodeURI(s);
+
+						var rtn = 'decodeURI_function_failed';
+						try {
+							rtn = decodeURI(s);
+						}
+						catch (err) {
+							//alert('erra33 in singlepage-ustodos.client.controller.js' + s);
+							console.log('malformed erra33 in singlepage-ustodos.client.controller.js:');
+							//console.log('malformed erra33 in singlepage-ustodos.client.controller.js:' + err.toString() + ':' + err.stack);
+						}
+						return rtn;
 					};
 
 					$scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml)

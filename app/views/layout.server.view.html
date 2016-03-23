@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <HTML
 		xmlns="http://www.w3.org/1999/xhtml">
+
 <HEAD>
 	<META content="IE=11.0000"
 		  http-equiv="X-UA-Compatible">
@@ -46,6 +47,7 @@
 
 	<!--hhkk103-->
 	<script type="text/javascript" src="/util/U_setup.js"></script>
+	<script type="text/javascript" src="/util/U_o.js"></script>
 	<script type="text/javascript" src="/util/UtilError.js"></script>
 	<script type="text/javascript" src="/util/UtilIdle.js"></script>
 	<script type="text/javascript" src="/util/UtilString.js"></script>
@@ -97,6 +99,7 @@
 		 */
 		$(document).ready( function() {
 			// create the OUTER LAYOUT
+
 			outerLayout = $("body").layout( layoutSettings_Outer );
 
 			/*******************************
@@ -152,6 +155,10 @@
 				if (path.substr(path.length-1)=="#") path = path.substr(0,path.length-1);
 				if (this.href.substr(this.href.length-1) == "#") this.href = path +"#";
 			});
+
+
+			//alert('hhkk104 call to createInnerLayout()');
+			createInnerLayout();
 
 		});
 
@@ -567,8 +574,7 @@
 		<H3 class="header">Inner - Center</H3>
 		<DIV class="ui-layout-content">
 			<P id="createInner2" style="font-weight: bold;"><A onclick="createInnerLayout(); return false;"
-				href="http://layout.jquery-dev.com/demos/complex.html#">Click here to CREATE the
-				Inner Layout</A>
+				href="http://layout.jquery-dev.com/demos/complex.html#">Click here to CREATE the Inner Layout</A>
 			</P>
 			<!-- outerLayout.open('east');  -->
 
@@ -631,18 +637,59 @@
 	<DIV class="ui-layout-north"> Inner - North
 
 		<!--hhkk103 -->
-		<span style='font-size:8px'>idDivCEOmniBox</span>
 		<div
-				id='idDivCEOmniBox'
-				contenteditable="true" style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
+				id='idDivCEOmniBox_UP'
+				contenteditable="true"
+				style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
 				ng-keyup='omniboxKey_EventHandler($event)'
 				ng-bind-html='bindToTextBox'
 				ng-mouseover = 'idDivCEOmniBox_eventHandler_ngMouseover()'
 				ng-mouseleave = mouseOut()
 				style='resize:both'
 		>
+			upper
 			<!--ng-bind-html='ustodosFiltered[$index].html'-->
 		</div>
+
+
+		<!--  -->
+		<!--style='isolation: isolate'-->
+		<!-- hhkk -->
+		<!--<div-->
+				<!--id='idDivCEOmniBox'-->
+				<!--style='-->
+					<!--position:absolute;-->
+					<!--resize:both;-->
+					<!--/*top:300px;*/-->
+					<!--max-height: 20px;-->
+					<!--height: 20px;-->
+					<!--background-color:lightgrey;-->
+					<!--border-width:0px; border-style:solid; border-color:green;-->
+					<!--width:500px; xxheight:auto;-->
+					<!--display:inline;-->
+					<!--xxoverflow:auto; overflow-x: hidden;-->
+					<!--z-index:5-->
+					<!--'-->
+				<!--contenteditable="true"-->
+				<!--ng-keyup='omniboxKey_EventHandler($event)'-->
+				<!--ng-bind-html='bindToTextBox'-->
+				<!--ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover(1)-->
+				<!--ng-focus= idDivCEOmniBox_eventHandler_ngMouseover(2)-->
+				<!--xxng-mouseleave = mouseOut()-->
+		<!--&gt;-->
+			<!--&lt;!&ndash;ng-bind-html='ustodosFiltered[$index].html'&ndash;&gt;-->
+		<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
 
 	</DIV>
 	<DIV class="ui-layout-south"> Inner - South</DIV>
