@@ -1,3 +1,6 @@
+<!-- localhost:3000\hk\htmltest\160320_TestAngular\160320_TestAngular2.html -->
+
+
 <html>
 <head>
 	<title></title>
@@ -9,13 +12,11 @@
 	<br />
 	<input type="text" ng-model="hellomodel" />
 	<br />
-	<br />
-	<h1>
-	</h1>
 	<script language="javascript">
 		var myapp = angular.module("myApp", []);
 		myapp.controller("myCntrl", function ($scope) {
 			$scope.hellomodel = "Hello World!";
+			alert('scope defined');
 		});
 	</script>
 </div>

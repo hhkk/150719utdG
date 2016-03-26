@@ -79,8 +79,6 @@
 
 
 
-
-
 	<SCRIPT type="text/javascript">
 		/*
 		 * complex.html
@@ -298,7 +296,12 @@
 	</SCRIPT>
 	<META name="GENERATOR" content="MSHTML 11.00.9600.18052">
 </HEAD>
+
+
+
+<!--body hhkk105-->
 <BODY>
+<!--<BODY ng-app="ustodos" data-ng-controller="SinglepageUstodosController">-->
 <DIV class="ui-layout-west">
 	<DIV class="header">Outer - West</DIV>
 	<DIV class="content">
@@ -545,10 +548,17 @@
 		<br>
 
 		<span id='hkheader' style="display: block">
-		  <header data-ng-include="'/modules/core/views/header.client.view.html'"
+
+		  <header data-ng-include="'/modules/core/views/footer.client.view.html'"
 				  style="position:relative; margin-bottom:0px"
 				  class="navbar navbar-fixed-top navbar-inverse">
 		  </header>
+
+		<div id='hkfooter'
+			 style="display: none"
+			 data-ng-include="'/modules/core/views/footer.client.view.html'"
+			 class="navbar-fixed-bottom"></div >
+
 		</span>
 		sfsdfdsf
 		<br>
@@ -564,8 +574,13 @@
 </DIV>
 <DIV class="ui-layout-south">
 	<DIV class="header">Outer - South</DIV>
+	<header data-ng-include="'/modules/core/views/footer.client.view.html'"
+			style="position:relative; margin-bottom:0px"
+			class="navbar navbar-fixed-top navbar-inverse">
+	</header>
+
 	<DIV class="content">
-		<P>I only have a resizer/toggler when 'open'</P>
+		<P>I only have a 2 resizer/toggler when 'open'</P>
 	</DIV>
 </DIV>
 <DIV id="mainContent">
@@ -636,16 +651,19 @@
 	</DIV>
 	<DIV class="ui-layout-north"> Inner - North
 
-		<!--hhkk103 -->
+		<input type="button" value="localScope_testOutsiderCall" onclick="localScope_testOutsiderCall()"/>
+
+		<!--hhkk106 idDivCEOmniBoxUP -->
+		<!--onkeyup='omniboxKey_EventHandlerOUTSIDER($event)'-->
+		<!--onkeyup="console.log('xxx:' + angular.element(document.getElementById('idSectionWholePage')).scope().omniboxKey_EventHandler($event))"-->
+♠		<!--ng-bind-html='bindToTextBox'-->
+		<!--ng-mouseover = 'idDivCEOmniBox_eventHandler_ngMouseover()'-->
+		<!--ng-mouseleave = mouseOut()-->
 		<div
-				id='idDivCEOmniBox_UP'
-				contenteditable="true"
-				style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
-				ng-keyup='omniboxKey_EventHandler($event)'
-				ng-bind-html='bindToTextBox'
-				ng-mouseover = 'idDivCEOmniBox_eventHandler_ngMouseover()'
-				ng-mouseleave = mouseOut()
-				style='resize:both'
+			id='idDivCEOmniBoxUP'
+			contenteditable="true"
+			style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
+			style='resize:both'
 		>
 			upper
 			<!--ng-bind-html='ustodosFiltered[$index].html'-->
@@ -692,7 +710,8 @@
 
 
 	</DIV>
-	<DIV class="ui-layout-south"> Inner - South</DIV>
+	<DIV class="ui-layout-south"> Inner - South
+	</DIV>
 	<DIV class="ui-layout-west">  Inner - West</DIV>
 	<DIV class="ui-layout-east">
 		Inner - East
@@ -734,5 +753,27 @@
 		<P>...</P>
 	</DIV>
 </DIV>
+<!--hhkk106-->
+<SCRIPT type="text/javascript">
+	var localScope_testOutsiderCall = function() {
+		alert('from scope:' + angular.element(document.getElementById('idSectionWholePage')).scope().testOutsiderCall());
+	}; // yourControllerElementID
+
+	document.getElementById('idDivCEOmniBoxUP').addEventListener( 'keyup', function( e ) {
+		u_.U_o.o ( 'Keyup event' + e.keyCode );
+		angular.element(document.getElementById('idSectionWholePage')).
+			scope().omniboxKey_EventHandler(e);
+
+	} );
+
+//	document.getElementById('idDivCEOmniBoxUP').addEventListener( 'keypress', function( e ) {
+//		console.log( 'Keypress event' );
+//		console.log( e.keyCode );
+//	} );
+
+
+</SCRIPT>
+
 </BODY>
+
 </HTML>

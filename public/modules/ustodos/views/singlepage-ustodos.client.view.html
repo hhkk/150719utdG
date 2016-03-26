@@ -3,7 +3,10 @@
 <!-- hbklrb5 invoked by core client routes -->
 
 
-<section class="WholePage"
+<!--hhkk105 wholepage ng-app="ustodos" data-ng-controller="SinglepageUstodosController" -->
+
+<section id="idSectionWholePage"
+		 class="WholePage"
 		 data-ng-controller="SinglepageUstodosController"
 		 resize="alert('resizehk)"
 		 style="top:0px"
@@ -65,14 +68,18 @@
 		</div>
 
 
-		<button ng-click=hktesty='fdfg'>hktesty</button>
+		<button ng-click="hktesty='fdfg'">sethktesty</button>
 		{{hktesty}}
+		<button ng-click="hktesty2='fdfg'">sethktesty2</button>
+
+		1 nondivhkt2:{{hktesty2}}
+		2 divhkt2:<div data-ng-bind="hktesty2"/>
+		3 	div2hkt2:<div data-ng-bind="hktesty2"/>
 		<button id='showHideDetails' ng-click="toggleShowDetails()">Show</button>
 		<!---->
 
 		<br>
-		div
-		<div id="idDivCumIframe" width="100%" height="50px" >
+		<div id="idDivCumIframe" width="100%" height="50px" data-ng-bind="">
 			x
 		</div>
 
@@ -127,6 +134,7 @@
 
 			<button ng-click="testButton(-2)" title="testButton0">Test0</button>
 			<button ng-click="clearOmniBox()" title="testButton0">Clear</button>
+			<button ng-click="clearOmniBoxUP()" title="testButton0">ClearUp</button>
 			<!--<button ng-click="u_.U_error2.o('from in view')" title="testButton1">Test1</button>-->
 			<!--&lt;!&ndash;<button ng-click="UcHtmlDocManipulate.testScopeAccess()" title="testButton1">Test1</button>&ndash;&gt;-->
 			<!--<button ng-click="processCommand(enumCommands.COMMAND_SEARCH, $scope.enumProcessCommandCaller.HTMLSTARALLBUTTON, '*', '*')" title="yy">-->
@@ -242,9 +250,10 @@
 					Filter
 				</span>
 
+				dddddddddddd
 				<input id="idInputTextFilter"  type="text" title='Restrict/filter within search result' name="input" ng-model="filterText"  ng-keyup='updateUstodosFiltered(filterText)'
 					   xxng-pattern="example.word" required ng-trim="false" >
-
+				eeeeeeee
 				<span class='classSpanSearchedFor'>
 					Showing
 					<span class='classSpanSearchedForSearchText' >
