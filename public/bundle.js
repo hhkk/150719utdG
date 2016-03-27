@@ -93,7 +93,7 @@ var liveLog = function (s)
 // http://stackoverflow.com/questions/15313418/javascript-assert
 var assert = function (condition, message) {
 	if (!condition) {
-
+		alert('no go in assert');
 		if (typeof Error === "undefined") {
 			Error = function(message) {
 				this.message = message;

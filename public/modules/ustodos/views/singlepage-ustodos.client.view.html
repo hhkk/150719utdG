@@ -7,10 +7,11 @@
 
 <section id="idSectionWholePage"
 		 class="WholePage"
-		 data-ng-controller="SinglepageUstodosController"
-		 resize="alert('resizehk)"
+		 resize="alert('resizehk')"
 		 style="top:0px"
-		 data-ng-init="ngInitTopLevel()">
+		 data-ng-controller="SinglepageUstodosController"
+		 data-ng-init="ngInitTopLevel()"
+>
 
 
 
@@ -75,6 +76,9 @@
 		1 nondivhkt2:{{hktesty2}}
 		2 divhkt2:<div data-ng-bind="hktesty2"/>
 		3 	div2hkt2:<div data-ng-bind="hktesty2"/>
+		4 timeForTestingBind
+		<div ng-bind='timeForTestingBind'></div>
+
 		<button id='showHideDetails' ng-click="toggleShowDetails()">Show</button>
 		<!---->
 
@@ -419,7 +423,7 @@
 									<!-- trash garbage icon -->
 									&nbsp;&nbsp;<img class="per-row-icons-trashimage" ng-src="/img/gnome_edit_delete.png"
 													 alt="{{image.name}}"  title='Delete immediately'
-													 ng-click="deleteDbUstotoOneByIndex([$index])"
+													 ng-click="deleteDbUstotoOneByIndex([$index], ustodos)"
 								>
 									&nbsp
 									<!--ng-show="nowShowing==$index"-->

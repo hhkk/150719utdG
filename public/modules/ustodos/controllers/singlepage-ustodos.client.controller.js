@@ -234,81 +234,48 @@ app.factory('SppSvc', ['$rootScope', 'Ustodos', function($rootScope, Ustodos)
 
 
 
-	var ustodo = new Ustodos ({
-		// looks like mongoose
-		// http://mongoosejs.com/docs/index.html
-		// need to be model schema elements from ustodo.server.model.js
-		// joey: 'and pete', // not sufficient to just be here
-		//html: 'htmlhk:'+utdUserCommand.xHtml.replaceLast(' w', ''),
-		html: 'testhtml',
-		text: 'testtext',
-		datelastmod: (''+new Date()),
-		datecreated: (''+new Date()),
-		// (I guess "if in schema" covers both client-server and server-db)
-		utdUserCommand: 'usercommand'  // this goes to the DB if in schema
-	});
-
-	alert ('in SppSvc2');
-	ustodo.$save
-	(
-		function(response) // line 60 of 'ustodos.server. controller.js' exports.create
-		{
-			alert('in response');
-
-		},
-		function(errorResponse) {
-			alert('failed to save record:' + errorResponse.data.message);
-			$scope.error = errorResponse.data.message;
-		});
-	alert ('in SppSvc3');
-
-
-
-
-
-
-
-
-
 
 	var sppData = {};
 	var itemsServiceFns = {};
 
 
 
-
-
-
-	itemsServiceFns.deleteDbUstotoOneByIndex = function(arrIntIndexesToDelete_or_oneUsToDo)
+	//hhkk106
+	/**
+	 *
+	 * @param arrIntIndexesToDelete_or_oneUsToDo - delete index (in array)
+	 * @param ustodos - side-effected array
+     */
+	itemsServiceFns.deleteDbUstotoOneByIndex = function(arrIntIndexesToDelete_or_oneUsToDo, ustodos)
 	{
-		alert ('in deleteDbUstotoOneByIndex2');
+		//alert ('in deleteDbUstotoOneByIndex2 arrIntIndexesToDelete_or_oneUsToDo:'+arrIntIndexesToDelete_or_oneUsToDo);
 		//try {
 		//
 		//}
 		//u_.U_o.assert (false, 'asdasd');
-		u_.U_o.assert ((arrIntIndexesToDelete_or_oneUsToDo.length === 1), 'support only delete one right now, not:' + arrIntIndexesToDelete_or_oneUsToDo.length);
 
 		// Still support only one delete at a time!!!!!!!!!!!!!!
+		u_.U_o.assert ((arrIntIndexesToDelete_or_oneUsToDo.length === 1), 'support only delete one right now, not:' + arrIntIndexesToDelete_or_oneUsToDo.length);
 
 		var intIndexToDelete = arrIntIndexesToDelete_or_oneUsToDo[0];
+		//alert('intIndexToDelete:'+intIndexToDelete);
 		//return;
 		//alert ('deleting i:' + i);
 		try {
-			var ustodo = $scope.ustodos[intIndexToDelete];
+			var ustodo = ustodos[intIndexToDelete];
 
 			var savOid = ustodo._id;
 			u_.U_o.o('33333333333333333333333333333 splicing: i' + intIndexToDelete );
-			$scope.ustodos.splice(intIndexToDelete, 1);
+			ustodos.splice(intIndexToDelete, 1);
 
 			ustodo.$delete(function() {
 				console.log ('$delete done !!! savOid:' + savOid);
-				//$scope.ustodos.splice(index, 1));
+				//ustodos.splice(index, 1));
 				//alert ('delete done, now remove from array');
 				//array.;
 			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-				//console.log ('ERROR ON SAVE !!! '  + $scope.ustodos[i].html);
-				console.log ('ERROR ON SAVE !!! $scope.error:'  + $scope.error);
+				var error = errorResponse.data.message;
+				console.log ('ERROR ON SAVE !!! error:'  + error);
 			});
 			console.log ('done remove/delete');
 		} catch (err) {
@@ -354,7 +321,7 @@ app.factory('SppSvc', ['$rootScope', 'Ustodos', function($rootScope, Ustodos)
 
 		if (val)
 		{
-			alert('2 setting dirty true caller:'+caller);
+			//alert('2 setting dirty true caller:'+caller);
 
 			/**
 			 * get internal frame mce window elem id, e.g. to color it
@@ -505,7 +472,7 @@ var callbackCommand = function(callbackResult) {
 //| |              | | |              | | |              | | |              | | |              | | |              | | |  |_______|   | | |              | | |              | | |              | | |              | | |              | | |              | | |              | | |              | | |              | | |              | |
 //| '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
 //'----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------' '----------------'
-// section_single
+// section_singlepage   section_controller
 
 
 //u_.U_o.a ('oneOfSeveral controller with array - first?');
@@ -528,6 +495,9 @@ angular.module('ustodos').controller
 					 Authentication, Ustodos, Commands, SppSvc   // Ustodos is a $resource I think - .query on it maps to routes in ustodos.server.routes.js
 			)
 			{
+
+				$scope.timeForTestingBind = (new Date()).toString();
+				$scope.saveOriginalDevCeHtml = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
 				var windowhk = angular.element($window);
 				windowhk.bind('resize', function () {
 					//console.log ('resize');
@@ -2215,10 +2185,16 @@ angular.module('ustodos').controller
 					{
 						u_.U_o.o ('!!!! in onKeyUp_MainContentEditable');
 							//alert ('!!!! in onKeyUp_MainContentEditable');
+						var html = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
+						//alert('comparing html ['+html+'] to ' + $('div[id="idDivCEOmniBox"]')[0].innerHTML);
+						if (html !== $scope.saveOriginalDevCeHtml)
+							SppSvc.setModelDirty(true,'line 2192');
+						else
+							SppSvc.setModelDirty(false,'line 2193');
 						if (keyEvent.keyCode === 13) // enter key
 						{
 							alert('in omniboxKey_EventHandler keyEvent.keyCode === 13');
-							var html = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
+
 							var text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(html, false);
 
 							// if write
@@ -3285,7 +3261,9 @@ angular.module('ustodos').controller
 					//| |              | | |              | | |              | | | |              | | |              | | |              | | |              | | |              | |
 					//| '--------------' | '--------------' | '--------------' | | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
 					//'----------------' '----------------' '----------------'   '----------------' '----------------' '----------------' '----------------' '----------------'
-					$scope.saveUstodoGiven = function(ustodo, i) {
+					$scope.saveUstodoGiven = function(ustodo, i)
+					{
+						alert('in saveUstodoGiven');
 						var myEl = angular.element(document.querySelector('#ustodorow' + i));
 						ustodo.html = myEl[0].innerHTML;
 						ustodo.text = myEl[0].innerText;
@@ -3297,7 +3275,7 @@ angular.module('ustodos').controller
 						console.log('SAVED3 !!! ustodo.json [' + ustodo.json);
 						console.log('SAVED4 !!! ustodo.jsonx [' + ustodo.jsonx);
 						ustodo.$update(function () {
-							console.log('SAVED OK !!! ');
+							alert('SAVED OK !!! ');
 						}, function (errorResponse) {
 							$scope.error = errorResponse.data.message;
 							console.log('ERROR ON SAVE !!! ' + ustodo.html);
@@ -4247,7 +4225,7 @@ angular.module('ustodos').controller
 					};
 
 
-
+					// hhkk106
 					$scope.deleteDbUstotoOneByIndex = SppSvc.deleteDbUstotoOneByIndex;
 
 					//alert ('setting setUstodosFiltered');
@@ -4368,8 +4346,12 @@ angular.module('ustodos').controller
 						return rtn;
 					};
 
-					$scope.testOutsiderCall = function() {
+					$scope.hktest97 = "hktest97y";
+
+					$scope.testOutsiderCall = function(layout) {
+						$scope.hktestlayout = null;
 						alert('ddddddf');
+						return hktest97;
 					}
 
 					$scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml)
