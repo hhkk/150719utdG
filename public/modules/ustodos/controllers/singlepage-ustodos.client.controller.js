@@ -497,7 +497,7 @@ angular.module('ustodos').controller
 			{
 
 				$scope.timeForTestingBind = (new Date()).toString();
-				$scope.saveOriginalDevCeHtml = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
+				//$scope.saveOriginalDevCeHtml = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
 				var windowhk = angular.element($window);
 				windowhk.bind('resize', function () {
 					//console.log ('resize');
@@ -3481,6 +3481,7 @@ angular.module('ustodos').controller
 					// hhkk testbutton
 					$scope.testButton= function(fn)
 					{
+						//alert('in testbutton');
 						try
 						{
 							u_.U_o.o('hi sister!');
@@ -3488,7 +3489,8 @@ angular.module('ustodos').controller
 
 							if (true) // why this makes error
 							{
-								alert(document.activeElement.id);
+								$scope.timeForTestingBind = "xxy2";
+								//alert(xxxdocument.activeElement.id);
 							}
 
 							if (false) {

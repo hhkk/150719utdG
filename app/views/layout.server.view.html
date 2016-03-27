@@ -300,11 +300,17 @@
 
 
 <!--body hhkk105-->
-<BODY>
+<BODY
+		data-ng-controller="SinglepageUstodosController"
+		data-ng-init="ngInitTopLevel()"
+>
 <!--<BODY ng-app="ustodos" data-ng-controller="SinglepageUstodosController">-->
+
 <!--<BODY data-ng-controller="SinglepageUstodosController">-->
+
 <DIV class="ui-layout-west">
 	<DIV class="header">Outer - West
+		<button ng-click="testButton(-2)" title="testButton0">Test0</button>
 		4time
 		<div ng-bind='timeForTestingBind'></div>
 	</DIV>
@@ -666,6 +672,9 @@
 		<DIV class="footer">Center panes can have headers &amp; footers too</DIV>
 	</DIV>
 	<DIV class="ui-layout-north"> Inner - North
+		<button ng-click="testButton(-2)" title="testButton0">Test0</button>
+		4time
+		<div ng-bind='timeForTestingBind'></div>
 
 		<input type="button" value="localScope_testOutsiderCall" onclick="localScope_testOutsiderCall()"/>
 		<!--// hhkk106 <input type="button" value="localScope_testOutsiderCall" onclick=""myLayout.close('west')"/>-->
@@ -733,52 +742,17 @@
 	</DIV>
 	<DIV class="ui-layout-south"> Inner - South
 	</DIV>
-	<DIV class="ui-layout-west">  Inner - West
-
-		4 timeForTestingBind
-		<div ng-bind='timeForTestingBind'></div>
+	<DIV class="ui-layout-west">
+		<!--Inner - West-->
+		Search result categories & tags
+		<div ng-bind='searchCategories'></div>
 
 
 	</DIV>
 
 	<DIV class="ui-layout-east">
-		Inner - East
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
-		<P>...</P>
+		<!--Inner - East-->
+		Recent searches
 	</DIV>
 </DIV>
 <!--hhkk106-->

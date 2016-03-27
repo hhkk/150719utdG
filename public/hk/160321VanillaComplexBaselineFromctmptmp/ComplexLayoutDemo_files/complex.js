@@ -132,7 +132,7 @@ function showState (o_Settings, key) {
 * createInnerLayout
 */
 function createInnerLayout () {
-	alert('createInnerLayout from \\160321VanillaComplexBaselineFromctmptmp\\ComplexLayoutDemo_files\\complex.js')
+		//alert('createInnerLayout from \\160321VanillaComplexBaselineFromctmptmp\\ComplexLayoutDemo_files\\complex.js')
 	// innerLayout is INSIDE the center-pane of the outerLayout
 	//debugData( layoutSettings_Inner );
 	innerLayout = $( outerLayout.options.center.paneSelector ).layout( layoutSettings_Inner );
