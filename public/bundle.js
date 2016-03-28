@@ -62,7 +62,10 @@ var o = function (s)
 		console.log(t);
 		//if (appendFileSync)
 		//appendFileSync('c:/tmp/t.txt', t);
-		console.log(callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory);
+		var soutput = callcount_o++ + '. olog:' + s + ' alertHistory:' + alertHistory;
+		console.log(soutput);
+		if (!u_.isServer)  // client only log
+			liveLog(soutput);
 	}
 };
 
@@ -195,7 +198,6 @@ u_setup('U_o', 'assert', assert);
 u_setup('U_o', 'a', a);
 u_setup('U_o', 'e', e);
 u_setup('U_o', 'liveLog', liveLog);
-
 
 var U_o;
 

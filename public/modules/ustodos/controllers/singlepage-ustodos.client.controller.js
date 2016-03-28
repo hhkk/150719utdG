@@ -2183,7 +2183,7 @@ angular.module('ustodos').controller
 					//hhkk104
 					$scope.omniboxKey_EventHandler = function (keyEvent) //
 					{
-						u_.U_o.o ('!!!! in onKeyUp_MainContentEditable');
+						//u_.U_o.o ('!!!! in onKeyUp_MainContentEditable');
 							//alert ('!!!! in onKeyUp_MainContentEditable');
 						var html = $('div[id="idDivCEOmniBox"]')[0].innerHTML;
 						//alert('comparing html ['+html+'] to ' + $('div[id="idDivCEOmniBox"]')[0].innerHTML);
@@ -2193,7 +2193,7 @@ angular.module('ustodos').controller
 							SppSvc.setModelDirty(false,'line 2193');
 						if (keyEvent.keyCode === 13) // enter key
 						{
-							alert('in omniboxKey_EventHandler keyEvent.keyCode === 13');
+							u_.U_o.o('in omniboxKey_EventHandler keyEvent.keyCode === 13');
 
 							var text = u_.UtilHtmlCleaner.utilHtmlCleanerFunctions.testConvertHtmltoText(html, false);
 
@@ -2272,6 +2272,7 @@ angular.module('ustodos').controller
 						//
 						//alert ('!!!! in onKeyUp_perrow_text');
 
+						SppSvc.setModelDirty(true);
 						// if not escape then return
 						if (keyEvent.keyCode !== 27 ) // if not escape key section_escape
 						{
@@ -2777,7 +2778,7 @@ angular.module('ustodos').controller
 					{
 						$scope.callCounter_eventHandlerEditorcontentChange++;
 
-						console.log ('$scope.callCounter_eventHandlerEditorcontentChange:' + $scope.callCounter_eventHandlerEditorcontentChange);
+						//console.log ('$scope.callCounter_eventHandlerEditorcontentChange:' + $scope.callCounter_eventHandlerEditorcontentChange);
 
 						//
 						//alert( '######### in eventHandlerEditorcontentChange');
@@ -3383,66 +3384,6 @@ angular.module('ustodos').controller
 
 
 
-
-
-						//  copied down
-						//  $scope.addPerrowCE_EventHandlers();
-
-						//alert ('$scope.ustodosFiltered:' + $scope.ustodosFiltered);
-						//alert ('hkhkhk');
-						var sPre = '\
-						    this text and its surrounding Iframe were injected \
-							<span class="hkcssContentedit" >   \
-							<div class="WholePage focusblurme"  \
-								state="nonIframed"  \
-								id="ustodorow{{$index}}"  \
-								hkindex="{{$index}}"  \
-								hkustodoid="{{ustodo._id}}"  \
-							  \
-								contenteditable="true"  \
-								xxonpaste="UtilHtmlCleaner2_pasteProcessForContentEditable.handlepaste (this, event)"  \
-								ng-focus="hkngfocustest($index)"  \
-								ng-keyup="onKeyUp_perrow_text($event, $index, ustodosFiltered[$index]._id)"  \
-							>';
-
-						var sPost = '</div>  \
-							</span>  \
-							';
-
-						var sMid = encodeURIComponent($scope.ustodosFiltered[0].html);
-						var sAll = sPre + 'hi dad!' + sMid + sPost;
-						//var sAll = sPre + sPost;
-						document.getElementById('idPerRowIframeTop2').src = 'data:text/html;charset=utf-8,' + sAll;
-
-						//$scope.ustodosFiltered.forEach (function (x)
-						//{
-						//	var sMid = encodeURIComponent($scope.ustodosFiltered[i].html);
-						//	var sAll = sPre + sMid + sPost;
-						//	//var sAll = sPre + sPost;
-						//	document.getElementById('idPerRowIframe'+i).src = "data:text/html;charset=utf-8," +
-						//		//escape($scope.ustodosFiltered.html);
-						//		i + ', ' + sAll;
-						//		//$scope.ustodosFiltered[i].html;
-						//	//alert ('x:' + x);
-						//	i++;
-						//});
-                        //
-
-						// //
-						// //alert("made it to start :");
-						// var html_string= "contenthbk";
-                        //
-						// document.getElementById('idPerRowIframeTop').src = "data:text/html;charset=utf-8," + escape(html_string+' TOP');
-						// //document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +' 0');
-						// //document.getElementById('idPerRowIframeBottom').src = "data:text/html;charset=utf-8," + escape(html_string +' BOTTOM');
-						// var x = document.getElementById('idPerRowIframe0');
-						// ///alert(" made it to start in x ["+x+"] ngRepeatFinished $scope.ustodos.length:" + $scope.ustodos.length);
-                        //
-						// document.getElementById('idPerRowIframe0').src = "data:text/html;charset=utf-8," + escape(html_string +'_0');
-						// document.getElementById('idPerRowIframe1').src = "data:text/html;charset=utf-8," + escape(html_string +'_1');
-						// //
-						// //alert("made it to end ");
-
 					});
 
 
@@ -3455,8 +3396,8 @@ angular.module('ustodos').controller
 					//Uutil2_.Dt_u_.U_o.x('calling o');
 					$scope.mouseOut = function(fn) {
 						//alert('in mouseout');
-						document.getElementById('idDivCEOmniBox').style.height = '24px';
-						document.getElementById('idDivCEOmniBox').style.display = 'compact';
+						//document.getElementById('idDivCEOmniBox').style.height = '24px';
+							//document.getElementById('idDivCEOmniBox').style.display = 'compact';
 
 					}
 
@@ -3474,10 +3415,6 @@ angular.module('ustodos').controller
 					$scope.clearOmniBox = function() {
 						document.getElementById('idDivCEOmniBox').innerHTML = ''
 					}
-					$scope.clearOmniBoxUP = function() {
-						document.getElementById('idDivCEOmniBoxUP').innerHTML = ''
-					}
-
 					// hhkk testbutton
 					$scope.testButton= function(fn)
 					{
@@ -3486,12 +3423,6 @@ angular.module('ustodos').controller
 						{
 							u_.U_o.o('hi sister!');
 							//u_.U_o.a('hi sister!');
-
-							if (true) // why this makes error
-							{
-								$scope.timeForTestingBind = "xxy2";
-								//alert(xxxdocument.activeElement.id);
-							}
 
 							if (false) {
 								document.getElementById('idTextareaUtdLog').style.resize = "myFunction()";
@@ -4276,7 +4207,7 @@ angular.module('ustodos').controller
 						{
 							this.xTextCommandRemoved = this.xTextTrimmed; //no command so removed is same
 						}
-						console.log('UtdUserCommand instantiated this.xText [' + this.xText + '] this.xHtml [' + this.xHtml + ']');
+						//console.log('UtdUserCommand instantiated this.xText [' + this.xText + '] this.xHtml [' + this.xHtml + ']');
 					};
 
 					var ustodosQueryCommon_wrapper = function(xTextCommandRemoved, callbackFromQuery)

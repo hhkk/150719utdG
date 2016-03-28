@@ -14,8 +14,6 @@
 
 
 
-	<!--hhkk103 -->
-    Careful - bootstrap herein?
     {% for cssFile in cssFiles %}
         <link rel="stylesheet" href="{{cssFile}}">
     {% endfor %}
@@ -161,6 +159,9 @@
 		});
 
 
+
+
+
 		/*
 		 *#######################
 		 * INNER LAYOUT SETTINGS
@@ -172,7 +173,7 @@
 		 */
 		layoutSettings_Inner = {
 			applyDefaultStyles:				true // basic styling for testing & demo purposes
-			,	minSize:						20 // TESTING ONLY
+			,	minSize:						70// TESTING ONLY
 			,	spacing_closed:					14
 			,	north__spacing_closed:			8
 			,	south__spacing_closed:			8
@@ -193,6 +194,11 @@
 		};
 
 
+
+
+
+
+
 		/*
 		 *#######################
 		 * OUTER LAYOUT SETTINGS
@@ -210,7 +216,7 @@
 			// options.defaults apply to ALL PANES - but overridden by pane-specific settings
 			,	defaults: {
 				size:					"auto"
-				,	minSize:				50
+				,	minSize:				100
 				,	paneClass:				"pane" 		// default = 'ui-layout-pane'
 				,	resizerClass:			"resizer"	// default = 'ui-layout-resizer'
 				,	togglerClass:			"toggler"	// default = 'ui-layout-toggler'
@@ -234,7 +240,7 @@
 				spacing_open:			1			// cosmetic spacing
 				,	togglerLength_open:		0			// HIDE the toggler button
 				,	togglerLength_closed:	-1			// "100%" OR -1 = full width of pane
-				,	resizable: 				false
+				,	resizable: 				true
 				,	slidable:				false
 				//	override default effect
 				,	fxName:					"none"
@@ -245,14 +251,15 @@
 				,	slidable:				false		// REFERENCE - cannot slide if spacing_closed = 0
 				,	initClosed:				false
 				//	CALLBACK TESTING...
-				,	onhide_start:			function () { return confirm("START South pane hide \n\n onhide_start callback \n\n Allow pane to hide?"); }
-				,	onhide_end:				function () { alert("END South pane hide \n\n onhide_end callback"); }
-				,	onshow_start:			function () { return confirm("START South pane show \n\n onshow_start callback \n\n Allow pane to show?"); }
-				,	onshow_end:				function () { alert("END South pane show \n\n onshow_end callback"); }
-				,	onopen_start:			function () { return confirm("START South pane open \n\n onopen_start callback \n\n Allow pane to open?"); }
-				,	onopen_end:				function () { alert("END South pane open \n\n onopen_end callback"); }
-				,	onclose_start:			function () { return confirm("START South pane close \n\n onclose_start callback \n\n Allow pane to close?"); }
-				,	onclose_end:			function () { alert("END South pane close \n\n onclose_end callback"); }
+//				hbk commented March 28, 2016
+//				,	onhide_start:			function () { return confirm("START South pane hide \n\n onhide_start callback \n\n Allow pane to hide?"); }
+//				,	onhide_end:				function () { alert("END South pane hide \n\n onhide_end callback"); }
+//				,	onshow_start:			function () { return confirm("START South pane show \n\n onshow_start callback \n\n Allow pane to show?"); }
+//				,	onshow_end:				function () { alert("END South pane show \n\n onshow_end callback"); }
+//				,	onopen_start:			function () { return confirm("START South pane open \n\n onopen_start callback \n\n Allow pane to open?"); }
+//				,	onopen_end:				function () { alert("END South pane open \n\n onopen_end callback"); }
+//				,	onclose_start:			function () { return confirm("START South pane close \n\n onclose_start callback \n\n Allow pane to close?"); }
+//				,	onclose_end:			function () { alert("END South pane close \n\n onclose_end callback"); }
 				//,	onresize_start:			function () { return confirm("START South pane resize \n\n onresize_start callback \n\n Allow pane to be resized?)"); }
 				//hbk commented  ,	onresize_end:			function () { alert("END South pane resize \n\n onresize_end callback \n\n NOTE: onresize_start event was skipped."); }
 			}
@@ -310,9 +317,6 @@
 
 <DIV class="ui-layout-west">
 	<DIV class="header">Outer - West
-		<button ng-click="testButton(-2)" title="testButton0">Test0</button>
-		4time
-		<div ng-bind='timeForTestingBind'></div>
 	</DIV>
 	<DIV class="content">
 		<H3><B>Outer Layout</B></H3>
@@ -554,21 +558,10 @@
 	<DIV class="content">
 		<!--I only have toggler when 'closed' - I cannot be resized - -->
 		<!--and I do not 'slide open'-->
-		<span id='hkheader' style="display: block">
-
-		  <header data-ng-include="'/modules/core/views/footer.client.view.html'"
+		  <header data-ng-include="'/modules/core/views/header.client.view.html'"
 				  style="position:relative; margin-bottom:0px"
 				  class="navbar navbar-fixed-top navbar-inverse">
 		  </header>
-
-		<div id='hkfooter'
-			 style="display: none"
-			 data-ng-include="'/modules/core/views/footer.client.view.html'"
-			 class="navbar-fixed-bottom"></div >
-
-		</span>
-		sfsdfdsf
-		<br>
 
 	</DIV>
 	<UL class="toolbar">
@@ -580,30 +573,29 @@
 	</UL>
 </DIV>
 <DIV class="ui-layout-south">
-	<DIV class="header">Outer - South</DIV>
+	<!--<DIV class="header">Outer - South</DIV>-->
 
 	<DIV class="content">
-		<!--I only have toggler when 'closed' - I cannot be resized - -->
-		<!--and I do not 'slide open'-->
-		sfsdfdsf
-		<br>
+		<P>See the <A onclick="outerLayout.open('east'); return false;" href="http://layout.jquery-dev.com/demos/complex.html#">Outer-East
+			pane</A> for commands to manipulate the Inner Layout
+		</P>
+		<button ng-click="testButton(-2)" title="testButton0">Test0</button>
+		<button id='showHideDetails' ng-click="toggleShowDetails()">Show</button><br>
+		<textarea id='idTextareaUtdLog' resize="alert('resizehk')" rows='4' cols='200' style='resize:both;font-size:8pt'>idTextareaUtdLog</textarea>
+		filter:<input type='text' id='idInputtextUtdLogFilter' value=''>
+		<!--hktesty2:{{hktesty2}}-->
+		<!--div2hkt2:<div data-ng-bind="hktesty2"/>-->
 
-		<span id='hkfooter' style="display: block">
 
-		  <header data-ng-include="'/modules/core/views/footer.client.view.html'"
-				  style="position:relative; margin-bottom:0px"
-				  class="navbar-fixed-bottom navbar-inverse">
-		  </header>
-		</span>
-		sfsdfdsf
-		<br>
+
+
 
 	</DIV>
 
 
-	<DIV class="content">
-		<P>I only have a 2 resizer/toggler when 'open'</P>
-	</DIV>
+	<!--<DIV class="content">-->
+		<!--<P>I only have a 2 resizer/toggler when 'open'</P>-->
+	<!--</DIV>-->
 </DIV>
 <DIV id="mainContent">
 	<!-- DIVs for the INNER LAYOUT -->
@@ -626,57 +618,34 @@
 			</section>
 
 
-			<P>See the <A onclick="outerLayout.open('east'); return false;" href="http://layout.jquery-dev.com/demos/complex.html#">Outer-East
-				pane</A> for commands to manipulate the Inner Layout
-			</P>
-			<P><A href="http://layout.jquery-dev.com/demos.html">Go to the Demos
-				page</A>
-			</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
-			<P>...</P>
 		</DIV>
 		<DIV class="footer">Center panes can have headers &amp; footers too</DIV>
 	</DIV>
-	<DIV class="ui-layout-north"> Inner - North
-		<button ng-click="testButton(-2)" title="testButton0">Test0</button>
-		4time
-		<div ng-bind='timeForTestingBind'></div>
+	<DIV class="ui-layout-north">
+		<!--Inner - North-->
+		<!--hhkk103 -->
+		<div
+				id='idDivCEOmniBox'
+				contenteditable="true"
+				style='resize:both;
+				 	width:100%;
+				 	height:auto;
+				 	xxheight:60px;
+					background-color:lightgrey;
+					border-width:0px;
+					border-style:solid;
+					border-color:lightgrey;
+					display:auto; xxoverflow:auto;
+					overflow-x: hidden;'
+				ng-keyup='omniboxKey_EventHandler($event)'
+				ng-bind-html='bindToTextBox'
+				ng-mouseover = 'idDivCEOmniBox_eventHandler_ngMouseover()'
+				ng-mouseleave = mouseOut()
+		>
+			<!--ng-bind-html='ustodosFiltered[$index].html'-->
+		</div>
 
-		<input type="button" value="localScope_testOutsiderCall" onclick="localScope_testOutsiderCall()"/>
+
 		<!--// hhkk106 <input type="button" value="localScope_testOutsiderCall" onclick=""myLayout.close('west')"/>-->
 
 
@@ -689,15 +658,6 @@
 		<!--ng-bind-html='bindToTextBox'-->
 		<!--ng-mouseover = 'idDivCEOmniBox_eventHandler_ngMouseover()'-->
 		<!--ng-mouseleave = mouseOut()-->
-		<div
-			id='idDivCEOmniBoxUP'
-			contenteditable="true"
-			style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
-			style='resize:both'
-		>
-			upper
-			<!--ng-bind-html='ustodosFiltered[$index].html'-->
-		</div>
 
 
 		<!--  -->
@@ -740,7 +700,17 @@
 
 
 	</DIV>
-	<DIV class="ui-layout-south"> Inner - South
+	<DIV class="ui-layout-south">
+		<!--Inner - South-->
+		<!--I only have toggler when 'closed' - I cannot be resized - -->
+		<!--and I do not 'slide open'-->
+		<span id='hkfooter' style="display: block">
+		<header data-ng-include="'/modules/core/views/footer.client.view.html'"
+			  style="position:relative; margin-bottom:0px"
+			  class="navbar-fixed-bottom navbar-inverse">
+		</header>
+		</span>
+
 	</DIV>
 	<DIV class="ui-layout-west">
 		<!--Inner - West-->
@@ -755,26 +725,6 @@
 		Recent searches
 	</DIV>
 </DIV>
-<!--hhkk106-->
-<SCRIPT type="text/javascript">
-	var localScope_testOutsiderCall = function() {
-		alert('from scope:' + angular.element(document.getElementById('idSectionWholePage')).scope().testOutsiderCall());
-	}; // yourControllerElementID
-
-	document.getElementById('idDivCEOmniBoxUP').addEventListener( 'keyup', function( e ) {
-		u_.U_o.o ( 'Keyup event' + e.keyCode );
-		angular.element(document.getElementById('idSectionWholePage')).
-			scope().omniboxKey_EventHandler(e);
-
-	} );
-
-//	document.getElementById('idDivCEOmniBoxUP').addEventListener( 'keypress', function( e ) {
-//		console.log( 'Keypress event' );
-//		console.log( e.keyCode );
-//	} );
-
-
-</SCRIPT>
 
 </BODY>
 
