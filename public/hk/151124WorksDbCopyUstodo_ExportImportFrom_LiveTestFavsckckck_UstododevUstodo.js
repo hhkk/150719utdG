@@ -143,7 +143,9 @@ if (true) {
                                                         targetObj.datelastmod = new Date(sourceObj.date);
                                                         targetObj.datecreated = new Date(sourceObj.date);
                                                         //targetObj.jsonx = JSON.stringify(targetObj); // jsonx
-                                                        targetObj.user = new ObjectID('5418f365f5bc55500a906584');
+                                                        //targetObj.user = new ObjectID('5418f365f5bc55500a906584');       // username hkhk
+                                                        targetObj.user = new ObjectID('5673beb86797f3643033dbf7');       // username henry
+
 
 
                                                         //if (targetObj.text.toLowerCase().indexOf('downt') >= 0)

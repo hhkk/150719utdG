@@ -83,6 +83,7 @@ var oerr = function (s)
 
 var liveLog = function (s)
 {
+	//alert('liveloghk');
 	var liveUtdLogFilter = document.getElementById('idInputtextUtdLogFilter').value.trim();
 	if (liveUtdLogFilter.length === 0 || s.contains(liveUtdLogFilter))
 	{
