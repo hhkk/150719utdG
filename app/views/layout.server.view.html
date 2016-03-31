@@ -6,8 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<!-- DEMO styles - specific to this page -->
-	<!--<link rel="stylesheet" type="text/css" href="./Complex Layout Demo_files/complex.css">-->
-	<link rel="stylesheet" type="text/css" href="/bluelayout/css/complex.css" />
+	<link rel="stylesheet" type="text/css" href="/bluelayout2/Complex Layout Demo_files/complex.css">
 
 
 	<script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
@@ -15,6 +14,10 @@
 	<script type="text/javascript" src="/bluelayout/lib/jquery-ui/jquery-ui.js"></script>
 	<script type="text/javascript" src="/bluelayout/complex.js"></script>
 
+	<!--<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">-->
+	<!--<link rel="stylesheet" href="/modules/core/css/core.css">-->
+	<!--<link rel="stylesheet" href="/modules/core/css/core_mce.css">-->
+	<!--<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-theme.css">-->
 
 
 	<!--ori-->
@@ -22,7 +25,6 @@
 	<!--<script type="text/javascript" src="./Complex Layout Demo_files/jquery-ui-latest.js"></script>-->
 	<!--<script type="text/javascript" src="./Complex Layout Demo_files/jquery.layout-latest.js"></script>-->
 	<!--<script type="text/javascript" src="./Complex Layout Demo_files/complex.js"></script>-->
-	<!--<script type="text/javascript" src="/bluelayout2/debug.js"></script>-->
 
 	<script type="text/javascript">
 		/*
@@ -111,7 +113,7 @@
 		 * Pane-specific settings are prefixed with the pane name + 2-underscores: north__fxName:"none"
 		 */
 		layoutSettings_Inner = {
-			applyDefaultStyles:				true // basic styling for testing and demo purposes
+			applyDefaultStyles:				true // basic styling for testing & demo purposes
 			,	minSize:						20 // TESTING ONLY
 			,	spacing_closed:					14
 			,	north__spacing_closed:			8
@@ -203,7 +205,7 @@
 				,	togglerAlign_closed:	"top"		// align to top of resizer
 				,	togglerLength_open:		0			// NONE - using custom togglers INSIDE west-pane
 				,	togglerTip_open:		"Close West Pane"
-				,	togglerTip_closed:		"Open West Pane1"
+			,	togglerTip_closed:		"Open West Pane"
 				,	resizerTip_open:		"Resize West Pane"
 				,	slideTrigger_open:		"click" 	// default
 				,	initClosed:				true
@@ -241,11 +243,9 @@
 </head>
 
 
-<!--<script type="text/javascript" src="../lib/angular/angular.js"></script>-->
-<!--<script type="text/javascript" src="../lib/angular-resource/angular-resource.js"></script>-->
+<body style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;" class="ui-layout-container">
 
 
-<body>
 
 <!--xxhkbody-->
 
@@ -297,13 +297,13 @@
 
 </div>
 
-<div class="ui-layout-east">
+	<div class="ui-layout-east pane pane-east" style="position: absolute; margin: 0px; left: auto; right: 0px; top: 95px; bottom: 0px; height: 824px; z-index: 0; width: 248px; display: none; visibility: visible;"><span id="east-closer" class="button-close button-close-east" title="Close East Pane"></span><span class="pin-button button-pin button-pin-east button-pin-up button-pin-east-up" pin="up" title="Pin"></span>
 
 	<div class="header">Outer - East</div>
 
 	<div class="subhead">I'm a subheader</div>
 
-	<div class="content">
+		<div class="content" style="position: relative;">
 		<h3><b>Inner Layout</b></h3>
 		<ul id="createInner">
 			<li><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="createInnerLayout(); return false;">CREATE Inner Layout</a></li>
@@ -356,41 +356,52 @@
 		I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
 	</div>
 	<ul class="toolbar">
-		<li id="tbarToggleNorth" class="first"><span></span>Toggle NORTH</li>
-		<li id="tbarOpenSouth"><span></span>Open SOUTH</li>
-		<li id="tbarCloseSouth"><span></span>Close SOUTH</li>
-		<li id="tbarPinWest"><span></span>Pin/Unpin WEST</li>
-		<li id="tbarPinEast" class="last"><span></span>Pin/Unpin EAST</li>
+			<li id="tbarToggleNorth" class="first button-toggle button-toggle-north"><span></span>Toggle NORTH</li>
+			<li id="tbarOpenSouth" class="button-open button-open-south" title="Open This Pane"><span></span>Open SOUTH</li>
+			<li id="tbarCloseSouth" class="button-close button-close-south" title="Close This Pane"><span></span>Close SOUTH</li>
+			<li id="tbarPinWest" class="button-pin button-pin-west button-pin-up button-pin-west-up" pin="up" title="Pin"><span></span>Pin/Unpin WEST</li>
+			<li id="tbarPinEast" class="last button-pin button-pin-east button-pin-up button-pin-east-up" pin="up" title="Pin"><span></span>Pin/Unpin EAST</li>
 	</ul>
 </div>
 
 
-<div class="ui-layout-south">
+	<div class="ui-layout-south pane pane-south" style="position: absolute; margin: 0px; top: auto; bottom: 0px; left: 0px; right: 0px; width: auto; z-index: 0; height: 82px; display: none; visibility: visible;">
 	<div class="header">Outer - South</div>
-	<div class="content">
+		<div class="content" style="position: relative; height: 36px;">
 		<p>I only have a resizer/toggler when 'open'</p>
 	</div>
 </div>
 
 
-<div id="mainContent">
+	<div id="mainContent" class="pane pane-center pane-hover pane-center-hover pane-open-hover pane-center-open-hover" style="position: absolute; margin: 0px; left: 21px; right: 21px; top: 95px; bottom: 0px; height: 794px; width: 963px; z-index: 0; display: block; visibility: visible;">
 	<!-- DIVs for the INNER LAYOUT -->
 
 	<div class="ui-layout-center">
 		<h3 class="header">Inner - Center</h3>
 		<div class="ui-layout-content">
 
-			<p id="createInner2" style="font-weight: bold;"><a href="#" onClick="createInnerLayout(); return false;"
-			>Click here to CREATE the Inner Layout</a></p><!-- outerLayout.open('east');  -->
+				<p id="createInner2" style="font-weight: bold;"><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="createInnerLayout(); return false;">Click here to CREATE the Inner Layout</a></p><!-- outerLayout.open('east');  -->
 
-			<p>See the <a href="#" onclick="outerLayout.open('east'); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
+				<p>See the <a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.open(&#39;east&#39;); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
 
-			<p><a href="../demos.html">Go to the Demos page</a></p>
+				<p><a href="http://layout.jquery-dev.com/demos.html">Go to the Demos page</a></p>
 
 			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
 			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
 		</div>
-		<!--<div class="footer">Center panes can have headers &amp; footers too</div>-->
+			<div class="footer">Center panes can have headers &amp; footers too</div>
+	</div>
+
+	<div class="ui-layout-north"> Inner - North</div>
+	<div class="ui-layout-south"> Inner - South</div>
+	<div class="ui-layout-west">  Inner - West</div>
+	<div class="ui-layout-east">  Inner - East
+		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
 	</div>
 
 
