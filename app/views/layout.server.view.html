@@ -4,7 +4,7 @@
 <head>
 
 	<!--<LINK href="Complex%20Layout%20Demo_files/complex.css" rel="stylesheet" type="text/css">-->
-	<LINK href="http://localhost:3000/bluelayout/css/complex.css" rel="stylesheet" type="text/css">
+	<LINK href="http://jpro.co/bluelayout/css/complex.css" rel="stylesheet" type="text/css">
 
 	<!--C:\utd\150719utdG\public\bluelayout2\Complex Layout Demo_files\complex.css-->
 	<!--C:\utd\150719utdG\public\bluelayout\css\complex.css-->
@@ -15,9 +15,9 @@
 	<!--<SCRIPT src="Complex%20Layout%20Demo_files/complex.js" type="text/javascript"></SCRIPT>-->
 	<!--<SCRIPT src="Complex%20Layout%20Demo_files/debug.js" type="text/javascript"></SCRIPT>-->
 
-    {% for cssFile in cssFiles %}
-        <link rel="stylesheet" href="{{cssFile}}">
-    {% endfor %}
+	{% for cssFile in cssFiles %}
+	<link rel="stylesheet" href="{{cssFile}}">
+	{% endfor %}
 
 	<LINK href="/hk/160321VanillaComplexBaselineFromctmptmp/ComplexLayoutDemo_files/complex.css" rel="stylesheet" type="text/css">
 
@@ -25,11 +25,11 @@
 	<LINK href="/lib/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 
 
-	<script type="text/javascript" src="http://localhost:3000/lib/jquery/dist/jquery.js"></script>
-	<script type="text/javascript" src="http://localhost:3000/lib/jquery-layout/jquery.layout-latest.js"></script>
-	<script type="text/javascript" src="http://localhost:3000/bluelayout/lib/jquery-ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="http://jpro.co/lib/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="http://jpro.co/lib/jquery-layout/jquery.layout-latest.js"></script>
+	<script type="text/javascript" src="http://jpro.co/bluelayout/lib/jquery-ui/jquery-ui.js"></script>
 	<!--added hhkk103-->
-	<SCRIPT src="http://localhost:3000/bluelayout/complex.js" type="text/javascript"></SCRIPT>
+	<SCRIPT src="http://jpro.co/bluelayout/complex.js" type="text/javascript"></SCRIPT>
 
 
 
@@ -68,14 +68,14 @@
 	<!--C:\utd\150719utdG\public\bluelayout\lib\jquery-ui\jquery-ui.js-->
 
 
-	<!--<script type="text/javascript" src="http://localhost:3000/lib/angular/angular.js"></script>-->
-	<!--<script type="text/javascript" src="http://localhost:3000/lib/angular-resource/angular-resource.js"></script>-->
-	<!--<script type="text/javascript" src="http://localhost:3000/lib/angular-sanitize/angular-sanitize.js"></script>-->
-	<!--<script type="text/javascript" src="http://localhost:3000/lib/angular-animate/angular-animate.js"></script>-->
-	<!--<script type="text/javascript" src="http://localhost:3000/lib/angular-ui-router/release/angular-ui-router.js"></script>-->
-	<!--<script type="text/javascript" src="http://localhost:3000/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>-->
-	<!--<script type="text/javascript" src="http://localhost:3000/config.js"></script>-->
-	<!--<script type="text/javascript" src="http://localhost:3000/application.js"></script>-->
+	<!--<script type="text/javascript" src="http://jpro.co/lib/angular/angular.js"></script>-->
+	<!--<script type="text/javascript" src="http://jpro.co/lib/angular-resource/angular-resource.js"></script>-->
+	<!--<script type="text/javascript" src="http://jpro.co/lib/angular-sanitize/angular-sanitize.js"></script>-->
+	<!--<script type="text/javascript" src="http://jpro.co/lib/angular-animate/angular-animate.js"></script>-->
+	<!--<script type="text/javascript" src="http://jpro.co/lib/angular-ui-router/release/angular-ui-router.js"></script>-->
+	<!--<script type="text/javascript" src="http://jpro.co/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>-->
+	<!--<script type="text/javascript" src="http://jpro.co/config.js"></script>-->
+	<!--<script type="text/javascript" src="http://jpro.co/application.js"></script>-->
 
 
 	<SCRIPT type="text/javascript">
@@ -302,7 +302,7 @@
 
 	</SCRIPT>
 
-<!--body hhkk105-->
+	<!--body hhkk105-->
 <BODY
 		data-ng-controller="SinglepageUstodosController"
 		xxdata-ng-init="ngInitTopLevel()"
@@ -487,10 +487,10 @@
 	<DIV class="content">
 		<!--I only have toggler when 'closed' - I cannot be resized - -->
 		<!--and I do not 'slide open'-->
-		  <header data-ng-include="'/modules/core/views/header.client.view.html'"
-				  style="position:relative; margin-bottom:0px"
-				  class="navbar navbar-fixed-top navbar-inverse">
-		  </header>
+		<header data-ng-include="'/modules/core/views/header.client.view.html'"
+				style="position:relative; margin-bottom:0px"
+				class="navbar navbar-fixed-top navbar-inverse">
+		</header>
 
 	</DIV>
 	<UL class="toolbar">
@@ -520,11 +520,11 @@
 
 
 
-</DIV>
+	</DIV>
 
 
 	<!--<DIV class="content">-->
-		<!--<P>I only have a 2 resizer/toggler when 'open'</P>-->
+	<!--<P>I only have a 2 resizer/toggler when 'open'</P>-->
 	<!--</DIV>-->
 </DIV>
 <DIV id="mainContent">
@@ -533,7 +533,7 @@
 		<H3 class="header">Inner - Center</H3>
 		<DIV class="ui-layout-content">
 			<P id="createInner2" style="font-weight: bold;"><A onclick="createInnerLayout(); return false;"
-				href="http://layout.jquery-dev.com/demos/complex.html#">Click here to CREATE the Inner Layout</A>
+															   href="http://layout.jquery-dev.com/demos/complex.html#">Click here to CREATE the Inner Layout</A>
 			</P>
 			<!-- outerLayout.open('east');  -->
 
@@ -579,8 +579,8 @@
 		<!--// hhkk106 <input type="button" value="localScope_testOutsiderCall" onclick=""myLayout.close('west')"/>-->
 
 
-<!--<span onClick="myLayout.close('west')>  hhkk106 -->
-    <!--Close West Pane</span>-->
+		<!--<span onClick="myLayout.close('west')>  hhkk106 -->
+		<!--Close West Pane</span>-->
 
 		<!--hhkk106 idDivCEOmniBoxUP -->
 		<!--onkeyup='omniboxKey_EventHandlerOUTSIDER($event)'-->
@@ -594,28 +594,28 @@
 		<!--style='isolation: isolate'-->
 		<!-- hhkk -->
 		<!--<div-->
-				<!--id='idDivCEOmniBox'-->
-				<!--style='-->
-					<!--position:absolute;-->
-					<!--resize:both;-->
-					<!--/*top:300px;*/-->
-					<!--max-height: 20px;-->
-					<!--height: 20px;-->
-					<!--background-color:lightgrey;-->
-					<!--border-width:0px; border-style:solid; border-color:green;-->
-					<!--width:500px; xxheight:auto;-->
-					<!--display:inline;-->
-					<!--xxoverflow:auto; overflow-x: hidden;-->
-					<!--z-index:5-->
-					<!--'-->
-				<!--contenteditable="true"-->
-				<!--ng-keyup='omniboxKey_EventHandler($event)'-->
-				<!--ng-bind-html='bindToTextBox'-->
-				<!--ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover(1)-->
-				<!--ng-focus= idDivCEOmniBox_eventHandler_ngMouseover(2)-->
-				<!--xxng-mouseleave = mouseOut()-->
+		<!--id='idDivCEOmniBox'-->
+		<!--style='-->
+		<!--position:absolute;-->
+		<!--resize:both;-->
+		<!--/*top:300px;*/-->
+		<!--max-height: 20px;-->
+		<!--height: 20px;-->
+		<!--background-color:lightgrey;-->
+		<!--border-width:0px; border-style:solid; border-color:green;-->
+		<!--width:500px; xxheight:auto;-->
+		<!--display:inline;-->
+		<!--xxoverflow:auto; overflow-x: hidden;-->
+		<!--z-index:5-->
+		<!--'-->
+		<!--contenteditable="true"-->
+		<!--ng-keyup='omniboxKey_EventHandler($event)'-->
+		<!--ng-bind-html='bindToTextBox'-->
+		<!--ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover(1)-->
+		<!--ng-focus= idDivCEOmniBox_eventHandler_ngMouseover(2)-->
+		<!--xxng-mouseleave = mouseOut()-->
 		<!--&gt;-->
-			<!--&lt;!&ndash;ng-bind-html='ustodosFiltered[$index].html'&ndash;&gt;-->
+		<!--&lt;!&ndash;ng-bind-html='ustodosFiltered[$index].html'&ndash;&gt;-->
 		<!--</div>-->
 
 
@@ -636,8 +636,8 @@
 		<!--and I do not 'slide open'-->
 		<span id='hkfooter' style="display: block">
 		<header data-ng-include="'/modules/core/views/footer.client.view.html'"
-			  style="position:relative; margin-bottom:0px"
-			  class="navbar-fixed-bottom navbar-inverse">
+				style="position:relative; margin-bottom:0px"
+				class="navbar-fixed-bottom navbar-inverse">
 		</header>
 		</span>
 
