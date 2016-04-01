@@ -203,9 +203,10 @@
 		 * Pane-specific settings go inside their keys: north:{}, south:{}, center:{}, etc
 		 */
 		var layoutSettings_Outer = {
-			name: "outerLayout" // NO FUNCTIONAL USE, but could be used by custom code to 'identify' a layout
+			name: "outerLayout", // NO FUNCTIONAL USE, but could be used by custom code to 'identify' a layout
 			// options.defaults apply to ALL PANES - but overridden by pane-specific settings
-			,	defaults: {
+			defaults:
+			{
 				size:					"auto"
 				,	minSize:				50
 				,	paneClass:				"pane" 		// default = 'ui-layout-pane'
@@ -298,7 +299,7 @@
 
 
 
-<body style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;" class="ui-layout-container">
+<body data-ng-controller="SinglepageUstodosController" style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;" class="ui-layout-container">
 
 
 
@@ -406,78 +407,121 @@
 
 
 <div class="ui-layout-north">
-	<div class="header">Outer - North</div>
+	<div class="header">
+		<!--Outer - North-->
+
+		<section class="content">
+			<span id='hkheader' style="display: block">
+			  <header data-ng-include="'/modules/core/views/header.client.view.html'"
+					  style="position:relative; margin-bottom:0px"
+					  class="navbar navbar-fixed-top navbar-inverse">
+			  </header>
+			</span>
+		</section>
+	</div>
+
 	<div class="content">
 		I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
 	</div>
-	<ul class="toolbar">
-			<li id="tbarToggleNorth" class="first button-toggle button-toggle-north"><span></span>Toggle NORTH</li>
-			<li id="tbarOpenSouth" class="button-open button-open-south" title="Open This Pane"><span></span>Open SOUTH</li>
-			<li id="tbarCloseSouth" class="button-close button-close-south" title="Close This Pane"><span></span>Close SOUTH</li>
-			<li id="tbarPinWest" class="button-pin button-pin-west button-pin-up button-pin-west-up" pin="up" title="Pin"><span></span>Pin/Unpin WEST</li>
-			<li id="tbarPinEast" class="last button-pin button-pin-east button-pin-up button-pin-east-up" pin="up" title="Pin"><span></span>Pin/Unpin EAST</li>
-	</ul>
-</div>
+		<ul class="toolbar">
+				<li id="tbarToggleNorth" class="first button-toggle button-toggle-north"><span></span>Toggle NORTH</li>
+				<li id="tbarOpenSouth" class="button-open button-open-south" title="Open This Pane"><span></span>Open SOUTH</li>
+				<li id="tbarCloseSouth" class="button-close button-close-south" title="Close This Pane"><span></span>Close SOUTH</li>
+				<li id="tbarPinWest" class="button-pin button-pin-west button-pin-up button-pin-west-up" pin="up" title="Pin"><span></span>Pin/Unpin WEST</li>
+				<li id="tbarPinEast" class="last button-pin button-pin-east button-pin-up button-pin-east-up" pin="up" title="Pin"><span></span>Pin/Unpin EAST</li>
+		</ul>
+	</div>
 
 
 	<div class="ui-layout-south pane pane-south" style="position: absolute; margin: 0px; top: auto; bottom: 0px; left: 0px; right: 0px; width: auto; z-index: 0; height: 82px; display: none; visibility: visible;">
-	<div class="header">Outer - South</div>
-		<div class="content" style="position: relative; height: 36px;">
-		<p>I only have a resizer/toggler when 'open'</p>
+		<div class="header">Outer - South</div>
+
+			<button ng-click="testButton(-2)" title="testButton0">Test0</button>
+			<button id='showHideDetails' ng-click="toggleShowDetails()">Show</button><br>
+			<textarea id='idTextareaUtdLog' resize="alert('resizehk')" rows='4' cols='200' style='resize:both;font-size:8pt'>idTextareaUtdLog</textarea>
+			filter:<input type='text' id='idInputtextUtdLogFilter' value=''>
+
+			<div class="content" style="position: relative; height: 36px;">
+			<p>I only have a resizer/toggler when 'open'</p>
+		</div>
 	</div>
-</div>
 
 
 	<div id="mainContent" class="pane pane-center pane-hover pane-center-hover pane-open-hover pane-center-open-hover" style="position: absolute; margin: 0px; left: 21px; right: 21px; top: 95px; bottom: 0px; height: 794px; width: 963px; z-index: 0; display: block; visibility: visible;">
-	<!-- DIVs for the INNER LAYOUT -->
+		<!-- DIVs for the INNER LAYOUT -->
 
-	<div class="ui-layout-center">
-		<h3 class="header">Inner - Center</h3>
-		<div class="ui-layout-content">
+		<div class="ui-layout-center">
+			<h3 class="header">Inner - Center</h3>
+			<div class="ui-layout-content">
 
-				<p id="createInner2" style="font-weight: bold;"><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="createInnerLayout(); return false;">Click here to CREATE the Inner Layout</a></p><!-- outerLayout.open('east');  -->
 
-				<p>See the <a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.open(&#39;east&#39;); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
 
-				<p><a href="http://layout.jquery-dev.com/demos.html">Go to the Demos page</a></p>
+				<!--&lt;!&ndash;hhkk103 &ndash;&gt;-->
+				<!--section_content-->
+				<section class="content">
+					<section class="container-fluid">
+						<!-- marries in {% block contentXXYYOfSameNameCarefulNottoBeSAMe!!!!HERE IN COMMENT %} from index.server.view.html-->
+						{% block contentxxx %}{% endblock %}
+					</section>
+				</section>
 
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+
+					<p id="createInner2" style="font-weight: bold;"><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="createInnerLayout(); return false;">Click here to CREATE the Inner Layout</a></p><!-- outerLayout.open('east');  -->
+
+					<p>See the <a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.open(&#39;east&#39;); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
+
+					<p><a href="http://layout.jquery-dev.com/demos.html">Go to the Demos page</a></p>
+
 				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
 				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-		</div>
-			<div class="footer">Center panes can have headers &amp; footers too</div>
-	</div>
-
-	<div class="ui-layout-north"> Inner - North
-
-
-
-		<div
-			id='idDivCEOmniBoxUP'
-			contenteditable="true"
-			style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
-			style='resize:both'
-		>
-			upper
-			<!--ng-bind-html='ustodosFiltered[$index].html'-->
+					<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+					<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+			</div>
+				<div class="footer">Center panes can have headers &amp; footers too</div>
 		</div>
 
+		<div class="ui-layout-north">
+			<!--Inner - North-->
+
+			<div
+				id='idDivCEOmniBox'
+				style='
+					position:absolute;
+					resize:both;
+					/*top:300px;*/
+					/*max-height: 20px;*/
+					height: 200px;
+					font-size: 18px;
+					background-color:lightgrey;
+					border-width:0px; border-style:solid; border-color:green;
+					width:900px; xxheight:auto;
+					display:inline;
+					xxoverflow:auto; overflow-x: hidden;
+					z-index:5
+					'
+				contenteditable="true"
+				ng-keyup='omniboxKey_EventHandler($event)'
+				ng-bind-html='bindToTextBox'
+				ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover(1)
+				ng-focus= idDivCEOmniBox_eventHandler_ngMouseover(2)
+				xxng-mouseleave = mouseOut()
+			>
+				<!--ng-bind-html='ustodosFiltered[$index].html'-->
+			</div>
+
+		</div>
+
+		<div class="ui-layout-south"> Inner - South</div>
+		<div class="ui-layout-west">  Inner - West</div>
+		<div class="ui-layout-east">  Inner - East
+			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+		</div>
 
 
-
-</div>
-	<div class="ui-layout-south"> Inner - South</div>
-	<div class="ui-layout-west">  Inner - West</div>
-	<div class="ui-layout-east">  Inner - East
-		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
 	</div>
-
-
-</div>
 
 <!--<script type="text/javascript" src="../lib/angular/angular.js"></script>-->
 <!--<script type="text/javascript" src="../lib/angular-resource/angular-resource.js"></script>-->
