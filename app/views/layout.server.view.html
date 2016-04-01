@@ -26,7 +26,53 @@
 	<!--<script type="text/javascript" src="./Complex Layout Demo_files/jquery.layout-latest.js"></script>-->
 	<!--<script type="text/javascript" src="./Complex Layout Demo_files/complex.js"></script>-->
 
+	<!--hhkk103 -->
+    Careful - bootstrap herein?
+    {% for cssFile in cssFiles %}
+        <link rel="stylesheet" href="{{cssFile}}">
+    {% endfor %}
+
+
+	<!--Embedding The User Object-->
+	<!-- hhkk103-->
 	<script type="text/javascript">
+		var user = {{ user | json | safe }};
+	</script>
+
+
+	<!--hhkk103-->
+	<script type="text/javascript" src="/util/U_setup.js"></script>
+	<script type="text/javascript" src="/util/U_o.js"></script>
+	<script type="text/javascript" src="/util/UtilError.js"></script>
+	<script type="text/javascript" src="/util/UtilIdle.js"></script>
+	<script type="text/javascript" src="/util/UtilString.js"></script>
+	<script type="text/javascript" src="/util/UtilClass.js"></script>
+	<script type="text/javascript" src="/util/UtilDate.js"></script>
+	<script type="text/javascript" src="/util/UtilJsTypeDetect.js"></script>
+	<script type="text/javascript" src="/util/UcHtmlDocManipulate.js"></script>
+	<script type="text/javascript" src="/util/NLB_bgFade.js"></script>
+	<script type="text/javascript" src="/util/UtilHtmlCleaner.js"></script>
+
+
+
+
+
+
+
+
+	<!--hhkk103-->
+	{% for jsFile in jsFiles %}
+	<script type="text/javascript" src="{{jsFile}}"></script>
+	{% endfor %}
+
+
+
+
+
+
+
+
+	<SCRIPT type="text/javascript">
 		/*
 		 * complex.html
 		 *
@@ -44,6 +90,7 @@
 		 */
 		$(document).ready( function() {
 			// create the OUTER LAYOUT
+
 			outerLayout = $("body").layout( layoutSettings_Outer );
 
 			/*******************************
@@ -100,6 +147,10 @@
 				if (this.href.substr(this.href.length-1) == "#") this.href = path +"#";
 			});
 
+
+
+			createInnerLayout();  			//alert('hhkk106 call to createInnerLayout()');
+
 		});
 
 
@@ -133,6 +184,10 @@
 			,	center__minWidth:				200
 			,	center__minHeight:				200
 		};
+
+
+
+
 
 
 		/*
@@ -185,7 +240,7 @@
 				maxSize:				200
 				,	spacing_closed:			0			// HIDE resizer & toggler when 'closed'
 				,	slidable:				false		// REFERENCE - cannot slide if spacing_closed = 0
-				,	initClosed:				true
+				,	initClosed:				false
 				//	CALLBACK TESTING...
 				,	onhide_start:			function () { return confirm("START South pane hide \n\n onhide_start callback \n\n Allow pane to hide?"); }
 				,	onhide_end:				function () { alert("END South pane hide \n\n onhide_end callback"); }
@@ -196,7 +251,7 @@
 				,	onclose_start:			function () { return confirm("START South pane close \n\n onclose_start callback \n\n Allow pane to close?"); }
 				,	onclose_end:			function () { alert("END South pane close \n\n onclose_end callback"); }
 				//,	onresize_start:			function () { return confirm("START South pane resize \n\n onresize_start callback \n\n Allow pane to be resized?)"); }
-				,	onresize_end:			function () { alert("END South pane resize \n\n onresize_end callback \n\n NOTE: onresize_start event was skipped."); }
+				//hbk commented  ,	onresize_end:			function () { alert("END South pane resize \n\n onresize_end callback \n\n NOTE: onresize_start event was skipped."); }
 			}
 			,	west: {
 				size:					250
@@ -235,12 +290,12 @@
 			}
 		};
 
-	</script>
+	</SCRIPT>
+	<META name="GENERATOR" content="MSHTML 11.00.9600.18052">
+</HEAD>
 
 
 
-
-</head>
 
 
 <body style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;" class="ui-layout-container">
@@ -394,7 +449,24 @@
 			<div class="footer">Center panes can have headers &amp; footers too</div>
 	</div>
 
-	<div class="ui-layout-north"> Inner - North</div>
+	<div class="ui-layout-north"> Inner - North
+
+
+
+		<div
+			id='idDivCEOmniBoxUP'
+			contenteditable="true"
+			style='background-color:lightgrey; border-width:0px; border-style:solid; border-color:lightgrey; width:500px; height:auto; display:auto; xxoverflow:auto; overflow-x: hidden;'
+			style='resize:both'
+		>
+			upper
+			<!--ng-bind-html='ustodosFiltered[$index].html'-->
+		</div>
+
+
+
+
+</div>
 	<div class="ui-layout-south"> Inner - South</div>
 	<div class="ui-layout-west">  Inner - West</div>
 	<div class="ui-layout-east">  Inner - East
