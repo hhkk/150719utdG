@@ -165,7 +165,7 @@
 		 */
 		layoutSettings_Inner = {
 			applyDefaultStyles:				true // basic styling for testing & demo purposes
-			,	minSize:						20 // TESTING ONLY
+			,	minSize:						100 // TESTING ONLY
 			,	spacing_closed:					14
 			,	north__spacing_closed:			8
 			,	south__spacing_closed:			8
@@ -407,21 +407,19 @@
 
 
 <div class="ui-layout-north">
-	<div class="header">
-		<!--Outer - North-->
-
-		<section class="content">
-			<span id='hkheader' style="display: block">
-			  <header data-ng-include="'/modules/core/views/header.client.view.html'"
-					  style="position:relative; margin-bottom:0px"
-					  class="navbar navbar-fixed-top navbar-inverse">
-			  </header>
-			</span>
-		</section>
-	</div>
 
 	<div class="content">
-		I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
+		<!--<div class="header">-->
+		<!--&lt;!&ndash;Outer - North&ndash;&gt;-->
+
+			<!--<span id='hkheader' style="display: block">-->
+			  <!--<header data-ng-include="'/modules/core/views/header.client.view.html'"-->
+					  <!--style="position:relative; margin-bottom:0px"-->
+					  <!--class="navbar navbar-fixed-top navbar-inverse">-->
+			  <!--</header>-->
+			<!--</span>-->
+		<!--</div>-->
+		<!--I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'-->
 	</div>
 		<ul class="toolbar">
 				<li id="tbarToggleNorth" class="first button-toggle button-toggle-north"><span></span>Toggle NORTH</li>
@@ -455,20 +453,19 @@
 			<div class="ui-layout-content">
 
 
-
 				<!--&lt;!&ndash;hhkk103 &ndash;&gt;-->
 				<!--section_content-->
 				<section class="content">
+					<!-- REMEMBER THIS CAN'T BE COMMENTED MAYBE LIKE THIS block contentxxxXXXXXXXXXXXXXXXX -->
 					<section class="container-fluid">
 						<!-- marries in {% block contentXXYYOfSameNameCarefulNottoBeSAMe!!!!HERE IN COMMENT %} from index.server.view.html-->
 						{% block contentxxx %}{% endblock %}
 					</section>
 				</section>
 
-
 					<p id="createInner2" style="font-weight: bold;"><a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="createInnerLayout(); return false;">Click here to CREATE the Inner Layout</a></p><!-- outerLayout.open('east');  -->
 
-					<p>See the <a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.open(&#39;east&#39;); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
+					<p>See thex <a href="http://layout.jquery-dev.com/demos/complex.html#" onclick="outerLayout.open(&#39;east&#39;); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
 
 					<p><a href="http://layout.jquery-dev.com/demos.html">Go to the Demos page</a></p>
 
@@ -490,12 +487,12 @@
 					resize:both;
 					/*top:300px;*/
 					/*max-height: 20px;*/
-					height: 200px;
+					height: 100px;
 					font-size: 18px;
 					background-color:lightgrey;
 					border-width:0px; border-style:solid; border-color:green;
-					width:900px; xxheight:auto;
-					display:inline;
+					width:100%; xxheight:auto;
+					display:block;
 					xxoverflow:auto; overflow-x: hidden;
 					z-index:5
 					'
@@ -508,7 +505,6 @@
 			>
 				<!--ng-bind-html='ustodosFiltered[$index].html'-->
 			</div>
-
 		</div>
 
 		<div class="ui-layout-south"> Inner - South</div>

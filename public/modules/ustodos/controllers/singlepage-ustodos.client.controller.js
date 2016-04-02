@@ -2526,6 +2526,7 @@ angular.module('ustodos').controller
 
 					// section_per_editor 3
 					//
+					//$scope.setTextInShowingEditor = function(e, callerID, processFailure) active  current active editor
 					$scope.setTextInShowingEditor = function(e, callerID, processFailure)
 					{
 						//alert('in setTextInShowingEditor callerID' + callerID);
@@ -4251,7 +4252,7 @@ angular.module('ustodos').controller
 						if ($scope.ustodos.length > 0)
 							$scope.setTextInShowingEditor(decodeURI($scope.ustodos[0].html), 'line 3329a2');
 						else
-							$scope.setTextInShowingEditor('', 'line 3329a2');
+							$scope.setTextInShowingEditor('', 'line 3329a2b');
 						//alert ('in callbackFromQuery post get callback2');
 					};  ///callbackfromquery
 
