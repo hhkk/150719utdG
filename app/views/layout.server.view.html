@@ -1,3 +1,4 @@
+
 <!--localhost:3000/hk/160402NewComplex/160402Complex.html-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,6 +23,8 @@
 	<!--&lt;!&ndash;&lt;!&ndash;<script type="text/javascript" src="http://jpro.co/hk\160402NewComplex\complex.js"></script>&ndash;&gt;&ndash;&gt;-->
 	<script type="text/javascript" src="http://jpro.co/hk/160402NewComplex/complex.js"></script>
 
+	<script type="text/javascript" src="../lib/angular/angular.js"></script>
+	<script type="text/javascript" src="../lib/angular-resource/angular-resource.js"></script>
 
 	<!--<script hk="1" type="text/javascript" src="http://jpro.co/hk/160319_complexLayoutComplete/Complex Layout Demo_files/jquery-latest.js"></script>-->
 	<!--<script hk="2" type="text/javascript" src="http://jpro.co/hk/160319_complexLayoutComplete/Complex Layout Demo_files/jquery-ui-latest.js"></script>-->
@@ -37,7 +40,53 @@
 	<!--<script type="text/javascript" src="js/complex.js"></script>-->
 	<!--<script type="text/javascript" src="/lib/js/debug.js"></script>-->
 
+	<!--hhkk103 -->
+    Careful - bootstrap herein?
+    {% for cssFile in cssFiles %}
+        <link rel="stylesheet" href="{{cssFile}}">
+    {% endfor %}
+
+
+	<!--Embedding The User Object-->
+	<!-- hhkk103-->
 	<script type="text/javascript">
+		var user = {{ user | json | safe }};
+	</script>
+
+
+	<!--hhkk103-->
+	<script type="text/javascript" src="/util/U_setup.js"></script>
+	<script type="text/javascript" src="/util/U_o.js"></script>
+	<script type="text/javascript" src="/util/UtilError.js"></script>
+	<script type="text/javascript" src="/util/UtilIdle.js"></script>
+	<script type="text/javascript" src="/util/UtilString.js"></script>
+	<script type="text/javascript" src="/util/UtilClass.js"></script>
+	<script type="text/javascript" src="/util/UtilDate.js"></script>
+	<script type="text/javascript" src="/util/UtilJsTypeDetect.js"></script>
+	<script type="text/javascript" src="/util/UcHtmlDocManipulate.js"></script>
+	<script type="text/javascript" src="/util/NLB_bgFade.js"></script>
+	<script type="text/javascript" src="/util/UtilHtmlCleaner.js"></script>
+
+
+
+
+
+
+
+
+	<!--hhkk103-->
+	{% for jsFile in jsFiles %}
+	<script type="text/javascript" src="{{jsFile}}"></script>
+	{% endfor %}
+
+
+
+
+
+
+
+
+	<SCRIPT type="text/javascript">
 		/*
 		 * complex.html
 		 *
@@ -55,6 +104,7 @@
 		 */
 		$(document).ready( function() {
 			// create the OUTER LAYOUT
+
 			outerLayout = $("body").layout( layoutSettings_Outer );
 
 			/*******************************
@@ -111,6 +161,10 @@
 				if (this.href.substr(this.href.length-1) == "#") this.href = path +"#";
 			});
 
+
+
+			createInnerLayout();  			//alert('hhkk106 call to createInnerLayout()');
+
 		});
 
 
@@ -124,8 +178,8 @@
 		 * Pane-specific settings are prefixed with the pane name + 2-underscores: north__fxName:"none"
 		 */
 		layoutSettings_Inner = {
-			applyDefaultStyles:				true // basic styling for testing & demo purposes
-			,	minSize:						20 // TESTING ONLY
+			applyDefaultStyles:				true // basic styling for testing and demo purposes
+			,	minSize:						150 // TESTING ONLY
 			,	spacing_closed:					14
 			,	north__spacing_closed:			8
 			,	south__spacing_closed:			8
@@ -146,6 +200,10 @@
 		};
 
 
+
+
+
+
 		/*
 		 *#######################
 		 * OUTER LAYOUT SETTINGS
@@ -159,9 +217,10 @@
 		 * Pane-specific settings go inside their keys: north:{}, south:{}, center:{}, etc
 		 */
 		var layoutSettings_Outer = {
-			name: "outerLayout" // NO FUNCTIONAL USE, but could be used by custom code to 'identify' a layout
+			name: "outerLayout", // NO FUNCTIONAL USE, but could be used by custom code to 'identify' a layout
 			// options.defaults apply to ALL PANES - but overridden by pane-specific settings
-			,	defaults: {
+			defaults:
+			{
 				size:					"auto"
 				,	minSize:				50
 				,	paneClass:				"pane" 		// default = 'ui-layout-pane'
@@ -185,6 +244,7 @@
 			}
 			,	north: {
 				spacing_open:			1			// cosmetic spacing
+				,	minSize:				125
 				,	togglerLength_open:		0			// HIDE the toggler button
 				,	togglerLength_closed:	-1			// "100%" OR -1 = full width of pane
 				,	resizable: 				false
@@ -196,18 +256,18 @@
 				maxSize:				200
 				,	spacing_closed:			0			// HIDE resizer & toggler when 'closed'
 				,	slidable:				false		// REFERENCE - cannot slide if spacing_closed = 0
-				,	initClosed:				true
+				,	initClosed:				false
 				//	CALLBACK TESTING...
-				,	onhide_start:			function () { return confirm("START South pane hide \n\n onhide_start callback \n\n Allow pane to hide?"); }
-				,	onhide_end:				function () { alert("END South pane hide \n\n onhide_end callback"); }
-				,	onshow_start:			function () { return confirm("START South pane show \n\n onshow_start callback \n\n Allow pane to show?"); }
-				,	onshow_end:				function () { alert("END South pane show \n\n onshow_end callback"); }
-				,	onopen_start:			function () { return confirm("START South pane open \n\n onopen_start callback \n\n Allow pane to open?"); }
-				,	onopen_end:				function () { alert("END South pane open \n\n onopen_end callback"); }
-				,	onclose_start:			function () { return confirm("START South pane close \n\n onclose_start callback \n\n Allow pane to close?"); }
-				,	onclose_end:			function () { alert("END South pane close \n\n onclose_end callback"); }
+//				,	onhide_start:			function () { return confirm("START South pane hide \n\n onhide_start callback \n\n Allow pane to hide?"); }
+//				,	onhide_end:				function () { alert("END South pane hide \n\n onhide_end callback"); }
+//				,	onshow_start:			function () { return confirm("START South pane show \n\n onshow_start callback \n\n Allow pane to show?"); }
+//				,	onshow_end:				function () { alert("END South pane show \n\n onshow_end callback"); }
+//				,	onopen_start:			function () { return confirm("START South pane open \n\n onopen_start callback \n\n Allow pane to open?"); }
+//				,	onopen_end:				function () { alert("END South pane open \n\n onopen_end callback"); }
+//				,	onclose_start:			function () { return confirm("START South pane close \n\n onclose_start callback \n\n Allow pane to close?"); }
+//				,	onclose_end:			function () { alert("END South pane close \n\n onclose_end callback"); }
 				//,	onresize_start:			function () { return confirm("START South pane resize \n\n onresize_start callback \n\n Allow pane to be resized?)"); }
-				,	onresize_end:			function () { alert("END South pane resize \n\n onresize_end callback \n\n NOTE: onresize_start event was skipped."); }
+				//hbk commented  ,	onresize_end:			function () { alert("END South pane resize \n\n onresize_end callback \n\n NOTE: onresize_start event was skipped."); }
 			}
 			,	west: {
 				size:					250
@@ -249,8 +309,7 @@
 	</script>
 
 </head>
-<body>
-
+<body data-ng-controller="SinglepageUstodosController" style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;" class="ui-layout-container">
 <div class="ui-layout-west">
 
 	<div class="header">Outer - West</div>
@@ -355,7 +414,13 @@
 <div class="ui-layout-north">
 	<div class="header">Outer - North</div>
 	<div class="content">
-		I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
+		<span id='hkheader' style="display: block">
+		  <header data-ng-include="'/modules/core/views/header.client.view.html'"
+				style="position:relative; margin-bottom:0px"
+				class="navbar navbar-fixed-top navbar-inverse">
+		  </header>
+		</span>
+		<!--I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'-->
 	</div>
 	<ul class="toolbar">
 		<li id="tbarToggleNorth" class="first"><span></span>Toggle NORTH</li>
@@ -370,6 +435,16 @@
 <div class="ui-layout-south">
 	<div class="header">Outer - South</div>
 	<div class="content">
+			<span id='hkheader' style="display: block">
+			  <header data-ng-include="'/modules/core/views/footer.client.view.html'"
+					  style="position:relative; margin-bottom:0px"
+					  class="navbar navbar-fixed-top navbar-inverse">
+			  </header>
+			</span>		I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
+			<button ng-click="testButton(-2)" title="testButton0">Test0</button>
+			<button id='showHideDetails' ng-click="toggleShowDetails()">Show</button><br>
+			<textarea id='idTextareaUtdLog' resize="alert('resizehk')" rows='4' cols='200' style='resize:both;font-size:8pt'>idTextareaUtdLog</textarea>
+			filter:<input type='text' id='idInputtextUtdLogFilter' value=''>
 		<p>I only have a resizer/toggler when 'open'</p>
 	</div>
 </div>
@@ -382,22 +457,61 @@
 		<h3 class="header">Inner - Center</h3>
 		<div class="ui-layout-content">
 
-			<p id="createInner2" style="font-weight: bold;"><a href="#" onClick="createInnerLayout(); return false;"
-			>Click here to CREATE the Inner Layout</a></p><!-- outerLayout.open('east');  -->
+			<section class="content">
+				<!-- REMEMBER THIS CAN'T BE COMMENTED MAYBE LIKE THIS block contentxxxXXXXXXXXXXXXXXXX -->
+				<section class="container-fluid">
+					<!-- marries in {% block contentXXYYOfSameNameCarefulNottoBeSAMe!!!!HERE IN COMMENT %} from index.server.view.html-->
+					{% block contentxxx %}{% endblock %}
+				</section>
+			</section>
 
-			<p>See the <a href="#" onclick="outerLayout.open('east'); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
 
-			<p><a href="../demos.html">Go to the Demos page</a></p>
 
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+			<!--<p id="createInner2" style="font-weight: bold;"><a href="#" onClick="createInnerLayout(); return false;"-->
+			<!--&gt;Click here to CREATE the Inner Layout</a></p>&lt;!&ndash; outerLayout.open('east');  &ndash;&gt;-->
+
+			<!--<p>See the <a href="#" onclick="outerLayout.open('east'); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>-->
+
+			<!--<p><a href="../demos.html">Go to the Demos page</a></p>-->
+
+			<!--<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>-->
+			<!--<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>-->
+			<!--<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>-->
+			<!--<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>-->
 		</div>
 		<div class="footer">Center panes can have headers &amp; footers too</div>
 	</div>
 
-	<div class="ui-layout-north"> Inner - North</div>
+	<div class="ui-layout-north">
+		<!--Inner - North-->
+
+			<div
+				id='idDivCEOmniBox'
+				style='
+					position:absolute;
+					resize:both;
+					/*top:300px;*/
+					/*max-height: 20px;*/
+					height: 100px;
+					font-size: 18px;
+					background-color:lightgrey;
+					border-width:0px; border-style:solid; border-color:green;
+					width:100%; xxheight:auto;
+					display:block;
+					xxoverflow:auto; overflow-x: hidden;
+					z-index:5
+					'
+				contenteditable="true"
+				ng-keyup='omniboxKey_EventHandler($event)'
+				ng-bind-html='bindToTextBox'
+				ng-mouseover = idDivCEOmniBox_eventHandler_ngMouseover(1)
+				ng-focus= idDivCEOmniBox_eventHandler_ngMouseover(2)
+				xxng-mouseleave = mouseOut()
+			>
+				<!--ng-bind-html='ustodosFiltered[$index].html'-->
+			</div>
+
+</div>
 	<div class="ui-layout-south"> Inner - South</div>
 	<div class="ui-layout-west">  Inner - West</div>
 	<div class="ui-layout-east">  Inner - East

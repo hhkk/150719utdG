@@ -2850,7 +2850,7 @@ angular.module('ustodos').controller
 									'caller eventHandler space and ends w space', text, html, data);
 							}
 							else if (enumKeyEvent === $scope.enumKeyEvent.ENTER) {
-								alert ('not skipping 2')
+								//alert ('not skipping 2')
 								$scope.processCommand($scope.enumCommands.COMMAND_SEARCH,
 									'caller eventHandler ENTER key pressed', text, html, data);
 							}
@@ -3419,7 +3419,7 @@ angular.module('ustodos').controller
 					// hhkk testbutton
 					$scope.testButton= function(fn)
 					{
-						//alert('in testbutton');
+						alert('in testbutton');
 						try
 						{
 							u_.U_o.o('hi sister!');
