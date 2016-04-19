@@ -67,12 +67,7 @@
 	<script type="text/javascript" src="/util/NLB_bgFade.js"></script>
 	<script type="text/javascript" src="/util/UtilHtmlCleaner.js"></script>
 
-
-
-
-
-
-
+	<script type="text/javascript" src="/util/U_hilight.js"></script>
 
 	<!--hhkk103-->
 	{% for jsFile in jsFiles %}
@@ -312,10 +307,11 @@
 <body data-ng-controller="SinglepageUstodosController" style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;" class="ui-layout-container">
 <div class="ui-layout-west">
 
-	<div class="header">Outer - West</div>
+	<div class="header">To Do Tickler</div>
+	<!--<div class="header">Outer - West</div>-->
 
 	<div class="content">
-		<h3><b>Outer Layout</b></h3>
+		<!--<h3><b>Outer Layout</b></h3>-->
 		<ul>
 			<li><a href="#" onClick="outerLayout.toggle('north')">Toggle North</a></li>
 			<li><a href="#" onClick="outerLayout.toggle('south')">Toggle South</a></li>
@@ -360,12 +356,15 @@
 
 <div class="ui-layout-east">
 
-	<div class="header">Outer - East</div>
+	<div class="header">
+		To Do Ticker / Standing Commands
+		<!--Outer - East-->
+	</div>
 
 	<div class="subhead">I'm a subheader</div>
 
 	<div class="content">
-		<h3><b>Inner Layout</b></h3>
+		<!--<h3><b>Inner Layout</b></h3>-->
 		<ul id="createInner">
 			<li><a href="#" onClick="createInnerLayout(); return false;">CREATE Inner Layout</a></li>
 		</ul>
@@ -513,8 +512,24 @@
 
 </div>
 	<div class="ui-layout-south"> Inner - South</div>
-	<div class="ui-layout-west">  Inner - West</div>
-	<div class="ui-layout-east">  Inner - East
+	<div class="ui-layout-west"> Outline/Highlights
+		<!--Inner - West-->
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	</div>
+	<div class="ui-layout-east"> Command History
+
+		<!--Inner - East-->
 		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
 		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
 		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>

@@ -30,6 +30,13 @@ String.prototype.contains = function (s) {
 	return this.indexOf(s) >= 0;
 };
 
+String.prototype.strcmp = function (s) {
+	var s1 = this || "";
+	var s2 = s || "";
+	return (s1 > s2) - (s1 < s2);
+};
+
+
 	/**
 	 * remove one or all of a string at head
 	 * @param substr

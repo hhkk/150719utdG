@@ -256,3 +256,20 @@ div.focus {
 	background-color:greenyellow;
 
 }
+
+
+
+
+.HkHilite_highlighted {
+	background-color: yellow;
+	font-weight: bold;
+}
+.HkHilite_term0 {
+	background-color: yellow;
+}
+.HkHilite_term1 {
+	background-color: #331616;
+}
+.HkHilite_term2 {
+	background-color: #163316;
+}

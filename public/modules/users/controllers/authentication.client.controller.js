@@ -20,14 +20,21 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		};
 
 		$scope.signin = function() {
+			u_.U_o.o('in signin');
 			$http.post('/auth/signin', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
 				// And redirect to the index page
-				$location.path('/');
+				u_.U_o.o('in signin success pre');
+				//$location.path('/');
+				//location.href='http://google.com'
+				location.href='/'
+
+				u_.U_o.o('in signin success post');
 			}).error(function(response) {
 				$scope.error = response.message;
+				u_.U_o.o('in signin error');
 			});
 		};
 	}

@@ -5,52 +5,60 @@
  * where util is state free utility code shared potentially by client browser and server
  * @type {null}
  */
-var uberglobal = null;
 
-if (typeof global !== 'undefined')
-	uberglobal = global;
-else if (typeof window !== 'undefined')
-	uberglobal = window;
-else
-	throw ('')
-
-if (typeof uberglobal === "undefined") // error
 {
-	throw "uberglobal cannot be undefined";
-}
 
-uberglobal.u_ = uberglobal.u_ || {};
+	console.log('in U_setup.js');
+	var uberglobal = null; // whether client or server
 
-uberglobal.u_.isServer = function() {
-	return (typeof window === "undefined");
-}
+	if (typeof global !== 'undefined')
+		uberglobal = global;
+	else if (typeof window !== 'undefined')
+		uberglobal = window;
+	else
+		throw ('ustodo: unknown environment')
 
-
-
-
-
-
-
-
-//if (typeof global !== 'undefined')  //
-//{
-//
-uberglobal.u_setup = function (clasz, methodname, method)
-{
-	// for server only, require to avoid 'require' not defined error on client
-
-	try {
-		// if first method from this clasz
-		if (typeof uberglobal.u_[clasz] === 'undefined')
-			uberglobal.u_[clasz] = {};
-		// define it
-		uberglobal.u_[clasz][methodname] = method;
-	} catch (err) {
-		// do nothing - no global on client
-		console.log('xxxxxxxxxxxxxxx0:' + err); //
+	if (typeof uberglobal === "undefined") // error
+	{
+		throw "uberglobal cannot be undefined";
 	}
-	//}
+
+	uberglobal.u_ = uberglobal.u_ || {};
+
+	uberglobal.u_.isServer = function() {
+		return (typeof window === "undefined");
+	}
+
+	/**
+	 * util.js files call u_setup per function to be added to the u_.utilname.function namespace
+	 *
+	 * @param clasz - should be the same name as the
+	 * @param methodname
+	 * @param method
+	 */
+	uberglobal.u_setup = function (clasz, methodname, method)
+	{
+		// for server only, require to avoid 'require' not defined error on client
+
+		try {
+			// if first method from this clasz
+			if (typeof uberglobal.u_[clasz] === 'undefined')
+				uberglobal.u_[clasz] = {};
+			// define it
+			uberglobal.u_[clasz][methodname] = method;
+		} catch (err) {
+			// do nothing - no global on client
+			alert('error in u_setup:' + err)
+			console.log('xxxxxxxxxxxxxxx0:' + err); //
+		}
+		console.log('done u_setup [' + clasz + '.' + methodname + ']')
+		//}
+	}
 }
+
+
+
+
 //}
 
 // list server utils U_setup.js
@@ -122,10 +130,10 @@ if (typeof window === "undefined") // error
 // Uutil.UtilError.emitError
 
 if (typeof exports !== 'undefined') {
-    //exports.emitError = emitError;
-    //exports.testWithinEmitError = testWithinEmitError;
-    //exports.dt_testEmitter = dt_testEmitter;
-    //exports.o = o;
+	//exports.emitError = emitError;
+	//exports.testWithinEmitError = testWithinEmitError;
+	//exports.dt_testEmitter = dt_testEmitter;
+	//exports.o = o;
 }
 
 //console.log ('completed definition xxxxxxxxxxxxxxxxxx uu_:' + uu_);
