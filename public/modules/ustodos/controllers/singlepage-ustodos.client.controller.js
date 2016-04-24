@@ -311,6 +311,10 @@ app.factory('SppSvc', ['$rootScope', 'Ustodos', function($rootScope, Ustodos)
 	//	return data;
 	//};
 
+
+
+
+
 	/**
 	 * service to indicate if the editor contains non-saved content such that should not be overwritten
 	 * @param val
@@ -4298,6 +4302,8 @@ angular.module('ustodos').controller
 
 					$scope.processCommand = function(scopeEnumCommand, enumProcessCommandCaller, xText, xHtml)
 					{
+						document.title = 'UsToDo: ' + xText;
+
 						$scope.utdUserCommand = new UtdUserCommand(xText, xHtml); // standing variable
 						//alert ('in processCommand caller [' + enumProcessCommandCaller + ']');
 						//u_.U_o.o ('1 ===================== in processCommand for 1 xText [' + xText + ']');

@@ -297,6 +297,18 @@ function convertHtmlStringToDocForParse (str) {
 	return a
 }
 
+function isHTML3(str) {
+	if (!str)
+		return false;
+	var a = document.createElement('div');
+	a.innerHTML = str;
+	for (var c = a.childNodes, i = c.length; i--; ) {
+		if (c[i].nodeType == 1)
+			return true;
+	}
+	return false;
+}
+
 
 function removeHtmlWhiteSpace(str)
 {
@@ -384,6 +396,7 @@ var UtilHtmlCleaner;
 u_setup('UtilHtmlCleaner', 'utilHtmlCleanerFunctions', utilHtmlCleanerFunctions);
 u_setup('UtilHtmlCleaner', 'handlepaste', handlepaste);
 u_setup('UtilHtmlCleaner', 'isHTML2', isHTML2);
+u_setup('UtilHtmlCleaner', 'isHTML3', isHTML3);
 
 if (typeof exports !== 'undefined')
 {
