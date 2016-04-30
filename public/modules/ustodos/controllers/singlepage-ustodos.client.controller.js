@@ -3373,7 +3373,7 @@ angular.module('ustodos').controller
 					{
 						if (CONST_SHOW_INIT_ALERTS)
 							alert('inONLOADINIT#A ngRepeatFinished');
-						u_.U_hilight.highlightOnLoad($scope.utdUserCommand.getxTextCommandRemoved());
+						u_.U_hilight.highlightOnLoad($scope.utdUserCommand.xTextCommandRemoved);
 
 						//
 						//alert("22222222 $([contenteditable=true].length" + $("[contenteditable='true']").length);
@@ -4197,20 +4197,15 @@ angular.module('ustodos').controller
 					// hbkk
 					var UtdUserCommand = function (xText, xHtml) {
 						console.log('in UtdUserCommand');
-						this.private = {};
 						this.xText = xText;
 						this.xHtml = xHtml;
 						this.xTextTrimmed = xText.trim();
 						this.isWriteCommand = u_.UtilString.endsWith(this.xTextTrimmed, ' w') || u_.UtilString.endsWith(this.xTextTrimmed, ' W');
-						this.private.xTextCommandRemoved = null;
+						this.xTextCommandRemoved = null;
 
-						this.getxTextCommandRemoved = function() {
-							//alert('someone getting this.private.xTextCommandRemoved:' + this.private.xTextCommandRemoved);
-							return  this.private.xTextCommandRemoved;
-						}
 						if (this.isWriteCommand) {
 							//alert ('in endsWith w');
-							this.private.xTextCommandRemoved = this.xTextTrimmed.slice(0, this.xTextTrimmed.length - 1).trim();
+							this.xTextCommandRemoved = this.xTextTrimmed.slice(0, this.xTextTrimmed.length - 1).trim();
 							u_.U_o.liveLog('in write \r\n' +
 								' xHtml [' + xHtml + ']\r\n' +
 								' xTextCommandRemoved.asciiTable():' + this.xTextCommandRemoved.asciiTable());
@@ -4218,7 +4213,7 @@ angular.module('ustodos').controller
 						}
 						else
 						{
-							this.private.xTextCommandRemoved = this.xTextTrimmed; //no command so removed is same
+							this.xTextCommandRemoved = this.xTextTrimmed; //no command so removed is same
 						}
 						//console.log('UtdUserCommand instantiated this.xText [' + this.xText + '] this.xHtml [' + this.xHtml + ']');
 					};
@@ -4354,7 +4349,7 @@ angular.module('ustodos').controller
 								//alert ('commandRemoved_toSearchFor_trimmed:' + commandRemoved_toSearchFor_trimmed);
 								//var target = '';
 								// may want to leave angular sanitize call in here for future use as a test that it will always run
-								var x = $filter('linky')($scope.utdUserCommand.getxTextCommandRemoved()); // links to C:\utd\150719utdG\public\lib\angular-sanitize\angular-sanitize.js per client side debugger run on a save
+								var x = $filter('linky')($scope.utdUserCommand.xTextCommandRemoved); // links to C:\utd\150719utdG\public\lib\angular-sanitize\angular-sanitize.js per client side debugger run on a save
 
 								//alert ('utdUserCommand.xTextCommandRemoved:' + utdUserCommand.xTextCommandRemoved);
 								//alert ('x:' + x);
@@ -4377,7 +4372,7 @@ angular.module('ustodos').controller
 									// joey: 'and pete', // not sufficient to just be here
 									//html: 'htmlhk:'+utdUserCommand.xHtml.replaceLast(' w', ''),
 									html: encodeURI($scope.utdUserCommand.xHtml),
-									text: $scope.utdUserCommand.getxTextCommandRemoved(),
+									text: $scope.utdUserCommand.xTextCommandRemoved,
 									datelastmod: (''+new Date()),
 									datecreated: (''+new Date()),
 									// (I guess "if in schema" covers both client-server and server-db)
@@ -4454,7 +4449,7 @@ angular.module('ustodos').controller
 							{
 
 								//alert ('post write - search for 2');
-								ustodosQueryCommon_wrapper($scope.utdUserCommand.getxTextCommandRemoved(), callbackFromQuery);
+								ustodosQueryCommon_wrapper($scope.utdUserCommand.xTextCommandRemoved, callbackFromQuery);
 							}
 							//alert ('post write - search for ');
 
