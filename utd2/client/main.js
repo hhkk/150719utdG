@@ -20,3 +20,6 @@ Template.hello.events({
     instance.counter.set(instance.counter.get() + 1);
   },
 });
+
+
+new Mongo.Collection()
